@@ -240,7 +240,6 @@ class FinanceController extends HomeController
     
     //钱包总览
     public function index(){
-        dump($_GET);
         if (!userid()) {
 			$this->redirect('/Login/index');
 		}
