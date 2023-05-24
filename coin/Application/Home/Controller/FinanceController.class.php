@@ -211,7 +211,6 @@ class FinanceController extends HomeController
 	public function czpage($id = null){
 
 	    if(checkstr($id)){
-            dump($id);exit();
 	        $this->redirect('Finance/index');
 	    }
 //	    if($id <= 0){
@@ -223,6 +222,7 @@ class FinanceController extends HomeController
 //	    }
 	    $this->assign('info',$info);
 	    $address = $info['czaddress'];
+	    $qrcode=$info['qrcode'];
 	    $url = $address;
 		$drpath = './Public/Static/coinimgs/';
         $imgma = $address . '.png';
@@ -234,11 +234,13 @@ class FinanceController extends HomeController
         $object->png($url, $drpath . '/' . $imgma, $errorLevel, $size);
         $object->scerweima1($url,$urel,$url);
 	    $this->assign("address",$address);
+	    $this->assign("qrcode",$qrcode);
 	    $this->display();
 	}
     
     //钱包总览
     public function index(){
+        dump($_GET);
         if (!userid()) {
 			$this->redirect('/Login/index');
 		}
