@@ -1,3 +1,6 @@
-/.idea
-/coin/Runtime
-/coin/Public/payimgs
+.gitignore
+.idea
+coin/Runtime
+coin/Public/Static/payimgs
+coin/Public/Static/coinimgs
+coin/Upload/public
