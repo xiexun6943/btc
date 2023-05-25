@@ -57,6 +57,22 @@
 					<td><input type="text" class="form-control input_12" name="czaddress" value="{$data['czaddress']}" autocomplete="off" aria-autocomplete="none"></td>
 					<td class="item-note"></td>
                 </tr>
+				  <tr class="controls hoh">
+					  <td class="item-label">合约地址二维码 :</td>
+					  <td>
+						  <div id="addpicContainer" class="gezibg">
+							  <notempty name="data.qrcode">
+								  <img id="up_img" onclick="getElementById('weblogo_box').click()" style="cursor:pointer;max-height:62px;" title="合约地址二维码" alt="点击添加图片" src="/Public/Static/coinimgs/{$data.qrcode}">
+								  <else/>
+								  <!--没有图片显示默认图片-->
+								  <img id="up_img" onclick="getElementById('weblogo_box').click()" style="cursor:pointer;max-height:62px;" title="合约地址二维码" alt="点击添加图片" src="__PUBLIC__/Admin/images/addimg.png">
+							  </notempty>
+							  <input type="hidden" id="weblogo_deputy" name="qrcode" value="{$data.qrcode}">
+							  <input type="file" id="weblogo_box" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+						  </div>
+					  </td>
+					  <td class="item-note" style="color:red;">* 200*200px</td>
+				  </tr>
 
                 <tr class="controls">
 					<td class="item-label">充币状态 :</td>
@@ -176,5 +192,39 @@
 <script type="text/javascript" charset="utf-8">
 	//导航高亮
 	highlight_subnav("{:U('Config/coin')}");
+	/** 合约地址logo上传 **/
+	$(document).ready(function () {
+		//响应文件添加成功事件
+		$("#weblogo_box").change(function () {
+			//创建FormData对象
+			var data = new FormData();
+			//为FormData对象添加数据
+			$.each($('#weblogo_box')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+			//发送数据
+			$.ajax({
+				url: '/Admin/Config/qrCodeImage',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//不可缺参数
+				processData: false,		//不可缺参数
+				success: function (data) {
+					console.log(data)
+					if (data) {
+						$('#up_img').attr("src", '/Public/Static/coinimgs/' + $.trim(data));
+						$('#weblogo_deputy').val($.trim(data));
+						$('#up_img').show();
+					}
+				},
+				error: function () {
+					alert('上传出错');
+					$(".loading").hide();	//加载失败移除加载图片
+				}
+			});
+
+		});
+	});
 </script>
 </block>

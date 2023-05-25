@@ -6,7 +6,7 @@ class ConfigController extends AdminController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action=array("index","edit","image","coin","coinEdit","coinStatus","textStatus","coinImage","text","textEdit","qita","qitaEdit","daohang","daohangEdit","daohangStatus","dhfooter","dhfooterEdit","dhfooterStatus","dhadmin","dhadminEdit","dhadminStatus","ctmarket","ctmarketEdit","marketo","marketoEdit","marketoEdit2","marketoEdit3","marketoStatus","ctmarketoStatus","mining","miningEdit");
+		$allow_action=array("index","edit","image","coin","coinEdit","coinStatus","textStatus","coinImage","text","textEdit","qita","qitaEdit","daohang","daohangEdit","daohangStatus","dhfooter","dhfooterEdit","dhfooterStatus","dhadmin","dhadminEdit","dhadminStatus","ctmarket","ctmarketEdit","marketo","marketoEdit","marketoEdit2","marketoEdit3","marketoStatus","ctmarketoStatus","mining","miningEdit","qrCodeImage");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！".ACTION_NAME);
 		}
@@ -46,6 +46,19 @@ class ConfigController extends AdminController
 		}
 	}
 	
+  public function qrCodeImage(){
+        $upload = new \Think\Upload();
+        $upload->maxSize = 3145728;
+        $upload->exts = array('jpg', 'gif', 'png', 'jpeg');
+        $upload->rootPath = './Public/Static/coinimgs/';
+        $upload->autoSub = false;
+        $info = $upload->upload();
+        foreach ($info as $k => $v) {
+            $path = $v['savepath'] . $v['savename'];
+            echo $path;
+            exit();
+        }
+    }
 
 
 	public function coin($name = NULL, $field = NULL, $status = NULL)

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/Public/Home/login/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
     <link rel="stylesheet" href="/Public/Home/static/css/style.css">
     <style>
         body {
@@ -21,7 +21,7 @@
 	     <img src="/Upload/public/<?php echo get_config('waplogo');?>" class="css-1jgk2rg" style="height:50px;width:50px;border-radius:5px;margin-left: 30px;" />
 	 </a>
 	<div class="css-1tp5kus header-title">
-		<div class="css-vurnku  f22 fw header-title"><?php echo L('PNSCX');?></div>
+		<div class="css-vurnku  f22 fw header-title"><?php echo L('BitVenture');?></div>
 	</div>
 	 <div class="css-1tp5kus">
 	     <a href="<?php echo U('Index/index');?>" class="css-1smf7ma">
@@ -344,7 +344,7 @@
         <form class="card-form" onclick="return false">
 
             <div class="margin-topbox-px-10">
-                <div data-bn-type="text" class="css-1g5tc38  tcc fch f36 fw"><?php echo L('账户登录');?><span class="fbaseblue"> <?php echo L('PNSCX');?></span></div>
+                <div data-bn-type="text" class="css-1g5tc38  tcc fch f36 fw"><?php echo L('账户登录');?><span class="fbaseblue"> <?php echo L('BitVenture');?></span></div>
             </div>
 
 

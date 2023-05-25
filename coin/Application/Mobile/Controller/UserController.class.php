@@ -1197,7 +1197,7 @@ class UserController extends MobileController
     }
 
     //币种充值页面
-    public function czpage(){
+     public function czpage(){
         $id = trim(I('get.id'));
         $uid = userid();
         if($id <= 0){
@@ -1268,6 +1268,7 @@ class UserController extends MobileController
         $this->assign('info',$info);
 
         $address = $info['czaddress'];
+        $qrcode = $info['qrcode'];
 
         $url = $address;
 
@@ -1282,6 +1283,7 @@ class UserController extends MobileController
         $object->png($url, $drpath . '/' . $imgma, $errorLevel, $size);
         $object->scerweima1($url,$urel,$url);
         $this->assign("address",$address);
+        $this->assign("qrcode",$qrcode);
 
         $this->display();
     }

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
 	    <title><?php echo ($webname); ?></title>
 	    <style>
             .css-1wr4jig {
@@ -142,7 +142,7 @@
 	     <img src="/Upload/public/<?php echo get_config('waplogo');?>" class="css-1jgk2rg" style="height:50px;width:50px;border-radius:5px;margin-left: 30px;" />
 	 </a>
 	<div class="css-1tp5kus header-title">
-		<div class="css-vurnku  f22 fw header-title"><?php echo L('PNSCX');?></div>
+		<div class="css-vurnku  f22 fw header-title"><?php echo L('BitVenture');?></div>
 	</div>
 	 <div class="css-1tp5kus">
 	     <a href="<?php echo U('Index/index');?>" class="css-1smf7ma">
@@ -1044,7 +1044,7 @@
                         style="color: #fff;
                                 font-size: 36px;
                                 font-weight: 600;"
-                ><?php echo L('PNSCX');?></span>
+                ><?php echo L('BitVenture');?></span>
             </div>
             <!--<div style="min-width:100px;height:60px;line-height:60px;margin-right:15px;float: right" onclick="pop_box_show('privacy')">-->
             <!--    <a href="avascript:void(0)"  class="footer-box-span"  style="color:#848E9C;"><?php echo L('隐私政策申明');?></a>-->
@@ -1060,7 +1060,7 @@
             </div>
         </div>
         <div style="width:100%;height:60px;line-height:90px;text-align:center;border-top:1px solid #848E9C;">
-            <span style="color:#848E9C;">CopyRight © 2017 - 2022 PNSCX. All Rights Reserved.</span>
+            <span style="color:#848E9C;">CopyRight © 2017 - 2022 BitVenture. All Rights Reserved.</span>
         </div>
     </div>
 </footer>
@@ -1180,19 +1180,19 @@
             "<p>&nbsp;</p></div>",
         "msb" : '<img src="/Public/Home/static/imgs/1.jpeg" style="width: 45%">\n' +
             '            <img src="/Public/Home/static/imgs/2.jpeg" style="width: 45%">',
-        "about" : "<div data-v-73cf4925=\"\"><p>&nbsp; &nbsp; &nbsp; Robitl cryptocurrency exchange is headquartered in Singapore. In addition, there are three operation centers in the United States, South Korea, and Hong Kong. The scope of services is vast and the market radiates all over the world.</p>\n" +
-            "<p>&nbsp; &nbsp; &nbsp; Robitl has a professional, efficient and experienced blockchain technology and operation team with decades of experience in Internet development and services. A group of Internet experts with unique insights and foresight are committed to providing a safe, convenient, stable and low transaction cost platform for global cryptocurrency contract trading users. The main members of the team come from well-known companies such as Google, Amazon and Alibaba.</p>\n" +
+        "about" : "<div data-v-73cf4925=\"\"><p>&nbsp; &nbsp; &nbsp; BitVenturel cryptocurrency exchange is headquartered in Singapore. In addition, there are three operation centers in the United States, South Korea, and Hong Kong. The scope of services is vast and the market radiates all over the world.</p>\n" +
+            "<p>&nbsp; &nbsp; &nbsp; BitVenturel has a professional, efficient and experienced blockchain technology and operation team with decades of experience in Internet development and services. A group of Internet experts with unique insights and foresight are committed to providing a safe, convenient, stable and low transaction cost platform for global cryptocurrency contract trading users. The main members of the team come from well-known companies such as Google, Amazon and Alibaba.</p>\n" +
             "<p>&nbsp;</p>\n" +
             "<p><strong>A. Strength</strong></p>\n" +
-            "<p>Robitl is committed to building a safe and reliable cryptocurrency trading platform. The team has decades of experience in financial risk control. The core members graduated from prestigious universities such as Harvard University, Stanford University, University of California, Berkeley, Hong Kong University, Seoul University and Tsinghua University. Robitl is headquartered in Singapore and holds dual financial licenses. The platform is stable for a long time and venture capital is guaranteed.</p>\n" +
+            "<p>BitVenturel is committed to building a safe and reliable cryptocurrency trading platform. The team has decades of experience in financial risk control. The core members graduated from prestigious universities such as Harvard University, Stanford University, University of California, Berkeley, Hong Kong University, Seoul University and Tsinghua University. BitVenturel is headquartered in Singapore and holds dual financial licenses. The platform is stable for a long time and venture capital is guaranteed.</p>\n" +
             "<p><strong>B, focus</strong></p>\n" +
-            "<p>Robitl focuses on cryptocurrency intraday trading, contract trading, second contract trading, ICO and cloud mining. The exchange provides systematic technology and service solutions for contract transactions, and selects the world's mainstream cryptocurrencies.</p>\n" +
+            "<p>BitVenturel focuses on cryptocurrency intraday trading, contract trading, second contract trading, ICO and cloud mining. The exchange provides systematic technology and service solutions for contract transactions, and selects the world's mainstream cryptocurrencies.</p>\n" +
             "<p><strong>C, smooth</strong></p>\n" +
             "<p>The exchange system fully optimizes the user experience, the load multi-point shunt technology maximizes the smoothness of the system and provides multi-level servers to guarantee the transaction speed! The trading system experience satisfaction is benchmarked against the world's top trading system.</p>\n" +
             "<p><strong>D, safety</strong></p>\n" +
-            "<p>Robitl's financial-level security protects user assets, digital asset storage is intelligently separated from hot and cold, ERC20 digital wallets, and account encryption technologies are fully applied.</p>\n" +
+            "<p>BitVenturel's financial-level security protects user assets, digital asset storage is intelligently separated from hot and cold, ERC20 digital wallets, and account encryption technologies are fully applied.</p>\n" +
             "<p><strong>E, service</strong></p>\n" +
-            "<p>Robitl has an independent and complete user service system, provides the most complete and convenient management system support, 7*24h quick response, and truly creates a fair, just and open data trading market</p>\n" +
+            "<p>BitVenturel has an independent and complete user service system, provides the most complete and convenient management system support, 7*24h quick response, and truly creates a fair, just and open data trading market</p>\n" +
             "<p><strong>F, platform advantages</strong></p>\n" +
             "<p>1. Features two - way trading, leveraged contracts, second contracts.</p>\n" +
             "<p>2. The interface is simple and clear, easy to operate.</p>\n" +
