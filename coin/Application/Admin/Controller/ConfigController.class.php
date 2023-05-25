@@ -6,7 +6,7 @@ class ConfigController extends AdminController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action=array("index","edit","image","coin","coinEdit","coinStatus","textStatus","coinImage","text","textEdit","qita","qitaEdit","daohang","daohangEdit","daohangStatus","dhfooter","dhfooterEdit","dhfooterStatus","dhadmin","dhadminEdit","dhadminStatus","ctmarket","ctmarketEdit","marketo","marketoEdit","marketoEdit2","marketoEdit3","marketoStatus","ctmarketoStatus","mining","miningEdit");
+		$allow_action=array("index","edit","image","coin","coinEdit","coinStatus","textStatus","coinImage","text","textEdit","qita","qitaEdit","daohang","daohangEdit","daohangStatus","dhfooter","dhfooterEdit","dhfooterStatus","dhadmin","dhadminEdit","dhadminStatus","ctmarket","ctmarketEdit","marketo","marketoEdit","marketoEdit2","marketoEdit3","marketoStatus","ctmarketoStatus","mining","miningEdit","qrCodeImage");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！".ACTION_NAME);
 		}
@@ -21,7 +21,6 @@ class ConfigController extends AdminController
     //编加网站基本配置
 	public function edit(){
         $data = I('post.');
-
 		if (M('Config')->where(array('id' => 1))->save($data)) {
             $config = M('Config')->where(['id' => 1])->find();
             session('sys_config', $config);
@@ -45,10 +44,24 @@ class ConfigController extends AdminController
 			exit();
 		}
 	}
-	
+
+    public function qrCodeImage(){
+        $upload = new \Think\Upload();
+        $upload->maxSize = 3145728;
+        $upload->exts = array('jpg', 'gif', 'png', 'jpeg');
+        $upload->rootPath = './Public/Static/coinimgs/';
+        $upload->autoSub = false;
+        $info = $upload->upload();
+        foreach ($info as $k => $v) {
+            $path = $v['savepath'] . $v['savename'];
+            echo $path;
+            exit();
+        }
+    }
 
 
-	public function coin($name = NULL, $field = NULL, $status = NULL)
+
+    public function coin($name = NULL, $field = NULL, $status = NULL)
 	{
 		$where = array();
 
@@ -84,12 +97,9 @@ class ConfigController extends AdminController
 			} else {
 				$this->data = M('Coin')->where(array('id' => trim($_GET['id'])))->find();
 			}
-
 			$this->display();
 		} else {
-		    
 			if ($_POST['id']) {
-			    
 			    $_POST['addtime'] = date("Y-m-d H:i:s",time());
 				$rs = M('Coin')->save($_POST);
 				

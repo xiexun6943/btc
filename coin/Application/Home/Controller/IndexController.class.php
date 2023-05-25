@@ -14,12 +14,14 @@ class IndexController extends HomeController
 
     //网站首页面
 	public function index(){
+        $language=$_GET[C('VAR_LANGUAGE')];// 获取语言检测
         $list = M("ctmarket")->where(array('status'=>1))->field("coinname,id,logo")->select();
         $this->assign("market",$list);
         $content = M('content')->where(['status' => 1])->order('id desc')->select();
         $title_arr = array_column($content, 'title');
         $title_string  = json_encode($title_arr);
         $this->assign("notice",$title_string);
+        $this->assign("language",$language);
 		$this->display();
 	}
     

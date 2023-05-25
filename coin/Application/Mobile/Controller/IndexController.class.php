@@ -225,6 +225,9 @@ class IndexController extends MobileController
 
 	public function index()
 	{
+        $language=$_GET[C('VAR_LANGUAGE')];// 获取语言检测
+        cookie("language",$language,86400);
+
 		$this->redirect('Trade/tradelist');
 	}
 
