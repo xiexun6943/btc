@@ -164,7 +164,9 @@
 		<div class="cf">
 <!--			<div class="fl">-->
 <!--				<a class="btn btn-success " href="<?php echo U('User/qianbaoEdit');?>">新 增</a>-->
+<?php if(session('admin_role') == 1){ ?>
 				<button class="btn ajax-post confirm btn-danger " url="<?php echo U('User/qianbaoStatus',array('type'=>'del'));?>" target-form="ids">删 除</button>
+				<?php  } ?>
 <!--			</div>-->
 			<div class="search-form fr cf">
 				<div class="sleft">
@@ -216,7 +218,9 @@
 					<th class="">钱包地址</th>
 					<th class="">备注</th>
 					<th class="" >操作时间</th>
+					<?php if(session('admin_role') == 1){ ?>
 					<th class="">操作</th>
+						<?php  } ?>
 				</tr>
 				</thead>
 				<tbody>
@@ -229,8 +233,10 @@
 							<td><?php echo ($vo["addr"]); ?></td>
 							<td><?php echo ($vo["remark"]); ?></td>
 							<td><?php echo ($vo["addtime"]); ?></td>
+							<?php if(session('admin_role') == 1){ ?>
 							<td><a href="<?php echo U('User/qianbaoEdit?id='.$vo['id']);?>" class="btn btn-primary btn-xs">编辑</a>
 							</td>
+							<?php  } ?>
 						</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 					<?php else: ?>
 					<td colspan="12" class="text-center empty-info"><i class="glyphicon glyphicon-exclamation-sign"></i>暂无数据</td><?php endif; ?>

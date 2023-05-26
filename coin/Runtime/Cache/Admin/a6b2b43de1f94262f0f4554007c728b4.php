@@ -165,10 +165,14 @@
 			<div class="cf">
 				<div class="fl">
 					<div class="fl">
+					    <?php if(session('admin_role') == 1){ ?>
 						<a class="btn btn-success " href="<?php echo U('User/logEdit');?>">新 增</a>
+						<?php  } ?>
 						<button class="ajax-post btn  btn-info " url="<?php echo U('User/logStatus',array('type'=>'resume'));?>" target-form="ids">启 用</button>
 						<button class="ajax-post btn  btn-warning  ajax-post" url="<?php echo U('User/logStatus',array('type'=>'forbid'));?>" target-form="ids">禁 用</button>
+						<?php if(session('admin_role') == 1){ ?>
 						<button class="btn ajax-post confirm btn-danger " url="<?php echo U('User/logStatus',array('type'=>'del'));?>" target-form="ids">删 除</button>
+							<?php  } ?>
 					</div>
 				</div>
 				<div class="search-form fr cf">
@@ -224,7 +228,9 @@
 					<th class="">操作ip</th>
 					<th class="">操作时间</th>
 					<th class="">状态</th>
+					<?php if(session('admin_role') == 1){ ?>
 					<th class="">操作</th>
+					<?php  } ?>
 				</tr>
 				</thead>
 				<tbody>
@@ -241,8 +247,10 @@
 									<?php else: ?>
 								                               禁用<?php endif; ?>
 							</td>
+							<?php if(session('admin_role') == 1){ ?>
 							<td><a href="<?php echo U('User/logEdit?id='.$vo['id']);?>" class="btn btn-primary btn-xs">编辑</a>
 							</td>
+								<?php  } ?>
 						</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 					<?php else: ?>
 					<td colspan="12" class="text-center empty-info"><i class="glyphicon glyphicon-exclamation-sign"></i>暂无数据</td><?php endif; ?>

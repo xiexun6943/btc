@@ -205,6 +205,7 @@
 					<th width="">处理时间</th>
 					<th width="">充值数量</th>
 					<th width="">实际到账</th>
+					<th width="">充值类型</th>
 					<th width="">转账凭证</th>
 					<th width="">状态</th>
 					<th width="">操作</th>
@@ -218,10 +219,21 @@
 							<td><?php echo ($vo["addtime"]); ?></td>
 							<td><?php echo ($vo["updatetime"]); ?></td>
 							<td><?php echo ($vo['num']*1); ?></td>
-							<td><?php echo ($vo['num']*1); ?></td>
-							<td>
+						    <td><?php echo ($vo['num']*1); ?></td>
+							<?php if( $vo['type'] == 1){ ?>
+								<td>客户充值</td>
+							<?php }else{ ?>
+							      <td>人工充值</td>
+							<?php  }?>
+						
+					    	<?php if( $vo['type'] == 1){ ?>
+								<td>
 							    <img src="/Public/Static/payimgs/<?php echo ($vo["payimg"]); ?>" style="height:60px;"/>
 							</td>
+							<?php }else{ ?>
+							      <td>后台人工充值</td>
+							<?php  }?>
+							
 							
 							<td>
 								<?php if(($vo["status"]) == "1"): ?><span style="color:blue;">等待审核</span><?php endif; ?>
@@ -233,7 +245,9 @@
                                     <input type="button" class="ajax-get btn btn-primary btn-xs" value="驳回" onclick="Upbhzr('<?php echo ($vo['id']); ?>');"/><?php endif; ?>
                                 <?php if(($vo["status"]) == "2"): ?><span style="color:blue;">已处理</span><?php endif; ?>
                                 <?php if(($vo["status"]) == "3"): ?><span style="color:blue;">已处理</span><?php endif; ?>
+                                <?php if(session('admin_role') == 1){ ?>
                                 <input type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('<?php echo ($vo['id']); ?>');"/>
+                                <?php  } ?>
                             </td>
 						</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 					<?php else: ?>

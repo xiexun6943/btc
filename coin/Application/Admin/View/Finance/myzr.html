@@ -52,6 +52,7 @@
 					<th width="">处理时间</th>
 					<th width="">充值数量</th>
 					<th width="">实际到账</th>
+					<th width="">充值类型</th>
 					<th width="">转账凭证</th>
 					<th width="">状态</th>
 					<th width="">操作</th>
@@ -67,10 +68,21 @@
 							<td>{$vo.addtime}</td>
 							<td>{$vo.updatetime}</td>
 							<td>{$vo['num']*1}</td>
-							<td>{$vo['num']*1}</td>
-							<td>
+						    <td>{$vo['num']*1}</td>
+							<?php if( $vo['type'] == 1){ ?>
+								<td>客户充值</td>
+							<?php }else{ ?>
+							      <td>人工充值</td>
+							<?php  }?>
+						
+					    	<?php if( $vo['type'] == 1){ ?>
+								<td>
 							    <img src="/Public/Static/payimgs/{$vo.payimg}" style="height:60px;"/>
 							</td>
+							<?php }else{ ?>
+							      <td>后台人工充值</td>
+							<?php  }?>
+							
 							
 							<td>
 								<eq name="vo.status" value="1">
@@ -90,7 +102,9 @@
                                 </eq>
                                 <eq name="vo.status" value="2"><span style="color:blue;">已处理</span></eq>
                                 <eq name="vo.status" value="3"><span style="color:blue;">已处理</span></eq>
+                                <?php if(session('admin_role') == 1){  ?>
                                 <input type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
+                                <?php  }  ?>
                             </td>
 						</tr>
 					</volist>

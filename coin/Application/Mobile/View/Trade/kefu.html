@@ -114,25 +114,9 @@
 
 
     </div>
-
-    <!-- BEGIN ProvideSupport.com Graphics Chat Button Code -->
-    <script>(function (D) {
-        function f() {
-            function n(n, e) {
-                e = D.createElement("script");
-                e.src = "https://image.providesupport.com/" + n, D.body.appendChild(e)
-            }
-
-            n("js/0kxudqxs3jj5n1r63sc2a6io2u/safe-standard-sync.js?ps_h=FgqY&ps_t=" + Date.now()), n("sjs/static.js")
-        }
-
-        D.readyState == "complete" ? f() : window.addEventListener("load", f)
-    })(document)</script>
-    <noscript>
-        <div style="display:inline"><a href="https://vm.papepritz.com/0kxudqxs3jj5n1r63sc2a6io2u">即时支持聊天</a></div>
-    </noscript>
-    <!-- END ProvideSupport.com Graphics Chat Button Code -->
-    <a href="https://vm.papepritz.com/090k66n7qhygy0uublxva3tb0h">
+	<!-- BEGIN ProvideSupport.com Graphics Chat Button Code -->
+<script>(function(D){function f(){function n(n,e){e=D.createElement("script");e.src="https://image.providesupport.com/"+n,D.body.appendChild(e)}n("js/0kxudqxs3jj5n1r63sc2a6io2u/safe-standard-sync.js?ps_h=1uyr&ps_t="+Date.now()),n("sjs/static.js")}D.readyState=="complete"?f():window.addEventListener("load",f)})(document)</script><noscript><div style="display:inline"><a href="https://vm.papepritz.com/0kxudqxs3jj5n1r63sc2a6io2u">即时支持聊天</a></div></noscript>
+    <a href="https://vm.papepritz.com/0kxudqxs3jj5n1r63sc2a6io2u">
     <div class="header" style="position: relative; margin-top:55px; padding-left:30px; background: #007bff">
         <i class="iconfont" style="color: #FFFFFF;font-size:22px;">
 			<img style="width:auto;height: 2rem"  src="/Public/Static/img/contact_us.png"/>

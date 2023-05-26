@@ -270,6 +270,7 @@
 								</td>
                                 <td><span><?php echo ($vo["invit"]); ?></span></td>
                                 <td>
+                                    <a class="btn btn-primary btn-danger btn-xs" href="<?php echo U('User/recharge');?>?id=<?php echo ($vo["id"]); ?>">充值</a>
 						            <a class="btn btn-primary btn-xs" href="<?php echo U('User/edit');?>?id=<?php echo ($vo["id"]); ?>">编辑</a>
 						            <?php if(($vo["rzstatus"]) == "1"): ?><a class="btn btn-primary btn-xs" href="<?php echo U('User/authrz');?>?id=<?php echo ($vo["id"]); ?>">审核认证</a><?php endif; ?>
 						            <a class="btn btn-primary btn-xs" href="<?php echo U('User/sendnotice');?>?id=<?php echo ($vo["id"]); ?>&type=1">发送通知</a>

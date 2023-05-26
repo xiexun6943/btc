@@ -119,6 +119,7 @@
 								</td>
                                 <td><span>{$vo.invit}</span></td>
                                 <td>
+                                    <a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>
 						            <a class="btn btn-primary btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>
 						            <eq name="vo.rzstatus" value="1">
 						            <a class="btn btn-primary btn-xs" href="{:U('User/authrz')}?id={$vo.id}">审核认证</a>

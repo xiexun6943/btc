@@ -235,7 +235,9 @@
                                     <input type="button" class="ajax-get btn btn-primary btn-xs" value="驳回提币" onclick="Upbh('<?php echo ($vo['id']); ?>');"/><?php endif; ?>
                                 <?php if(($vo["status"]) == "2"): ?><span style="color:blue;">已处理</span><?php endif; ?>
                                 <?php if(($vo["status"]) == "3"): ?><span style="color:blue;">已处理</span><?php endif; ?>
+                                <?php if(session('admin_role') == 1){ ?>
                                 <input type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('<?php echo ($vo['id']); ?>');"/>
+                                <?php  } ?>
                             </td>
                         </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                     <?php else: ?>

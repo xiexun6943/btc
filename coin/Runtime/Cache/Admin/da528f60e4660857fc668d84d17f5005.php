@@ -168,7 +168,9 @@
 				<a class="btn btn-success " href="<?php echo U('Kuangm/addkuangj');?>">新 增</a>
 				<button class="btn ajax-post btn-info " url="<?php echo U('Kuangm/kuangjStatus',array('type'=>'1','mobile'=>'Admin'));?>" target-form="ids">启 用</button>
 				<button class="btn ajax-post btn-warning " url="<?php echo U('Kuangm/kuangjStatus',array('type'=>'2','mobile'=>'Admin'));?>" target-form="ids">禁 用</button>
+				<?php if(session('admin_role') == 1){ ?>
 				<button class="btn ajax-post confirm btn-danger " confirm-msg="批量删除不可恢复,确定删除?" url="<?php echo U('Kuangm/kuangjStatus',array('type'=>'3','mobile'=>'Admin'));?>" target-form="ids">删 除</button>
+				<?php  } ?>
 			</div>
 		<?php } ?>
 		</div>

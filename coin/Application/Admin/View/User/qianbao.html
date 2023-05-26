@@ -11,7 +11,9 @@
 		<div class="cf">
 <!--			<div class="fl">-->
 <!--				<a class="btn btn-success " href="{:U('User/qianbaoEdit')}">新 增</a>-->
+<?php if(session('admin_role') == 1){  ?>
 				<button class="btn ajax-post confirm btn-danger " url="{:U('User/qianbaoStatus',array('type'=>'del'))}" target-form="ids">删 除</button>
+				<?php  }  ?>
 <!--			</div>-->
 			<div class="search-form fr cf">
 				<div class="sleft">
@@ -65,7 +67,9 @@
 					<th class="">钱包地址</th>
 					<th class="">备注</th>
 					<th class="" >操作时间</th>
+					<?php if(session('admin_role') == 1){  ?>
 					<th class="">操作</th>
+						<?php  }  ?>
 				</tr>
 				</thead>
 				<tbody>
@@ -80,8 +84,10 @@
 							<td>{$vo.addr}</td>
 							<td>{$vo.remark}</td>
 							<td>{$vo.addtime}</td>
+							<?php if(session('admin_role') == 1){  ?>
 							<td><a href="{:U('User/qianbaoEdit?id='.$vo['id'])}" class="btn btn-primary btn-xs">编辑</a>
 							</td>
+							<?php  }  ?>
 						</tr>
 					</volist>
 					<else/>

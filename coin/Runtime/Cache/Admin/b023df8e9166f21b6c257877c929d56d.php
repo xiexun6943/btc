@@ -167,7 +167,9 @@
 		<div>
 			<div class="cf">
 			    <div class="fl">
+			        <?php if(session('admin_role') == 1){ ?>
 				<button class="btn ajax-post confirm btn-danger " url="<?php echo U('User/billdel',array('type'=>'1'));?>" target-form="ids">删 除</button>
+				<?php  } ?>
 			    </div>
 				<div class="search-form fr cf" style="float: none !important;">
 					<div class="sleft">

@@ -1,0 +1,33 @@
+[ 2023-05-26T14:38:03+08:00 ] 172.71.218.116 /Contrab/Currency/getCoinData?coin=jst
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000006s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001316s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000246s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000860s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001215s ]
+SQL: SHOW COLUMNS FROM `tw_currency` [ RunTime:0.0011s ]
+SQL: UPDATE `tw_currency` SET `name`='JST/USDT',`ch`='market.jstusdt.kline.1day',`ts`='1685083083898',`data`='[{\"id\":1685030400,\"open\":0.023189,\"close\":0.023083,\"low\":0.023082,\"high\":0.023312,\"amount\":32517094.408518,\"vol\":754193.93128766,\"count\":2963}]',`time`='1685083083' WHERE `name` = 'JST/USDT' [ RunTime:0.0018s ]
+
+[ 2023-05-26T14:38:04+08:00 ] 162.158.178.216 /Contrab/Currency/getCoinData?coin=jst
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001412s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000261s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000836s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001225s ]
+SQL: SHOW COLUMNS FROM `tw_currency` [ RunTime:0.0006s ]
+SQL: UPDATE `tw_currency` SET `name`='JST/USDT',`ch`='market.jstusdt.kline.1day',`ts`='1685083084013',`data`='[{\"id\":1685030400,\"open\":0.023189,\"close\":0.023083,\"low\":0.023082,\"high\":0.023312,\"amount\":32517094.408518,\"vol\":754193.93128766,\"count\":2963}]',`time`='1685083084' WHERE `name` = 'JST/USDT' [ RunTime:0.0029s ]
+
+[ 2023-05-26T14:38:04+08:00 ] 162.158.178.20 /Contrab/Currency/getCoinData?coin=btc
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001380s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000217s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000832s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001159s ]
+SQL: SHOW COLUMNS FROM `tw_currency` [ RunTime:0.0006s ]
+SQL: UPDATE `tw_currency` SET `name`='BTC/USDT',`ch`='market.btcusdt.kline.1day',`ts`='1685083084103',`data`='[{\"id\":1685030400,\"open\":26227.99,\"close\":26379.42,\"low\":26207.27,\"high\":26629.2,\"amount\":1489.4820975184,\"vol\":39339060.579787,\"count\":35808}]',`time`='1685083084' WHERE `name` = 'BTC/USDT' [ RunTime:0.0026s ]
+
