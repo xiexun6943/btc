@@ -20,7 +20,7 @@ class IndexController extends HomeController
         $content = M('content')->where(['status' => 1])->order('id desc')->select();
         $title_arr = array_column($content, 'title');
         $title_string  = json_encode($title_arr);
-        $this->assign("notice",$title_string);
+        $this->assign("notice",$content);
         $this->assign("language",$language);
 		$this->display();
 	}

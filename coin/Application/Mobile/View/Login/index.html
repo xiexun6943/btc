@@ -6,7 +6,7 @@
 
 <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=2" />
+    <link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css" />
     <link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
     <title>{$webname}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
@@ -98,12 +98,12 @@
         <div class="dela-presets-container-2" style="padding: 0px;">
             <div class="dela-preset-container">
                 <form class="dela-preset-2-1" action="?" method="get" onclick="return false">
-                    <p class="dela-form__title">{:L('BitVenture')}</p>
+                    <p class="dela-form__title">{:L('Robit')}</p>
                     <input type="email" name="email" id="email" placeholder="{:L('邮箱')}" required autocomplete="email">
                     <input type="password" id="lpwd" name="password" placeholder="{:L('密码')}" required>
-                    <label class="dela-form__checkbox">
+                    <label class="dela-form__checkbox" id="remember"  >
                         {:L('记住账号')}
-                        <input type="checkbox" name="remember" value="1"><span></span>
+                        <input type="checkbox" name="remember"  id="rem"  value="1"><span></span>
                     </label>
                     <input type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
 
@@ -133,8 +133,10 @@
     </div>
 </div>
 
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<!--<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>-->
+<script src="/Public/Static/slider/jquery.js"></script>
 <script type="text/javascript" src="/Public/Static/js/layer/layer.js" ></script>
+<script type="text/javascript" src="/Public/Static/js/jquery.cookie.js" ></script>
 <script type="text/javascript">
 </script>
 
@@ -151,11 +153,30 @@
     function forgot_password() {
         window.location.href="{:U('Login/findpwd')}";
     }
+
 </script>
 
-<script src="/Public/Static/slider/jquery.js"></script>
+
 <script src="/Public/Static/slider/disk/longbow.js"></script>
 <script>
+
+    $(document).ready(function(){
+        if ($.cookie("remember") == "true") {
+            $("#rem").prop("checked",true);
+            $("#email").val($.cookie("email"));
+            $("#lpwd").val($.cookie("password"));
+        }
+    });
+
+    $("#remember").click(function(){
+        if ($("#rem").prop("checked") == true) {
+            $("#rem").prop("checked",false)
+        }else{
+            $("#rem").prop("checked",true)
+        }
+
+    });
+
     function uplogin(){
         var email = $("#email").val();
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
@@ -169,7 +190,7 @@
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
-
+        save_cookies();
         // $('.container-fluid').show();
         // $('#captcha').sliderCaptcha(
         //     {
@@ -194,6 +215,28 @@
             // });
     }
 
+    //保存到cookie
+    function save_cookies(){
+        if($("#rem").prop("checked")){
+            var email = $("#email").val();
+            var password = $("#lpwd").val();
+            console.log(email)
+            console.log(password)
+            $.cookie("remember","true",{expires:7});
+            $.cookie("email",email,{expires:7 });
+            $.cookie("password",password,{expires:7 });
+            console.log($.cookie("remember"))
+            console.log($.cookie("email"))
+            console.log($.cookie("password"))
+
+        }else{
+            console.log(1111)
+            console.log(2222)
+            $.cookie("remember","false",{expires:-1});
+            $.cookie("email","",{ expires:-1 });
+            $.cookie("password","",{ expires:-1 });
+        }
+    };
 
 </script>
 </body>
