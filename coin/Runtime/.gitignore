@@ -1,0 +1,19 @@
+ .DS_Store
+ node_modules/
+ /dist/
+ npm-debug.log*
+ yarn-debug.log*
+ yarn-error.log*
+ 
+ # Editor directories and files
+ .idea
+ .vscode
+ *.suo
+ *.ntvs*
+ *.njsproj
+ *.sln
+
+作者：叁分之一
+链接：https://juejin.cn/post/6844903902647697416
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
