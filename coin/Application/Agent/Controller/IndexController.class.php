@@ -432,15 +432,17 @@ class IndexController extends AgentController
 
 		$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
 		$ulist = M('User')->where($map_3)->order('id desc')->getField('id',true);
-		
-		$where['uid'] = ['in',$ulist];
+		if(!empty($ulist)){
+		    $where['uid'] = ['in',$ulist];
 
-		$count = M('recharge')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('recharge')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
+	    	$count = M('recharge')->where($where)->count();
+		    $Page = new \Think\Page($count, 15);
+	    	$show = $Page->show();
+		    $list = M('recharge')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
+		    $this->assign('list', $list);
+		    $this->assign('page', $show);
+		}
+		
 	     $this->display();
 	 }
 	 
@@ -462,15 +464,17 @@ class IndexController extends AgentController
 
 		$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
 		$ulist = M('User')->where($map_3)->order('id desc')->getField('id',true);
-		
-		$where['userid'] = ['in',$ulist];
+		if(!empty($ulist)){
+		    $where['userid'] = ['in',$ulist];
 
-		$count = M('myzc')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('myzc')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
+		    $count = M('myzc')->where($where)->count();
+	    	$Page = new \Think\Page($count, 15);
+		    $show = $Page->show();
+		    $list = M('myzc')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+	    	$this->assign('list', $list);
+		    $this->assign('page', $show);
+		}
+		
 	     $this->display();
 	 }
 	 
@@ -491,22 +495,26 @@ class IndexController extends AgentController
 	      
       	$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
       	$ulist = M('User')->where($map_3)->order('id desc')->getField('id',true);
-      	$where['userid'] = ['in',$ulist];
+      	if(!empty($ulist)){
+      	    $where['userid'] = ['in',$ulist];
 
-		$count = M('UserCoin')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('UserCoin')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		    $count = M('UserCoin')->where($where)->count();
+	    	$Page = new \Think\Page($count, 15);
+		    $show = $Page->show();
+	    	$list = M('UserCoin')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
-		foreach ($list as $k => $v) {
-			$list[$k]['username'] = M('User')->where(array('id' => $v['userid']))->getField('username');
-		}
+		    foreach ($list as $k => $v) {
+		    	$list[$k]['username'] = M('User')->where(array('id' => $v['userid']))->getField('username');
+	    	}
 
-		$this->assign('list', $list);
-		$this->assign('page', $show);
+		    $this->assign('list', $list);
+		    $this->assign('page', $show);
 		
-		$coinlist = M("coin")->where("type = 1")->order("id desc")->field("name,title")->select();
-        $this->assign("coinlist",$coinlist);
+		    $coinlist = M("coin")->where("type = 1")->order("id desc")->field("name,title")->select();
+            $this->assign("coinlist",$coinlist);
+      	    
+      	}
+      	
 	      $this->display();
 	  }
 }
