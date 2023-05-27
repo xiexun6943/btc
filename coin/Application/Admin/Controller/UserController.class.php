@@ -5,7 +5,7 @@ class UserController extends AdminController
 {
 	protected function _initialize()
 	{
-		parent::_initialize();	$allow_action=array("index","edit","status","admin","adminEdit","adminStatus","updateRules","log","logEdit","logStatus","qianbao","qianbaoEdit","qianbaoStatus","coin","coinEdit","coinFreeze","coinLog","setpwd","amountlog","loginadmin","billdel","sendnotice","upsendnotice","noticelist","noticedel","authrz","upanthrz","online","onlinelist","sendonline","uponline","setagent","agent","cancelagent","recharge");
+		parent::_initialize();	$allow_action=array("index","edit","status","admin","adminEdit","adminStatus","updateRules","log","logEdit","logStatus","qianbao","qianbaoEdit","qianbaoStatus","coin","coinEdit","coinFreeze","coinLog","setpwd","amountlog","loginadmin","billdel","sendnotice","upsendnotice","noticelist","noticedel","authrz","upanthrz","online","onlinelist","sendonline","uponline","setagent","agent","cancelagent","recharge","reset");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！");
 		}
@@ -301,7 +301,10 @@ class UserController extends AdminController
 			break;
 		case 5:
 		    //删除会员
-	        $result = M("user")->where($where)->delete();
+	       $result = M("user")->where($where)->delete();
+	        $where2['uid'] = array('in', $id);
+	        // 删除用户钱包
+	        M("UserQianbao")->where($where2)->delete();
 			break;	
 		default:
 			$this->error('操作失败！');	
@@ -913,10 +916,9 @@ class UserController extends AdminController
 	public function qianbao($name = NULL, $field = NULL, $coinname = NULL, $status = NULL)
 	{
 		$where = array();
-
 		if ($field && $name) {
 			if ($field == 'username') {
-				$where['userid'] = M('User')->where(array('username' => $name))->getField('id');
+				$where['uid'] = M('User')->where(array('username' => $name))->getField('id');
 			} else {
 				$where[$field] = $name;
 			}
@@ -926,7 +928,12 @@ class UserController extends AdminController
 			$where['name'] = trim($coinname);
 		}
 		
-		$coinlist = M("coin")->where("type = 1")->order("id desc")->field("name,title")->select();
+// 		$coinlist = M("coin")->where("type = 1")->order("id desc")->field("name,title")->select();
+        $coinlist=[
+                ['name'=>"USDT"],
+                ['name'=>"BTC"],
+                ['name'=>"ETH"],
+            ];
         $this->assign("coinlist",$coinlist);
 
 		$count = M('UserQianbao')->where($where)->count();
@@ -963,6 +970,31 @@ class UserController extends AdminController
 		}
 	}
 
+  //重置会员钱包地址
+	public function reset()
+	{
+	   
+		if (empty($_POST['id']) || empty($_POST['czline']) ) {
+				echo   json_encode(['code'=>500,'info'=>'重置失败']); exit;
+		} else {
+			    
+			$where=[
+			     'id'=>$_POST['id'],
+			      'czline'=>$_POST['czline']
+			      ];
+			 $data['addr']="";
+			 //   dump($where); dump($data); exit;
+			    $result= M('UserQianbao')->where($where)->save($data);
+			 //   echo M()->getLastSql();exit;
+		        if ($result) {
+		            
+				   echo   json_encode(['code'=>200,'info'=>'重置成功']); exit;
+		    	}
+			
+			} 
+			echo   json_encode(['code'=>500,'info'=>'重置失败']); exit;
+		
+	}
 
     //修改用户钱包数据
     public function qianbaoStatus($id = NULL, $type = null){
