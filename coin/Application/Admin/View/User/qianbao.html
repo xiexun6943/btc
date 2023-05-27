@@ -23,9 +23,10 @@
 							<empty name="Think.get.coinname">selected</empty>
 							>币种</option>
 							<volist name="coinlist" id="vo">
+							    <!--{$vo['name']}-->
 								<option value="{$vo['name']}"
 								<eq name="vo['name']" value="$Think.get.coinname">selected</eq>
-								>{$vo['title']}</option>
+								>{$vo['name']}</option>
 							</volist>
 						</select>
 
@@ -84,8 +85,13 @@
 							<td>{$vo.addr}</td>
 							<td>{$vo.remark}</td>
 							<td>{$vo.addtime}</td>
+				
+							<td>
+							     <input type="button" class="ajax-get btn btn-danger btn-xs" value="重置" onclick="reset('{$vo['id']}','{$vo['czline']}');"/>
+							</td>
+					
 							<?php if(session('admin_role') == 1){  ?>
-							<td><a href="{:U('User/qianbaoEdit?id='.$vo['id'])}" class="btn btn-primary btn-xs">编辑</a>
+							<td><a href="{:U('User/qianbaoEdit?id='.$vo['id'])}" class="btn btn-primary btn-xs" '{$vo['id']}'>编辑</a>
 							</td>
 							<?php  }  ?>
 						</tr>
@@ -106,5 +112,37 @@
 	<script type="text/javascript" charset="utf-8">
 		//导航高亮
 		highlight_subnav("{:U('User/qianbao')}");
+		
+	function reset(id,czline) {
+        var uid = parseInt(id);
+        if (id == "" || id,czline == null || czline =="" || czline == null) {
+            layer.alert('参数错误！');
+            return false;
+        }
+        
+        // layer.load(0, {shade: [0.5,'#8F8F8F']});
+        $.post("{:U('User/reset')}", {
+            id: id,czline:czline
+        }, function (data) {
+            console.log(data.code );
+            if (data.code == 200) {
+                layer.msg(data.info, {
+                    icon: 1
+                });
+                 setTimeout("shuaxin()",1000);
+            } else {
+                layer.msg(data.info, {
+                    icon: 2
+                });
+            }
+        }, "json");
+    }
+    
+    function closetanchu(){
+        layer.closeAll('loading');
+    }
+    function shuaxin(){
+        window.location.href=window.location.href;
+    }
 	</script>
 </block>

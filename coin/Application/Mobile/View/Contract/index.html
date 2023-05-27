@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
 	<link rel="stylesheet" href="/Public/Static/Icoinfont/iconfont.css">
 	<script src="/Public/Static/Icoinfont/iconfont.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<title>{$webname}</title>
 	<style>
 	::-webkit-input-placeholder {color: #b5b5b5;font-size: 12px;}
@@ -164,9 +165,57 @@
     }
 
     
+	    .isModernIPhone{
+	        padding-top:49px!important;
+	    }
+    
+	    .bottomUp{
+	        padding-bottom:100px!important;
+	    }
 	</style>
   </head>
   <body style="background:#fff;">
+      <script>
+          $(function(){
+              // 检测是否在WebView中打开
+                function isWebView() {
+                  // 检查是否存在WebView特有的用户代理标识
+                  if (navigator.userAgent.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i) ||
+                      navigator.userAgent.match(/Android.*(wv|WebView)/i) ||
+                      navigator.userAgent.match(/(iPhone|iPod|iPad|Android).*[Ww]eb[Vv]iew/i)) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }
+                              
+              
+              const isIPhone = window.navigator.userAgent.includes("iPhone OS")
+              let iphoneVer = ''
+              let iphoneVerNumber = ''
+              let isModernIPhone = false
+              if(isIPhone === true){
+                  iphoneVer = window.navigator.userAgent.indexOf("iPhone OS")
+                  iphoneVerNumber = window.navigator.userAgent.substr(iphoneVer+9,5)
+              }
+              if(parseInt(iphoneVerNumber)>=11){
+                  console.log(parseInt(iphoneVerNumber))
+                  isModernIPhone = true
+              }
+              if(isModernIPhone===true&&isWebView()===true){
+                  $('.no_header').css('padding-top','50px')
+                  $('.no_header').css('height','100px')
+                  $('.container-fluid').addClass('isModernIPhone')
+              }else{
+                  $('.container-fluid').removeClass('isModernIPhone')
+              }
+              if(isModernIPhone===true&&isWebView()===true){
+                  $('.btnbox').addClass('bottomUp')
+              }else{
+                  $('.btnbox').removeClass('bottomUp')
+              }
+          })
+      </script>
 	<div class="container-fluid " style="padding:0px;width:100vw;">
 		<div class="no_header">
 			<div class="fl allhg txtl">
