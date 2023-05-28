@@ -173,6 +173,47 @@
 			</if>
 		</div>
 		
+		<style>
+		    .upHeight{
+		        height: auto;
+		        padding-bottom:50px;
+		    }
+		</style>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+      <script>
+          $(function(){
+              // 检测是否在WebView中打开
+                function isWebView() {
+                  // 检查是否存在WebView特有的用户代理标识
+                  if (navigator.userAgent.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i) ||
+                      navigator.userAgent.match(/Android.*(wv|WebView)/i) ||
+                      navigator.userAgent.match(/(iPhone|iPod|iPad|Android).*[Ww]eb[Vv]iew/i)) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }
+                              
+              
+              const isIPhone = window.navigator.userAgent.includes("iPhone OS")
+              let iphoneVer = ''
+              let iphoneVerNumber = ''
+              let isModernIPhone = false
+              if(isIPhone === true){
+                  iphoneVer = window.navigator.userAgent.indexOf("iPhone OS")
+                  iphoneVerNumber = window.navigator.userAgent.substr(iphoneVer+9,5)
+              }
+              if(parseInt(iphoneVerNumber)>=15){
+                  isModernIPhone = true
+              }
+              if(isModernIPhone===true&&isWebView()===true){
+                  $('.transbtnbox').addClass('upHeight')
+              }else{
+                  $('.transbtnbox').removeClass('upHeight')
+              }
+          })
+      </script>
+		
 		<!---------交易选择弹窗---------->
 	<div class="dongbox"  id="showdong">
 	    <div class="dong_con">

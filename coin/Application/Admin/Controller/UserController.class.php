@@ -456,6 +456,10 @@ class UserController extends AdminController
 		        }else{
 		            $add['username'] = $username;
 		        }
+		       $is_user= M('user')->where(['username'=>$username])->find();
+		       if($is_user){
+		           $this->error("会员账号已经存在!");exit();
+		       }
 		        
 		        if($_POST['password'] == ""){
 		            $this->error("请输入登陆密码");exit();
@@ -565,8 +569,17 @@ class UserController extends AdminController
 	        ];
 	    $upre = M("recharge")->add($save);
 	   
-	    //增加会员资产
-	    $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$num);
+	   if($minfo){
+	       //增加会员资产
+	        $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$num);
+	   }else{
+	       $coinData=[
+	           'userid'=>$uid,
+	           'usdt'=>$num,
+	           ];
+	        $incre = M("user_coin")->add($coinData);
+	   }
+	    
 	     
 	    //增加充值日志
 	    $data['uid'] =$uid;
@@ -960,13 +973,39 @@ class UserController extends AdminController
 			}
             $coinlist = M("coin")->where("type = 1")->order("id desc")->field("name,title,czline")->order('sort asc')->select();
             $this->assign("coinlist",$coinlist);
+            $this->assign("coinnames",[['name'=>'ustd'],['name'=>'btc'],['name'=>'eth']]);
 			$this->display();
 		} else {
-			if (M('UserQianbao')->save($_POST)) {
-				$this->success('编辑成功！');
-			} else {
-				$this->error('编辑失败！');
-			}
+		    if(empty($id)){ //添加
+		        $username=trim($_POST['username']);
+		        $userInfo=M('user')->where(['username'=>$username])->find();
+		        
+		        if(!$userInfo){
+		            $this->error('用户不存在！'); exit;
+		        } 
+		        $data=[
+		                'username'=>trim($_POST['username']),
+		                'name'=>trim($_POST['name']),
+		                'czline'=>trim($_POST['czline']),
+		                'addr'=>trim($_POST['addr']),
+		                'remark'=>trim($_POST['remark']),
+		                'uid'=>$userInfo['id']
+		            ];
+		 
+		        if ( M('UserQianbao')->add($data)) {
+				    $this->success('编辑成功！');
+    			} else {
+    				$this->error('编辑失败！');
+    			}
+		        
+		    }else{//编辑
+		        if (M('UserQianbao')->save($_POST)) {
+				    $this->success('编辑成功！');
+    			} else {
+    				$this->error('编辑失败！');
+    			}
+		    }
+			
 		}
 	}
 

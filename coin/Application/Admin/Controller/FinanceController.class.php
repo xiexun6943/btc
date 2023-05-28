@@ -63,8 +63,17 @@ class FinanceController extends AdminController
 	    $save['updatetime'] = date("Y-m-d H:i:s",time());
 	    $save['status'] = 2;
 	    $upre = M("recharge")->where(array('id'=>$id))->save($save);
-	    //增加会员资产
+	    if($minfo){
+	        //增加会员资产
 	    $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$num);
+	    }else{
+	        $coinData=[
+	                'userid'=>$uid,
+	                $coinname=>$num
+	            ];
+	        $incre = M("user_coin")->add($coinData);
+	    }
+	    
 	    //增加充值日志
 	    $data['uid'] = $info['uid'];
 	    $data['username'] = $info['username'];
@@ -75,6 +84,7 @@ class FinanceController extends AdminController
 	    $data['addtime'] = date("Y-m-d H:i:s",time());
 	    $data['st'] = 1;
 	    $data['remark'] = L('充币到账');
+	    
 	    $addre = M("bill")->add($data);
 	    if($upre && $incre && $addre){
 	        
