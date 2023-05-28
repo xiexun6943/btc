@@ -21,18 +21,35 @@
 							<table>
 							    	<tr class="controls">
 							    <td class="item-label">用户名 :</td>
-
-									<td>
-										<input type="text" class="form-control input-10x"  name="username" value="{$data.username}" readonly="true" style="color:red">
+									<?php  if(empty( $_GET['id'])){ ?>
+										<td>
+										<input type="text" class="form-control input-10x"  name="username" value="{$data.username}"  >
 									</td>
+									<?php }else{ ?>
+										<td>
+										<input type="text" class="form-control input-10x"  name="username"  readonly="true"  style="color:red"  value="{$data.username}"  >
+									</td>
+									
+									<?php }?>
+									
 									</tr>
 								<tr class="controls">
 								    
 									<td class="item-label">币种 :</td>
 
-									<td>
-										<input type="text" class="form-control input-10x"  name="name" value="{$data.name}">
-									</td>
+									<!--<td>-->
+									<!--	<input type="text" class="form-control input-10x"  name="name" value="{$data.name}">-->
+									<!--</td>-->
+									
+									<td><select name="name" class="form-control input-10x">
+										<volist name="coinnames" id="v">
+											<option value="{$v['name']}"
+											<eq name="data['name']" value="$v['name']">selected</eq>
+											>{$v['name']}
+										</option>
+										</volist>
+									</select></td>
+									<td class="item-note"></td>
 									<td class="item-note"></td>
 								</tr>
 								<tr class="controls">
