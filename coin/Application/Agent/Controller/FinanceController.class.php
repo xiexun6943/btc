@@ -6,14 +6,14 @@ class FinanceController extends AgentController
 	//驳回充币
 	public function rejectzr($id = null){
 	    if($id <= 0){
-	        $this->error("缺少重要参数");exit();
+	        $this->error(L("缺少重要参数"));exit();
 	    }
 	    $info = M("recharge")->where(array('id'=>$id))->find();
 	    if(empty($info)){
-	        $this->error("充币订单不存在");exit();
+	        $this->error(L("充币订单不存在"));exit();
 	    }
 	    if($info['status'] != 1){
-	        $this->error("此订单已处理");exit();
+	        $this->error(L("此订单已处理"));exit();
 	    }
 	    //修改订单状态
 	    $save['updatetime'] = date("Y-m-d H:i:s",time());
@@ -29,23 +29,23 @@ class FinanceController extends AgentController
 		    $data['status'] = 1;
 		    M("notice")->add($data);
 	        
-	        $this->success("充值驳回成功");
+	        $this->success(L("充值驳回成功"));
 	    }else{
-	        $this->error("驳回失败");
+	        $this->error(L("驳回失败"));
 	    }
 	}
 	
 	//确认充币
 	public function adoptzr($id = null){
 	    if($id <= 0){
-	        $this->error("缺少重要参数");exit();
+	        $this->error(L("缺少重要参数"));exit();
 	    }
 	    $info = M("recharge")->where(array('id'=>$id))->find();
 	    if(empty($info)){
-	        $this->error("充币订单不存在");exit();
+	        $this->error(L("充币订单不存在"));exit();
 	    }
 	    if($info['status'] != 1){
-	        $this->error("此订单已处理");exit();
+	        $this->error(L("此订单已处理"));exit();
 	    }
 	    $uid = $info['uid'];
 	    $num = $info['num'];
@@ -78,9 +78,9 @@ class FinanceController extends AgentController
 		    $notice['status'] = 1;
 		    M("notice")->add($notice);
 	        
-	        $this->success("处理成功");
+	        $this->success(L("处理成功"));
 	    }else{
-	        $this->error("处理失败");
+	        $this->error(L("处理失败"));
 	    }
 	}
 	
@@ -89,13 +89,13 @@ class FinanceController extends AgentController
     public function del($id = null){
         $info = M("recharge")->where(array('id'=>$id))->find();
 	    if(empty($info)){
-	        $this->error("充币订单不存在");exit();
+	        $this->error(L("充币订单不存在"));exit();
 	    }
 	    $result = M("recharge")->where(array('id'=>$id))->delete();
 	    if($result){
-	         $this->success('删除成功！',U('Finance/myzr'));
+	         $this->success(L('删除成功'),U('Finance/myzr'));
 	    }else{
-	        $this->error("删除失败");exit();
+	        $this->error(L("删除失败"));exit();
 	    }
     }
     
@@ -104,13 +104,13 @@ class FinanceController extends AgentController
     public function delT($id = null){
         $info = M("myzc")->where(array('id'=>$id))->find();
 	    if(empty($info)){
-	        $this->error("提币订单不存在");exit();
+	        $this->error(L("提币订单不存在"));exit();
 	    }
 	    $result = M("myzc")->where(array('id'=>$id))->delete();
 	    if($result){
-	         $this->success('删除成功！',U('Finance/myzc'));
+	         $this->success(L('删除成功'),U('Finance/myzc'));
 	    }else{
-	        $this->error("删除失败");exit();
+	        $this->error(L("删除失败"));exit();
 	    }
     }
 	
@@ -118,14 +118,14 @@ class FinanceController extends AgentController
 	//驳回提币记录
 	public function reject($id = null){
 	    if($id <= 0){
-	        $this->error("缺少重要参数");exit();
+	        $this->error(L("缺少重要参数"));exit();
 	    }
 	    $info = M("myzc")->where(array('id'=>$id))->find();
 	    if(empty($info)){
-	        $this->error("提币订单不存在");exit();
+	        $this->error(L("提币订单不存在"));exit();
 	    }
 	    if($info['status'] != 1){
-	        $this->error("此订单已处理");exit();
+	        $this->error(L("此订单已处理"));exit();
 	    }
 	    
 	   $uid = $info['userid'];
@@ -158,9 +158,9 @@ class FinanceController extends AgentController
 		   $notice['status'] = 1;
 		   M("notice")->add($notice);
 	       
-	       $this->success("操作成功");exit();
+	       $this->success(L("操作成功"));exit();
 	   }else{
-	       $this->error("操作失败");exit();
+	       $this->error(L("操作失败"));exit();
 	   }
 	    
 	}
@@ -168,14 +168,14 @@ class FinanceController extends AgentController
 	//通过提币处理
 	public function adopttb($id = null){
 	    if($id <= 0){
-	        $this->error("缺少重要参数");exit();
+	        $this->error(L("缺少重要参数"));exit();
 	    }
 	    $info = M("myzc")->where(array('id'=>$id))->find();
 	    if(empty($info)){
-	        $this->error("提币订单不存在");exit();
+	        $this->error(L("提币订单不存在"));exit();
 	    }
 	    if($info['status'] != 1){
-	        $this->error("此订单已处理");exit();
+	        $this->error(L("此订单已处理"));exit();
 	    }
 	    $save['endtime'] = date("Y-m-d H:i:s",time());
 	    $save['status'] = 2;
@@ -190,9 +190,9 @@ class FinanceController extends AgentController
 		    $notice['status'] = 1;
 		    M("notice")->add($notice);
 	        
-	        $this->success('处理成功！',U('Finance/myzc'));
+	        $this->success(L('处理成功'),U('Finance/myzc'));
 	    }else{
-	        $this->error("处理失败");exit();
+	        $this->error(L("处理失败"));exit();
 	    }
 	}
     

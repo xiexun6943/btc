@@ -4,12 +4,12 @@
 <div id="main-content">
 	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
 		<button class="close fixed" style="margin-top: 4px;">&times;</button>
-		<div class="alert-content">警告内容</div>
+		<div class="alert-content">{:L('警告内容')}</div>
 	</div>
 	<div id="main" class="main">
 		<div class="main-title-h">
-			<span class="h1-title"><a href="{:U('Index/index')}">用户管理</a> &gt;&gt;</span>
-			<span class="h1-title"><empty name="data">添加用户<else/>编辑用户</empty></span>
+			<span class="h1-title"><a href="{:U('Index/index')}">{:L('用户管理')}</a> &gt;&gt;</span>
+			<span class="h1-title"><empty name="data">{:L('添加用户')}<else/>{:L('编辑用户')}</empty></span>
 		</div>
 		<div class="tab-wrap">
 			<div class="tab-content">
@@ -19,22 +19,22 @@
 							<table>
 
 								<tr class="controls">
-									<td class="item-label">用户名 :</td>
+									<td class="item-label">{:L('用户名')} :</td>
 									<td>
 										<input type="text" class="form-control input-10x" name="username" value="{$data.username}">
 									</td>
 									<td class="item-note"></td>
 								</tr>
 								<tr class="controls">
-									<td class="item-label">用户密码 :</td>
+									<td class="item-label">{:L('用户密码')} :</td>
 									<td><input type="text" class="form-control input-10x" name="password" value=""></td>
-									<td class="item-note" style="color:red;">*留空不更新</td>
+									<td class="item-note" style="color:red;">*{:L('留空不更新')}</td>
 								</tr>
 								<tr class="controls">
-									<td class="item-label">交易密码 :</td>
+									<td class="item-label">{:L('交易密码')} :</td>
 									<td><input type="text" class="form-control input-10x" name="paypassword" value="">
 									</td>
-									<td class="item-note" style="color:red;">*留空不更新</td>
+									<td class="item-note" style="color:red;">* {:L('留空不更新')}</td>
 								</tr>
 
 
@@ -42,8 +42,8 @@
 									<td class="item-label"></td>
 									<td>
 										<div class="form-item cf">
-											<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">提交</button>
-											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">返 回</a>
+											<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">{:L('提交')}</button>
+											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">{:L('返 回')}</a>
 											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
 											</notempty>
 										</div>

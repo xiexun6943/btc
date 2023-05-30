@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>代理中心</title>
+	<title>{:L('代理中心')}</title>
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/base.css" media="all">
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/common.css" media="all">
@@ -20,40 +20,40 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="navbar-header" style="background-color:#3c434d;">
 		<a class="navbar-brand" style="width:200px;text-align:center;background-color:#3c434d;" href="{:U('Agent/Index/index')}">
-		    <span>代理系统</span>	
+		    <span>{:L('代理系统')}</span>	
 		</a>
 	</div>
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">
 			<li> 
-			    <a href="{:U('Agent/Index/index')}">会员列表</a>
+			    <a href="{:U('Agent/Index/index')}">{:L('会员列表')}</a>
 			</li>
 			
 			<li> 
-				<a href="{:U('Agent/Index/jclist')}">合约建仓订单</a>
+				<a href="{:U('Agent/Index/jclist')}">{:L('合约建仓订单')}</a>
 			</li>
 			
 			<li class="active">
-			    <a href="{:U('Agent/Index/pclist')}">合约平仓订单</a>
+			    <a href="{:U('Agent/Index/pclist')}">{:L('合约平仓订单')}</a>
 			</li>
 			
 						<li>
-			    <a href="{:U('Agent/Index/recharge')}">充值列表</a>
+			    <a href="{:U('Agent/Index/recharge')}">{:L('充值列表')}</a>
 			</li>
 			
 			<li>
-			    <a href="{:U('Agent/Index/withdraw')}">提现列表</a>
+			    <a href="{:U('Agent/Index/withdraw')}">{:L('提现列表')}</a>
 			</li>
 			
 			<li>
-			    <a href="{:U('Agent/Index/property')}">用户财产</a>
+			    <a href="{:U('Agent/Index/property')}">{:L('用户财产')}</a>
 			</li>
 		</ul>
 		
 		
 		<ul class="nav navbar-nav navbar-rights" style="margin-right:10px;">
 			<li>
-				<a class="dropdown-toggle" title="{:L('退出')}" href="{:U('Agent/Login/loginout')}" target="_blank">
+				<a class="dropdown-toggle" title="{:L('退出')}" href="{:U('Agent/Login/loginout')}" >
 					<span class="glyphicon glyphicon-share" aria-hidden="true"></span>
 				</a>
 			</li>
@@ -123,18 +123,18 @@
 						<td>{$vo.coinname}</td>
 						<td>
 						    <if condition="$vo.hyzd eq 1">
-						        <span style="color:#0ecb81;">买涨</span>
+						        <span style="color:#0ecb81;">{:L('买涨')}</span>
 						    <elseif condition="$vo.hyzd eq 2" />
-						        <span style="color:#f5465c;">买跌</span>
+						        <span style="color:#f5465c;">{:L('买跌')}</span>
 						    </if>
 						</td>
 						<td>
 						    <if condition="$vo.status eq 1">
-						        <span style="color:#707A8A;">待结算</span>
+						        <span style="color:#707A8A;">{:L('待结算')}</span>
 						    <elseif condition="$vo.status eq 2" />
-						        <span style="color:#0ecb81;">已完成</span>
+						        <span style="color:#0ecb81;">{:L('已完成')}</span>
 						    <elseif condition="$vo.status eq 3" />
-						        <span style="color:#f5465c;">无效</span>
+						        <span style="color:#f5465c;">{:L('无效')}</span>
 						    </if>
 						</td>
 						<td>{$vo.num}</td>
@@ -163,7 +163,7 @@
 					</volist>
                     <else/>
 					<td colspan="12" class="text-center empty-info">
-					    <i class="glyphicon glyphicon-exclamation-sign"></i>暂无数据
+					    <i class="glyphicon glyphicon-exclamation-sign"></i>{:L('暂无数据')}
 					</td>
 					</notempty>
 				</tbody>
@@ -186,8 +186,8 @@
         {'st':st},
         function(data){
             if(data.code == 1){
-                layer.confirm('有新的合约订单', {
-                  btn: ['知道了'] //按钮
+                 layer.confirm('There is a new contract order', {
+                  btn: ['I knew'] // 按钮
                 }, function(){
                     
                     $.post("{:U('Admin/Trade/settzstatus')}",

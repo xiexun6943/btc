@@ -66,13 +66,13 @@ class IndexController extends AgentController
 		    if($id <= 0 || $id == null){
 		        $username = trim($_POST['username']);
 		        if($username == ''){
-		            $this->error("请输入会员账号");exit();
+		            $this->error(L("请输入会员账号"));exit();
 		        }else{
 		            $add['username'] = $username;
 		        }
 		        
 		        if($_POST['password'] == ""){
-		            $this->error("请输入登陆密码");exit();
+		            $this->error(L("请输入登陆密码"));exit();
 		        }else{
 		            $add['password'] = md5($_POST['password']);
 		        }
@@ -95,9 +95,9 @@ class IndexController extends AgentController
                 $re = M("user")->add($add);
 		        if($re){
 		            M('user_coin')->add(array('userid' => $re));
-		             $this->success("新增成功");exit();
+		             $this->success(L("新增成功"));exit();
 		        }else{
-		            $this->error("新增失败");exit();
+		            $this->error(L("新增失败"));exit();
 		        }
 		    //编辑会员   
 		    }else{
@@ -115,9 +115,9 @@ class IndexController extends AgentController
 		        
 		        $result = M("user")->where(array('id'=>$id))->save($_POST);
 		        if($result){
-		            $this->success("编辑成功");exit();
+		            $this->success(L("编辑成功"));exit();
 		        }else{
-		            $this->error("编辑失败");exit();
+		            $this->error(L("编辑失败"));exit();
 		        }
 		    }
 
@@ -139,7 +139,7 @@ class IndexController extends AgentController
 	    $rzstatus = $_POST['rzstatus'];
 	    $uid = $_POST['uid'];
 	    if($uid <= 0 || $uid == ''){
-	        $this->error("参数得要参数");
+	        $this->error(L("参数得要参数"));
 	    }
 	    if($rzstatus== 2){//表示认证成功
 	    
@@ -190,9 +190,9 @@ class IndexController extends AgentController
 		        $notice['status'] = 1;
 		        M("notice")->add($notice);
 		    
-	            $this->success("认证成功");
+	            $this->success(L("认证成功"));
 	        }else{
-	            $this->error("操作失败");
+	            $this->error(L("操作失败"));
 	        }
 
 	    }elseif($rzstatus == 3){//表示驳回认证
@@ -205,10 +205,10 @@ class IndexController extends AgentController
 		        $notice['addtime'] = date("Y-m-d H:i:s",time());
 		        $notice['status'] = 1;
 		        M("notice")->add($notice);
-                $this->success("操作成功");
+                $this->success(L("操作成功"));
                 
             }else{
-                $this->error("操作失败");
+                $this->error(L("操作失败"));
             }
 	    }
 
@@ -307,17 +307,17 @@ class IndexController extends AgentController
 	        $kongyk = trim(I('post.kongyk'));
 	        $info = M("hyorder")->where(array('id'=>$id))->find();
 	        if(empty($info)){
-	            $this->ajaxReturn(['code'=>0,'info'=>"参少重要参数"]);
+	            $this->ajaxReturn(['code'=>0,'info'=>L("参少重要参数")]);
 	        }
 	        
 	        $result = M("hyorder")->where(array('id'=>$id))->save(array('kongyk'=>$kongyk));
 	        if($result){
-	            $this->ajaxReturn(['code'=>1,'info'=>"操作成功"]); 
+	            $this->ajaxReturn(['code'=>1,'info'=>L("操作成功")]); 
 	        }else{
-	            $this->ajaxReturn(['code'=>0,'info'=>"操作失败"]);
+	            $this->ajaxReturn(['code'=>0,'info'=>L("操作失败")]);
 	        }
 	    }else{
-	        $this->ajaxReturn(['code'=>0,'info'=>"网络错误"]);
+	        $this->ajaxReturn(['code'=>0,'info'=>L("网络错误")]);
 	    }
 	}
 	
