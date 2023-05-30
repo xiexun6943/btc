@@ -24,7 +24,7 @@ class LoginController extends \Think\Controller
 			}
 		} else {
 			if(session('agent_id')) {
-				$this->redirect('Agent/Index/index');
+				$this->redirect('Index/index');
 			}
 			$this->display();
 		}

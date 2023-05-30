@@ -5,10 +5,106 @@
 	<meta name="renderer" content="webkit">
 	<title>{:L('代理系统')}</title>
 	<link rel="stylesheet" href="__PUBLIC__/Admin/ecshe_css/login.css" />
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 </head>
+<style>
+ ul {
+            list-style: none;
+        }
+
+        .wrap {
+            width: 50px;
+            height: 25px;
+            margin-top: 10px;
+            padding-right: 20px;
+            background-color: #FF6A6A;
+            text-align: center;
+        }
+
+        .wrap li{
+            background-color: #FF6A6A;
+        }
+
+        .wrap > ul > li {
+            float: left;
+            margin-right: 10px;
+            position: relative;
+           
+        }
+
+        .wrap a {
+            display: block;
+            height: 30px;
+            width: 100px;
+            text-decoration: none;
+            color: #fff;
+            line-height: 30px;
+            text-align: center;
+        
+        }
+
+        .wrap li ul {
+            position: absolute;
+            top: 30px;
+            display: none;
+        }
+        .wrap  ul  li {
+            font-size: 16px;
+            
+        }
+</style>
 <body style="background:#f5f5f5;">
+<div style="position:absolute; top:10px;right:50px">
+<div class="wrap">
+    <ul>
+        <li>
+    
+             <?php if(LANG_SET=='zh-cn'){?>
+             
+             <a class="css-1smf7ma">中文&nbsp;&nbsp;</a>
+		
+			<?php }elseif(LANG_SET=='en-us'){?>
+
+			<a class="css-1smf7ma">English&nbsp;&nbsp;</a>
+			<?php }else{ ?>
+
+			        <a href="javascript:void(0);">{:L('language')}</a>
+			<?php } ?>
+
+            <ul  >
+                
+                <li><a href="{:U('?Lang=zh-cn')}">{:L('中文')}</a></li>
+                <li><a href="{:U('?Lang=en-us')}">English</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+</div>
+
+ <script>
+ $(function () {
+            $('.wrap > ul > li').mouseover(function () {
+                $(this).children('ul').show(); // show()方法本质还是更新 display属性为block
+            });
+
+            $('.wrap > ul > li').mouseout(function () {
+                $(this).children('ul').hide(); // hide()本质上, 还是更新 display属性为 none
+            });
+            
+            $('.wrap > ul > li >ul >li').each(function(){
+                 $(this).click(function(){
+                     var text=$(this).text();
+                     $('.wrap > ul > li >a').text(text)
+                     console.log(text);
+                 })
+             })
+
+        });
+    </script>
+
 <div style="width:100%;height:120px;margin-top:50px;text-align:center;">
-    <img src="/Public/Admin/ecshe_img/alogn.png" style="height: 120px;"/>
+    <img src="/Public/Admin/ecshe_img/logo.png" style="height: 120px;"/>
 </div>
 <div class="logsbox" style="margin-top:25px;background:#fff;">
 	<h2 class="tc" style="margin-bottom:35px;color:#8a8a8a;">{:L('代理系统')}</h2>

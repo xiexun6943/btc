@@ -21,16 +21,16 @@ class AgentController extends Controller
         
         $access = $this->accessControl();
         if ($access === false) {
-            $this->error('403:禁止访问');
+            $this->error(L('403:禁止访问'));
         } else if ($access === null) {
             $dynamic = $this->checkDynamic();
             if ($dynamic === null) {
                 $rule = strtolower(MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME);
                  if (!$this->checkRule($rule, array('in', '1,2'))) {
-                     $this->error('未授权访问!');
+                     $this->error(L('未授权访问!'));
                  }
             } else if ($dynamic === false) {
-                $this->error('未授权访问!');
+                $this->error(L('未授权访问!'));
             }
         }
 
@@ -83,7 +83,7 @@ class AgentController extends Controller
         $where = array_merge(array(
             'id' => array('in', $id)
         ), (array)$where);
-        $msg = array_merge(array('success' => '操作成功！', 'error' => '操作失败！', 'url' => '', 'ajax' => IS_AJAX), (array)$msg);
+        $msg = array_merge(array('success' => L('操作成功'), 'error' => L('操作失败'), 'url' => '', 'ajax' => IS_AJAX), (array)$msg);
 
         if (M($model)->where($where)->save($data) !== false) {
             $this->success($msg['success'], $msg['url'], $msg['ajax']);
@@ -92,19 +92,19 @@ class AgentController extends Controller
         }
     }
 
-    protected function forbid($model, $where = array(), $msg = array('success' => '状态禁用成功！', 'error' => '状态禁用失败！'))
+    protected function forbid($model, $where = array(), $msg = array('success' =>'状态禁用成功' , 'error' =>'状态禁用失败' ))
     {
         $data = array('status' => 0);
         $this->editRow($model, $data, $where, $msg);
     }
 
-    protected function resume($model, $where = array(), $msg = array('success' => '状态恢复成功！', 'error' => '状态恢复失败！'))
+    protected function resume($model, $where = array(), $msg = array('success' => '状态恢复成功', 'error' => '状态恢复失败'))
     {
         $data = array('status' => 1);
         $this->editRow($model, $data, $where, $msg);
     }
 
-    protected function restore($model, $where = array(), $msg = array('success' => '状态还原成功！', 'error' => '状态还原失败！'))
+    protected function restore($model, $where = array(), $msg = array('success' => '状态还原成功', 'error' => '状态还原失败'))
     {
         $data = array('status' => 1);
         $where = array_merge(array('status' => -1), $where);
@@ -124,26 +124,26 @@ class AgentController extends Controller
         $status = I('request.status');
 
         if (empty($ids)) {
-            $this->error('请选择要操作的数据');
+            $this->error(L('请选择要操作的数据'));
         }
 
         $map['id'] = array('in', $ids);
 
         switch ($status) {
             case -1:
-                $this->delete($Model, $map, array('success' => '删除成功', 'error' => '删除失败'));
+                $this->delete($Model, $map, array('success' => L('删除成功'), 'error' => L('删除失败')));
                 break;
 
             case 0:
-                $this->forbid($Model, $map, array('success' => '禁用成功', 'error' => '禁用失败'));
+                $this->forbid($Model, $map, array('success' => L('禁用成功'), 'error' => L('禁用失败')));
                 break;
 
             case 1:
-                $this->resume($Model, $map, array('success' => '启用成功', 'error' => '启用失败'));
+                $this->resume($Model, $map, array('success' => L('启用成功'), 'error' => L('启用失败')));
                 break;
 
             default:
-                $this->error('参数错误');
+                $this->error(L('参数错误'));
                 break;
         }
     }
@@ -203,7 +203,7 @@ class AgentController extends Controller
 
                 foreach ($menus['main'] as $key => $item) {
                     if (!is_array($item) || empty($item['title']) || empty($item['url'])) {
-                        $this->error('控制器基类$menus属性元素配置有误');
+                        $this->error(L('控制器基类$menus属性元素配置有误'));
                     }
 
                     if (stripos($item['url'], MODULE_NAME) !== 0) {
