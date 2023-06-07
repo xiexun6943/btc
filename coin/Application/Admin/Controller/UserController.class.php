@@ -495,7 +495,6 @@ class UserController extends AdminController
             $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
             $list[$k]['state']=$user_login_state['state'];
         }
-
         $this->assign('list', $list);
         $this->assign('page', $show);
         $this->display();

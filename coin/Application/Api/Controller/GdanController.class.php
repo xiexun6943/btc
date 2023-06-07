@@ -17,7 +17,7 @@ class GdanController extends Controller
         $allow_controller = array("Index", "Ajax", "Api", "Orepool", "Finance", "Login", "Queue", "Trade", "User", "Chart", "Issue", "Ajaxtrade", "Contract", "Gdan", "Logout","record");
         if (!in_array(CONTROLLER_NAME, $allow_controller)) {
             $result = [
-                'code' => ResponsecodeController::METHOD_NOT_ALLOWED,
+                'code' => 405,
                 'msg' => 'Unauthorized'
             ];
             $this->ajaxReturn($result);
@@ -96,7 +96,7 @@ class GdanController extends Controller
     {
         if (!IS_POST) {
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::METHOD_NOT_ALLOWED,
+                'code' => 405,
                 'msg' => L('方法不允许')
             ]);
             $this->ajaxReturn($result);
@@ -107,7 +107,7 @@ class GdanController extends Controller
         $password = trim($param['password']);
         if (!$username | !$password) {
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::INVALID_PARAMS,
+                'code' => 400,
                 'msg' => 'Invalid Params',
                 'data' => [
                     "sign" => false,
@@ -125,7 +125,7 @@ class GdanController extends Controller
             $return['sign'] = false;
             $return['message'] = L('用户不存在');
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::INVALID_PARAMS,
+                'code' => 400,
                 'msg' => 'Login Error',
                 'data' => $return
             ]);
@@ -138,7 +138,7 @@ class GdanController extends Controller
             $return['sign'] = false;
             $return['message'] = L('用户名或密码错误');
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::INVALID_PARAMS,
+                'code' => 400,
                 'msg' => 'Login Error',
                 'data' => $return
             ]);
@@ -151,7 +151,7 @@ class GdanController extends Controller
             $return['sign'] = false;
             $return['message'] = L('账户不允许登入');
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::INVALID_PARAMS,
+                'code' => 400,
                 'msg' => 'Login Error',
                 'data' => $return
             ]);
@@ -168,7 +168,7 @@ class GdanController extends Controller
             $return['sign'] = false;
             $return['message'] = L('缺少登陆IP');
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::INVALID_PARAMS,
+                'code' => 400,
                 'msg' => 'Invalid Params',
                 'data' => $return
             ]);
@@ -203,7 +203,7 @@ class GdanController extends Controller
 
             $return['message'] = L('登陆成功');
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::SUCCESS,
+                'code' => 200,
                 'msg' => L('登陆成功'),
                 'data' => $return
             ]);
@@ -214,7 +214,7 @@ class GdanController extends Controller
             $return['sign'] = false;
             $return['message'] = L('登陆失败');
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::GENERAL_EXCEPTION_CODE,
+                'code' => 500,
                 'msg' => L('登陆失败'),
                 'data' => $return
             ]);
@@ -235,7 +235,7 @@ class GdanController extends Controller
             $return['sign'] = true;
             $return['message'] = L('退出成功');
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::SUCCESS,
+                'code' => 200,
                 'msg' => L('退出成功'),
                 'data' => $return
             ]);
@@ -243,7 +243,7 @@ class GdanController extends Controller
             $return['sign'] = false;
             $return['message'] = L('退出失败');
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::GENERAL_EXCEPTION_CODE,
+                'code' => 500,
                 'msg' => L('退出失败'),
                 'data' => $return
             ]);
@@ -297,6 +297,7 @@ class GdanController extends Controller
             $this->ajaxReturn($data);
         }
 
+
         // 检查后台是否开启跟单功能
         $gdConfig=$this->getGdConfig();
         if (!$gdConfig || empty($gdConfig) || $gdConfig['state'] == 0) {
@@ -317,7 +318,7 @@ class GdanController extends Controller
                 $this->ajaxReturn($data);
             }
         }
-
+   
         if (M('user')->where(['id'=>$id])->save(['gd_state'=>$state])) {
             if ($state == 1) { // 开启写入跟单用户表
                 M('gd_member')->add(['uid'=>$userArr['id'],'username'=>$userArr['username'],'addtime'=>time()]);
@@ -373,7 +374,7 @@ class GdanController extends Controller
     {
         if (!IS_POST) {
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::METHOD_NOT_ALLOWED,
+                'code' => 405,
                 'msg' => 'Method Not Allowed'
             ]);
             $this->ajaxReturn($result);
@@ -440,7 +441,7 @@ class GdanController extends Controller
     public function record(){
         if (!IS_POST) {
             $result = ApiResponseController::fail([
-                'code' => ResponseCodeController::METHOD_NOT_ALLOWED,
+                'code' => 405,
                 'msg' => 'Method Not Allowed'
             ]);
             $this->ajaxReturn($result);
@@ -576,7 +577,9 @@ class GdanController extends Controller
         // 检查后台是否开启跟单功能
        $configs= $this->getConfig();
         //  获取开启跟单的用户id集合
+      
        $ids= $this->getGdMember($configs);
+        
         // 合约订单生成
         if ($ids && !empty($ids)) {
             foreach ($ids as $v) {
@@ -609,7 +612,7 @@ class GdanController extends Controller
                     'is_gd'=>2, // 是否跟单 2 是  1 不是
                 ];
                 M('hyorder')->add($hyData);
-
+      
                 echo "Uid为：".$v.'跟单合约创建成功!'. "\r\n";;
             }
 
