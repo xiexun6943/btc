@@ -369,6 +369,10 @@ class UserController extends AdminController
                 $where2['uid'] = array('in', $id);
                 // 删除用户钱包
                 M("UserQianbao")->where($where2)->delete();
+//                echo M()->getLastSql();
+                // 删除用户财产数据
+                $where3['userid'] = array('in', $id);
+                M("user_coin")->where($where3)->delete();
                 break;
             default:
                 $this->error('操作失败！');
@@ -495,7 +499,6 @@ class UserController extends AdminController
             $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
             $list[$k]['state']=$user_login_state['state'];
         }
-
         $this->assign('list', $list);
         $this->assign('page', $show);
         $this->display();
@@ -514,6 +517,7 @@ class UserController extends AdminController
         } else {
             //新增会员
             if($id <= 0 || $id == null){
+
                 $username = trim($_POST['username']);
                 if($username == ''){
                     $this->error("请输入会员账号");exit();
@@ -549,15 +553,15 @@ class UserController extends AdminController
                     $add['invit_3'] = 0;
                     $path = '';
                 }
+
                 $add['status'] = $_POST['status'];
                 $add['txstate'] = $_POST['txstate'];
                 $add['addtime'] = time();
                 $add['addip'] = get_client_ip();
                 $add['addr'] = get_city_ip();
                 $add['invit']  = tradenoa();
-                $add['gd_state']  = $_POST['gd_state'];
-
                 $re = M("user")->add($add);
+
                 if($re){
                     M('user_coin')->add(array('userid' => $re));
                     $this->success("新增成功");exit();
