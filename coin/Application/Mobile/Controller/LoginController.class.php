@@ -194,7 +194,7 @@ class LoginController extends MobileController
 			if($invit != 0 || $invit != ''){
 				$inv_user = M('User')->where(array('invit' => $invit))->field("id,username,invit_1,invit_2,path")->find();
 				if(empty($inv_user)){
-					$this->ajaxReturn(['code'=>0,'info'=>L('Referrer does not exist')]);
+					$this->ajaxReturn(['code'=>0,'info'=>L('邀请码不存在')]);
 				}
 				$invit_1 = $inv_user['id'];
 				$invit_2 = $inv_user['invit_1'];
