@@ -391,7 +391,7 @@ class GdanController extends Controller
         $userCoin=$user_coin['usdt']?$user_coin['usdt']:'0.00000000'; //usdt
 
         $data=[
-            'code' => '200',
+            'code' => 200,
             'msg' => L('获取数据成功'),
             'data'=>[
                 'usdt'=>$userCoin
