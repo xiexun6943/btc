@@ -419,15 +419,20 @@ class GdanController extends Controller
         if (!empty($tokenInfo)) {
             $this->ajaxReturn($tokenInfo);
         }
-
+        $gdUser = M('gd_member')->where(['uid'=>$this->member['id']])->find();
+        $is_open=0;
+        if ($gdUser && !empty($gdUser)) {
+            $is_open=1;
+        }
         $data=[
-            'code' => '200',
+            'code' => 200,
             'msg' => L('获取数据成功'),
             'data'=>[
-                'id'=>$this->member['id'],
+                'id'=>(int)$this->member['id'],
                 'username'=>$this->member['username'],
-                'gd_state'=>$this->member['gd_state'], // 跟单状态 0 关闭 1 开启
-                'status'=>$this->member['status'],// 状态 1 正常 2 禁用
+                'gd_state'=>(int)$this->member['gd_state'], // 跟单状态 0 关闭 1 开启
+                'status'=>(int)$this->member['status'],// 状态 1 正常 2 禁用
+                'is_open'=>$is_open
             ]
         ];
         $this->ajaxReturn($data);
@@ -436,7 +441,7 @@ class GdanController extends Controller
     }
 
     /**
-     *  跟单记录
+     *  跟单记录 (2个月记录)
      */
     public function record(){
         if (!IS_POST) {
@@ -527,6 +532,53 @@ class GdanController extends Controller
             echo "平台未开启跟单功能,请联系平台客服!!". "\r\n";; exit();
         }
         return  $configs;
+    }
+
+    /**
+     * 今日　收益　
+     */
+    public function todayIncome(){
+        if (!IS_POST) {
+            $result = ApiResponseController::fail([
+                'code' => ResponseCodeController::METHOD_NOT_ALLOWED,
+                'msg' => 'Method Not Allowed'
+            ]);
+            $this->ajaxReturn($result);
+            exit;
+        }
+        $param = I('post.');
+        $tokenInfo =$this->verifyToken($param['token']); // 不为空继续执行
+        if (!empty($tokenInfo)) {
+            $this->ajaxReturn($tokenInfo);
+        }
+        $start_time=strtotime("today");
+        $end_time=strtotime("today")+86400;
+        $uid=$this->member['id'];
+        $total_coin= M('hyorder')
+            ->where("uid = {$uid} and status = 2 and intselltime >= {$start_time} and intselltime < $end_time")
+            ->field('uid ,username ,status, is_win, intselltime ,ploss ')
+            ->select();
+        $total=0;
+        if (!empty($total_coin)) {
+            foreach ($total_coin as $v) {
+                if ($v['is_win'] == 1) {
+                    $total+=$v['ploss'];
+                }
+                if ($v['is_win'] == 2) {
+                    $total-=$v['ploss'];
+                }
+            }
+        }
+        $data=[
+            'code' => 200,
+            'msg' => L('获取数据成功'),
+            'data'=>[
+                'id'=>(int)$this->member['id'],
+                'username'=>$this->member['username'],
+                'ploss'=>$total,
+            ]
+        ];
+        $this->ajaxReturn($data);
     }
 
     /**
