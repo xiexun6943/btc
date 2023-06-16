@@ -505,7 +505,7 @@ class UserController extends AdminController
     }
 
     //编辑或新增会员
-    public function edit($id = NULL)
+ public function edit($id = NULL)
     {
         if (empty($_POST)) {
             if (empty($id)) {
@@ -561,41 +561,6 @@ class UserController extends AdminController
                 $add['addr'] = get_city_ip();
                 $add['invit']  = tradenoa();
                 $re = M("user")->add($add);
-<<<<<<< HEAD
-		        if($re){
-		            M('user_coin')->add(array('userid' => $re));
-		            $this->success("新增成功");exit();
-		        }else{
-		            $this->error("新增失败");exit();
-		        }
-		    //编辑会员   
-		    }else{
-		   
-		       if ($_POST['password']) {
-				    $_POST['password'] = md5($_POST['password']);
-			    } else {
-			    	unset($_POST['password']);
-			    }
-			    if ($_POST['paypassword']) {
-			    	$_POST['paypassword'] = md5($_POST['paypassword']);
-			    } else {
-			    	unset($_POST['paypassword']);
-			    }
-		        
-		        $result = M("user")->where(array('id'=>$id))->save($_POST);
-		        if($result){
-		            $this->success("编辑成功");exit();
-		        }else{
-		            $this->error("编辑失败");exit();
-		        }
-		    }
-
-		}
-	}
-	
-	 //用户手动充值
- public function recharge($id = NULL)
-=======
 
                 if($re){
                     M('user_coin')->add(array('userid' => $re));
@@ -627,10 +592,9 @@ class UserController extends AdminController
 
         }
     }
-
+	
     //用户手动充值
     public function recharge($id = NULL)
->>>>>>> ab7387c9bd6b9dfce11b3839356d3c88f03a02e2
     {
         if (empty($_POST)) {
             if (empty($id)) {
