@@ -665,6 +665,8 @@ class GdanController extends Controller
                     'is_gd'=>2, // 是否跟单 2 是  1 不是
                 ];
                 M('hyorder')->add($hyData);
+                // 扣 掉 usdt
+                M("user_coin")->where(array('userid'=>$v))->setDec("usdt",$coins['usdt']);
       
                 echo "Uid为：".$v.'跟单合约创建成功!'. "\r\n";;
             }
