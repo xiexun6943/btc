@@ -778,4 +778,6 @@ return [
     '未通过'=>'Did not pass',
      '条记录'=>'Records',
      '页'=>'Page',
+    '邀请码不存在'=>'Invitation code does not exist',
+
 ];

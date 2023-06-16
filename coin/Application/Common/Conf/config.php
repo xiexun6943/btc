@@ -11,7 +11,7 @@ return array(
 	'ACTION_SUFFIX'        => '',
 	'MULTI_MODULE'         => true,
 	'MODULE_DENY_LIST'     => array('Common', 'Runtime'),
-	'MODULE_ALLOW_LIST'    => array('Home', 'Admin', 'Mobile', 'Support','Agent','Contrab'),
+	'MODULE_ALLOW_LIST'    => array('Home', 'Admin', 'Mobile', 'Support','Agent','Contrab','Api'),
 	'DEFAULT_MODULE'       => WHERECOME,
 	'URL_CASE_INSENSITIVE' => false,
 	'URL_MODEL'            => 2,

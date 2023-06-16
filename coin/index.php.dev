@@ -47,7 +47,7 @@ define('BBAPIKEY', 'RkAyda9huaQYux6R');
 //redis 配置
 define('REDIS_HOST', '127.0.0.1');
 define('REDIS_PORT', '6379');
-define('REDIS_PWD', '123456');
+define('REDIS_PWD', '');
 
 
 
