@@ -826,6 +826,7 @@ class AutoexeController extends \Think\Controller
         $status=$setting['status'];
 	    if(!empty($list)){
 //	        $redis = $this->getRedis();
+
 	        foreach($list as $key=>$vo){
                 if ($vo['status'] != '1') {
                     continue;
@@ -853,7 +854,7 @@ class AutoexeController extends \Think\Controller
 	            $num = $vo['num'];
 	            $hybl = $vo['hybl'];
 	            $ylnum = $num * ($hybl / 100);
-	            $money = $num + $ylnum;//盈利金额
+
 	            //买涨
 	            if($otype == 1){
 	                if(in_array($uid,$winarr)){//如果有指定盈利ID，则按盈利结算
@@ -864,15 +865,15 @@ class AutoexeController extends \Think\Controller
 	                    }elseif($newprice < $buyprice){
 	                        $sellprice = $buyprice + $randnum;
 	                    }
-
-	                    //增加资产
-	                    M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
 	                    //修改订单状态
 	                    $sd['status'] = 2;
 	                    $sd['is_win'] = 1;
 	                    $sd['sellprice'] = $sellprice;
 	                    $sd['ploss'] = $ylnum;
 	                    $orderobj->where(array('id'=>$id))->save($sd);
+                        //增加资产
+                        $money = $num + $ylnum;//盈利金额
+                        M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
 	                    //写财务日志
 	                    $this->addlog($uid,$vo['username'],$money);
 	                }elseif(in_array($uid,$lossarr)){//如果有指定亏损ID，则按亏损结算
@@ -892,6 +893,11 @@ class AutoexeController extends \Think\Controller
 	                    $sd['sellprice'] = $sellprice;
 	                    $sd['ploss'] = $ylnum;
 	                    $orderobj->where(array('id'=>$id))->save($sd);
+                        $money = $num - $ylnum;// 亏损后的金额
+                        //增加资产
+                        M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
+                        //写财务日志
+                        $this->addlog($uid,$vo['username'],$money);
 	                    
 	                }else{//如果未指定盈利和亏损ID，则按单控的计算
 	                    if($dkong == 1){//单控 盈利
@@ -903,19 +909,20 @@ class AutoexeController extends \Think\Controller
 	                            $sellprice = $buyprice + $randnum;
 	                        }
 	                        
-	                       // echo '买入价格:'.$buyprice;
+	                       // G '买入价格:'.$buyprice;
 	                       // echo "<br />";
 	                       // echo  '结算价格:'.$sellprice;die;
-	                        
-	                        //增加资产
-	                        M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
+
 	                        //修改订单状态
 	                        $sd['status'] = 2;
 	                        $sd['is_win'] = 1;
 	                        $sd['sellprice'] = $sellprice;
 	                        $sd['ploss'] = $ylnum;
 	                        $orderobj->where(array('id'=>$id))->save($sd);
-	                        //写财务日志
+                            $money = $num + $ylnum;
+                            //增加资产
+                            M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
+//	                        //写财务日志
 	                        $this->addlog($uid,$vo['username'],$money);
 	                            
 	                     }elseif($dkong == 2){//单控 亏损
@@ -938,6 +945,11 @@ class AutoexeController extends \Think\Controller
 	                        $sd['sellprice'] = $sellprice;
 	                        $sd['ploss'] = $ylnum;
 	                        $orderobj->where(array('id'=>$id))->save($sd);
+                            $money = $num - $ylnum;
+                            //增加资产
+                            M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
+                            //写财务日志
+                            $this->addlog($uid,$vo['username'],$money);
 	                    }
 
 	                    /*else{ // 如果未指定 单控  按照系统默认 盈亏 亏损算
@@ -983,8 +995,6 @@ class AutoexeController extends \Think\Controller
 	                        $sellprice = $newprice;
 	                    }
 
-	                    //增加资产
-	                    M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
 	                    //修改订单状态
 	                    $sd['status'] = 2;
 	                    $sd['is_win'] = 1;
@@ -993,6 +1003,12 @@ class AutoexeController extends \Think\Controller
 	                    $orderobj->where(array('id'=>$id))->save($sd);
 	                    //写财务日志
 	                    $this->addlog($uid,$vo['username'],$money);
+
+                        $money = $num + $ylnum;
+                        //增加资产
+                        M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
+                        //写财务日志
+                        $this->addlog($uid,$vo['username'],$money);
 	                }elseif(in_array($uid,$lossarr)){//如果有指定亏损ID，则按亏损结算
 	                   
 	                
@@ -1012,6 +1028,11 @@ class AutoexeController extends \Think\Controller
 	                    $sd['sellprice'] = $sellprice;
 	                    $sd['ploss'] = $ylnum;
 	                    $orderobj->where(array('id'=>$id))->save($sd);
+                        $money = $num - $ylnum;
+                        //增加资产
+                        M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
+                        //写财务日志
+                        $this->addlog($uid,$vo['username'],$money);
 	                }else{//如果未指定盈利和亏损，则按单控的计算
 	                    if($dkong == 1){//盈利
                             if($newprice > $buyprice){
@@ -1022,16 +1043,17 @@ class AutoexeController extends \Think\Controller
 	                            $sellprice = $newprice;
 	                        }
 
-	                        //增加资产
-	                        M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
 	                        //修改订单状态
 	                        $sd['status'] = 2;
 	                        $sd['is_win'] = 1;
 	                        $sd['sellprice'] = $sellprice;
 	                        $sd['ploss'] = $ylnum;
 	                        $orderobj->where(array('id'=>$id))->save($sd);
-	                        //写财务日志
-	                        $this->addlog($uid,$vo['username'],$money);
+                            $money = $num + $ylnum;
+                            //增加资产
+                            M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
+                            //写财务日志
+                            $this->addlog($uid,$vo['username'],$money);
 	                            
 	                     }elseif($dkong == 2){//亏损
 	                        if($newprice > $buyprice){
@@ -1048,6 +1070,11 @@ class AutoexeController extends \Think\Controller
 	                        $sd['sellprice'] = $sellprice;
 	                        $sd['ploss'] = $ylnum;
 	                        $orderobj->where(array('id'=>$id))->save($sd);
+                            $money = $num - $ylnum;
+                            //增加资产
+                            M("user_coin")->where(array('userid'=>$uid))->setInc("usdt",$money);
+                            //写财务日志
+                            $this->addlog($uid,$vo['username'],$money);
 	                    }
 	                    /*else{ // 如果未指定 单控  按照系统默认 盈亏 亏损算
                             if ($status == 1) { // 盈利
@@ -1098,12 +1125,13 @@ class AutoexeController extends \Think\Controller
 	    $data['username'] = $username;
 	    $data['num'] = $money;
 	    $data['coinname'] = "usdt";
-	    $data['afternum'] = $minfo['usdt'] + $money;
+	    $data['afternum'] = $minfo['usdt'];
 	    $data['type'] = 4;
 	    $data['addtime'] = date("Y-m-d H:i:s",time());
 	    $data['st'] = 1;
-	    $data['remark'] = L('合约出售');
+	    $data['remark'] = L('秒合约交易结算');
 	    M("bill")->add($data);
+
 	    
 	    $notice['uid'] = $uid;
 		$notice['account'] = $username;

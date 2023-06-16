@@ -588,8 +588,10 @@ class GdanController extends Controller
     private  function getGdMember($configs){
         $redis=$this-> getRedis();
         //  获取开启跟单的用户
-        $all_users= M('gd_member')->select();
-        if ($all_users ) {
+        $all_users= M('gd_member')->field('uid')->select();
+         $redis->del('dg_user');
+        if ($all_users && !empty($all_users) ) {
+           
             foreach ($all_users as $v) {
 
                 $userCoin=M('user_coin')->field('usdt')->where(['userid'=>$v['uid']])->find();
@@ -599,8 +601,7 @@ class GdanController extends Controller
                         $redis->sAdd('dg_user',$v['uid']);
                     }else{
                         M('gd_member')->where(['uid'=>$v['uid']])->delete();
-                        $redis->srem('dg_user',$v['uid']);
-
+                        
                         // 写入 跟单日志表
                         $gd_log = [
                             'uid' => $v['uid'],
@@ -614,7 +615,6 @@ class GdanController extends Controller
                     }
                 }else{
                     M('gd_member')->where(['uid'=>$v['uid']])->delete();
-                    $redis->srem('dg_user',$v['uid']);
                 }
 
             }
@@ -631,7 +631,6 @@ class GdanController extends Controller
         //  获取开启跟单的用户id集合
       
        $ids= $this->getGdMember($configs);
-        
         // 合约订单生成
         if ($ids && !empty($ids)) {
             foreach ($ids as $v) {
@@ -648,7 +647,7 @@ class GdanController extends Controller
                 $price_arr = json_decode($coinInfo['data'],true);
                 $open = $price_arr[0]['open'];//开盘价
                 $close = $price_arr[0]['close'];//现价
-
+                $time=time();
                 $hyData=[
                     'uid'=>$v,
                     'username'=>$username,
@@ -657,10 +656,12 @@ class GdanController extends Controller
                     'hyzd'=>$configs['hyzd'],// 合约涨跌  1 涨 2跌
                     'coinname'=>$configs['coin_name'],// 交易对
                     'status'=>1,// 状态  1 待结算
-                    'buytime'=>date('Y-m-d H:i:s',time()),// 购买时间
+                    'buytime'=>date('Y-m-d H:i:s',$time),// 购买时间
                     'buyprice'=>$close,// 建仓价格
                     'time'=>$configs['trade_time'],//  结算秒
                     'tznum'=>'0', // 通知
+                    'intselltime'=>$time+$configs['trade_time'], // 通知
+                    'selltime'=>date('Y-m-d H:i:s',$time+$configs['trade_time']), // 通知
                     'is_gd'=>2, // 是否跟单 2 是  1 不是
                 ];
                 M('hyorder')->add($hyData);
