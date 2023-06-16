@@ -1,0 +1,113 @@
+<include file="Public:header" />
+
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">警告内容</div>
+	</div>
+
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title">跟单合约参数设置</span>
+		</div>
+		<p style="color:red;">* 说明： 所有跟单配置修改都是 5分钟 +合约时间  后生效 谨慎操作</p>
+		<div class="tab-wrap">
+			<div class="tab-content">
+				<form id="form" action="{:U('Trade/setgd')}" method="post" class="form-horizontal" >
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table>
+
+								<tr class="controls">
+									<td class="item-label">交易对 :</td>
+									<td>
+										<select name="coin_name" class="form-control input-10x">
+											<volist name="coin" id="v">
+												<option value="{$v}"
+												<eq name="data['coin_name']" value="$v">selected</eq>
+												>{$v}
+												</option>
+											</volist>
+										</select>
+									<td class="item-note" style="color:red;">* 设置跟单合约时间</td>
+								</tr>
+
+								<tr class="controls">
+									<td class="item-label">合约时间 :</td>
+									<td>
+									<select name="trade_time" class="form-control input-10x">
+										<volist name="info" id="v">
+											<option value="{$v}"
+											<eq name="data['trade_time']" value="$v">selected</eq>
+											>{$v}
+											</option>
+										</volist>
+									</select>
+									<td class="item-note" style="color:red;">* 设置跟单合约时间</td>
+								</tr>
+
+								<tr class="controls">
+									<td class="item-label" style="width:100px;">挂机触发线 :</td>
+									<td style="width:300px;">
+										<p><input type="text" class="form-control input-10x" name="allow_usdt" value="{$data['allow_usdt']}"></p>
+										<p style="color:red;">* 说明： 此处设置跟单触发线（如：10  '填写整数'）用户账号上有大于等于这个数的USDT(且不是冻结中的usdt) 才能开启跟单 请谨慎操作</p>
+									</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">买涨买跌 :</td>
+									<td>
+										<select name="hyzd" class="form-control input-10x">
+											<option value="1" <eq name="data.hyzd" value="1">selected</eq>>买涨</option>
+											<option value="2" <eq name="data.hyzd" value="2">selected</eq>>买跌</option>
+										</select>
+									</td>
+									<td class="item-note" style="color:red;">* 总开关</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">跟单总开关 :</td>
+									<td>
+										<select name="state" class="form-control input-10x">
+											<option value="0" <eq name="data.state" value="0">selected</eq>>关闭</option>
+											<option value="1" <eq name="data.state" value="1">selected</eq>>开启</option>
+										</select>
+									</td>
+									<td class="item-note" style="color:red;">* 总开关</td>
+								</tr>
+
+								<input type="hidden" name="id" value="{$data['id']}" />
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class= "btn submit-btn ajax-post"  target-form="form-horizontal" id="submit" type="submit">提交</button>
+											<a class="btn btn-return" href="{$Think.server.HTTP_REFERER}">返 回</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+
+				<script type="text/javascript">
+					//提交表单
+					$('#submit').click(function(){
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$(function(){
+		//主导航高亮
+		$('.config-box').addClass('current');
+		//边导航高亮
+		$('.config-contact').addClass('current');
+	});
+</script>
+
+<include file="Public:footer" />
