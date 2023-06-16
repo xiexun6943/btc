@@ -525,90 +525,91 @@ class UserController extends AdminController
 	}
 	
 	 //用户手动充值
-	public function recharge($id = NULL)
-	{
-	    if (empty($_POST)) {
-			if (empty($id)) {
-				$this->data = '';
-			} else {
-				$this->data = M('User')->where(array('id' => trim($id)))->find();
-			}
-			$this->display();
-		} else {
-		    $uid=$_POST['id'];
-		    $usdt=$_POST['num'];
-		   
-		if(empty($id)){
-	        $this->error("缺少重要参数");exit();
-	    }
-	 	if(empty($usdt)){
-	        $this->error("缺少金额参数");exit();
-	    }
-	    if($usdt<=0){
-	        $this->error("金额不能为负数");exit();
-	    }
-	 
-	    $num = trim($_POST['num']);
-	    $coinname = "usdt";
-	    $username = trim($_POST['username']);
-	    $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
-	   
-	    //写入充值单
-	    $save=[
-	           'uid'=>$uid,
-	           'username'=>$username,
-	           'status' => 2,
-	           "type"=>2,
-	           'coin'=>'USDT',
-	           'num'=>$num,
-	           'addtime'=> date("Y-m-d H:i:s",time()),
-	           'updatetime' => date("Y-m-d H:i:s",time()),
-	           'payimg'=>'',
-	           'msg'=>'无'
-	        
-	        ];
-	    $upre = M("recharge")->add($save);
-	   
-	   if($minfo){
-	       //增加会员资产
-	        $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$num);
-	   }else{
-	       $coinData=[
-	           'userid'=>$uid,
-	           'usdt'=>$num,
-	           ];
-	        $incre = M("user_coin")->add($coinData);
-	   }
-	    
-	     
-	    //增加充值日志
-	    $data['uid'] =$uid;
-	    $data['username'] = $username;
-	    $data['num'] = $num;
-	    $data['coinname'] = $coinname;
-	    $data['afternum'] = $minfo[$coinname] + $num;
-	    $data['type'] = 17;
-	    $data['addtime'] = date("Y-m-d H:i:s",time());
-	    $data['st'] = 1;
-	    $data['remark'] = L('充币到账');
-	    
-	    $addre = M("bill")->add($data);
-	    if($upre && $incre && $addre){
-	        /*$notice['uid'] = $uid;
-		    $notice['account'] = $username;
-		    $notice['title'] = L('系统充币');
-		    $notice['content'] = L('系统充值金额已到账，请注意查收');
-		    $notice['addtime'] = date("Y-m-d H:i:s",time());
-		    $notice['status'] = 1;
-		    M("notice")->add($notice);*/
-	        
-	        $this->success("处理成功");
-	    }else{
-	        $this->error("处理失败");
-	    }
-		    
-		}
-	}
+ public function recharge($id = NULL)
+    {
+        if (empty($_POST)) {
+            if (empty($id)) {
+                $this->data = '';
+            } else {
+                $this->data = M('User')->where(array('id' => trim($id)))->find();
+            }
+            $this->display();
+        } else {
+            $uid=$_POST['id'];
+            $usdt=trim($_POST['num']); // 正数为充值  负数 减
+
+            if(empty($id)){
+                $this->error("缺少重要参数");exit();
+            }
+            if(empty($usdt)){
+                $this->error("缺少金额参数");exit();
+            }
+            $num = trim($_POST['num']);
+            $coinname = "usdt";
+            $username = trim($_POST['username']);
+            $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+
+            //写入充值单
+            $save=[
+                'uid'=>$uid,
+                'username'=>$username,
+                'status' => 2,
+                "type"=>2,
+                'coin'=>'USDT',
+                'num'=>$num,
+                'addtime'=> date("Y-m-d H:i:s",time()),
+                'updatetime' => date("Y-m-d H:i:s",time()),
+                'payimg'=>'',
+                'msg'=>'无'
+
+            ];
+            $upre = M("recharge")->add($save);
+
+            if($minfo){
+                      //增加会员资产
+                $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$num);
+            }else{
+                $coinData=[
+                    'userid'=>$uid,
+                    'usdt'=>$num,
+                ];
+                $incre = M("user_coin")->add($coinData);
+            }
+
+            if($usdt > 0){
+                $data['remark'] = L('后台充币');
+            }else{
+                $data['remark'] = L('后台减币');
+            }
+              
+            //增加充值日志
+            $data['uid'] =$uid;
+            $data['username'] = $username;
+            $data['num'] = $num;
+            $data['coinname'] = $coinname;
+            $data['afternum'] = $minfo[$coinname] + $num;
+            $data['type'] = 17;
+            $data['addtime'] = date("Y-m-d H:i:s",time());
+            $data['st'] = 1;
+         
+
+            $addre = M("bill")->add($data);
+            if($upre && $incre && $addre){
+                /*$notice['uid'] = $uid;
+                $notice['account'] = $username;
+                $notice['title'] = L('系统充币');
+                $notice['content'] = L('系统充值金额已到账，请注意查收');
+                $notice['addtime'] = date("Y-m-d H:i:s",time());
+                $notice['status'] = 1;
+                M("notice")->add($notice);*/
+
+                $this->success("处理成功");
+            }else{
+                $this->error("处理失败");
+            }
+
+        }
+    }
 
     //管理列表
 	public function admin($name = NULL, $field = NULL, $status = NULL)
