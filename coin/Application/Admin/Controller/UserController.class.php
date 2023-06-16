@@ -605,7 +605,7 @@ class UserController extends AdminController
             $this->display();
         } else {
             $uid=$_POST['id'];
-            $usdt=$_POST['num'];
+            $usdt=trim($_POST['num']); // 正数为充值  负数 减
 
             if(empty($id)){
                 $this->error("缺少重要参数");exit();
@@ -613,10 +613,6 @@ class UserController extends AdminController
             if(empty($usdt)){
                 $this->error("缺少金额参数");exit();
             }
-            if($usdt<=0){
-                $this->error("金额不能为负数");exit();
-            }
-
             $num = trim($_POST['num']);
             $coinname = "usdt";
             $username = trim($_POST['username']);
@@ -639,7 +635,7 @@ class UserController extends AdminController
             $upre = M("recharge")->add($save);
 
             if($minfo){
-                //增加会员资产
+                      //增加会员资产
                 $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$num);
             }else{
                 $coinData=[
@@ -649,7 +645,12 @@ class UserController extends AdminController
                 $incre = M("user_coin")->add($coinData);
             }
 
-
+            if($usdt > 0){
+                $data['remark'] = L('后台充币');
+            }else{
+                $data['remark'] = L('后台减币');
+            }
+              
             //增加充值日志
             $data['uid'] =$uid;
             $data['username'] = $username;
@@ -659,7 +660,7 @@ class UserController extends AdminController
             $data['type'] = 17;
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['st'] = 1;
-            $data['remark'] = L('充币到账');
+         
 
             $addre = M("bill")->add($data);
             if($upre && $incre && $addre){
