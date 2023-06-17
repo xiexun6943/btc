@@ -779,6 +779,7 @@ return [
      '条记录'=>'Records',
      '页'=>'Page',
 
+    '邀请码不存在'=>'Invitation code does not exist',
     '亲联系后台配置银行卡配置'=>'Contact the background to configure the bank card configuration',
     '获取成功'=>'get success',
     '币种类型错误'=>'currency type error',
@@ -788,4 +789,6 @@ return [
     '卡号'=>'card number',
     '银行卡充值'=>'Bank card recharge',
     '银行卡提款'=>'Bank card withdrawal',
+
+
 ];

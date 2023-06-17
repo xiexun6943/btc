@@ -3,251 +3,300 @@ namespace Admin\Controller;
 
 class TradeController extends AdminController
 {
-	
+
 	protected function _initialize(){
 		parent::_initialize();
-		$allow_action=array("index","sethy","hylog","market","marketEdit","marketStatus","tradeclear","orderinfo","orderinfo_ty","setwinloss_ty","setwinloss","bbsetting","bbxjlist","bbsjlist","gethyorder","settzstatus","tyorder");
+		$allow_action=array("index","sethy","hylog","market","marketEdit","marketStatus","tradeclear","orderinfo","orderinfo_ty","setwinloss_ty","setwinloss","bbsetting","bbxjlist","bbsjlist","gethyorder","settzstatus","tyorder","setgd","gdopenlog","gdopenuser");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！");
 		}
 	}
-	
+
 	//设置已通知
 	public function settzstatus(){
-	    $where['status'] = 1;
-	    $where['tznum'] = 0;
-	    $list = M("hyorder")->where($where)->field('id')->select();
-	    if(!empty($list)){
-	        foreach($list as $key=>$vo){
-	            $id = $vo['id'];
-	            M("hyorder")->where(array('id'=>$id))->save(array('tznum'=>1));
-	        }
-	        $this->ajaxReturn(['code'=>1]);
-	    }
-	    
+		$where['status'] = 1;
+		$where['tznum'] = 0;
+		$list = M("hyorder")->where($where)->field('id')->select();
+		if(!empty($list)){
+			foreach($list as $key=>$vo){
+				$id = $vo['id'];
+				M("hyorder")->where(array('id'=>$id))->save(array('tznum'=>1));
+			}
+			$this->ajaxReturn(['code'=>1]);
+		}
+
 	}
 
 	/**
 	 *  提示信息 轮询
 	 */
 	public function gethyorder(){
-	    $where['status'] = 1;
-	    $where['tznum'] = 0;
-	    $count = M("hyorder")->where($where)->count();
-	    if($count > 0){
-	        $this->ajaxReturn(['code'=>1]);
-	    }
+		$where['status'] = 1;
+		$where['tznum'] = 0;
+		$count = M("hyorder")->where($where)->count();
+		if($count > 0){
+			$this->ajaxReturn(['code'=>1]);
+		}
 	}
-	
+
 	//币币交易市价交易记录
 	public function bbsjlist(){
-	    if(I('get.type') > 0){
-            $hyzd = trim(I('get.type'));
-		    $where['type'] = $hyzd;
-        }
-        
-        if(I('get.status') > 0){
-            $status = trim(I('get.status'));
-		    $where['status'] = $status;
-        }
-        
-        if(I('get.username') > 0){
-            $username = trim(I('get.username'));
-		    $where['account'] = $username;
-        }
-        
-        
-	    
-	    
-	    $where['ordertype'] = 2;
-	    $count = M('bborder')->where($where)->count();
+		if(I('get.type') > 0){
+			$hyzd = trim(I('get.type'));
+			$where['type'] = $hyzd;
+		}
+
+		if(I('get.status') > 0){
+			$status = trim(I('get.status'));
+			$where['status'] = $status;
+		}
+
+		if(I('get.username') > 0){
+			$username = trim(I('get.username'));
+			$where['account'] = $username;
+		}
+
+
+
+
+		$where['ordertype'] = 2;
+		$count = M('bborder')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('bborder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		$this->assign('list', $list);
 		$this->assign('page', $show);
-	    $this->display();
+		$this->display();
 	}
-	
+
 	//币币交易限价委托记录
 	public function bbxjlist(){
-	    
-	    if(I('get.type') > 0){
-            $hyzd = trim(I('get.type'));
-		    $where['type'] = $hyzd;
-        }
-        
-        if(I('get.status') > 0){
-            $status = trim(I('get.status'));
-		    $where['status'] = $status;
-        }
-        
-        if(I('get.username') > 0){
-            $username = trim(I('get.username'));
-		    $where['account'] = $username;
-        }
-        
-        
-	    
-	    
-	    $where['ordertype'] = 1;
-	    $count = M('bborder')->where($where)->count();
+
+		if(I('get.type') > 0){
+			$hyzd = trim(I('get.type'));
+			$where['type'] = $hyzd;
+		}
+
+		if(I('get.status') > 0){
+			$status = trim(I('get.status'));
+			$where['status'] = $status;
+		}
+
+		if(I('get.username') > 0){
+			$username = trim(I('get.username'));
+			$where['account'] = $username;
+		}
+
+
+
+
+		$where['ordertype'] = 1;
+		$count = M('bborder')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('bborder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		$this->assign('list', $list);
 		$this->assign('page', $show);
-	    
-	    $this->display();
-	}
-	
-	
-	//币币交易参数设置
-    public function bbsetting(){
-        if($_POST){
-            $id = trim($_POST['bbid']);
-            if($id <= 0){
-                $result = M("bbsetting")->add($_POST);
-            }else{
-                unset($_POST['bbid']);
-                $result = M("bbsetting")->where(array('id'=>$id))->save($_POST);
-            }
-            if($result){
 
-                $this->success("操作成功!",U('Trade/bbsetting'));
-            }else{
-                $this->error("操作失败!",U('Trade/bbsetting'));
-            }
-            
-        }else{
-           
-           $info = M("bbsetting")->where(array('id'=>1))->find();
-           $this->assign("info",$info);
-           $this->display(); 
-        }
-        
-    }
-	
+		$this->display();
+	}
+
+
+	//币币交易参数设置
+	public function bbsetting(){
+		if($_POST){
+			$id = trim($_POST['bbid']);
+			if($id <= 0){
+				$result = M("bbsetting")->add($_POST);
+			}else{
+				unset($_POST['bbid']);
+				$result = M("bbsetting")->where(array('id'=>$id))->save($_POST);
+			}
+			if($result){
+
+				$this->success("操作成功!",U('Trade/bbsetting'));
+			}else{
+				$this->error("操作失败!",U('Trade/bbsetting'));
+			}
+
+		}else{
+
+			$info = M("bbsetting")->where(array('id'=>1))->find();
+			$this->assign("info",$info);
+			$this->display();
+		}
+
+	}
+
 	//单控盈亏
 	public function setwinloss(){
-	    if($_POST){
-	        $id = trim(I('post.id'));
-	        $kongyk = trim(I('post.kongyk'));
-	        $info = M("hyorder")->where(array('id'=>$id))->find();
-	        if(empty($info)){
-	            $this->ajaxReturn(['code'=>0,'info'=>"参少重要参数"]);
-	        }
-	        
-	        $result = M("hyorder")->where(array('id'=>$id))->save(array('kongyk'=>$kongyk));
-	        if($result){
-	            $this->ajaxReturn(['code'=>1,'info'=>"操作成功"]); 
-	        }else{
-	            $this->ajaxReturn(['code'=>0,'info'=>"操作失败"]);
-	        }
-	    }else{
-	        $this->ajaxReturn(['code'=>0,'info'=>"网络错误"]);
-	    }
+		if($_POST){
+			$id = trim(I('post.id'));
+			$kongyk = trim(I('post.kongyk'));
+			$info = M("hyorder")->where(array('id'=>$id))->find();
+			if(empty($info)){
+				$this->ajaxReturn(['code'=>0,'info'=>"参少重要参数"]);
+			}
+
+			$result = M("hyorder")->where(array('id'=>$id))->save(array('kongyk'=>$kongyk));
+			if($result){
+				$this->ajaxReturn(['code'=>1,'info'=>"操作成功"]);
+			}else{
+				$this->ajaxReturn(['code'=>0,'info'=>"操作失败"]);
+			}
+		}else{
+			$this->ajaxReturn(['code'=>0,'info'=>"网络错误"]);
+		}
 	}
-	
+
 	//单控盈亏
 	public function setwinloss_ty(){
-	    if($_POST){
-	        $id = trim(I('post.id'));
-	        $kongyk = trim(I('post.kongyk'));
-	        $info = M("tyhyorder")->where(array('id'=>$id))->find();
-	        if(empty($info)){
-	            $this->ajaxReturn(['code'=>0,'info'=>"参少重要参数"]);
-	        }
-	        
-	        $result = M("tyhyorder")->where(array('id'=>$id))->save(array('kongyk'=>$kongyk));
-	        if($result){
-	            $this->ajaxReturn(['code'=>1,'info'=>"操作成功"]); 
-	        }else{
-	            $this->ajaxReturn(['code'=>0,'info'=>"操作失败"]);
-	        }
-	    }else{
-	        $this->ajaxReturn(['code'=>0,'info'=>"网络错误"]);
-	    }
+		if($_POST){
+			$id = trim(I('post.id'));
+			$kongyk = trim(I('post.kongyk'));
+			$info = M("tyhyorder")->where(array('id'=>$id))->find();
+			if(empty($info)){
+				$this->ajaxReturn(['code'=>0,'info'=>"参少重要参数"]);
+			}
+
+			$result = M("tyhyorder")->where(array('id'=>$id))->save(array('kongyk'=>$kongyk));
+			if($result){
+				$this->ajaxReturn(['code'=>1,'info'=>"操作成功"]);
+			}else{
+				$this->ajaxReturn(['code'=>0,'info'=>"操作失败"]);
+			}
+		}else{
+			$this->ajaxReturn(['code'=>0,'info'=>"网络错误"]);
+		}
 	}
-	
+
 	//合约订单详情
 	public function orderinfo(){
-	    $id = trim(I('get.id'));
-        $info = M("hyorder")->where(array("id"=>$id))->find();
-        $this->assign('info',$info);
-	    $this->display();
+		$id = trim(I('get.id'));
+		$info = M("hyorder")->where(array("id"=>$id))->find();
+		$this->assign('info',$info);
+		$this->display();
 	}
 	//合约订单详情
 	public function orderinfo_ty(){
-	    $id = trim(I('get.id'));
-        $info = M("tyhyorder")->where(array("id"=>$id))->find();
-        $this->assign('info',$info);
-	    $this->display();
+		$id = trim(I('get.id'));
+		$info = M("tyhyorder")->where(array("id"=>$id))->find();
+		$this->assign('info',$info);
+		$this->display();
 	}
-    
-    //秒合约参数设置
-    public function sethy(){
-        if($_POST){
-            $id = trim($_POST['hy_id']);
-            if($id <= 0){
-                $result = M("hysetting")->add($_POST);
-            }else{
-                unset($_POST['hy_id']);
-                $result = M("hysetting")->where(array('id'=>$id))->save($_POST);
-            }
-            if($result){
 
-                $this->success("操作成功!",U('Trade/sethy'));
-            }else{
-                $this->error("操作失败!",U('Trade/sethy'));
-            }
-            
-        }else{
-           
-           $info = M("hysetting")->where(array('id'=>1))->find();
-           $this->assign("info",$info);
-           $this->display(); 
-        }
-        
-    }
-    
-    //体验订单记灵
+	//秒合约参数设置
+	public function sethy(){
+		if($_POST){
+			$id = trim($_POST['hy_id']);
+			if($id <= 0){
+				$result = M("hysetting")->add($_POST);
+			}else{
+				unset($_POST['hy_id']);
+				$result = M("hysetting")->where(array('id'=>$id))->save($_POST);
+			}
+			if($result){
+
+				$this->success("操作成功!",U('Trade/sethy'));
+			}else{
+				$this->error("操作失败!",U('Trade/sethy'));
+			}
+
+		}else{
+			$info = M("hysetting")->where(array('id'=>1))->find();
+			$this->assign("info",$info);
+			$this->display();
+		}
+
+	}
+	protected function getRedis()
+	{
+		$redis = new \Redis();
+		$host = REDIS_HOST;
+		$port = REDIS_PORT;
+		$password= REDIS_PWD;
+		$redis->connect($host ,$port, 30);
+		$redis->auth($password);
+		return $redis;
+	}
+
+	//跟单参数设置
+	public function setgd(){
+		if($_POST){
+			$id = trim($_POST['id']);
+			if($id <= 0){
+				$result = M("gendan")->add($_POST);
+			}else{
+				unset($_POST['id']);
+				$result = M("gendan")->where(array('id'=>$id))->save($_POST);
+			}
+			if($result){
+				// 写入redis 缓存中
+				$gdanInfo = M("gendan")->where(array('id'=>$id))->find();
+				$redis=$this-> getRedis();
+				$redis->hMSet('gdan_config',$gdanInfo);
+//				$redis->del('gdan_config');
+				$this->success("操作成功!",U('Trade/setgd'));
+			}else{
+				$this->error("操作失败!",U('Trade/setgd'));
+			}
+
+		}else{
+			$gendan_arr=M('gendan')->find();
+			$info = M("hysetting")->where(array('id'=>1))->find();
+			$trade_time=explode(',',$info['hy_time']);
+			$coin_name=['BTC/USDT','ETH/USDT','EOS/USDT','DOGE/USDT','BCH/USDT','LTC/USDT','IOTA/USDT','FIL/USDT','FLOW/USDT','JST/USDT','HT/USDT'];
+			$this->assign("coin",$coin_name);
+			$this->assign("info",$trade_time);
+			$this->assign("data",$gendan_arr);
+			$this->display();
+		}
+
+	}
+
+	//体验订单记灵
 	public function tyorder(){
-        
-        $where = array();
-        if(I('get.username') != '' || I('get.username') != null){
-            $username = trim(I('get.username'));
-		    $where['username'] = $username;
-        }
-        
-        if(I('get.hyzd') > 0){
-            $hyzd = trim(I('get.hyzd'));
-		    $where['hyzd'] = $hyzd;
-        }
+
+		$where = array();
+		if(I('get.username') != '' || I('get.username') != null){
+			$username = trim(I('get.username'));
+			$where['username'] = $username;
+		}
+
+		if(I('get.hyzd') > 0){
+			$hyzd = trim(I('get.hyzd'));
+			$where['hyzd'] = $hyzd;
+		}
 		$count = M('tyhyorder')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('tyhyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		$this->assign('list', $list);
 		$this->assign('page', $show);
- 
+
 		$this->display();
 	}
-    
-    //合约购买记录（未平仓的）
+
+	//合约购买记录（未平仓的）
 	public function index(){
-        
-        $where = array();
-        if(I('get.username') != '' || I('get.username') != null){
-            $username = trim(I('get.username'));
-		    $where['username'] = $username;
-        }
-        
-        if(I('get.hyzd') > 0){
-            $hyzd = trim(I('get.hyzd'));
-		    $where['hyzd'] = $hyzd;
-        }
-		
+
+		$where = array();
+		if(I('get.username') != '' || I('get.username') != null){
+			$username = trim(I('get.username'));
+			$where['username'] = trim($username);
+		}
+
+		if(I('get.hyzd') > 0){
+			$hyzd = trim(I('get.hyzd'));
+			$where['hyzd'] = $hyzd;
+		}
+
+
+		if(I('get.is_gd') > 0){
+			$is_gd= trim(I('get.is_gd'));
+			$where['is_gd'] = $is_gd;
+		}
+
 		$where['status'] = 1;
 
 		$count = M('hyorder')->where($where)->count();
@@ -256,23 +305,23 @@ class TradeController extends AdminController
 		$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		$this->assign('list', $list);
 		$this->assign('page', $show);
- 
+
 		$this->display();
 	}
 
 
-    //合约交易平仓记录
+	//合约交易平仓记录
 	public function hylog($invit=null,$username=null){
-	    
-	    if($invit != ''){
-	        $where['invit'] = $invit;
-	    }
-	    
-	    if($username != ''){
-	        $where['username'] = $username;
-	    }
-	    
-	    $where['status'] = 2;
+
+		if($invit != ''){
+			$where['invit'] = $invit;
+		}
+
+		if($username != ''){
+			$where['username'] = $username;
+		}
+
+		$where['status'] = 2;
 		$count = M('hyorder')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
@@ -282,7 +331,41 @@ class TradeController extends AdminController
 		$this->display();
 	}
 
-    ///机器人刷单币种列表
+
+	//跟单开关记录
+	public function gdopenlog($username=null){
+
+		$where=[];
+		if($username != ''){
+			$where['username'] = trim($username);
+		}
+
+
+		$count = M('gd_open_log')->where($where)->count();
+		$Page = new \Think\Page($count, 15);
+		$show = $Page->show();
+		$list = M('gd_open_log')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		$this->assign('list', $list);
+		$this->assign('page', $show);
+		$this->display();
+	}
+
+	//开启跟单用户
+	public function gdopenuser($username=null){
+
+		if($username != ''){
+			$where['username'] = trim($username);
+		}
+		$count = M('gd_member')->where($where)->count();
+		$Page = new \Think\Page($count, 15);
+		$show = $Page->show();
+		$list = M('gd_member')->where($where)->order('addtime desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		$this->assign('list', $list);
+		$this->assign('page', $show);
+		$this->display();
+	}
+
+	///机器人刷单币种列表
 	public function market($field = NULL, $name = NULL)
 	{
 		$where = array();
@@ -304,8 +387,8 @@ class TradeController extends AdminController
 		$this->assign('page', $show);
 		$this->display();
 	}
-    
-    //编辑刷单
+
+	//编辑刷单
 	public function marketEdit($id = NULL)
 	{
 		$getCoreConfig = getCoreConfig();
@@ -382,34 +465,34 @@ class TradeController extends AdminController
 		$where['id'] = array('in', $id);
 
 		switch (strtolower($type)) {
-		case 'forbid':
-			$data = array('status' => 0);
-			break;
+			case 'forbid':
+				$data = array('status' => 0);
+				break;
 
-		case 'resume':
-			$data = array('status' => 1);
-			break;
+			case 'resume':
+				$data = array('status' => 1);
+				break;
 
-		case 'repeal':
-			$data = array('status' => 2, 'endtime' => time());
-			break;
+			case 'repeal':
+				$data = array('status' => 2, 'endtime' => time());
+				break;
 
-		case 'delete':
-			$data = array('status' => -1);
-			break;
+			case 'delete':
+				$data = array('status' => -1);
+				break;
 
-		case 'del':
-			if (M($mobile)->where($where)->delete()) {
-				$this->success('操作成功！');
-			}
-			else {
+			case 'del':
+				if (M($mobile)->where($where)->delete()) {
+					$this->success('操作成功！');
+				}
+				else {
+					$this->error('操作失败！');
+				}
+
+				break;
+
+			default:
 				$this->error('操作失败！');
-			}
-
-			break;
-
-		default:
-			$this->error('操作失败！');
 		}
 
 		if (M($mobile)->where($where)->save($data)) {

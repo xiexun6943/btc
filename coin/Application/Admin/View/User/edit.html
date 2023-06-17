@@ -27,9 +27,9 @@
 									<td>
 										<input type="text" class="form-control input-10x" name="username" value="{$data.username}" readonly="true" style="color:red">
 									</td>
-									
+
 									<?php }?>
-									
+
 									<td class="item-note"></td>
 								</tr>
 								<tr class="controls">
@@ -43,63 +43,63 @@
 									</td>
 									<td class="item-note" style="color:red;">*留空不更新</td>
 								</tr>
-								
+
 								<tr class="controls">
 									<td class="item-label">上一代用户名 :</td>
 									<td><input type="text" class="form-control input-10x" name="invit_1" value="{$data.invit_1}">
 									</td>
 									<td class="item-note" style="color:red;">上一代用户名</td>
 								</tr>
-								
-								
+
+
 								<tr class="controls">
 									<td class="item-label">上二代用户名 :</td>
 									<td><input type="text" class="form-control input-10x" name="invit_2" value="{$data.invit_2}">
 									</td>
 									<td class="item-note" style="color:red;">上二代用户名</td>
 								</tr>
-								
-								
+
+
 								<tr class="controls">
 									<td class="item-label">上三代用户名 :</td>
 									<td><input type="text" class="form-control input-10x" name="invit_3" value="{$data.invit_3}">
 									</td>
 									<td class="item-note" style="color:red;">上三代用户名</td>
 								</tr>
-								
-								
+
+
 								<empty name="data">
-								<tr class="controls">
-									<td class="item-label">邀请码 :</td>
-									<td><input type="text" class="form-control input-10x" name="invit" value="">
-									</td>
-									<td class="item-note" style="color:red;">*上级邀请码</td>
-								</tr>
+									<tr class="controls">
+										<td class="item-label">邀请码 :</td>
+										<td><input type="text" class="form-control input-10x" name="invit" value="">
+										</td>
+										<td class="item-note" style="color:red;">*上级邀请码</td>
+									</tr>
 								</empty>
-								
+
 								<tr class="controls">
 									<td class="item-label">登陆状态 :</td>
 									<td>
-									    <select name="status" class="form-control input-10x">
-										<option value="1" <eq name="data.status" value="1">selected</eq>>正常</option>
-										<option value="2" <eq name="data.status" value="2">selected</eq>>冻结</option>
-									    </select>
+										<select name="status" class="form-control input-10x">
+											<option value="1" <eq name="data.status" value="1">selected</eq>>正常</option>
+											<option value="2" <eq name="data.status" value="2">selected</eq>>冻结</option>
+										</select>
 									</td>
 									<td class="item-note" style="color:red;">*会员登陆的状态</td>
 								</tr>
-								
+
 								<tr class="controls">
 									<td class="item-label">提币状态 :</td>
 									<td>
-									    <select name="txstate" class="form-control input-10x">
-										<option value="1" <eq name="data.txstate" value="1">selected</eq>>正常</option>
-										<option value="2" <eq name="data.txstate" value="2">selected</eq>>禁止</option>
-									</select></td>
+										<select name="txstate" class="form-control input-10x">
+											<option value="1" <eq name="data.txstate" value="1">selected</eq>>正常</option>
+											<option value="2" <eq name="data.txstate" value="2">selected</eq>>禁止</option>
+										</select></td>
 									<td class="item-note" style="color:red;">*会员提币的状态</td>
 								</tr>
-								
-								
-								
+
+
+
 								<tr class="controls">
 									<td class="item-label">客服链接 :</td>
 									<td>
@@ -107,6 +107,16 @@
 									</td>
 									<td class="item-note"></td>
 								</tr>
+
+<!--								<tr class="controls">-->
+<!--									<td class="item-label">跟单状态 :</td>-->
+<!--									<td>-->
+<!--										<select name="gd_state" class="form-control input-10x">-->
+<!--											<option value="0" <eq name="data.gd_state" value="0">selected</eq>>关闭</option>-->
+<!--											<option value="1" <eq name="data.gd_state" value="1">selected</eq>>开启</option>-->
+<!--										</select></td>-->
+<!--									<td class="item-note" style="color:red;">*会员提币的状态</td>-->
+<!--								</tr>-->
 								<!--<tr class="controls">-->
 								<!--	<td class="item-label">TRC20地址 :</td>-->
 								<!--	<td>-->
@@ -135,8 +145,8 @@
 								<!--	</td>-->
 								<!--	<td class="item-note"></td>-->
 								<!--</tr>-->
-								
-								
+
+
 								<tr class="controls">
 									<td class="item-label"></td>
 									<td>
