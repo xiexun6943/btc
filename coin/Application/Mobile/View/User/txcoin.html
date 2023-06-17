@@ -73,6 +73,22 @@
                 </div>
                 </a>
                 </foreach>
+                <foreach name="bklist" item="vo">
+                    <a href="{:U('User/withdraw')}?id={$vo.id}">
+                        <div class="coinlistbox_info_list">
+                            <div class="coinlistbox_info_list_l">
+                                <span class="fzmmm fcc"><?php echo strtoupper($vo['cname']);?></span>
+                            </div>
+                            <div class="coinlistbox_info_list_c">
+                                <span class="fzmm fcc"><?php echo L($vo['title']);?></span>
+                            </div>
+                            <div class="coinlistbox_info_list_r">
+                                <span class="fzmm fcc"><?php echo $vo['cnum'];?></span>
+                                <i class="bi bi-chevron-right fcc"></i>
+                            </div>
+                        </div>
+                    </a>
+                </foreach>
 
             </div>
         </div>

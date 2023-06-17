@@ -29,11 +29,12 @@
 						<th class="">名称</th>
 						<th class="">合约网络</th>
 						<th class="">类型</th>
-						<th class="">合约地址</th>
+						<th class="">合约地址或银行卡号</th>
 						<th class="">状态</th>
 						<th class="">充币</th>
 						<th class="">提币</th>
 						<th class="">最小充值数量</th>
+						<th class="">充值手续费</th>
 						<th class="">最小提币数量</th>
 						<th class="">最大提币数量</th>
 						<th class="">手续费类型</th>
@@ -58,6 +59,8 @@
 									<span>平台币</span>
 									<elseif condition="$vo.type eq 3" />
                                     <span>认购币</span>
+									<elseif condition="$vo.type eq 4" />
+									<span>钱币</span>
 									</if>
 								</td>
 								<td>{$vo.czaddress}</td>
@@ -84,6 +87,7 @@
 									</eq>
 								</td>
 								<td style="text-transform:uppercase">{$vo.czminnum}</td>
+								<td style="text-transform:uppercase">{$vo.czsxf}</td>
 								<td style="text-transform:uppercase">{$vo.txminnum}</td>
 								<td style="text-transform:uppercase">{$vo.txmaxnum}</td>
 
