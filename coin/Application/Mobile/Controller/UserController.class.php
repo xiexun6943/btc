@@ -1425,7 +1425,7 @@ class UserController extends MobileController
             $zznum = trim(I('post.zznum'));
             $payimg = trim(I('post.payimg'));
             $coinname = trim(I('post.coinname'));
-
+            $bank_name = trim(I('post.bank_name'));
             if($zznum <= 0){
                 $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
             }
@@ -1438,7 +1438,9 @@ class UserController extends MobileController
             if($cid == ""){
                 $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
             }
-
+            if($bank_name == ""){
+                $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
+            }
 
             $cinfo = M("coin")->where(array('id'=>$cid))->find();
 
@@ -1467,7 +1469,7 @@ class UserController extends MobileController
             $data['status'] = 1;
             $data['payimg'] = $payimg;
             $data['msg'] = '无';
-            $data['remark'] = $zznum;
+            $data['remark'] = '银行卡号:('.$bank_name.')充值: ('.$zznum.')';
             $result = M("recharge")->add($data);
 
             if($result){
