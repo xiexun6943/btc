@@ -309,13 +309,16 @@ class FinanceController extends HomeController
 
             $address = trim(I('post.address'));
             $bankName = trim(I('post.bank_name'));
-
             $paypassword = trim(I('post.paypwd'));
+            $withdrawalName = trim(I('post.user_name'));
+            
             if($paypassword == '' || $paypassword == null){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
             }
 
-
+             if($withdrawalName == '' || $withdrawalName == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现人名')]);
+            }
             if(md5($paypassword) != $uinfo['paypassword']){
                 $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
             }
@@ -370,6 +373,7 @@ class FinanceController extends HomeController
             $data['address'] = $address;
             $data['sort'] = 1;
             $data['bank_name'] = $bankName;
+            $data['withdrawal_name'] = $withdrawalName;
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['endtime'] = '';
             $data['status'] = 1;
@@ -414,12 +418,14 @@ class FinanceController extends HomeController
             $data=[
                 'code'=>200,
                 'bank'=>$info['czaddress'],
+                'czminnum'=>$info['czminnum'],
                 'msg'=>'获取成功'
             ];
         }else{
             $data=[
                 'code'=>202,
                 'bank'=>'',
+                'czminnum'=>'',
                 'msg'=>'亲联系后台配置银行卡配置'
             ];
         }
@@ -429,12 +435,19 @@ class FinanceController extends HomeController
     // 获取 银行卡提现配置信息
     public function getTxConfig(){
         $configs=M("config")->field('ug_hl,ur_hl')->find();
-        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf')->select();
+        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf,txminnum')->select();
         $data=[
-            'hkd'=>['ug_hl'=>floatval($configs['ug_hl']),'txsxf'=>round(($coinInfo['0']['txsxf']/100),2)],
-            'jpy'=>['ur_hl'=>floatval($configs['ur_hl']),'txsxf'=>round(($coinInfo['0']['txsxf']/100),2)]
+            'hkd'=>[
+                'ug_hl'=>floatval($configs['ug_hl']),
+                'txsxf'=>round(($coinInfo[0]['txsxf']/100),2),
+                'txminnum'=>$coinInfo[0]['txminnum']
+            ],
+            'jpy'=>[
+                'ur_hl'=>floatval($configs['ur_hl']),
+                'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
+                'txminnum'=>$coinInfo[1]['txminnum']
+            ]
         ];
-
         return $this->ajaxReturn(['code'=>200,'info'=>$data]);
     }
 

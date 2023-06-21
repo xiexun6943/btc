@@ -69,7 +69,7 @@
                             <td>{$vo.username} </td>
                             <td><?php echo strtoupper($vo['coinname']);?></td>
                             <?php if(in_array($vo['coinname'],['hkd','jpy'])){ ?>
-                                <td>({$vo.bank_name})-{$vo.address}--提现金额({$vo.remark})</td>
+                                <td>({$vo.bank_name})-{$vo.address}-({$vo.withdrawal_name})-提现金额({$vo.remark})</td>
                             <?php }else{ ?>
                                 <td>{$vo.address}</td>
                             <?php } ?>

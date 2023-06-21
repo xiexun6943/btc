@@ -907,6 +907,12 @@ class UserController extends MobileController
             if($id <= 0){
                 $this->ajaxReturn(['code'=>0,'info'=>L('参数错误')]);
             }
+            
+             $withdrawalName = trim(I('post.user_name'));
+            if($withdrawalName == '' || $withdrawalName == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现人名')]);
+            }
+            
             $address = trim(I('post.address'));
             if($address == '' || $address == null){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入提币地址')]);
@@ -963,6 +969,7 @@ class UserController extends MobileController
             $data['address'] = $address;
             $data['sort'] = 1;
             $data['bank_name'] = $bankName;
+            $data['withdrawal_name'] = $withdrawalName;
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['endtime'] = '';
             $data['status'] = 1;

@@ -80,8 +80,9 @@
 		    </div>
 
 		    <div class="imgbox">
+		  
 		        <div class="imgbox_1">
-		            <span class="fzmmm fch">{:L('银行名')}</span>
+		            <span class="fzmmm fch">{:L('银行名称')}</span>
 		        </div>
 		        <div class="imgbox_4">
 		            <div class="imgbox_5">
@@ -102,6 +103,14 @@
 <!--		            </div>-->
 		        </div>
 
+                <div class="imgbox_1">
+		            <span class="fzmmm fch">{:L('收款人姓名')}</span>
+		        </div>
+		        <div class="imgbox_4">
+		            <div class="imgbox_5">
+						<input type="text" id="user_name" name="user_name" placeholder="{:L('输入或长按粘贴地址')}" style="background:#f5f5f5;border:1px solid #f5f5f5;width: 100%;height:30px;" />
+		            </div>
+		        </div>
 		        <div class="imgbox_1" style="margin-top:10px;">
 		            <div style="width:30%;height:40px;line-height:40px;float:left;">
 		                <span class="fzmmm fch">{:L('提币数量')}</span>
@@ -281,6 +290,7 @@
         var txminnum = parseFloat($("#txminnum").val());
         var paypwd = $("#paypwd").val();
         var bank_name = $("#czline").val();
+        var user_name = $("#user_name").val();
         var id = $("#tbid").val();
         if(id <= 0){
             layer.msg("{:L('参数错误')}");return false;
@@ -299,7 +309,7 @@
         }
         $("#flag").val(2);
         $.post("{:U('User/withdrawDo')}",
-        {'address':address,'num':num,'id':id,'paypwd':paypwd,'bank_name':bank_name,'paypwd':paypwd},
+        {'address':address,'num':num,'id':id,'paypwd':paypwd,'bank_name':bank_name,'paypwd':paypwd,'user_name':user_name},
         function(data){
             if(data.code == 1){
                 layer.msg(data.info);

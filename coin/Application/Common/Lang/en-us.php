@@ -1,6 +1,9 @@
 <?php
 
 return [
+    "请输入收款人姓名"=>"Please enter the name of the payee",
+    "收款人姓名"=>"Payee name",
+    "银行名称"=>"Bank Name",
     "关于我们"=>"About us",
     "MSB认证"=>"MSB certification",
     "提现密码"=>"Withdrawal password",
@@ -789,6 +792,7 @@ return [
     '卡号'=>'card number',
     '银行卡充值'=>'Bank card recharge',
     '银行卡提款'=>'Bank card withdrawal',
+    '请输入提现人名'=>'Please enter the withdrawal name',
 
 
 ];

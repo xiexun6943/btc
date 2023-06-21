@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
 	<link rel="stylesheet" href="/Public/Static/Icoinfont/iconfont.css">
 	<script src="/Public/Static/Icoinfont/iconfont.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<title>{$webname}</title>
 	<style>
 	    ::-webkit-input-placeholder {color: #b5b5b5;font-size: 12px;}
@@ -70,15 +71,22 @@
 		        </a>
 		    </div>
 		    <div class="imgbox">
-		        <div class="imgbox_4">
+		        <div class="imgbox_4" style="height:170px">
 		            <div class="imgbox_5">
 		                <span class="fzmmm fch">{:L('银行卡号')}</span>
 		            </div>
 
 		            <div class="imgbox_7">
 		                <input type="hidden" id="czaddress" value="{$info.czaddress}" />
-		                <span class="fzmm fch">{$info.czaddress}</span>
+		                <span class="fzmm fch card_no">{$info.czaddress}</span>
 		            </div>
+		            <script>
+		                $(function(){
+		                    var formattedStr = $('#czaddress').val().replace(/(.{4})/g, "$1 ");
+		                    
+		                    $('.card_no').text(formattedStr)
+		                })
+		            </script>
 		            <div class="imgbox_8">
 		                <div class="imgbox_9" onclick="copyUrl()" style="margin: 15px auto;">
 		                    <span class="fzmm fcy">{:L('复制地址')}</span>
