@@ -1425,7 +1425,7 @@ class UserController extends MobileController
             $zznum = trim(I('post.zznum'));
             $payimg = trim(I('post.payimg'));
             $coinname = trim(I('post.coinname'));
-            $bank_name = trim(I('post.bank_name'));
+            $bank_name = trim(I('post.bank_num'));
             if($zznum <= 0){
                 $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
             }

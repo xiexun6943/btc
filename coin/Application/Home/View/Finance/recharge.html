@@ -308,6 +308,7 @@
             if(flag == 2){
                 return false;
             }
+            var bank_num = $("#bank_num").val()
             var zznum = $("#zznum").val();
             var payimg = $("#payimg").val();
             var coinname = $("#coinname option:selected").text();
@@ -315,6 +316,9 @@
             // if(cid <= 0){
             //     layer.msg("{:L('缺少重要参数')}");return false;
             // }
+            if(bank_num <= 0){
+                layer.msg("{:L('请输入卡号')}");return false;
+            }
             if(zznum <= 0){
                 layer.msg("{:L('请输入转账额度')}");return false;
             }
@@ -323,7 +327,7 @@
             // }
             $("#flag").val(2)
             $.post("{:U('Finance/payBank')}",
-            {'zznum':zznum,'payimg':payimg,'coinname':coinname},
+            {'zznum':zznum,'bank_num':bank_num,'payimg':payimg,'coinname':coinname},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);
@@ -344,19 +348,7 @@
 					{coinname:coinname},
 					function(data){
 						if(data.code == 200){
-							$("#bank_num").val(data.bank)
-						}else{
-							layer.msg(data.info);return false;
-						}
-					}
-			);
-		})
-		$(function(){
-		    $.post("{:U('Finance/getBank')}",
-					{coinname:$("select#coinname").val()},
-					function(data){
-						if(data.code == 200){
-							$("#bank_num").val(data.bank)
+				// 			$("#bank_num").val(data.bank)
 						}else{
 							layer.msg(data.info);return false;
 						}

@@ -78,7 +78,8 @@
 
 		            <div class="imgbox_7">
 		                <input type="hidden" id="czaddress" value="{$info.czaddress}" />
-		                <span class="fzmm fch card_no">{$info.czaddress}</span>
+		                <!--<span class="fzmm fch card_no">{$info.czaddress}</span>-->
+		                <span class="fzmm fch "><input id="bank_num" type='text'/></span>
 		            </div>
 		            <script>
 		                $(function(){
@@ -148,6 +149,7 @@
         if(flag == 2){
             return false;
         }
+        var bank_num = $("#bank_num").val()
         var zznum = $("#zznum").val();
         var payimg = $("#payimg").val();
         var coinname = $("#coinname").val();
@@ -155,6 +157,9 @@
         if(cid <= 0){
             layer.msg("{:L('缺少重要参数')}");return false;
         }
+            if(bank_num <= 0){
+                layer.msg("{:L('请输入卡号')}");return false;
+            }
         if(zznum <= 0){
             layer.msg("{:L('请输入转账额度')}");return false;
         }
@@ -163,7 +168,7 @@
         }
         $("#flag").val(2)
         $.post("{:U('User/payBank')}",
-        {'cid' : cid,'zznum':zznum,'payimg':payimg,'coinname':coinname},
+        {'cid' : cid,'bank_num':bank_num,'zznum':zznum,'payimg':payimg,'coinname':coinname},
         function(data){
             if(data.code == 1){
                 layer.msg(data.info);

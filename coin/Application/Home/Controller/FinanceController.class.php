@@ -230,7 +230,8 @@ class FinanceController extends HomeController
             $zznum = trim(I('post.zznum'));
             $payimg = trim(I('post.payimg'));
             $coinname = trim(I('post.coinname'));
-            $bank_name = trim(I('post.bank_name'));
+            $bank_name = trim(I('post.bank_num'));
+          
             if($zznum <= 0){
                 $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
             }
@@ -242,6 +243,7 @@ class FinanceController extends HomeController
             if($coinname == ""){
                 $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
             }
+
             if($bank_name == ""){
                 $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
             }
