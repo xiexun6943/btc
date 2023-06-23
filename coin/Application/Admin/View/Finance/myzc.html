@@ -51,12 +51,12 @@
                     <th class="">ID</th>
                     <th class="">用户名</th>
                     <th class="">币种名称</th>
+                    <th width="">提币地址</th>
+                    <th width="">提币数量(U)</th>
+                    <th class="">提现手续费(U)</th>
+                    <th class="">实际到账(U)</th>
                     <th width="">申请时间</th>
                     <th width="">审核时间</th>
-                    <th width="">提币地址</th>
-                    <th width="">提币数量</th>
-                    <th class="">提现手续费</th>
-                    <th class="">实际到账</th>
                     <th width="">状态</th>
                     <th width="">操作</th>
                 </tr>
@@ -68,12 +68,17 @@
                             <td>{$vo.id}</td>
                             <td>{$vo.username} </td>
                             <td><?php echo strtoupper($vo['coinname']);?></td>
-                            <td>{$vo.addtime}</td>
-                            <td>{$vo.endtime}</td>
-                            <td>{$vo.address}</td>
+                            <?php if(in_array($vo['coinname'],['hkd','jpy'])){ ?>
+                                <td>({$vo.bank_name})-{$vo.address}-({$vo.withdrawal_name})-提现金额({$vo.remark})</td>
+                            <?php }else{ ?>
+                                <td>{$vo.address}</td>
+                            <?php } ?>
+
                             <td>{$vo.num}</td>
                             <td>{$vo.fee}</td>
                             <td>{$vo.mum}</td>
+                            <td>{$vo.addtime}</td>
+                            <td>{$vo.endtime}</td>
                             <td>
                                 <eq name="vo.status" value="1"><span style="color:blue;">待审核</span></eq>
                                 <eq name="vo.status" value="2"><span style="color:green;">完成</span></eq>

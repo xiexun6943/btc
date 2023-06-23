@@ -50,8 +50,9 @@
 					<th class="">充值币种</th>
 					<th width="">充值时间</th>
 					<th width="">处理时间</th>
-					<th width="">充值数量</th>
-					<th width="">实际到账</th>
+					<th width="">充值数量(U)</th>
+					<th width="">实际到账(U)</th>
+					<th width="">银行卡充值信息</th>
 					<th width="">充值类型</th>
 					<th width="">转账凭证</th>
 					<th width="">状态</th>
@@ -67,8 +68,9 @@
 							<td><?php echo strtoupper($vo['coin']);?></td>
 							<td>{$vo.addtime}</td>
 							<td>{$vo.updatetime}</td>
-							<td>{$vo['num']*1}</td>
-						    <td>{$vo['num']*1}</td>
+							<td>{$vo['num']}</td>
+						    <td>{$vo['real_num']}</td>
+						    <td>{$vo['remark']}</td>
 							<?php if( $vo['type'] == 1){ ?>
 								<td>客户充值</td>
 							<?php }else{ ?>

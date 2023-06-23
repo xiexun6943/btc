@@ -56,8 +56,13 @@ class FinanceController extends AdminController
 	        $this->error("此订单已处理");exit();
 	    }
 	    $uid = $info['uid'];
-	    $num = $info['num'];
-	    $coinname = strtolower(trim($info['coin']));
+	    $num = $info['real_num'];
+        if (in_array(strtolower(trim($info['coin'])),['jpy','hkd'])) {
+            $coinname='usdt';
+        }else{
+            $coinname = strtolower(trim($info['coin']));
+        }
+
 	    $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
 	    //修改订单状态
 	    $save['updatetime'] = date("Y-m-d H:i:s",time());
@@ -148,7 +153,13 @@ class FinanceController extends AdminController
 	    
 	   $uid = $info['userid'];
 	   $num = $info['num'];
-	   $coinname = strtolower(trim($info['coinname']));
+
+        if (in_array($info['coinname'],['jpy','hkd'])) {
+            $coinname = 'usdt';
+        }else{
+            $coinname = strtolower(trim($info['coinname']));
+        }
+
 	   //修改记录状态
 	   $save['endtime'] = date("Y-m-d H:i:s",time());
 	   $save['status'] = 3;

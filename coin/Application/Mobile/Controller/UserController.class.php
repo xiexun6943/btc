@@ -8,7 +8,13 @@ class UserController extends MobileController
     protected function _initialize()
     {
         parent::_initialize();
-        $allow_action=array("index","getmoneyinfo","getallzhehe","login","qianbao","qianbaoadd","qianbao_coin_list","upqianbao","delqianbao","log","czcoin","getsymbol","czpage","recharge_img","paycoin","czlist","czinfo","txcoin","getcoinnum","txpage","txaddlist","plusaddress","upplusaddress","getaddress","tbhandle","txlist","txinfo","coininfo","getnewprice","deladdress","addresslist","getmoneyusdt","getmoneybtc","getmoneyeth","getmoneyeos","getmoneydoge","getmoneybch","getmoneyltc","getmoneytrx","getmoneyxrp","getmoneyiotx","getmoneyfil","getmoneyshib","getmoneyflow","getmoneyjst","getmoneyitc","getmoneyht","getmoneyogo","getmoneyusdz","getmoneyatm","getmoneiota","getmoneyttc","authrz","upauthrz","online","uptxt","getlineinfo",'appeal');
+        $allow_action=array("index","getmoneyinfo","getallzhehe","login","qianbao","qianbaoadd","qianbao_coin_list","upqianbao",
+            "delqianbao","log","czcoin","getsymbol","czpage","recharge_img","paycoin","czlist","czinfo","txcoin",
+            "getcoinnum","txpage","txaddlist","plusaddress","upplusaddress","getaddress","tbhandle","txlist","txinfo",
+            "coininfo","getnewprice","deladdress","addresslist","getmoneyusdt","getmoneybtc","getmoneyeth","getmoneyeos",
+            "getmoneydoge","getmoneybch","getmoneyltc","getmoneytrx","getmoneyxrp","getmoneyiotx","getmoneyfil","getmoneyshib",
+            "getmoneyflow","getmoneyjst","getmoneyitc","getmoneyht","getmoneyogo","getmoneyusdz","getmoneyatm","getmoneiota",
+            "getmoneyttc","authrz","upauthrz","online","uptxt","getlineinfo",'appeal','recharge','payBank','withdraw','withdrawDo','getTxConfig');
         if(!in_array(ACTION_NAME,$allow_action)){
             $this->error("非法操作");
         }
@@ -868,6 +874,128 @@ class UserController extends MobileController
 
         }
     }
+    //银行卡提币处理
+    public function withdrawDo(){
+        if($_POST){
+            $uid = userid();
+            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword,txstate")->find();
+            if(empty($uinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
+            }
+            if($uinfo['txstate'] == 2){
+                $this->ajaxReturn(['code'=>0,'info'=>L('禁止提币,请联系客服')]);
+            }
+
+            if(empty($uinfo['paypassword'])){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先设置提现密码')]);
+            }
+            $paypassword = trim(I('post.paypwd'));
+            if($paypassword == '' || $paypassword == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
+            }
+
+            if(md5($paypassword) != $uinfo['paypassword']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
+            }
+
+            if($uinfo['rzstatus'] != 2){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
+            }
+
+            $id = trim(I('post.id'));
+            $bankName = trim(I('post.bank_name'));
+            if($id <= 0){
+                $this->ajaxReturn(['code'=>0,'info'=>L('参数错误')]);
+            }
+            
+             $withdrawalName = trim(I('post.user_name'));
+            if($withdrawalName == '' || $withdrawalName == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现人名')]);
+            }
+            
+            $address = trim(I('post.address'));
+            if($address == '' || $address == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提币地址')]);
+            }
+            $num = trim(I('post.num'));
+            if($num <= 0){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入正确的额度')]);
+            }
+            $cinfo = M("coin")->where(array('id'=>$id))->find();
+            if(empty($cinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('参数错误')]);
+            }
+            if($num < $cinfo['txminnum']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('不能低于最小提币值')]);
+            }
+            if($num > $cinfo['txmaxnum']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('不能高于最大提币值')]);
+            }
+
+
+
+
+            $coinname = $cinfo['name'];
+            $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+            $config = M("config")->field('gu_hl,ru_hl')->find();
+            $coinname =='hkd'?$hl=$config['gu_hl']:$hl=$config['ru_hl'];
+
+            $sxftype = $cinfo['sxftype'];
+            if($sxftype == 1){
+                $sxf = $num * $cinfo['txsxf'] / 100;
+            }elseif($sxftype == 2){
+                $sxf = $cinfo['txsxf_n'];
+            }
+
+            if($sxf <= 0 || $sxf == ''){
+                $sxf = 0;
+            }
+
+
+            $tnum = round(($num - $sxf)*$hl,4);
+            $unum=round($num*$hl,2);
+            if($minfo['usdt'] < $unum){ // 只能在ustd中扣
+                $this->ajaxReturn(['code'=>0,'info'=>L('账户余额不足')]);
+            }
+
+            $dec_re = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$unum);
+
+            $data['userid'] = $uid;
+            $data['username'] = $uinfo['username'];
+            $data['coinname'] = $cinfo['name'];
+            $data['num'] = $unum;
+            $data['fee'] = round($sxf*$hl,2);;
+            $data['mum'] = $tnum;
+            $data['address'] = $address;
+            $data['sort'] = 1;
+            $data['bank_name'] = $bankName;
+            $data['withdrawal_name'] = $withdrawalName;
+            $data['addtime'] = date("Y-m-d H:i:s",time());
+            $data['endtime'] = '';
+            $data['status'] = 1;
+            $data['remark'] = $num;
+            $result = M("myzc")->add($data);
+
+            //操作日志
+            $bill['uid'] = $uid;
+            $bill['username'] = $uinfo['username'];
+            $bill['num'] = $unum;
+            $bill['coinname'] = $cinfo['name'];
+            $bill['afternum'] = $minfo['usdt'] - $unum;
+            $bill['type'] = 2;
+            $bill['addtime'] = date("Y-m-d H:i:s",time());
+            $bill['st'] = 2;
+            $bill['remark'] = "提币申请";
+
+            $billre = M("bill")->add($bill);
+
+            if($result && $dec_re && $billre){
+                $this->ajaxReturn(['code'=>1,'info'=>L('提交成功')]);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=>L('提交失败')]);
+            }
+        }
+    }
 
     //判断是否绑定提币地址
     public function getaddress(){
@@ -988,6 +1116,37 @@ class UserController extends MobileController
 
         $this->display();
     }
+    //銀行卡提币页面
+    public function withdraw(){
+        $id = trim(I('get.id'));
+        if($id <= 0){
+            $this->redirect('User/txcoin');
+        }
+        $info = M("coin")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        $coinname = $info['name'];
+        $uid = userid();
+        $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+        $config = M("config")->field('ug_hl,ur_hl')->find();
+
+        if ($info['name'] == 'hkd') {
+            $money = $minfo['usdt'] * $config['ug_hl'];
+        }
+        if ($info['name'] == 'jpy') {
+            $money = $minfo['usdt'] * $config['ur_hl'];
+        }
+
+        $this->assign('money',round($money,2));
+
+        $adrinfo = M("user_qianbao")->where(array('uid'=>$uid,'name'=>$coinname,'czline'=>$info['czline']))->order('id desc')->limit(1)->find();
+
+        if(!empty($adrinfo)){
+            $this->assign('adrinfo',$adrinfo);
+        }
+
+        $this->display();
+    }
 
     //提现币列表
     public function txcoin(){
@@ -995,8 +1154,10 @@ class UserController extends MobileController
         if($uid <= 0){
             $this->redirect('Login/index');
         }
-        $clist = M("coin")->where(array('txstatus'=>1))->field("id,name,title")->order('sort asc')->select();
+        $clist = M("coin")->where(array('txstatus'=>1,'type'=>1))->field("id,name,title")->order('sort asc')->select();
+        $bklist = M("coin")->where(array('txstatus'=>1,'type'=>4))->field("id,name,title")->order('sort asc')->select();
         $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+        $config = M("config")->field('ug_hl,ur_hl')->find();
 
         if(!empty($clist)){
             foreach($clist as $k=>$v){
@@ -1009,7 +1170,28 @@ class UserController extends MobileController
             }
 
         }
+
+        if(!empty($bklist)){
+            foreach($bklist as $k=>$v){
+                $coinname = $v['name'];
+
+                if ($v['name'] == 'hkd') {
+
+                    $coin_num=$minfo['usdt']*$config['ug_hl'];
+                }
+                if ($v['name'] == 'jpy') {
+
+                    $coin_num=$minfo['usdt']*$config['ur_hl'];
+                }
+                $bddata[$k]['cname'] = strtoupper($coinname);
+                $bddata[$k]['title'] = $v['title'];
+                $bddata[$k]['id'] = $v['id'];
+                $bddata[$k]['cnum'] = round($coin_num,2);
+            }
+
+        }
         $this->assign("list",$data);
+        $this->assign("bklist",$bddata);
         $this->display();
     }
 
@@ -1049,7 +1231,15 @@ class UserController extends MobileController
     public function czlist(){
         $uid = userid();
         $mlist = M("recharge")->where(array('uid'=>$uid))->order("id desc")->select();
-        $this->assign('mlist',$mlist);
+        $data=[];
+        if ($mlist && !empty($mlist)) {
+            foreach ($mlist as$k=> $vo) {
+                $data[$k]=$vo;
+                $data[$k]['sxf']=round($vo['num']-$vo['real_num'],2);
+            }
+
+        }
+        $this->assign('mlist',$data);
         $this->display();
     }
 
@@ -1195,6 +1385,103 @@ class UserController extends MobileController
         $this->ajaxReturn(['code'=>1,'info'=>$data]);
 
     }
+    //币种充值页面
+    public function recharge()
+    {
+        $id = trim(I('get.id'));
+        $uid = userid();
+        if($id <= 0){
+            $this->redirect('User/czcoin');
+        }
+        $info = M("coin")->where(array('id'=>$id))->find();
+        if($info['czstatus'] != 1){
+            $this->redirect('User/czcoin');
+        }
+
+        //查询最上级是否代理
+        $user = M("user")->where(['id'=>$uid])->find();
+
+        $this->assign('info',$info);
+
+        $address = $info['czaddress'];
+
+
+        $this->assign("address",$address);
+
+
+        $this->display();
+    }
+
+    //上传转账号凭证
+    public function payBank(){
+//        dump($_POST);exit();
+        if($_POST){
+            $uid = userid();
+            $uinfo = M("user")->where(array('id'=>$uid))->field("id,username")->find();
+            if(empty($uinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=> L('请先登陆')]);
+            }
+            $cid = trim(I('post.cid'));
+            $zznum = trim(I('post.zznum'));
+            $payimg = trim(I('post.payimg'));
+            $coinname = trim(I('post.coinname'));
+            $bank_name = trim(I('post.bank_num'));
+            if($zznum <= 0){
+                $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
+            }
+            if($payimg == ""){
+                $this->ajaxReturn(['code'=>0,'info'=> L('请上传转账凭证')]);
+            }
+            if($coinname == ""){
+                $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
+            }
+            if($cid == ""){
+                $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
+            }
+            if($bank_name == ""){
+                $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
+            }
+
+            $cinfo = M("coin")->where(array('id'=>$cid))->find();
+
+            //$bi=M('coin')->where(array('name'=>$coinname))->find();
+            if($zznum < $cinfo['czminnum']){
+                $this->ajaxReturn(['code'=>0,'info'=> L('低于最低额度')]);
+            }
+
+            $config = M("config")->field('gu_hl,ru_hl')->find();
+            if ($coinname == 'hkd') {
+                $num=round($zznum*$config['gu_hl'],4);
+            }elseif($coinname == 'jpy'){
+                $num=round($zznum*$config['ru_hl'],4);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=> L('币种类型错误！')]);
+            }
+            $cinfo = M("coin")->where(array('name'=>strtolower($coinname)))->find();
+            //var_dump($cinfo);exit;
+            $data['uid'] = $uid;
+            $data['username'] = $uinfo['username'];
+            $data['coin'] = strtoupper($coinname);
+            $data['num'] = $num;
+            $data['real_num'] = round($num-$num*($cinfo['czsxf']/100),4);
+            $data['addtime'] = date("Y-m-d H:i:s",time());
+            $data['updatetime'] = null;
+            $data['status'] = 1;
+            $data['payimg'] = $payimg;
+            $data['msg'] = '无';
+            $data['remark'] = '银行卡号:('.$bank_name.')充值: ('.$zznum.')';
+            $result = M("recharge")->add($data);
+
+            if($result){
+                $this->ajaxReturn(['code'=>1,'info'=> L('凭证提交成功')]);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=> L('凭证提交失败')]);
+            }
+
+        }else{
+            $this->ajaxReturn(['code'=>0,'info'=> L('参数错误')]);
+        }
+    }
 
     //币种充值页面
      public function czpage(){
@@ -1207,6 +1494,8 @@ class UserController extends MobileController
         if($info['czstatus'] != 1){
             $this->redirect('User/czcoin');
         }
+
+
 
 // dump($info);exit;
 
@@ -1294,8 +1583,18 @@ class UserController extends MobileController
         if($uid <= 0){
             $this->redirect('Login/index');
         }
-        $list = M("coin")->where(array('status'=>1))->order('sort asc')->field("name,title,id,czstatus")->select();
+        $list = M("coin")
+            ->where(array('status'=>1,'type'=>1))
+            ->order('sort asc')
+            ->field("name,title,id,czstatus")
+            ->select();
+        $bklist = M("coin")
+            ->where(array('status'=>1,'type'=>4))
+            ->order('sort asc')
+            ->field("name,title,id,czstatus")
+            ->select();
         $this->assign("list",$list);
+        $this->assign("bklist",$bklist);
         $this->display();
     }
 
@@ -1376,7 +1675,28 @@ class UserController extends MobileController
         }
     }
 
-
+ // 获取 银行卡提现配置信息
+    public function getTxConfig(){
+        $configs=M("config")->field('ug_hl,ur_hl')->find();
+        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf,czsxf,txminnum,czminnum')->select();
+        $data=[
+            'hkd'=>[
+                'ug_hl'=>floatval($configs['ug_hl']),
+                'txsxf'=>round(($coinInfo[0]['txsxf']/100),2),
+                'czsxf'=>round(($coinInfo[0]['czsxf']/100),2),
+                'txminnum'=>$coinInfo[0]['txminnum'],
+                'czminnum'=>$coinInfo[0]['czminnum']
+            ],
+            'jpy'=>[
+                'ur_hl'=>floatval($configs['ur_hl']),
+                'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
+                'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
+                'txminnum'=>$coinInfo[1]['txminnum'],
+                'czminnum'=>$coinInfo[1]['czminnum']
+            ]
+        ];
+        return $this->ajaxReturn(['code'=>200,'info'=>$data]);
+    }
 
 }
 

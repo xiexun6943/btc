@@ -6,7 +6,10 @@ class FinanceController extends HomeController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action=array("index","getnewprice","getmoneyusdt","getmoneybtc","getmoneyeth","getmoneyeos","getmoneydoge","getmoneybch","getmoneyltc","getmoneytrx","getmoneyxrp","getmoneyiotx","getmoneyfil","getmoneyshib","getmoneyflow","getmoneyjst","getmoneyitc","getmoneyht","getmoneyogo","getmoneyusdz","getmoneyatm","getmoneyttc","getallzhehe","czpage","paycoin","txpage","tbhandle","czlist","txlist");
+		$allow_action=array("index","getnewprice","getmoneyusdt","getmoneybtc","getmoneyeth","getmoneyeos","getmoneydoge","getmoneybch",
+            "getmoneyltc","getmoneytrx","getmoneyxrp","getmoneyiotx","getmoneyfil","getmoneyshib","getmoneyflow","getmoneyjst",
+            "getmoneyitc","getmoneyht","getmoneyogo","getmoneyusdz","getmoneyatm","getmoneyttc","getallzhehe","czpage","paycoin",
+            "txpage","tbhandle","czlist","txlist",'withdraw','recharge','payBank','getBank','getTxConfig','withdrawDo');
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error(L("非法操作"));
 		}
@@ -55,7 +58,7 @@ class FinanceController extends HomeController
 	public function tbhandle(){
 	    if($_POST){
 	        $uid = userid();
-	        $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username")->find();
+	        $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword")->find();
 	        if(empty($uinfo)){
 	            $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
 	        }
@@ -63,7 +66,14 @@ class FinanceController extends HomeController
 	        if($uinfo['rzstatus'] != 2){
 		        $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
 		    }
-	        
+            $paypassword = trim(I('post.paypwd'));
+            if($paypassword == '' || $paypassword == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
+            }
+
+            if(md5($paypassword) != $uinfo['paypassword']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
+            }
 	        $id = trim(I('post.id'));
 	        if($id <= 0){
 	            $this->ajaxReturn(['code'=>0,'info'=>L('参数错误')]);
@@ -159,6 +169,7 @@ class FinanceController extends HomeController
 	        if(empty($uinfo)){
 	            $this->ajaxReturn(['code'=>0,'info'=> L('请先登陆')]);
 	        }
+
 	        $cid = trim(I('post.cid'));
 	        $zznum = trim(I('post.zznum'));
 	        $payimg = trim(I('post.payimg'));
@@ -181,15 +192,16 @@ class FinanceController extends HomeController
 
 
 	        $cinfo = M("coin")->where(array('id'=>$cid))->find();
-	        
-	        if($zznum < $minnum){
+
+	        if($zznum < $cinfo['czminnum']){
 	            $this->ajaxReturn(['code'=>0,'info'=> L('低于最低额度')]);
 	        }
 	        
 	        $data['uid'] = $uid;
 	        $data['username'] = $uinfo['username'];
 	        $data['coin'] = strtoupper($coinname);
-	        $data['num'] = $zznum;
+            $data['num'] = $zznum;
+            $data['real_num'] = round($zznum-$zznum*($cinfo['czsxf']/100),4);
 	        $data['addtime'] = date("Y-m-d H:i:s",time());
 	        $data['updatetime'] = '';
 	        $data['status'] = 1;
@@ -207,6 +219,248 @@ class FinanceController extends HomeController
 	        $this->ajaxReturn(['code'=>0,'info'=> L('参数错误')]);
 	    }
 	}
+    //上传转账号凭证 银行卡提单
+    public function payBank(){
+        if($_POST){
+            $uid = userid();
+            $uinfo = M("user")->where(array('id'=>$uid))->field("id,username")->find();
+            if(empty($uinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=> L('请先登陆')]);
+            }
+            $zznum = trim(I('post.zznum'));
+            $payimg = trim(I('post.payimg'));
+            $coinname = trim(I('post.coinname'));
+            $bank_name = trim(I('post.bank_num'));
+          
+            if($zznum <= 0){
+                $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
+            }
+
+            if($payimg == ""){
+                $this->ajaxReturn(['code'=>0,'info'=> L('请上传转账凭证')]);
+            }
+
+            if($coinname == ""){
+                $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
+            }
+
+            if($bank_name == ""){
+                $this->ajaxReturn(['code'=>0,'info'=> L('缺少重要参数')]);
+            }
+
+            $cinfo = M("coin")->where(array('name'=>strtolower($coinname)))->find();
+            if (!$cinfo || empty( $cinfo)) {
+                $this->ajaxReturn(['code'=>0,'info'=> L('支付配置错误')]);
+            }
+            if($zznum < $cinfo['czminnum']){
+                $this->ajaxReturn(['code'=>0,'info'=> L('低于最低额度')]);
+            }
+            $config = M("config")->field('gu_hl,ru_hl')->find();
+            if ($coinname == 'HKD') {
+                $num=round($zznum*$config['gu_hl'],4);
+            }elseif($coinname == 'JPY'){
+                $num=round($zznum*$config['ru_hl'],4);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=> L('币种类型错误！')]);
+            }
+
+            $data['uid'] = $uid;
+            $data['username'] = $uinfo['username'];
+            $data['coin'] = strtoupper($coinname);
+            $data['num'] = $num;
+            $data['real_num'] = round($num-$num*($cinfo['czsxf']/100),4);
+            $data['addtime'] = date("Y-m-d H:i:s",time());
+            $data['updatetime'] = '';
+            $data['status'] = 1;
+            $data['payimg'] = $payimg;
+            $data['msg'] = '';
+            $data['remark'] = '银行卡号:('.$bank_name.')充值: ('.$zznum.')';
+
+            $result = M("recharge")->add($data);
+            if($result){
+                $this->ajaxReturn(['code'=>1,'info'=> L('凭证提交成功')]);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=> L('凭证提交失败')]);
+            }
+
+        }else{
+            $this->ajaxReturn(['code'=>0,'info'=> L('参数错误')]);
+        }
+    }
+    //银行卡提现页面
+    public function withdraw(){
+        $id = trim(I('get.id'));
+
+        $info = M("coin")->where(array('name'=>$id))->find();
+        $this->assign('info',$info);
+
+        $uid = userid();
+        $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+        $money = $minfo['usdt'];
+        $this->assign('money',$money);
+        $this->display();
+    }
+    // 银行卡提款
+    public function withdrawDo(){
+        if($_POST){
+            $uid = userid();
+            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword")->find();
+            if(empty($uinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
+            }
+            if($uinfo['rzstatus'] != 2){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
+            }
+            $coinname = trim(I('post.coinname'));
+
+            $address = trim(I('post.address'));
+            $bankName = trim(I('post.bank_name'));
+            $paypassword = trim(I('post.paypwd'));
+            $withdrawalName = trim(I('post.user_name'));
+            
+            if($paypassword == '' || $paypassword == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
+            }
+
+             if($withdrawalName == '' || $withdrawalName == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现人名')]);
+            }
+            if(md5($paypassword) != $uinfo['paypassword']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
+            }
+
+            if($address == '' || $address == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提币地址')]);
+            }
+            $num = trim(I('post.num'));
+            if($num <= 0){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入正确的额度')]);
+            }
+            $cinfo = M("coin")->where(array('name'=>$coinname))->find();
+            if(empty($cinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('参数错误')]);
+            }
+            if($num < $cinfo['txminnum']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('不能低于最小提币值')]);
+            }
+            if($num > $cinfo['txmaxnum']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('不能高于最大提币值')]);
+            }
+
+
+            $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+
+            $config = M("config")->field('gu_hl,ru_hl')->find();
+            $coinname =='hkd'?$hl=$config['gu_hl']:$hl=$config['ru_hl'];
+            $sxftype = $cinfo['sxftype'];
+            if($sxftype == 1){
+                $sxf = $num * ($cinfo['txsxf'] / 100);
+            }elseif($sxftype == 2){
+                $sxf = $cinfo['txsxf_n'];
+            }
+
+            if($sxf <= 0 || $sxf == ''){
+                $sxf = 0;
+            }
+
+            $tnum = round(($num - $sxf)*$hl,4);
+            $unum=round($num*$hl,2);
+            if($minfo['usdt'] < $unum){ // 只能在ustd中扣
+                $this->ajaxReturn(['code'=>0,'info'=>L('账户余额不足')]);
+            }
+            $dec_re = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$unum);
+
+            $data['userid'] = $uid;
+            $data['username'] = $uinfo['username'];
+            $data['coinname'] = $cinfo['name'];
+            $data['num'] = $unum;
+            $data['fee'] = round($sxf*$hl,2);
+            $data['mum'] = $tnum;
+            $data['address'] = $address;
+            $data['sort'] = 1;
+            $data['bank_name'] = $bankName;
+            $data['withdrawal_name'] = $withdrawalName;
+            $data['addtime'] = date("Y-m-d H:i:s",time());
+            $data['endtime'] = '';
+            $data['status'] = 1;
+            $data['remark'] = $num;
+
+            $result = M("myzc")->add($data);
+
+            //操作日志
+            $bill['uid'] = $uid;
+            $bill['username'] = $uinfo['username'];
+            $bill['num'] = $unum;
+            $bill['coinname'] = $cinfo['name'];
+            $bill['afternum'] = $minfo['usdt'] - $unum;
+            $bill['type'] = 2;
+            $bill['addtime'] = date("Y-m-d H:i:s",time());
+            $bill['st'] = 2;
+            $bill['remark'] = "提币申请";
+
+            $billre = M("bill")->add($bill);
+
+            if($result && $dec_re && $billre){
+                $this->ajaxReturn(['code'=>1,'info'=>L('提交成功')]);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=>L('提交失败')]);
+            }
+        }
+    }
+
+    // 银行卡充值页面
+    public function recharge($name = ''){
+        // 获取钱币
+        $info = M("coin")->where(array('name'=>$name))->find();
+        $this->assign('info',$info);
+        $this->display();
+    }
+
+    // 银行卡获取
+    public function getBank(){
+	    $name=I('coinname');
+        $info = M("coin")->where(array('name'=>$name))->find();
+        if ($info) {
+            $data=[
+                'code'=>200,
+                'bank'=>$info['czaddress'],
+                'czminnum'=>$info['czminnum'],
+                'msg'=>'获取成功'
+            ];
+        }else{
+            $data=[
+                'code'=>202,
+                'bank'=>'',
+                'czminnum'=>'',
+                'msg'=>'亲联系后台配置银行卡配置'
+            ];
+        }
+        return $this->ajaxReturn($data) ;
+    }
+
+    // 获取 银行卡提现配置信息
+    public function getTxConfig(){
+        $configs=M("config")->field('ug_hl,ur_hl')->find();
+        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf,czsxf,txminnum,czminnum')->select();
+        $data=[
+            'hkd'=>[
+                'ug_hl'=>floatval($configs['ug_hl']),
+                'txsxf'=>round(($coinInfo[0]['txsxf']/100),2),
+                'czsxf'=>round(($coinInfo[0]['czsxf']/100),2),
+                'txminnum'=>$coinInfo[0]['txminnum'],
+                'czminnum'=>$coinInfo[0]['czminnum']
+            ],
+            'jpy'=>[
+                'ur_hl'=>floatval($configs['ur_hl']),
+                'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
+                'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
+                'txminnum'=>$coinInfo[1]['txminnum'],
+                'czminnum'=>$coinInfo[1]['czminnum']
+            ]
+        ];
+        return $this->ajaxReturn(['code'=>200,'info'=>$data]);
+    }
+
 	//充值页面
 	public function czpage($id = null){
 

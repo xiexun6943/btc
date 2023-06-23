@@ -10,6 +10,48 @@ body{width:100vw;height:100vh;background:#f5f5f5;min-height: 100vh;overflow-y: a
   font-size: 14px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    background: unset!important;
+    border: unset!important;
+    -webkit-text-fill-color: white!important;
+    -webkit-box-shadow: 0 0 0px 1000px #000 inset!important;
+    transition: background-color 5000s ease-in-out 0s!important;
+}
+
+* {
+
+    -webkit-tap-highlight-color: transparent!important;
+
+}
+
+input::-webkit-input-placeholder {
+    color: #eaeaea !important;
+}
+
+input::-moz-placeholder {
+    color: #eaeaea !important;
+}
+
+input::-moz-placeholder {
+    color: #eaeaea !important;
+}
+
+input::-ms-input-placeholder {
+    color: #eaeaea !important;
+}
+.form-control{
+    border:none!important;
+    height: 48px!important;
+    width: 95%!important;
+}
 :-ms-input-placeholder { /* Internet Explorer 10+ */
   color: #424852;
   font-size: 14px;

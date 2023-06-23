@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=<?=time()?>" />
+	    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	    <title>{$webname}</title>
         <style>
             .css-ogtd7z {
@@ -145,7 +146,7 @@
             .czbox{width:100%;height:80px;margin-bottom:20px;}
             .czbox_1{width:30%;height:80px;float:left;}
             .czbox_2{width:70%;height:80px;float:right;}
-            .czbox_3{width:100%;height:20px;line-height:30px}
+            .czbox_3{width:100%;height:20px;line-height:20px;}
             .czbox_4{width:100%;height:50px;line-height:50px;margin-top:5px;border:1px solid #f5f5f5;padding-left:15px;}
             .czbox_4:hover{border:1px solid #FCD535;}
             .czbox_5{width:100%;height:100%;border:1px solid #fff;background-color:#fff;color:#000;font-size:14px;}
@@ -156,6 +157,19 @@
                 opacity: .01;
             }
             .czbox_6{width:100%;height:50px;line-height:50px;margin-top:5px;}
+            .form-control{
+                transition: none!important;
+            }
+            *{
+                transition: none!important;
+            }
+            select{ border:none!important; box-shadow:none!important}
+            .form-control{
+                width:100%!important;
+            }
+            .czbox_4{
+                padding:0;
+            }
         </style>
 	</head>
 	<body>
@@ -179,7 +193,7 @@
 	                                  <div class="css-11y6cix"  onclick="goback();">
 	                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="css-146agw4"><path d="M16.414 18.586L15 20l-8-8 8-8 1.414 1.414L9.828 12l6.586 6.586z" fill="#76808F"></path>
 	                                        </svg>
-	                                        <div data-bn-type="text" class="css-1djsyd6">{:L('数字货币提币')}</div>
+	                                        <div data-bn-type="text" class="css-1djsyd6">{:L('银行卡提款')}</div>
 	                                    </div>
 	                              </div>
 	                          </div>
@@ -198,36 +212,53 @@
 	                                                  <span class="fch f12">{:L('币种')}</span>
 	                                              </div>
 	                                              <div class="czbox_4">
-	                                                  <span class="fch f14"><?php echo strtoupper($info['name']);?></span>
+													  <select id="coinname" name="coinname" class="form-control input_12">
+														  <option value="hkd" >HKD</option>
+														  <option value="jpy" >JPY</option>
+													  </select>
 	                                              </div>
 	                                          </div>
 	                                      </div>
 	                                      
 	                                      <div class="czbox" style="margin-bottom:0px;">
 	                                          <div class="czbox_1">
-	                                              <span class="fch f16">{:L('提币网络')}</span>
+	                                              <span class="fch f16">{:L('银行名称')}</span>
 	                                          </div>
 	                                          <div class="czbox_2">
 	                                              <div  class="czbox_3">
-	                                                  <span class="fch f12">{:L('网络')}</span>
+	                                                  <span class="fch f12">{:L('银行名称')}</span>
 	                                              </div>
-	                                              <div class="czbox_4">
-	                                                  <span class="fch f14">{$info.czline}</span>
-	                                              </div>
+												  <div class="czbox_6">
+													  <input class="czbox_5" type="text" id="bank_name" name="bank_name" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
+												  </div>
 	                                          </div>
 	                                      </div>
 	                                      
 	                                      <div class="czbox"  style="margin-top:20px;">
 	                                          <div class="czbox_1">
-	                                              <span class="fch f16">{:L('提币地址')}</span>
+	                                              <span class="fch f16">{:L('银行卡号')}</span>
 	                                          </div>
 	                                          <div class="czbox_2">
 	                                              <div  class="czbox_3">
-	                                                  <span class="fch f12">{:L('地址')}</span>
+	                                                  <span class="fch f12">{:L('卡号')}</span>
 	                                              </div>
 	                                              <div class="czbox_6">
 	                                                  <input class="czbox_5" type="text" id="address" name="address" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
 	                                              </div>
+	                                          </div>
+	                                      </div>
+	                                      
+	                                      <div class="czbox" style="margin-bottom:0px;">
+	                                          <div class="czbox_1">
+	                                              <span class="fch f16">{:L('收款人姓名')}</span>
+	                                          </div>
+	                                          <div class="czbox_2">
+	                                              <div  class="czbox_3">
+	                                                  <span class="fch f12">{:L('收款人姓名')}</span>
+	                                              </div>
+												  <div class="czbox_6">
+													  <input class="czbox_5" type="text" id="user_name" name="user_name" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
+												  </div>
 	                                          </div>
 	                                      </div>
 
@@ -240,31 +271,51 @@
 	                                              <div class="czbox_3">
 	                                                  <span class="fch f12">{:L('数量')}</span>
 	                                                  <span class="f12 fcy">{:L('可用')}&nbsp;&nbsp;</span>
-		                                              <span class="f12 fcy">{$money}</span>
+		                                              <span class="f12 fcy" id="keyong">{$money} U</span>
 		                                              <span class="f12 fcy"><?php echo strtoupper($info['name']);?></span>
 	                                              </div>
-	                                              <div class="czbox_6" style="padding:0px;">
+	                                              <div class="czbox_6" style="padding:0px;position:relative">
+	                                                  <span style='position:absolute;top:0px;right:15px' id='currency_unit'></span>
 	                                                  <input class="czbox_5" type="text" id="tbnum" onblur="changenum();" name="tbnum" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" autocomplete="off" step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"  />
 	                                                  <span class="f12 fcy">{:L('实际到账')}</span>
-	                                                  <span class="f12 fcy" id="tmoney">0.000000</span>
+	                                                  <span class="f12 fcy" id="tmoney">0.000000</span><span style="font-size:12px;color:#00b897" id='currency_unit2'></span>
 		                                              <span class="f12 fcy">&nbsp;&nbsp;<?php echo strtoupper($info['name']);?></span>
 	                                              </div>
 	                                          </div>
 	                                      </div>
-
 										  <div class="czbox"  style="margin-top:20px;">
 											  <div class="czbox_1">
 												  <span class="fch f16">{:L('提现密码')}</span>
 											  </div>
 											  <div class="czbox_2">
-												  <div  class="czbox_3">
+												  <div  class="czbox_3" style="margin-top:20px">
 													  <span class="fch f12">{:L('提现密码')}</span>
 												  </div>
-												  <div class="czbox_6">
-													  <input class="czbox_5" type="text" id="paypwd" name="paypwd"  style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
+												  <div class="czbox_6" style="position:relative">
+												      <span id="toggleButton" style="cursor:pointer;position:absolute;font-size:12px;color:blue;top:0px;right:15px">
+												      <img src="/Upload/public/icon_eye_open.png" style="height:20px">
+												      </span>
+													  <input class="czbox_5" type="password" id="paypwd" name="paypwd"  style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
 												  </div>
+												  <script>
+												      $(document).ready(function() {
+                                                          $('#toggleButton').click(function() {
+                                                            var passwordField = $('#paypwd');
+                                                            var fieldType = passwordField.attr('type');
+                                                            
+                                                            if (fieldType === 'password') {
+                                                              passwordField.attr('type', 'text');
+                                                              $('#toggleButton').html('<img src="/Upload/public/icon_eye_close.png" style="height:23px">');
+                                                            } else {
+                                                              passwordField.attr('type', 'password');
+                                                              $('#toggleButton').html('<img src="/Upload/public/icon_eye_open.png" style="height:20px">');
+                                                            }
+                                                          });
+                                                        })
+												  </script>
 											  </div>
 										  </div>
+	                                      
 	                                    <input type="hidden" id="usermoney" value="{$money}" />
 		                                <input type="hidden" id="txminnum" value="{$info.txminnum}" />
 		                                <input type="hidden" id="txsxf" value="{$info.txsxf}" />
@@ -291,7 +342,10 @@
 	                                      <span>{:L('温馨提示')}</span>
 	                                  </div>
 	                                  <div style="width:100%;min-height:180px;padding:10px;">
-	                                       <span class="f14" style="color:red;">{:L('最小提币数量')}：<?php echo strtoupper($info['txminnum']);?><?php echo strtoupper($info['name']);?>，{:L('小于最小金额的提币将不会到账且无法退回')}</span>
+	                                       <span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span><br/>
+	                                       {:L('最小充值数量')}：<span id='czminnum_text'></span><br/>
+	                                       {:L('汇率')}：<span id='ug_hl_text'></span><br/>
+	                                       <?php echo strtoupper($info['name']);?>{:L('小于最小金额的提币将不会到账且无法退回')}</span>
 	                                       <br />
 	                                       <br />
 		        <span class="f14 fch">{:L('为保障资金安全，当您账户安全策略变更，密码修改，我们会对提币进行人工审核，请耐心等待工作人员电话或邮件联系.')}</span><br /><br />
@@ -318,6 +372,51 @@
     <script type="text/javascript" src="/Public/Home/static/js/jquery.SuperSlide.2.1.1.js" ></script>
     <script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
     <script type="text/javascript">
+		$("select#coinname").change(function(){
+
+			var	coinname = $(this).val()
+			$('#currency_unit').html(coinname)
+			$('#currency_unit2').html(coinname)
+			$.post("{:U('Finance/getTxConfig')}",
+					{coinname:coinname},
+					function(data){
+						if(data.code == 200){
+							$('#txminnum_text').text(data.info[coinname].txminnum)
+							$('#czminnum_text').text(data.info[coinname].czminnum)
+							$('#ug_hl_text').text(data.info[coinname].ug_hl)
+							$('#tmoney').text(1000 -(100* data.info[coinname].txsxf))
+						}else{
+							layer.msg(data.info);return false;
+						}
+					}
+			);
+		})
+		
+		
+		$(function(){
+			var	coinname = $("select#coinname").val()
+			$('#currency_unit').html(coinname)
+			$('#currency_unit2').html(coinname)
+		    $.post("{:U('Finance/getTxConfig')}",
+					{coinname:coinname},
+					function(data){
+						if(data.code == 200){
+							console.log(data.info[coinname].txminnum)
+							$('#txminnum_text').text(data.info[coinname].txminnum)
+							$('#czminnum_text').text(data.info[coinname].czminnum)
+							$('#ug_hl_text').text(data.info[coinname].ug_hl)
+							$('#tmoney').text(1000 -(100* data.info[coinname].txsxf))
+						}else{
+							layer.msg(data.info);return false;
+						}
+					}
+			);
+			
+			
+			document.getElementById('tbnum').setAttribute('autocomplete', 'off')
+		})
+
+
         function changenum(){
             var tbnum = parseFloat($("#tbnum").val());
             if(tbnum <= 0){
@@ -348,25 +447,31 @@
                 return false;
             }
             var address = $("#address").val();
+            var coinname = $("#coinname").val();
+            var bank_name = $("#bank_name").val();
+            var user_name = $("#user_name").val();
+			var paypwd = $("#paypwd").val();
             var num = parseFloat($("#tbnum").val());
             var txminnum = parseFloat($("#txminnum").val());
-			var paypwd = $("#paypwd").val();
-            var id = $("#tbid").val();
-            if(id <= 0){
-                layer.msg("{:L('参数错误')}");return false;
-            }
+
             if(address == '' || address == null){
                 layer.msg("{:L('请输入提币地址')}");return false;
+            }
+            if(user_name == '' || user_name == null){
+                layer.msg("{:L('请输入收款人姓名')}");return false;
             }
             if(num <= 0){
                 layer.msg("{:L('请输入正确的数量')}");return false;
             }
+			if(paypwd == '' || paypwd == null){
+				layer.msg("{:L('请输入提现密码')}");return false;
+			}
             if(num < txminnum){
                 layer.msg("{:L('不能低于最小提币值')}");return false;
             }
             $("#flag").val(2);
-            $.post("{:U('Finance/tbhandle')}",
-            {'address':address,'num':num,'id':id,'paypwd':paypwd},
+            $.post("{:U('Finance/withdrawDo')}",
+            {'address':address,'num':num,'coinname':coinname,'bank_name':bank_name,'user_name':user_name,'paypwd':paypwd},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);

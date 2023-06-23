@@ -40,6 +40,7 @@
 							<option value="1" <eq name="data.type" value="1">selected</eq>>钱包币</option>
 							<option value="2" <eq name="data.type" value="2">selected</eq>>平台币</option>
 							<option value="3" <eq name="data.type" value="3">selected</eq>>认购币</option>
+							<option value="4" <eq name="data.type" value="4">selected</eq>>钱币</option>
 						</select>
 					</td>
 					<td class="item-note"></td>
@@ -89,9 +90,13 @@
 					<td class="item-label">最小充值额度 :</td>
 					<td><input type="text" class="form-control input_12" placeholder="最小充值额度" name="czminnum" value="{$data['czminnum']}"></td>
                 </tr>
-                
+				  <tr class="controls">
+					  <td class="item-label">充值手续费:</td>
+					  <td><input type="text" class="form-control input_12" placeholder="最小充值额度" name="czsxf" value="{$data['czsxf']}"></td>
+					  <td class="item-note" style="color:red;">* 百分百 填正数</td>
+				  </tr>
                 <tr class="controls">
-					<td class="item-label">手续费类型 :</td>
+					<td class="item-label">提现手续费类型 :</td>
 					<td>
 						<select name="sxftype" class="form-control input_12" >
 							<option value="1" <eq name="data['sxftype']" value="1">selected</eq>>按百分比扣除</option>
