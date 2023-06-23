@@ -798,6 +798,8 @@ return [
     '银行卡充值'=>'Bank card recharge',
     '银行卡提款'=>'Bank card withdrawal',
     '请输入提现人名'=>'Please enter the withdrawal name',
-
-
+    '提款'=>'withdraw',
+    '充值'=>'recharge',
+    '银行卡充值--提款'=>'Bank card recharge--withdrawal',
+    '小于最小金额的充值将不会上账且无法退回。'=>'Deposits below the minimum amount will not be credited and cannot be refunded.'
 ];
