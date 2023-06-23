@@ -341,15 +341,14 @@
 	                                  <div style="width:100%;height:60px;line-height:60px;">
 	                                      <span>{:L('温馨提示')}</span>
 	                                  </div>
-	                                  <div style="width:100%;min-height:180px;padding:10px;">
-	                                       <span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span><br/>
-	                                       {:L('最小充值数量')}：<span id='czminnum_text'></span><br/>
-	                                       {:L('汇率')}：<span id='ug_hl_text'></span><br/>
-	                                       <?php echo strtoupper($info['name']);?>{:L('小于最小金额的提币将不会到账且无法退回')}</span>
+	                                  <div style="width:100%;min-height:180px;padding:10px;color:red;font-size:14px">
+	                                       1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> USDT<br/>
+	                                       2、{:L('小于最小金额的提币将不会上账且无法退回。')}<br/>
+	                                       2、{:L('最小充值数量')}：<span id='czminnum_text'></span><br/>
+	                                       3、1USDT = <span id='tip_hkd'></span> HKD 1USDT = <span id='tip_jpy'></span> JPY<br/>
 	                                       <br />
 	                                       <br />
-		        <span class="f14 fch">{:L('为保障资金安全，当您账户安全策略变更，密码修改，我们会对提币进行人工审核，请耐心等待工作人员电话或邮件联系.')}</span><br /><br />
-		        <span class="f14 fch">{:L('请务必确认电脑及浏览器安全，防止信息被篡改或泄露')}</span><br /><br />
+		        <span class="f14 fch">{:L('请务必确认电脑及浏览器安全，防止信息被篡改或泄露。')}</span><br /><br />
 
 	                                  </div>
 	                              </div>
@@ -381,6 +380,12 @@
 					{coinname:coinname},
 					function(data){
 						if(data.code == 200){
+						    
+						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
+						    $('#tip_jpy').text(data.info['jpy'].ur_hl)
+						    
+						    
+						    
 							$('#txminnum_text').text(data.info[coinname].txminnum)
 							$('#czminnum_text').text(data.info[coinname].czminnum)
 							$('#ug_hl_text').text(data.info[coinname].ug_hl)
@@ -401,6 +406,10 @@
 					{coinname:coinname},
 					function(data){
 						if(data.code == 200){
+						    
+						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
+						    $('#tip_jpy').text(data.info['jpy'].ur_hl)
+						    
 							console.log(data.info[coinname].txminnum)
 							$('#txminnum_text').text(data.info[coinname].txminnum)
 							$('#czminnum_text').text(data.info[coinname].czminnum)

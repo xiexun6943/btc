@@ -50,6 +50,8 @@
 					{coinname:coinname},
 					function(data){
 						if(data.code == 200){
+						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
+						    $('#tip_jpy').text(data.info['jpy'].ur_hl)
 							if($('#fzmmm').text()==='JPY'){
     							$('#txminnum_text').html(data.info['jpy'].txminnum)
     							$('#czminnum_text').html(data.info['jpy'].czminnum)
@@ -160,14 +162,13 @@
 		    
 		    <div class="textbox">
 		        <p class="fzm" style="color:red;">
-		            {:L('最小提币数量')}：<span id='txminnum_text'></span>,
-		        {:L('最小充值数量')}：<span id='czminnum_text'></span>,
-		        {:L('汇率')}：<span id='ug_hl_text'></span>,
-		        <?php echo strtoupper($info['name']);?>，{:L('小于最小金额的充值将不会上账且无法退回')}</p>
-		        <p class="fzm fch">{:L('请选择正确的充值通道网络，否则资产将不可找回')}</p>
-		        <p class="fzm fch">{:L('最小充值金额')}：<?php echo strtoupper($info['czminnum']);?><?php echo strtoupper($info['name']);?>，{:L('小于最小金额的充值将不会上账且无法退回')}</p>
-		        <p class="fzm fch">{:L('您的充值地址不会经常改变，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您')}</p>
-		        <p class="fzm fch">{:L('请务必确认电脑及浏览器安全，防止信息被篡改或泄露')}</p>
+		            1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> USDT<br/>
+	                                       2、{:L('小于最小金额的提币将不会上账且无法退回。')}<br/>
+	                                       2、{:L('最小充值数量')}：<span id='czminnum_text'></span><br/>
+	                                       3、1USDT = <span id='tip_hkd'></span> HKD 1USDT = <span id='tip_jpy'></span> JPY<br/>
+	                                       <br />
+	                                       <br />
+		        <span class="f14 fch">{:L('请务必确认电脑及浏览器安全，防止信息被篡改或泄露。')}</span><br /><br />
 		    </div>
 
 		    <div style="width:100%;height:80px;"></div>
