@@ -1,6 +1,8 @@
 <?php
 
 return [
+    "最小充值数量"=>"Minimum recharge amount",
+    "汇率"=>"exchange rate",
     "请输入收款人姓名"=>"Please enter the name of the payee",
     "收款人姓名"=>"Payee name",
     "银行名称"=>"Bank Name",

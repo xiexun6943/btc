@@ -41,6 +41,30 @@
 	    .layui-upload-file{display: none!important;opacity: .01;}
 	</style>
 </head>
+<script>
+    
+		
+		$(function(){
+			var	coinname = $("select#coinname").val()
+		    $.post("{:U('User/getTxConfig')}",
+					{coinname:coinname},
+					function(data){
+						if(data.code == 200){
+							if($('#fzmmm').text()==='JPY'){
+    							$('#txminnum_text').html(data.info['jpy'].txminnum)
+    							$('#czminnum_text').html(data.info['jpy'].czminnum)
+    							$('#ug_hl_text').html(data.info['jpy'].ur_hl)
+							}
+							if($('#fzmmm').text()==='HKD'){
+    							$('#txminnum_text').html(data.info['hkd'].txminnum)
+    							$('#czminnum_text').html(data.info['hkd'].czminnum)
+    							$('#ug_hl_text').html(data.info['hkd'].ur_hl)
+							}
+						}
+					}
+			);
+		})
+</script>
 <body>
 	<div class="container-fluid " style="padding:0px;width:100vw;">
         <div class="no_header">
@@ -64,7 +88,7 @@
 		        </div>
 		        <a href="{:U('User/czcoin')}">
 		        <div class="line_2">
-		            <span class="fzmmm fcy" style="font-size:18px;font-weight:bold;"><?php echo strtoupper($info['name']);?></span>
+		            <span id='fzmmm' class="fzmmm fcy" style="font-size:18px;font-weight:bold;"><?php echo strtoupper($info['name']);?></span>
 		            <span class="fzmmm fch">&nbsp;&nbsp;<?php echo L($info['title']);?></span>
 		            <i class="bi bi-chevron-right fzmmm fcc"></i>
 		        </div>
@@ -72,14 +96,14 @@
 		    </div>
 		    <div class="imgbox">
 		        <div class="imgbox_4" style="height:170px">
-		            <div class="imgbox_5">
+		            <div class="imgbox_5" style="width:20%;display:inline-block">
 		                <span class="fzmmm fch">{:L('银行卡号')}</span>
 		            </div>
 
-		            <div class="imgbox_7">
+		            <div class="imgbox_7" style="width:75%;display:inline-block">
 		                <input type="hidden" id="czaddress" value="{$info.czaddress}" />
 		                <!--<span class="fzmm fch card_no">{$info.czaddress}</span>-->
-		                <span class="fzmm fch "><input id="bank_num" type='text'/></span>
+		                <span class="fzmm fch "><input id="bank_num" type='text' style='display: block;width: 100%'/></span>
 		            </div>
 		            <script>
 		                $(function(){
@@ -89,19 +113,12 @@
 		                })
 		            </script>
 		            <div class="imgbox_8">
-		                <div class="imgbox_9" onclick="copyUrl()" style="margin: 15px auto;">
+		                <div class="imgbox_9" onclick="copyUrl()" id="pasteButton" style="margin: 15px auto;">
 		                    <span class="fzmm fcy">{:L('复制地址')}</span>
 		                </div>
+
 		            </div>
 		        </div>
-		    </div>
-		    
-		    <div class="textbox">
-		        <p class="fzm" style="color:red;">{:L('最小充值金额')}：<?php echo strtoupper($info['czminnum']);?><?php echo strtoupper($info['name']);?>，{:L('小于最小金额的充值将不会上账且无法退回')}</p>
-		        <p class="fzm fch">{:L('请选择正确的充值通道网络，否则资产将不可找回')}</p>
-		        <p class="fzm fch">{:L('最小充值金额')}：<?php echo strtoupper($info['czminnum']);?><?php echo strtoupper($info['name']);?>，{:L('小于最小金额的充值将不会上账且无法退回')}</p>
-		        <p class="fzm fch">{:L('您的充值地址不会经常改变，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您')}</p>
-		        <p class="fzm fch">{:L('请务必确认电脑及浏览器安全，防止信息被篡改或泄露')}</p>
 		    </div>
 		    
 		    <div class="imgbox">
@@ -109,7 +126,13 @@
 		            <div class="imgbox_5">
 		                <span class="fzmmm fch">{:L('转账金额')}</span>
 		            </div>
-		            <div class="zz_inputbox">
+		            <div class="zz_inputbox" style="position:relative">
+	                    <span style='position:absolute;top:0px;right:15px' id='currency_unit'></span>
+	                    <script>
+	                        $(function(){
+	                            $('#currency_unit').text($('#fzmmm').text())
+	                        })
+	                    </script>
 		                <input type="text" id="zznum" class="zz_input"  placeholder="{:L('请输入转账金额')}" />
 		            </div>
 		            
@@ -132,6 +155,19 @@
 		            </div>
 		            
 		        </div>
+		    </div>
+		    
+		    
+		    <div class="textbox">
+		        <p class="fzm" style="color:red;">
+		            {:L('最小提币数量')}：<span id='txminnum_text'></span>,
+		        {:L('最小充值数量')}：<span id='czminnum_text'></span>,
+		        {:L('汇率')}：<span id='ug_hl_text'></span>,
+		        <?php echo strtoupper($info['name']);?>，{:L('小于最小金额的充值将不会上账且无法退回')}</p>
+		        <p class="fzm fch">{:L('请选择正确的充值通道网络，否则资产将不可找回')}</p>
+		        <p class="fzm fch">{:L('最小充值金额')}：<?php echo strtoupper($info['czminnum']);?><?php echo strtoupper($info['name']);?>，{:L('小于最小金额的充值将不会上账且无法退回')}</p>
+		        <p class="fzm fch">{:L('您的充值地址不会经常改变，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您')}</p>
+		        <p class="fzm fch">{:L('请务必确认电脑及浏览器安全，防止信息被篡改或泄露')}</p>
 		    </div>
 
 		    <div style="width:100%;height:80px;"></div>

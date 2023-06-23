@@ -14,7 +14,7 @@ class UserController extends MobileController
             "coininfo","getnewprice","deladdress","addresslist","getmoneyusdt","getmoneybtc","getmoneyeth","getmoneyeos",
             "getmoneydoge","getmoneybch","getmoneyltc","getmoneytrx","getmoneyxrp","getmoneyiotx","getmoneyfil","getmoneyshib",
             "getmoneyflow","getmoneyjst","getmoneyitc","getmoneyht","getmoneyogo","getmoneyusdz","getmoneyatm","getmoneiota",
-            "getmoneyttc","authrz","upauthrz","online","uptxt","getlineinfo",'appeal','recharge','payBank','withdraw','withdrawDo');
+            "getmoneyttc","authrz","upauthrz","online","uptxt","getlineinfo",'appeal','recharge','payBank','withdraw','withdrawDo','getTxConfig');
         if(!in_array(ACTION_NAME,$allow_action)){
             $this->error("非法操作");
         }
@@ -1675,7 +1675,28 @@ class UserController extends MobileController
         }
     }
 
-
+ // 获取 银行卡提现配置信息
+    public function getTxConfig(){
+        $configs=M("config")->field('ug_hl,ur_hl')->find();
+        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf,czsxf,txminnum,czminnum')->select();
+        $data=[
+            'hkd'=>[
+                'ug_hl'=>floatval($configs['ug_hl']),
+                'txsxf'=>round(($coinInfo[0]['txsxf']/100),2),
+                'czsxf'=>round(($coinInfo[0]['czsxf']/100),2),
+                'txminnum'=>$coinInfo[0]['txminnum'],
+                'czminnum'=>$coinInfo[0]['czminnum']
+            ],
+            'jpy'=>[
+                'ur_hl'=>floatval($configs['ur_hl']),
+                'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
+                'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
+                'txminnum'=>$coinInfo[1]['txminnum'],
+                'czminnum'=>$coinInfo[1]['czminnum']
+            ]
+        ];
+        return $this->ajaxReturn(['code'=>200,'info'=>$data]);
+    }
 
 }
 
