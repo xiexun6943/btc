@@ -336,7 +336,7 @@ return [
 	"为保障资金安全，当您账户安全策略变更，密码修改，我们会对提币进行人工审核，请耐心等待工作人员电话或邮件联系." => "ord is changed, we will manually review the withdrawal. Please wait patiently for the staff to contact by phone or email.",
 	"请务必确认电脑及浏览器安全，防止信息被篡改或泄露" => "Assurez - vous que votre ordinateur et votre navigateur sont sécuritaires et protégés contre les manipulations ou les fuites d'information.",
 	"请务必确认电脑及浏览器安全，防止信息被篡改或泄露。" => "Assurez - vous que votre ordinateur et votre navigateur sont sécuritaires et protégés contre les manipulations ou les fuites d'information.",
-	"小于最小金额的提币将不会上账且无法退回。" => "Les retraits inférieurs au montant minimum ne seront pas crédités et ne pourront pas être remboursés",
+	"小于最小金额的提币将不会上账且无法退回" => "Les retraits inférieurs au montant minimum ne seront pas crédités et ne pourront pas être remboursés",
 	"地址" => "Adresse",
 	"关闭" => "Fermer",
 	"地址管理" => "Gestion des adresses",

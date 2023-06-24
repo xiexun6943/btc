@@ -338,7 +338,7 @@ return [
 	"为保障资金安全，当您账户安全策略变更，密码修改，我们会对提币进行人工审核，请耐心等待工作人员电话或邮件联系." => "Per garantire la sicurezza del fondo, quando la politica di sicurezza del tuo conto cambia e la tua password è cambiata, noi riesamineremo manualmente il ritiro. Attendiamo pazientemente che il personale contatti via telefono o e-mail",
 	"请务必确认电脑及浏览器安全，防止信息被篡改或泄露" => "Si prega di assicurarsi che il computer e il browser siano sicuri per impedire che le informazioni vengano manomesse o divulgate",
 	"请务必确认电脑及浏览器安全，防止信息被篡改或泄露。" => "Si prega di assicurarsi che il computer e il browser siano sicuri per impedire che le informazioni vengano manomesse o divulgate",
-	"小于最小金额的提币将不会上账且无法退回。" => "I prelievi inferiori all'importo minimo non verranno accreditati e non potranno essere rimborsati",
+	"小于最小金额的提币将不会上账且无法退回" => "I prelievi inferiori all'importo minimo non verranno accreditati e non potranno essere rimborsati",
 	"地址" => "indirizzo",
 	"关闭" => "chiusura",
 	"地址管理" => "Gestione degli indirizzi",

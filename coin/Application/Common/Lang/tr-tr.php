@@ -339,7 +339,7 @@ return [
 	"为保障资金安全，当您账户安全策略变更，密码修改，我们会对提币进行人工审核，请耐心等待工作人员电话或邮件联系." => "Fon güvenliğini sağlamak için, hesap güvenlik politikanız veya şifreniz değiştiğinde, para çekme işlemini manuel olarak inceleyeceğiz.Lütfen sabırlı olun ve personelin sizinle telefon veya e-posta yoluyla iletişime geçmesini bekleyin.",
 	"请务必确认电脑及浏览器安全，防止信息被篡改或泄露" => "Bilgilerin kurcalanmasını veya sızdırılmasını önlemek için bilgisayarınızın ve tarayıcınızın güvenliğini onayladığınızdan emin olun.",
 	"请务必确认电脑及浏览器安全，防止信息被篡改或泄露。" => "Bilgilerin kurcalanmasını veya sızdırılmasını önlemek için bilgisayarınızın ve tarayıcınızın güvenliğini onayladığınızdan emin olun.",
-	"小于最小金额的提币将不会上账且无法退回。" => "Minimum tutarın altındaki para çekme işlemleri kredilendirilmeyecek ve geri ödenmeyecektir.",
+	"小于最小金额的提币将不会上账且无法退回" => "Minimum tutarın altındaki para çekme işlemleri kredilendirilmeyecek ve geri ödenmeyecektir.",
 	"地址" => "adres",
 	"关闭" => "kapatma",
 	"地址管理" => "adres yönetimi",
