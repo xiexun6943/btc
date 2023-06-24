@@ -10,7 +10,7 @@ return [
     "MSB认证"=>"MSB certification",
     "提现密码"=>"Withdrawal password",
     "一直以来担任全球加密货币领导者"=>"Consistently serving as a global cryptocurrency leader",
-    "24小时交易量"=>"24 hour trading volume",
+    "24小时交易量"=>"24hours",
     "预计盈利"=>"expected profit",
     "暂无订单"=>"No order yet",
     "查看更多"=>"see more",
