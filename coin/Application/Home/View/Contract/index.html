@@ -1254,7 +1254,7 @@
                         if(data.data == '' || data.data == null){
                             $('.order-main-table-current').empty()
                             html += '<div class="table-history-more"><img src="/Public/Home/static/imgs/empty.e90e5075.svg" class="empty-svg" >\n' +
-                                '                                                    <p class="tcc"> 暂无订单</p></div>';
+                                '                                                    <p class="tcc"> {:L('暂无订单')}</p></div>';
                             $('.order-main-table-current').append(html)
                         }else{
                             $.each(data.data,function(key,val){
