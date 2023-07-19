@@ -85,6 +85,7 @@
                                 <eq name="vo.status" value="3"><span style="color:red;">未通过</span></eq>
                             </td>
                             <td>
+                                <a class="btn btn-primary btn-xs" href="{:U('Finance/edit')}?id={$vo.id}">编辑</a>
                                 <eq name="vo.status" value="1">
                                     <input type="button" class="ajax-get btn btn-primary btn-xs" value="确认提币" onclick="Upzc('{$vo['id']}');"/>
                                     <input type="button" class="ajax-get btn btn-primary btn-xs" value="驳回提币" onclick="Upbh('{$vo['id']}');"/>
