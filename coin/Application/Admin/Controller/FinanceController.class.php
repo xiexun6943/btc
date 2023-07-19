@@ -5,7 +5,7 @@ class FinanceController extends AdminController
 {
 	protected function _initialize(){
 		parent::_initialize();
-		$allow_action=array("index","myzr","myzc","adopttb","reject","adoptzr","rejectzr","del","delT");
+		$allow_action=array("index","myzr","myzc","adopttb","reject","adoptzr","rejectzr","del","delT","edit");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！");
 		}
@@ -270,6 +270,29 @@ class FinanceController extends AdminController
 		$this->display();
 	}
 
+    /**
+     * 编辑提现订单
+     * @param null $id
+     */
+    public function edit($id = NULL)
+    {
+        if (empty($_POST)) {
+            if (empty($id)) {
+                $this->data = '';
+            } else {
+                $this->data = M('myzc')->where(array('id' => trim($id)))->find();
+            }
+            $this->display();
+        } else {
+            $data=I('post.');
+            $result = M("myzc")->where(array('id'=>$id))->save($data);
+            if($result){
+                $this->success("编辑成功");exit();
+            }else{
+                $this->error("编辑失败");exit();
+            }
+        }
+    }
 
 }
 ?>
