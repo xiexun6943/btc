@@ -50,7 +50,7 @@
 					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
 <!--					<th class="">ID</th>-->
 					<th class="">用户id</th>
-					<th class="">用户名</th>
+					<th class="">用户名/手机号</th>
 					<volist name="coinlist" id="v">
 						<th class="">{$v['name']}(<?php echo strtoupper($v['name']);?>)</th>
 					</volist>
@@ -63,7 +63,7 @@
 							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
 <!--							<td>{$vo.id}</td>-->
 							<td>{$vo.userid}</td>
-							<td>{$vo['username']}</td>
+							<td>{$vo['username']} <p>{$vo['phone']}</td>
 							
 							<volist name="coinlist" id="v">
 								<td>{$v['name']}<br>

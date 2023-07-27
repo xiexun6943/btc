@@ -76,9 +76,9 @@
         if(email=='' || email == null){
             layer.msg("{:L('请输入邮箱')}");return false;
         }
-        if(!reg.test(email)){
-            layer.msg("{:L('邮箱格式不正确')}");return false;
-        }
+        // if(!reg.test(email)){
+        //     layer.msg("{:L('邮箱格式不正确')}");return false;
+        // }
         var vcode = $("#vcode").val();
         if(vcode == ''){
             layer.msg("{:L('请输入图形验证码')}");return false;
@@ -89,7 +89,7 @@
         }
 
         $.post("{:U('Login/loginsubmit')}",
-            {'email' : email, 'vcode' : vcode, 'lpwd' : lpwd},
+            {'email' : email, 'vcode' : vcode, 'pwd' : lpwd,'type':1},
             function(data){
                 if(data.code){
                     layer.msg(data.info);

@@ -6,7 +6,8 @@ class LoginController extends HomeController
 {
 	protected function _initialize()
 	{
-		parent::_initialize();	$allow_action=array("index","register","upregister","loginsubmit","loginout","findpwd","findpaypwd","webreg","loption","setlang","lhelp","sendcode","findsendcode","resetpwd");
+		parent::_initialize();	$allow_action=array("index","register","upregister","loginsubmit","loginout","findpwd","findpaypwd","webreg",
+        "loption","setlang","lhelp","sendcode","findsendcode","resetpwd","sendSmsCode",'smsregister');
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error(L("非法操作"));
 		}
@@ -104,21 +105,28 @@ class LoginController extends HomeController
     }
 
 	// 登录提交处理
-	public function loginsubmit($email=null,$lpwd=null,$vcode=null){
-// 	    if (checkstr($email) || checkstr($lpwd) || checkstr($vcode)) {
-// 			$this->ajaxReturn(['code'=>0,'info'=>L('您输入的信息有误')]);
-// 		}
-	
-	    
+	public function loginsubmit(){
+        $pwd = I("post.pwd");
+        $vcode = I("post.vcode");
+        $type = I("post.type");
 		if (!check_verify(strtoupper($vcode),'1')) {
 			$this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
 		}
-		
-		$user = M('User')->where(array('username' => $email))->find();
+        if ($type == 1) { // type 1、邮箱 ，2、手机号码
+            $email = I("post.email");
+            $user = M('User')->where(array('username' => $email))->find();
+            $remark="邮箱登录";
+        }else{
+            $phone = I("post.phone ");
+            $user = M('User')->where(array('phone' => $phone))->find();
+            $remark="手机登录";
+        }
+
 		if(empty($user)){
 			$this->ajaxReturn(['code'=>0,'info'=> L('用户不存在')]);
 		}
-		if (md5($lpwd) != $user['password']){
+
+		if (md5($pwd) != $user['password']){
 			$this->ajaxReturn(['code'=>0,'info'=> L('登录密码错误')]);
 		}
 		
@@ -130,8 +138,8 @@ class LoginController extends HomeController
 		
 		//新增登陆记录
 		$data['userid'] = $user['id'];
-		$data['type'] = L('登录');
-		$data['remark'] = L('邮箱登录');
+		$data['type'] = '登录';
+		$data['remark'] = $remark;
 		$data['addtime'] = time();
 		$data['addip'] = get_client_ip();
 		$data['addr'] = get_city_ip();
@@ -308,6 +316,7 @@ class LoginController extends HomeController
 		
 	}
 
+
 	//邮件发送验证码
 	public function emailsend($desc_content, $toemail){	
 	    
@@ -359,6 +368,181 @@ class LoginController extends HomeController
 	public function findpaypwd(){
 		$this->display();
 	}
+    //手机注册注册处理程序
+    public function smsregister(){
+        if($_POST){
+            $phone=I('post.phone');
+            $sms_code=I('post.sms_code');
+            $pwd=I('post.pwd');
+            $invit=I('post.invitation_code');
+            $area_code=I('post.area_code');
+            $checkus = M('User')->where(array('phone' => $phone))->find();
+            if(!empty($checkus)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('手机号已存在')]);
+            }
 
+            $redis=$this->_Redis();
+            $secode=$redis->hGet('sms_reg_code',$area_code.$phone);
+            if($secode != $sms_code){
+                $this->ajaxReturn(['code'=>0,'info'=>L('手机验证码错误')]);
+            }
+
+            if($pwd == ''){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入密码')]);
+            }
+
+            if($invit == ''){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
+            }
+            $config = M("config")->where(array('id'=>1))->field("tymoney")->find();
+            if($invit != 0 || $invit != ''){
+                $inv_user = M('User')->where(array('invit' => $invit))->field("id,username,invit_1,invit_2,path")->find();
+                if(empty($inv_user)){
+                    $this->ajaxReturn(['code'=>0,'info'=>L('推荐人不存在')]);
+                }
+                $invit_1 = $inv_user['id'];
+                $invit_2 = $inv_user['invit_1'];
+                $invit_3 = $inv_user['invit_2'];
+                $path = $inv_user['path'].','.$inv_user['id'];
+            }else{
+                $invit_1 = 0;
+                $invit_2 = 0;
+                $invit_3 = 0;
+                $path = '';
+            }
+
+            for (; true; ) {
+                $myinvit = tradenoa();
+                if (!M('User')->where(array('invit' => $myinvit))->find()) {
+                    break;
+                }
+            }
+
+            $mo = M();
+            $mo->execute('set autocommit=0');
+            $mo->execute('lock tables tw_user write , tw_user_coin write ');
+            $rs = array();
+            $rs[] = $mo->table('tw_user')->add(
+                array(
+                    'phone' => $phone,
+                    'password' => md5($pwd),
+                    'money' => $config['tymoney'],
+                    'invit' => $myinvit,
+                    'invit_1' => $invit_1,
+                    'invit_2' => $invit_2,
+                    'invit_3' => $invit_3,
+                    'path'=>$path,
+                    'addip' => get_client_ip(),
+                    'addr' => get_city_ip(),
+                    'addtime' => time(),
+                    'status' => 1,
+                    'txstate' => 1,
+                ));
+
+            $user_coin = array('userid' => $rs[0]);
+            // 创建用户数字资产档案
+            $rs[] = $mo->table('tw_user_coin')->add($user_coin);
+            if (check_arr($rs)) {
+                $mo->execute('commit');
+                $mo->execute('unlock tables');
+                $redis->hSet('sms_reg_code',$phone,''); //初始化动态验证码
+                $user = $mo->table('tw_user')->where(array('id'=>$rs[0]))->find();
+                $this->ajaxReturn(['code'=>1,'info'=>L('注册成功')]);
+            } else {
+                $mo->execute('rollback');
+                $this->ajaxReturn(['code'=>0,'info'=>L('注册失败')]);
+            }
+
+        }else{
+            $this->ajaxReturn(['code'=>0,'info'=>L('网络错误')]);
+        }
+    }
+    //短信发送验证码
+    public function sendSmsCode(){
+        if($_POST){
+            $phone =  I('post.phone');
+            $area_code =  I('post.area_code');
+            if($phone == ''){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入手机号码')]);
+            }
+
+            $uinfo = M("user")->where(array('phone'=>$phone))->find();
+            if(!empty($uinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('该手机号码已经注册过')]);
+            }
+            $code = rand(10000,99999);
+            $desc_content=L("您的验证码是").$code.','.L(" 5分钟内有效");
+            $phone=$area_code.$phone;
+
+            $result = $this->smsSend($desc_content,$phone);
+            $redis=$this->_Redis();
+
+            if($result){
+                $redis->hSet('sms_reg_code',$phone,$code);
+
+                $this->ajaxReturn(['code'=>1,'info'=>L('验证码发送成功')]);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=>L('验证码发送失败')]);
+            }
+
+        }else{
+            $this->ajaxReturn(['code'=>0,'info'=>L('网络错误')]);
+        }
+
+    }
+
+    //短信发送验证码
+    public function smsSend($desc_content, $toPhone){
+        $url = "https://api.liasmart.com/api/SendSMS";
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $headers = array(
+            "Content-Type: application/json",
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $data = <<<DATA
+{
+ "api_id":"API119226292925",
+ "api_password":"P7DRQt1tPX",
+ "sms_type": "T",
+ "encoding": "U",
+ "sender_id":"LIASMT",
+ "phonenumber":"$toPhone",
+ "textmessage":"$desc_content"
+}
+DATA;
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+        $result=json_decode($resp,true);
+        if($result && $result['status'] == 'S' ){
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
+    /**
+     * 连接redis
+     * @return \Redis
+     */
+    private function _Redis()
+    {
+        $redis = new \Redis();
+        $host = REDIS_HOST;
+        $port = REDIS_PORT;
+        $password= REDIS_PWD;
+        $redis->connect($host ,$port, 30);
+        $redis->auth($password);
+        return $redis;
+    }
 }
 ?>

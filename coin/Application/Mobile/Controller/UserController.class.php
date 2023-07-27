@@ -102,13 +102,14 @@ class UserController extends MobileController
         if($uid <= 0){
             $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
         }
-        $uinfo = M("user")->where(array('phone'=>$phone))->find();
-        //if(!empty($uinfo)){
-        //$this->ajaxReturn(['code'=>0,'info'=>L('手机号已绑定')]);
-        //}
-        //if($userinfo['rzstatus'] == 1){
-        //$this->ajaxReturn(['code'=>0,'info'=>L('不能重复认证')]);
-        //}
+        if (!$userinfo['phone']) {
+            $uinfo = M("user")->where(array('phone'=>$phone))->find();
+            if(!empty($uinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('手机号已绑定')]);
+            }
+            $data['phone'] = $phone;
+        }
+
 
         if($cardzm == ""){
             $this->ajaxReturn(['code'=>0,'info'=>L('请上传上传身份证正面')]);
@@ -117,7 +118,7 @@ class UserController extends MobileController
             $this->ajaxReturn(['code'=>0,'info'=>L('请上传上传身份证背面')]);
         }
 
-        $data['phone'] = $phone;
+
         $data['cardzm'] = $cardzm;
         $data['cardfm'] = $cardfm;
         $data['rzstatus'] = 1;

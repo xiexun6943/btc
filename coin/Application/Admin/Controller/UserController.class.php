@@ -1141,9 +1141,10 @@ class UserController extends AdminController
         $show = $Page->show();
         $list = M('UserCoin')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach ($list as $k => $v) {
-            $list[$k]['username'] = M('User')->where(array('id' => $v['userid']))->getField('username');
+            $userInfo=M('User')->field('username,phone')->where(array('id' => $v['userid']))->find();
+            $list[$k]['username'] = $userInfo['username'];
+            $list[$k]['phone'] = $userInfo['phone'];
         }
-//        dump($list);
         $this->assign('list', $list);
         $this->assign('page', $show);
 

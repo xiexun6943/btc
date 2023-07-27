@@ -71,7 +71,12 @@
 		                <span class="fzmmm fch">{:L('手机号码')}</span>
 		            </div>
 		            <div class="zz_inputbox">
-		                <input type="text" id="phone" class="zz_input" value="{$info.phone}"   placeholder="{:L('请输入手机号码')}" />
+						<?php if(!empty($info['phone'])){ ?>
+						<input type="text" id="phone" class="zz_input" value="{$info.phone}"   placeholder="{:L('请输入手机号码')}" readonly />
+						<?php }else{ ?>
+						<input type="text" id="phone" class="zz_input" value="{$info.phone}"   placeholder="{:L('请输入手机号码')}" />
+						<?php } ?>
+
 		            </div>
 		            
 		            <div class="imgbox_5">
