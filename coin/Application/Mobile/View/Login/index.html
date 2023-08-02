@@ -92,6 +92,7 @@
         </a>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <div id="page-container">
     <div class="all-dela-presets-container"  >
         <!-- Preset Begin-->
@@ -99,15 +100,127 @@
             <div class="dela-preset-container">
                 <form class="dela-preset-2-1" action="?" method="get" onclick="return false">
                     <p class="dela-form__title">{:L('Bitventure')}</p>
-                    <input type="email" name="email" id="email" placeholder="{:L('邮箱')}" required autocomplete="email">
-                    <input type="password" id="lpwd" name="password" placeholder="{:L('密码')}" required>
-                    <label class="dela-form__checkbox" id="remember"  >
-                        {:L('记住账号')}
-                        <input type="checkbox" name="remember"  id="rem"  value="1"><span></span>
-                    </label>
-                    <input type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
-
-                    <input type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
+                    
+                    <style>
+                    button {
+            appearance: auto;
+            writing-mode: horizontal-tb !important;
+            font-style: ;
+            font-variant-ligatures: ;
+            font-variant-caps: ;
+            font-variant-numeric: ;
+            font-variant-east-asian: ;
+            font-weight: ;
+            font-stretch: ;
+            font-size: ;
+            font-family: ;
+            text-rendering: auto;
+            color: buttontext;
+            letter-spacing: normal;
+            word-spacing: normal;
+            line-height: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: center;
+            align-items: flex-start;
+            cursor: default;
+            box-sizing: border-box;
+            background-color: buttonface;
+            margin: 0em;
+            padding: 1px 6px;
+            border-width: 2px;
+            border-style: outset;
+            border-color: buttonborder;
+            border-image: initial;
+        }
+        .btn-hover {
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            height: 30px;
+            text-align: center;
+            border: none;
+            background-size: 300% 100%;
+            border-radius: 50px;
+            moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+        .btn-hover.color-1 {
+            background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+            box-shadow: 0 4px 15px 0 rgb(49 196 190 / 75%);
+        }
+        .btn-hover.color-6 {
+            background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+            box-shadow: 0 4px 15px 0 rgb(83 176 57 / 75%);
+        }
+        .btnl {
+            float: left;
+            margin-bottom:1.1em;
+        }
+        .btnr {
+            float: right;
+            margin-bottom:1.1em;
+        }
+                        .btn_bar_login{
+                            float: left;
+                            width:45%;
+                        }
+                        .gray{
+                            background-image: linear-gradient(to right, #e9e9e9, #e9e9e9, #e9e9e9, #e9e9e9)!important;color:black
+                        }
+                    </style>
+                    <script>
+                        $(function(){
+                            $('.btn_bar_login').click(function(){
+                                $('.btn_bar_login').addClass('gray')
+                                $(this).removeClass('gray')
+                                var index = $(this).index($('.btn_bar_login'))
+                                $('.reg_kind_login').hide()
+                                $('.reg_kind_login').eq(index).show()
+                            })
+                        })
+                    </script>
+                    
+                    <button class="btn_bar_login btn-hover color-6 btnr" style="margin-right:1.5rem">{:L('邮箱')}</button>
+                    <button class="btn_bar_login btn-hover color-6 btnr gray">{:L('手机')}</button>
+                    
+                    <span class="reg_kind_login">
+                        <input type="email" name="email" id="email" placeholder="{:L('邮箱')}" required autocomplete="email">
+                        <input type="password" id="lpwd" name="password" placeholder="{:L('密码')}" required>
+                        
+                        
+                       <!-- <input type="text" id="text" name="text" placeholder="{:L('验证码')}" required>
+                    <div class="action-button login-send-button">
+                        <img style="width:100%;height:50px;border-radius:5px;" src="{:U('Verify/code')}" onclick="this.src=this.src+'?t='+Math.random()" title="{:L('换一张')}">
+                    </div>-->
+                        
+                        
+                        <label class="dela-form__checkbox" id="remember"  >
+                            {:L('记住账号')}
+                            <input type="checkbox" name="remember"  id="rem"  value="1"><span></span>
+                        </label>
+                        <input type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+    
+                        <input type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
+                    </span>
+                    
+                    <span class="reg_kind_login" style="display:none">
+                        <input type="email" name="phone" id="phone" placeholder="{:L('手机号')}" required autocomplete="email">
+                        <input type="password" id="pwd_phone" name="pwd_phone" placeholder="{:L('密码')}" required>
+                        <label class="dela-form__checkbox" id="remember"  >
+                            {:L('记住账号')}
+                            <input type="checkbox" name="remember"  id="rem"  value="1"><span></span>
+                        </label>
+                        <input type="submit" name="submit" onclick="uplogin2()" value="{:L('登录')}">
+    
+                        <input type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
+                    </span>
 
                     <span class="dela-form__rorgot-password" onclick="forgot_password()">
                         <a href="{:U('Login/findpwd')}">{:L('忘记密码')}?</a>
@@ -200,6 +313,40 @@
         //         onSuccess: function () {
                     $.post("{:U('Login/loginsubmit')}",
                         {'email' : email,  'lpwd' : lpwd},
+                        function(data){
+                            if(data.code){
+                                layer.msg(data.info);
+                                setTimeout(function(){
+                                    window.location.href="{:U('Index/index')}";
+                                },2000);
+                            }else{
+                                layer.msg(data.info);return false;
+                            }
+                        });
+                    // $('.container-fluid').hide();
+                // }
+            // });
+    }
+
+    function uplogin2(){
+        var phone = $("#phone").val();
+        if(phone=='' || phone == null){
+            layer.msg("{:L('请输入手机号')}");return false;
+        };
+        var pwd_phone = $("#pwd_phone").val();
+        if(pwd_phone == ''){
+            layer.msg("{:L('请输入密码')}");return false;
+        }
+        save_cookies();
+        // $('.container-fluid').show();
+        // $('#captcha').sliderCaptcha(
+        //     {
+        //         repeatIcon: 'fa fa-redo',
+        //         setSrc: function () {
+        //             return ''; },
+        //         onSuccess: function () {
+                    $.post("{:U('Login/loginsubmit')}",
+                        {'phone' : phone,  'lpwd' : pwd_phone},
                         function(data){
                             if(data.code){
                                 layer.msg(data.info);

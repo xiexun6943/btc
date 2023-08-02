@@ -30,6 +30,8 @@
       font-weight: 400;
       text-align: center;
       margin-bottom: 0.89em; }
+    .dela-presets-container-1 .dela-preset-1-1 input[type="area_code"],
+    .dela-presets-container-1 .dela-preset-1-1 input[type="phone"],
     .dela-presets-container-1 .dela-preset-1-1 input[type="email"],
     .dela-presets-container-1 .dela-preset-1-1 input[type="password"],
     .dela-presets-container-1 .dela-preset-1-1 input[type="text"] {
@@ -146,6 +148,8 @@
       font-weight: 400;
       text-align: center;
       margin-bottom: 0.89em; }
+    .dela-presets-container-1 .dela-preset-1-2 input[type="area_code"],
+    .dela-presets-container-1 .dela-preset-1-2 input[type="phone"],
     .dela-presets-container-1 .dela-preset-1-2 input[type="email"],
     .dela-presets-container-1 .dela-preset-1-2 input[type="password"],
     .dela-presets-container-1 .dela-preset-1-2 input[type="text"] {
@@ -160,6 +164,8 @@
       border-bottom: 0.063em solid rgba(255, 255, 255, 0.2);
       margin-bottom: 1.1em;
       border-radius: 0; }
+    .dela-presets-container-1 .dela-preset-1-2 input[type="area_code"]:valid,
+    .dela-presets-container-1 .dela-preset-1-2 input[type="phone"]:valid,
     .dela-presets-container-1 .dela-preset-1-2 input[type="email"]:valid,
     .dela-presets-container-1 .dela-preset-1-2 input[type="password"]:valid,
     .dela-presets-container-1 .dela-preset-1-2 input[type="text"]:valid {
@@ -657,6 +663,8 @@
       padding: 0 0.8em; }
     .dela-presets-container-1 .dela-preset-1-6 .form-content {
       padding: 0 3.68em; }
+      .dela-presets-container-1 .dela-preset-1-6 .form-content input[type="area_code"],
+      .dela-presets-container-1 .dela-preset-1-6 .form-content input[type="phone"],
       .dela-presets-container-1 .dela-preset-1-6 .form-content input[type="tel"],
       .dela-presets-container-1 .dela-preset-1-6 .form-content input[type="time"],
       .dela-presets-container-1 .dela-preset-1-6 .form-content input[type="text"],
@@ -832,6 +840,8 @@
       font-weight: 400;
       text-align: center;
       margin-bottom: 0.89em; }
+    .dela-presets-container-2 .dela-preset-2-1 input[type="area_code"],
+    .dela-presets-container-2 .dela-preset-2-1 input[type="phone"],
     .dela-presets-container-2 .dela-preset-2-1 input[type="email"],
     .dela-presets-container-2 .dela-preset-2-1 input[type="password"],
     .dela-presets-container-2 .dela-preset-2-1 input[type="text"] {
@@ -848,6 +858,8 @@
       border-radius: 0; 
         outline: none;
     }
+    .dela-presets-container-2 .dela-preset-2-1 input[type="area_code"]:valid,
+    .dela-presets-container-2 .dela-preset-2-1 input[type="phone"]:valid,
     .dela-presets-container-2 .dela-preset-2-1 input[type="email"]:valid,
     .dela-presets-container-2 .dela-preset-2-1 input[type="password"]:valid,
     .dela-presets-container-2 .dela-preset-2-1 input[type="text"]:valid {
@@ -950,6 +962,8 @@
       font-weight: 400;
       text-align: center;
       margin-bottom: 0.89em; }
+    .dela-presets-container-2 .dela-preset-2-2 input[type="area_code"],
+    .dela-presets-container-2 .dela-preset-2-2 input[type="phone"],
     .dela-presets-container-2 .dela-preset-2-2 input[type="email"],
     .dela-presets-container-2 .dela-preset-2-2 input[type="password"],
     .dela-presets-container-2 .dela-preset-2-2 input[type="text"] {
@@ -966,6 +980,8 @@
       border-radius: 0; 
      outline: none;
     }
+    .dela-presets-container-2 .dela-preset-2-2 input[type="area_code"]:valid,
+    .dela-presets-container-2 .dela-preset-2-2 input[type="phone"]:valid,
     .dela-presets-container-2 .dela-preset-2-2 input[type="email"]:valid,
     .dela-presets-container-2 .dela-preset-2-2 input[type="password"]:valid,
     .dela-presets-container-2 .dela-preset-2-2 input[type="text"]:valid {

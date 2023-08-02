@@ -1,6 +1,9 @@
 <?php
 
 return [
+    "区号"=>"Area",
+    "手机"=>"Phone",
+    "手机号"=>"Phone",
     "最小充值数量"=>"Minimum recharge amount",
     "汇率"=>"exchange rate",
     "请输入收款人姓名"=>"Please enter the name of the payee",
