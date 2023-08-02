@@ -471,7 +471,7 @@ class LoginController extends HomeController
                 $this->ajaxReturn(['code'=>0,'info'=>L('该手机号码已经注册过')]);
             }
             $code = rand(10000,99999);
-            $desc_content=L("您的验证码是").$code.','.L("5分钟内有效");
+            $desc_content='[bitventure]'.L("您的验证码是").$code.','.L("5分钟内有效");
             $phone=$area_code.$phone;
 
             $result = $this->smsSend($desc_content,$phone);
