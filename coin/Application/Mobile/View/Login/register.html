@@ -159,11 +159,34 @@
                         .btn_bar{
                             float: left;
                             width:45%;
+                            font-size: .2rem;
                         }
                         .gray{
                             background-image: linear-gradient(to right, #e9e9e9, #e9e9e9, #e9e9e9, #e9e9e9)!important;color:black
                         }
                     </style>
+                    
+            <script>
+                $(function(){
+                    var cookies = document.cookie ? document.cookie.split('; ') : [];
+                    var lang = []
+                    cookies.forEach(function(ele){
+                        if(ele.indexOf('think_language')>=0){
+                            lang = ele.split('=')
+                        }
+                    })
+                    console.log(lang[1])
+                    if(lang.length>0){
+                     if(lang[1]=='ja-jp'){
+                         $('#area_code').val('+81')
+                     }
+                     if(lang[1]=='zh-cn'){
+                         $('#area_code').val('+852')
+                     }   
+                    }
+                })
+            </script>
+            
                     <script>
                         $(function(){
                             $('.btn_bar').click(function(){
