@@ -406,10 +406,14 @@ class UserController extends HomeController
 		if($uid <= 0){
 		    $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
 		}
-		$uinfo = M("user")->where(array('phone'=>$phone))->find();
-		if(!empty($uinfo)){
-		    $this->ajaxReturn(['code'=>0,'info'=>L('手机号已绑定')]);
-		}
+        if (!$userinfo['phone']) {
+            $uinfo = M("user")->where(array('phone'=>$phone))->find();
+            if(!empty($uinfo)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('手机号已绑定')]);
+            }
+            $data['phone'] = $phone;
+        }
+
 		if($uinfo['rzstatus'] == 1){
 		    $this->ajaxReturn(['code'=>0,'info'=>L('不能重复认证')]);
 		}
@@ -420,8 +424,7 @@ class UserController extends HomeController
 		if($cardfm == ""){
 		    $this->ajaxReturn(['code'=>0,'info'=>L('请上传上传身份证背面')]);
 		}
-		
-		$data['phone'] = $phone;
+
 		$data['cardzm'] = $cardzm;
 		$data['cardfm'] = $cardfm;
 		$data['rzstatus'] = 1;

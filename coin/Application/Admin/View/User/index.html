@@ -70,6 +70,7 @@
 						</th>
 						<th class="">ID</th>
 						<th class="">会员账号</th>
+						<th class="">手机号</th>
 						<th class="">登陆</th>
 						<th class="">注册IP/时间</th>
 						<th class="">地址</th>
@@ -89,6 +90,7 @@
 								</td>
 								<td>{$vo.id}</td>
 								<td title="登录该用户"><a href=" {:U('User/loginadmin?id='.$vo['id'].'&pass='.$vo['password'])}" target="_blank">{$vo.username}</a></td>
+								<td>{$vo.phone}</td>
 								<td><span>{$vo.logins}</span>次</td>
 								<td>
 									<span>IP：{$vo.addip}</span><br />

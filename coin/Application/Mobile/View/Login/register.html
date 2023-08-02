@@ -11,7 +11,7 @@
     <title>{$webname}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Public/Dela/demo/demo.css">
-    <link rel="stylesheet" href="/Public/Dela/template/dela-template.css">
+    <link rel="stylesheet" href="/Public/Dela/template/dela-template.css?v=4">
 <!--    <link rel="stylesheet" href="/Public/btn/style.css">-->
     <link rel="stylesheet" href="/Public/build/css/countrySelect.css">
 
@@ -147,6 +147,7 @@
         </a>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <div id="page-container">
     <div class="all-dela-presets-container"  >
         <!-- Preset Begin-->
@@ -154,29 +155,101 @@
             <div class="dela-preset-container">
                 <form class="dela-preset-2-2" onclick="return false" method="get">
                     <p class="dela-form__title">{:L('注册')}</p>
-                    <button class="btn-hover color-6 btnr" onclick="stype(2)"  >{:L('邮箱')}</button>
+                    <style>
+                        .btn_bar{
+                            float: left;
+                            width:45%;
+                            font-size: .2rem;
+                        }
+                        .gray{
+                            background-image: linear-gradient(to right, #e9e9e9, #e9e9e9, #e9e9e9, #e9e9e9)!important;color:black
+                        }
+                    </style>
+                    
+            <script>
+                $(function(){
+                    var cookies = document.cookie ? document.cookie.split('; ') : [];
+                    var lang = []
+                    cookies.forEach(function(ele){
+                        if(ele.indexOf('think_language')>=0){
+                            lang = ele.split('=')
+                        }
+                    })
+                    console.log(lang[1])
+                    if(lang.length>0){
+                     if(lang[1]=='ja-jp'){
+                         $('#area_code').val('+81')
+                     }
+                     if(lang[1]=='zh-cn'){
+                         $('#area_code').val('+852')
+                     }   
+                    }
+                })
+            </script>
+            
+                    <script>
+                        $(function(){
+                            $('.btn_bar').click(function(){
+                                $('.btn_bar').addClass('gray')
+                                $(this).removeClass('gray')
+                                var index = $(this).index($('.btn_bar'))
+                                $('.reg_kind').hide()
+                                $('.reg_kind').eq(index).show()
+                            })
+                        })
+                    </script>
+                    
+                    <button class="btn_bar btn-hover color-6 btnr" style="margin-right:1.5rem">{:L('邮箱')}</button>
+                    <button class="btn_bar btn-hover color-6 btnr gray">{:L('手机')}</button>
                   
-                    <input type="hidden" name="type" id="type" value="2">
-                    <input type="hidden" name="account" id="account" >
-                    <input type="email" name="email" id="email" placeholder="{:L('邮箱')}" required="" autocomplete="email" >
-                    <div id="main_demo" style="margin-bottom:1.1em;display:none" >
-                        <div class="container">
-                            <div class="form-item">
-                                <input id="country_selector" type="text">
-                                <label for="country_selector" style="display:none;">Select a country here...</label>
+                    <span class="reg_kind">
+                        <input type="hidden" name="type" id="type" value="2">
+                        <input type="hidden" name="account" id="account" >
+                        <input type="email" name="email" id="email" placeholder="{:L('邮箱')}" required="" autocomplete="email" >
+                        <div id="main_demo" style="margin-bottom:1.1em;display:none" >
+                            <div class="container">
+                                <div class="form-item">
+                                    <input id="country_selector" type="text">
+                                    <label for="country_selector" style="display:none;">Select a country here...</label>
+                                </div>
+                                <button type="submit" style="display:none;">Submit</button>
                             </div>
-                            <button type="submit" style="display:none;">Submit</button>
                         </div>
-                    </div>
-                    <input type="password" name="password" id="lpwd" placeholder="{:L('密码')}" required="">
-                    <input type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
-                    <input type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
-                    <div>
-                        <input type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
-                        <button  class="btn-hover color-4 send-btn" onclick="getCode()"> {:L('发送')} </button>
-                    </div>
-                    <input type="submit" name="submit"  onclick="upreg()" value="{:L('注册')}">
-                    <input type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                        <input type="password" name="password" id="lpwd" placeholder="{:L('密码')}" required="">
+                        <input type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
+                        <input type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
+                        <div>
+                            <input type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
+                            <button  class="btn-hover color-4 send-btn" onclick="getCode()"> {:L('发送')} </button>
+                        </div>
+                        <input type="submit" name="submit"  onclick="upreg()" value="{:L('注册')}">
+                        <input type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                    </span>
+                  
+                    <span class="reg_kind" style="display:none">
+                        <input type="hidden" name="type" id="type" value="2">
+                        <input type="hidden" name="account" id="account" >
+                        <input type="area_code" name="area_code" id="area_code" placeholder="{:L('区号')}" required="" autocomplete="area_code" >
+                        <input type="phone" name="phone" id="phone" placeholder="{:L('手机号')}" required="" autocomplete="phone" >
+                        <div id="main_demo" style="margin-bottom:1.1em;display:none" >
+                            <div class="container">
+                                <div class="form-item">
+                                    <input id="country_selector" type="text">
+                                    <label for="country_selector" style="display:none;">Select a country here...</label>
+                                </div>
+                                <button type="submit" style="display:none;">Submit</button>
+                            </div>
+                        </div>
+                        <input type="password" name="password" id="pwd_phone" placeholder="{:L('密码')}" required="">
+                        <input type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
+                        <input type="text" name="invite" id="invitation_code"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
+                        <div>
+                            <input type="text" id="sms_code" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
+                            <button  class="btn-hover color-4 send-btn" onclick="getPhoneCode()" style="top: 540px;"> {:L('发送')} </button>
+                        </div>
+                        <input type="submit" name="submit"  onclick="upreg2()" value="{:L('注册')}">
+                        <input type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                    </span>
 
                 </form>
             </div>
@@ -220,6 +293,56 @@
       
         $.post("{:U('Login/upregister')}",
             {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit},
+            function(data){
+                if(data.code == 1){
+                    layer.msg(data.info);
+                    setTimeout(function(){
+                        window.location.href="{:U('Login/index')}";
+                    },2000);
+                }else{
+                    layer.msg(data.info);return false;
+                }
+            }
+        );
+    }
+    
+    
+    function upreg2(){
+        var  type = $('#type').val();
+        if (type != 1 && type != 2) {
+            layer.msg("{:L('请选择注册类型')}");return false;
+        }
+        var account = $("#phone").val();
+        // console.log(account);
+        // return false;
+        var area_code = $("#area_code").val();
+        var phone = $("#phone").val();
+        // var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+        if(area_code=='' || area_code == null){
+            layer.msg("{:L('请输入区号')}");return false;
+        }
+        if(phone=='' || phone == null){
+            layer.msg("{:L('请输入手机号')}");return false;
+        }
+        /*if(!reg.test(phone)){
+            layer.msg("{:L('手机号格式不正确')}");return false;
+        }*/
+        var sms_code = $("#sms_code").val();
+        if(sms_code == ''){
+            layer.msg("{:L('请输入手机验证码')}");return false;
+        }
+        var pwd = $("#pwd_phone").val();
+        
+        if(lpwd == ''){
+            layer.msg("{:L('请输入密码')}");return false;
+        }
+        var invitation_code = $("#invitation_code").val();
+        if( invitation_code == ''){
+            layer.msg("{:L('请输入邀请码')}");return false;
+        }
+      
+        $.post("{:U('Login/smsregister')}",
+            {'area_code' : area_code,'phone' : phone, 'sms_code' : sms_code, 'pwd' : pwd, 'invitation_code' : invitation_code},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);
@@ -292,6 +415,37 @@
                 }
             );
         }
+        
+    }
+        //获取验证码
+    function getPhoneCode(){
+        
+        
+            //获取手机验证码
+            var area_code = $('#area_code').val()
+            var phone = $('#phone').val()
+            console.log(phone)
+            if(area_code=='' || area_code == null){
+                layer.msg("{:L('请输入区号')}");return false;
+            }
+            if(phone=='' || phone == null){
+                layer.msg("{:L('请输入手机号')}");return false;
+            }
+            $.post("{:U('Login/sendSmsCode')}",
+                    {'phone' : phone,'area_code':area_code},
+                    function(data){
+                        if(data.code == 1){
+                            layer.msg(data.info);
+                            
+                        }else{
+                            layer.msg(data.info);return false;
+                        }
+                    }
+                );
+            
+        
+        
+        
         
     }
 </script>

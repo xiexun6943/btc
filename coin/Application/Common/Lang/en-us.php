@@ -1,6 +1,9 @@
 <?php
 
 return [
+    "区号"=>"Area",
+    "手机"=>"Phone",
+    "手机号"=>"Phone",
     "最小充值数量"=>"Minimum recharge amount",
     "汇率"=>"exchange rate",
     "请输入收款人姓名"=>"Please enter the name of the payee",
@@ -801,5 +804,8 @@ return [
     '提款'=>'withdraw',
     '充值'=>'recharge',
     '银行卡充值--提款'=>'Bank card recharge--withdrawal',
-    '小于最小金额的充值将不会上账且无法退回。'=>'Deposits below the minimum amount will not be credited and cannot be refunded.'
+    '小于最小金额的充值将不会上账且无法退回。'=>'Deposits below the minimum amount will not be credited and cannot be refunded.',
+    "手机登录" => "Phone login",
+    "您的验证码是" => "Your verification code is",
+    "5分钟内有效" => "Valid for 5 minutes",
 ];
