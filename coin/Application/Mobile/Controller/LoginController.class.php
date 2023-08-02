@@ -121,18 +121,18 @@ class LoginController extends MobileController
 
 	// 登录提交处理
     public function loginsubmit(){
-        $pwd = I("post.pwd");
-        $vcode = I("post.vcode");
+        $pwd = I("post.lpwd");
+//        $vcode = I("post.vcode");
         $type = I("post.type");
-        if (!check_verify(strtoupper($vcode),'1')) {
-            $this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
-        }
+//        if (!check_verify(strtoupper($vcode),'1')) {
+//            $this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
+//        }
         if ($type == 1) { // type 1、邮箱 ，2、手机号码
             $email = I("post.email");
             $user = M('User')->where(array('username' => $email))->find();
             $remark="邮箱登录";
         }else{
-            $phone = I("post.phone ");
+            $phone = I("post.phone");
             $user = M('User')->where(array('phone' => $phone))->find();
             $remark="手机登录";
         }
@@ -491,7 +491,7 @@ class LoginController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('该手机号码已经注册过')]);
             }
             $code = rand(10000,99999);
-            $desc_content=L("您的验证码是").$code.','.L(" 5分钟内有效");
+            $desc_content='[bitventure]'.L("您的验证码是").$code.','.L("5分钟内有效");
             $phone=$area_code.$phone;
 
             $result = $this->smsSend($desc_content,$phone);

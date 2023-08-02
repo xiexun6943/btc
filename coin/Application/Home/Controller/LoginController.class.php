@@ -117,7 +117,7 @@ class LoginController extends HomeController
             $user = M('User')->where(array('username' => $email))->find();
             $remark="邮箱登录";
         }else{
-            $phone = I("post.phone ");
+            $phone = I("post.phone");
             $user = M('User')->where(array('phone' => $phone))->find();
             $remark="手机登录";
         }
@@ -471,7 +471,7 @@ class LoginController extends HomeController
                 $this->ajaxReturn(['code'=>0,'info'=>L('该手机号码已经注册过')]);
             }
             $code = rand(10000,99999);
-            $desc_content=L("您的验证码是").$code.','.L(" 5分钟内有效");
+            $desc_content=L("您的验证码是").$code.','.L("5分钟内有效");
             $phone=$area_code.$phone;
 
             $result = $this->smsSend($desc_content,$phone);

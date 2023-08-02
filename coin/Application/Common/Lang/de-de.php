@@ -669,7 +669,9 @@ return [
 	'记住账号'=>'mich erinnern',
     '个人'=>'persönlich',
 
-
+    "手机登录" => "Melden Sie sich mit dem Telefon an",
+    "您的验证码是" => "Ihr Bestätigungscode lautet",
+    "5分钟内有效" => "Gültig für 5 Minuten",
 	
 	
 	
