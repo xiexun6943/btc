@@ -127,20 +127,32 @@ class LoginController extends MobileController
 //        if (!check_verify(strtoupper($vcode),'1')) {
 //            $this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
 //        }
-        if ($type == 1) { // type 1、邮箱 ，2、手机号码
+        $email = I("post.email");
+        $phone = I("post.phone");
+        if ($email ) { // type 1、邮箱 ，2、手机号码
             $email = I("post.email");
             $user = M('User')->where(array('username' => $email))->find();
             $remark="邮箱登录";
-        }else{
+        };
+        if ($phone ) { // type 1、邮箱 ，2、手机号码
             $phone = I("post.phone");
             $user = M('User')->where(array('phone' => $phone))->find();
-            $remark="手机登录";
-        }
-
+            $remark="邮箱登录";
+        };
+        // dump($email);exit;
+        // if ($type == 1) { // type 1、邮箱 ，2、手机号码
+        //     $email = I("post.email");
+        //     $user = M('User')->where(array('username' => $email))->find();
+        //     $remark="邮箱登录";
+        // }else{
+        //     $phone = I("post.phone");
+        //     $user = M('User')->where(array('phone' => $phone))->find();
+        //     $remark="手机登录";
+        // }
         if(empty($user)){
             $this->ajaxReturn(['code'=>0,'info'=> L('用户不存在')]);
         }
-
+      
         if (md5($pwd) != $user['password']){
             $this->ajaxReturn(['code'=>0,'info'=> L('登录密码错误')]);
         }
