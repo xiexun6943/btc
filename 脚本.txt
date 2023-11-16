@@ -1,0 +1,191 @@
+字段	数据类型	描述
+ch	string	数据所属的 channel，格式：market.$symbol.kline.$period
+ts	long	系统响应时间
+<tick>	object	
+id	integer	unix时间，同时作为K线ID
+amount	float	成交量
+count	integer	成交笔数
+open	float	开盘价
+close	float	收盘价（当K线为最晚的一根时，是最新成交价）
+low	float	最低价
+high	float	最高价
+vol	float	成交额, 即 sum(每一笔成交价 * 该笔的成交量)
+虚拟币 官方价格信息
+五秒执行一次的
+
+step=3
+for (( i = 0; i < 60; i=(i+step) )); do
+host="https://zxdongload.store"
+url=$host"/Contrab/Currency/getCoinData?coin=btc"
+curl $url
+url2=$host"/Contrab/Currency/getCoinData?coin=eth"
+curl $url2
+url3=$host"/Contrab/Currency/getCoinData?coin=eos"
+curl $url3
+url4=$host"/Contrab/Currency/getCoinData?coin=doge"
+curl $url4
+url5=$host"/Contrab/Currency/getCoinData?coin=bch"
+curl $url5
+sleep $step
+done
+exit 0
+
+ 6秒一次的
+step=6
+for (( i = 0; i < 60; i=(i+step) )); do
+host="https://zxdongload.store"
+url6=$host"/Contrab/Currency/getCoinData?coin=ltc"
+curl $url6
+url7=$host"/Contrab/Currency/getCoinData?coin=iota"
+curl $url7
+url8=$host"/Contrab/Currency/getCoinData?coin=fil"
+curl $url8
+url9=$host"/Contrab/Currency/getCoinData?coin=flow"
+curl $url9
+url10=$host"/Contrab/Currency/getCoinData?coin=jst"
+curl $url10
+url11=$host"/Contrab/Currency/getCoinData?coin=ht"
+curl $url11
+sleep $step
+done
+exit 0
+
+
+
+//  虚拟币官方买卖记录
+
+step=3
+for (( i = 0; i < 60; i=(i+step) )); do
+host="https://zxdongload.store"
+url=$host"/Contrab/Currency/getCoinHistory?coin=btc"
+curl $url
+url2=$host"/Contrab/Currency/getCoinHistory?coin=eth"
+curl $url2
+url3=$host"/Contrab/Currency/getCoinHistory?coin=eos"
+curl $url3
+url4=$host"/Contrab/Currency/getCoinHistory?coin=doge"
+curl $url4
+url5=$host"/Contrab/Currency/getCoinHistory?coin=bch"
+curl $url5
+url6=$host"/Contrab/Currency/getCoinHistory?coin=ltc"
+curl $url6
+url7=$host"/Contrab/Currency/getCoinHistory?coin=iota"
+curl $url7
+url8=$host"/Contrab/Currency/getCoinHistory?coin=fil"
+curl $url8
+url9=$host"/Contrab/Currency/getCoinHistory?coin=flow"
+curl $url9
+url10=$host"/Contrab/Currency/getCoinHistory?coin=jst"
+curl $url10
+url11=$host"/Contrab/Currency/getCoinHistory?coin=ht"
+curl $url11
+sleep $step
+done
+exit 0
+
+
+
+
+
+
+step=10
+for (( i = 0; i < 60; i=(i+step) )); do
+host="https://zxdongload.store"
+url=$host"/home/autoexe/setwl"
+curl $url
+url2=$host"/home/autoexe/hycarryout"
+curl $url2
+url3=$host"/home/autoexe/autoxjtade"
+curl $url3
+sleep $step
+done
+exit 0
+https://boostingaming.net
+host="https://bitventure.online"
+url=$host"/home/autoexe/autokjsy"                  //独资矿机自动收益        每天00：00
+curl $url
+url2=$host"/home/autoexe/releaseissue"               //自动释放冻结的认购币   每天00：00
+curl $url2
+url3=$host"/home/autoexe/releasedjprofit"             //释放冻结的矿机收益币  每天00：00
+curl $url3
+
+host="https://zxdongload.store"
+url=$host"/home/autoexe/autokjsy"
+curl $url
+url2=$host"/home/autoexe/releaseissue"
+curl $url2
+url3=$host"/home/autoexe/releasedjprofit"
+curl $url3
+
+
+host="https://zxdongload.store"
+url=$host"/home/autoexe/autokjsy"                  //独资矿机自动收益        每天00：00
+curl $url
+url2=$host"/home/autoexe/releaseissue"               //自动释放冻结的认购币   每天00：00
+curl $url2
+url3=$host"/home/autoexe/releasedjprofit"             //释放冻结的矿机收益币  每天00：00
+curl $url3
+
+step=10
+for (( i = 0; i < 60; i=(i+step) )); do
+host="https://zxdongload.online"
+url=$host"/home/autoexe/setwl"  
+curl $url
+url2=$host"/home/autoexe/hycarryout"  
+curl $url2
+url3=$host"/home/autoexe/autoxjtade" 
+curl $url3
+sleep $step
+done
+exit 0
+
+-----要执行的------
+https://你的域名/home/autoexe/setwl                      //  合约盈亏比例脚本         5-10秒
+https://你的域名/home/autoexe/hycarryout                   //自动结算合约订单          5-10秒
+https://你的域名/home/autoexe/autoxjtade                  //  委托订单自动交易         5-10秒
+
+
+https://你的域名/home/autoexe/autokjsy                        //独资矿机自动收益        每天00：00
+https://你的域名/home/autoexe/releaseissue                  //自动释放冻结的认购币   每天00：00
+https://你的域名/home/autoexe/releasedjprofit              //释放冻结的矿机收益币  每天00：00
+
+
+
+-----完成修改的----------
+https://你的域名/home/autoexe/setwl                             计划任务A                  5-10秒执
+https://你的域名/home/autoexe/setwl_ty                         计划任务B                  5-10秒执
+https://你的域名/home/autoexe/hycarryout_ty               自动结算体验合约订单   5-10秒
+https://你的域名/home/autoexe/hycarryout                   自动结算合约订单          5-10秒
+https://你的域名/home/autoexe/autokjsy                        独资矿机自动收益        每天00：00
+https://你的域名/home/autoexe/autoxjtade                    委托订单自动交易         5-10秒
+
+https://你的域名/home/autoexe/releaseissue                  自动释放冻结的认购币   每天00：00
+---------未修改的---------
+
+https://你的域名/home/autoexe/authsharesjsy                共享矿机自动结算收益   每天00：00  暂时不用
+https://你的域名/home/autoexe/releasedjprofit              释放冻结的矿机收益币  每天00：00
+
+
+https://你的域名/home/autoexe/rengoubimoneyup          认购币每日增长              每天00：00  没有代码
+https://你的域名/home/autoexe/rengoubijiesuan          认购币满X天，将增长的利益转到余额账户  每天00：00  没有代码
+https://你的域名/home/autoexe/rengoubifafang           发放认购币波动利润 （未到余额）  设置每天00：00分执行一次  没有代码
+
+
+
+https://你的域名/home/Queue/fortrade                         系统币种计算交易    每天一次
+https://你的域名/home/Queue/chart                              系统币行情计算     每天一次
+https://你的域名/home/autoexe/recharge_jiankong              充值自动到账监控   每分钟访问一次  不用
+
+
+step=10
+for (( i = 0; i < 60; i=(i+step) )); do
+host="https://zxdongload.online"
+url=$host"/home/autoexe/setwl"  
+curl $url
+url2=$host"/home/autoexe/hycarryout"  
+curl $url2
+url3=$host"/home/autoexe/autoxjtade" 
+curl $url3
+sleep $step
+done
+exit 0

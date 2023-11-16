@@ -566,12 +566,18 @@ class ContractController extends MobileController
         $this->assign('tj_money',$tj_money);
 
         $this->assign('select','contract');
-
-        
-        
 		$this->display();
 	}
-	
+    // 检测用户金额
+    public function checkUsdt(){
+        $time= trim($_POST['time']);
+        $time=60;
+        $hysetting= M("hysetting")->where(array('id'=>1))->find();
+        $hy_time=explode(',',$hysetting['hy_time']);
+        $room_min=explode(',',$hysetting['room_min']);
+        $data=array_combine($hy_time,$room_min);
+        return  ['code'=>200,'data'=>['room_min'=>$data[$time]],'msg'=>$time.'秒合约获取门槛成功'];
+    }
 
 
 }

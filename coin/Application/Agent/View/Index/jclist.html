@@ -142,19 +142,19 @@
 						<td>{$vo.buyprice}</td>
 						<td>
 						    <if condition="$vo.is_win eq 0">
-						        <span style="color:#707A8A;">{$vo.sellprice}</span>    
-						    <elseif condition="$vo.is_win eq 1" />  
+						        <span style="color:#707A8A;">{$vo.sellprice}</span>
+						    <elseif condition="$vo.is_win eq 1" />
 						        <span style="color:#0ecb81;">{$vo.sellprice}</span>
 						    <elseif condition="$vo.is_win eq 2" />
 						        <span style="color:#f5465c;">{$vo.sellprice}</span>
 						    </if>
 						</td>
-						
+
 						<td>{$vo.buytime}</td>
 						<td>
 						    <if condition="$vo.is_win eq 0">
-						        <span style="color:#707A8A;">{$vo.ploss}</span>    
-						    <elseif condition="$vo.is_win eq 1" />  
+						        <span style="color:#707A8A;">{$vo.ploss}</span>
+						    <elseif condition="$vo.is_win eq 1" />
 						        <span style="color:#0ecb81;">+{$vo.ploss}</span>
 						    <elseif condition="$vo.is_win eq 2" />
 						        <span style="color:#f5465c;">-{$vo.ploss}</span>
@@ -172,7 +172,8 @@
                     <else/>
 					<td colspan="12" class="text-center empty-info">
 					    <i class="glyphicon glyphicon-exclamation-sign"></i>{:L('暂无数据')}
-					</td>')}
+					</td>
+
 					</notempty>
 				</tbody>
 			</table>

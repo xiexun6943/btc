@@ -5,7 +5,7 @@ class MobileController extends \Think\Controller
 {
 	protected function _initialize()
 	{
-		$allow_controller=array("Ajax","Ajaxtrade","Api","Article","Chart","Finance","Index","Login","Pay","Queue","Trade","User","Issue",  "Morefind","Financing","Exchange","Orepool","Contract");
+		$allow_controller=array("Ajax","Ajaxtrade","Api","Article","Chart","Finance","Index","Login","Pay","Queue","Trade","User","Issue",  "Morefind","Financing","Exchange","Orepool","Contract","Draw");
 		if(!in_array(CONTROLLER_NAME,$allow_controller)){
 			$this->error("非法操作");
 		}

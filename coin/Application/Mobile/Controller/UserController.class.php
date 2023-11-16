@@ -749,6 +749,9 @@ class UserController extends MobileController
     public function txinfo(){
         $id = trim(I('get.oid'));
         $info = M("myzc")->where(array('id'=>$id))->find();
+        $n=substr($info['address'],0,'5');
+        $m=substr($info['address'],-4);
+        $info['address']=$n.'************'.$m;
         $this->assign('info',$info);
         $this->display();
     }
@@ -786,9 +789,10 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
             }
 
-            if($uinfo['rzstatus'] != 2){
+            /*
+             if($uinfo['rzstatus'] != 2){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-            }
+            }*/
 
             $id = trim(I('post.id'));
             if($id <= 0){

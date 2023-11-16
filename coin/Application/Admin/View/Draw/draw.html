@@ -1,0 +1,108 @@
+<include file="Public:header" />
+<link href="/Public/Static/css/hongbao/global.css" rel="stylesheet" type="text/css" />
+<link href="/Public/Static/css/hongbao/content.css" rel="stylesheet" type="text/css" />
+<div class="subnav">
+    <h2 class="title-1">{:L('中奖管理')}</h2>
+    <a href="javascript:location.reload();" class="reload">{:L('刷新')}</a>
+    <div class="content-menu">
+        <a href="<?php echo ADMIN_PATH ?>&c=draw&a=init"><em>{:L('中奖列表')}</em></a><span>|</span>
+        <a href="<?php echo ADMIN_PATH ?>&c=draw&a=get" class="on"><em> {:L('红包抽奖设置')}</em></a>
+    </div>
+</div>
+<div class="content-t">
+    <form name="multipart/form-data" action="<?php echo ADMIN_PATH ?>&c=draw&a=set" method="post">
+        <input type="hidden" name="m" value="admin">
+        <input type="hidden" name="c" value="draw">
+        <input type="hidden" name="a" value="search">
+        <?php
+        $draw = unserialize(urldecode($draw));
+        $drawControl = unserialize(urldecode($drawControl));
+        $lang = unserialize(urldecode($lang));
+        ?>
+        <table width="100%" cellspacing="0" class="table_form">
+            <caption>{:L('红包抽奖等级设置')} </caption>
+            <tbody id="draw">
+            <?php $i= 0;foreach ($draw as $key => $val) { if($i >4){break;} ?>
+            <tr>
+                <th><?= $val['name'] ?>：</th>
+                <input type="hidden" name="setting[draw][name][<?= $key ?>]" value="<?= $val['name'] ?>">
+                <input type="hidden" name="setting[draw][level][<?= $key ?>]" value="<?= $val['level'] ?>">
+                <td>
+                    {:L('充值累计金额')}：<input class="input-text" type="text" name="setting[draw][amount][<?= $key ?>]"
+                                                value="<?= $val['amount'] ?>">
+                </td>
+                <td>
+                    {:L('日抽奖次数')}：<input class="input-text" type="text" name="setting[draw][num][<?= $key ?>]"
+                                               value="<?= $val['num'] ?>">
+                </td>
+                <td>
+                    {:L('默认抽奖中奖金额')}：<input class="input-text" type="text" name="setting[draw][draw_min][<?= $key ?>]"
+                                                  value="<?= $val['draw_min'] ?>">
+                    - <input class="input-text" type="text" name="setting[draw][draw_max][<?= $key ?>]"
+                             value="<?= $val['draw_max'] ?>">
+                </td>
+                <td>
+                    <label>{:L('启用')}</label><input type="radio" name="setting[draw][status][<?= $key ?>]"
+                                                          value="1" <?php if ($val['status'] == 1) echo 'checked="checked"' ?>/>
+                    <label>{:L('停用')}</label><input type="radio" name="setting[draw][status][<?= $key ?>]"
+                                                          value="2" <?php if ($val['status'] == 2) echo 'checked="checked"' ?>/>
+                </td>
+            </tr>
+            <?php $i++; } ?>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" class="table_form">
+            <caption>{:L('红包抽奖金额设置')}</caption>
+            <tbody id="draw_control">
+            <tr>
+                <th>{:L('控制')}</th>
+                <td>
+                    <label>{:L('随机')} <input type="radio" class="settingdrawcontroltype"
+                                                   name="setting[draw_control][type]"
+                                                   value="1" <?php if ($drawControl['type'] == 1) echo 'checked="checked"' ?>/></label>
+                    <label>{:L('自定义')} <input type="radio" class="settingdrawcontroltype"
+                                                    name="setting[draw_control][type]"
+                                                    value="2" <?php if ($drawControl['type'] == 2) echo 'checked="checked"' ?>/></label>
+                </td>
+                <td>
+                            <textarea class="input-text settingdrawcontroldrawcontrol"
+                                      name="setting[draw_control][draw_control]"
+                                      style="height: 60px;width: 95%"  <?php if ($drawControl['type'] == 1) { ?> disabled="disabled" <?php } ?>><?= $drawControl['draw_control'] ?></textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" class="table_form">
+            <caption>{:L('规则说明')}</caption>
+            <tbody id="lang">
+            <?php foreach ($lang as $key => $val) { ?>
+            <tr>
+                <input type="hidden" name="setting[lang][name][<?= $key ?>]" value="<?= $val['name'] ?>">
+                <input type="hidden" name="setting[lang][type][<?= $key ?>]" value="<?= $val['type'] ?>">
+                <th>
+                    <?= $val['name'] ?>
+                </th>
+                <td>
+                            <textarea class="input-text lang_content_s" name="setting[lang][content][<?= $key ?>]"
+                                      style="height: 120px;width: 95%"><?= $val['content'] ?></textarea>
+                </td>
+            </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <p class="mt20"></p>
+        <input type="submit" class="button" name="dosubmit" value=" 提 交 "/>
+    </form>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(".settingdrawcontroltype").change(function (){
+        if ($(this).val() == 2){
+            $('.settingdrawcontroldrawcontrol').removeAttr("disabled");
+        }
+        if ($(this).val() == 1){
+            $('.settingdrawcontroldrawcontrol').attr('disabled',"true");
+        }
+    });
+</script>

@@ -19,7 +19,30 @@ class FinanceController extends HomeController
 	public function txlist(){
 	    $uid = userid();
 	    $txlist = M("myzc")->where(array('userid'=>$uid))->order('id desc')->limit(15)->select();
-	    $this->assign("txlist",$txlist);
+	    $data=[];
+        if ($txlist) {
+            foreach ($txlist as$k=> $v){
+                $n=substr($v['address'],0,'5');
+                $m=substr($v['address'],-4);
+                $address=$n.'************'.$m;
+                $data[$k]['address']=$address;
+                $data[$k]['coinname']=$v['coinname'];;
+                $data[$k]['num']=$v['num'];
+                $data[$k]['mum']=$v['mum'];
+                $data[$k]['fee']=$v['fee'];;
+                $data[$k]['addtime']=$v['addtime'];
+                if ($v['status'] == 1) {
+                    $data[$k]['status']="确认中";
+                }elseif($v['status'] == 2){
+                    $data[$k]['status']="完成";
+                }else{
+                    $data[$k]['status']="原路返回";
+                }
+            }
+
+        }
+
+	    $this->assign("txlist",$data);
 	    $this->display();
 	}
 	
@@ -63,9 +86,9 @@ class FinanceController extends HomeController
 	            $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
 	        }
 	        
-	        if($uinfo['rzstatus'] != 2){
+	        /*if($uinfo['rzstatus'] != 2){
 		        $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-		    }
+		    }*/
             $paypassword = trim(I('post.paypwd'));
             if($paypassword == '' || $paypassword == null){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);

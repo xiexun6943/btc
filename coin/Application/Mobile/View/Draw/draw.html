@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="en" style="font-size: 50px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="Robots" contect="none" />
+    <link rel="shortcut icon" id="link-icon" href="/Public/Static/css/hongbao/images/shop.png" />
+    <link href="/Public/Static/css/hongbao/app.cc8ec.css" rel="stylesheet" />
+    <link href="/Public/Static/css/hongbao/869_style.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script>
+        if(('standalone' in window.navigator)&&window.navigator.standalone){
+            var noddy,remotes=false;
+            document.addEventListener('click',function(event){
+                noddy=event.target;
+                while(noddy.nodeName!=='A'&&noddy.nodeName!=='HTML') noddy=noddy.parentNode;
+                if('href' in noddy&&noddy.href.indexOf('http')!==-1&&(noddy.href.indexOf(document.location.host)!==-1||remotes)){
+                    event.preventDefault();
+                    document.location.href=noddy.href;
+                }
+            },false);
+        }
+    </script>
+    <script src="/Public/Static/css/hongbao/js/lf.js"></script>
+    <script src="/Public/Static/css/hongbao/js/dianjianniu.js"></script>
+    <script src="/Public/Static/css/hongbao/js/mDialogMin.js"></script>
+    <link type="text/css" rel="stylesheet" href="/Public/Static/css/hongbao/common_touch.css">
+    <title>High Five</title>
+
+    <style type="text/css" >
+        body {
+            background: #fce1e1  !important;
+        }
+        #main{
+            height: 100%;
+
+        }
+        .hb_add_twoBox{
+            width: 85%;
+            margin: 0 auto 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .hb_leftArry,.hb_rightArry{
+            width: 42%;
+            height: 1.2rem;
+            border-radius: 14px;
+            border: 4px solid #fca9a9;
+            /* border-image: linear-gradient(to bottom, #fcdca9, #e3b170) 1; */
+            background: linear-gradient(180deg, #ff9590 0%, #eb544e 100%)!important;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bolder;
+            padding: 6px;
+            text-align: center;
+            line-height: .45rem;
+        }
+        .hb_add_twoBox p{
+            padding-top: 0;
+            font-size: 13px;
+        }
+        .turnImg{
+            width: 95%;
+        }
+        .round{
+            /*width: 85%;*/
+            /*margin: auto;*/
+            /*text-align: center;*/
+            position: relative;
+            z-index: 99;
+        }
+        .begin{
+            position: absolute;
+            width: 20%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .begin img{
+            width: 100%;
+        }
+        .round_contain{
+            position: fixed;
+            width: 85%;
+            margin: auto;
+            text-align: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 99;
+        }
+        .endRotate{
+            position: relative;
+            margin-top: -30px;
+            z-index: 1;
+        }
+        .endRotate img{
+            width: 100%;
+        }
+        .hb_menban{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 99;
+        }
+        .hb_result{
+            position: fixed;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            /* transform: translate(-50%, -50%); */
+            height: 450px;
+            background: url(/ublic/Static/css/hongbao/images/hb_tc.png?v=2) no-repeat;
+            background-size: 100% 100%;
+            display: none;
+            z-index: 99;
+        }
+        .hb_result h1{
+            margin-top: 100px;
+            background: linear-gradient(to bottom, #fff, #ffe698);
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            padding-left: 10px;
+            font-size: 30px;
+        }
+        .hb_result p{
+            margin-top: 58px;
+            color: #ff4d60;
+            font-size: 16px;
+            padding-left: 12px;
+        }
+        #hn_num{
+            margin-top: 30px;
+            font-size: 50px;
+            color: #ff4d60;
+            letter-spacing: 2px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<script type="text/javascript" src="/Public/Static/css/hongbao/js/touchslide.js"></script>
+<body >
+
+<div id="wrapper">
+</div>
+<div id="main">
+    <div class="header">
+        <a class="back" href="?a=" title="返回"><i class="back iconfont icon-fanhui"></i></a>
+        <h4 style="margin-top: 0em;font-weight: bold">Hight Five {:L('红包')} </h4>
+    </div>
+    <img class="hongbao_gif" src="/Public/Static/css/hongbao/images/hongbao.gif?v=3" alt="" />
+    <div class="hb_main_content">
+
+        <img class="hb_title" src="/Public/Static/css/hongbao/images/hb_title_{$lang}.png?" alt="" />
+        <img class="btn_text" src="/Public/Static/css/hongbao/images/btn_text_{$lang}.png?" alt="" />
+        <style>
+            .hongbao_gif{
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                width: 7rem;
+                height: 6rem;
+                z-index: 99;
+            }
+            .hb_title{
+                display: block;
+                width: 5.5rem;
+                height: auto;
+                margin: 0 auto;
+                padding-top:1.5rem;
+            }
+            .btn_text{
+                display: block;
+                width: .8rem;
+                height: auto;
+                margin: 0 auto;
+                margin-left: 43.5%;
+                padding-top:1.5rem;
+            }
+        </style>
+        <div class="hb_handle_btn">{:L('抽奖')}</div>
+    </div>
+    <div class="hb_add_twoBox">
+        <div class="hb_leftArry">
+            <p>{:L('今日中奖金额')}</p>
+            <p id="today_draw"></p>
+        </div>
+        <div class="hb_rightArry">
+            <p>{:L('今日剩余次数')}</p>
+            <p id="today_times"></p>
+        </div>
+    </div>
+
+
+    </div>
+    <div class="hb_zj_list" style="margin: 30px auto 0;">
+        <h6>{:L('其他中奖名单')}</h6>
+        <div class="hb_zjother_arry" id="hb_zjother_arry">
+            <ul class="mingdan" id="holder">
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="hb_rule hb_rule_<?=LANG?>">
+        <p>{:L('规则说明')}</p>
+
+    </div>
+    <input type="hidden" name="" id="today_draw_num" value="" />
+    <div class="hb_menban">
+
+    </div>
+    <div class="round_contain">
+        <div class="round">
+            <img class="turnImg" src="/Public/Static/css/hongbao/images/lunpan.png" alt="" />
+            <div class="begin">
+                <img src="/Public/Static/css/hongbao/images/go.png" alt="" />
+            </div>
+        </div>
+        <div class="endRotate">
+            <img src="/Public/Static/css/hongbao/images/dizuo.png" alt="" />
+        </div>
+    </div>
+    <div class="hb_result animate__animated animate__bounce">
+        <h1>{:L('恭喜中奖了')}</h1>
+        <p>{:L('太棒了！恭喜获得！')}</p>
+        <h6 id="hn_num"></h6>
+    </div>
+</body>
+
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Static/css/hongbao/js/jquery.rotate.js"></script>
+<script>
+    // function rotate(num){
+    //     var flog = true
+    // 	$(".round").rotate({
+    // 		bind: {
+    // 			click: function () {
+    // 			    console.log(23423)
+    // 				if (flog) {
+    // 					flog = false
+    // 					var math = Math.floor(Math.random() * 10);
+    // 					var sectorId = 5 //选中的奖品地址是需要后台传给你
+    // 					var part = 14  //奖品的总个数
+    // 					var defaultRotate = 1800   //一圈360度，旋转5圈
+    // 					var setRotate = (360 / part) * sectorId - (360 / part) / 2 //计算定位到指定商品在商品的中间
+    // 					var allRotate = defaultRotate + setRotate //总旋转度数
+    // 					$('.turnImg').rotate({
+    // 						duration: 10000,
+    // 						angle: 0,
+    // 						animateTo: allRotate,
+    // 						callback: function () {
+    // 							flog = true
+    // 							console.log($('.turnImg')[0].style.transform,num)
+    // 						}
+    // 					})
+    // 				}
+    // 			}
+    // 		}
+    // 	})
+
+    // }
+    (function () {
+        var flog = true
+        $(".round").rotate({
+            bind: {
+                click: function () {
+                    if (flog) {
+                        flog = false
+                        var math = Math.floor(Math.random() * 10);
+                        var sectorId = 5 //选中的奖品地址是需要后台传给你
+                        var part = 14  //奖品的总个数
+                        var defaultRotate = 1800   //一圈360度，旋转5圈
+                        var setRotate = (360 / part) * sectorId - (360 / part) / 2 //计算定位到指定商品在商品的中间
+                        var allRotate = defaultRotate + setRotate //总旋转度数
+                        $('.turnImg').rotate({
+                            duration: 10000,
+                            angle: 0,
+                            animateTo: allRotate,
+                            callback: function () {
+                                flog = true
+                                $('.round_contain').hide()
+                                $('.hb_result').show()
+                                setTimeout(function(){ $('.hb_result,.hb_menban').hide(200) }, 3500);
+                                godrawshows()
+                                console.log($('.turnImg')[0].style.transform)
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    })
+
+    (function godrawshow() {
+        console.log(123)
+        $.ajax({
+            url: "?a=ajax_godrawshow",
+            dataType: "json",
+            success: function (data) {
+                if(data){
+
+                    var draw_desc = (data.data.draw_desc.content)
+
+
+                    if(data.data.draw_desc.content===undefined){
+                        draw_desc = "1.赤い封筒の抽選回数は毎日更新され、累積されません。\r\n2.抽選で有効化された赤い封筒の金額を受け取ることができます。\r\n3.赤い封筒の抽選の最終的な解釈権は会社に帰属します。\r\n4.宝くじの赤い封筒の量は10,000の無料スタートアップクォータを超えています。規制に従って活性化が必要になった後、撤回は撤回できます。"
+                    }
+                    var arr = draw_desc.split()
+
+                    var ling = '<br>'
+                    draw_desc=draw_desc.replace(/\r\n/g,ling)
+                    console.log(draw_desc,arr)
+                    $('.hb_rule').append(draw_desc)
+
+                    $('#hb_numner').html(data.data.total_draw);
+                    $('#today_draw_num').val(data.data.today_draw_num)
+                    var draw_list = data.data.draw_list,length = data.data.draw_list.length;
+                    var draw_list_other = data.data.draw_list_other,lengths = data.data.draw_list_other.length;
+                    $('#today_draw').html(data.data.today_draw);
+                    $('#today_times').html(data.data.today_draw_num)
+                    for(var i = 0;i<length;i++){
+                        var html = '<li><span>'+ parseInt(i+1) +'</span><span>'+ draw_list[i].name +'</span><span>'+ draw_list[i].amount +'</span></li>';
+                        $('.hb_zj_arry').append(html)
+                    }
+                    for(var s = 0;s<lengths;s++){
+                        var htmls = '<li><span>'+ draw_list_other[s].name +'</span><span>'+ draw_list_other[s].amount +'</span></li>';
+                        $('#holder').append(htmls)
+                    }
+
+                }
+            }
+        })
+    }());
+    function godrawshows() {
+        $('.hb_zj_arry').html("");
+        $('#holder').html("")
+        $.ajax({
+            url: "?a=ajax_godrawshow",
+            dataType: "json",
+            success: function (data) {
+                if(data){
+                    $('#hb_numner').html(data.data.total_draw);
+                    $('#today_draw_num').val(data.data.today_draw_num)
+                    var draw_list = data.data.draw_list,length = data.data.draw_list.length;
+                    var draw_list_other = data.data.draw_list_other,lengths = data.data.draw_list_other.length;
+                    $('#today_draw').html(data.data.today_draw);
+                    $('#today_times').html(data.data.today_draw_num)
+                    for(var i = 0;i<length;i++){
+                        var html = '<li><span>'+ parseInt(i+1) +'</span><span>'+ draw_list[i].name +'</span><span>'+ draw_list[i].amount +'</span></li>';
+                        $('.hb_zj_arry').append(html)
+                    }
+                    for(var s = 0;s<lengths;s++){
+                        var htmls = '<li><span>'+ draw_list_other[s].name +'</span><span>'+ draw_list_other[s].amount +'</span></li>';
+                        $('#holder').append(htmls)
+                    }
+
+                }
+            }
+        })
+    };
+    $('.hb_handle_btn').click(function(){
+        // $('.hb_menban,.round_contain').show()
+        $.get('?a=ajax_godraw',function(data){
+            if(data.data == [] || data.data == ''){
+                console.log(getCookie('zh_choose'))
+                if(getCookie('zh_choose')==='j'){
+                    layer.msg('現在、抽選を行う機会がありません')
+                }else{
+                    layer.msg(data.msg)
+                }
+
+                return;
+            }else{
+
+                // $('.hongbao_gif').show()
+                // setTimeout(function(){
+                //   $('.hongbao_gif').hide()
+
+
+                $('.hb_menban,.round_contain').show()
+                setTimeout(function(){ $('.begin').click() }, 500);
+                $('#hn_num').html(data.data)
+
+                // },1500)
+
+            }
+        })
+    })
+
+
+    function AutoScroll(obj) {
+        $(obj).find("ul:first").animate({
+                marginTop: "-30px"
+            },
+            500,
+            function() {
+                $(this).css({
+                    marginTop: "0px"
+                }).find("li:first").appendTo(this);
+            });
+    }
+    $(document).ready(function() {
+        setInterval('AutoScroll("#hb_zjother_arry")', 1500)
+    });
+</script>
+
+</html>
+

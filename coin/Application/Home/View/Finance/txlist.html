@@ -578,13 +578,7 @@
                                                         <span class="f14 fch">{$vo.addtime}</span>
                                                     </div>
                                                     <div class="contentop" style="width:8%;">
-                                                        <?php if($vo['status']==1){?>
-                                                        <span class="f14 fch fw"><?php echo L('确认中');?></span>
-                                                        <?php }elseif($vo['status']==2){?>
-                                                        <span class="f14 bgreen fw"><?php echo L('完成');?></span>
-                                                        <?php }elseif($vo['status']==3){?>
-                                                        <span class="f14 bred fw"><?php echo L('原路返回');?></span>
-                                                        <?php }?>
+                                                        <?php echo L($vo['status']);?>
                                                     </div>
 
                                                 </div>
