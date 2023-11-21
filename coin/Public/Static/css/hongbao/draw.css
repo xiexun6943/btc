@@ -1,0 +1,28 @@
+.subnav{
+    padding-left: 90px;
+    margin-top:50px;
+}
+.title-1 {
+    font-size: 16px;
+    float: left;
+    height: 37px;
+    line-height: 37px;
+    min-width: 100px;
+    color: #555;
+    font-weight: 400;
+    background-color: #eaeaea;
+    text-align: center;
+    margin-top: 2px;
+}
+.reload{
+    background: unset;
+}
+.content-t{
+    padding-left: 90px;
+}
+.table_01{
+    display: block;
+}
+.table_02{
+    display: none;
+}

@@ -1,15 +1,245 @@
 <include file="Public:header" />
 <link href="/Public/Static/css/hongbao/global.css" rel="stylesheet" type="text/css" />
 <link href="/Public/Static/css/hongbao/content.css" rel="stylesheet" type="text/css" />
-<div class="subnav">
-    <h2 class="title-1">{:L('中奖管理')}</h2>
-    <a href="javascript:location.reload();" class="reload">{:L('刷新')}</a>
-    <div class="content-menu">
-        <a href="<?php echo ADMIN_PATH ?>&c=draw&a=init"><em>{:L('中奖列表')}</em></a><span>|</span>
-        <a href="<?php echo ADMIN_PATH ?>&c=draw&a=get" class="on"><em> {:L('红包抽奖设置')}</em></a>
+<link href="/Public/Static/css/hongbao/draw.css?v=<?=time()?>" rel="stylesheet" type="text/css" />
+
+        
+        
+        
+<div class="content-t table_01">
+    
+    
+    <?php
+    
+class form {
+	/**
+	 * 日历选择
+	 */
+    public static function date($name, $value = '', $isdatetime = 0, $lock = 0) {
+        if ($value == '0000-00-00 00:00:00') $value = '';
+        $id = preg_match("/\[(.*)\]/", $name, $m) ? $m[1] : $name;
+        if ($isdatetime) {
+            $size = 21;
+            $format = '%Y-%m-%d %H:%M:%S';
+            $showsTime = 'true';
+        } else {
+            $size = 14;
+            $format = '%Y-%m-%d';
+            $showsTime = 'false';
+        }
+        $str = '';
+        if (!defined('CALENDAR_INIT')) {
+            define('CALENDAR_INIT', 1);
+            // $str .= '
+            // <link rel="stylesheet" type="text/css" href="' . JS_PATH . 'calendar/calendar-blue.css"/>
+            // <script type="text/javascript" src="' . JS_PATH . 'calendar/calendar.js"></script>';
+            $str .= '
+			<script type="text/javascript" src="' . JS_PATH . '../../../../Public/laydate.js"></script>
+			';
+        }
+        $readonly = 'readonly';
+        if ($lock) {
+            $readonly = '';
+        }
+        if (LANG=='s') {
+            $str .= '
+			<input class="input-text date" type="text" name="' . $name . '" id="' . $id . '" value="' . $value . '" size="' . $size . '" ' . $readonly . ' placeholder="日期"/>';
+        }
+        if (LANG=='t') {
+            $str .= '
+			<input class="input-text date" type="text" name="' . $name . '" id="' . $id . '" value="' . $value . '" size="' . $size . '" ' . $readonly . ' placeholder="日期"/>';
+        }
+        if (LANG=='v') {
+            $str .= '
+			<input class="input-text date" type="text" name="' . $name . '" id="' . $id . '" value="' . $value . '" size="' . $size . '" ' . $readonly . ' placeholder="ngày"/>';
+        }
+        if (LANG=='e') {
+            $str .= '
+			<input class="input-text date" type="text" name="' . $name . '" id="' . $id . '" value="' . $value . '" size="' . $size . '" ' . $readonly . ' placeholder="date"/>';
+        }
+        if (LANG=='in') {
+            $str .= '
+			<input class="input-text date" type="text" name="' . $name . '" id="' . $id . '" value="' . $value . '" size="' . $size . '" ' . $readonly . ' placeholder="tanggal"/>';
+        }
+        // $str .= '
+        // 	<script type="text/javascript">
+        // 		date = new Date();
+        // 		document.getElementById("' . $id . '").value="' . $value . '";
+        // 		Calendar.setup({
+        // 			inputField     :    "' . $id . '",
+        // 			ifFormat       :    "' . $format . '",
+        // 			showsTime      :    ' . $showsTime . ',
+        // 			timeFormat     :    "24"
+        // 		});
+        // 	</script>';
+        $str.='
+		<script type="text/javascript">
+			laydate.render({
+				elem: "#'.$id.'", 
+				type: "datetime"
+			});
+		</script>';
+        return $str;
+    }
+
+	/**
+	 * 验证码
+	 *
+	 * @param string $id 生成的验证码ID
+	 * @param integer $code_len 生成多少位验证码
+	 * @param integer $font_size 验证码字体大小
+	 * @param integer $width 验证图片的宽
+	 * @param integer $height 验证码图片的高
+	 * @param string $font 使用什么字体，设置字体的URL
+	 * @param string $font_color 字体使用什么颜色
+	 * @param string $background 背景使用什么颜色
+	 */
+	public static function checkcode($id = 'checkcode', $code_len = 4, $font_size = 20, $width = 130, $height = 50, $font = '', $font_color = '', $background = '', $vform = false, $charset = '') {
+		return "<img id='$id' style='cursor:pointer;' title='看不清？点击更换验证码' onclick='".($vform ? '$("#code")[0].validform_valid="false";' : '')."this.src=this.src+\"&\"+Math.random()' src='api.php?op=checkcode&code_len=$code_len&font_size=$font_size&width=$width&height=$height&font=" . urlencode($font) . "&font_color=" . urlencode($font_color) . "&background=" . urlencode($background) . "&charset=$charset&rand=" . rand() . "' />";
+	}
+
+	/**
+	 * 下拉选择框
+	 */
+	public static function select($array = array(), $id = '', $str = '', $default_option = '', $default_id = '', $idadd = 0) {
+		$string = '<select ' . $str . '>';
+		if ($default_option) {
+			$default_selected = (empty($id) && $default_option) ? 'selected' : '';
+			$default_id = (empty($default_id) && $default_id != 0) ? '' : $default_id;
+			$string .= '<option value="' . $default_id . '" ' . $default_selected . '>' . $default_option . '</option>';
+		}
+		foreach($array as $key => $value) {
+			$key = $idadd ? $key + 1 : $key;
+			$selected = ($id == $key) ? 'selected' : '';
+			$string .= '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
+		}
+		$string .= '</select>';
+		return $string;
+	}
+
+	/**
+	 * 复选框
+	 *
+	 * @param  $array 选项 二维数组
+	 * @param  $id 默认选中值，多个用 '逗号'分割或者传入数组
+	 * @param  $str 属性
+	 * @param  $defaultvalue 是否增加默认值 默认值为 -99
+	 * @param  $width 宽度
+	 */
+	public static function checkbox($array = array(), $id = '', $str = '', $defaultvalue = '', $width = 0, $br = false) {
+		$string = '';
+		if ($id != '') $id = is_array($id) ? $id : explode(',', $id);
+		if ($defaultvalue) $string .= '<input type="hidden" ' . $str . ' value="-99">';
+		foreach($array as $key => $value) {
+			$checked = ($id && in_array($key, $id)) ? 'checked' : '';
+			if ($br) $string .= '<div>';
+			if ($width) $string .= '<span class="ib" style="width:' . $width . 'px">';
+			$string .= '<label><input type="checkbox" ' . $str . ' ' . $checked . ' value="' . $key . '"/> ' . $value . '</label>';
+			if ($width) $string .= '</span>';
+			if ($br) $string .= '</div>';
+		}
+		return $string;
+	}
+
+	/**
+	 * 单选框
+	 *
+	 * @param  $array 选项 二维数组
+	 * @param  $id 默认选中值
+	 * @param  $str 属性
+	 */
+	public static function radio($array = array(), $id = 0, $str = '') {
+		$string = '';
+		foreach($array as $key => $value) {
+			$checked = $id == $key ? 'checked' : '';
+			$string .= '<label><input type="radio" ' . $str . ' ' . $checked . ' value="' . $key . '"/> ' . $value . '</label>';
+		}
+		return $string;
+	}
+}
+    ?>
+        
+        <div class="subnav">
+            <h2 class="title-1">{:L('中奖管理')}</h2>
+            <a href="javascript:location.reload();" class="reload">{:L('刷新')}</a>
+            <a href="javascript:;" onclick="searchshow(1)" class="searchshow">{:L('展开')}/{:L('收起搜索栏')}</a>
+            <div class="content-menu">
+                <!--<a href="<?php echo ADMIN_PATH ?>&c=draw&a=init"><em>{:L('中奖列表')}</em></a><span>|</span>-->
+                <!--<a href="<?php echo ADMIN_PATH ?>&c=draw&a=get" class="on"><em> {:L('红包抽奖设置')}</em></a>-->
+                <a class="tab_btn on"><em>{:L('中奖列表')}</em></a>
+                <span>|</span>
+                <a class="tab_btn"><em> {:L('红包抽奖设置')}</em></a>
+            </div>
+        </div>     
+    
+    
+    <div id="searchshow">
+        <form name="searchform" action="<?php echo ADMIN_PATH?>&c=draw&a=search" method="get">
+            <input type="hidden" name="m" value="admin">
+            <input type="hidden" name="c" value="draw">
+            <input type="hidden" name="a" value="search">
+            <table width="100%" cellspacing="0" class="search-form">
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="explain-col">
+                            {:L('红包抽奖设置')}/UID <input class="input-text" type="text" name="search[uid]" style="width:50px;" value="<?php echo $search_uid?>">
+                            <!--{:L('开始时间')}-->
+                            <!--<?php echo form::date('search[start_time]',$search_start_time)?>-->
+                            <!--{:L('到')}-->
+                            <!--<?php echo form::date('search[end_time]',$search_end_time)?>-->
+                            <input type="submit" value="{:L('搜索')}" class="button" name="dosubmit">
+                            <!--<a href="<?php echo ADMIN_PATH?>&c=draw"><input type="button" value="{:L('重置')}" class="button"></a>-->
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
     </div>
+    
+    <div class="table-list">
+        <form name="myform" id="myform" action="<?php echo ADMIN_PATH?>&c=account" method="post">
+            <input type="hidden" name="type" value="all">
+            <input type="hidden" name="a" value="del">
+            <table width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th align="center" width="80">UID</th>
+                    <th align="center" width="80">{:L('用户名')}</th>
+                    <th align="center" width="80">{:L('当日红包')}</th>
+                    <th align="center" width="80">{:L('累计红包')}</th>
+                    <th align="center" width="120">{:L('当日已经抽奖次数')}/{:L('当日总抽奖次数')}</th>
+                    <th align="center" width="80">{:L('累计充值金额')}</th>
+                    <th align="center" width="80">{:L('上级代理UID')}</th>
+                    <th align="center" width="80">{:L('上级代理用户名')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($list as $v){ ?>
+                    <tr id="list_<?php echo $v['uid']?>">
+                        <td align="center"><?= $v['uid'] ?></td>
+                        <td align="center"><?= _lang($val['name']) ?></td>
+                        <td align="center"><?= $v['today_amount'] ?></td>
+                        <td align="center"><?= $v['amount'] ?></td>
+                        <td align="center"><?= $v['draw_ed_num'] ?> / <?= $v['draw_num'] ?></td>
+                        <td align="center"><?= $v['total_recharge'] ?></td>
+                        <td align="center"><?= $v['agent_uid'] ?></td>
+                        <td align="center"><?= $v['agent_name'] ?></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </form>
+        <div id="pages"><?php echo $pages?></div>
+    </div>
+    
+    
+    
 </div>
-<div class="content-t">
+         
+
+<div class="content-t table_02">
     <form name="multipart/form-data" action="<?php echo ADMIN_PATH ?>&c=draw&a=set" method="post">
         <input type="hidden" name="m" value="admin">
         <input type="hidden" name="c" value="draw">
@@ -19,7 +249,180 @@
         $drawControl = unserialize(urldecode($drawControl));
         $lang = unserialize(urldecode($lang));
         ?>
+        
+        
+        
+        <div class="subnav">
+            <h2 class="title-1">{:L('中奖管理')}</h2>
+            <div class="content-menu">
+                <!--<a href="<?php echo ADMIN_PATH ?>&c=draw&a=init"><em>{:L('中奖列表')}</em></a><span>|</span>-->
+                <!--<a href="<?php echo ADMIN_PATH ?>&c=draw&a=get" class="on"><em> {:L('红包抽奖设置')}</em></a>-->
+                <a class="tab_btn"><em>{:L('中奖列表')}</em></a>
+                <span>|</span>
+                <a class="tab_btn on"><em> {:L('红包抽奖设置')}</em></a>
+            </div>
+        </div>     
+        
+        
         <table width="100%" cellspacing="0" class="table_form">
+            <caption>{:L('红包抽奖等级设置')}</caption>
+            <tbody id="draw">
+            <?php $i= 0;foreach ($draw as $key => $val) { if($i >4){break;} ?>
+                <tr>
+                    <th><?= $val['name'] ?>：</th>
+                    <input type="hidden" name="setting[draw][name][<?= $key ?>]" value="<?= $val['name'] ?>">
+                    <input type="hidden" name="setting[draw][level][<?= $key ?>]" value="<?= $val['level'] ?>">
+                    <td>
+                        {:L('充值累计金额')}：<input class="input-text" type="text" name="setting[draw][amount][<?= $key ?>]"
+                                      value="<?= $val['amount'] ?>">
+                    </td>
+                    <td>
+                        {:L('日抽奖次数')}：<input class="input-text" type="text" name="setting[draw][num][<?= $key ?>]"
+                                     value="<?= $val['num'] ?>">
+                    </td>
+                    <td>
+                        {:L('默认抽奖中奖金额')}：<input class="input-text" type="text" name="setting[draw][draw_min][<?= $key ?>]"
+                                        value="<?= $val['draw_min'] ?>">
+                        - <input class="input-text" type="text" name="setting[draw][draw_max][<?= $key ?>]"
+                                 value="<?= $val['draw_max'] ?>">
+                    </td>
+                    <td>
+                        <label>{:L('启用')}</label><input type="radio" name="setting[draw][status][<?= $key ?>]"
+                                                value="1" <?php if ($val['status'] == 1) echo 'checked="checked"' ?>/>
+                        <label>{:L('停用')}</label><input type="radio" name="setting[draw][status][<?= $key ?>]"
+                                                value="2" <?php if ($val['status'] == 2) echo 'checked="checked"' ?>/>
+                    </td>
+                </tr>
+            <?php $i++; } ?>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" class="table_form">
+            <caption>{:L('红包抽奖金额设置')}</caption>
+            <tbody id="draw_control">
+                <tr>
+                    <th>{:L('控制')}</th>
+                    <td>
+                        <label>{:L('随机')} <input type="radio" class="settingdrawcontroltype"
+                                         name="setting[draw_control][type]"
+                                         value="1" <?php if ($drawControl['type'] == 1) echo 'checked="checked"' ?>/></label>
+                        <label>{:L('自定义')} <input type="radio" class="settingdrawcontroltype"
+                                          name="setting[draw_control][type]"
+                                          value="2" <?php if ($drawControl['type'] == 2) echo 'checked="checked"' ?>/></label>
+                    </td>
+                    <td>
+                            <textarea class="input-text settingdrawcontroldrawcontrol"
+                                      name="setting[draw_control][draw_control]"
+                                      style="height: 60px;width: 95%"  <?php if ($drawControl['type'] == 1) { ?> disabled="disabled" <?php } ?>><?= $drawControl['draw_control'] ?></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" class="table_form">
+            <caption>{:L('规则说明')}</caption>
+            <tbody id="lang">
+            <?php foreach ($lang as $key => $val) { ?>
+                <tr>
+                    <input type="hidden" name="setting[lang][name][<?= $key ?>]" value="<?= $val['name'] ?>">
+                    <input type="hidden" name="setting[lang][type][<?= $key ?>]" value="<?= $val['type'] ?>">
+                    <th>
+                        <?= $val['name'] ?>
+                    </th>
+                    <td>
+                            <textarea class="input-text lang_content_s" name="setting[lang][content][<?= $key ?>]"
+                                      style="height: 120px;width: 95%"><?= $val['content'] ?></textarea>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <p class="mt20"></p>
+        <input type="submit" class="button" name="dosubmit" value=" 提 交 "/>
+    </form>
+</div>   
+
+<script>
+    $(function(){
+        $('.table_01 .tab_btn').click(function(){
+            const index = $('.table_01 .tab_btn').index($(this))
+            if(index===0){
+                $('.table_01').show()
+                $('.table_02').hide()
+            }else{
+                $('.table_01').hide()
+                $('.table_02').show()
+            }
+        })
+        $('.table_02 .tab_btn').click(function(){
+            const index = $('.table_02 .tab_btn').index($(this))
+            if(index===0){
+                $('.table_01').show()
+                $('.table_02').hide()
+            }else{
+                $('.table_01').hide()
+                $('.table_02').show()
+            }
+        })
+    })
+</script>
+
+
+
+<div class="content-t" style="display:none">
+    <form name="multipart/form-data" action="<?php echo ADMIN_PATH ?>&c=draw&a=set" method="post">
+        <input type="hidden" name="m" value="admin">
+        <input type="hidden" name="c" value="draw">
+        <input type="hidden" name="a" value="search">
+        <?php
+        $draw = unserialize(urldecode($draw));
+        $drawControl = unserialize(urldecode($drawControl));
+        $lang = unserialize(urldecode($lang));
+        ?>
+        
+        
+        <div class="subnav">
+            <h2 class="title-1">{:L('中奖管理')}</h2>
+            <a href="javascript:location.reload();" class="reload">{:L('刷新')}</a>
+            <a href="javascript:;" onclick="searchshow(1)" class="searchshow">{:L('展开')}/{:L('收起搜索栏')}</a>
+            <div class="content-menu">
+                <a href="<?php echo ADMIN_PATH ?>&c=draw&a=init" class="on"><em>{:L('中奖列表')}</em></a><span>|</span>
+                <a href="<?php echo ADMIN_PATH ?>&c=draw&a=get"><em>{:L('红包抽奖设置')}</em></a>
+            </div>
+        </div>     
+        
+        
+        
+        <table width="100%" cellspacing="0" class="table_form" style="display:none">
+            <tbody id="draw">
+            <?php $i= 0;foreach ($draw as $key => $val) { if($i >4){break;} ?>
+            <tr>
+                <th><?= $val['name'] ?>：</th>
+                <input type="hidden" name="setting[draw][name][<?= $key ?>]" value="<?= $val['name'] ?>">
+                <input type="hidden" name="setting[draw][level][<?= $key ?>]" value="<?= $val['level'] ?>">
+                <td>
+                    {:L('充值累计金额')}：<input class="input-text" type="text" name="setting[draw][amount][<?= $key ?>]"
+                                                value="<?= $val['amount'] ?>">
+                </td>
+                <td>
+                    {:L('日抽奖次数')}：<input class="input-text" type="text" name="setting[draw][num][<?= $key ?>]"
+                                               value="<?= $val['num'] ?>">
+                </td>
+                <td>
+                    {:L('默认抽奖中奖金额')}：<input class="input-text" type="text" name="setting[draw][draw_min][<?= $key ?>]"
+                                                  value="<?= $val['draw_min'] ?>">
+                    - <input class="input-text" type="text" name="setting[draw][draw_max][<?= $key ?>]"
+                             value="<?= $val['draw_max'] ?>">
+                </td>
+                <td>
+                    <label>{:L('启用')}</label><input type="radio" name="setting[draw][status][<?= $key ?>]"
+                                                          value="1" <?php if ($val['status'] == 1) echo 'checked="checked"' ?>/>
+                    <label>{:L('停用')}</label><input type="radio" name="setting[draw][status][<?= $key ?>]"
+                                                          value="2" <?php if ($val['status'] == 2) echo 'checked="checked"' ?>/>
+                </td>
+            </tr>
+            <?php $i++; } ?>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" class="table_form" style="display:none">
             <caption>{:L('红包抽奖等级设置')} </caption>
             <tbody id="draw">
             <?php $i= 0;foreach ($draw as $key => $val) { if($i >4){break;} ?>
@@ -51,9 +454,8 @@
             <?php $i++; } ?>
             </tbody>
         </table>
-        <table width="100%" cellspacing="0" class="table_form">
-            <caption>{:L('红包抽奖金额设置')}</caption>
-            <tbody id="draw_control">
+            <caption style="display:none">{:L('红包抽奖金额设置')}</caption>
+            <tbody id="draw_control" style="display:none">
             <tr>
                 <th>{:L('控制')}</th>
                 <td>
@@ -72,7 +474,7 @@
             </tr>
             </tbody>
         </table>
-        <table width="100%" cellspacing="0" class="table_form">
+        <table width="100%" cellspacing="0" class="table_form" style="display:none">
             <caption>{:L('规则说明')}</caption>
             <tbody id="lang">
             <?php foreach ($lang as $key => $val) { ?>
@@ -90,8 +492,8 @@
             <?php } ?>
             </tbody>
         </table>
-        <p class="mt20"></p>
-        <input type="submit" class="button" name="dosubmit" value=" 提 交 "/>
+        <p class="mt20" style="display:none"></p>
+        <input type="submit" class="button" name="dosubmit" value=" 提 交 " style="display:none"/>
     </form>
 </div>
 </body>
