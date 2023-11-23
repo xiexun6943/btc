@@ -1,8 +1,8 @@
 <?php
 /* 红包抽奖 */
-namespace Mobile\Controller;
+namespace Home\Controller;
 
-class DrawController extends MobileController
+class DrawController extends HomeController
 {
     
 	protected function _initialize()
@@ -12,14 +12,6 @@ class DrawController extends MobileController
 			$this->error(L("非法操作"));
 		}
 		
-	}
-
-	//红包页面首页
-	public function draw(){
-		$uid = userid();
-        $lang=cookie("language");
-        $this->assign('lang',$lang);
-		$this->display();
 	}
 
     public function drawList()
@@ -216,6 +208,7 @@ class DrawController extends MobileController
         $this->ajaxReturn($msg);
         exit;
     }
+
 
 	
 	

@@ -476,13 +476,30 @@ class ContractController extends HomeController
 
     // 检测用户金额
     public function checkUsdt(){
+        $uid = userid();
+        if($uid <= 0){ // 用户登录失效
+            return $this->ajaxReturn(['code'=>0,'msg'=>L('用户失效,请登录！')]) ;
+        }
         $time= trim($_POST['time']);
-        $time=60;
+        if (!$time) {
+            return $this->ajaxReturn(['code'=>0,'msg'=>L('参数缺失')]) ;
+        }
+
         $hysetting= M("hysetting")->where(array('id'=>1))->find();
+        $userInfo= M("user_coin")->field('userid,usdt')->where(array('userid'=>$uid))->find();
         $hy_time=explode(',',$hysetting['hy_time']);
+        if (!in_array($time,$hy_time)) {
+            return $this->ajaxReturn(['code'=>0,'msg'=>L('参数无效')]) ;
+        }
         $room_min=explode(',',$hysetting['room_min']);
         $data=array_combine($hy_time,$room_min);
-        return  ['code'=>200,'data'=>['room_min'=>$data[$time]],'msg'=>$time.'秒合约获取门槛成功'];
+
+        if ($userInfo && $userInfo['usdt'] >= $data[$time]) {
+            return   $this->ajaxReturn(['code'=>1,'msg'=>L('允行进入').$time.L('秒合约房间')]);
+        }else{
+            return   $this->ajaxReturn(['code'=>0,'msg'=>L('不允行进入').$time.L('秒合约房间')]);
+        }
+
     }
 
 }

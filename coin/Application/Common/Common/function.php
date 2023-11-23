@@ -542,6 +542,43 @@ if (!function_exists('get_config')){
     }
 }
 
+function returnMsg($code){
+    $response=['code'=>404,'msg'=>L('接口异常')];
+    switch ($code) {
+        case 10001:
+            $response= ['code'=>10001,'msg'=>L('参数无效')];break;
+        case 10002:
+            $response= ['code'=>10001,'msg'=>L('参数为空')];break;
+        case 10003:
+            $response= ['code'=>10001,'msg'=>L('参数缺失')];break;
+        case 20001:
+            $response=  ['code'=>20001,'msg'=>L('用户失效,请登录！')];break;
+        case 20002:
+            $response= ['code'=>20002,'msg'=>L('账号密码错误')];break;
+        case 20003:
+            $response= ['code'=>20002,'msg'=>L('账号被禁用！')];break;
+        case 20004:
+            $response= ['code'=>20004,'msg'=>L('用户不存在!')];break;
+    }
+    return  $response;
+}
+// 获取系统设置信息
+ function get_settings($filed = '')
+{
+    if ($filed) {
+        $settingdata = M("settings")->where(['name'=>$filed])->find();
+        if ($filed == 'draw' || $filed == 'lang') {
+            return unserialize(urldecode($settingdata['data']));
+        }
+        return $settingdata['data'];
+    } else {
+        $settingdata = M("settings")->select();
+        foreach ($settingdata as $k => $v) {
+            $settingarr[$v['name']] = $v['data'];
+        }
+        return $settingarr;
+    }
+}
 
 
 ?>
