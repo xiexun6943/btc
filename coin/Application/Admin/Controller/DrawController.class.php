@@ -16,452 +16,207 @@ class DrawController extends AdminController
 
 	//红包抽奖记录
 	public function draw(){
-
-//		if(I('get.type') > 0){
-//			$hyzd = trim(I('get.type'));
-//			$where['type'] = $hyzd;
-//		}
-//
-//		if(I('get.status') > 0){
-//			$status = trim(I('get.status'));
-//			$where['status'] = $status;
-//		}
-//
-//		if(I('get.username') > 0){
-//			$username = trim(I('get.username'));
-//			$where['account'] = $username;
-//		}
-//
-//		$where['ordertype'] = 2;
-//		$count = M('draw')->where($where)->count();
-//		$Page = new \Think\Page($count, 15);
-//		$show = $Page->show();
-//		$list = M('bborder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-//		$this->assign('list', $list);
-//		$this->assign('page', $show);
 		$this->display();
 	}
 
-	//币币交易限价委托记录
-	public function bbxjlist(){
+	private $db, $db2, $db3, $db4;
 
-		if(I('get.type') > 0){
-			$hyzd = trim(I('get.type'));
-			$where['type'] = $hyzd;
-		}
-
-		if(I('get.status') > 0){
-			$status = trim(I('get.status'));
-			$where['status'] = $status;
-		}
-
-		if(I('get.username') > 0){
-			$username = trim(I('get.username'));
-			$where['account'] = $username;
-		}
-
-
-
-
-		$where['ordertype'] = 1;
-		$count = M('bborder')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('bborder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
-
-		$this->display();
-	}
-
-
-	//币币交易参数设置
-	public function bbsetting(){
-		if($_POST){
-			$id = trim($_POST['bbid']);
-			if($id <= 0){
-				$result = M("bbsetting")->add($_POST);
-			}else{
-				unset($_POST['bbid']);
-				$result = M("bbsetting")->where(array('id'=>$id))->save($_POST);
-			}
-			if($result){
-
-				$this->success("操作成功!",U('Trade/bbsetting'));
-			}else{
-				$this->error("操作失败!",U('Trade/bbsetting'));
-			}
-
-		}else{
-
-			$info = M("bbsetting")->where(array('id'=>1))->find();
-			$this->assign("info",$info);
-			$this->display();
-		}
-
-	}
-
-
-	//合约订单详情
-	public function orderinfo(){
-		$id = trim(I('get.id'));
-		$info = M("hyorder")->where(array("id"=>$id))->find();
-		$this->assign('info',$info);
-		$this->display();
-	}
-	//合约订单详情
-	public function orderinfo_ty(){
-		$id = trim(I('get.id'));
-		$info = M("tyhyorder")->where(array("id"=>$id))->find();
-		$this->assign('info',$info);
-		$this->display();
-	}
-
-	//秒合约参数设置
-	public function sethy(){
-		if($_POST){
-			$id = trim($_POST['hy_id']);
-			if($id <= 0){
-				$result = M("hysetting")->add($_POST);
-			}else{
-				unset($_POST['hy_id']);
-				$result = M("hysetting")->where(array('id'=>$id))->save($_POST);
-			}
-			if($result){
-
-				$this->success("操作成功!",U('Trade/sethy'));
-			}else{
-				$this->error("操作失败!",U('Trade/sethy'));
-			}
-
-		}else{
-			$info = M("hysetting")->where(array('id'=>1))->find();
-			$this->assign("info",$info);
-			$this->display();
-		}
-
-	}
-	protected function getRedis()
+	public function __construct()
 	{
-		$redis = new \Redis();
-		$host = REDIS_HOST;
-		$port = REDIS_PORT;
-		$password= REDIS_PWD;
-		$redis->connect($host ,$port, 30);
-		$redis->auth($password);
-		return $redis;
+		parent:: __construct();
+		$this->db = base:: load_model('draw_model');
+		$this->db2 = base:: load_model('pay_model');
+		$this->db3 = base:: load_model('user_model');
+		$this->db4 = base:: load_model('settings_model');
 	}
 
-	//跟单参数设置
-	public function setgd(){
-		if($_POST){
-			$id = trim($_POST['id']);
-			if($id <= 0){
-				$result = M("gendan")->add($_POST);
-			}else{
-				unset($_POST['id']);
-				$result = M("gendan")->where(array('id'=>$id))->save($_POST);
-			}
-			if($result){
-				// 写入redis 缓存中
-				$gdanInfo = M("gendan")->where(array('id'=>$id))->find();
-				$redis=$this-> getRedis();
-				$redis->hMSet('gdan_config',$gdanInfo);
-//				$redis->del('gdan_config');
-				$this->success("操作成功!",U('Trade/setgd'));
-			}else{
-				$this->error("操作失败!",U('Trade/setgd'));
-			}
-
-		}else{
-			$gendan_arr=M('gendan')->find();
-			$info = M("hysetting")->where(array('id'=>1))->find();
-			$trade_time=explode(',',$info['hy_time']);
-			$coin_name=['BTC/USDT','ETH/USDT','EOS/USDT','DOGE/USDT','BCH/USDT','LTC/USDT','IOTA/USDT','FIL/USDT','FLOW/USDT','JST/USDT','HT/USDT'];
-			$this->assign("coin",$coin_name);
-			$this->assign("info",$trade_time);
-			$this->assign("data",$gendan_arr);
-			$this->display();
-		}
-
-	}
-
-	//体验订单记灵
-	public function tyorder(){
-
-		$where = array();
-		if(I('get.username') != '' || I('get.username') != null){
-			$username = trim(I('get.username'));
-			$where['username'] = $username;
-		}
-
-		if(I('get.hyzd') > 0){
-			$hyzd = trim(I('get.hyzd'));
-			$where['hyzd'] = $hyzd;
-		}
-		$count = M('tyhyorder')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('tyhyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
-
-		$this->display();
-	}
-
-	//合约购买记录（未平仓的）
-	public function index(){
-
-		$where = array();
-		if(I('get.username') != '' || I('get.username') != null){
-			$username = trim(I('get.username'));
-			$where['username'] = trim($username);
-		}
-
-		if(I('get.hyzd') > 0){
-			$hyzd = trim(I('get.hyzd'));
-			$where['hyzd'] = $hyzd;
-		}
-
-
-		if(I('get.is_gd') > 0){
-			$is_gd= trim(I('get.is_gd'));
-			$where['is_gd'] = $is_gd;
-		}
-
-		$where['status'] = 1;
-
-		$count = M('hyorder')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
-
-		$this->display();
-	}
-
-
-	//合约交易平仓记录
-	public function hylog($invit=null,$username=null){
-
-		if($invit != ''){
-			$where['invit'] = $invit;
-		}
-
-		if($username != ''){
-			$where['username'] = $username;
-		}
-
-		$where['status'] = 2;
-		$count = M('hyorder')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
-		$this->display();
-	}
-
-
-	//跟单开关记录
-	public function gdopenlog($username=null){
-
-		$where=[];
-		if($username != ''){
-			$where['username'] = trim($username);
-		}
-
-
-		$count = M('gd_open_log')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('gd_open_log')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
-		$this->display();
-	}
-
-	//开启跟单用户
-	public function gdopenuser($username=null){
-
-		if($username != ''){
-			$where['username'] = trim($username);
-		}
-		$count = M('gd_member')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('gd_member')->where($where)->order('addtime desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
-		$this->display();
-	}
-
-	///机器人刷单币种列表
-	public function market($field = NULL, $name = NULL)
+	public function init()
 	{
-		$where = array();
-
-		if ($field && $name) {
-			if ($field == 'username') {
-				$where['userid'] = M('User')->where(array('username' => $name))->getField('id');
-			}
-			else {
-				$where[$field] = $name;
-			}
-		}
-
-		$count = M('Market')->where($where)->count();
-		$Page = new \Think\Page($count, 15);
-		$show = $Page->show();
-		$list = M('Market')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-		$this->assign('list', $list);
-		$this->assign('page', $show);
-		$this->display();
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$list = $this->db->listinfo('', 'uid DESC', $page, 15, 1, 10, 1, '', '', [], 'uid,name,sum(amount) as amount', 'uid',1);
+		$pages = $this->db->pages;
+		$list = $this->listData($list);
+		base:: load_sys_class('format', '', 0);
+		base:: load_sys_class('form');
+		include $this->admin_tpl('draw_list');
 	}
 
-	//编辑刷单
-	public function marketEdit($id = NULL)
+	public function search()
 	{
-		$getCoreConfig = getCoreConfig();
-		if(!$getCoreConfig){
-			$this->error('核心配置有误');
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$where = " 1 ";
+		if (is_array($_GET['search'])) extract($_GET['search']);
+		$search_uid = trim($uid);
+		$search_start_time = $start_time;
+		$search_end_time = $end_time;
+		if ($search_uid) {
+			if (is_numeric($search_uid)) {
+				$where .= " and uid = {$search_uid} ";
+			} else {
+				$where .= " and name LIKE '%{$search_uid}%' ";
+			}
 		}
-		if (empty($_POST)) {
-			if (empty($id)) {
-				$this->data = array();
-			}
-			else {
-				$this->data = M('Market')->where(array('id' => $id))->find();
-			}
-			$time_arr = array('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23');
-			$time_minute = array('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59');
-			$this->assign('time_arr', $time_arr);
-			$this->assign('time_minute', $time_minute);
-			$this->assign('getCoreConfig',$getCoreConfig['indexcat']);
-			$this->display();
+
+		if ($search_start_time) {
+			$search_start_time = date('Y-m-d 00:00:00', strtotime($search_start_time));
+			$where .= " and create_time >= '{$search_start_time}' ";
 		}
-		else {
-			if (APP_DEMO) {
-				$this->error('测试站暂时不能修改！');
-			}
 
-			$round = array(0, 1, 2, 3, 4, 5, 6);
+		if ($search_end_time) {
+			$search_end_time = date('Y-m-d 23:59:59', strtotime($search_end_time));
+			$where .= " and create_time <= '{$search_end_time}' ";
+		}
 
-			if (!in_array($_POST['round'], $round)) {
-				$this->error('小数位数格式错误！');
-			}
+		$list = $this->db->listinfo($where, 'uid DESC', $page, 15, 1, 10, 1, '', '', [], 'uid,name,sum(amount) as amount,count(id) as draw_ed_num', 'uid',1);
+		$pages = $this->db->pages;
+		$list = $this->listData($list);
+		base:: load_sys_class('format', '', 0);
+		base:: load_sys_class('form');
+		include $this->admin_tpl('draw_list');
+	}
 
-			if ($_POST['id']) {
-				$rs = M('Market')->save($_POST);
-			}
-			else {
-				$_POST['name'] = $_POST['sellname'] . '_' . $_POST['buyname'];
-				unset($_POST['buyname']);
-				unset($_POST['sellname']);
-
-				if (M('Market')->where(array('name' => $_POST['name']))->find()) {
-					$this->error('市场存在！');
+	public function listData($list)
+	{
+		$todayS = date('Y-m-d 00:00:00');
+		$todayE = date('Y-m-d 23:59:59');
+		$todayDraw = $this->db->select("create_time between '{$todayS}' and '{$todayE}'"
+			, 'uid,sum(amount) as amount,count(id) as draw_ed_num', '', '', 'uid');
+		$todayDrawArr = [];
+		$todayDrawNumArr = [];
+		if ($todayDraw) {
+			$todayDrawArr = array_column($todayDraw, 'amount', 'uid');
+			$todayDrawNumArr = array_column($todayDraw, 'draw_ed_num', 'uid');
+		}
+		$todayST = strtotime($todayS);
+		$todayET = strtotime($todayE);
+		$totalRecharge = $this->db2->select("state in (1,2) and addtime between '{$todayST}' and '{$todayET}'", 'uid,sum(money) as money', '', '', 'uid');
+		$totalRechargeArr = [];
+		if ($totalRecharge) {
+			$totalRechargeArr = array_column($totalRecharge, 'money', 'uid');
+		}
+		$todayST = strtotime($todayS);
+		$todayET = strtotime($todayE);
+		$todayRecharge = $this->db2->select("state in (1,2) and addtime between '{$todayST}' and '{$todayET}'", 'uid,sum(money) as money', '', '', 'uid');
+		$todayRechargeArr = [];
+		if ($todayRecharge) {
+			$todayRechargeArr = array_column($todayRecharge, 'money', 'uid');
+		}
+		$user = $this->db3->select('', '*');
+		$userArr = [];
+		if ($user) {
+			$userArr = array_column($user, null, 'uid');
+		}
+		$setting = $this->get_settings('draw');
+		$drawSetArr = [];
+		$amount = [];
+		if ($setting) {
+			$drawSetArr = array_column($setting, null, 'amount');
+			$amount = array_column($setting, 'amount');
+			rsort($amount);
+		}
+		foreach ($list as $k => $v) {
+			$list[$k]['today_amount'] = $todayDrawArr[$v['uid']] ?? 0;
+			$list[$k]['draw_ed_num'] = $todayDrawNumArr[$v['uid']] ?? 0;
+			$list[$k]['total_recharge'] = $totalRechargeArr[$v['uid']] ?? 0;
+			$list[$k]['agent_uid'] = '';
+			$list[$k]['agent_name'] = '';
+			$list[$k]['draw_num'] = 0;
+			if (isset($userArr[$v['uid']])) {
+				$tmpUser = $userArr[$v['uid']];
+				isset($tmpUser['agent']) && !empty($tmpUser['agent']) && $list[$k]['agent_uid'] = $tmpUser['agent'];
+				$list[$k]['agent_uid'] && $list[$k]['agent_name'] = $userArr[$tmpUser['agent']]['username'];
+				if ($amount) {
+					foreach ($amount as $av) {
+						// if ($av <= $list[$k]['total_recharge'] && $drawSetArr[$av]['status'] == 1 && isset($todayRechargeArr[$v['uid']])) {
+						if ($av <= $list[$k]['total_recharge'] && $drawSetArr[$av]['status'] == 1) {
+							$list[$k]['draw_num'] = $drawSetArr[$av]['num'];
+							break;
+						}
+					}
 				}
-
-				$rs = M('Market')->add($_POST);
-			}
-
-			if ($rs) {
-				$this->success('操作成功！');
-			}
-			else {
-				$this->error('操作失败！');
 			}
 		}
+		return $list;
 	}
 
-	public function marketStatus($id = NULL, $type = NULL, $mobile = 'Market')
+	// 获取系统设置信息
+	public function get_settings($filed = '')
 	{
-		if (APP_DEMO) {
-			$this->error('测试站暂时不能修改！');
-		}
-
-		if (empty($id)) {
-			$this->error('参数错误！');
-		}
-
-		if (empty($type)) {
-			$this->error('参数错误1！');
-		}
-
-		if (strpos(',', $id)) {
-			$id = implode(',', $id);
-		}
-
-		$where['id'] = array('in', $id);
-
-		switch (strtolower($type)) {
-			case 'forbid':
-				$data = array('status' => 0);
-				break;
-
-			case 'resume':
-				$data = array('status' => 1);
-				break;
-
-			case 'repeal':
-				$data = array('status' => 2, 'endtime' => time());
-				break;
-
-			case 'delete':
-				$data = array('status' => -1);
-				break;
-
-			case 'del':
-				if (M($mobile)->where($where)->delete()) {
-					$this->success('操作成功！');
-				}
-				else {
-					$this->error('操作失败！');
-				}
-
-				break;
-
-			default:
-				$this->error('操作失败！');
-		}
-
-		if (M($mobile)->where($where)->save($data)) {
-			$this->success('操作成功！');
-		}
-		else {
-			$this->error('操作失败！');
-		}
-	}
-
-	public function tradeclear($type=NULL,$id=NULL)
-	{
-		if(!$id){
-			$this->error('请选择交易市场!');
-		}
-		if(!$type){
-			$this->error('请选择清理类型!');
-		}
-		$market= M('Market')->where(array('id' => $id))->find();
-		if($type==1){
-			$allclear=M('Trade')->where(array('market'=>$market['name'],'userid'=>0))->delete();
-		}
-		if($type==2){
-			if(!$market['sdhigh'] or !$market['sdlow']){
-				$this->error('该市场未设置刷单最高价或最低价,无法部分清理');
+		$setdb = base:: load_model('settings_model');
+		if ($filed) {
+			$settingdata = $setdb->get_one(array('name' => $filed));
+			if ($filed == 'draw') {
+				return unserialize(urldecode($settingdata['data']));
 			}
-			$map['market']=$market['name'];
-			$map['userid']=0;
-			$map['price']=array('notbetween',array($market['sdhigh'],$market['sdlow']));
-			$allclear=M('Trade')->where($map)->delete();
-		}
-		if($allclear){
-			$this->success('清理成功,一共'.$allclear.'条刷单记录');
-		}else{
-			$this->error('清理失败!');
+			return $settingdata['data'];
+		} else {
+			$settingdata = $setdb->select();
+			foreach ($settingdata as $k => $v) {
+				$settingarr[$v['name']] = $v['data'];
+			}
+			return $settingarr;
 		}
 	}
+
+	public function get()
+	{
+		$drawArr = [];
+		$draw = $this->db4->select("name in('draw','draw_control','lang')");
+		foreach ($draw as $k => $v) {
+			$drawArr[$v['name']] = $v['data'];
+		}
+		$draw = $drawArr['draw'];
+		$drawControl = $drawArr['draw_control'];
+		$lang = $drawArr['lang'];
+		include $this->admin_tpl('draw_set');
+	}
+
+	public function set()
+	{
+		if (isset($_POST['dosubmit'])) {
+			$setting_arr = $_POST['setting'];
+
+			$draw = array();
+			foreach ($setting_arr['draw'] as $keyD => $valD) {
+				foreach ($valD as $keD => $vaD) {
+					if(!empty($vaD)){
+						$draw[$keD][$keyD] = trim($vaD);
+					}
+				}
+			}
+			$setting_arr['draw'] = urlencode(serialize($draw));
+
+			$drawControl = array();
+			foreach ($setting_arr['draw_control'] as $keyC => $valC) {
+				if(!empty($valC)){
+					$drawControl[$keyC] = trim($valC);
+				}else{
+					$drawControl[$keyC] = '';
+				}
+			}
+			$setting_arr['draw_control'] = urlencode(serialize($drawControl));
+
+			$lang = array();
+			foreach ($setting_arr['lang'] as $keyL => $valL) {
+				foreach ($valL as $keL => $vaL) {
+					if(!empty($vaL)){
+						$lang[$keL][$keyL] = $vaL;
+					}
+
+				}
+			}
+			$setting_arr['lang'] = urlencode((serialize($lang)));
+			foreach($setting_arr as $k => $v) {
+				$setting[$k] = safe_replace(trim($v));
+				$this -> db4 -> update(array('data' => safe_replace(trim($v))),array('name' => $k )); //更新数据
+			}
+			showmessage(_lang('更新成功！'), HTTP_REFERER);
+		}
+	}
+
+
+
+
 
 
 }
