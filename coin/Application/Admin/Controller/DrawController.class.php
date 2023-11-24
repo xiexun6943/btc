@@ -11,34 +11,55 @@ class DrawController extends AdminController
 			$this->error("页面不存在！");
 		}
 	}
+	//系统设置首页
+	public function index($uid=null,$name=null){
+		if($uid != ''){
+			$where['uid'] = $uid;
+		}
 
+		if($name != ''){
+			$where['name'] = $name;
+		}
 
+		$count = M('draw')->where($where)->count();
+		$Page = new \Think\Page($count, 15);
+		$show = $Page->show();
+		$list = M('draw')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		$data=[];
+		if ($list) {
+			foreach ($list as$k=> $v) {
+				$data[]=$v;
+				$data[$k]['total_draw']=$this->getUserDraw($v['uid']);
+				$data[$k]['total_recharge']=$this->getUserRecharge($v['uid']);
+			}
+		}
+//		var_dump($data);exit();
+		$this->assign('list', $data);
+		$this->assign('page', $show);
+		$this->display();
+
+	}
+	// 个人所有抽奖总计
+	public function getUserDraw($uid){
+		$userAmount = M('draw')->field('sum(amount) as amount')->where(['uid'=>$uid])->find();
+
+		if (!$userAmount) {
+			return '0.00';
+		}
+		return $userAmount['amount'];
+	}
+	// 个人所有充值
+	public function getUserRecharge($uid){
+		$recharge = M('recharge')->field('sum(num) as amount')->where(['uid'=>$uid,'status'=>1])->find();
+		if (!$recharge) {
+			return '0.00';
+		}
+		return $recharge['amount'];
+	}
 
 	//红包抽奖记录
 	public function draw(){
 		$this->display();
-	}
-
-	private $db, $db2, $db3, $db4;
-
-	public function __construct()
-	{
-		parent:: __construct();
-		$this->db = base:: load_model('draw_model');
-		$this->db2 = base:: load_model('pay_model');
-		$this->db3 = base:: load_model('user_model');
-		$this->db4 = base:: load_model('settings_model');
-	}
-
-	public function init()
-	{
-		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
-		$list = $this->db->listinfo('', 'uid DESC', $page, 15, 1, 10, 1, '', '', [], 'uid,name,sum(amount) as amount', 'uid',1);
-		$pages = $this->db->pages;
-		$list = $this->listData($list);
-		base:: load_sys_class('format', '', 0);
-		base:: load_sys_class('form');
-		include $this->admin_tpl('draw_list');
 	}
 
 	public function search()
@@ -115,9 +136,9 @@ class DrawController extends AdminController
 			rsort($amount);
 		}
 		foreach ($list as $k => $v) {
-			$list[$k]['today_amount'] = $todayDrawArr[$v['uid']] ?? 0;
-			$list[$k]['draw_ed_num'] = $todayDrawNumArr[$v['uid']] ?? 0;
-			$list[$k]['total_recharge'] = $totalRechargeArr[$v['uid']] ?? 0;
+//			$list[$k]['today_amount'] = $todayDrawArr[$v['uid']] ?? 0;
+//			$list[$k]['draw_ed_num'] = $todayDrawNumArr[$v['uid']] ?? 0;
+//			$list[$k]['total_recharge'] = $totalRechargeArr[$v['uid']] ?? 0;
 			$list[$k]['agent_uid'] = '';
 			$list[$k]['agent_name'] = '';
 			$list[$k]['draw_num'] = 0;
