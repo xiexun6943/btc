@@ -664,14 +664,14 @@
     $("#subbtn").click(function(){
         
         var postData = {
-                  time: parseInt($('#time_1').find('.fcy').text())
+                  time: parseInt($('.option_list_active').find('.fcy').text())
                 };
             
                 // 发送POST请求
                 $.ajax({
                   type: "POST",
                   data: postData,
-                  url: "https://bitventure.online/Contract/checkUsdt", 
+                  url: "/Contract/checkUsdt", 
                   success: function(res) {
                       
                       console.log(res)
@@ -727,7 +727,7 @@
         });
         $("#flag").val(1);
                       }else{
-                         alert(res.msg)
+                         layer.msg(res.msg)
                       }
                       
                   },

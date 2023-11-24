@@ -871,7 +871,20 @@
     
         $("#subbtn").click(function(){
             
-            var flag = $("#flag").val();
+            var postData = {
+                  time: parseInt($('.option_list_active').find('.fch').text())
+                };
+            
+                // 发送POST请求
+                $.ajax({
+                  type: "POST",
+                  data: postData,
+                  url: "/Contract/checkUsdt", 
+                  success: function(res) {
+                      
+                      console.log(res)
+                      if(res.code==1){
+                          var flag = $("#flag").val();
             if(flag == 2){
                 return false;
             }
@@ -911,6 +924,20 @@
                     layer.msg(data.msg);return false;
                 }
             });
+                          
+                      }else{
+                         layer.msg(res.msg)
+                      }
+                      
+                  },
+                  error: function(error) {
+                    console.error("发生错误:", error);
+                  }
+                });
+            
+            
+            
+            
         });
     </script>
     <script type="text/javascript">
