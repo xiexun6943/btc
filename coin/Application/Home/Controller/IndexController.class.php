@@ -6,7 +6,7 @@ class IndexController extends HomeController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action = array("index","gglist","gginfo");
+		$allow_action = array("index","gglist","gginfo","getIcon");
 		if (!in_array(ACTION_NAME,$allow_action)) {
 			$this->error("非法操作！");
 		}
@@ -47,6 +47,16 @@ class IndexController extends HomeController
         $this->assign("info",$info);
         $this->display();
     }
+    
+    //红包
+	public function getIcon()
+	{
+	    $uid = userid();
+	   // if($uid >= 1){
+    //         redirect('/Index/getIcon.html');
+	   // }
+		$this->display();
+	}
 
 }
 ?>

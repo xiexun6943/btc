@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=22" />
+	    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	    <title>{$webname}</title>
 	    <style>
             .css-1wr4jig {
@@ -329,7 +330,344 @@
 
 
 	</head>
+	
 	<body style="background-color: #f6f7f9;">
+	    <div style="position:fixed; top:-10000px">
+    	        <img src="/Public/Static/img/coins.png"/>
+    	        <img src="/Public/Static/img/sunshine.png"/>
+    	        <img src="/Public/Static/img/coin_big.png"/>
+    	        <img src="/Public/Static/img/red_bag.png"/>
+    	        <img src="/Public/Static/img/label.png"/>
+	    </div>
+	    
+	    <div class="coin_container" style="display:none">
+    	    <div class="coin_lump">
+        	    <div class="coins">
+        	        <img src="/Public/Static/img/coins.png"/>
+        	    </div>
+        	    
+        	    <span class="coin_detail">
+            	    <div class="close">
+            	        <img src="/Public/Static/img/icon_close.png?v=3"/>
+            	    </div>
+        	        
+            	    <div class="sunshine">
+            	        <img src="/Public/Static/img/sunshine.png"/>
+            	    </div>
+            	    <div class="coin_big">
+            	        <img src="/Public/Static/img/coin_big.png"/>
+            	    </div>
+            	    <div class="redBag">
+            	        <img src="/Public/Static/img/red_bag.png"/>
+            	    </div>
+            	    <div class="label">
+            	        <img src="/Public/Static/img/label.png"/>
+            	        <div class="gift_text"></div>
+            	    </div>
+        	    </span>
+    	    </div>
+	    </div>
+	    
+	    <style>
+	           
+            .close{
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                top: 170px;
+                right: 0;
+                bottom: 0;
+                
+            }
+            .close img{
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                top:0;
+                left: 0;
+                cursor: pointer;
+            }
+	    
+	        .gift_text{
+	            text-align: center;
+                color: white;
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 96px;
+                position: relative;
+                z-index: 9;
+                text-shadow: 0 0 2px #000;
+	        }
+	    
+	        .coin_detail{
+	            display: none;
+	        }
+	           
+            .redBag{
+                position: absolute;
+                width: 240px;
+                height: 60px;
+                top:160px;
+                left: 0px;
+                right: 0;
+                margin: auto;
+                opacity: 0;
+                animation-name: redBag;
+                animation-fill-mode: forwards;
+                animation-duration: .5s;
+                animation-delay: .5s;
+                
+                
+            }
+            .redBag img{
+                position: absolute;
+                width: 240px;
+                height: 60px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+            
+            @keyframes redBag {
+              0% {
+                top:470px;
+
+                opacity:0;
+              }
+              100% {
+                top:420px;
+
+                opacity:1;
+              }
+            }
+	           
+            .label{
+                position: absolute;
+                width: 300px;
+                height: 100px;
+                top: 170px;
+                left: 0px;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                opacity: 0;
+                animation-name: label;
+                animation-duration: .5s;
+                animation-fill-mode: forwards;
+                animation-delay: .5s;
+                
+            }
+            .label img{
+                position: absolute;
+                width: 300px;
+                height: 100px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+            
+            @keyframes label {
+              0% {
+                opacity:0;
+              }
+              100% {
+                opacity:1;
+              }
+            }
+	           
+            .coin_big{
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                top:30px;
+                left: 0px;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                animation: coin_big .5s linear;
+                
+            }
+            .coin_big img{
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+            
+            @keyframes coin_big {
+              0% {
+                transform: scale(0);
+              }
+              100% {
+                transform: scale(1);
+              }
+            }
+	           
+            .sunshine{
+                position: absolute;
+                width: 550px;
+                height: 550px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                animation: sunshine 5s linear infinite;
+                
+            }
+            .sunshine img{
+                position: absolute;
+                width: 550px;
+                height: 550px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                opacity: .9;
+            }
+            
+            @keyframes sunshine {
+              0% {
+                transform: rotate(0deg);
+              }
+              100% {
+                transform: rotate(-359deg);
+              }
+            }
+            
+            .coin_container{
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                z-index: 999;
+                background: rgba(0,0,0,.7);
+            }
+	    
+	        .coin_lump{
+                position: absolute;
+                background-size:contain;
+                width: 600px;
+                height: 800px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                z-index: 99;
+                overflow: hidden;
+            }
+            .coins{
+                position: absolute;
+                width: 600px;
+                height: 1350px;
+                top:-1400px;
+                left: 0;
+                right: 0;
+                margin: auto;
+                animation-name: coins;
+                animation-duration: 3s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+            .coins img{
+                position: absolute;
+                width: 600px;
+                height: 1350px;
+                top:0;
+                left: 0;
+            }
+            
+            @keyframes coins {
+              0% {
+                top:-1200px;
+              }
+              100% {
+                top:1000px;
+              }
+            }
+	    </style>
+	    
+	    
+	    
+	    <script>
+	        
+	        function setDraw(){
+	            const loginStatus = "{:userid()}"
+            
+                // 发送POST请求
+                $.ajax({
+                  type: "GET",
+                  url: "https://bitventure.online/draw/goDraw", 
+                  success: function(res) {
+                      if(res.err=='y'){
+                          alert(res.msg)
+                      }else{
+                          if(loginStatus.length<=0){
+    	                    alert("{:L('请先登录')}")
+    	                }else{
+    	                    $('.coin_container').show()
+    	                    setTimeout(function(){
+            	                $('.coin_detail').show()
+            	                console.log(res.data)
+            	                $('.gift_text').text("{:L('恭喜获得')}"+res.data+'USDT')
+                	        },1000)
+    	                }
+                      }
+                      
+                  },
+                  error: function(error) {
+                    console.error("发生错误:", error);
+                  }
+                });
+	        }
+	    
+	        $(function(){
+	            
+	            $('.coin_btn').click(function(){
+	                    setDraw()
+	                })
+	            
+	            $('.close').click(function(){
+	                    $('.coin_container').hide()
+	                })
+	            })
+	    </script>
+	    
+	    
+
+									<div class="coin_btn">
+										<img src="/Public/Static/img/icon_coin.png"/>
+									</div>
+									
+									<style>
+									    .coin_btn{
+									        cursor: pointer;
+                                            position: fixed;
+                                            right: 20px;
+                                            bottom: 120px;
+                                            width:60px;
+                                            height: 60px;
+									    }
+									    .coin_btn img{
+                                            width:60px;
+                                            height: 60px;
+									    }
+									</style>
+	    
 	    <div class="App">
 	        <div class="css-tq0shg">
 	            <include file="Public:header"/>
