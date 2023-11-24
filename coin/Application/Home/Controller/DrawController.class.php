@@ -147,7 +147,7 @@ class DrawController extends HomeController
         if ($todayRecharge) {
             $todayRechargeArr = true;
         }
-
+        
         $currDrawSet=[];
         $drawTodayEdData = M('draw')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid} and is_control = 1")->order('id DESC')->find();
         $drawTodayEdDataEC = M('draw')->where("create_time = '{$todays}' AND uid = {$uid} and is_control = 1")->order('id DESC')->find();
@@ -168,42 +168,42 @@ class DrawController extends HomeController
             }
         }
 
-        if ($totalDrawNum < ($drawEdNum + 1)){
-            $msg['data'] = [];
-            $msg['err'] = 'y';
-            $msg['msg'] = L('您目前没有抽奖机会');
-            $this->ajaxReturn($msg);
-            exit;
-        }
-        if (empty($currDrawSet)){
-            $msg['data'] = [];
-            $msg['err'] = 'y';
-            $msg['msg'] = L('数据错误');
-            $this->ajaxReturn($msg);
-            exit;
-        }
-        $drawControl = $this->drawControl($uid, $drawEdNum, $currDrawSet);
+        // if ($totalDrawNum < ($drawEdNum + 1)){
+        //     $msg['data'] = [];
+        //     $msg['err'] = 'y';
+        //     $msg['msg'] = L('您目前没有抽奖机会');
+        //     $this->ajaxReturn($msg);
+        //     exit;
+        // }
+        // if (empty($currDrawSet)){
+        //     $msg['data'] = [];
+        //     $msg['err'] = 'y';
+        //     $msg['msg'] = L('数据错误');
+        //     $this->ajaxReturn($msg);
+        //     exit;
+        // }
+        // $drawControl = $this->drawControl($uid, $drawEdNum, $currDrawSet);
 
-        $drawAmount = $drawControl['draw_amount'] ?: 0;
-        $isControl = $drawControl['is_control'] ?: 0;
+        // $drawAmount = $drawControl['draw_amount'] ?: 0;
+        // $isControl = $drawControl['is_control'] ?: 0;
         $users['username']? $acount=$users['username']:$acount=$users['email'];
         M('draw')->add(array(
             'uid' => $uid,
             'name' => $acount,
-            'amount' => $drawAmount,
-            'is_control' => $isControl,
+            'amount' => 300,
+            'is_control' => 1,
             'create_time' => date('Y-m-d H:i:s')));
-        M('user')->where(['uid' => $uid])->setInc('money',$drawAmount);
+        M('user')->where(['uid' => $uid])->setInc('money',300);
         M('bill')->add(array(
             'uid' => $uid,
             'money' => $drawAmount,
-            'countmoney' => $users['money'] + $drawAmount,
+            'countmoney' => $users['money'] + 300,
             'type' => 20,
             'addtime' => time(),
             'comment' => '中奖'
         ));
-        $msg['data'] = $drawAmount;
-        $msg['err'] = 'n';
+        $msg['data'] = 300;
+        $msg['err'] = 1;
         $msg['msg'] = L('成功!');
         $this->ajaxReturn($msg);
         exit;

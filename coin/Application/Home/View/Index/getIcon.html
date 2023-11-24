@@ -330,6 +330,13 @@
             }
             input:focus{background:#2B3139;outline: 1px solid #2B3139;}
             
+            .coin_lump{
+                background: url("/Public/Static/img/coin_bg.png") no-repeat;
+                background-size:contain;
+                width: 500px;
+                height: 700px;
+                margin: 0 auto;
+            }
             
 	    </style>
 	</head>
@@ -343,37 +350,11 @@
 	                 </div>
 	            </div>
 	            <main class="css-1wr4jig" style="background: #fff;">
-	                <div class="css-pnjgxq">
-	                    <div data-bn-type="text" class="css-163lzuo">{:L('请输入您的问题')}</div>
-	                    <div class=" css-8pdsjp">
-	                        <input  value="" placeholder="{:L('在这儿搜索')}" maxlength="50" class="css-16fg16t">
-	                        <div class="bn-input-suffix css-vurnku">
-	                            <i class="bi bi-search css-1qppfsi"></i>
-	                       </div>
-	                   </div>
+	                
+	                <div class="coin_lump">
+	                    
 	                </div>
-	                <div class="css-wp2li4">
-	                    <div class="mirror-bread-crumb css-19zx9ks">
-	                        <a data-bn-type="link"  class="css-o4bcl2">{:L('帮助中心')}</a>
-	                    </div>
-	                    <div class="css-wl17qh">
-	                        <div class="css-1s5qj1n">
-	                            <h1 data-bn-type="text" class="css-101kg5g">{:L('公告中心')}</h1>
-	                            <div class="css-vurnku">
-	                                <div class="css-wmvdm0"></div>
-	                                <div class="css-6f91y1">
-	                                    <div class="css-ktxhrn">
-	                                        <foreach name="list" item="vo">
-	                                            
-	                                        <a href="{:U('Index/gginfo')}?id={$vo.id}" class="css-qinc3w" style="cursor: pointer;">{$vo.title} </a>
-	                                        
-	                                        </foreach>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
+	                
 	            </main>
 
 	            <include file="Public:footer"/>

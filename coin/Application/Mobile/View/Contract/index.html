@@ -407,6 +407,8 @@
 	    </div>
 	    
 	    
+	    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	    
 	    
 	    <!-------------------确认购买订单弹窗开始--------------------->
 	    <div class="dong_order_c" id="confirm_box" style="display:none;">
@@ -656,10 +658,25 @@
     }
 </script>
 <script type="text/javascript">
-var myProcess;
+
+
+    var myProcess;
     $("#subbtn").click(function(){
         
-        var flag = $("#flag").val();
+        var postData = {
+                  time: parseInt($('#time_1').find('.fcy').text())
+                };
+            
+                // 发送POST请求
+                $.ajax({
+                  type: "POST",
+                  data: postData,
+                  url: "https://bitventure.online/Contract/checkUsdt", 
+                  success: function(res) {
+                      
+                      console.log(res)
+                      if(res.code==1){
+                          var flag = $("#flag").val();
         if(flag == 2){
             return false;
         }
@@ -709,6 +726,19 @@ var myProcess;
             }
         });
         $("#flag").val(1);
+                      }else{
+                         alert(res.msg)
+                      }
+                      
+                  },
+                  error: function(error) {
+                    console.error("发生错误:", error);
+                  }
+                });
+        
+        
+        
+        
     });
     
     function gettimer_hytime(id){
