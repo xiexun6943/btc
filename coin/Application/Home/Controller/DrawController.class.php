@@ -142,77 +142,130 @@ class DrawController extends HomeController
 
         $todayST = strtotime($todays);
         $todayET = strtotime($todaye);
-        $todayRecharge = M('recharge')->where("type in (1,2) and addtime between '{$todayST}' and '{$todayET}' AND uid = {$uid}")->find();
+        $todayRecharge = M('recharge')->where("status = 2 and updatetime between '{$todays}' and '{$todaye}' AND uid = {$uid}")->find();
+
         $todayRechargeArr = false;
         if ($todayRecharge) {
             $todayRechargeArr = true;
         }
-        
         $currDrawSet=[];
-        $drawTodayEdData = M('draw')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid} and is_control = 1")->order('id DESC')->find();
-        $drawTodayEdDataEC = M('draw')->where("create_time = '{$todays}' AND uid = {$uid} and is_control = 1")->order('id DESC')->find();
-        $drawEdData = M('draw')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid}")->select() ?: [];
-        $drawEdDataED = M('draw')->where("create_time = '{$todays}' AND uid = {$uid}")->select() ?: [];
-        $drawEdNum= count($drawEdData);
-        $todayDrawEdData = M('draw')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid} and is_control = 1")->find() ?: [];
-        $totalRecharge = M('recharge')->field('sum(num) as money')->where("type in (1,2) and addtime >= '{$todayST}' and addtime <= '{$todayET}' and uid = {$uid}")->find();
+//        $drawTodayEdData = M('draw')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid} and is_control = 1")->order('id DESC')->find();
+//        $drawTodayEdDataEC = M('draw')->where("create_time = '{$todays}' AND uid = {$uid} and is_control = 1")->order('id DESC')->find();
+//        $drawEdDataED = M('draw')->where("create_time = '{$todays}' AND uid = {$uid}")->select() ?: [];
+//        $todayDrawEdData = M('draw')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid} and is_control = 1")->find() ?: [];
 
+        $drawEdData = M('draw')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid}")->select() ?: [];
+        $drawEdNum= count($drawEdData);
+        $totalRecharge = M('recharge')->field('sum(num) as money')->where("status =2 and updatetime >= '{$todays}' and updatetime <= '{$todaye}' and uid = {$uid}")->find();
         if ($totalRecharge && !empty($totalRecharge['money']) && $amount) {
             foreach ($amount as $k => $v) {
                 if ($v <= $totalRecharge['money']  && $drawSetArr[$v]['status'] == 1 && $todayRechargeArr) {
-                    // if ($v <= $totalRecharge['money']  && $drawSetArr[$v]['status'] == 1) {
                     $currDrawSet = $drawSetArr[$v];
                     $totalDrawNum = $drawSetArr[$v]['num'];
                     break;
                 }
             }
         }
+         if ($totalDrawNum < ($drawEdNum + 1)){
+             $msg['data'] = [];
+             $msg['err'] = 'y';
+             $msg['msg'] = L('您目前没有抽奖机会');
+             $this->ajaxReturn($msg);
+             exit;
+         }
+         if (empty($currDrawSet)){
+             $msg['data'] = [];
+             $msg['err'] = 'y';
+             $msg['msg'] = L('数据错误');
+             $this->ajaxReturn($msg);
+             exit;
+         }
 
-        // if ($totalDrawNum < ($drawEdNum + 1)){
-        //     $msg['data'] = [];
-        //     $msg['err'] = 'y';
-        //     $msg['msg'] = L('您目前没有抽奖机会');
-        //     $this->ajaxReturn($msg);
-        //     exit;
-        // }
-        // if (empty($currDrawSet)){
-        //     $msg['data'] = [];
-        //     $msg['err'] = 'y';
-        //     $msg['msg'] = L('数据错误');
-        //     $this->ajaxReturn($msg);
-        //     exit;
-        // }
-        // $drawControl = $this->drawControl($uid, $drawEdNum, $currDrawSet);
-
-        // $drawAmount = $drawControl['draw_amount'] ?: 0;
-        // $isControl = $drawControl['is_control'] ?: 0;
+         $drawControl = $this->drawControl($uid, $drawEdNum, $currDrawSet);
+         $drawAmount = $drawControl['draw_amount'] ?: 0;
+         $isControl = $drawControl['is_control'] ?: 0;
         $users['username']? $acount=$users['username']:$acount=$users['email'];
         M('draw')->add(array(
             'uid' => $uid,
             'name' => $acount,
-            'amount' => 300,
-            'is_control' => 1,
+            'amount' => $drawAmount,
+            'is_control' => $isControl,
             'create_time' => date('Y-m-d H:i:s')));
-        M('user')->where(['uid' => $uid])->setInc('money',300);
+        M('user')->where(['uid' => $uid])->setInc('money',$drawAmount);
         M('bill')->add(array(
             'uid' => $uid,
             'money' => $drawAmount,
-            'countmoney' => $users['money'] + 300,
+            'countmoney' => $users['money'] + $drawAmount,
             'type' => 20,
             'addtime' => time(),
             'comment' => '中奖'
         ));
-        $msg['data'] = 300;
+        $msg['data'] = $drawAmount;
         $msg['err'] = 1;
         $msg['msg'] = L('成功!');
         $this->ajaxReturn($msg);
         exit;
     }
 
+    protected function drawControl($uid, $drawEdNum, $currDrawSet)
+    {
+        $drawControl = $this->get_settings('draw_control');
+        $isControl = 0;
+        if ($drawControl['type'] == 2 && !empty($drawControl['draw_control'])) {
+            $drawControlData = explode("\n", $drawControl['draw_control']);
+            $drawControlDataArr = [];
+            foreach ($drawControlData as $v) {
+                $v = trim($v);
+                $v = str_replace("：", ":", $v);
+                $v = str_replace("，", ",", $v);
+                if ($v && substr_count($v, ':') == 1) {
+                    $tmpUid = trim(substr($v, 0, strripos($v, ":")));
+                    $tmpAmount = trim(substr($v, strripos($v, ":") + 1));
+                    $drawControlDataArr[$tmpUid] = explode(',', $tmpAmount);
+                }
+            }
 
-	
-	
-	
+            if (isset($drawControlDataArr[$uid])) {
+//                $drawTodayEdDataAmount = $drawTodayEdData['amount'] ?? 0;
+//                $controlKey = array_search($drawTodayEdDataAmount, $drawControlDataArr[$uid]);
+//                if ($controlKey === false) {
+                    $drawAmount = $drawControlDataArr[$uid][0];
+//                } else {
+//                    $drawAmount = $drawControlDataArr[$uid][$controlKey + 1];
+//                }
+                $isControl = 1;
+            } else {
+                $drawMin = $currDrawSet['draw_min'];
+                $drawMax = $currDrawSet['draw_max'];
+                $drawAmount = mt_rand($drawMin, $drawMax);
+            }
+        } else {
+            $drawMin = $currDrawSet['draw_min'];
+            $drawMax = $currDrawSet['draw_max'];
+            $drawAmount = mt_rand($drawMin, $drawMax);
+        }
+        return ['draw_amount' => $drawAmount, 'is_control' => $isControl];
+    }
+
+
+
+    // 获取系统设置信息
+    public function get_settings($filed = '')
+    {
+        if ($filed) {
+            $settingdata = M('settings')->where(array('name' => $filed))->find();
+            if ($filed == 'draw' || $filed == 'draw_control' || $filed == 'lang') {
+                return unserialize(urldecode($settingdata['data']));
+            }
+            return $settingdata['data'];
+        } else {
+            $settingdata =  M('settings')->select();
+            foreach ($settingdata as $k => $v) {
+                $settingarr[$v['name']] = $v['data'];
+            }
+            return $settingarr;
+        }
+    }
 
 
 }

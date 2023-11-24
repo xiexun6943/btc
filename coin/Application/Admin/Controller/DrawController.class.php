@@ -18,49 +18,84 @@ class DrawController extends AdminController
 		}
 
 		if($name != ''){
-			$where['name'] = $name;
+			$where['username'] = $name;
 		}
 
 		$count = M('draw')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
-		$list = M('draw')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		$list = M('user')->field("id,username,phone")->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		echo M()->getLastSql();
 		$data=[];
 		if ($list) {
 			foreach ($list as$k=> $v) {
-				$data[]=$v;
-				$data[$k]['total_draw']=$this->getUserDraw($v['uid']);
-				$data[$k]['total_recharge']=$this->getUserRecharge($v['uid']);
+				$data[$k]['uid']=$v['id'];
+				$data[$k]['username']=$v['username'];
+				$data[$k]['phone']=$v['phone'];
+				$todays=$this->getTodayDraw($v['id']);
+				$data[$k]['today_draw']=$todays['amount'];
+				$data[$k]['total_draw']=$this->getUserDraw($v['id']);
+				$data[$k]['total_recharge']=$this->getUserRecharge($v['id']);
+				$data[$k]['is_draw']=$todays['num'];
+				$data[$k]['draw_total']=$this->getTotalDraw($v['id']);
 			}
 		}
-//		var_dump($data);exit();
 		$this->assign('list', $data);
 		$this->assign('page', $show);
 		$this->display();
 
 	}
+	//当前总计有多少抽奖次数
+	public function getTotalDraw($uid)
+	{
+		$todayS = date('Y-m-d 00:00:00');
+		$todayE = date('Y-m-d 23:59:59');
+		$recharge = M('recharge')->field('sum(num) as amount')->where("uid ={$uid} and updatetime between '{$todayS}' and '{$todayE}' and status =2 ")->find();
+		$draw_num=0;
+		if ($recharge) {
+			$setting = get_settings('draw');
+			krsort($setting);
+
+			foreach ($setting as $item) {
+				if ($item['amount']<$recharge['amount']) {
+					$draw_num=$item['num'];break;
+				}
+			}
+		}
+		return $draw_num;
+	}
+	// 当天抽奖红包
+	public function getTodayDraw($uid){
+		$todayS = date('Y-m-d 00:00:00');
+		$todayE = date('Y-m-d 23:59:59');
+		$todayDraw = M('draw')->where("uid ={$uid} and create_time between '{$todayS}' and '{$todayE}'")->select();
+		$data=['num'=>0,'amount'=>'0.00'];
+		if ($todayDraw) {
+			foreach ($todayDraw as $v) {
+				$data['amount']+=$v['amount'];
+			}
+			$data['num']=count($todayDraw);
+		}
+		return $data;
+	}
 	// 个人所有抽奖总计
 	public function getUserDraw($uid){
 		$userAmount = M('draw')->field('sum(amount) as amount')->where(['uid'=>$uid])->find();
-
-		if (!$userAmount) {
-			return '0.00';
+		if ($userAmount && $userAmount['amount']) {
+			return $userAmount['amount'];
 		}
-		return $userAmount['amount'];
+		return '0.00';
 	}
 	// 个人所有充值
 	public function getUserRecharge($uid){
-		$recharge = M('recharge')->field('sum(num) as amount')->where(['uid'=>$uid,'status'=>1])->find();
-		if (!$recharge) {
-			return '0.00';
+		$recharge = M('recharge')->field('sum(num) as amount')->where(['uid'=>$uid,'status'=>2])->find();
+		if ($recharge && $recharge['amount']) {
+			return $recharge['amount'];
 		}
-		return $recharge['amount'];
+		return '0.0000';
 	}
 
-	//红包抽奖记录
-	public function draw(){
-		$this->display();
-	}
+
 
 	public function search()
 	{
@@ -96,88 +131,8 @@ class DrawController extends AdminController
 		include $this->admin_tpl('draw_list');
 	}
 
-	public function listData($list)
-	{
-		$todayS = date('Y-m-d 00:00:00');
-		$todayE = date('Y-m-d 23:59:59');
-		$todayDraw = $this->db->select("create_time between '{$todayS}' and '{$todayE}'"
-			, 'uid,sum(amount) as amount,count(id) as draw_ed_num', '', '', 'uid');
-		$todayDrawArr = [];
-		$todayDrawNumArr = [];
-		if ($todayDraw) {
-			$todayDrawArr = array_column($todayDraw, 'amount', 'uid');
-			$todayDrawNumArr = array_column($todayDraw, 'draw_ed_num', 'uid');
-		}
-		$todayST = strtotime($todayS);
-		$todayET = strtotime($todayE);
-		$totalRecharge = $this->db2->select("state in (1,2) and addtime between '{$todayST}' and '{$todayET}'", 'uid,sum(money) as money', '', '', 'uid');
-		$totalRechargeArr = [];
-		if ($totalRecharge) {
-			$totalRechargeArr = array_column($totalRecharge, 'money', 'uid');
-		}
-		$todayST = strtotime($todayS);
-		$todayET = strtotime($todayE);
-		$todayRecharge = $this->db2->select("state in (1,2) and addtime between '{$todayST}' and '{$todayET}'", 'uid,sum(money) as money', '', '', 'uid');
-		$todayRechargeArr = [];
-		if ($todayRecharge) {
-			$todayRechargeArr = array_column($todayRecharge, 'money', 'uid');
-		}
-		$user = $this->db3->select('', '*');
-		$userArr = [];
-		if ($user) {
-			$userArr = array_column($user, null, 'uid');
-		}
-		$setting = $this->get_settings('draw');
-		$drawSetArr = [];
-		$amount = [];
-		if ($setting) {
-			$drawSetArr = array_column($setting, null, 'amount');
-			$amount = array_column($setting, 'amount');
-			rsort($amount);
-		}
-		foreach ($list as $k => $v) {
-//			$list[$k]['today_amount'] = $todayDrawArr[$v['uid']] ?? 0;
-//			$list[$k]['draw_ed_num'] = $todayDrawNumArr[$v['uid']] ?? 0;
-//			$list[$k]['total_recharge'] = $totalRechargeArr[$v['uid']] ?? 0;
-			$list[$k]['agent_uid'] = '';
-			$list[$k]['agent_name'] = '';
-			$list[$k]['draw_num'] = 0;
-			if (isset($userArr[$v['uid']])) {
-				$tmpUser = $userArr[$v['uid']];
-				isset($tmpUser['agent']) && !empty($tmpUser['agent']) && $list[$k]['agent_uid'] = $tmpUser['agent'];
-				$list[$k]['agent_uid'] && $list[$k]['agent_name'] = $userArr[$tmpUser['agent']]['username'];
-				if ($amount) {
-					foreach ($amount as $av) {
-						// if ($av <= $list[$k]['total_recharge'] && $drawSetArr[$av]['status'] == 1 && isset($todayRechargeArr[$v['uid']])) {
-						if ($av <= $list[$k]['total_recharge'] && $drawSetArr[$av]['status'] == 1) {
-							$list[$k]['draw_num'] = $drawSetArr[$av]['num'];
-							break;
-						}
-					}
-				}
-			}
-		}
-		return $list;
-	}
 
-	// 获取系统设置信息
-	public function get_settings($filed = '')
-	{
-		$setdb = base:: load_model('settings_model');
-		if ($filed) {
-			$settingdata = $setdb->get_one(array('name' => $filed));
-			if ($filed == 'draw') {
-				return unserialize(urldecode($settingdata['data']));
-			}
-			return $settingdata['data'];
-		} else {
-			$settingdata = $setdb->select();
-			foreach ($settingdata as $k => $v) {
-				$settingarr[$v['name']] = $v['data'];
-			}
-			return $settingarr;
-		}
-	}
+
 
 	public function get()
 	{

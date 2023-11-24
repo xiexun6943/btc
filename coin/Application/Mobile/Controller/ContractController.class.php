@@ -569,7 +569,7 @@ class ContractController extends MobileController
 		$this->display();
 	}
     // 检测用户金额
-     public function checkUsdt(){
+    public function checkUsdt(){
         $uid = userid();
         if($uid <= 0){ // 用户登录失效
             return $this->ajaxReturn(['code'=>0,'msg'=>L('用户失效,请登录！')]) ;
@@ -591,7 +591,7 @@ class ContractController extends MobileController
         if ($userInfo && $userInfo['usdt'] >= $data[$time]) {
             return   $this->ajaxReturn(['code'=>1,'msg'=>L('允行进入').$time.L('秒合约房间')]);
         }else{
-            return   $this->ajaxReturn(['code'=>0,'msg'=>L('不允行进入').$time.L('秒合约房间')]);
+            return   $this->ajaxReturn(['code'=>0,'msg'=>L('进入').$time.L('秒合约房间入场券最低').$data[$time]]);
         }
 
     }

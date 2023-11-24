@@ -808,4 +808,14 @@ return [
     "手机登录" => "Phone login",
     "您的验证码是" => "Your verification code is",
     "5分钟内有效" => "Valid for 5 minutes",
+
+    '用户失效,请登录！'=>"The user is invalid, please log in!",
+    '参数缺失'=>"Parameter missing",
+    '参数无效'=>"Invalid argument",
+    '进入'=>"Enter",
+    '秒合约房间入场券最低'=>"The lowest second contract room admission ticket",
+    '中奖'=>"Winning",
+    '成功'=>"success",
+    '您目前没有抽奖机会'=>"You currently have no lottery entries",
+    '数据错误'=>"data error",
 ];

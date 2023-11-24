@@ -497,7 +497,7 @@ class ContractController extends HomeController
         if ($userInfo && $userInfo['usdt'] >= $data[$time]) {
             return   $this->ajaxReturn(['code'=>1,'msg'=>L('允行进入').$time.L('秒合约房间')]);
         }else{
-            return   $this->ajaxReturn(['code'=>0,'msg'=>L('不允行进入').$time.L('秒合约房间')]);
+            return   $this->ajaxReturn(['code'=>0,'msg'=>L('进入').$time.L('秒合约房间入场券最低').$data[$time]]);
         }
 
     }
