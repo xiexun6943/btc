@@ -6,7 +6,7 @@ class DrawController extends AdminController
 
 	protected function _initialize(){
 		parent::_initialize();
-		$allow_action=array("index","draw","hylog","market","marketEdit","marketStatus","tradeclear");
+		$allow_action=array("index","draw","setting");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！");
 		}
@@ -134,22 +134,9 @@ class DrawController extends AdminController
 
 
 
-	public function get()
-	{
-		$drawArr = [];
-		$draw = $this->db4->select("name in('draw','draw_control','lang')");
-		foreach ($draw as $k => $v) {
-			$drawArr[$v['name']] = $v['data'];
-		}
-		$draw = $drawArr['draw'];
-		$drawControl = $drawArr['draw_control'];
-		$lang = $drawArr['lang'];
-		include $this->admin_tpl('draw_set');
-	}
-
-	public function set()
-	{
-		if (isset($_POST['dosubmit'])) {
+	//秒合约参数设置
+	public function setting(){
+		if($_POST){
 			$setting_arr = $_POST['setting'];
 
 			$draw = array();
@@ -184,10 +171,24 @@ class DrawController extends AdminController
 			$setting_arr['lang'] = urlencode((serialize($lang)));
 			foreach($setting_arr as $k => $v) {
 				$setting[$k] = safe_replace(trim($v));
-				$this -> db4 -> update(array('data' => safe_replace(trim($v))),array('name' => $k )); //更新数据
+				M("hysetting") ->where(array('name' => $k ))->save(array('data' => safe_replace(trim($v)))); //更新数据
 			}
-			showmessage(_lang('更新成功！'), HTTP_REFERER);
+			$this->success("操作成功!",U('Draw/setting'));
+		}else{
+			$drawArr = [];
+			$draw = M('settings')->where("name in('draw','lang','draw_control')")->select();
+			foreach ($draw as $k => $v) {
+				$drawArr[$v['name']] = $v['data'];
+			}
+			$draw = unserialize(urldecode($drawArr['draw']));
+			$drawControl = unserialize(urldecode($drawArr['draw_control']));
+			$lang = unserialize(urldecode($drawArr['lang']));
+			$this->assign("draw",$draw);
+			$this->assign("drawControl",$drawControl);
+			$this->assign("lang",$lang);
+			$this->display();
 		}
+
 	}
 
 
