@@ -48,13 +48,28 @@
                                 <?php $i++; } ?>
                                 </tbody>
                             </table>
+                            
+                            <script>
+                                $(function(){
+                                    
+                                    $('.settingdrawcontroltype').click(function(){
+                                        if($(this).val()==2){
+                                            $('.settingdrawcontroldrawcontrol').removeAttr('disabled')
+                                        }else{
+                                            $('.settingdrawcontroldrawcontrol').attr('disabled','disabled')
+                                            $('.settingdrawcontroldrawcontrol').val('')
+                                        }
+                                    })
+                                })
+                            </script>
+                            
                             <table width="100%" cellspacing="0" class="table_form">
                                 <caption>红包抽奖金额设置</caption>
                                 <tbody id="draw_control">
                                 <tr>
                                     <th>控制</th>
                                     <td>
-                                        <label>随机 <input type="radio" class="settingdrawcontroltype"
+                                        <label>随机 <input type="radio" checked="checked" class="settingdrawcontroltype focus"
                                                          name="setting[draw_control][type]"
                                                          value="1" <?php if ($drawControl['type'] == 1) echo 'checked="checked"' ?>/></label>
                                         <label>自定义 <input type="radio" class="settingdrawcontroltype"
@@ -63,6 +78,7 @@
                                     </td>
                                     <td>
                             <textarea class="input-text settingdrawcontroldrawcontrol"
+                                        disabled="disabled"
                                       name="setting[draw_control][draw_control]"
                                       style="height: 60px;width: 95%"  <?php if ($drawControl['type'] == 1) { ?> disabled="disabled" <?php } ?>><?= $drawControl['draw_control'] ?></textarea>
                                     </td>

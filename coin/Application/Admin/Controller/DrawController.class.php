@@ -138,7 +138,7 @@ class DrawController extends AdminController
 	public function setting(){
 		if($_POST){
 			$setting_arr = $_POST['setting'];
-
+            // var_dump($setting_arr);exit;
 			$draw = array();
 			foreach ($setting_arr['draw'] as $keyD => $valD) {
 				foreach ($valD as $keD => $vaD) {
@@ -170,8 +170,8 @@ class DrawController extends AdminController
 			}
 			$setting_arr['lang'] = urlencode((serialize($lang)));
 			foreach($setting_arr as $k => $v) {
-				$setting[$k] = safe_replace(trim($v));
-				M("hysetting") ->where(array('name' => $k ))->save(array('data' => safe_replace(trim($v)))); //更新数据
+				$setting[$k] = $this->safe_replace(trim($v));
+				M("hysetting") ->where(array('name' => $k ))->save(array('data' => $this->safe_replace(trim($v)))); //更新数据
 			}
 			$this->success("操作成功!",U('Draw/setting'));
 		}else{
@@ -191,7 +191,24 @@ class DrawController extends AdminController
 
 	}
 
-
+    
+    /**
+     * 安全过滤函数
+     *
+     * @param  $string
+     * @return string
+ */
+    public function safe_replace($string) {
+    	$string = str_replace('%20', '', $string);
+    	$string = str_replace('%27', '', $string);
+    	$string = str_replace('%2527', '', $string);
+    	$string = str_replace('"', '&quot;', $string);
+    	// $string = str_replace("'", "", $string);
+    	$string = str_replace('<', '&lt;', $string);
+    	$string = str_replace('>', '&gt;', $string);
+    	return $string;
+    	// return new_htmlspecialchars($string);
+    }
 
 
 

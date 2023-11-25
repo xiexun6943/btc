@@ -377,6 +377,7 @@
                 top: 170px;
                 right: 0;
                 bottom: 0;
+                z-index: 999;
                 
             }
             .close img{
@@ -614,10 +615,10 @@
                   url: "/draw/goDraw", 
                   success: function(res) {
                       if(res.err=='y'){
-                          alert(res.msg)
+                          layer.msg(res.msg)
                       }else{
                           if(loginStatus.length<=0){
-    	                    alert("{:L('请先登录')}")
+    	                    layer.msg("{:L('请先登录')}")
     	                }else{
     	                    $('.coin_container').show()
     	                    setTimeout(function(){
