@@ -495,7 +495,7 @@ class TradeController extends MobileController
 	public function tradelist(){
 		$uid = userid();
 		$this->assign('uid',$uid);
-		$clist = M("config")->where(array('id'=>1))->field("websildea_y,websildea_z,websildea_r,websildeb_y,websildeb_z,websildeb_r,websildec_y,websildec_z,websildec_r,kefu")->find();
+		$clist = M("config")->where(array('id'=>1))->field("websildea_y,websildea_z,websildea_r,websildea_f,websildeb_y,websildeb_z,websildeb_r,websildeb_f,websildec_y,websildec_z,websildec_r,websildec_f,kefu")->find();
 
 
 		//查询最上级是否代理
@@ -518,6 +518,11 @@ class TradeController extends MobileController
                 $clist['websildea']=$clist['websildea_r'];
                 $clist['websildeb']=$clist['websildeb_r'];
                 $clist['websildec']=$clist['websildec_r'];
+                break;
+            case $lang=="zh-tw":
+                $clist['websildea']=$clist['websildea_f'];
+                $clist['websildeb']=$clist['websildeb_f'];
+                $clist['websildec']=$clist['websildec_f'];
                 break;
             default:
                 $clist['websildea']=$clist['websildea_y'];

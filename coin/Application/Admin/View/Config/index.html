@@ -108,6 +108,22 @@
 									<td class="item-note" style="color:red;">* 700*350px</td>
 								</tr>
 								<tr class="controls hoh">
+									<td class="item-label">手机端轮播图1-繁体 :</td>
+									<td>
+										<div id="addpicContainer_f" class="gezibg">
+											<notempty name="data.websildea_f">
+												<img id="up_img_websildea_f" onclick="getElementById('websildea_box_f').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图1_中文" alt="点击添加图片" src="/Upload/public/{$data.websildea_f}">
+												<else/>
+												<!--没有图片显示默认图片-->
+												<img id="up_img_websildea_f" onclick="getElementById('websildea_box_f').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图1_中文" alt="点击添加图片" src="__PUBLIC__/Admin/images/addimg.png">
+											</notempty>
+											<input type="hidden" id="websildea_deputy_f" name="websildea_f" value="{$data.websildea_f}">
+											<input type="file" id="websildea_box_f" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+										</div>
+									</td>
+									<td class="item-note" style="color:red;">* 700*350px</td>
+								</tr>
+								<tr class="controls hoh">
 									<td class="item-label">手机端轮播图1-日文 :</td>
 									<td>
 										<div id="addpicContainer_r" class="gezibg">
@@ -152,6 +168,22 @@
 											</notempty>
 											<input type="hidden" id="websildeb_deputy_z" name="websildeb_z" value="{$data.websildeb_z}">
 											<input type="file" id="websildeb_box_z" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+										</div>
+									</td>
+									<td class="item-note" style="color:red;">* 700*350px</td>
+								</tr>
+								<tr class="controls hoh">
+									<td class="item-label">手机端轮播图2繁体 :</td>
+									<td>
+										<div id="addpicContainer_f" class="gezibg">
+											<notempty name="data.websildeb_f">
+												<img id="up_img_websildeb_f" onclick="getElementById('websildeb_box_f').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图2繁体" alt="点击添加图片" src="/Upload/public/{$data.websildeb_f}">
+												<else/>
+												<!--没有图片显示默认图片-->
+												<img id="up_img_websildeb_f" onclick="getElementById('websildeb_box_f').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图2繁体" alt="点击添加图片" src="__PUBLIC__/Admin/images/addimg.png">
+											</notempty>
+											<input type="hidden" id="websildeb_deputy_f" name="websildeb_f" value="{$data.websildeb_f}">
+											<input type="file" id="websildeb_box_f" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
 										</div>
 									</td>
 									<td class="item-note" style="color:red;">* 700*350px</td>
@@ -202,6 +234,22 @@
 											</notempty>
 											<input type="hidden" id="websildec_deputy_z" name="websildec_z" value="{$data.websildec_z}">
 											<input type="file" id="websildec_box_z" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+										</div>
+									</td>
+									<td class="item-note" style="color:red;">* 700*350px</td>
+								</tr>
+								<tr class="controls hoh">
+									<td class="item-label">手机端轮播图3繁体 :</td>
+									<td>
+										<div id="addpicContainer_f" class="gezibg">
+											<notempty name="data.websildec_f">
+												<img id="up_img_websildec_f" onclick="getElementById('websildec_box_f').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图3繁体" alt="点击添加图片" src="/Upload/public/{$data.websildec_f}">
+												<else/>
+												<!--没有图片显示默认图片-->
+												<img id="up_img_websildec_f" onclick="getElementById('websildec_box_f').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图3繁体" alt="点击添加图片" src="__PUBLIC__/Admin/images/addimg.png">
+											</notempty>
+											<input type="hidden" id="websildec_deputy_f" name="websildec_f" value="{$data.websildec_f}">
+											<input type="file" id="websildec_box_f" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
 										</div>
 									</td>
 									<td class="item-note" style="color:red;">* 700*350px</td>
@@ -866,6 +914,39 @@
 
 		});
 	})
+	/** 手机端轮播图3上传繁体 **/
+	$(document).ready(function () {
+		//响应文件添加成功事件
+		$("#websildec_box_f").change(function () {
+			//创建FormData对象
+			var data = new FormData();
+			//为FormData对象添加数据
+			$.each($('#websildec_box_f')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+			//发送数据
+			$.ajax({
+				url: '/Admin/Config/image',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//不可缺参数
+				processData: false,		//不可缺参数
+				success: function (data) {
+					if (data) {
+						$('#up_img_websildec_f').attr("src", '/Upload/public/' + $.trim(data));
+						$('#websildec_deputy_f').val($.trim(data));
+						$('#up_img_websildec_f').show();
+					}
+				},
+				error: function () {
+					alert('上传出错');
+					$(".loading").hide();	//加载失败移除加载图片
+				}
+			});
+
+		});
+	})
 
     /** 手机端轮播图2上传英文 **/
 	$(document).ready(function () {
@@ -956,6 +1037,39 @@
 						$('#up_img_websildeb_r').attr("src", '/Upload/public/' + $.trim(data));
 						$('#websildeb_deputy_r').val($.trim(data));
 						$('#up_img_websildeb_r').show();
+					}
+				},
+				error: function () {
+					alert('上传出错');
+					$(".loading").hide();	//加载失败移除加载图片
+				}
+			});
+
+		});
+	})
+	/** 手机端轮播图2上传繁体 **/
+	$(document).ready(function () {
+		//响应文件添加成功事件
+		$("#websildeb_box_f").change(function () {
+			//创建FormData对象
+			var data = new FormData();
+			//为FormData对象添加数据
+			$.each($('#websildeb_box_f')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+			//发送数据
+			$.ajax({
+				url: '/Admin/Config/image',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//不可缺参数
+				processData: false,		//不可缺参数
+				success: function (data) {
+					if (data) {
+						$('#up_img_websildeb_f').attr("src", '/Upload/public/' + $.trim(data));
+						$('#websildeb_deputy_f').val($.trim(data));
+						$('#up_img_websildeb_f').show();
 					}
 				},
 				error: function () {
@@ -1067,7 +1181,73 @@
 
 		});
 	});
+	/** 手机端轮播图1日文上传 **/
+	$(document).ready(function () {
+		//响应文件添加成功事件
+		$("#websildea_box_r").change(function () {
+			//创建FormData对象
+			var data = new FormData();
+			//为FormData对象添加数据
+			$.each($('#websildea_box_r')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+			//发送数据
+			$.ajax({
+				url: '/Admin/Config/image',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//不可缺参数
+				processData: false,		//不可缺参数
+				success: function (data) {
+					if (data) {
+						$('#up_img_websildea_r').attr("src", '/Upload/public/' + $.trim(data));
+						$('#websildea_deputy_r').val($.trim(data));
+						$('#up_img_websildea_r').show();
+					}
+				},
+				error: function () {
+					alert('上传出错');
+					$(".loading").hide();	//加载失败移除加载图片
+				}
+			});
 
+		});
+	});
+
+	/** 手机端轮播图1繁体上传 **/
+	$(document).ready(function () {
+		//响应文件添加成功事件
+		$("#websildea_box_f").change(function () {
+			//创建FormData对象
+			var data = new FormData();
+			//为FormData对象添加数据
+			$.each($('#websildea_box_f')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+			//发送数据
+			$.ajax({
+				url: '/Admin/Config/image',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//不可缺参数
+				processData: false,		//不可缺参数
+				success: function (data) {
+					if (data) {
+						$('#up_img_websildea_f').attr("src", '/Upload/public/' + $.trim(data));
+						$('#websildea_deputy_f').val($.trim(data));
+						$('#up_img_websildea_f').show();
+					}
+				},
+				error: function () {
+					alert('上传出错');
+					$(".loading").hide();	//加载失败移除加载图片
+				}
+			});
+
+		});
+	});
     /** PC端网站logo上传 **/
 	$(document).ready(function () {
 		//响应文件添加成功事件

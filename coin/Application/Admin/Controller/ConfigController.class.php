@@ -36,9 +36,11 @@ class ConfigController extends AdminController
 		$upload = new \Think\Upload();
 		$upload->maxSize = 3145728;
 		$upload->exts = array('jpg', 'gif', 'png', 'jpeg');
+
 		$upload->rootPath = './Upload/public/';
 		$upload->autoSub = false;
 		$info = $upload->upload();
+//        var_dump($info);exit();
 		foreach ($info as $k => $v) {
 			$path = $v['savepath'] . $v['savename'];
 			echo $path;
