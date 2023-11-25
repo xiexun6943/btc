@@ -8,7 +8,7 @@
 
     <div id="main" class="main">
         <div class="main-title-h">
-            <span class="h1-title">秒合约参数设置</span>
+            <span class="h1-title">红包抽奖等级设置</span>
         </div>
 
         <div class="tab-wrap">
@@ -25,7 +25,7 @@
                                     <input type="hidden" name="setting[<?= $key ?>][name]" value="<?= $val['name'] ?>">
                                     <input type="hidden" name="setting[<?= $key ?>][level]" value="<?= $val['level'] ?>">
                                     <td>
-                                        充值累计金额：<input class="input-text" type="text" name="setting[<?= $key ?>][amount]"
+                                        充值累计USDT：<input class="input-text" type="text" name="setting[<?= $key ?>][amount]"
                                                       value="<?= $val['amount'] ?>">
                                     </td>
                                     <td>
@@ -33,7 +33,7 @@
                                                      value="<?= $val['num'] ?>">
                                     </td>
                                     <td>
-                                        默认抽奖中奖金额：<input class="input-text" type="text" name="setting[<?= $key ?>][draw_min]"
+                                        默认抽奖中奖USDT：<input class="input-text" type="text" name="setting[<?= $key ?>][draw_min]"
                                                         value="<?= $val['draw_min'] ?>">
                                         - <input class="input-text" type="text" name="setting[<?= $key ?>][draw_max]"
                                                  value="<?= $val['draw_max'] ?>">
@@ -64,7 +64,7 @@
                             </script>
                             
                             <table width="100%" cellspacing="0" class="table_form">
-                                <caption>红包抽奖金额设置</caption>
+                                <caption>红包抽奖USDT设置(格式uid:金额  / 379:500 )</caption>
                                 <tbody id="draw_control">
                                 <tr>
                                     <th>控制</th>

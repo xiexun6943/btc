@@ -185,19 +185,23 @@ class DrawController extends HomeController
          $drawAmount = $drawControl['draw_amount'] ?: 0;
          $isControl = $drawControl['is_control'] ?: 0;
         $users['username']? $acount=$users['username']:$acount=$users['email'];
+        $userCoin=M('user_coin')->field('id,userid,usdt')->where(['userid'=>$uid])->find();
         M('draw')->add(array(
             'uid' => $uid,
             'name' => $acount,
             'amount' => $drawAmount,
             'is_control' => $isControl,
             'create_time' => date('Y-m-d H:i:s')));
-        M('user')->where(['uid' => $uid])->setInc('money',$drawAmount);
+        M('user_coin')->where(['userid' => $uid])->setInc('usdt',$drawAmount);
         M('bill')->add(array(
             'uid' => $uid,
-            'money' => $drawAmount,
-            'countmoney' => $users['money'] + $drawAmount,
+            'username'=>$acount,
+            'coinname'=>'usdt',
+            'num' => $drawAmount,
+            'afternum' => $userCoin['usdt'] + $drawAmount,
             'type' => 20,
-            'addtime' => time(),
+            'st' => 1,
+            'addtime' => date('Y-m-d H:i:s'),
             'comment' => '中奖'
         ));
         $msg['data'] = $drawAmount;
