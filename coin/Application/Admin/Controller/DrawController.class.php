@@ -108,9 +108,20 @@ class DrawController extends AdminController
 		if($_POST){
 			$setting_arr = $_POST['setting'];
 			$setting_data['draw_control'] = urlencode(serialize($setting_arr['draw_control']));
-			unset($setting_arr['draw_control']);
-			$setting_data['draw'] = urlencode(serialize($setting_arr));
+			$lang = array();
+			foreach ($setting_arr['lang'] as $keyL => $valL) {
+				foreach ($valL as $keL => $vaL) {
+					if(!empty($vaL)){
+						$lang[$keL][$keyL] = $vaL;
+					}
 
+				}
+			}
+			$setting_data['lang'] = urlencode(serialize($lang));
+			unset($setting_arr['draw_control']);
+			unset($setting_arr['lang']);
+
+			$setting_data['draw'] = urlencode(serialize($setting_arr));
 			foreach($setting_data as $k => $v) {
 				M("settings") ->where(array('name' => $k ))->save(array('data' => $this->safe_replace(trim($v)))); //更新数据
 			}

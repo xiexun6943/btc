@@ -85,6 +85,24 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <table width="100%" cellspacing="0" class="table_form">
+                                <caption>规则说明</caption>
+                                <tbody id="lang">
+                                <?php foreach ($lang as $key => $val) { ?>
+                                <tr>
+                                    <input type="hidden" name="setting[lang][name][<?= $key ?>]" value="<?= $val['name'] ?>">
+                                    <input type="hidden" name="setting[lang][type][<?= $key ?>]" value="<?= $val['type'] ?>">
+                                    <th>
+                                        <?= $val['name'] ?>
+                                    </th>
+                                    <td>
+                            <textarea class="input-text lang_content_s" name="setting[lang][content][<?= $key ?>]"
+                                      style="height: 120px;width: 95%"><?= $val['content'] ?></textarea>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
                             <table>
 
                                 <tr class="controls">

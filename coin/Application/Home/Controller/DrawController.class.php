@@ -169,7 +169,7 @@ class DrawController extends HomeController
          if ($totalDrawNum < ($drawEdNum + 1)){
              $msg['data'] = [];
              $msg['err'] = 'y';
-             $msg['msg'] = L('您目前没有抽奖机会');
+             $msg['msg'] = L('您目前没有空降机会');
              $this->ajaxReturn($msg);
              exit;
          }
