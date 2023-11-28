@@ -333,7 +333,9 @@ class TradeController extends MobileController
 		    //把USDT转入冻结字段 
 		    $decre = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$musdt);
 		    $incre = M("user_coin")->where(array('userid'=>$uid))->setInc('usdtd',$musdt);
-		    if($addre && $decre && $incre){
+            //记录流水
+            $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$musdt);
+		    if($addre && $decre && $incre && $bill){
 		        $this->ajaxReturn(['code'=>1,'info'=> L('订单委托成功')]);
 		    }
   
@@ -410,8 +412,9 @@ class TradeController extends MobileController
 		    $cbill['remark'] = L('币币交易购买').$coin;
 
 		    $cbillre = M("bill")->add($cbill);
-
-		    if($addre && $decre && $ubillre && $incre && $cbillre){
+            //记录流水
+            $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$musdt);
+		    if($addre && $decre && $ubillre && $incre && $cbillre && $bill){
 		        $this->ajaxReturn(['code'=>1,'info'=>L('交易成功')]);
 		    }else{
 		        $this->ajaxReturn(['code'=>0,'info'=>L('交易失败')]);

@@ -511,8 +511,10 @@ class UserController extends AdminController
             if (empty($id)) {
                 $this->data = '';
             } else {
-                $this->data = M('User')->where(array('id' => trim($id)))->find();
+                $data = M('User')->where(array('id' => trim($id)))->find();
+                empty( $data['username']) ? $data['account']= $data['phone']: $data['account']= $data['username'];
             }
+            $this->assign('data', $data);
             $this->display();
         } else {
             //新增会员
@@ -600,24 +602,32 @@ class UserController extends AdminController
             if (empty($id)) {
                 $this->data = '';
             } else {
-                $this->data = M('User')->where(array('id' => trim($id)))->find();
+                $data= M('User')->where(array('id' => trim($id)))->find();
+                empty( $data['username']) ? $data['account']= $data['phone']: $data['account']= $data['username'];
             }
+            $this->assign('data',$data);
             $this->display();
         } else {
             $uid=$_POST['id'];
+            $coin=trim($_POST['coin']);
             $usdt=trim($_POST['num']); // 正数为充值  负数 减
-
-            if(empty($id)){
+            if(empty($id) || empty($coin)){
                 $this->error("缺少重要参数");exit();
             }
             if(empty($usdt)){
                 $this->error("缺少金额参数");exit();
             }
+
             $num = trim($_POST['num']);
             $coinname = "usdt";
             $username = trim($_POST['username']);
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
-
+            $type=17;  // 充值
+            if ($coin == 'bill') { //  bill 是 彩金 需要设置 用户流水线 并且清空之前设置的流水线值
+                $type=21;  // 彩金
+                $bonus = trim($_POST['bonus']);
+                $bill_result = M("user")->where(array('id'=>$uid))->save(['st_bill'=>$bonus,'bill'=>0]);
+            }
             //写入充值单
             $save=[
                 'uid'=>$uid,
@@ -657,7 +667,7 @@ class UserController extends AdminController
             $data['num'] = $num;
             $data['coinname'] = $coinname;
             $data['afternum'] = $minfo[$coinname] + $num;
-            $data['type'] = 17;
+            $data['type'] = $type;
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['st'] = 1;
          

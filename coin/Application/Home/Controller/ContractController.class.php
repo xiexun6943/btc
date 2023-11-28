@@ -386,7 +386,9 @@ class ContractController extends HomeController
 	        $bill['st'] = 2;
 	        $bill['remark'] = L('购买').$ccoinname.L('秒合约');
 	        $billre = M("bill")->add($bill);
-	        if($order && $decre && $billre){
+            //记录流水
+            $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$ctzed);
+	        if($order && $decre && $billre && $bill){
 	            $this->ajaxReturn(['code'=>1,'msg' => L('建仓成功')]);
 	        }else{
 	            $this->ajaxReturn(['code'=>0,'msg' => L('建仓失败')]);

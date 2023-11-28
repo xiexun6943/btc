@@ -168,7 +168,8 @@ class IssueController extends MobileController
             $incbill['st'] = 1;
             $incbill['remark'] = $issue['name'].L("认购");
             $incbillre = M("bill")->add($incbill);
-
+            //记录流水
+            $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$allmoney);
             // 提交事务
             M("issue")->commit();
 //            if($logre && $upre && $decre && $decbillre && $incre && $incbillre) {

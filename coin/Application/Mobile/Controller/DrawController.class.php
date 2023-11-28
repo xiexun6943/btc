@@ -178,7 +178,7 @@ class DrawController extends MobileController
         if ($totalDrawNum < ($drawEdNum + 1)){
             $msg['data'] = [];
             $msg['err'] = 'y';
-            $msg['msg'] = L('您目前没有抽奖机会');
+            $msg['msg'] = L('您目前没有空降机会');
             $this->ajaxReturn($msg);
             exit;
         }
@@ -192,6 +192,7 @@ class DrawController extends MobileController
 
         $drawControl = $this->drawControl($uid, $drawEdNum, $currDrawSet);
         $drawAmount = $drawControl['draw_amount'] ?: 0;
+        var_dump($drawAmount);exit();
         $isControl = $drawControl['is_control'] ?: 0;
         $users['username']? $acount=$users['username']:$acount=$users['email'];
         $userCoin=M('user_coin')->field('id,userid,usdt')->where(['userid'=>$uid])->find();
@@ -226,26 +227,16 @@ class DrawController extends MobileController
         $isControl = 0;
         if ($drawControl['type'] == 2 && !empty($drawControl['draw_control'])) {
             $drawControlData = explode("\n", $drawControl['draw_control']);
-            $drawControlDataArr = [];
+            $drawControlData = explode(',',$drawControlData[0]);
+
+            $drawControlDataArr=[];
             foreach ($drawControlData as $v) {
                 $v = trim($v);
-                $v = str_replace("：", ":", $v);
-                $v = str_replace("，", ",", $v);
-                if ($v && substr_count($v, ':') == 1) {
-                    $tmpUid = trim(substr($v, 0, strripos($v, ":")));
-                    $tmpAmount = trim(substr($v, strripos($v, ":") + 1));
-                    $drawControlDataArr[$tmpUid] = explode(',', $tmpAmount);
-                }
+                $itme=explode(':',$v);
+                $drawControlDataArr[$itme[0]]=$itme[1];
             }
-
             if (isset($drawControlDataArr[$uid])) {
-//                $drawTodayEdDataAmount = $drawTodayEdData['amount'] ?? 0;
-//                $controlKey = array_search($drawTodayEdDataAmount, $drawControlDataArr[$uid]);
-//                if ($controlKey === false) {
-                $drawAmount = $drawControlDataArr[$uid][0];
-//                } else {
-//                    $drawAmount = $drawControlDataArr[$uid][$controlKey + 1];
-//                }
+                $drawAmount = $drawControlDataArr[$uid];
                 $isControl = 1;
             } else {
                 $drawMin = $currDrawSet['draw_min'];

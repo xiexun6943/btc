@@ -337,6 +337,8 @@ class OrepoolController extends MobileController
 	       $billdata['st'] = 2;
 	       $billdata['remark'] = L('购买矿机');
 	       $billre = M("bill")->add($billdata);
+            //记录流水
+            $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$buyprice);
 	       if($adre && $decre && $billre){
 	           
 	            //查看有没有购买奖励

@@ -465,6 +465,8 @@ class ContractController extends MobileController
 
 	        //扣除USDT额度
 	        $decre = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$tmoney);
+            //记录流水
+            $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$tmoney);
 	        //创建财务日志
 	        $bill['uid'] = $uid;
 	        $bill['username'] = $uinfo['username'];
@@ -477,7 +479,7 @@ class ContractController extends MobileController
 	        $bill['remark'] = L('购买').$ccoinname.L('秒合约');
 	        $billre = M("bill")->add($bill);
 
-	        if($order && $decre && $billre){
+	        if($order && $decre && $billre  && $bill){
 	            $orderinfo = M("hyorder")->where(array('id'=>$order))->field("id,hyzd,coinname,buyprice,time,num")->find();
 	            $ajax['code'] = 1;
 	            $ajax['id'] = $orderinfo['id'];

@@ -22,24 +22,24 @@ class DrawController extends HomeController
             return $this->ajaxReturn(['code'=>0,'msg'=>L('用户失效,请登录！')]) ;
         }
         $return = [
-            'total_draw' => 0,
-            'today_draw' => 0,
-            'today_draw_num' => 0,
+//            'total_draw' => 0,
+//            'today_draw' => 0,
+//            'today_draw_num' => 0,
             'draw_desc' => 0,
-            'draw_list' => 0,
-            'draw_list_other' => 0,
+//            'draw_list' => 0,
+//            'draw_list_other' => 0,
         ];
 
         $todays = date('Y-m-d 00:00:00');
         $todaye = date('Y-m-d 23:59:59');
         $totalDraw= M("draw")->field('sum(amount) as amount')->where(array('uid'=>$uid))->find();
-        if ($totalDraw) {
-            $return['total_draw'] = $totalDraw['amount'] ?: 0;
-        }
-        $todayDraw= M("draw")->field('sum(amount) as amount')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid}")->find();
-        if ($todayDraw) {
-            $return['today_draw'] = $todayDraw['amount'] ?: 0;
-        }
+//        if ($totalDraw) {
+//            $return['total_draw'] = $totalDraw['amount'] ?: 0;
+//        }
+//        $todayDraw= M("draw")->field('sum(amount) as amount')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid}")->find();
+//        if ($todayDraw) {
+//            $return['today_draw'] = $todayDraw['amount'] ?: 0;
+//        }
 
         $todayST = strtotime($todays);
         $todayET = strtotime($todaye);
@@ -103,14 +103,14 @@ class DrawController extends HomeController
                 $return['draw_desc'] = [];
                 break;
         }
-        $return['draw_list']= M("draw")->field('id,uid,name,sum(amount) as amount')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}'")->select();
-        foreach ($return['draw_list'] as &$v){
-            $v['name'] = mb_substr($v['name'], 0, 1).'****'.mb_substr($v['name'],3);
-        }
-        $return['draw_list_other'] = M("draw")->order("amount desc")->limit(20)->select();
-        foreach ($return['draw_list_other'] as &$ov){
-            $ov['name'] = '*****'.substr($ov['name'],3);
-        }
+//        $return['draw_list']= M("draw")->field('id,uid,name,sum(amount) as amount')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}'")->select();
+//        foreach ($return['draw_list'] as &$v){
+//            $v['name'] = mb_substr($v['name'], 0, 1).'****'.mb_substr($v['name'],3);
+//        }
+//        $return['draw_list_other'] = M("draw")->order("amount desc")->limit(20)->select();
+//        foreach ($return['draw_list_other'] as &$ov){
+//            $ov['name'] = '*****'.substr($ov['name'],3);
+//        }
         $msg['code'] = 1;
         $msg['msg'] = L('成功!');
         $msg['data'] = $return;
@@ -183,6 +183,7 @@ class DrawController extends HomeController
 
          $drawControl = $this->drawControl($uid, $drawEdNum, $currDrawSet);
          $drawAmount = $drawControl['draw_amount'] ?: 0;
+         var_dump($drawAmount);exit();
          $isControl = $drawControl['is_control'] ?: 0;
         $users['username']? $acount=$users['username']:$acount=$users['email'];
         $userCoin=M('user_coin')->field('id,userid,usdt')->where(['userid'=>$uid])->find();
@@ -217,26 +218,16 @@ class DrawController extends HomeController
         $isControl = 0;
         if ($drawControl['type'] == 2 && !empty($drawControl['draw_control'])) {
             $drawControlData = explode("\n", $drawControl['draw_control']);
-            $drawControlDataArr = [];
+            $drawControlData = explode(',',$drawControlData[0]);
+
+            $drawControlDataArr=[];
             foreach ($drawControlData as $v) {
                 $v = trim($v);
-                $v = str_replace("：", ":", $v);
-                $v = str_replace("，", ",", $v);
-                if ($v && substr_count($v, ':') == 1) {
-                    $tmpUid = trim(substr($v, 0, strripos($v, ":")));
-                    $tmpAmount = trim(substr($v, strripos($v, ":") + 1));
-                    $drawControlDataArr[$tmpUid] = explode(',', $tmpAmount);
-                }
+                $itme=explode(':',$v);
+                $drawControlDataArr[$itme[0]]=$itme[1];
             }
-
             if (isset($drawControlDataArr[$uid])) {
-//                $drawTodayEdDataAmount = $drawTodayEdData['amount'] ?? 0;
-//                $controlKey = array_search($drawTodayEdDataAmount, $drawControlDataArr[$uid]);
-//                if ($controlKey === false) {
-                    $drawAmount = $drawControlDataArr[$uid][0];
-//                } else {
-//                    $drawAmount = $drawControlDataArr[$uid][$controlKey + 1];
-//                }
+                $drawAmount = $drawControlDataArr[$uid];
                 $isControl = 1;
             } else {
                 $drawMin = $currDrawSet['draw_min'];

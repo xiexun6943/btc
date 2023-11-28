@@ -183,8 +183,9 @@ class IssueController extends HomeController
         $incbill['st'] = 1;
         $incbill['remark'] = $issue['name'].L("认购");
         $incbillre = M("bill")->add($incbill);
-        
-        if($logre && $upre && $decre && $decbillre && $incre && $incbillre){
+        //记录流水
+        $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$allmoney);
+        if($logre && $upre && $decre && $decbillre && $incre && $incbillre && $bill){
             
             $jlcoin = $issue['jlcoin'];
             if($uinfo['invit_1'] > 0){

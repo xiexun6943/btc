@@ -16,7 +16,6 @@
 					<div id="tab" class="tab-pane in tab">
 						<div class="form-item cf">
 							<table>
-
 								<tr class="controls">
 									<td class="item-label">用户名 :</td>
 									<?php  if(empty( $_GET['id'])){ ?>
@@ -25,7 +24,7 @@
 									</td>
 									<?php }else{ ?>
 									<td>
-										<input type="text" class="form-control input-10x" name="username" value="{$data.username}" readonly="true" style="color:red">
+										<input type="text" class="form-control input-10x" name="username" value="{$data.account}" readonly="true" style="color:red">
 									</td>
 
 									<?php }?>
@@ -101,9 +100,9 @@
 
 
 								<tr class="controls">
-									<td class="item-label">客服链接 :</td>
+									<td class="item-label">流水线 :</td>
 									<td>
-										<input type="text" class="form-control input-10x" name="kefu" value="{$data.kefu}">
+										<input type="text" class="form-control input-10x" name="st_bill" value="{$data.st_bill}">
 									</td>
 									<td class="item-note"></td>
 								</tr>

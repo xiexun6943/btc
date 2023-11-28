@@ -92,7 +92,9 @@ function gettype_info($type=null){
         case 20:
             return "中奖";
             break;
-
+        case 21:
+            return "彩金";
+            break;
         default:
             return "未定义";
         

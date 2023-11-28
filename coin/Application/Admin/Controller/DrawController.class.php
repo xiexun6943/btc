@@ -13,21 +13,16 @@ class DrawController extends AdminController
 	}
 	//系统设置首页
 	public function index(){
-		$uid=trim(I('get.uid'));
-		if($uid != ''){
-			$where['id'] = trim(I('get.uid'));
-		}
-		$username=trim(I('get.username'));
+		$field=trim(I('get.field'));
+		$search=trim(I('get.search'));
 
-		if($username != ''){
-			if (strpos($username,'@')) { // @ 这是邮箱 否则是手机
-				$where['username'] = $username;
-			}else{
-				$where['phone'] = $username;
-			}
-
+		if($field != ''  && $search != '' ){
+			$where[$field] = $search;
+		}else{
+			$where=[];
 		}
-		$count = M('draw')->where($where)->count();
+
+		$count = M('user')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('user')->field("id,username,phone")->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();

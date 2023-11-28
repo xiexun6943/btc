@@ -364,7 +364,9 @@ class OrepoolController extends HomeController
 	       $billdata['st'] = 2;
 	       $billdata['remark'] = L('购买矿机');
 	       $billre = M("bill")->add($billdata);
-	       if($adre && $decre && $billre){
+            //记录流水
+           $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$buyprice);
+	       if($adre && $decre && $billre && $bill){
 	            //查看有没有购买奖励
                 if($minfo['jlnum'] > 0){
                     $jlcoin = $minfo['jlcoin'];

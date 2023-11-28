@@ -32,14 +32,14 @@
 							<option value="2" <eq name="Think.get.status" value="2">selected</eq> >冻结状态</option>
 						</select>
 						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
-							<option value="username"
-							<empty name="Think.get.field">selected</empty>
-							>邮箱账号</option>
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
 						</select>
 
 						<script type="text/javascript" src="/Public/layer/laydate/laydate.js"></script>
 
-						<input type="text" name="name" class="search-input form-control" value="{$Think.get.name}" placeholder="请输入邮箱账号" style="">
+						<input type="text" name="search" class="search-input form-control" value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 					</form>
 					<script>
@@ -69,9 +69,10 @@
 							<input class="check-all" type="checkbox"/>
 						</th>
 						<th class="">ID</th>
-						<th class="">会员账号</th>
-						<th class="">手机号</th>
+						<th class="">会员账号 / 手机号</th>
 						<th class="">登陆</th>
+						<th class="">流水</th>
+						<th class="">流水线</th>
 						<th class="">注册IP/时间</th>
 						<th class="">地址</th>
 						<th class="">推荐人</th>
@@ -89,9 +90,11 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<td title="登录该用户"><a href=" {:U('User/loginadmin?id='.$vo['id'].'&pass='.$vo['password'])}" target="_blank">{$vo.username}</a></td>
-								<td>{$vo.phone}</td>
+<!--								<td title="登录该用户"><a href=" {:U('User/loginadmin?id='.$vo['id'].'&pass='.$vo['password'])}" target="_blank">{$vo.username}</a></td>-->
+								<td><span style="color: red">{$vo.username}</span> / <span style="color: green">{$vo.phone}</span></td>
 								<td><span>{$vo.logins}</span>次</td>
+								<td><span>{$vo.bill}</span></td>
+								<td><span>{$vo.st_bill}</span></td>
 								<td>
 									<span>IP：{$vo.addip}</span><br />
 									<span>时间：<?php echo date("Y-m-d H:i:s",$vo['addtime']);?></span>
