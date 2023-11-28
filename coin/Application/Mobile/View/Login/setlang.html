@@ -55,7 +55,37 @@
 			<div class="no_inbox">
 
 
+                <a href="{:U('Index/index?Lang=zh-tw')}">
+					<div class="lbox">
+						<div class="lbox_l">
+							<img  src="/Public/Static/img/flag/tw.png" class="flag" />
+							<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;中文繁體</span>
+						</div>
 
+						<div class="lbox_r lang_1">
+							<?php if(LANG_SET=='zh-tw'){?>
+							<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
+							<?php }?>
+						</div>
+
+					</div>
+				</a>
+				<a href="{:U('Index/index?Lang=zh-cn')}">
+				<div class="lbox">
+					<div class="lbox_l">
+						<img  src="/Public/Static/img/flag/cn.png" class="flag" />
+						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;中文简体</span>
+					</div>
+
+						<div class="lbox_r lang_1">
+							<?php if(LANG_SET=='zh-cn'){?>
+							<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
+							<?php }?>
+						</div>
+
+				</div>
+				</a>
+				
 				<a href="{:U('Index/index?Lang=en-us')}">
 				<div class="lbox">
 					<div class="lbox_l">
@@ -71,81 +101,81 @@
 				</a>
 
 				<!--法语-->
-				<a href="{:U('Index/index?Lang=fr-fr')}">
-				<div class="lbox">
-					<div class="lbox_l">
-						<img  src="/Public/Static/img/flag/fr.png" class="flag" />
-						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;Français</span>
-					</div>
+				<!--<a href="{:U('Index/index?Lang=fr-fr')}">-->
+				<!--<div class="lbox">-->
+				<!--	<div class="lbox_l">-->
+				<!--		<img  src="/Public/Static/img/flag/fr.png" class="flag" />-->
+				<!--		<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;Français</span>-->
+				<!--	</div>-->
 
-					<div class="lbox_r lang_3">
-						<?php if(LANG_SET=='fr-fr'){?>
-						<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
-						<?php }?>
-					</div>
-				</div>
-				</a>
+				<!--	<div class="lbox_r lang_3">-->
+				<!--		<?php if(LANG_SET=='fr-fr'){?>-->
+				<!--		<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>-->
+				<!--		<?php }?>-->
+				<!--	</div>-->
+				<!--</div>-->
+				<!--</a>-->
 				<!--德语-->
-				<a href="{:U('Index/index?Lang=de-de')}">
-				<div class="lbox">
-					<div class="lbox_l">
-						<img  src="/Public/Static/img/flag/de.png" class="flag" />
-						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;Deutsch</span>
-					</div>
-					<div class="lbox_r lang_2">
-						<?php if(LANG_SET=='de-de'){?>
-						<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
-						<?php }?>
-					</div>
+				<!--<a href="{:U('Index/index?Lang=de-de')}">-->
+				<!--<div class="lbox">-->
+				<!--	<div class="lbox_l">-->
+				<!--		<img  src="/Public/Static/img/flag/de.png" class="flag" />-->
+				<!--		<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;Deutsch</span>-->
+				<!--	</div>-->
+				<!--	<div class="lbox_r lang_2">-->
+				<!--		<?php if(LANG_SET=='de-de'){?>-->
+				<!--		<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>-->
+				<!--		<?php }?>-->
+				<!--	</div>-->
 
-				</div>
-				</a>
+				<!--</div>-->
+				<!--</a>-->
 
 				<!--意大利语-->
-				<a href="{:U('Index/index?Lang=it-it')}">
-				<div class="lbox">
-					<div class="lbox_l">
-						<img  src="/Public/Static/img/flag/it.png" class="flag" />
-						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;Italiano</span>
-					</div>
+				<!--<a href="{:U('Index/index?Lang=it-it')}">-->
+				<!--<div class="lbox">-->
+				<!--	<div class="lbox_l">-->
+				<!--		<img  src="/Public/Static/img/flag/it.png" class="flag" />-->
+				<!--		<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;Italiano</span>-->
+				<!--	</div>-->
 
-					<div class="lbox_r lang_2">
-						<?php if(LANG_SET=='it-it'){?>
-						<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
-						<?php }?>
-					</div>
+				<!--	<div class="lbox_r lang_2">-->
+				<!--		<?php if(LANG_SET=='it-it'){?>-->
+				<!--		<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>-->
+				<!--		<?php }?>-->
+				<!--	</div>-->
 
-				</div>
-				</a>
+				<!--</div>-->
+				<!--</a>-->
 				<!--韩语-->
-				<a href="{:U('Index/index?Lang=ko-kr')}">
-				<div class="lbox">
-					<div class="lbox_l">
-						<img  src="/Public/Static/img/flag/kr.png" class="flag" />
-						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;한국어</span>
-					</div>
-					<div class="lbox_r lang_2">
-						<?php if(LANG_SET=='ko-kr'){?>
-						<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
-						<?php }?>
-					</div>
-				</div>
-				</a>
+				<!--<a href="{:U('Index/index?Lang=ko-kr')}">-->
+				<!--<div class="lbox">-->
+				<!--	<div class="lbox_l">-->
+				<!--		<img  src="/Public/Static/img/flag/kr.png" class="flag" />-->
+				<!--		<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;한국어</span>-->
+				<!--	</div>-->
+				<!--	<div class="lbox_r lang_2">-->
+				<!--		<?php if(LANG_SET=='ko-kr'){?>-->
+				<!--		<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>-->
+				<!--		<?php }?>-->
+				<!--	</div>-->
+				<!--</div>-->
+				<!--</a>-->
 				<!--土尔其语-->
-				<a href="{:U('Index/index?Lang=tr-tr')}">
-				<div class="lbox">
-					<div class="lbox_l">
-						<img  src="/Public/Static/img/flag/tr.png" class="flag" />
-						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;Türk</span>
-					</div>
+				<!--<a href="{:U('Index/index?Lang=tr-tr')}">-->
+				<!--<div class="lbox">-->
+				<!--	<div class="lbox_l">-->
+				<!--		<img  src="/Public/Static/img/flag/tr.png" class="flag" />-->
+				<!--		<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;Türk</span>-->
+				<!--	</div>-->
 
-					<div class="lbox_r lang_2">
-						<?php if(LANG_SET=='tr-tr'){?>
-						<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
-						<?php }?>
-					</div>
-				</div>
-				</a>
+				<!--	<div class="lbox_r lang_2">-->
+				<!--		<?php if(LANG_SET=='tr-tr'){?>-->
+				<!--		<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>-->
+				<!--		<?php }?>-->
+				<!--	</div>-->
+				<!--</div>-->
+				<!--</a>-->
 
 				<!--日语-->
 				<a href="{:U('Index/index?Lang=ja-jp')}">
@@ -163,37 +193,8 @@
 
 				</div>
 				</a>
-
-				<a href="{:U('Index/index?Lang=zh-cn')}">
-				<div class="lbox">
-					<div class="lbox_l">
-						<img  src="/Public/Static/img/flag/tw.png" class="flag" />
-						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;中文简体</span>
-					</div>
-
-						<div class="lbox_r lang_1">
-							<?php if(LANG_SET=='zh-cn'){?>
-							<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
-							<?php }?>
-						</div>
-
-				</div>
-				</a>
-				<a href="{:U('Index/index?Lang=zh-tw')}">
-					<div class="lbox">
-						<div class="lbox_l">
-							<img  src="/Public/Static/img/flag/tw.png" class="flag" />
-							<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;中文繁體</span>
-						</div>
-
-						<div class="lbox_r lang_1">
-							<?php if(LANG_SET=='zh-tw'){?>
-							<i class="bi bi-check2 fcy fw" style="font-size: 26px;"></i>
-							<?php }?>
-						</div>
-
-					</div>
-				</a>
+                
+				
 			</div>
 
 		</div>

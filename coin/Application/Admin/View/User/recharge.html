@@ -30,11 +30,25 @@
 								<tr class="controls">
 									<td class="item-label">充值币种 :</td>
 									<td>
-									    <select name="coin" class="form-control input-10x">
+									    <select name="coin" class="form-control input-10x select_bar">
 										<option  value="usdt" >usdt</option>
+										<option  value="bill" >彩金</option>
 									</select></td>
 									<td class="item-note" style="color:red;"></td>
 								</tr>
+								
+								<script>
+								    $(function(){
+								        $('.select_bar').change(function(){
+								            console.log($(this).val())
+								            if($(this).val()==='bill'){
+								                $('.bonus').show()
+								            }else{
+								                $('.bonus').hide()
+								            }
+								        })
+								    })
+								</script>
 								
 								
 							
@@ -43,6 +57,17 @@
 									<td>
 										<input type="text" class="form-control input-8x" name="num" value="">
 										<p style="color:red;">注意： 正数为充值如(100 充值100),负数为减比如(-100 减币100)。</p>
+									</td>
+									
+								
+								</tr>
+								
+								
+							
+								<tr class="controls bonus" style="display:none">
+									<td class="item-label">流 水 :</td>
+									<td>
+										<input type="text" class="form-control input-8x" name="bonus" value="">
 									</td>
 									
 								
