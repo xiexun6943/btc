@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <title>{$webname}</title>
+	    <style>
+            .css-wp2li4 {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               display: -webkit-box;
+               display: -webkit-flex;
+               display: -ms-flexbox;
+               display: flex;
+               overflow-x: hidden;
+               -webkit-flex-direction: column;
+               -ms-flex-direction: column;
+               flex-direction: column;
+            }
+            .css-19zx9ks {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               display: -webkit-box;
+               display: -webkit-flex;
+               display: -ms-flexbox;
+               display: flex;
+               -webkit-align-items: center;
+               -webkit-box-align: center;
+               -ms-flex-align: center;
+               align-items: center;
+               height: 48px;
+               font-size: 12px;
+               color: #474D57;
+               display: -webkit-box;
+               display: -webkit-flex;
+               display: -ms-flexbox;
+               display: flex;
+               min-height: 48px;
+               height: -webkit-fit-content;
+               height: -moz-fit-content;
+               height: fit-content;
+               -webkit-flex-wrap: wrap;
+               -ms-flex-wrap: wrap;
+               flex-wrap: wrap;
+               z-index: 99;
+               padding-top: 16px;
+               padding-bottom: 10px;
+               padding-left: 17%;
+               padding-right: 17%;
+               line-height: 1.25;
+               box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
+            }
+            .css-o4bcl2 {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               color: #00b897;
+               -webkit-text-decoration: none;
+               text-decoration: none;
+               color: #000000;
+            }
+            .css-19zx9ks a {
+               -webkit-flex-wrap: nowrap;
+               -ms-flex-wrap: nowrap;
+               flex-wrap: nowrap;
+               -webkit-flex-shrink: 0;
+               -ms-flex-negative: 0;
+               flex-shrink: 0;
+               margin-bottom: 6px;
+            }
+            .css-19zx9ks a:hover {
+               color: #C99400;
+               -webkit-text-decoration: underline;
+               text-decoration: underline;
+            }
+            .css-wl17qh {
+               box-sizing: border-box;
+               margin: 100%px;
+               min-width: 0px;
+               display: flex;
+               height: fit-content;
+               min-height: 349px;
+            }
+            .css-1s5qj1n {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               position: relative;
+               margin-bottom: 32px;
+               padding-top: 40px;
+               padding-right: 24px;
+               padding-left: 17%;
+               width: 69%;
+            }
+            .css-101kg5g {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               font-size: 40px;
+               color: #1E2329;
+               font-weight: 700;
+            }
+            .css-vurnku {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+            }
+            .css-wmvdm0 {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               display: -webkit-box;
+               display: -webkit-flex;
+               display: -ms-flexbox;
+               display: flex;
+               -webkit-align-items: center;
+               -webkit-box-align: center;
+               -ms-flex-align: center;
+               align-items: center;
+               margin-top: 44px;
+               margin-bottom: 11px;
+            }
+            .css-ktxhrn {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               margin-bottom: 32px;
+            }
+            .css-qinc3w {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               color: #00b897;
+               display: block;
+               margin-bottom: 16px;
+               width: -webkit-fit-content;
+               width: -moz-fit-content;
+               width: fit-content;
+               max-width: 100%;
+               overflow: hidden;
+               text-overflow: ellipsis;
+               white-space: nowrap;
+               color: #474D57;
+               font-size: 14px;
+               -webkit-text-decoration: none;
+               text-decoration: none;
+            }
+            .css-6f91y1 {
+               box-sizing: border-box;
+               margin: 0;
+               min-width: 0;
+               margin-left: 48px;
+            }
+            .css-qinc3w:hover {
+               color: #C99400;
+               -webkit-text-decoration: underline;
+               text-decoration: underline;
+            }
+            .css-jrzkh7 {
+                box-sizing: border-box;
+                margin: 0;
+                min-width: 0;
+                background-color: #181A20;
+            }
+            .css-1aac2e {
+                box-sizing: border-box;
+                margin: 0;
+                min-width: 0;
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: 24px;
+                padding-right: 24px;
+                max-width: 1248px;
+                background-color: #FEF1F2;
+            }
+            .css-163lzuo {
+                box-sizing: border-box;
+                margin: 0;
+                min-width: 0;
+                margin-top: 24px;
+                margin-bottom: 24px;
+                font-weight: 700;
+                font-size: 36px;
+                color: #EAECEF;
+            }
+            .css-8pdsjp {
+                box-sizing: border-box;
+                margin: 0;
+                min-width: 0;
+                display: -webkit-inline-box;
+                display: -webkit-inline-flex;
+                display: -ms-inline-flexbox;
+                display: inline-flex;
+                position: relative;
+                height: 32px;
+                margin-top: 4px;
+                margin-bottom: 0px;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                line-height: 1.6;
+                border: 1px solid transparent;
+                border-color: #EAECEF;
+                border-radius: 4px;
+                margin-top: 0;
+                margin-bottom: 0;
+                width: 327px;
+                height: 32px;
+                padding-left: 11px;
+                padding-right: 6px;
+                border-radius: 4px;
+                background-color: #2B3139;
+                border: none;
+            }
+            .css-8pdsjp {
+                width: 610px;
+                height: 48px;
+                padding-left: 16px;
+                padding-right: 12.5px;
+            }
+            .css-16fg16t {
+                box-sizing: border-box;
+                margin: 0;
+                min-width: 0;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                outline: none;
+                border: none;
+                background-color: inherit;
+                opacity: 1;
+            }
+            .css-8pdsjp input {
+                color: #1E2329;
+                font-size: 14px;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+            .css-8pdsjp input {
+                padding-left: 0;
+                font-size: 12px;
+                color: #EAECEF;
+                border-radius: 10px;
+            }
+            .css-8pdsjp .bn-input-suffix {
+                -webkit-flex-shrink: 0;
+                -ms-flex-negative: 0;
+                flex-shrink: 0;
+                margin-left: 4px;
+                margin-right: 4px;
+                font-size: 14px;
+            }
+            .css-1qppfsi {
+                box-sizing: border-box;
+                margin: 0;
+                min-width: 0;
+                color: #EAECEF;
+                width: 24px;
+                height: 24px;
+                font-size: 24px;
+                fill: #1E2329;
+                fill: #EAECEF;
+                width: 1em;
+                height: 1em;
+                vertical-align: bottom;
+            }
+            ::-webkit-input-placeholder { /* WebKit browsers */
+              color: #474d57;
+              font-size: 14px;
+            }
+    
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+              color: #474d57;
+              font-size: 14px;
+            }
+            input:focus{background:#2B3139;outline: 1px solid #2B3139;}
+            
+            .lump_01{
+                background: #000;
+                text-align: center;
+                padding: 150px 0;
+            }
+            .lump_01 img{
+                display: block;
+                width:200px;
+                height: auto;
+                margin: 10px auto;
+            }
+            .lump_01 h1{
+                color:#fff;
+                font-size: 17px;
+                line-height: 30px;
+            }
+            .lump_02{
+                height: 500px;
+                background: #121212;
+                display: grid;
+                grid-template-columns: 50% 50%;
+            }
+            .lump_02 div{
+                padding-top:200px;
+                color:white;
+                padding-left: 100px;
+                transition: .3s all;
+            }
+            .lump_02 div:hover{
+                background: #fff;
+                padding-left: 100px;
+            }
+            .lump_02 div:hover h2{
+                color: #000;
+            }
+            .lump_02 div:hover h3{
+                color: #000;
+            }
+            .lump_02 div h2{
+                position: relative;
+                color:white;
+                font-size: 40px;
+                font-weight: bold;
+            }
+            .lump_02 div h2 img{
+                position: absolute;
+                width: 120px;
+                height: auto;
+                top:-70px;
+            }
+            .lump_02 div h2 .label2{
+                display: block;
+            }
+            .lump_02 div h2 .label3{
+                display: none;
+            }
+            .lump_02 div:hover .label2{
+                display: none;
+            }
+            .lump_02 div:hover .label3{
+                display: block;
+            }
+            .lump_02 div h3{
+                font-size: 14px;
+                margin-top:40px;
+            }
+            .lump_03{
+                height: auto;
+                padding-bottom: 100px;
+                background: #fff;
+            }
+            .lump_03 .contain{
+                width:800px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 70% 30%;
+            }
+            .lump_03 .contain div{
+                padding-top:100px;
+                color:white;
+            }
+            .lump_03 .contain div h2{
+                position: relative;
+                color:#000;
+                font-size: 40px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+            .lump_03 .contain div h3{
+                position: relative;
+                color:#000;
+                font-size: 14px;
+                line-height: 25px;
+            }
+            .lump_04{
+                height: auto;
+                padding-bottom: 100px;
+                background: #000;
+            }
+            .lump_04 .contain{
+                width:700px;
+                margin: 0 auto;
+            }
+            .lump_04 .contain div{
+                padding-top:100px;
+            }
+            .lump_04 .contain div h2{
+                position: relative;
+                color:#fff;
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+            .lump_04 .contain div h3{
+                position: relative;
+                color:#fff;
+                font-size: 14px;
+                line-height: 25px;
+            }
+            
+	    </style>
+	</head>
+	<body>
+	    <div class="App">
+	        <div class="css-tq0shg">
+	            <include file="Public:header"/>
+	            
+	            <div class="lump_01">
+	                <img src="{$logo}">
+	                <h1 style='padding-left:250px;padding-right:250px;'>{:L('BITVENTURE（bitventure.online）是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、<br>以太币等数字资产的币币和衍生品交易服务。')}</h1>
+	            </div>
+	            
+	            <div class="lump_02">
+	                <div>
+	                <h2>
+	                    <img class="label2" src="/Public/Static/img/label2.png">
+	                    <img class="label3" src="/Public/Static/img/label3.png">
+	                    {:L('愿景')}
+	                </h2>
+	                <h3>{:L('在追求全体同事物质和精神幸福的同时，推动区块链和数字资产走进全球亿万用户的生活。')}</h3>
+	                </div>
+	                <div>
+	                <h2>
+	                    <img class="label2" src="/Public/Static/img/label2.png">
+	                    <img class="label3" src="/Public/Static/img/label3.png">
+	                    {:L('使命')}
+	                </h2>
+	                <h3>{:L('通过区块链和数字资产让世界变得更透明、更美好。')}</h3>
+	                </div>
+	            </div>
+	            
+	            <div class="lump_03">
+	                <div class="contain">
+	                <div>
+	                <h2>
+	                    {:L('关于数字资产')}
+	                </h2>
+	                <h3>{:L('数字货币是一种使用密码学原理来确保交易安全的交易媒介。与美元等法币不同，数字货币并没有实体形式。<span style="color:#00e">Bitcoin (BTC)、Ethereum (ETH) 和 Polkadot (DOT)</span> 等热门数字货币以区块链作为底层技术，充当去中心化的数字分类账。<br><br>
+
+所有数字货币交易都记录在区块链中，一经确认和验证就无法更改。与传统货币由银行维护中心化分类账不同，数字货币交易在公共区块链上进行，任何人都可以访问。
+
+此外，根据共识机制，人人都可以验证数字货币交易并将其添加到区块链，从而实现去中心化。<br><br>
+
+
+随着三星、贝莱德、摩根士丹利和 Alphabet 等全球领先公司纷纷入局投资，人们相信区块链技术将彻底改变全球金融体系。<br><br>
+
+数字货币为您开启了通往去中心化金融世界的大门，让您能够探索前沿技术带来的无限可能。<br><br>
+
+现在，您可以通过 Apple Pay、Visa、Mastercard、MoonPay 和银行转账等支付方式购买各种热门数字货币，如<span style="color:#00e"> Tether (USDT)、Polygon (MATIC) 和狗狗币 (DOGE) </span>等。您还可以通过 <span style="color:#00e">BITVENTURE</span>闪兑 兑换现有数字资产，无任何交易手续费，亦没有价格滑点；或者在BITVENTURE C2C 交易市场上直接从其他卖家处购买数字货币。')}</h3>
+	                </div>
+	                <div>
+	                    <img class="label3" src="/Public/Static/img/big_card.png">
+	                </div>
+	                </div>
+	            </div>
+	            
+	            <div class="lump_04">
+	                <div class="contain">
+	                <div>
+	                <h2>
+	                    {:L('从世界范围来看，目前主流业界对比特币主要有5种观点，共识正在逐步形成。')}
+	                </h2>
+	                <h3>{:L('第一，比特币是一种虚拟商品，有一定的投资属性；<br><br>
+
+第二，比特币是一种点对点支付手段，未来有挑战Visa垄断地位的可能性；<br><br>
+
+第三，比特币区块链作为一种底层区块链，为其他的公有区块链提供共识解决方案，比特币本身是使用这个底层区块链的手续费，比特币区块链未来可能成为其他区块链应用的基础设施；<br><br>
+
+第四，比特币是一种互联网上的虚拟货币，拥有一定的货币属性，在特定的互联网社区里有一定的支付属性；<br><br>
+
+第五，比特币是一种类似黄金的储备资产，因其标准化、可拆分、可在线传输等特点，在支付效率、保存成本等方面有巨大优势，未来有可能成为“数字黄金”，并且是在价值互联网时代可能取代黄金的一种全球性资产。<br><br>
+
+
+大部分国家目前不承认比特币是货币，而是把他定义成一种虚拟商品，但已有不少国家已经制定相应政策规范或支持其发展，并从中立渐趋积极。美国把比特币纳入传统金融监管体系，要求比特币相关企业需要申请MTL(货币传输牌照)，纽约州政府还推出了专门的BitLicense来监管比特币；欧洲多国对比特币一直采取相对积极的态度，部分国家把比特币公司纳入沙箱监管，部分国家强调比特币的经济活动需要按规定纳税；日本FSA正式承认比特币和数字货币的货币地位，规定数字货币交易所必须在FSA登记注册；俄罗斯曾经推出过比特币禁令，在多国出台相应政策后，俄罗斯已放开比特币交易；印度央行行长Raghuram Rajan认为，在更深入地了解比特币之前，不应强烈干预，而是深入研究。')}</h3>
+	                </div>
+	                </div>
+	            </div>
+	            
+	            
+	            
+
+	            <include file="Public:footer"/>
+	        </div>   
+	    </div>
+	    
+	</body>
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/static/js/layer/layer.js" ></script>
+    <script type="text/javascript" src="/Public/Home/static/js/jquery.SuperSlide.2.1.1.js" ></script>
+
+    <script type="text/javascript">
+		$("#nav").slide({ 
+			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
+			titCell:".nLi", //鼠标触发对象
+			targetCell:".sub", //titCell里面包含的要显示/消失的对象
+			effect:"slideDown", //targetCell下拉效果
+			delayTime:300 , //效果时间
+			triggerTime:0, //鼠标延迟触发时间（默认150）
+			returnDefault:true //鼠标移走后返回默认状态，例如默认频道是“预告片”，鼠标移走后会返回“预告片”（默认false）
+		});
+	</script>
+
+    
+</html>

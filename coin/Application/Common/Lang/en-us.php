@@ -1,6 +1,75 @@
 <?php
 
 return [
+    "BITVENTURE（bitventure.online）是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、<br>以太币等数字资产的币币和衍生品交易服务。"=>"BITVENTURE (bitventure.online) is one of the world's famous digital asset trading platforms. It mainly provides currency and derivatives trading services for digital assets such as Bitcoin, Litecoin, and Ethereum to global users.",
+    "愿景"=>"Vision",
+    "在追求全体同事物质和精神幸福的同时，推动区块链和数字资产走进全球亿万用户的生活。"=>"While pursuing the material and spiritual happiness of all colleagues, we will promote blockchain and digital assets into the lives of hundreds of millions of users around the world.",
+    "使命"=>"mission",
+    "通过区块链和数字资产让世界变得更透明、更美好。"=>"Make the world more transparent and better through blockchain and digital assets.",
+    "关于数字资产"=>"About digital assets",
+    '数字货币是一种使用密码学原理来确保交易安全的交易媒介。与美元等法币不同，数字货币并没有实体形式。<span style="color:#00e">Bitcoin (BTC)、Ethereum (ETH) 和 Polkadot (DOT)</span> 等热门数字货币以区块链作为底层技术，充当去中心化的数字分类账。<br><br>
+
+所有数字货币交易都记录在区块链中，一经确认和验证就无法更改。与传统货币由银行维护中心化分类账不同，数字货币交易在公共区块链上进行，任何人都可以访问。
+
+此外，根据共识机制，人人都可以验证数字货币交易并将其添加到区块链，从而实现去中心化。<br><br>
+
+
+随着三星、贝莱德、摩根士丹利和 Alphabet 等全球领先公司纷纷入局投资，人们相信区块链技术将彻底改变全球金融体系。<br><br>
+
+数字货币为您开启了通往去中心化金融世界的大门，让您能够探索前沿技术带来的无限可能。<br><br>
+
+现在，您可以通过 Apple Pay、Visa、Mastercard、MoonPay 和银行转账等支付方式购买各种热门数字货币，如<span style="color:#00e"> Tether (USDT)、Polygon (MATIC) 和狗狗币 (DOGE) </span>等。您还可以通过 <span style="color:#00e">BITVENTURE</span>闪兑 兑换现有数字资产，无任何交易手续费，亦没有价格滑点；或者在BITVENTURE C2C 交易市场上直接从其他卖家处购买数字货币。'=>'Digital currency is a medium of exchange that uses cryptographic principles to ensure transaction security. Unlike fiat currencies such as the U.S. dollar, digital currencies do not have a physical form. Popular digital currencies such as <span style="color:#00e">Bitcoin (BTC), Ethereum (ETH) and Polkadot (DOT)</span> use blockchain as the underlying technology, acting as a decentralized digital ledger. <br><br>
+
+All digital currency transactions are recorded in the blockchain and cannot be changed once confirmed and verified. Unlike traditional currencies, where banks maintain centralized ledgers, digital currency transactions occur on public blockchains that can be accessed by anyone.
+
+In addition, according to the consensus mechanism, everyone can verify digital currency transactions and add them to the blockchain, thus achieving decentralization. <br><br>
+
+
+With leading global companies such as Samsung, BlackRock, Morgan Stanley and Alphabet investing, people believe blockchain technology will revolutionize the global financial system. <br><br>
+
+Digital currency opens the door to the world of decentralized finance for you, allowing you to explore the infinite possibilities brought by cutting-edge technology. <br><br>
+
+Now you can buy a variety of popular digital currencies like Tether (USDT), Polygon (MATIC) and Doge via payment methods such as Apple Pay, Visa, Mastercard, MoonPay and bank transfer Coin (DOGE) </span>etc. You can also redeem existing digital assets through <span style="color:#00e">BITVENTURE</span> flash exchange, without any transaction fees or price slippage; or directly from other companies on the BITVENTURE C2C trading market Buy digital currencies from sellers.',
+    '从世界范围来看，目前主流业界对比特币主要有5种观点，共识正在逐步形成。'=>'From a global perspective, there are currently five main views on Bitcoin in the mainstream industry, and a consensus is gradually forming.',
+    '第一，比特币是一种虚拟商品，有一定的投资属性；<br><br>
+
+第二，比特币是一种点对点支付手段，未来有挑战Visa垄断地位的可能性；<br><br>
+
+第三，比特币区块链作为一种底层区块链，为其他的公有区块链提供共识解决方案，比特币本身是使用这个底层区块链的手续费，比特币区块链未来可能成为其他区块链应用的基础设施；<br><br>
+
+第四，比特币是一种互联网上的虚拟货币，拥有一定的货币属性，在特定的互联网社区里有一定的支付属性；<br><br>
+
+第五，比特币是一种类似黄金的储备资产，因其标准化、可拆分、可在线传输等特点，在支付效率、保存成本等方面有巨大优势，未来有可能成为“数字黄金”，并且是在价值互联网时代可能取代黄金的一种全球性资产。<br><br>
+
+
+大部分国家目前不承认比特币是货币，而是把他定义成一种虚拟商品，但已有不少国家已经制定相应政策规范或支持其发展，并从中立渐趋积极。美国把比特币纳入传统金融监管体系，要求比特币相关企业需要申请MTL(货币传输牌照)，纽约州政府还推出了专门的BitLicense来监管比特币；欧洲多国对比特币一直采取相对积极的态度，部分国家把比特币公司纳入沙箱监管，部分国家强调比特币的经济活动需要按规定纳税；日本FSA正式承认比特币和数字货币的货币地位，规定数字货币交易所必须在FSA登记注册；俄罗斯曾经推出过比特币禁令，在多国出台相应政策后，俄罗斯已放开比特币交易；印度央行行长Raghuram Rajan认为，在更深入地了解比特币之前，不应强烈干预，而是深入研究。'=>'First, Bitcoin is a virtual commodity and has certain investment attributes;<br><br>
+
+Second, Bitcoin is a peer-to-peer payment method and may challenge Visa’s monopoly in the future;<br><br>
+
+Third, as an underlying blockchain, the Bitcoin blockchain provides consensus solutions for other public blockchains. Bitcoin itself is the handling fee for using this underlying blockchain. The Bitcoin blockchain may become a Infrastructure for other blockchain applications;<br><br>
+
+Fourth, Bitcoin is a virtual currency on the Internet, which has certain currency attributes and certain payment attributes in specific Internet communities;<br><br>
+
+Fifth, Bitcoin is a reserve asset similar to gold. Because of its characteristics such as standardization, divisibility, and online transmission, it has huge advantages in payment efficiency, storage costs, etc., and may become "digital gold" in the future, and It is a global asset that may replace gold in the era of value Internet. <br><br>
+
+
+Most countries currently do not recognize Bitcoin as currency, but define it as a virtual commodity. However, many countries have formulated corresponding policy regulations or supported its development, and have gradually become more positive from neutrality. The United States has incorporated Bitcoin into the traditional financial regulatory system and requires Bitcoin-related companies to apply for an MTL (money transmission license). The New York State government has also launched a special BitLicense to supervise Bitcoin; many European countries have always adopted a relatively positive attitude towards Bitcoin. Some countries have included Bitcoin companies in sandbox supervision, and some countries have emphasized that Bitcoin’s economic activities need to be taxed according to regulations; Japan’s FSA officially recognizes the currency status of Bitcoin and digital currencies, and stipulates that digital currency exchanges must register with the FSA; Russia has After launching a Bitcoin ban, Russia has liberalized Bitcoin transactions after many countries introduced corresponding policies; Raghuram Rajan, Governor of the Central Bank of India, believes that before understanding Bitcoin more deeply, there should be no strong intervention, but in-depth research.',
+    '第一，比特币是一种虚拟商品，有一定的投资属性；'=>'First, Bitcoin is a virtual commodity with certain investment attributes;',
+    '第二，比特币是一种点对点支付手段，未来有挑战Visa垄断地位的可能性；'=>'Second, Bitcoin is a peer-to-peer payment method and may challenge Visa’s monopoly in the future;',
+    '第三，比特币区块链作为一种底层区块链，为其他的公有区块链提供共识解决方案，比特币本身是使用这个底层区块链的手续费，比特币区块链未来可能成为其他区块链应用的基础设施；'=>'Third, as an underlying blockchain, the Bitcoin blockchain provides consensus solutions for other public blockchains. Bitcoin itself is the handling fee for using this underlying blockchain. The Bitcoin blockchain may become a Infrastructure for other blockchain applications;',
+    '第四，比特币是一种互联网上的虚拟货币，拥有一定的货币属性，在特定的互联网社区里有一定的支付属性；'=>'Fourth, Bitcoin is a virtual currency on the Internet, which has certain currency attributes and certain payment attributes in specific Internet communities;',
+    '第五，比特币是一种类似黄金的储备资产，因其标准化、可拆分、可在线传输等特点，在支付效率、保存成本等方面有巨大优势，未来有可能成为“数字黄金”，并且是在价值互联网时代可能取代黄金的一种全球性资产。'=>'Fifth, Bitcoin is a reserve asset similar to gold. Because of its characteristics such as standardization, divisibility, and online transmission, it has huge advantages in payment efficiency, storage costs, etc., and may become "digital gold" in the future, and It is a global asset that may replace gold in the era of value Internet.',
+    '大部分国家目前不承认比特币是货币，而是把他定义成一种虚拟商品，但已有不少国家已经制定相应政策规范或支持其发展，并从中立渐趋积极。美国把比特币纳入传统金融监管体系，要求比特币相关企业需要申请MTL(货币传输牌照)，纽约州政府还推出了专门的BitLicense来监管比特币；欧洲多国对比特币一直采取相对积极的态度，部分国家把比特币公司纳入沙箱监管，部分国家强调比特币的经济活动需要按规定纳税；日本FSA正式承认比特币和数字货币的货币地位，规定数字货币交易所必须在FSA登记注册；俄罗斯曾经推出过比特币禁令，在多国出台相应政策后，俄罗斯已放开比特币交易；印度央行行长Raghuram Rajan认为，在更深入地了解比特币之前，不应强烈干预，而是深入研究。'=>'Most countries currently do not recognize Bitcoin as currency, but define it as a virtual commodity. However, many countries have formulated corresponding policy regulations or supported its development, and have gradually become more positive from neutrality. The United States has incorporated Bitcoin into the traditional financial regulatory system and requires Bitcoin-related companies to apply for an MTL (money transmission license). The New York State government has also launched a special BitLicense to supervise Bitcoin; many European countries have always adopted a relatively positive attitude towards Bitcoin. Some countries have included Bitcoin companies in sandbox supervision, and some countries have emphasized that Bitcoin’s economic activities need to be taxed according to regulations; Japan’s FSA officially recognizes the currency status of Bitcoin and digital currencies, and stipulates that digital currency exchanges must register with the FSA; Russia has After launching a Bitcoin ban, Russia has liberalized Bitcoin transactions after many countries introduced corresponding policies; Raghuram Rajan, Governor of the Central Bank of India, believes that before understanding Bitcoin more deeply, there should be no strong intervention, but in-depth research.',
+    '数字货币是一种使用密码学原理来确保交易安全的交易媒介。与美元等法币不同，数字货币并没有实体形式。<span style="color:#00e">Bitcoin (BTC)、Ethereum (ETH) 和 Polkadot (DOT)</span> 等热门数字货币以区块链作为底层技术，充当去中心化的数字分类账。'=>'Digital currency is a medium of exchange that uses cryptographic principles to ensure transaction security. Unlike fiat currencies such as the U.S. dollar, digital currencies do not have a physical form. Popular digital currencies such as <span style="color:#00e">Bitcoin (BTC), Ethereum (ETH) and Polkadot (DOT)</span> use blockchain as the underlying technology, acting as a decentralized digital ledger.',
+    '所有数字货币交易都记录在区块链中，一经确认和验证就无法更改。与传统货币由银行维护中心化分类账不同，数字货币交易在公共区块链上进行，任何人都可以访问。'=>'All digital currency transactions are recorded in the blockchain and cannot be changed once confirmed and verified. Unlike traditional currencies, where banks maintain centralized ledgers, digital currency transactions occur on public blockchains that can be accessed by anyone.',
+    '此外，根据共识机制，人人都可以验证数字货币交易并将其添加到区块链，从而实现去中心化。'=>'In addition, according to the consensus mechanism, everyone can verify digital currency transactions and add them to the blockchain, thus achieving decentralization.',
+    '随着三星、贝莱德、摩根士丹利和 Alphabet 等全球领先公司纷纷入局投资，人们相信区块链技术将彻底改变全球金融体系。'=>'With leading global companies such as Samsung, BlackRock, Morgan Stanley and Alphabet investing, people believe blockchain technology will revolutionize the global financial system.',
+    '数字货币为您开启了通往去中心化金融世界的大门，让您能够探索前沿技术带来的无限可能。'=>'Digital currency opens the door to the world of decentralized finance for you, allowing you to explore the infinite possibilities brought by cutting-edge technology.',
+    '现在，您可以通过 Apple Pay、Visa、Mastercard、MoonPay 和银行转账等支付方式购买各种热门数字货币，如<span style="color:#00e"> Tether (USDT)、Polygon (MATIC) 和狗狗币 (DOGE) </span>等。您还可以通过 <span style="color:#00e">BITVENTURE</span>闪兑 兑换现有数字资产，无任何交易手续费，亦没有价格滑点；或者在BITVENTURE C2C 交易市场上直接从其他卖家处购买数字货币。'=>'Now you can buy a variety of popular digital currencies like Tether (USDT), Polygon (MATIC) and Doge via payment methods such as Apple Pay, Visa, Mastercard, MoonPay and bank transfer Coin (DOGE) </span>etc. You can also redeem existing digital assets through <span style="color:#00e">BITVENTURE</span> flash exchange, without any transaction fees or price slippage; or directly from other companies on the BITVENTURE C2C trading market Buy digital currencies from sellers.',
+
+    
+    
+    
     "区号"=>"Area",
     "手机"=>"Phone",
     "手机号"=>"Phone",

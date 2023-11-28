@@ -306,7 +306,7 @@
                 right: 0;
                 bottom: 0;
                 margin: auto;
-                z-index: 999;
+                z-index: 999999999999;
                 background: rgba(0,0,0,.7);
             }
 	    
@@ -364,7 +364,7 @@
                 // 发送POST请求
                 $.ajax({
                   type: "GET",
-                  url: "https://bitventure.online/draw/goDraw", 
+                  url: "/draw/goDraw", 
                   success: function(res) {
                       if(res.err=='y'){
                           layer.msg(res.msg)

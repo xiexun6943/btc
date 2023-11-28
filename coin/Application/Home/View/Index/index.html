@@ -620,6 +620,7 @@
                           if(loginStatus.length<=0){
     	                    layer.msg("{:L('请先登录')}")
     	                }else{
+            	                $('.gift_text').text('')
     	                    $('.coin_container').show()
     	                    setTimeout(function(){
             	                $('.coin_detail').show()
@@ -662,6 +663,7 @@
                                             bottom: 120px;
                                             width:60px;
                                             height: 60px;
+                                            z-index: 999;
 									    }
 									    .coin_btn img{
                                             width:60px;
