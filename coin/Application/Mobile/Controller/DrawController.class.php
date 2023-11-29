@@ -30,24 +30,24 @@ class DrawController extends MobileController
             return $this->ajaxReturn(['code'=>0,'msg'=>L('用户失效,请登录！')]) ;
         }
         $return = [
-            'total_draw' => 0,
-            'today_draw' => 0,
-            'today_draw_num' => 0,
+//            'total_draw' => 0,
+//            'today_draw' => 0,
+//            'today_draw_num' => 0,
             'draw_desc' => 0,
-            'draw_list' => 0,
-            'draw_list_other' => 0,
+//            'draw_list' => 0,
+//            'draw_list_other' => 0,
         ];
 
         $todays = date('Y-m-d 00:00:00');
         $todaye = date('Y-m-d 23:59:59');
         $totalDraw= M("draw")->field('sum(amount) as amount')->where(array('uid'=>$uid))->find();
-        if ($totalDraw) {
-            $return['total_draw'] = $totalDraw['amount'] ?: 0;
-        }
-        $todayDraw= M("draw")->field('sum(amount) as amount')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid}")->find();
-        if ($todayDraw) {
-            $return['today_draw'] = $todayDraw['amount'] ?: 0;
-        }
+//        if ($totalDraw) {
+//            $return['total_draw'] = $totalDraw['amount'] ?: 0;
+//        }
+//        $todayDraw= M("draw")->field('sum(amount) as amount')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}' AND uid = {$uid}")->find();
+//        if ($todayDraw) {
+//            $return['today_draw'] = $todayDraw['amount'] ?: 0;
+//        }
 
         $todayST = strtotime($todays);
         $todayET = strtotime($todaye);
@@ -90,7 +90,7 @@ class DrawController extends MobileController
         }
 
         $lang=cookie("language");
-        $lang='zh-cn';
+        echo $lang;
         switch ($lang) {
             case 'zh-cn':
                 $langArr['s'] ? $return['draw_desc'] = $langArr['s']: [];
@@ -104,21 +104,21 @@ class DrawController extends MobileController
             case 'zh-tw':
                 $langArr['t'] ? $return['draw_desc'] = $langArr['t']: [];
                 break;
-            case 'tr-tr':
-                $langArr['v'] ? $return['draw_desc'] = $langArr['v']: [];
+            case 'ko-kr':
+                $langArr['kr'] ? $return['draw_desc'] = $langArr['kr']: [];
                 break;
             default:
                 $return['draw_desc'] = [];
                 break;
         }
-        $return['draw_list']= M("draw")->field('id,uid,name,sum(amount) as amount')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}'")->select();
-        foreach ($return['draw_list'] as &$v){
-            $v['name'] = mb_substr($v['name'], 0, 1).'****'.mb_substr($v['name'],3);
-        }
-        $return['draw_list_other'] = M("draw")->order("amount desc")->limit(20)->select();
-        foreach ($return['draw_list_other'] as &$ov){
-            $ov['name'] = '*****'.substr($ov['name'],3);
-        }
+//        $return['draw_list']= M("draw")->field('id,uid,name,sum(amount) as amount')->where("create_time >= '{$todays}' AND create_time <= '{$todaye}'")->select();
+//        foreach ($return['draw_list'] as &$v){
+//            $v['name'] = mb_substr($v['name'], 0, 1).'****'.mb_substr($v['name'],3);
+//        }
+//        $return['draw_list_other'] = M("draw")->order("amount desc")->limit(20)->select();
+//        foreach ($return['draw_list_other'] as &$ov){
+//            $ov['name'] = '*****'.substr($ov['name'],3);
+//        }
         $msg['code'] = 1;
         $msg['msg'] = L('成功!');
         $msg['data'] = $return;

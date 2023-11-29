@@ -102,8 +102,8 @@ class DrawController extends AdminController
 	public function setting(){
 		if($_POST){
 			$setting_arr = $_POST['setting'];
-			//$setting_arr['lang']['name']['4']='韩文';
-			//$setting_arr['lang']['type']['4']='hr';
+//			$setting_arr['lang']['name']['4']='韩文';
+//			$setting_arr['lang']['type']['4']='kr';
 			$setting_data['draw_control'] = urlencode(serialize($setting_arr['draw_control']));
 			$lang = array();
 			foreach ($setting_arr['lang'] as $keyL => $valL) {

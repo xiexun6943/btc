@@ -82,7 +82,7 @@ class DrawController extends HomeController
         }
 
         $lang=cookie("language");
-        $lang='zh-cn';
+        echo $lang;
         switch ($lang) {
             case 'zh-cn':
                 $langArr['s'] ? $return['draw_desc'] = $langArr['s']: [];
@@ -96,8 +96,8 @@ class DrawController extends HomeController
             case 'zh-tw':
                 $langArr['t'] ? $return['draw_desc'] = $langArr['t']: [];
                 break;
-            case 'tr-tr':
-                $langArr['v'] ? $return['draw_desc'] = $langArr['v']: [];
+            case 'ko-kr':
+                $langArr['kr'] ? $return['draw_desc'] = $langArr['kr']: [];
                 break;
             default:
                 $return['draw_desc'] = [];
