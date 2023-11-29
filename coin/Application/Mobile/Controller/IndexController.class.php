@@ -8,7 +8,7 @@ class IndexController extends MobileController
 	{
 
 		parent::_initialize();
-		$allow_action=array("index","uoption","notice","respwd","sub_respwd","tgcode","noticeinfo","readall","delall","gglist","gginfo","aboutus",'msb','spwd','withdrawpwd','sub_withdrawpwd');
+		$allow_action=array("index","uoption","notice","respwd","sub_respwd","tgcode","noticeinfo","readall","delall","gglist","gginfo","aboutus",'msb','spwd','withdrawpwd','sub_withdrawpwd','coins');
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error(L("非法操作"));
 		}
@@ -249,6 +249,17 @@ class IndexController extends MobileController
     }
 
     public function withdrawpwd()
+    {
+        $uid = userid();
+        if($uid <= 0){
+            $this->redirect('Login/index');
+        }
+        $userInfo = M('user')->where(['id' => $uid])->find();
+        $this->assign('userInfo',$userInfo);
+        $this->display();
+    }
+
+    public function coins()
     {
         $uid = userid();
         if($uid <= 0){

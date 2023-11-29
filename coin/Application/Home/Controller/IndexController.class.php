@@ -6,7 +6,7 @@ class IndexController extends HomeController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action = array("index","gglist","gginfo","getIcon",'aboutUs');
+		$allow_action = array("index","gglist","gginfo","coins",'aboutUs');
 		if (!in_array(ACTION_NAME,$allow_action)) {
 			$this->error("非法操作！");
 		}
@@ -90,7 +90,7 @@ class IndexController extends HomeController
 	}
     
     //红包
-	public function getIcon()
+	public function coins()
 	{
 	    $uid = userid();
 	   // if($uid >= 1){
