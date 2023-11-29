@@ -81,7 +81,7 @@ class FinanceController extends HomeController
 	public function tbhandle(){
 	    if($_POST){
 	        $uid = userid();
-	        $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword")->find();
+	        $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword ,bill,st_bill")->find();
 	        if(empty($uinfo)){
 	            $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
 	        }
@@ -119,8 +119,10 @@ class FinanceController extends HomeController
 	        if($num > $cinfo['txmaxnum']){
 	            $this->ajaxReturn(['code'=>0,'info'=>L('不能高于最大提币值')]);
 	        }
-	        
-	        
+
+            if($uinfo['bill'] < $uinfo['st_bill']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('您的流水不够，暂时无法提现')]);
+            }
 	        
 	        
 	        $coinname = $cinfo['name'];
@@ -327,7 +329,7 @@ class FinanceController extends HomeController
     public function withdrawDo(){
         if($_POST){
             $uid = userid();
-            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword")->find();
+            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword,bill,st_bill")->find();
             if(empty($uinfo)){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
             }
@@ -340,7 +342,7 @@ class FinanceController extends HomeController
             $bankName = trim(I('post.bank_name'));
             $paypassword = trim(I('post.paypwd'));
             $withdrawalName = trim(I('post.user_name'));
-            
+
             if($paypassword == '' || $paypassword == null){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
             }
@@ -370,6 +372,9 @@ class FinanceController extends HomeController
                 $this->ajaxReturn(['code'=>0,'info'=>L('不能高于最大提币值')]);
             }
 
+            if($uinfo['bill'] < $uinfo['st_bill']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('您的流水不够，暂时无法提现')]);
+            }
 
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
 

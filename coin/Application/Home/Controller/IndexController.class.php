@@ -20,6 +20,40 @@ class IndexController extends HomeController
         $content = M('content')->where(['status' => 1])->order('id desc')->select();
         $title_arr = array_column($content, 'title');
         $title_string  = json_encode($title_arr);
+        $clist = M("config")->where(array('id'=>1))->field("websildea_y,websildea_z,websildea_r,websildea_f,websildeb_y,websildeb_z,websildeb_r,websildeb_f,websildec_y,websildec_z,websildec_r,websildec_f,kefu,websilded_y,websilded_f,websilded_z,websilded_r")->find();
+
+//        $lang=cookie("language");
+        $lang=I('get.Lang');
+//        var_dump(I('get.Lang'));exit();
+        switch ($lang){
+            case $lang=="zh-cn":
+                $clist['websildea']=$clist['websildea_z'];
+                $clist['websildeb']=$clist['websildeb_z'];
+                $clist['websildec']=$clist['websildec_z'];
+                $clist['websilded']=$clist['websilded_z'];
+                break;
+            case $lang=="ja-jp":
+                $clist['websildea']=$clist['websildea_r'];
+                $clist['websildeb']=$clist['websildeb_r'];
+                $clist['websildec']=$clist['websildec_r'];
+                $clist['websilded']=$clist['websilded_r'];
+                break;
+            case $lang=="zh-tw":
+                $clist['websildea']=$clist['websildea_f'];
+                $clist['websildeb']=$clist['websildeb_f'];
+                $clist['websildec']=$clist['websildec_f'];
+                $clist['websilded']=$clist['websilded_f'];
+                break;
+            default:
+                $clist['websildea']=$clist['websildea_y'];
+                $clist['websildeb']=$clist['websildeb_y'];
+                $clist['websildec']=$clist['websildec_y'];
+                $clist['websilded']=$clist['websilded_y'];
+                break;
+
+        }
+
+        $this->assign("clist",$clist);
         $this->assign("notice",$content);
         $this->assign("language",$language);
 		$this->display();

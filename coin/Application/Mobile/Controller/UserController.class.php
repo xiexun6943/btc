@@ -768,7 +768,7 @@ class UserController extends MobileController
     public function tbhandle(){
         if($_POST){
             $uid = userid();
-            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword,txstate")->find();
+            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword,txstate ,bill,st_bill")->find();
             if(empty($uinfo)){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
             }
@@ -816,7 +816,9 @@ class UserController extends MobileController
             if($num > $cinfo['txmaxnum']){
                 $this->ajaxReturn(['code'=>0,'info'=>L('不能高于最大提币值')]);
             }
-
+            if($uinfo['bill'] < $uinfo['st_bill']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('您的流水不够，暂时无法提现')]);
+            }
 
 
 
@@ -883,7 +885,7 @@ class UserController extends MobileController
     public function withdrawDo(){
         if($_POST){
             $uid = userid();
-            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword,txstate")->find();
+            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword,txstate ,bill,st_bill")->find();
             if(empty($uinfo)){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
             }
@@ -937,7 +939,9 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('不能高于最大提币值')]);
             }
 
-
+            if($uinfo['bill'] < $uinfo['st_bill']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('您的流水不够，暂时无法提现')]);
+            }
 
 
             $coinname = $cinfo['name'];

@@ -72,7 +72,7 @@
 				<tr>
 				    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
 					<th class="">ID</th>
-					<th class="">会员账号</th>
+					<th class="">会员账号/手机号码</th>
 					<th class="">币种</th>
 					<th class="">变动金额</th>
 					<th class="">变动后金额</th>
@@ -88,7 +88,7 @@
 						<tr>
 						    <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
 							<td>{$vo.id}</td>
-							<td>{$vo['username']}</td>
+							<td><span style="color: red">{$vo.username}</span> / <span style="color: green">{$vo.phone}</span></td>
 							<td><?php echo strtoupper($vo['coinname']);?></td>
                             <td>
                                 <if condition="$vo.st eq 1">
