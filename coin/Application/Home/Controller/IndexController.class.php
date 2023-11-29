@@ -22,9 +22,7 @@ class IndexController extends HomeController
         $title_string  = json_encode($title_arr);
         $clist = M("config")->where(array('id'=>1))->field("websildea_y,websildea_z,websildea_r,websildea_f,websildeb_y,websildeb_z,websildeb_r,websildeb_f,websildec_y,websildec_z,websildec_r,websildec_f,kefu,websilded_y,websilded_f,websilded_z,websilded_r")->find();
 
-//        $lang=cookie("language");
         $lang=I('get.Lang');
-//        var_dump(I('get.Lang'));exit();
         switch ($lang){
             case $lang=="zh-cn":
                 $clist['websildea']=$clist['websildea_z'];
