@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=2" />
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
+	<title>{$webname}</title>
+	<style>
+		::-webkit-input-placeholder { /* WebKit browsers */
+		  color: #b5b5b5;
+		  font-size: 18px;
+		}
+
+		::-moz-placeholder { /* Mozilla Firefox 19+ */
+		  color: #b5b5b5;
+		  font-size: 18px;
+		}
+		input:focus{background:#F5F5F5;outline: 1px solid #F5F5F5;}
+		a:hover,a:link,a:visited,a:active{color:#FCD535;text-decoration:none;}
+		.bmbtn{width:100%;height:60px;position:fixed;bottom:0px;padding:10px;}
+		.bmbtn_l{width:45%;height:40px;float:left;background:#ebecf0;border-radius:5px;line-height:40px;text-align:center;}
+		.bmbtn_r{width:45%;height:40px;float:right;background: #0052fe;color: #fff;border-radius:5px;line-height:40px;text-align:center;}
+		.badge-light {
+		    background-color: #FCD535;
+		    position: relative;
+		    left: 15px;		  
+		    top: -35px;
+		}
+		.badge{
+			line-height: 0.4;
+    		border-radius: .5rem;
+		}
+	</style>
+  </head>
+  <body>
+	<div class="container-fluid ctbox"  style="padding:0px;width:100vw;">
+		<div class="no_header"  style="position: fixed;z-index: 9999;background: #fff;padding:0px 10px;top:0px;">
+			<div class="fl allhg txtl" style="line-height:50px;width:10%;">
+				<i class="bi bi-arrow-left fcc fw" onclick="goback()" style="font-size: 24px;"></i>
+			</div>
+
+			<div class="fl allhg" id="centerbox" style="width:80%;text-align:center;line-height:50px;">
+				<span class="fcc fzmmm" style="font-size:18px;">{:L('空降')}</span>
+			</div>
+		</div>
+
+		<div style="margin:0 auto;padding:0;height:100vh;background:url('/Public/Static/img/coins/coins_bg_h5.png') no-repeat top fixed;background-size:cover">
+			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png"></div>
+			<div class="lump">
+			    <div class="label">{:L('规则说明')}</div>
+			    <p>
+			    </p>
+			</div>
+		</div>
+
+	</div>	
+	
+	
+	
+	
+	
+	    <div style="position:fixed; top:-10000px">
+    	        <img src="/Public/Static/img/coins.png"/>
+    	        <img src="/Public/Static/img/sunshine.png"/>
+    	        <img src="/Public/Static/img/coin_big.png"/>
+    	        <img src="/Public/Static/img/red_bag.png"/>
+    	        <img src="/Public/Static/img/label.png"/>
+	    </div>
+	    
+	    <div class="coin_container" style="display:none">
+    	    <div class="coin_lump">
+        	    <div class="coins">
+        	        <img src="/Public/Static/img/coins.png"/>
+        	    </div>
+        	    
+        	    <span class="coin_detail">
+            	    <div class="close">
+            	        <img src="/Public/Static/img/icon_close.png?v=3"/>
+            	    </div>
+        	        
+            	    <div class="sunshine">
+            	        <img src="/Public/Static/img/sunshine.png"/>
+            	    </div>
+            	    <div class="coin_big">
+            	        <img src="/Public/Static/img/coin_big.png"/>
+            	    </div>
+            	    <div class="redBag">
+            	        <img src="/Public/Static/img/red_bag.png"/>
+            	    </div>
+            	    <div class="label">
+            	        <img src="/Public/Static/img/label.png"/>
+            	        <div class="gift_text"></div>
+            	    </div>
+        	    </span>
+    	    </div>
+	    </div>
+	    
+	    <style>
+	           
+            .close{
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                top: 170px;
+                right: 30px;
+                bottom: 0;
+                z-index: 999;
+                
+            }
+            .close img{
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                top:0;
+                left: 0;
+                cursor: pointer;
+            }
+	    
+	        .gift_text{
+	            text-align: center;
+                color: white;
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 96px;
+                position: relative;
+                z-index: 9;
+                text-shadow: 0 0 2px #000;
+	        }
+	    
+	        .coin_detail{
+	            display: none;
+	        }
+	           
+            .redBag{
+                position: absolute;
+                width: 240px;
+                height: 60px;
+                top:160px;
+                left: 0px;
+                right: 0;
+                margin: auto;
+                opacity: 0;
+                animation-name: redBag;
+                animation-fill-mode: forwards;
+                animation-duration: .5s;
+                animation-delay: .5s;
+                
+                
+            }
+            .redBag img{
+                position: absolute;
+                width: 240px;
+                height: 60px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+            
+            @keyframes redBag {
+              0% {
+                top:470px;
+
+                opacity:0;
+              }
+              100% {
+                top:420px;
+
+                opacity:1;
+              }
+            }
+	           
+            .label{
+                position: absolute;
+                width: 300px;
+                height: 100px;
+                top: 170px;
+                left: 0px;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                opacity: 0;
+                animation-name: label;
+                animation-duration: .5s;
+                animation-fill-mode: forwards;
+                animation-delay: .5s;
+                
+            }
+            .label img{
+                position: absolute;
+                width: 300px;
+                height: 100px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+            
+            @keyframes label {
+              0% {
+                opacity:0;
+              }
+              100% {
+                opacity:1;
+              }
+            }
+	           
+            .coin_big{
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                top:30px;
+                left: 0px;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                animation: coin_big .5s linear;
+                
+            }
+            .coin_big img{
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+            
+            @keyframes coin_big {
+              0% {
+                transform: scale(0);
+              }
+              100% {
+                transform: scale(1);
+              }
+            }
+	           
+            .sunshine{
+                position: absolute;
+                width: 550px;
+                height: 550px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                animation: sunshine 5s linear infinite;
+                
+            }
+            .sunshine img{
+                position: absolute;
+                width: 550px;
+                height: 550px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                opacity: .9;
+            }
+            
+            @keyframes sunshine {
+              0% {
+                transform: rotate(0deg);
+              }
+              100% {
+                transform: rotate(-359deg);
+              }
+            }
+            
+            .coin_container{
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                z-index: 999999999999;
+                background: rgba(0,0,0,.7);
+            }
+	    
+	        .coin_lump{
+                position: absolute;
+                background-size:contain;
+                width: 100%;
+                height: 800px;
+                top:0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                z-index: 99;
+                overflow: hidden;
+            }
+            .coins{
+                position: absolute;
+                width: 600px;
+                height: 1350px;
+                top:-1400px;
+                left: 0;
+                right: 0;
+                margin: auto;
+                animation-name: coins;
+                animation-duration: 3s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+            .coins img{
+                position: absolute;
+                width: 600px;
+                height: 1350px;
+                top:0;
+                left: 0;
+            }
+            
+            @keyframes coins {
+              0% {
+                top:-1200px;
+              }
+              100% {
+                top:1000px;
+              }
+            }
+	    </style>
+	    
+	    
+	    
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	    <script>
+	    
+	    
+	        function getDes(){
+	            
+                $.ajax({
+                  type: "GET",
+                  url: "/draw/drawList", 
+                  success: function(res) {
+                      if(res.code==1){
+                          var newText = res.data.draw_desc.content.replace(/\r\n/g, "<br>")
+                          $('.lump p').html(newText)
+                      }else{
+                          layer.msg(res.msg)
+                      }
+                      
+                  },
+                  error: function(error) {
+                    console.error("发生错误:", error);
+                  }
+                });
+	        }
+	        
+	        getDes()
+	        
+	        function setDraw(){
+	            const loginStatus = "{:userid()}"
+            
+                // 发送POST请求
+                $.ajax({
+                  type: "GET",
+                  url: "/draw/goDraw", 
+                  success: function(res) {
+                      if(res.err=='y'){
+                          layer.msg(res.msg)
+                      }else{
+                          if(loginStatus.length<=0){
+    	                    layer.msg("{:L('请先登录')}")
+    	                }else{
+    	                    $('.coin_container').show()
+    	                    setTimeout(function(){
+            	                $('.coin_detail').show()
+            	                console.log(res.data)
+            	                $('.gift_text').text("{:L('恭喜获得')}"+res.data+'USDT')
+                	        },1000)
+    	                }
+                      }
+                      
+                  },
+                  error: function(error) {
+                    console.error("发生错误:", error);
+                  }
+                });
+	        }
+	    
+	        $(function(){
+	            
+	            $('.coin_btn').click(function(){
+	                    setDraw()
+	                })
+	            
+	            $('.close').click(function(){
+	                    $('.coin_container').hide()
+	                })
+	            })
+	    </script>
+	
+	
+	
+	
+	
+	
+</body>
+
+<style>
+    .btn{
+          width: 21rem;
+    height: 20.5rem;
+        position: fixed;
+        top:23%;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .btn img{
+         width: 21rem;
+    height: 20.5rem;
+    }
+    .lump{
+        background:#fff;
+        width:23rem;
+        height: auto;
+        position: fixed;
+        top:65%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        padding:2rem;
+        border: 5px solid #dbe7ff;
+        border-radius: .6rem;
+    }
+    .lump p{
+        font-size: .9rem;
+        line-height:1.5rem;
+    overflow-y: auto;
+    }
+    .lump .label{
+        background:url('/Public/Static/img/coins/label.png?v=2') no-repeat center;
+        background-size:contain;
+        width:11rem;
+        height: 4rem;
+        line-height: 4rem;
+        position: absolute;
+        top:-100%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        color:#000;
+        font-size: .9rem;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Static/js/layer/layer.js" ></script>
+<script type="text/javascript">
+    function goback(){
+        window.history.go(-1);
+    }
+</script>
+</html>
+
+
+
