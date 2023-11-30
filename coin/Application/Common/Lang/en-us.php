@@ -4,18 +4,6 @@ return [
     '规则说明'=>'Rule description',
     '空降福利'=>'Airborne welfare',
     '空降'=>'Airborne',
-    '1、红包抽奖每日更新，不累计。<br>
-2、抽奖激活红包金额即可领取。<br>
-3、红包抽奖最终解释权归本公司所有。<br>
-4、摇奖红包额度超出10000免启动额度根据规定需要将<br>
-      活动页面通过微信、QQ、微博或者 链接等<br>
-      方式分享好友即可。'=>'1. The red envelope lottery is updated daily and is not cumulative. <br>
-2. The amount of the red envelope can be collected by activating the lottery. <br>
-3. The final interpretation right of the red envelope lottery belongs to our company. <br>
-4. If the amount of the lottery red envelope exceeds the 10,000 free activation limit, it will be required according to regulations<br>
-       The event page can be accessed through WeChat, QQ, Weibo or links<br>
-       Just share it with your friends.',
-    
     "BITVENTURE（bitventure.online）是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、<br>以太币等数字资产的币币和衍生品交易服务。"=>"BITVENTURE (bitventure.online) is one of the world's famous digital asset trading platforms. It mainly provides currency and derivatives trading services for digital assets such as Bitcoin, Litecoin, and Ethereum to global users.",
     "愿景"=>"Vision",
     "在追求全体同事物质和精神幸福的同时，推动区块链和数字资产走进全球亿万用户的生活。"=>"While pursuing the material and spiritual happiness of all colleagues, we will promote blockchain and digital assets into the lives of hundreds of millions of users around the world.",
