@@ -356,7 +356,7 @@
 												<!--没有图片显示默认图片-->
 												<img id="up_img_websildea_kr" onclick="getElementById('websildea_box_kr').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图1_韩文" alt="点击添加图片" src="__PUBLIC__/Admin/images/addimg.png">
 											</notempty>
-											<input type="hidden" id="websildea_deputy_kr" name="websildea_kr" value="{$data.websildea_r}">
+											<input type="hidden" id="websildea_deputy_kr" name="websildea_kr" value="{$data.websildea_kr}">
 											<input type="file" id="websildea_box_kr" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
 										</div>
 									</td>
@@ -368,7 +368,7 @@
 									<td>
 										<div id="addpicContainer_kr" class="gezibg">
 											<notempty name="data.websildeb_kr">
-												<img id="up_img_websildeb_kr" onclick="getElementById('websildeb_box_kr').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图2韩文" alt="点击添加图片" src="/Upload/public/{$data.websildeb_r}">
+												<img id="up_img_websildeb_kr" onclick="getElementById('websildeb_box_kr').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图2韩文" alt="点击添加图片" src="/Upload/public/{$data.websildeb_kr}">
 												<else/>
 												<!--没有图片显示默认图片-->
 												<img id="up_img_websildeb_kr" onclick="getElementById('websildeb_box_kr').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图2韩文" alt="点击添加图片" src="__PUBLIC__/Admin/images/addimg.png">
@@ -391,7 +391,7 @@
 												<!--没有图片显示默认图片-->
 												<img id="up_img_websildec_kr" onclick="getElementById('websildec_box_kr').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图3韩文" alt="点击添加图片" src="__PUBLIC__/Admin/images/addimg.png">
 											</notempty>
-											<input type="hidden" id="websildec_deputy_kr" name="websildec_kr" value="{$data.websildec_r}">
+											<input type="hidden" id="websildec_deputy_kr" name="websildec_kr" value="{$data.websildec_kr}">
 											<input type="file" id="websildec_box_kr" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
 										</div>
 									</td>
@@ -400,14 +400,14 @@
 								<tr class="controls hoh">
 									<td class="item-label">手机端轮播图4-韩文 :</td>
 									<td>
-										<div id="addpicContainer_r" class="gezibg">
+										<div id="addpicContainer_kr" class="gezibg">
 											<notempty name="data.websilded_kr">
 												<img id="up_img_websilded_kr" onclick="getElementById('websilded_box_kr').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图3韩文" alt="点击添加图片" src="/Upload/public/{$data.websilded_kr}">
 												<else/>
 												<!--没有图片显示默认图片-->
 												<img id="up_img_websilded_kr" onclick="getElementById('websilded_box_kr').click()" style="cursor:pointer;max-height:62px;" title="手机端轮播图3韩文" alt="点击添加图片" src="__PUBLIC__/Admin/images/addimg.png">
 											</notempty>
-											<input type="hidden" id="websilded_deputy_kr" name="websilded_r" value="{$data.websilded_kr}">
+											<input type="hidden" id="websilded_deputy_kr" name="websilded_kr" value="{$data.websilded_kr}">
 											<input type="file" id="websilded_box_kr" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
 										</div>
 									</td>
@@ -861,7 +861,7 @@
 		 });
 	 })
 
-	/** 手机轮播图韩文 -02 **/
+	/** 手机轮播图韩文 -01 **/
 	$(document).ready(function () {
 		//响应文件添加成功事件
 		$("#websildea_box_kr").change(function () {
