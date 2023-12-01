@@ -6,7 +6,7 @@ class IndexController extends HomeController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action = array("index","gglist","gginfo","coins",'aboutUs');
+		$allow_action = array("index","gglist","gginfo","coins",'aboutUs','service');
 		if (!in_array(ACTION_NAME,$allow_action)) {
 			$this->error("非法操作！");
 		}
@@ -88,6 +88,15 @@ class IndexController extends HomeController
     
     //关于我们
 	public function aboutUs()
+	{
+	    $config = M("config")->where(array('id'=>1))->field('weblogo')->find();
+        $logo = $config['weblogo'] ? '/Upload/public/'.$config['weblogo'] : '/Public/Static/Icoinfont/icon/logo.png';
+        $this->assign('logo',$logo);
+        $this->display();
+	}
+    
+    //服务
+	public function service()
 	{
 	    $config = M("config")->where(array('id'=>1))->field('weblogo')->find();
         $logo = $config['weblogo'] ? '/Upload/public/'.$config['weblogo'] : '/Public/Static/Icoinfont/icon/logo.png';

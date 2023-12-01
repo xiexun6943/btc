@@ -192,7 +192,6 @@ class DrawController extends MobileController
 
         $drawControl = $this->drawControl($uid, $drawEdNum, $currDrawSet);
         $drawAmount = $drawControl['draw_amount'] ?: 0;
-        var_dump($drawAmount);exit();
         $isControl = $drawControl['is_control'] ?: 0;
         $users['username']? $acount=$users['username']:$acount=$users['email'];
         $userCoin=M('user_coin')->field('id,userid,usdt')->where(['userid'=>$uid])->find();

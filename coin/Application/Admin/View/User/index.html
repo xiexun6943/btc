@@ -70,6 +70,7 @@
 						</th>
 						<th class="">ID</th>
 						<th class="">会员账号 / 手机号</th>
+						<th class="">操作</th>
 						<th class="">登陆</th>
 						<th class="">流水</th>
 						<th class="">彩金流水</th>
@@ -79,7 +80,7 @@
 						<th class="">认证</th>
 						<th class="">状态</th>
 						<th class="">邀请码</th>
-						<th class="">操作</th>
+						
 					</tr>
 					</thead>
 					<tbody>
@@ -92,6 +93,22 @@
 								<td>{$vo.id}</td>
 <!--								<td title="登录该用户"><a href=" {:U('User/loginadmin?id='.$vo['id'].'&pass='.$vo['password'])}" target="_blank">{$vo.username}</a></td>-->
 								<td><span style="color: red">{$vo.username}</span> / <span style="color: green">{$vo.phone}</span></td>
+							    <td>
+									<a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>
+									<a class="btn btn-primary btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>
+										<if condition="$vo.gd_state == 0">
+											<input type="button" class="ajax-get btn btn-warning btn-xs" value="开启跟单" onclick="gdswitch('{$vo['id']}',1);"/>
+										<else/>
+											<input type="button" class="ajax-get btn btn-success btn-xs" value="关闭跟单" onclick="gdswitch('{$vo['id']}',0);"/>
+										</if>
+									<eq name="vo.rzstatus" value="1">
+										<a class="btn btn-primary btn-xs" href="{:U('User/authrz')}?id={$vo.id}">审核认证</a>
+									</eq>
+									<a class="btn btn-primary btn-xs" href="{:U('User/sendnotice')}?id={$vo.id}&type=1">发送通知</a>
+									<eq name="vo.is_agent" value="0">
+										<input type="button" class="ajax-get btn btn-danger btn-xs" value="设为代理" onclick="setagent('{$vo['id']}');"/>
+									</eq>
+								</td>
 								<td><span>{$vo.logins}</span>次</td>
 								<td><span>{$vo.bill}</span></td>
 								<td><span>{$vo.st_bill}</span></td>
@@ -126,22 +143,7 @@
 									<eq name="vo.gd_state" value="1">跟单：<span style="color:red;">开启</span></eq>
 								</td>
 								<td><span>{$vo.invit}</span></td>
-								<td>
-									<a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>
-									<a class="btn btn-primary btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>
-										<if condition="$vo.gd_state == 0">
-											<input type="button" class="ajax-get btn btn-warning btn-xs" value="开启跟单" onclick="gdswitch('{$vo['id']}',1);"/>
-										<else/>
-											<input type="button" class="ajax-get btn btn-success btn-xs" value="关闭跟单" onclick="gdswitch('{$vo['id']}',0);"/>
-										</if>
-									<eq name="vo.rzstatus" value="1">
-										<a class="btn btn-primary btn-xs" href="{:U('User/authrz')}?id={$vo.id}">审核认证</a>
-									</eq>
-									<a class="btn btn-primary btn-xs" href="{:U('User/sendnotice')}?id={$vo.id}&type=1">发送通知</a>
-									<eq name="vo.is_agent" value="0">
-										<input type="button" class="ajax-get btn btn-danger btn-xs" value="设为代理" onclick="setagent('{$vo['id']}');"/>
-									</eq>
-								</td>
+							
 							</tr>
 						</volist>
 						<else/>

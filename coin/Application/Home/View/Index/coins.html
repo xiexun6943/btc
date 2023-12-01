@@ -349,7 +349,7 @@
     }
     .btn img{
          width: 21rem;
-    height: 20.5rem;
+    height: auto;
     }
     .lump{
         background:#fff;
@@ -392,7 +392,7 @@
 	        
 	        
 	    <div style="position:fixed; top:-10000px">
-    	        <img src="/Public/Static/img/coins.png"/>
+    	        <img src="/Public/Static/img/coins.png?v=2"/>
     	        <img src="/Public/Static/img/sunshine.png"/>
     	        <img src="/Public/Static/img/coin_big.png"/>
     	        <img src="/Public/Static/img/red_bag.png"/>
@@ -402,7 +402,7 @@
 	    <div class="coin_container" style="display:none">
     	    <div class="coin_lump">
         	    <div class="coins">
-        	        <img src="/Public/Static/img/coins.png"/>
+        	        <img src="/Public/Static/img/coins.png?v=2"/>
         	    </div>
         	    
         	    <span class="coin_detail">
@@ -715,7 +715,7 @@
                       
                   },
                   error: function(error) {
-                    console.error("发生错误:", error);
+                    console.error("{:L('发生错误')}:", error);
                   }
                 });
 	        }
@@ -744,7 +744,7 @@
 	                
 	                <div class="coin_lump2">
 	                    
-			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png"></div>
+			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png?v=2"></div>
 			<div class="lump">
 			    <div class="label">{:L('规则说明')}</div>
 			    <p>

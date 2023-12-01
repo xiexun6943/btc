@@ -1,6 +1,8 @@
 <?php
 
 return [
+    '恭喜获得'=>'getting',
+    '发生错误'=>'error',
     '规则说明'=>'Rule description',
     '空降福利'=>'Airborne welfare',
     '空降'=>'Airborne',

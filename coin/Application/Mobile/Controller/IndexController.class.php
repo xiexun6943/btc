@@ -8,7 +8,7 @@ class IndexController extends MobileController
 	{
 
 		parent::_initialize();
-		$allow_action=array("index","uoption","notice","respwd","sub_respwd","tgcode","noticeinfo","readall","delall","gglist","gginfo","aboutus",'msb','spwd','withdrawpwd','sub_withdrawpwd','coins');
+		$allow_action=array("index","uoption","notice","respwd","sub_respwd","tgcode","noticeinfo","readall","delall","gglist","gginfo","aboutus","service",'msb','spwd','withdrawpwd','sub_withdrawpwd','coins');
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error(L("非法操作"));
 		}
@@ -239,6 +239,11 @@ class IndexController extends MobileController
     }
 
     public function msb()
+    {
+        $this->display();
+    }
+
+    public function service()
     {
         $this->display();
     }
