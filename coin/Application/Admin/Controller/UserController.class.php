@@ -268,15 +268,25 @@ class UserController extends AdminController
     }
 
     //会员管理列表
-    public function noticelist($username=NULL){
+    public function noticelist(){
+
+        $field=I('get.field');
+        $search=I('get.search');
         $where = array();
-        if($username != ''){
-            $where['account'] = $username;
+        if ($field && $search) {
+            $where['uid'] = M('User')->where(array($field => $search))->getField('id');
         }
         $count = M('notice')->where($where)->count();
         $Page = new \Think\Page($count, 15);
         $show = $Page->show();
         $list = M('notice')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['username'] = $userInfo['username'];
+            }
+        }
         $this->assign('list', $list);
         $this->assign('page', $show);
         $this->display();
@@ -488,7 +498,6 @@ class UserController extends AdminController
         if ($status) {
             $where['status'] = $status;
         }
-//        var_dump($where);exit();
         $count = M('User')->where($where)->count();
         $Page = new \Think\Page($count, 15);
         $show = $Page->show();
@@ -904,19 +913,17 @@ class UserController extends AdminController
 
 
     //会员登陆记录
-    public function log($name = NULL, $field = NULL, $status = NULL)
+    public function log()
     {
+        $status=I('get.status');
+        $field=I('get.field');
+        $search=I('get.search');
         $where = array();
-        if ($field && $name) {
-            if ($field == 'username') {
-                $where['userid'] = M('User')->where(array('username' => $name))->getField('id');
-            } else {
-                $where[$field] = $name;
-            }
+        if ($field && $search) {
+            $where['userid'] = M('User')->where(array($field => $search))->getField('id');
         }
-
         if ($status) {
-            $where['status'] = $status - 1;
+            $where['status'] = $status;
         }
 
         $count = M('UserLog')->where($where)->count();
@@ -925,7 +932,12 @@ class UserController extends AdminController
         $list = M('UserLog')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
         foreach ($list as $k => $v) {
-            $list[$k]['username'] = M('User')->where(array('id' => $v['userid']))->getField('username');
+            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['userid']))->find();
+            if ($userInfo) {
+                $list[$k]['username'] = $userInfo['username'];
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+
         }
 
         $this->assign('list', $list);
@@ -1009,22 +1021,19 @@ class UserController extends AdminController
 
 
     //会员钱包管理
-    public function qianbao($name = NULL, $field = NULL, $coinname = NULL, $status = NULL)
+    public function qianbao()
     {
+        $field=I('get.field');
+        $search=I('get.search');
+        $coinname=I('get.coinname');
         $where = array();
-        if ($field && $name) {
-            if ($field == 'username') {
-                $where['uid'] = M('User')->where(array('username' => $name))->getField('id');
-            } else {
-                $where[$field] = $name;
-            }
+        if ($field && $search) {
+            $where['uid'] = M('User')->where(array($field => $search))->getField('id');
         }
-
         if ($coinname) {
             $where['name'] = trim($coinname);
         }
 
-// 		$coinlist = M("coin")->where("type = 1")->order("id desc")->field("name,title")->select();
         $coinlist=[
             ['name'=>"USDT"],
             ['name'=>"BTC"],
@@ -1037,9 +1046,12 @@ class UserController extends AdminController
         $show = $Page->show();
         $list = M('UserQianbao')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
-//		foreach ($list as $k => $v) {
-//			$list[$k]['username'] = M('User')->where(array('id' => $v['userid']))->getField('username');
-//		}
+		foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+		}
         $this->assign('list', $list);
         $this->assign('page', $show);
         $this->display();
@@ -1137,16 +1149,13 @@ class UserController extends AdminController
 
 
     //会员资产
-    public function coin($name = NULL, $field = NULL)
+    public function coin()
     {
+        $field=I('get.field');
+        $search=I('get.search');
         $where = array();
-
-        if ($field && $name) {
-            if ($field == 'username') {
-                $where['userid'] = M('User')->where(array('username' => $name))->getField('id');
-            } else {
-                $where[$field] = $name;
-            }
+        if ($field && $search) {
+            $where['userid'] = M('User')->where(array($field => $search))->getField('id');
         }
 
         $count = M('UserCoin')->where($where)->count();
@@ -1183,29 +1192,37 @@ class UserController extends AdminController
     }
 
     // 资金变更日志
-    public function amountlog($st=null,$coinname=null,$username=null){
+    public function amountlog(){
+        $field=I('get.field');
+        $search=I('get.search');
+        $coinname=I('get.coinname');
+        $st=I('get.st');
+        $where = array();
+        if ($field && $search) {
+            $where['uid'] = M('User')->where(array($field => $search))->getField('id');
+        }
         $coinlist = M("coin")->order("id desc")->field("name,title")->select();
         $this->assign("coinlist",$coinlist);
         if($st > 0){
             $where['st'] = $st;
         }
-
         if($coinname != ''){
             $where['coinname'] = $coinname;
-        }
-
-        if($username != ''){
-            $where['username'] = $username;
         }
 
         $count = M('bill')->where($where)->count();
         $Page = new \Think\Page($count, 15);
         $show = $Page->show();
         $list = M('bill')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+
+        }
         $this->assign('list', $list);
         $this->assign('page', $show);
-
-
         $this->display();
     }
 

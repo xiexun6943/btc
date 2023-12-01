@@ -226,14 +226,26 @@ class FinanceController extends AdminController
 	}
     
     //账务明细
-	public function index($name=null){
-		if($name != ''){
-		    $where['username'] = $name;
-		}
+	public function index(){
+        $field=I('get.field');
+        $search=I('get.search');
+        $where = array();
+        if ($field && $search) {
+            $where[$field] = $search;
+        }
 		$count = M('bill')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('bill')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['username'] = $userInfo['username'];
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+
+        }
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 		$this->display();
@@ -242,13 +254,23 @@ class FinanceController extends AdminController
 
 	//充币列表
 	public function myzr($name=null){
-	    if($name != ''){
-		    $where['username'] = $name;
-		}
+        $field=I('get.field');
+        $search=I('get.search');
+        $where = array();
+        if ($field && $search) {
+            $where['uid'] = M('User')->where(array($field => $search))->getField('id');
+        }
 		$count = M('recharge')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('recharge')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['username'] = $userInfo['username'];
+            }
+        }
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 
@@ -257,13 +279,23 @@ class FinanceController extends AdminController
 	
 	//提币列表
 	public function myzc($name=null){
-	    if($name != ''){
-		    $where['username'] = $name;
-		}
+        $field=I('get.field');
+        $search=I('get.search');
+        $where = array();
+        if ($field && $search) {
+            $where['userid'] = M('User')->where(array($field => $search))->getField('id');
+        }
 		$count = M('myzc')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('myzc')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['userid']))->find();
+            if ($userInfo) {
+                $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['username'] = $userInfo['username'];
+            }
+        }
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 		

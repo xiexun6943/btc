@@ -789,10 +789,10 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
             }
 
-            /*
+
              if($uinfo['rzstatus'] != 2){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-            }*/
+            }
 
             $id = trim(I('post.id'));
             if($id <= 0){
@@ -905,9 +905,9 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
             }
 
-//            if($uinfo['rzstatus'] != 2){
-//                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-//            }
+            if($uinfo['rzstatus'] != 2){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
+            }
 
             $id = trim(I('post.id'));
             $bankName = trim(I('post.bank_name'));

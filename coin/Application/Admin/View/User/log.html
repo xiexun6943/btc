@@ -36,12 +36,17 @@
 								<eq name="Think.get.status" value="2">selected</eq>
 								>正常状态</option>
 							</select>
-							<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-control">
-								<option value="username"
-								<empty name="Think.get.field">selected</empty>
-								>用户名</option>
+<!--							<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-control">-->
+<!--								<option value="username"-->
+<!--								<empty name="Think.get.field">selected</empty>-->
+<!--								>用户名</option>-->
+<!--							</select>-->
+							<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+								<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+								<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+								<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
 							</select>
-							<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="请输入查询内容" style="">
+							<input type="text" name="search" class="search-input form-control  " value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 							<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 						</form>
 						<script>
@@ -68,7 +73,7 @@
 				<thead>
 				<tr>
 					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-					<th class="">ID</th>
+					<th class="">UID</th>
 					<th class="">用户名/手机号码</th>
 					<th class="">类型</th>
 					<th class="">内容</th>
@@ -85,7 +90,7 @@
 					<volist name="list" id="vo">
 						<tr>
 							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
-							<td>{$vo.id}</td>
+							<td>{$vo.userid}</td>
 							<td><span style="color: red">{$vo.username}</span> / <span style="color: green">{$vo.phone}</span></td>
 							<td>{$vo.type}</td>
 							<td>{$vo.remark}</td>

@@ -86,9 +86,9 @@ class FinanceController extends HomeController
 	            $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
 	        }
 	        
-	        /*if($uinfo['rzstatus'] != 2){
+	        if($uinfo['rzstatus'] != 2){
 		        $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-		    }*/
+		    }
             $paypassword = trim(I('post.paypwd'));
             if($paypassword == '' || $paypassword == null){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
@@ -333,9 +333,9 @@ class FinanceController extends HomeController
             if(empty($uinfo)){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
             }
-//            if($uinfo['rzstatus'] != 2){
-//                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-//            }
+            if($uinfo['rzstatus'] != 2){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
+            }
             $coinname = trim(I('post.coinname'));
 
             $address = trim(I('post.address'));

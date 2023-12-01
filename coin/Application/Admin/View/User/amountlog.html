@@ -43,8 +43,13 @@
 									>{$vos.name|strtoupper}</option>
 								</volist>
 							</select>
+							<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+								<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+								<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+								<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
+							</select>
 
-							<input type="text" name="username" class="search-input form-control  " value="{$Think.get.username}" placeholder="请输入查询内容" style="">
+							<input type="text" name="search" class="search-input form-control  " value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 							<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 						</form>
 						<script>
@@ -71,7 +76,7 @@
 				<thead>
 				<tr>
 				    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-					<th class="">ID</th>
+					<th class="">UID</th>
 					<th class="">会员账号/手机号码</th>
 					<th class="">币种</th>
 					<th class="">变动金额</th>
@@ -87,8 +92,8 @@
 					<volist name="list" id="vo">
 						<tr>
 						    <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
-							<td>{$vo.id}</td>
-							<td><span style="color: red">{$vo.username}</span> / <span style="color: green">{$vo.phone}</span></td>
+							<td>{$vo.uid}</td>
+							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							<td><?php echo strtoupper($vo['coinname']);?></td>
                             <td>
                                 <if condition="$vo.st eq 1">

@@ -17,12 +17,12 @@
 				<div class="sleft">
 					<form name="formSearch" id="formSearch" method="get" name="form1">
 
-						<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-control">
-							<option value="username"
-							<eq name="Think.get.field" value="username">selected</eq>
-							>用户名</option>
+						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
 						</select>
-						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="请输入查询内容" style="">
+						<input type="text" name="search" class="search-input form-control  " value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 					</form>
 					<script>
