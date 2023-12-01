@@ -333,9 +333,9 @@ class FinanceController extends HomeController
             if(empty($uinfo)){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
             }
-            if($uinfo['rzstatus'] != 2){
-                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-            }
+//            if($uinfo['rzstatus'] != 2){
+//                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
+//            }
             $coinname = trim(I('post.coinname'));
 
             $address = trim(I('post.address'));
