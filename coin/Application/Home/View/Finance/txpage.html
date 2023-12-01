@@ -345,7 +345,9 @@
         $("#sumbtn").click(function(){
             var flag = $("#flag").val();
             if(flag == 2){
-                return false;
+				layer.msg("{:L('提现成功,跳转中')}");
+				window.location.href = "{:U('Finance/index')}";
+				return false;
             }
             var address = $("#address").val();
             var num = parseFloat($("#tbnum").val());
@@ -364,11 +366,11 @@
             if(num < txminnum){
                 layer.msg("{:L('不能低于最小提币值')}");return false;
             }
-            $("#flag").val(2);
             $.post("{:U('Finance/tbhandle')}",
             {'address':address,'num':num,'id':id,'paypwd':paypwd},
             function(data){
                 if(data.code == 1){
+					$("#flag").val(2);
                     layer.msg(data.info);
                     setTimeout(function(){
                         window.location.href = "{:U('Finance/index')}";

@@ -477,15 +477,18 @@ class UserController extends AdminController
     }
 
     //会员管理列表
-    public function index($name=NULL, $field=NULL, $status=NULL){
+    public function index(){
+        $status=I('get.status');
+        $field=I('get.field');
+        $search=I('get.search');
         $where = array();
-        if ($field && $name) {
-            $where[$field] = $name;
+        if ($field && $search) {
+            $where[$field] = $search;
         }
         if ($status) {
             $where['status'] = $status;
         }
-
+//        var_dump($where);exit();
         $count = M('User')->where($where)->count();
         $Page = new \Think\Page($count, 15);
         $show = $Page->show();

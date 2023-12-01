@@ -452,7 +452,9 @@
         $("#sumbtn").click(function(){
             var flag = $("#flag").val();
             if(flag == 2){
-                return false;
+				layer.msg("{:L('提现成功,跳转中')}");
+				window.location.href = "{:U('Finance/index')}";
+				return false;
             }
             var address = $("#address").val();
             var coinname = $("#coinname").val();
@@ -463,25 +465,26 @@
             var txminnum = parseFloat($("#txminnum").val());
 
             if(address == '' || address == null){
-                layer.msg("{:L('请输入提币地址')}");return false;
+                layer.msg("{:L('请输入提币地址')}");
             }
             if(user_name == '' || user_name == null){
-                layer.msg("{:L('请输入收款人姓名')}");return false;
+                layer.msg("{:L('请输入收款人姓名')}");
             }
             if(num <= 0){
-                layer.msg("{:L('请输入正确的数量')}");return false;
+                layer.msg("{:L('请输入正确的数量')}");
             }
 			if(paypwd == '' || paypwd == null){
-				layer.msg("{:L('请输入提现密码')}");return false;
+				layer.msg("{:L('请输入提现密码')}");
 			}
             if(num < txminnum){
-                layer.msg("{:L('不能低于最小提币值')}");return false;
+                layer.msg("{:L('不能低于最小提币值')}");
             }
-            $("#flag").val(2);
+
             $.post("{:U('Finance/withdrawDo')}",
             {'address':address,'num':num,'coinname':coinname,'bank_name':bank_name,'user_name':user_name,'paypwd':paypwd},
             function(data){
                 if(data.code == 1){
+					$("#flag").val(2);
                     layer.msg(data.info);
                     setTimeout(function(){
                         window.location.href = "{:U('Finance/index')}";

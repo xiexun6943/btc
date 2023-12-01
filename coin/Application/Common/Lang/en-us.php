@@ -898,5 +898,6 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     '英语'=>"English",
     '日语'=>"Japanese",
     '韩语'=>"Korean",
+    '提现成功,跳转中'=>'Withdrawal successful, redirecting',
 
 ];
