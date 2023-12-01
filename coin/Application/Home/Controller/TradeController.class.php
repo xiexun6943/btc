@@ -132,9 +132,9 @@ class TradeController extends HomeController
 		    $this->ajaxReturn(['code'=>0,'info'=>L('请先登录')]);
 		}
 		
-		if($uinfo['rzstatus'] != 2){
-		    $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-		}
+//		if($uinfo['rzstatus'] != 2){
+//		    $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
+//		}
 		
 		if($symbol == ''){
 		    $this->ajaxReturn(['code'=>0,'info'=>L('缺少重要参数')]);
@@ -303,9 +303,9 @@ class TradeController extends HomeController
 		    $this->ajaxReturn(['code'=>0,'info'=>L('请先登录')]);
 		}
 		
-		if($uinfo['rzstatus'] != 2){
-		    $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-		}
+//		if($uinfo['rzstatus'] != 2){
+//		    $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
+//		}
 		
 		if($symbol == ''){
 		    $this->ajaxReturn(['code'=>0,'info'=>L('缺少重要参数')]);

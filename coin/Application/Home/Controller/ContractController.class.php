@@ -176,9 +176,9 @@ class ContractController extends HomeController
 	            $this->ajaxReturn(['code'=>0,'msg'=> L('请先登陆')]);
 	        }
 	        
-	        if($uinfo['rzstatus'] != 2){
-		        $this->ajaxReturn(['code'=>0,'msg'=>L('请先完成实名认证')]);
-		    }
+//	        if($uinfo['rzstatus'] != 2){
+//		        $this->ajaxReturn(['code'=>0,'msg'=>L('请先完成实名认证')]);
+//		    }
 		    
 		    $puid = $uinfo['invit_1'];
 	        $puser = M("user")->where(array('id'=>$puid))->field("invit")->find();
@@ -290,9 +290,9 @@ class ContractController extends HomeController
 	            $this->ajaxReturn(['code'=>0,'msg'=> L('请先登陆')]);
 	        }
 	        
-	        if($uinfo['rzstatus'] != 2){
-		        $this->ajaxReturn(['code'=>0,'msg'=>L('请先完成实名认证')]);
-		    }
+//	        if($uinfo['rzstatus'] != 2){
+//		        $this->ajaxReturn(['code'=>0,'msg'=>L('请先完成实名认证')]);
+//		    }
 	        $puid = $uinfo['invit_1'];
 	        $puser = M("user")->where(array('id'=>$puid))->field("invit")->find();
 	        

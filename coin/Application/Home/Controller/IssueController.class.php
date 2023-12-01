@@ -82,9 +82,9 @@ class IssueController extends HomeController
 		    $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
 		}
 		
-		if($uinfo['rzstatus'] != 2){
-		    $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
-		}
+//		if($uinfo['rzstatus'] != 2){
+//		    $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
+//		}
 
 		$issue = M("issue")->where(array('id'=>$pid))->find();
         if(empty($issue)){

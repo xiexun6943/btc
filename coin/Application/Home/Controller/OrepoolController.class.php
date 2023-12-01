@@ -103,9 +103,9 @@ class OrepoolController extends HomeController
 	           $this->ajaxReturn(['code'=>0,'msg'=> L('请先登陆')]);
 	       }
 	       
-	       if($uinfo['rzstatus'] != 2){
-		        $this->ajaxReturn(['code'=>0,'msg'=>L('请先完成实名认证')]);
-		    }
+//	       if($uinfo['rzstatus'] != 2){
+//		        $this->ajaxReturn(['code'=>0,'msg'=>L('请先完成实名认证')]);
+//		    }
 		    
 		   $sharbltxt = trim(I('post.sharbltxt'));
 	       if($sharbltxt <= 0 || $sharbltxt == null){
@@ -267,9 +267,9 @@ class OrepoolController extends HomeController
 	           $this->ajaxReturn(['code'=>0,'msg'=> L('请先登陆')]);
 	       }
 	       
-	       if($uinfo['rzstatus'] != 2){
-		        $this->ajaxReturn(['code'=>0,'msg'=>L('请先完成实名认证')]);
-		    }
+//	       if($uinfo['rzstatus'] != 2){
+//		        $this->ajaxReturn(['code'=>0,'msg'=>L('请先完成实名认证')]);
+//		    }
 	       
 	       
 	       $minfo = M("kuangji")->where(array('id'=>$kid))->find();
