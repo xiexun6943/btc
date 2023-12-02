@@ -14,7 +14,7 @@
         }
     </style>
 </head>
-<body oncopy="return false" oncut="return false;" onselectstart="return false" oncontextmenu="return false">
+<body onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
 
 <include file="Public:header"/>
 
@@ -136,16 +136,16 @@
 
             <span class="reg_kind_login">
                 <div class="input">
-                    <input type="text" class="input-field" name="email" id="email" value="" required/>
+                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="email" id="email" value="" required/>
                     <label class="input-label">{:L('邮箱')}</label>
                 </div>
                 <div class="input">
-                    <input type="password" class="input-field"  name="lpwd" id="lpwd" value="" required/>
+                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="lpwd" id="lpwd" value="" required/>
                     <label class="input-label">{:L('密码')}</label>
                 </div>
     
                 <div class="input">
-                    <input type="text" class="input-field"  name="vcode" id="vcode" value="" required style="width: 60%" />
+                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="vcode" id="vcode" value="" required style="width: 60%" />
                     <label class="input-label">{:L('验证码')}</label>
                     <div class="action-button login-send-button">
                         <img style="width:100%;height:50px;border-radius:5px;" src="{:U('Verify/code')}" onclick="this.src=this.src+'?t='+Math.random()" title="{:L('换一张')}">
@@ -158,16 +158,16 @@
 
             <span class="reg_kind_login" style="display:none">
                 <div class="input">
-                    <input type="text" class="input-field" name="phone" id="phone" value="" required/>
+                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="phone" id="phone" value="" required/>
                     <label class="input-label">{:L('手机号')}</label>
                 </div>
                 <div class="input">
-                    <input type="password" class="input-field"  name="pwd_phone" id="pwd_phone" value="" required/>
+                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="pwd_phone" id="pwd_phone" value="" required/>
                     <label class="input-label">{:L('密码')}</label>
                 </div>
     
                 <div class="input">
-                    <input type="text" class="input-field"  name="vcode_phone" id="vcode_phone" value="" required style="width: 60%" />
+                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="vcode_phone" id="vcode_phone" value="" required style="width: 60%" />
                     <label class="input-label">{:L('验证码')}</label>
                     <div class="action-button login-send-button">
                         <img style="width:100%;height:50px;border-radius:5px;" src="{:U('Verify/code')}" onclick="this.src=this.src+'?t='+Math.random()" title="{:L('换一张')}">

@@ -40,7 +40,7 @@
 	    .layui-upload-file{display: none!important;opacity: .01;}
 	</style>
 </head>
-<body>
+<body onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
 	<div class="container-fluid " style="padding:0px;width:100vw;">
         <div class="no_header">
 			<div class="fl allhg txtl">
@@ -86,7 +86,7 @@
 		                <img src="/Public/Static/coinimgs/{$qrcode}" style="height:120px;" />
 		            </div>
 		            <div class="imgbox_7">
-		                <input type="hidden" id="czaddress" value="{$info.czaddress}" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="czaddress" value="{$info.czaddress}" />
 		                <span class="fzmm fch">{$info.czaddress}</span>
 		            </div>
 		            <div class="imgbox_8">
@@ -111,7 +111,7 @@
 		                <span class="fzmmm fch">{:L('转账金额')}</span>
 		            </div>
 		            <div class="zz_inputbox">
-		                <input type="text" id="zznum" class="zz_input"  placeholder="{:L('请输入转账金额')}" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="zznum" class="zz_input"  placeholder="{:L('请输入转账金额')}" />
 		            </div>
 		            
 		            <div class="imgbox_5">
@@ -121,11 +121,11 @@
 		            <div class="imgbox_6">
 		                <img src="/Public/Static/img/upimg.png" id="test1" style="height:100px;" />
 		                
-		                <input type="hidden" id="payimg" value="" />
-		                <input type="hidden" id="coinname" value="{$info.name}" />
-		                <input type="hidden" id="cid" value="{$info.id}" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="payimg" value="" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="coinname" value="{$info.name}" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="cid" value="{$info.id}" />
 		            </div>
-		            <input type="hidden" id="flag" value="1" />
+		            <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="flag" value="1" />
 		            <div class="imgbox_8">
 		                <div class="imgbox_10" id="sumbtn">
 		                    <span class="fzmm fch">{:L('提交')}</span>

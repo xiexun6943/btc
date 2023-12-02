@@ -80,7 +80,7 @@
 
     </style>
 </head>
-<body oncopy="return false" oncut="return false;" onselectstart="return false" oncontextmenu="return false">
+<body onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
 
 <div class="no_headers header_box" >
     <div class="fl bhalf allhg txtl" style="line-height:50px;">
@@ -193,8 +193,8 @@
                     <button class="btn_bar_login btn-hover color-6 btnr gray">{:L('手机')}</button>
                     
                     <span class="reg_kind_login">
-                        <input type="email" name="email" id="email" placeholder="{:L('邮箱')}" required autocomplete="email">
-                        <input type="password" id="lpwd" name="password" placeholder="{:L('密码')}" required>
+                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="email" id="email" placeholder="{:L('邮箱')}" required autocomplete="email">
+                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" id="lpwd" name="password" placeholder="{:L('密码')}" required>
                         
                         
                        <!-- <input type="text" id="text" name="text" placeholder="{:L('验证码')}" required>
@@ -205,23 +205,23 @@
                         
                         <label class="dela-form__checkbox" id="remember"  >
                             {:L('记住账号')}
-                            <input type="checkbox" name="remember"  id="rem"  value="1"><span></span>
+                            <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="checkbox" name="remember"  id="rem"  value="1"><span></span>
                         </label>
-                        <input type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
     
-                        <input type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
+                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
                     </span>
                     
                     <span class="reg_kind_login" style="display:none">
-                        <input type="email" name="phone" id="phone" placeholder="{:L('手机号')}" required autocomplete="email">
-                        <input type="password" id="pwd_phone" name="pwd_phone" placeholder="{:L('密码')}" required>
+                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="phone" id="phone" placeholder="{:L('手机号')}" required autocomplete="email">
+                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" id="pwd_phone" name="pwd_phone" placeholder="{:L('密码')}" required>
                         <label class="dela-form__checkbox" id="remember"  >
                             {:L('记住账号')}
                             <input type="checkbox" name="remember"  id="rem"  value="1"><span></span>
                         </label>
-                        <input type="submit" name="submit" onclick="uplogin2()" value="{:L('登录')}">
+                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin2()" value="{:L('登录')}">
     
-                        <input type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
+                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
                     </span>
 
                     <span class="dela-form__rorgot-password" onclick="forgot_password()">

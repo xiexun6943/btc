@@ -172,7 +172,7 @@
             }
         </style>
 	</head>
-	<body oncopy="return false" oncut="return false;" onselectstart="return false" oncontextmenu="return false">
+	<body onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
 	    <div class="App">
 	        <div class="css-tq0shg">
 	            <include file="Public:header"/>
@@ -229,7 +229,7 @@
 	                                                  <span class="fch f12">{:L('银行名称')}</span>
 	                                              </div>
 												  <div class="czbox_6">
-													  <input class="czbox_5" type="text" id="bank_name" name="bank_name" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
+													  <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" class="czbox_5" type="text" id="bank_name" name="bank_name" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
 												  </div>
 	                                          </div>
 	                                      </div>
@@ -243,7 +243,7 @@
 	                                                  <span class="fch f12">{:L('卡号')}</span>
 	                                              </div>
 	                                              <div class="czbox_6">
-	                                                  <input class="czbox_5" type="text" id="address" name="address" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
+	                                                  <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" class="czbox_5" type="text" id="address" name="address" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
 	                                              </div>
 	                                          </div>
 	                                      </div>
@@ -257,7 +257,7 @@
 	                                                  <span class="fch f12">{:L('收款人姓名')}</span>
 	                                              </div>
 												  <div class="czbox_6">
-													  <input class="czbox_5" type="text" id="user_name" name="user_name" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
+													  <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" class="czbox_5" type="text" id="user_name" name="user_name" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
 												  </div>
 	                                          </div>
 	                                      </div>
@@ -276,7 +276,7 @@
 	                                              </div>
 	                                              <div class="czbox_6" style="padding:0px;position:relative">
 	                                                  <span style='position:absolute;top:0px;right:15px' id='currency_unit'></span>
-	                                                  <input class="czbox_5" type="text" id="tbnum" onblur="changenum();" name="tbnum" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" autocomplete="off" step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"  />
+	                                                  <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" class="czbox_5" type="text" id="tbnum" onblur="changenum();" name="tbnum" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" autocomplete="off" step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"  />
 	                                                  <span class="f12 fcy">{:L('实际到账')}</span>
 	                                                  <span class="f12 fcy" id="tmoney">0.000000</span><span style="font-size:12px;color:#00b897" id='currency_unit2'></span>
 		                                              <span class="f12 fcy">&nbsp;&nbsp;<?php echo strtoupper($info['name']);?></span>
@@ -295,7 +295,7 @@
 												      <span id="toggleButton" style="cursor:pointer;position:absolute;font-size:12px;color:blue;top:0px;right:15px">
 												      <img src="/Public/Static/img/icon_eye_close.png" style="height:20px">
 												      </span>
-													  <input class="czbox_5" type="password" id="paypwd" name="paypwd"  style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
+													  <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" class="czbox_5" type="password" id="paypwd" name="paypwd"  style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" />
 												  </div>
 												  <script>
 												      $(document).ready(function() {
@@ -316,16 +316,16 @@
 											  </div>
 										  </div>
 	                                      
-	                                    <input type="hidden" id="usermoney" value="{$money}" />
-		                                <input type="hidden" id="txminnum" value="{$info.txminnum}" />
-		                                <input type="hidden" id="txsxf" value="{$info.txsxf}" />
-		                                <input type="hidden" id="txsxf_n" value="{$info.txsxf_n}" />
-		                                <input type="hidden" id="sxftype" value="{$info.sxftype}" />
+	                                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="usermoney" value="{$money}" />
+		                                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="txminnum" value="{$info.txminnum}" />
+		                                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="txsxf" value="{$info.txsxf}" />
+		                                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="txsxf_n" value="{$info.txsxf_n}" />
+		                                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="sxftype" value="{$info.sxftype}" />
 		                                
-		                                <input type="hidden" id="tbid" value="{$info.id}" />
-		                                <input type="hidden" id="tbaddre" value="{$adrinfo.addr}" />
+		                                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="tbid" value="{$info.id}" />
+		                                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="tbaddre" value="{$adrinfo.addr}" />
 
-		                                <input type="hidden" id="flag" value="1" />
+		                                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="flag" value="1" />
 	                                      <div class="czbox">
 	                                          <div class="czbox_2">
 	                                              <div class="czbox_3"></div>
