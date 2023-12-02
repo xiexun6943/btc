@@ -48,7 +48,7 @@
         .overflow{overflow: hidden;text-overflow:ellipsis;white-space: nowrap;width:100%;height:35px;line-height:35px;}
 	</style>
 </head>
-<body oncopy="return false" oncut="return false;" onselectstart="return false" oncontextmenu="return false">
+<body onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
 	<div class="container-fluid " style="padding:0px;width:100vw;">
         <div class="no_header">
 			<div class="fl allhg txtl">
@@ -95,7 +95,7 @@
 		        
 		        <div class="tx_inputbox">
 		            <div class="tx_inputbox_l">
-		                <input type="text" id="address" name="address" placeholder="{:L('输入或长按粘贴地址')}" style="background:#f5f5f5;border:1px solid #f5f5f5;width: 100%;height:30px;" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="address" name="address" placeholder="{:L('输入或长按粘贴地址')}" style="background:#f5f5f5;border:1px solid #f5f5f5;width: 100%;height:30px;" />
 		            </div>
 		            <div class="tx_inputbox_r">
 		                <i class="bi bi-journal-text fch" id="showdongbtn" style="font-size:18px;"></i>
@@ -114,17 +114,17 @@
 		        </div>
 
 
-		        <input type="hidden" id="usermoney" value="{$money}" />
-		        <input type="hidden" id="txminnum" value="{$info.txminnum}" />
-		        <input type="hidden" id="txsxf" value="{$info.txsxf}" />
-		        <input type="hidden" id="txsxf_n" value="{$info.txsxf_n}" />
-		        <input type="hidden" id="sxftype" value="{$info.sxftype}" />
+		        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="usermoney" value="{$money}" />
+		        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="txminnum" value="{$info.txminnum}" />
+		        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="txsxf" value="{$info.txsxf}" />
+		        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="txsxf_n" value="{$info.txsxf_n}" />
+		        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="sxftype" value="{$info.sxftype}" />
 		        
-		        <input type="hidden" id="tbid" value="{$info.id}" />
-		        <input type="hidden" id="tbaddre" value="{$adrinfo.addr}" />
+		        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="tbid" value="{$info.id}" />
+		        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="tbaddre" value="{$adrinfo.addr}" />
 		        <div class="tx_inputbox">
 		            <div class="tx_inputbox_l" style="width:65%;">
-		                <input type="text" id="tbnum" onblur="changenum();" name="tbnum" placeholder="{:L('输入提币数量')}" style="background:#f5f5f5;border:1px solid #f5f5f5;height: 30px;" autocomplete="off" step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="tbnum" onblur="changenum();" name="tbnum" placeholder="{:L('输入提币数量')}" style="background:#f5f5f5;border:1px solid #f5f5f5;height: 30px;" autocomplete="off" step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
 		            </div>
 		            <div class="tx_inputbox_r" style="width:35%;">
 		                <div class="inputbox_r_l">
@@ -142,7 +142,7 @@
 
 				<div class="tx_inputbox">
 					<div class="tx_inputbox_l">
-						<input  type="password" id="paypwd" name="paypwd" placeholder="{:L('提现密码')}" style="background:#f5f5f5;border:1px solid #f5f5f5;width: 100%;height:30px;" />
+						<input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus"  type="password" id="paypwd" name="paypwd" placeholder="{:L('提现密码')}" style="background:#f5f5f5;border:1px solid #f5f5f5;width: 100%;height:30px;" />
 					    <span class="toggle-btn" onclick="togglePassword()">
 					        <img class="open" style="display:none" src="/Public/Static/img/icon_eye_open.png">
 					        <img class="close" src="/Public/Static/img/icon_eye_close.png">
@@ -182,7 +182,7 @@
 					</div>
 				</div>
 
-				<input type="hidden" id="flag" value="1" />
+				<input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="flag" value="1" />
 		        <div class="imgbox_8" style="margin-top:20px;">
 		            <div class="imgbox_10" id="sumbtn">
 		                <span class="fzmm">{:L('提交')}</span>

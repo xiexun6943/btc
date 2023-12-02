@@ -67,7 +67,7 @@
 			);
 		})
 </script>
-<body>
+<body onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
 	<div class="container-fluid " style="padding:0px;width:100vw;">
         <div class="no_header">
 			<div class="fl allhg txtl">
@@ -103,9 +103,9 @@
 		            </div>
 
 		            <div class="imgbox_7" style="width:75%;display:inline-block">
-		                <input type="hidden" id="czaddress" value="{$info.czaddress}" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="czaddress" value="{$info.czaddress}" />
 		                <!--<span class="fzmm fch card_no">{$info.czaddress}</span>-->
-		                <span class="fzmm fch "><input id="bank_num" type='text' style='display: block;width: 100%'/></span>
+		                <span class="fzmm fch "><input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" id="bank_num" type='text' style='display: block;width: 100%'/></span>
 		            </div>
 		            <script>
 		                $(function(){
@@ -135,7 +135,7 @@
 	                            $('#currency_unit').text($('#fzmmm').text())
 	                        })
 	                    </script>
-		                <input type="text" id="zznum" class="zz_input"  placeholder="{:L('请输入转账金额')}" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="zznum" class="zz_input"  placeholder="{:L('请输入转账金额')}" />
 		            </div>
 		            
 		            <div class="imgbox_5">
@@ -145,11 +145,11 @@
 		            <div class="imgbox_6">
 		                <img src="/Public/Static/img/upimg.png" id="test1" style="height:100px;" />
 		                
-		                <input type="hidden" id="payimg" value="" />
-		                <input type="hidden" id="coinname" value="{$info.name}" />
-		                <input type="hidden" id="cid" value="{$info.id}" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="payimg" value="" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="coinname" value="{$info.name}" />
+		                <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="cid" value="{$info.id}" />
 		            </div>
-		            <input type="hidden" id="flag" value="1" />
+		            <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" id="flag" value="1" />
 		            <div class="imgbox_8">
 		                <div class="imgbox_10" id="sumbtn">
 		                    <span class="fzmm fch">{:L('提交')}</span>
