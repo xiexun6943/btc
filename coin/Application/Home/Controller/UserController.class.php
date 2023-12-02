@@ -218,6 +218,10 @@ class UserController extends HomeController
 		$this->assign('uinfo',$uinfo);
 	    
 	    $list = M("notice")->where(array('uid'=>$uid))->order("id desc")->limit(50)->select();
+        foreach ($list as $k => $v) {
+            $list[$k]['title'] = L($v['title']);
+            $list[$k]['content'] = L($v['content']);
+        }
 	    $this->assign("list",$list);
 	    $this->display();
 	}
@@ -316,6 +320,9 @@ class UserController extends HomeController
 	    
 	    //登陆日志
 	    $loglist = M("user_log")->where(array('userid'=>$uid))->order("id desc")->limit(20)->select();
+        foreach ($loglist as $k => $v) {
+            $loglist[$k]['remark'] = L($v['remark']);
+        }
 	    $this->assign('loglist',$loglist);
 		$this->display();
 	}
