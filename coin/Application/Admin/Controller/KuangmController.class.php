@@ -10,27 +10,49 @@ class KuangmController extends AdminController
 	}
 	//矿机收益列表
 	public function djprofit($username = null){
-	   if($username != ''){
-	        $where['username'] = array('eq',$username);
-	    }
+        $field=I('get.field');
+        $search=I('get.search');
+        $coinname=I('get.coinname');
+        $st=I('get.st');
+        $where = array();
+        if ($field && $search) {
+            $where['uid'] = M('User')->where(array($field => $search))->getField('id');
+        }
 	    $count = M('djprofit')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('djprofit')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+
+        }
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 	    $this->display(); 
 	}
 	
 	//矿机收益列表
-	public function kjsylist($username = null){
-	   if($username != ''){
-	        $where['username'] = array('eq',$username);
-	    }
+	public function kjsylist(){
+        $field=I('get.field');
+        $search=I('get.search');
+        $where = array();
+        if ($field && $search) {
+            $where['uid'] = M('User')->where(array($field => $search))->getField('id');
+        }
 	    $count = M('kjprofit')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('kjprofit')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+
+        }
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 	    $this->display(); 
@@ -77,14 +99,26 @@ class KuangmController extends AdminController
 	
 	//会员运行中的矿机列表
 	public function kjlist($username = null){
-	    if($username != ''){
-	        $where['username'] = array('eq',$username);
-	    }
+        $field=I('get.field');
+        $search=I('get.search');
+        $where = array();
+        if ($field && $search) {
+            $where['uid'] = M('User')->where(array($field => $search))->getField('id');
+        }
+
 	    $where['status'] = array('lt',3);
 	    $count = M('kjorder')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('kjorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['username'] = $userInfo['username'];
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+
+        }
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 	    $this->display();

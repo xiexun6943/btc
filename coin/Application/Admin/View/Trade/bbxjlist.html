@@ -39,7 +39,12 @@
 							>已撤消</option>
 						</select>
 
-						<input type="text" name="username" class="search-input form-control" value="" placeholder="请输入用户名" />
+						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
+						</select>
+						<input type="text" name="search" class="search-input form-control" value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 					</form>
 					<script>
@@ -64,7 +69,7 @@
 			<table class="">
 				<thead>
 				<tr>
-					<th class="">ID</th>
+					<th class="">UID</th>
 					<th class="">会员账号</th>
 					<th class="">交易对</th>
 					<th class="">方向</th>
@@ -82,8 +87,8 @@
                     <notempty name="list">
                     <volist name="list" id="vo">
 					<tr>
-						<td>{$vo.id}</td>
-						<td>{$vo.account}</td>
+						<td>{$vo.uid}</td>
+						<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 						<td>{$vo.symbol}</td>
 						<td>
 						    <if condition="$vo.type eq 1">

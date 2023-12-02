@@ -41,6 +41,13 @@ class TradeController extends AdminController
 
 	//币币交易市价交易记录
 	public function bbsjlist(){
+		$field=I('get.field');
+		$search=I('get.search');
+		$where = array();
+		if ($field && $search) {
+			$where['uid'] = M('User')->where(array($field => $search))->getField('id');
+		}
+
 		if(I('get.type') > 0){
 			$hyzd = trim(I('get.type'));
 			$where['type'] = $hyzd;
@@ -55,8 +62,6 @@ class TradeController extends AdminController
 			$username = trim(I('get.username'));
 			$where['account'] = $username;
 		}
-
-
 
 
 		$where['ordertype'] = 2;
@@ -64,6 +69,14 @@ class TradeController extends AdminController
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('bborder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		foreach ($list as $k => $v) {
+			$userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+			if ($userInfo) {
+				$list[$k]['username'] = $userInfo['username'];
+				$list[$k]['phone'] = $userInfo['phone'];
+			}
+
+		}
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 		$this->display();
@@ -71,6 +84,12 @@ class TradeController extends AdminController
 
 	//币币交易限价委托记录
 	public function bbxjlist(){
+		$field=I('get.field');
+		$search=I('get.search');
+		$where = array();
+		if ($field && $search) {
+			$where['uid'] = M('User')->where(array($field => $search))->getField('id');
+		}
 
 		if(I('get.type') > 0){
 			$hyzd = trim(I('get.type'));
@@ -82,19 +101,18 @@ class TradeController extends AdminController
 			$where['status'] = $status;
 		}
 
-		if(I('get.username') > 0){
-			$username = trim(I('get.username'));
-			$where['account'] = $username;
-		}
-
-
-
-
 		$where['ordertype'] = 1;
 		$count = M('bborder')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('bborder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		foreach ($list as $k => $v) {
+			$userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+			if ($userInfo) {
+				$list[$k]['username'] = $userInfo['username'];
+				$list[$k]['phone'] = $userInfo['phone'];
+			}
+		}
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 
@@ -280,29 +298,33 @@ class TradeController extends AdminController
 	//合约购买记录（未平仓的）
 	public function index(){
 
+		$field=I('get.field');
+		$search=I('get.search');
 		$where = array();
-		if(I('get.username') != '' || I('get.username') != null){
-			$username = trim(I('get.username'));
-			$where['username'] = trim($username);
+		if ($field && $search) {
+			$where['uid'] = M('User')->where(array($field => $search))->getField('id');
 		}
 
 		if(I('get.hyzd') > 0){
 			$hyzd = trim(I('get.hyzd'));
 			$where['hyzd'] = $hyzd;
 		}
-
-
 		if(I('get.is_gd') > 0){
 			$is_gd= trim(I('get.is_gd'));
 			$where['is_gd'] = $is_gd;
 		}
-
 		$where['status'] = 1;
 
 		$count = M('hyorder')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		foreach ($list as $k => $v) {
+			$userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+			if ($userInfo) {
+				$list[$k]['phone'] = $userInfo['phone'];
+			}
+		}
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 
@@ -313,21 +335,36 @@ class TradeController extends AdminController
 	//合约交易平仓记录
 	public function hylog($invit=null,$username=null){
 
-		if($invit != ''){
-			$where['invit'] = $invit;
+		$field=I('get.field');
+		$search=I('get.search');
+		$where = array();
+		if ($field && $search) {
+			$where['uid'] = M('User')->where(array($field => $search))->getField('id');
 		}
 
-		if($username != ''){
-			$where['username'] = $username;
+		if(I('get.hyzd') > 0){
+			$hyzd = trim(I('get.hyzd'));
+			$where['hyzd'] = $hyzd;
 		}
-
+		if(I('get.is_gd') > 0){
+			$is_gd= trim(I('get.is_gd'));
+			$where['is_gd'] = $is_gd;
+		}
 		$where['status'] = 2;
+
 		$count = M('hyorder')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		foreach ($list as $k => $v) {
+			$userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+			if ($userInfo) {
+				$list[$k]['phone'] = $userInfo['phone'];
+			}
+		}
 		$this->assign('list', $list);
 		$this->assign('page', $show);
+
 		$this->display();
 	}
 

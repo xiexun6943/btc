@@ -7,6 +7,9 @@
 	<div id="main" class="main">
 		<div class="main-title-h">
 			<span class="h1-title">用户管理</span>
+			<div class="fr">
+				<button class="btn btn-warning" onClick="location.href='{:U('User/index')}'">初始化搜索</button>
+			</div>
 		</div>
 		<div class="cf">
 			<div class="fl">
@@ -91,7 +94,6 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-<!--								<td title="登录该用户"><a href=" {:U('User/loginadmin?id='.$vo['id'].'&pass='.$vo['password'])}" target="_blank">{$vo.username}</a></td>-->
 								<td><span style="color: red">{$vo.username}</span> / <span style="color: green">{$vo.phone}</span></td>
 							    <td>
 									<a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>

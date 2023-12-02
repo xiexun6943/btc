@@ -95,14 +95,25 @@ class IssueController extends AdminController
         }
     }
 
-	public function log($name=null){
-		if($name != null){
-		    $where['account'] = trim($name);
-		}
+	public function log(){
+        $field=I('get.field');
+        $search=I('get.search');
+        $where = array();
+        if ($field && $search) {
+            $where['uid'] = M('User')->where(array($field => $search))->getField('id');
+        }
 		$count = M('issue_log')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('issue_log')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['username'] = $userInfo['username'];
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+
+        }
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 		$this->display();

@@ -5,15 +5,20 @@
 		<div class="alert-content">警告内容</div>
 	</div>
 	<div id="main" class="main">
-		<div class="main-title-h"> <span class="h1-title">认购记录</span> </div>
+		<div class="main-title-h">
+			<span class="h1-title">认购记录</span>
+			<a class="btn btn-warning" onClick="location.href='{:U('Issue/log')}'">初始化搜索</a>
+		</div>
 		<div class="cf">
 			<div class="search-form fl cf">
 				<div class="sleft">
 					<form name="formSearch" id="formSearch" method="get" name="form1">
-						<select style="width:160px;float:left;margin-right:10px;" name="field" class="form-control">
-							<option value="username" <eq name="Think.get.field" value="username">selected</eq>>用户名</option>
+						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
 						</select>
-						<input type="text" name="name" class="search-input form-control" value="{$Think.get.name}" placeholder="请输入查询内容" style="">
+						<input type="text" name="search" class="search-input form-control" value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 					</form>
 					<script>
@@ -40,7 +45,7 @@
 				<thead>
 					<tr>
 						<th class="row-selected row-selected"><input class="check-all" type="checkbox" /></th>
-						<th class="">ID</th>
+						<th class="">UID</th>
 						<th class="">会员账号</th>
 						<th class="">项目名称</th>
 						<th class="">认购</th>
@@ -54,8 +59,8 @@
 						<volist name="list" id="vo">
 							<tr>
 								<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
-								<td>{$vo.id}</td>
-								<td>{$vo.account}</td>
+								<td>{$vo.uid}</td>
+								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 								<td>{$vo.name}</td>
 								<td>
 								    <span>认购币种：<?php echo strtoupper($vo['coinname']);?></span><br />

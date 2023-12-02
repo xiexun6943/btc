@@ -76,10 +76,12 @@
 			<div class="search-form fl cf" style="float: none !important;">
 				<div class="sleft">
 					<form name="formSearch" id="formSearch" method="get" name="form1">
-						<select style=" width: 100px; float: left; margin-right: 10px;" name="field" class="form-control">
-							<option value="username" <eq name="Think.get.field" value="username">selected</eq>>{:L('用户名')}</option>
+						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
 						</select>
-						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="{:L('请输入查询内容')}" style="">
+						<input type="text" name="search" class="search-input form-control  " value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 					</form>
 					<script>
@@ -106,7 +108,7 @@
 				<thead>
 				<tr>
 					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-					<th class="">ID</th>
+					<th class="">UID</th>
 					<th class="">{:L('用户名')}</th>
 					<volist name="coinlist" id="v">
 						<th class="">{$v.title}(<?php echo strtoupper($v['name']);?>)</th>
@@ -119,8 +121,7 @@
 						<tr>
 							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
 							<td>{$vo.id}</td>
-							<td>{$vo['username']}</td>
-							
+							<td ><span style="color: #ff0000">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							<volist name="coinlist" id="v">
 								<td>
 								    {:L('可用')}：{$vo[$v['name']] * 1}<br>{:L('冻结')}：

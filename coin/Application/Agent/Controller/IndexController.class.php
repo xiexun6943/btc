@@ -15,34 +15,26 @@ class IndexController extends AgentController
 			$this->redirect('Agent/Login/index');
 		}
 		$uid = session('agent_id');
-		$where = "";
-
-		if ($name != '') {
-
-            $map_3 = "username like '%{$name}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
- 
+		$field=I('get.field');
+		$search=I('get.search');
+		if ($field && $search) {
+            $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
 		}else{
 		    $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
 		}
-		
 
 		$count = M('User')->where($map_3)->count();
-
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
-
 		$list = M('User')->where($map_3)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-
         foreach ($list as $k => $v) {
 			$list[$k]['invit_1'] = M('User')->where(array('id' => $v['invit_1']))->getField('username');
 			$list[$k]['invit_2'] = M('User')->where(array('id' => $v['invit_2']))->getField('username');
 			$list[$k]['invit_3'] = M('User')->where(array('id' => $v['invit_3']))->getField('username');
 		}
-        
-        
+
 		$this->assign('list', $list);
 		$this->assign('page', $show);
-       
 	    $this->display();
 	}
 	
@@ -215,88 +207,41 @@ class IndexController extends AgentController
 	}	
 	
 	//代理中心建仓订单
-	public function jclist($username=NULL){
-        if (!session('agent_id')) {
+	public function jclist(){
+		if (!session('agent_id')) {
 			$this->redirect('Agent/Login/index');
 		}
 
 		$uid = session('agent_id');
 
-		if ($username != '') {
+		$field=I('get.field');
+		$search=I('get.search');
+		$where = array();
+		if ($field && $search) {
+			$map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
 
-            $map_3 = "username like '%{$username}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
- 
 		}else{
-		    $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+			$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
 		}
-		
-		
-		$ulist = M('User')->where($map_3)->order('id desc')->field('id')->select();
 
+		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
 		if(!empty($ulist)){
-		    $list = array();
-		    foreach($ulist as $key=>$vo){
-		        $map['uid'] = $vo['id'];
-		        $map['status'] = 1;
-		        $orderlist = M("hyorder")->where($map)->select();
-		        if(!empty($orderlist)){
-		            foreach($orderlist as $k=>$v){
-		                $list[$key][$k]['id'] = $v['id'];
-		                $list[$key][$k]['username'] = $v['username'];
-		                $list[$key][$k]['num'] = $v['num'];
-		                $list[$key][$k]['hybl'] = $v['hybl'];
-		                $list[$key][$k]['hyzd'] = $v['hyzd'];
-		                $list[$key][$k]['coinname'] = $v['coinname'];
-		                $list[$key][$k]['status'] = $v['status'];
-		                $list[$key][$k]['is_win'] = $v['is_win'];
-		                $list[$key][$k]['buytime'] = $v['buytime'];
-		                $list[$key][$k]['selltime'] = $v['selltime'];
-		                $list[$key][$k]['intselltime'] = $v['intselltime'];
-		                $list[$key][$k]['buyprice'] = $v['buyprice'];
-		                $list[$key][$k]['sellprice'] = $v['sellprice'];
-		                $list[$key][$k]['ploss'] = $v['ploss'];
-		                $list[$key][$k]['time'] = $v['time'];
-		                $list[$key][$k]['kongyk'] = $v['kongyk'];
-		            }
-		        }
+			$userInfo=array_column($ulist,'phone','id');
+			$ulist=array_column($ulist,'id');
+			$where['uid'] = ['in',$ulist];
+			$where['status'] = 1;
 
-		    }
-		}else{
-		    $list = '';
+			$count = M('hyorder')->where($where)->count();
+			$Page = new \Think\Page($count, 15);
+			$show = $Page->show();
+			$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
+			foreach ($list as $k => $v) {
+				$list[$k]['phone'] =$userInfo[$v['uid']] ;
+			}
+			$this->assign('list', $list);
+			$this->assign('page', $show);
 		}
-		
-        if(!empty($list)){
-            $arr[] = array();
-            foreach($list as $key=>$vo){
-                foreach($vo as $a=>$b){
-                    $arr_1['id'] = $b['id'];
-		            $arr_1['username'] = $b['username'];
-		            $arr_1['num'] = $b['num'];
-		            $arr_1['hybl'] = $b['hybl'];
-		            $arr_1['hyzd'] = $b['hyzd'];
-		            $arr_1['coinname'] = $b['coinname'];
-		            $arr_1['status'] = $b['status'];
-		            $arr_1['is_win'] = $b['is_win'];
-		            $arr_1['buytime'] = $b['buytime'];
-		            $arr_1['selltime'] = $b['selltime'];
-		            $arr_1['intselltime'] = $b['intselltime'];
-		            $arr_1['buyprice'] = $b['buyprice'];
-		            $arr_1['sellprice'] = $b['sellprice'];
-		            $arr_1['ploss'] = $b['ploss'];
-		            $arr_1['time'] = $b['time'];
-		            $arr_1['kongyk'] = $b['kongyk'];
-		            $arr[] = $arr_1;
-                }
-            }
-        }
-       
-        $arr = array_filter($arr);
-       
-        $this->assign('list', $arr);
-		$this->assign('page', $show);
-       
-       
-	    $this->display();
+		$this->display();
 	}
 	
 	
@@ -323,93 +268,42 @@ class IndexController extends AgentController
 	
 	
 	//代理中心平仓订单
-	public function pclist($username=NULL){
-        if (!session('agent_id')) {
+	public function pclist(){
+		if (!session('agent_id')) {
 			$this->redirect('Agent/Login/index');
 		}
-		
+
 		$uid = session('agent_id');
 
-		if ($username != '') {
+		$field=I('get.field');
+		$search=I('get.search');
+		$where = array();
+		if ($field && $search) {
+			$map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
 
-            $map_3 = "username like '%{$username}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
- 
 		}else{
-		    $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+			$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
 		}
-		
-		
-		$ulist = M('User')->where($map_3)->order('id desc')->field('id')->select();
 
+		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
 		if(!empty($ulist)){
-		    $list = array();
-		    foreach($ulist as $key=>$vo){
-		        $uid = $vo['id'];
-		        $orderlist = M("hyorder")->where("uid = $uid and (status = 2 or status = 3)")->select();
-		        if(!empty($orderlist)){
-		            foreach($orderlist as $k=>$v){
-		                $list[$key][$k]['id'] = $v['id'];
-		                $list[$key][$k]['username'] = $v['username'];
-		                $list[$key][$k]['num'] = $v['num'];
-		                $list[$key][$k]['hybl'] = $v['hybl'];
-		                $list[$key][$k]['hyzd'] = $v['hyzd'];
-		                $list[$key][$k]['coinname'] = $v['coinname'];
-		                $list[$key][$k]['status'] = $v['status'];
-		                $list[$key][$k]['is_win'] = $v['is_win'];
-		                $list[$key][$k]['buytime'] = $v['buytime'];
-		                $list[$key][$k]['selltime'] = $v['selltime'];
-		                $list[$key][$k]['intselltime'] = $v['intselltime'];
-		                $list[$key][$k]['buyprice'] = $v['buyprice'];
-		                $list[$key][$k]['sellprice'] = $v['sellprice'];
-		                $list[$key][$k]['ploss'] = $v['ploss'];
-		                $list[$key][$k]['time'] = $v['time'];
-		                $list[$key][$k]['kongyk'] = $v['kongyk'];
-		            }
-		        }
+			$userInfo=array_column($ulist,'phone','id');
+			$ulist=array_column($ulist,'id');
+			$where['uid'] = ['in',$ulist];
+			$where['status'] = ['in',[2,3]];
 
-		    }
-		}else{
-		    $list = '';
+			$count = M('hyorder')->where($where)->count();
+			$Page = new \Think\Page($count, 15);
+			$show = $Page->show();
+			$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
+			foreach ($list as $k => $v) {
+				$list[$k]['phone'] =$userInfo[$v['uid']] ;
+			}
+			$this->assign('list', $list);
+			$this->assign('page', $show);
 		}
+		$this->display();
 		
-        if(!empty($list)){
-            $arr[] = array();
-            foreach($list as $key=>$vo){
-                foreach($vo as $a=>$b){
-                    $arr_1['id'] = $b['id'];
-		            $arr_1['username'] = $b['username'];
-		            $arr_1['num'] = $b['num'];
-		            $arr_1['hybl'] = $b['hybl'];
-		            $arr_1['hyzd'] = $b['hyzd'];
-		            $arr_1['coinname'] = $b['coinname'];
-		            $arr_1['status'] = $b['status'];
-		            $arr_1['is_win'] = $b['is_win'];
-		            $arr_1['buytime'] = $b['buytime'];
-		            $arr_1['selltime'] = $b['selltime'];
-		            $arr_1['intselltime'] = $b['intselltime'];
-		            $arr_1['buyprice'] = $b['buyprice'];
-		            $arr_1['sellprice'] = $b['sellprice'];
-		            $arr_1['ploss'] = $b['ploss'];
-		            $arr_1['time'] = $b['time'];
-		            $arr_1['kongyk'] = $b['kongyk'];
-		            $arr[] = $arr_1;
-                }
-            }
-        }
-       
-        $arr = array_filter($arr);
-       
-        
-       
-       
-       
-        $this->assign('list', $arr);
-		$this->assign('page', $show);
-       
-       
-		
-       
-	    $this->display();
 	}
 	
 	
@@ -418,31 +312,38 @@ class IndexController extends AgentController
 	/**
 	 * 代理中心充币列表
 	 */ 
-	 public function recharge($name=null){
+	 public function recharge(){
 	   if (!session('agent_id')) {
 			$this->redirect('Agent/Login/index');
 		}
 		
 		$uid = session('agent_id');
-	     
-	    if($name != ''){
-		    $where['username'] = $name;
-		}
-		
 
-		$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
-		$ulist = M('User')->where($map_3)->order('id desc')->getField('id',true);
+		 $field=I('get.field');
+		 $search=I('get.search');
+		 $where = array();
+		 if ($field && $search) {
+			 $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
+
+		 }else{
+			 $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+		 }
+
+		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
 		if(!empty($ulist)){
+			$userInfo=array_column($ulist,'phone','id');
+			$ulist=array_column($ulist,'id');
 		    $where['uid'] = ['in',$ulist];
-
 	    	$count = M('recharge')->where($where)->count();
 		    $Page = new \Think\Page($count, 15);
 	    	$show = $Page->show();
 		    $list = M('recharge')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
+			foreach ($list as $k => $v) {
+				$list[$k]['phone'] =$userInfo[$v['uid']] ;
+			}
 		    $this->assign('list', $list);
 		    $this->assign('page', $show);
 		}
-		
 	     $this->display();
 	 }
 	 
@@ -451,31 +352,36 @@ class IndexController extends AgentController
 	 * 代理中心提币列表
 	 */ 
 	 public function withdraw($name=null){
-	   if (!session('agent_id')) {
-			$this->redirect('Agent/Login/index');
-		}
-		
-		$uid = session('agent_id');
-	     
-	    if($name != ''){
-		    $where['username'] = $name;
-		}
-		
+		 if (!session('agent_id')) {
+			 $this->redirect('Agent/Login/index');
+		 }
+		 $uid = session('agent_id');
+		 $field=I('get.field');
+		 $search=I('get.search');
+		 $where = array();
+		 if ($field && $search) {
+			 $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
+		 }else{
+			 $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+		 }
 
-		$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
-		$ulist = M('User')->where($map_3)->order('id desc')->getField('id',true);
-		if(!empty($ulist)){
-		    $where['userid'] = ['in',$ulist];
+		 $ulist = M('User')->field('id,username,phone')->where($map_3)->select();
 
-		    $count = M('myzc')->where($where)->count();
-	    	$Page = new \Think\Page($count, 15);
-		    $show = $Page->show();
-		    $list = M('myzc')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-	    	$this->assign('list', $list);
-		    $this->assign('page', $show);
-		}
-		
-	     $this->display();
+		 if(!empty($ulist)){
+			 $userInfo=array_column($ulist,'phone','id');
+			 $ulist=array_column($ulist,'id');
+			 $where['userid'] = ['in',$ulist];
+			 $count = M('myzc')->where($where)->count();
+			 $Page = new \Think\Page($count, 15);
+			 $show = $Page->show();
+			 $list = M('myzc')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
+			 foreach ($list as $k => $v) {
+				 $list[$k]['phone'] =$userInfo[$v['userid']] ;
+			 }
+			 $this->assign('list', $list);
+			 $this->assign('page', $show);
+		 }
+		 $this->display();
 	 }
 	 
 	 
@@ -483,38 +389,40 @@ class IndexController extends AgentController
 	  * 用户财产
 	  */
 	  public function property(){
-	     if (!session('agent_id')) {
-			$this->redirect('Agent/Login/index');
+		if (!session('agent_id')) {
+		  $this->redirect('Agent/Login/index');
 		}
-		
 		$uid = session('agent_id');
-	     
-	    if($name != ''){
-		    $where['username'] = $name;
+		$field=I('get.field');
+		$search=I('get.search');
+
+		if ($field && $search) {
+		  $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
+		}else{
+		  $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
 		}
-	      
-      	$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
       	$ulist = M('User')->where($map_3)->order('id desc')->getField('id',true);
       	if(!empty($ulist)){
       	    $where['userid'] = ['in',$ulist];
-
 		    $count = M('UserCoin')->where($where)->count();
 	    	$Page = new \Think\Page($count, 15);
 		    $show = $Page->show();
 	    	$list = M('UserCoin')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
 		    foreach ($list as $k => $v) {
-		    	$list[$k]['username'] = M('User')->where(array('id' => $v['userid']))->getField('username');
+				$userinfo=M('User')->where(array('id' => $v['userid']))->field('username,phone')->find();
+				if ($userinfo) {
+					$list[$k]['username'] =$userinfo['username'];
+					$list[$k]['phone'] =$userinfo['phone'];
+				}
 	    	}
-
 		    $this->assign('list', $list);
 		    $this->assign('page', $show);
-		
+
 		    $coinlist = M("coin")->where("type = 1")->order("id desc")->field("name,title")->select();
             $this->assign("coinlist",$coinlist);
-      	    
+
       	}
-      	
 	      $this->display();
 	  }
 }

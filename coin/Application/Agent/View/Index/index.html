@@ -79,15 +79,14 @@
 			<div class="search-form cf">
 				<div class="sleft">
 					<form name="formSearch" id="formSearch" method="get" name="form1">
-						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
-							<option value="username"
-							<empty name="Think.get.field">selected</empty>
-							>{:L('邮箱账号')}</option>
-						</select>
-
 						<script type="text/javascript" src="/Public/layer/laydate/laydate.js"></script>
 
-						<input type="text" name="name" class="search-input form-control" value="{$Think.get.name}" placeholder="{:L('请输入邮箱账号')}" style="width: 380px;">
+						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
+						</select>
+						<input type="text" name="search" class="search-input form-control  " value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 					</form>
 					<script>
@@ -114,7 +113,7 @@
 				<thead>
 				<tr>
 					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-					<th>ID</th>
+					<th>UID</th>
 					<th>{:L('会员账号')}</th>
 					<th>{:L('登陆')}</th>
 					<th>{:L('注册IP')}/{:L('时间')}</th>
@@ -133,7 +132,7 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<td title="登录该用户">{$vo.username}</td>
+								<td title="登录该用户"><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 								<td><span>{$vo.logins}</span>{:L('次')}</td>
 								<td>
 								    <span>IP：{$vo.addip}</span><br />

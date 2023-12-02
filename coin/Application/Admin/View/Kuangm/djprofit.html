@@ -6,14 +6,22 @@
 	</div>
 	<div id="main" class="main">
 		<div class="main-title-h">
-			<span class="h1-title">矿机管理</span>
-			<span class="h2-title">>><a href="{:U('Kuangm/djprofit')}">收益列表</a></span>
+			<span class="h1-title">冻结收益列表</span>
+			<div class="fr">
+				<button class="btn btn-warning" onClick="location.href='{:U('Kuangm/djprofit')}'">初始化搜索</button>
+			</div>
 		</div>
 		<div class="cf">
             <div class="search-form fr cf" style="43px;float: none !important;">
 				<div class="sleft">
 					<form name="formSearch" id="formSearch" method="get" name="form1">
-						<input type="text" name="username" class="search-input form-control" value="" placeholder="输入用户账号" />
+						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
+						</select>
+
+						<input type="text" name="search" class="search-input form-control" value="{$Think.get.search}" placeholder="请输入查询内容" style="">
 						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
 					</form>
 					<script>
@@ -39,7 +47,7 @@
 				<thead>
 				<tr>
 					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-					<th class="">ID</th>
+					<th class="">UID</th>
 					<th class="">会员账号</th>
 					<th class="">冻结金额</th>
 					<th class="">冻结币种</th>
@@ -54,8 +62,8 @@
 					<volist name="list" id="vo">
 						<tr>
 							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
-							<td>{$vo.id}</td>
-							<td>{$vo.username}</td>
+							<td>{$vo.uid}</td>
+							<td><span style="color: red">{$vo.username}</span> </p> <span style="color: green">{$vo.phone}</span></td>
 							<td>{$vo.num}</td>
 							<td><?php echo strtoupper($vo['coin']);?></td>
 							<td>
