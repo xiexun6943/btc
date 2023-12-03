@@ -338,17 +338,42 @@
                 margin: 0 auto;
             }
             
+    .left{
+          width: 15rem;
+        height: 100vh;
+        position: fixed;
+        top:5%;
+        left: 5%;
+        margin: auto;
+    }
+    .left img{
+         width: 15rem;
+        height: auto;
+    }
+            
+    .right{
+          width: 15rem;
+        height: 100vh;
+        position: fixed;
+        top:5%;
+        right: 5%;
+        margin: auto;
+    }
+    .right img{
+         width: 15rem;
+        height: auto;
+    }
     .btn{
-          width: 21rem;
+          width: 30rem;
     height: 20.5rem;
         position: fixed;
-        top:13%;
+        top:3%;
         left: 0;
         right: 0;
         margin: auto;
     }
     .btn img{
-         width: 21rem;
+         width: 30rem;
     height: auto;
     }
     .lump{
@@ -394,7 +419,7 @@
 	    <div style="position:fixed; top:-10000px">
     	        <img src="/Public/Static/img/coins.png?v=2"/>
     	        <img src="/Public/Static/img/sunshine.png"/>
-    	        <img src="/Public/Static/img/coin_big.png"/>
+    	        <img src="/Public/Static/img/coin_big.png?v=2"/>
     	        <img src="/Public/Static/img/red_bag.png"/>
     	        <img src="/Public/Static/img/label.png"/>
 	    </div>
@@ -414,7 +439,7 @@
             	        <img src="/Public/Static/img/sunshine.png"/>
             	    </div>
             	    <div class="coin_big">
-            	        <img src="/Public/Static/img/coin_big.png"/>
+            	        <img src="/Public/Static/img/coin_big.png?v=2"/>
             	    </div>
             	    <div class="redBag">
             	        <img src="/Public/Static/img/red_bag.png"/>
@@ -744,7 +769,11 @@
 	                
 	                <div class="coin_lump2">
 	                    
-			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png?v=2"></div>
+	                    
+			<div class="left"><img src="/Public/Static/img/coins/left.png?v=4"></div>
+			<div class="right"><img src="/Public/Static/img/coins/right.png?v=4"></div>
+	                    
+			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png?v=4"></div>
 			<div class="lump">
 			    <div class="label">{:L('规则说明')}</div>
 			    <p>

@@ -49,7 +49,13 @@
 		</div>
 
 		<div style="margin:0 auto;padding:0;height:100vh;background:url('/Public/Static/img/coins/coins_bg_h5.png') no-repeat top fixed;background-size:cover">
-			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png?v=2"></div>
+	                    
+	                    
+			<div class="left"><img src="/Public/Static/img/coins/left.png?v=4"></div>
+			<div class="right"><img src="/Public/Static/img/coins/right.png?v=4"></div>
+			
+			
+			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png?v=4"></div>
 			<div class="lump">
 			    <div class="label">{:L('规则说明')}</div>
 			    <p>
@@ -66,7 +72,7 @@
 	    <div style="position:fixed; top:-10000px">
     	        <img src="/Public/Static/img/coins.png?v=2"/>
     	        <img src="/Public/Static/img/sunshine.png"/>
-    	        <img src="/Public/Static/img/coin_big.png"/>
+    	        <img src="/Public/Static/img/coin_big.png?v=2"/>
     	        <img src="/Public/Static/img/red_bag.png"/>
     	        <img src="/Public/Static/img/label.png"/>
 	    </div>
@@ -86,7 +92,7 @@
             	        <img src="/Public/Static/img/sunshine.png"/>
             	    </div>
             	    <div class="coin_big">
-            	        <img src="/Public/Static/img/coin_big.png"/>
+            	        <img src="/Public/Static/img/coin_big.png?v=2"/>
             	    </div>
             	    <div class="redBag">
             	        <img src="/Public/Static/img/red_bag.png"/>
@@ -245,10 +251,10 @@
 	           
             .sunshine{
                 position: absolute;
-                width: 550px;
-                height: 550px;
+                width: 700px;
+                height: 700px;
                 top:0;
-                left: 0;
+                left: -170px;
                 right: 0;
                 bottom: 0;
                 margin: auto;
@@ -257,8 +263,8 @@
             }
             .sunshine img{
                 position: absolute;
-                width: 550px;
-                height: 550px;
+                width: 700px;
+                height: 700px;
                 top:0;
                 left: 0;
                 right: 0;
@@ -411,12 +417,37 @@
 </body>
 
 <style>
+    .left{
+          width: 13rem;
+        height: 100vh;
+        position: fixed;
+        top:15%;
+        left: -5%;
+        margin: auto;
+    }
+    .left img{
+         width: 13rem;
+        height: auto;
+    }
+            
+    .right{
+          width: 13rem;
+        height: 100vh;
+        position: fixed;
+        top:15%;
+        right: -5%;
+        margin: auto;
+    }
+    .right img{
+         width: 13rem;
+        height: auto;
+    }
     .btn{
           width: 21rem;
     height: 20.5rem;
         position: fixed;
-        top:23%;
-        left: 0;
+        top:30%;
+        left: -6%;
         right: 0;
         margin: auto;
     }
