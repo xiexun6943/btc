@@ -853,12 +853,13 @@
                 layer.msg("{:L('缺少重要参数')}");return false;
             }
             
-            $("#flag").val(2);
+
             ctime = ctime / 60;
             $.post("{:U('Contract/ty_creatorder')}",
             {'ctime':ctime,'ctzed':ctzed,'ccoinname':ccoinname,'ctzfx':ctzfx,'cykbl':cykbl},
             function(data){
                 if(data.code == 1){
+                    $("#flag").val(2);
                     layer.msg(data.msg);
                     setTimeout(function(){
                         window.location.reload();
@@ -881,13 +882,15 @@
                   data: postData,
                   url: "/Contract/checkUsdt", 
                   success: function(res) {
-                      
-                      console.log(res)
-                      if(res.code==1){
-                          var flag = $("#flag").val();
-            if(flag == 2){
-                return false;
-            }
+                  if(res.code==1){
+                  var flag = $("#flag").val();
+                if(flag == 2){
+                    layer.msg("{:L('合约建仓中...')}");
+                    setTimeout(function(){
+                        window.location.href = "{:U('Contract/index')}";
+                    },2000);
+                    return false;
+                }
             
             var ctime = $("#ctime").val();
             var ctzed = $("#ctzed").val();
@@ -910,12 +913,13 @@
                 layer.msg("{:L('缺少重要参数')}");return false;
             }
             
-            $("#flag").val(2);
+
             ctime = ctime / 60;
             $.post("{:U('Contract/creatorder')}",
             {'ctime':ctime,'ctzed':ctzed,'ccoinname':ccoinname,'ctzfx':ctzfx,'cykbl':cykbl},
             function(data){
                 if(data.code == 1){
+                    $("#flag").val(2);
                     layer.msg(data.msg);
                     setTimeout(function(){
                         window.location.reload();

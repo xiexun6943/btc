@@ -69,6 +69,7 @@
 			<table class="">
 				<thead>
 				<tr>
+					<th class="">ID</th>
 					<th class="">UID</th>
 					<th class="">会员账号</th>
 					<th class="">交易对</th>
@@ -87,6 +88,7 @@
                     <notempty name="list">
                     <volist name="list" id="vo">
 					<tr>
+						<td>{$vo.id}</td>
 						<td>{$vo.uid}</td>
 						<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 						<td>{$vo.symbol}</td>

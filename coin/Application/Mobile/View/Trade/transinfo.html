@@ -216,7 +216,7 @@
 		                        <span class="fzm fcc">USDT</span>
 		                    </div>
 		                </div>
-		                
+						<input type="hidden" id="flag" value="1" />
 		                <div class="inputbox">
 		                    <div class="inputbox_float">
 		                        <input type="text" id="buyusdt" oninput="buyusdtfc();" class="fcc xjinput" value="" placeholder="{:L('交易额')}"  autocomplete="off" step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,6})?/) ? this.value.match(/\d+(\.\d{0,6})?/)[0] : ''" />
@@ -346,7 +346,7 @@
 		                        <span class="fzmm fcc">{$symbol}</span>
 		                    </div>
 		                </div>
-		                
+						<input type="hidden" id="flagc" value="1" />
 		                
 		                <if condition="$uid egt 1">
 		                <div  onclick="bb_sellcoin(2);" style="width:100%;height:36px;line-height:36px;background:#f5465c;text-align:center;color:#fff;border-radius:5px;margin-top:20px;">
@@ -646,6 +646,10 @@
 <script type="text/javascript">
     function bb_sellcoin(type){
         var type = type;
+		var flagc = $("#flagc").val();
+		if(flagc == 2){
+			layer.msg('卖出中');return false;
+		}
         if(type <= 0){
             layer.msg("{:L('缺少重要参数')}");return false;
         }
@@ -671,6 +675,7 @@
         {'symbol':symbol,'mprice':mprice,'mnum':mnum,'musdt':musdt,'selltype':selltype,'type':type},
         function(data){
             if(data.code == 1){
+				$("#flagc").val(2);
                 layer.msg(data.info);
                 setTimeout(function(args){
                     window.location.reload();
@@ -684,6 +689,11 @@
 <script type="text/javascript">
     function bb_buycoin(type){
         var type = type;
+		var flag = $("#flag").val();
+		if(flag == 2){
+			layer.msg("{:L('买入中...')}");
+			return false;
+		}
         if(type <= 0){
             layer.msg("{:L('缺少重要参数')}");return false;
         }
@@ -705,6 +715,7 @@
         {'symbol':symbol,'mprice':mprice,'mnum':mnum,'musdt':musdt,'buytype':buytype,'type':type},
         function(data){
             if(data.code == 1){
+				$("#flag").val(2);
                 layer.msg(data.info);
                 setTimeout(function(args){
                     window.location.reload();

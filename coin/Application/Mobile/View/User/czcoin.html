@@ -154,8 +154,13 @@
                             '</div>'+
                             '</div>'+
                             '</a>';
-                    $("#coinbox").append(html);        
+                    $("#coinbox").append(html);
                 }
+            }else{ // 这里改下
+                // html=
+                    // '<span class="fzmmm fcc">'{:L('暂时没有认购项目')} +'</span>'
+                    // '<span class="fzmmm fcc">暂时没有认购项目</span>'
+                // $("#coinbox").text(html);
             }
         });
     }

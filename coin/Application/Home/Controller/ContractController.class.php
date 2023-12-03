@@ -338,8 +338,7 @@ class ContractController extends HomeController
             if($min_arr[$index] > $ctzed){
                 $this->ajaxReturn(['code'=>0,'msg'=> L('不能小于最低投资额度').$min_arr[$index]]);
             }
-	        
-	        
+
 	        $sxf = $setting['hy_sxf'];
 	        $tmoney = $ctzed + $ctzed * $sxf / 100;
 	        if($tmoney > $usdtnum){
@@ -371,7 +370,7 @@ class ContractController extends HomeController
 	            $puser['invit'] = 0;
 	        }
 	        $odata['invit'] = $puser['invit'];
-
+            M()->startTrans();
 	        $order = M("hyorder")->add($odata);
 	        //扣除USDT额度
 	        $decre = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$tmoney);
@@ -389,8 +388,10 @@ class ContractController extends HomeController
             //记录流水
             $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$ctzed);
 	        if($order && $decre && $billre && $bill){
+	            M()->commit();
 	            $this->ajaxReturn(['code'=>1,'msg' => L('建仓成功')]);
 	        }else{
+	            M()->rollback();
 	            $this->ajaxReturn(['code'=>0,'msg' => L('建仓失败')]);
 	        }
 	        

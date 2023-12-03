@@ -2521,6 +2521,7 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "认购币释放"=>"Subscription coin release",
     "服务协议"=>"Service Agreement",
     "我要购买"=>"I want to buy",
-    "已达到限购数量"=>"The purchase limit has been reached",
-
+    "今天开始您的加密货币之旅"=>"Start your cryptocurrency journey today",
+    "暂时没有数据"=>"No data yet",
+    "输入USDT数量"=>"Enter USDT amount",
 ];

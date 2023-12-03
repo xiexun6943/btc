@@ -348,6 +348,7 @@
 																<div class="inputbox_float" style="width:10%;text-align:center;line-height:36px;float:right;">
 																	<span class="f12 fcc">USDT</span>
 																</div>
+																<input type="hidden" id="flag" value="1" />
 															</div>
 
 															<if condition="$uid egt 1">
@@ -388,6 +389,7 @@
 																<div class="formbox_op_list jy-btn" id="sell_sjbtn">
 																	<span class="f12 fch" id="sell_sjspan">{:L('市价委托')}</span>
 																</div>
+																<input type="hidden" id="flagc" value="1" />
 															</div>
 
 															<!--限价委托单价框-->
@@ -788,6 +790,13 @@
     <script type="text/javascript">
         function bb_sellcoin(type){
             var type = type;
+			var flagc = $("#flagc").val();
+			if(flagc == 2){
+				setTimeout(function(){
+					window.location.href = "{:U('Contract/index')}";
+				},2000);
+				return false;
+			}
             if(type <= 0){
                 layer.msg("{:L('缺少重要参数')}");return false;
             }
@@ -813,6 +822,7 @@
             {'symbol':symbol,'mprice':mprice,'mnum':mnum,'musdt':musdt,'selltype':selltype,'type':type},
             function(data){
                 if(data.code == 1){
+					$("#flagc").val(2);
                     layer.msg(data.info);
                     setTimeout(function(args){
                         window.location.reload();
@@ -825,6 +835,13 @@
     </script>
     <script type="text/javascript">
         function bb_buycoin(type){
+			var flag = $("#flag").val();
+			if(flag == 2){
+				setTimeout(function(){
+					window.location.href = "{:U('Trade/index')}";
+				},2000);
+				return false;
+			}
             var type = type;
             if(type <= 0){
                 layer.msg("{:L('缺少重要参数')}");return false;
@@ -847,6 +864,7 @@
             {'symbol':symbol,'mprice':mprice,'mnum':mnum,'musdt':musdt,'buytype':buytype,'type':type},
             function(data){
                 if(data.code == 1){
+					$("#flag").val(2);
                     layer.msg(data.info);
                     setTimeout(function(args){
                         window.location.reload();

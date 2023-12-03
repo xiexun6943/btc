@@ -614,9 +614,9 @@
         if(cykbl <= 0 || cykbl ==''){
             layer.msg("{:L('缺少重要参数')}");return false;
         }
-        
+
         $("#flag").val(2);
-        
+
         $.post("{:U('Contract/ty_creatorder')}",
         {'ctime':ctime,'ctzed':ctzed,'ccoinname':ccoinname,'ctzfx':ctzfx,'cykbl':cykbl},
         function(data){
@@ -632,7 +632,7 @@
                 $("#confirm_box").hide();
                 $("#timer_box").show();
                 gettimer_time(data.id);
-                setInterval('gettimer_time('+ data.id +')',1000);
+                setInterval('gettimer_time('+ data.id +')',2000);
             }else{
                 layer.msg(data.msg);return false;
             }

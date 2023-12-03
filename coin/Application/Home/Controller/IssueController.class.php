@@ -133,7 +133,7 @@ class IssueController extends HomeController
         if($minfo[$buycoin] < $allmoney){
             $this->ajaxReturn(['code'=>0,'info'=>L('账户余额不足')]);
         }
-        
+        M()->startTrans();
         //组装认购记录
         $log['pid'] = $pid;
         $log['uid'] = $uid;
@@ -186,7 +186,7 @@ class IssueController extends HomeController
         //记录流水
         $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$allmoney);
         if($logre && $upre && $decre && $decbillre && $incre && $incbillre && $bill){
-            
+            M()->commit();
             $jlcoin = $issue['jlcoin'];
             if($uinfo['invit_1'] > 0){
                 $onebl = $issue['one_jl'];
@@ -207,6 +207,7 @@ class IssueController extends HomeController
             }
             $this->ajaxReturn(['code'=>0,'info'=>L('认购成功')]);
         }else{
+            M()->rollback();
             $this->ajaxReturn(['code'=>0,'info'=>L('认购失败')]);
         }
         

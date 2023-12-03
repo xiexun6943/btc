@@ -1370,9 +1370,11 @@ class UserController extends MobileController
         $map['name'] = array('like',"%$symbol%");
         $info = M("coin")->where($map)->field("name,title,id")->find();
         $uname = strtoupper($info['name']);
-        $info['uname'] = $uname;
-        //print_r($info);die;
-        $this->ajaxReturn(['code'=>1,'info'=>$info]);
+        if ($info) {
+            $info['uname'] = $uname;
+            $this->ajaxReturn(['code'=>1,'info'=>$info]);
+        }
+        $this->ajaxReturn(['code'=>0,'info'=>[]]);
     }
 
     //获取单个提币币种列表
@@ -1387,11 +1389,14 @@ class UserController extends MobileController
         if(!empty($minfo)){
             $cnum = $minfo[$coinname];
         }
-        $data['cname'] = strtoupper($info['name']);
-        $data['title'] = $info['title'];
-        $data['cnum'] = $cnum;
-        $data['id'] = $info['id'];
-        $this->ajaxReturn(['code'=>1,'info'=>$data]);
+        if ($info) {
+            $data['cname'] = strtoupper($info['name']);
+            $data['title'] = $info['title'];
+            $data['cnum'] = $cnum;
+            $data['id'] = $info['id'];
+            $this->ajaxReturn(['code'=>1,'info'=>$data]);
+        }
+        $this->ajaxReturn(['code'=>0,'info'=>[]]);
 
     }
     //币种充值页面

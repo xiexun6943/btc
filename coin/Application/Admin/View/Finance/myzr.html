@@ -47,6 +47,7 @@
 			<table class="">
 				<thead>
 				<tr>
+					<th class="">ID</th>
 					<th class="">UID</th>
 					<th class="">用户名</th>
 					<th class="">充值币种</th>
@@ -65,6 +66,7 @@
 				<notempty name="list">
 					<volist name="list" id="vo">
 						<tr>
+							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
 							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							<td><?php echo strtoupper($vo['coin']);?></td>

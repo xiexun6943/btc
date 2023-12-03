@@ -94,7 +94,7 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<td><span style="color: red">{$vo.username}</span> / <span style="color: green">{$vo.phone}</span></td>
+								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							    <td>
 									<a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>
 									<a class="btn btn-primary btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>

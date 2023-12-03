@@ -460,6 +460,7 @@ class ContractController extends MobileController
 	        }
 
 	        $odata['invit'] = $puser['invit'];
+	        M()->startTrans();
             // 写入合约订单
 	        $order = M("hyorder")->add($odata);
 
@@ -480,6 +481,7 @@ class ContractController extends MobileController
 	        $billre = M("bill")->add($bill);
 
 	        if($order && $decre && $billre  && $bill){
+	            M()->commit();
 	            $orderinfo = M("hyorder")->where(array('id'=>$order))->field("id,hyzd,coinname,buyprice,time,num")->find();
 	            $ajax['code'] = 1;
 	            $ajax['id'] = $orderinfo['id'];
@@ -497,6 +499,7 @@ class ContractController extends MobileController
 	            $ajax['hyzd'] = $orderinfo['hyzd'];
 	            $this->ajaxReturn($ajax);
 	        }else{
+	            M()->rollback();
 	            $this->ajaxReturn(['code'=>0,'msg' => L('建仓失败')]);
 	        }
 	        

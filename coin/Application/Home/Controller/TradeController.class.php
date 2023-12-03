@@ -190,13 +190,16 @@ class TradeController extends HomeController
 		    $xjdata['coin'] = $coin;
 		    $xjdata['status'] = 1;
 		    $xjdata['sxfbl'] = $sxf;
+		    M()->startTrans();
 	        $addre = M("bborder")->add($xjdata);
 	        //把资产转入冻结字段
 	        $decre = M("user_coin")->where(array('userid'=>$uid))->setDec($lowercname,$mnum);
 		    $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($lowercname."d",$mnum);
 	        if($addre && $decre && $incre){
+	            M()->commit();
 	            $this->ajaxReturn(['code'=>1,'info'=> L('订单委托成功')]);
 	        }else{
+	            M()->rollback();
 	            $this->ajaxReturn(['code'=>0,'info'=> L('订单委托失败')]);
 	        }
 	    
@@ -243,6 +246,7 @@ class TradeController extends HomeController
 		    $sjdata['fee'] = $sxfnum;
 		    $sjdata['sxfbl'] = $sxf;
 		    $sjdata['status'] = 2;
+            M()->startTrans();
             $addre = M("bborder")->add($sjdata);
 	        
 	        //扣除卖出额度并写入日志
@@ -272,8 +276,10 @@ class TradeController extends HomeController
 	        $ubillre = M("bill")->add($ubill);
 	        
 	        if($addre && $decre && $cbillre && $incre && $ubillre){
+	            M()->commit();
 	            $this->ajaxReturn(['code'=>1,"info"=>L('出售成功')]);
 	        }else{
+	            M()->rollback();
 	            $this->ajaxReturn(['code'=>0,"info"=>L('出售失败')]);
 	        }
 	    }
@@ -355,6 +361,7 @@ class TradeController extends HomeController
 		    $xjdata['status'] = 1;
 		    $xjdata['sxfbl'] = $sxf;
 		    //添加限价委托记录
+            M()->startTrans();
 		    $addre = M("bborder")->add($xjdata);
 		    //把USDT转入冻结字段 
 		    $decre = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$musdt);
@@ -362,8 +369,12 @@ class TradeController extends HomeController
             //记录流水
             $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$musdt);
 		    if($addre && $decre && $incre && $bill){
+                M()->commit();
 		        $this->ajaxReturn(['code'=>1,'info'=> L('订单委托成功')]);
-		    }
+		    }else{
+                M()->rollback();
+                $this->ajaxReturn(['code'=>0,'info'=> L('订单委托失败')]);
+            }
   
 		}elseif($buytype == 2){//市价
 		    if($musdt <= 0){
@@ -408,7 +419,7 @@ class TradeController extends HomeController
 		    $sjdata['status'] = 2;
 
 		    $lowercoin = strtolower($coin);
-		    
+            M()->startTrans();
 		    //生成交易记录
 		    $addre = M("bborder")->add($sjdata);
 		    //扣除USDT额度并写日志
@@ -438,8 +449,10 @@ class TradeController extends HomeController
             //记录流水
             $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$musdt);
 		    if($addre && $decre && $ubillre && $incre && $cbillre && $bill){
+		        M()->commit();
 		        $this->ajaxReturn(['code'=>1,'info'=>L('交易成功')]);
 		    }else{
+		        M()->rollback();
 		        $this->ajaxReturn(['code'=>0,'info'=>L('交易失败')]);
 		    }
 		}
