@@ -912,9 +912,7 @@
             if(cykbl <= 0 || cykbl ==''){
                 layer.msg("{:L('缺少重要参数')}");return false;
             }
-            
-
-            ctime = ctime / 60;
+                      
             $.post("{:U('Contract/creatorder')}",
             {'ctime':ctime,'ctzed':ctzed,'ccoinname':ccoinname,'ctzfx':ctzfx,'cykbl':cykbl},
             function(data){

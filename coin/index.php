@@ -85,7 +85,7 @@ if(wherecome()) {
 
     define('WHERECOME','Mobile');
 } else {
-    //define('WHERECOME','Mobile');
+//    define('WHERECOME','Mobile');
     define('WHERECOME','Home');
 }
 

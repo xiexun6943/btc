@@ -2525,4 +2525,7 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "今天开始您的加密货币之旅"=>"Start your cryptocurrency journey today",
     "暂时没有数据"=>"No data yet",
     "输入USDT数量"=>"Enter USDT amount",
+    "买入中"=>"Buying",
+    "卖出中"=>"Selling",
+    "请选择到期时间"=>"Please select expiry time",
 ];

@@ -466,8 +466,6 @@ class ContractController extends MobileController
 
 	        //扣除USDT额度
 	        $decre = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$tmoney);
-            //记录流水
-            $bill = M("user")->where(array('id'=>$uid))->setInc('bill',$tmoney);
 	        //创建财务日志
 	        $bill['uid'] = $uid;
 	        $bill['username'] = $uinfo['username'];
@@ -479,8 +477,9 @@ class ContractController extends MobileController
 	        $bill['st'] = 2;
 	        $bill['remark'] = L('购买').$ccoinname.L('秒合约');
 	        $billre = M("bill")->add($bill);
-
-	        if($order && $decre && $billre  && $bill){
+            //记录流水
+            $bill_total = M("user")->where(array('id'=>$uid))->setInc('bill',$tmoney);
+	        if($order && $decre && $billre  && $bill_total){
 	            M()->commit();
 	            $orderinfo = M("hyorder")->where(array('id'=>$order))->field("id,hyzd,coinname,buyprice,time,num")->find();
 	            $ajax['code'] = 1;
@@ -588,7 +587,7 @@ class ContractController extends MobileController
         $userInfo= M("user_coin")->field('userid,usdt')->where(array('userid'=>$uid))->find();
         $hy_time=explode(',',$hysetting['hy_time']);
         if (!in_array($time,$hy_time)) {
-            return $this->ajaxReturn(['code'=>0,'msg'=>L('参数无效')]) ;
+            return $this->ajaxReturn(['code'=>0,'msg'=>L('请选择到期时间')]) ;
         }
         $room_min=explode(',',$hysetting['room_min']);
         $data=array_combine($hy_time,$room_min);
