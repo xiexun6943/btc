@@ -1199,6 +1199,7 @@ class UserController extends MobileController
             }
 
         }
+
         $this->assign("list",$data);
         $this->assign("bklist",$bddata);
         $this->display();
@@ -1366,37 +1367,68 @@ class UserController extends MobileController
 
     public function getsymbol(){
         $symbol = trim(I('post.symbol'));
+
         $symbol = strtolower($symbol);
-        $map['name'] = array('like',"%$symbol%");
-        $info = M("coin")->where($map)->field("name,title,id")->find();
-        $uname = strtoupper($info['name']);
-        if ($info) {
-            $info['uname'] = $uname;
-            $this->ajaxReturn(['code'=>1,'info'=>$info]);
+        if ($symbol) {
+            $map['name'] = array('like',"%$symbol%");
+            $info = M("coin")->where($map)->field("name,title,id")->find();
+            $uname = strtoupper($info['name']);
+            if ($info) {
+                $info['uname'] = $uname;
+                $this->ajaxReturn(['code'=>1,'info'=>$info]);
+            }
+            $this->ajaxReturn(['code'=>0,'info'=>[]]);
+        }else{
+            $list = M("coin")
+                ->where(array('status'=>1,'type'=>['in',[1,4]]))
+                ->order('sort asc')
+                ->field("name,title,id,czstatus")
+                ->select();
+            $this->ajaxReturn(['code'=>1,'info'=>$list]);
         }
-        $this->ajaxReturn(['code'=>0,'info'=>[]]);
+
     }
 
     //获取单个提币币种列表
     public function getcoinnum(){
         $symbol = trim(I('post.symbol'));
-        $symbol = strtolower($symbol);
-        $map['name'] = array('like',"%$symbol%");
-        $info = M("coin")->where($map)->field("name,title,id")->find();
-        $coinname = $info['name'];
-        $uid = userid();
-        $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
-        if(!empty($minfo)){
-            $cnum = $minfo[$coinname];
-        }
-        if ($info) {
-            $data['cname'] = strtoupper($info['name']);
-            $data['title'] = $info['title'];
-            $data['cnum'] = $cnum;
-            $data['id'] = $info['id'];
+        if ($symbol) {
+
+            $symbol = strtolower($symbol);
+            $map['name'] = array('like',"%$symbol%");
+            $info = M("coin")->where($map)->field("name,title,id")->find();
+            $coinname = $info['name'];
+            $uid = userid();
+            $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+            if(!empty($minfo)){
+                $cnum = $minfo[$coinname];
+            }
+            if ($info) {
+                $data['cname'] = strtoupper($info['name']);
+                $data['title'] = $info['title'];
+                $data['cnum'] = $cnum;
+                $data['id'] = $info['id'];
+                $this->ajaxReturn(['code'=>1,'info'=>$data]);
+            }
+            $this->ajaxReturn(['code'=>0,'info'=>[]]);
+        }else {
+            $uid = userid();
+            $clist = M("coin")->where(array('txstatus' => 1, 'type' => ['in',[1,4]]))->field("id,name,title")->order('sort asc')->select();
+            $minfo = M("user_coin")->where(array('userid' => $uid))->find();
+
+            if (!empty($clist)) {
+                foreach ($clist as $k => $v) {
+                    $coinname = $v['name'];
+                    $coin_num = $minfo[$coinname];
+                    $data[$k]['cname'] = strtoupper($coinname);
+                    $data[$k]['title'] = $v['title'];
+                    $data[$k]['id'] = $v['id'];
+                    $data[$k]['cnum'] = $coin_num;
+                }
+            }
             $this->ajaxReturn(['code'=>1,'info'=>$data]);
         }
-        $this->ajaxReturn(['code'=>0,'info'=>[]]);
+
 
     }
     //币种充值页面
@@ -1509,9 +1541,6 @@ class UserController extends MobileController
             $this->redirect('User/czcoin');
         }
 
-
-
-// dump($info);exit;
 
         //查询最上级是否代理
         $user = M("user")->where(['id'=>$uid])->find();
