@@ -1,6 +1,13 @@
 <?php
 
 return [
+    
+    '合约秒交易'=>'Contract seconds trading',
+    '合約秒交易'=>'Contract seconds trading',
+    '秒合約已平倉,請及時加倉'=>'The second contract has been closed, please add your position in time',
+    '添加提现地址'=>'Add withdrawal address',
+    '请输入提币地址'=>'Please enter the withdrawal address',
+    '请输入手机号码'=>'Please enter the phone number',
     '手机验证码错误'=>'Mobile phone verification code error',
     '服务条款'=>'Terms of Service',
     
@@ -2525,7 +2532,4 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "今天开始您的加密货币之旅"=>"Start your cryptocurrency journey today",
     "暂时没有数据"=>"No data yet",
     "输入USDT数量"=>"Enter USDT amount",
-    "买入中"=>"Buying",
-    "卖出中"=>"Selling",
-    "请选择到期时间"=>"Please select expiry time",
 ];
