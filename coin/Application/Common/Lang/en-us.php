@@ -1648,7 +1648,7 @@ or (d) any damages caused by another users acts, omissions or breach of these Te
     '发生错误'=>'error',
     '规则说明'=>'Rule description',
     '空投福利'=>'Airdrop benefits',
-    '空降'=>'Airborne',
+    '空投'=>'Airborne',
     "BITVENTURE（bitventure.online）是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、<br>以太币等数字资产的币币和衍生品交易服务。"=>"BITVENTURE (bitventure.online) is one of the world's famous digital asset trading platforms. It mainly provides currency and derivatives trading services for digital assets such as Bitcoin, Litecoin, and Ethereum to global users.",
     "愿景"=>"Vision",
     "在追求全体同事物质和精神幸福的同时，推动区块链和数字资产走进全球亿万用户的生活。"=>"While pursuing the material and spiritual happiness of all colleagues, we will promote blockchain and digital assets into the lives of hundreds of millions of users around the world.",
