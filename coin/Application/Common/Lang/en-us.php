@@ -1,6 +1,22 @@
 <?php
 
 return [
+    '操作成功'=>'Operation successful',
+    '幣幣交易限價購買委託訂單購買成功'=>'Coin-to-coin trading limit purchase order was purchased successfully',
+    '幣幣交易限價委託交易'=>'Coin-to-coin transaction limit order transaction',
+    '请输入提币地址'=>'Please enter the withdrawal address',
+    '添加提现地址'=>'Add withdrawal address',
+    '期货'=>'Futures',
+    'ethd期货'=>'ethd futures',
+    '新币合约'=>'New Coin Contract',
+    'btc新币合约'=>'btc new currency contract',
+    '普通充币'=>'Normal deposit',
+    'BTC余额不足'=>'Insufficient BTC balance',
+    '请选择到期时间'=>'Please select expiration time',
+    
+    
+    
+    
     
     '合约秒交易'=>'Contract seconds trading',
     '合約秒交易'=>'Contract seconds trading',
