@@ -32,12 +32,17 @@ class IssueController extends MobileController
 	//认购项目详情
 	public function details($id=NULL){
         $info = M("issue")->where(array('id'=>$id))->find();
+
+            $info['name']=L($info['name']);
+            $info['content']=L($info['content']);
+  
 		if(empty($info)){
 		    $this->redirect('Issue/index');
 		}
 		$uid = userid();
 		$buycoin = trim($info['buycoin']);
 		$minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+
 		$this->assign("uid",$uid);
 		$money = $minfo[$buycoin];
 		if($money <= 0){

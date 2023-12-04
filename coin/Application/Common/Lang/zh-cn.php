@@ -672,9 +672,10 @@ return [
 	'请输入上诉内容'=>'请输入上诉内容',
 	'转账截图'=>'转账截图',
     '记住账号'=>'记住账号',
-    '个人'=>'个人'
+    '个人'=>'个人',
 	
-	
+    '<span><span class="html-tag" style="font-family:monospace;font-size:medium;"><span style="font-family:monospace;font-size:medium;"><span>TCC</span><span>&nbsp;新币合约是由华尔街华人风控联合发起，限量发行1亿个，2023年9月18日向全球起发起第一期认购，第一期发行量20000000，为期15天，认购币冻结90天自动释放，释放后币币市场开放TCC/USDT交易对，合约市场开放TCC/USDT交易对进行交易，价格预计是认购单价的10倍.</span></span></span></span>'=>" <span>TCC</span><span>&nbsp;新币合约是由华尔街华人风控联合发起，限量发行1亿个，2023年9月18日向全球发起第一期认购，第一期发行量20000000 ，为期15天，认购币冻结90天自动释放，释放后币币市场开放TCC/USDT交易对，合约市场开放TCC/USDT交易对进行交易，价格预计是认购单价的10倍.</span>",
+
 	
 	
 	

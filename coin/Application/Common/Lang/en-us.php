@@ -2532,4 +2532,6 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "今天开始您的加密货币之旅"=>"Start your cryptocurrency journey today",
     "暂时没有数据"=>"No data yet",
     "输入USDT数量"=>"Enter USDT amount",
+    '<span><span class="html-tag" style="font-family:monospace;font-size:medium;"><span style="font-family:monospace;font-size:medium;"><span>TCC</span><span>&nbsp;新币合约是由华尔街华人风控联合发起，限量发行1亿个，2023年9月18日向全球起发起第一期认购，第一期发行量20000000，为期15天，认购币冻结90天自动释放，释放后币币市场开放TCC/USDT交易对，合约市场开放TCC/USDT交易对进行交易，价格预计是认购单价的10倍.</span></span></span></span>'=>"<span>TCC</span><span>&nbsp; The new currency contract was jointly initiated by Wall Street Chinese Risk Control, with a limited issuance of 100 million. The first phase of subscription will be launched globally on September 18, 2023. The first phase of issuance 20,000,000, for a period of 15 days, and the subscription coins will be automatically released after being frozen for 90 days. After the release, the currency market will open the TCC/USDT trading pair, and the contract market will open the TCC/USDT trading pair for trading. The price is expected to be 10 times the subscription price.</span>",
+
 ];

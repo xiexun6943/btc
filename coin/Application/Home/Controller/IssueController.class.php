@@ -40,8 +40,12 @@ class IssueController extends HomeController
 
     //认购首页
 	public function index(){
-	    
 	    $list = M("issue")->where(array('status'=>1))->order("id desc")->select();
+        foreach ($list as$k =>$v) {
+            $list[$k]['name']=L($v['name']);
+            $list[$k]['content']=L($v['content']);
+        }
+
 	    $this->assign('list',$list);
 	    
 		$this->display();
