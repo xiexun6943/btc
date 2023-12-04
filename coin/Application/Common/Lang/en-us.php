@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '手机验证码错误'=>'Mobile phone verification code error',
     '服务条款'=>'Terms of Service',
     
     '最近更新时间：2023年11月1日'=>'Last updated: November 1, 2023',

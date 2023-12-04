@@ -87,6 +87,12 @@
 					</tr>
 					</thead>
 					<tbody>
+					    <style>
+					        .btn-xs, .btn-group-xs > .btn{
+					            display: block;
+					            margin-bottom: 5px;
+					        }
+					    </style>
 					<notempty name="list">
 						<volist name="list" id="vo">
 							<tr>
@@ -118,8 +124,8 @@
 									<span>IP：{$vo.addip}</span><br />
 									<span>时间：<?php echo date("Y-m-d H:i:s",$vo['addtime']);?></span>
 								</td>
-								<td><span>{$vo.addr}</span></td>
-								<td>
+								<td style="width:200px;white-space:unset"><span>{$vo.addr}</span></td>
+								<td style="width:120px;white-space:unset">
 									<neq name="vo.invit_1"><a href="{:U('User/index?name='.$vo['invit_1'].'&field=username')}">1代：{$vo['invit_1']}</a><br></neq>
 									<neq name="vo.invit_2"><a href="{:U('User/index?name='.$vo['invit_2'].'&field=username')}">2代：{$vo['invit_2']}</a><br></neq>
 									<neq name="vo.invit_3"><a href="{:U('User/index?name='.$vo['invit_3'].'&field=username')}">3代：{$vo['invit_3']}</a><br></neq>
