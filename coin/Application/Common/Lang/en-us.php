@@ -1647,8 +1647,8 @@ or (d) any damages caused by another users acts, omissions or breach of these Te
     '恭喜获得'=>'getting',
     '发生错误'=>'error',
     '规则说明'=>'Rule description',
-    '空降福利'=>'Airborne welfare',
-    '空降'=>'Airborne',
+    '空投福利'=>'Airdrop benefits',
+    '空投'=>'Airborne',
     "BITVENTURE（bitventure.online）是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、<br>以太币等数字资产的币币和衍生品交易服务。"=>"BITVENTURE (bitventure.online) is one of the world's famous digital asset trading platforms. It mainly provides currency and derivatives trading services for digital assets such as Bitcoin, Litecoin, and Ethereum to global users.",
     "愿景"=>"Vision",
     "在追求全体同事物质和精神幸福的同时，推动区块链和数字资产走进全球亿万用户的生活。"=>"While pursuing the material and spiritual happiness of all colleagues, we will promote blockchain and digital assets into the lives of hundreds of millions of users around the world.",
@@ -2549,5 +2549,5 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "暂时没有数据"=>"No data yet",
     "输入USDT数量"=>"Enter USDT amount",
     '<span><span class="html-tag" style="font-family:monospace;font-size:medium;"><span style="font-family:monospace;font-size:medium;"><span>TCC</span><span>&nbsp;新币合约是由华尔街华人风控联合发起，限量发行1亿个，2023年9月18日向全球起发起第一期认购，第一期发行量20000000，为期15天，认购币冻结90天自动释放，释放后币币市场开放TCC/USDT交易对，合约市场开放TCC/USDT交易对进行交易，价格预计是认购单价的10倍.</span></span></span></span>'=>"<span>TCC</span><span>&nbsp; The new currency contract was jointly initiated by Wall Street Chinese Risk Control, with a limited issuance of 100 million. The first phase of subscription will be launched globally on September 18, 2023. The first phase of issuance 20,000,000, for a period of 15 days, and the subscription coins will be automatically released after being frozen for 90 days. After the release, the currency market will open the TCC/USDT trading pair, and the contract market will open the TCC/USDT trading pair for trading. The price is expected to be 10 times the subscription price.</span>",
-
+    "您目前没有空降机会"=>"You currently have no airborne opportunities",
 ];

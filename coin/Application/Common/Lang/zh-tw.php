@@ -1622,8 +1622,8 @@ Aux Cayes FinTech Co. Ltd.， 一家註冊在塞席爾的公司（「Aux Cayes�
     '恭喜获得'=>'恭喜獲得',
     '发生错误'=>'發生錯誤',
     '规则说明'=>'規則說明',
-    '空降福利'=>'空降福利',
-    '空降'=>'空降',
+    '空投福利'=>'空投福利',
+    '空投'=>'空投',
 
     "BITVENTURE（bitventure.online）是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、<br>以太币等数字资产的币币和衍生品交易服务。"=>"BITVENTURE（bitventure.online）是全球著名的數位資產交易平台之一，主要為全球用戶提供比特幣、萊特幣、<br>以太幣等數位資產的幣幣和衍生性商品交易服務。",
     "愿景"=>"願景",
@@ -2379,7 +2379,7 @@ Aux Cayes FinTech Co. Ltd.， 一家註冊在塞席爾的公司（「Aux Cayes�
 "请选择到期时间"=>"請選擇到期時間",
     '<span><span class="html-tag" style="font-family:monospace;font-size:medium;"><span style="font-family:monospace;font-size:medium;"><span>TCC</span><span>&nbsp;新币合约是由华尔街华人风控联合发起，限量发行1亿个，2023年9月18日向全球起发起第一期认购，第一期发行量20000000，为期15天，认购币冻结90天自动释放，释放后币币市场开放TCC/USDT交易对，合约市场开放TCC/USDT交易对进行交易，价格预计是认购单价的10倍.</span></span></span></span>'=>"<span>TCC</span><span>&nbsp;新幣合約是由華爾街華人風控聯合發起，限量發行1億個，2023年9月18日向全球發起第一期認購，第一期發行量20000000，為期15天，認購幣凍結90天自動釋放，釋放後幣幣市場開放TCC/USDT交易對，合約市場開放TCC/USDT交易對進行交易，價格預計是認購單價的10倍.</span>",
 
-
+"您目前没有空降机会"=>"您目前没有空降机会",
 
 
 ];
