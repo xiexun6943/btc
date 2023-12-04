@@ -359,8 +359,8 @@ class ContractController extends HomeController
 	        $odata['status'] = 1;
 	        $odata['is_win'] = 0;
 	        $odata['buytime'] = date("Y-m-d H:i:s",time());
-	        $odata['selltime'] = date("Y-m-d H:i:s",(time()+$ctime*60));
-	        $odata['intselltime'] = time() + $ctime*60;
+	        $odata['selltime'] = date("Y-m-d H:i:s",(time()+$ctime));
+	        $odata['intselltime'] = time() + $ctime;
 	        $odata['buyprice'] = $close;
 	        $odata['sellprice'] = '';
 	        $odata['ploss'] = 0;
