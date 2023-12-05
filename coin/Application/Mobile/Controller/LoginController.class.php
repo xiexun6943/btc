@@ -371,7 +371,7 @@ class LoginController extends MobileController
 		$mail->addAddress($toemail,'');
 		$mail->addReplyTo($smsemail,"Reply");
 		$mail->Subject = L('Verification Code');
-        $mail->Body = '[bitventure]'.L("您的验证码是").$desc_content.','.L("5分钟内有效");
+        $mail->Body = '[bitventure] '.L("验证码5分钟内有效,").L("您的验证码是:").$desc_content;;
 		if(!$mail->send()){  
 			return 0;
 		}else{
@@ -503,7 +503,7 @@ class LoginController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('该手机号码已经注册过')]);
             }
             $code = rand(10000,99999);
-            $desc_content='[bitventure]'.L("您的验证码是").$code.','.L("5分钟内有效");
+            $desc_content='[bitventure] '.L("验证码5分钟内有效,").L("您的验证码是:").$code;
             $phone=$area_code.$phone;
 
             $result = $this->smsSend($desc_content,$phone);
