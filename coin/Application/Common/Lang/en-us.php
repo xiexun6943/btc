@@ -2524,7 +2524,7 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     '银行卡充值--提款'=>'Bank card recharge--withdrawal',
     '小于最小金额的充值将不会上账且无法退回。'=>'Deposits below the minimum amount will not be credited and cannot be refunded.',
     "手机登录" => "Phone login",
-    "您的验证码是" => "Your verification code is",
+    "您的验证码是:" => "Your verification code is",
     "验证码5分钟内有效," => "The verification code is valid within 5 minutes.",
 
     '用户失效,请登录！'=>"The user is invalid, please log in!",
