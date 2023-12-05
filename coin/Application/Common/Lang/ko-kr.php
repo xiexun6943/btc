@@ -2428,7 +2428,9 @@ Samsung, BlackRock, Morgan Stanley 및 Alphabet과 같은 선도적인 글로벌
     '<span><span class="html-tag" style="font-family:monospace;font-size:medium;"><span style="font-family:monospace;font-size:medium;"><span>TCC</span><span>&nbsp;新币合约是由华尔街华人风控联合发起，限量发行1亿个，2023年9月18日向全球起发起第一期认购，第一期发行量20000000，为期15天，认购币冻结90天自动释放，释放后币币市场开放TCC/USDT交易对，合约市场开放TCC/USDT交易对进行交易，价格预计是认购单价的10倍.</span></span></span></span>'=>" <span>TCC</span><span>&nbsp; 새로운 통화 계약은 Wall Street Chinese Risk Control과 공동으로 시작되었으며 발행량은 1억 개로 제한되었습니다. 1차 구독 단계는 2023년 9월 18일 전 세계적으로 출시됩니다. 1차 발행 20,000,000개는 15일 동안 진행되며 청약 코인은 90일 동안 동결 후 자동으로 출시됩니다. 출시 후 통화 시장에 TCC/USDT 거래 페어가 오픈되고 계약 시장이 오픈됩니다. 거래를 위해 TCC/USDT 거래쌍을 개설하세요. 가격은 청약 가격의 10배가 될 것으로 예상됩니다.</span>",
     "您目前没有空降机会"=>"현재 공중에서 기회를 얻을 수 없습니다",
     "恭喜获得"=>"획득 축하드립니다",
-
+    "该手机号码已经注册过"=>"この携帯番号はすでに登録されています",
+    "您的验证码是"=>"귀하의 인증 코드는 다음과 같습니다.",
+    "5分钟内有效"=>"5분 이내 유효",
 
 
 ];

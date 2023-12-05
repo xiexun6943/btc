@@ -320,10 +320,10 @@ class LoginController extends HomeController
 	//邮件发送验证码
 	public function emailsend($desc_content, $toemail){	
 	    
-	    $config = $clist = M("config")->where(array('id'=>1))->field("smsemail,emailcode,smstemple")->find();
+//	    $config = $clist = M("config")->where(array('id'=>1))->field("smsemail,emailcode,smstemple")->find();
 	    $smsemail = "pnscx.s@gmail.com";
-	    $emailcode = trim($config['emailcode']);
-	    $smstemple = trim($config['smstemple']);
+//	    $emailcode = trim($config['emailcode']);
+//	    $smstemple = trim($config['smstemple']);
 		Vendor('PHPMailer.src.PHPMailer');
 		Vendor('PHPMailer.src.SMTP');
 		$mail = new \PHPMailer();
@@ -341,7 +341,7 @@ class LoginController extends HomeController
 		$mail->addAddress($toemail,'');
 		$mail->addReplyTo($smsemail,"Reply");
 		$mail->Subject = L('Verification Code');
-		$mail->Body = $smstemple.":".$desc_content;	
+		$mail->Body = '[bitventure]'.L("您的验证码是").$desc_content.','.L("5分钟内有效");
 		if(!$mail->send()){  
 			return 0;
 		}else{
