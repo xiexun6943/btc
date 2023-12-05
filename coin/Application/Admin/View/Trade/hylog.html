@@ -60,9 +60,9 @@
 					<th class="">UID</th>
 					<th class="">会员账号</th>
 					<th class="">时长</th>
-					<th class="">交易对</th>
-					<th class="">方向</th>
-					<th class="">状态</th>
+					<th class="">交易信息</th>
+<!--					<th class="">方向</th>-->
+<!--					<th class="">状态</th>-->
 					<th class="">委托额度</th>
 					<th class="">建仓单价</th>
 					<th class="">平仓单价</th>
@@ -79,22 +79,24 @@
 						<td>{$vo.uid}</td>
 						<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 						<td>{$vo.time}</td>
-						<td>{$vo.coinname}</td>
+
 						<td>
-						    <if condition="$vo.hyzd eq 1">
-						        <span style="color:#0ecb81;">买涨</span>
-						    <elseif condition="$vo.hyzd eq 2" />
-						        <span style="color:#f5465c;">买跌</span>
-						    </if>
-						</td>
-						<td>
-						    <if condition="$vo.status eq 1">
-						        <span style="color:#707A8A;">待结算</span>
-						    <elseif condition="$vo.status eq 2" />
-						        <span style="color:#0ecb81;">已完成</span>
-						    <elseif condition="$vo.status eq 3" />
-						        <span style="color:#f5465c;">无效</span>
-						    </if>
+							交易对:  <span style="color:red;">{$vo.coinname}</span> <br>
+							方向:
+							<if condition="$vo.hyzd eq 1">
+								<span style="color:#0ecb81;">买涨</span>
+								<elseif condition="$vo.hyzd eq 2" />
+								<span style="color:#f5465c;">买跌</span>
+							</if>
+							<br>
+							状态:
+							<if condition="$vo.status eq 1">
+								<span style="color:#707A8A;">待结算</span>
+								<elseif condition="$vo.status eq 2" />
+								<span style="color:#0ecb81;">已完成</span>
+								<elseif condition="$vo.status eq 3" />
+								<span style="color:#f5465c;">无效</span>
+							</if>
 						</td>
 						<td>{$vo.num}</td>
 						<td>{$vo.buyprice}</td>

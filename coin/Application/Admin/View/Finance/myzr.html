@@ -51,11 +51,11 @@
 					<th class="">UID</th>
 					<th class="">用户名</th>
 					<th width="">操作</th>
-					<th width="">充值时间/处理时间</th>
-					<th width="">充值数量(U)/实际到账(U)</th>
+					<th width="">充值数量/实际到账(U)</th>
 					<th width="">银行卡充值信息</th>
 					<th width="">充值类型/币种/状态</th>
 					<th width="">转账凭证</th>
+					<th width="">充值时间/处理时间</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -70,16 +70,17 @@
                                     <input type="button" class="ajax-get btn btn-primary btn-xs" value="确认" onclick="Upzr('{$vo['id']}');"/>
                                     <input type="button" class="ajax-get btn btn-primary btn-xs" value="驳回" onclick="Upbhzr('{$vo['id']}');"/>
                                 </eq>
+								<br>
                                 <eq name="vo.status" value="2"><span style="color:blue;">已处理</span></eq>
                                 <eq name="vo.status" value="3"><span style="color:blue;">已处理</span></eq>
+								<br>
                                 <?php if(session('admin_role') == 1){  ?>
                                 <input type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
                                 <?php  }  ?>
                             </td>
-							<td>充值时间:{$vo.addtime}<br>
-							处理时间:{$vo.updatetime}</td>
-							<td>充值数量(U):{$vo['num']}<br>
-							实际到账(U):{$vo['real_num']}</td>
+
+							<td>充值(U):{$vo['num']}<br>
+							到账(U):{$vo['real_num']}</td>
 							
 						    <td>{$vo['remark']}</td>
 							<?php if( $vo['type'] == 1){ ?>
@@ -117,6 +118,8 @@
 							<?php }else{ ?>
 							      <td>后台人工充值</td>
 							<?php  }?>
+							<td>充值时间:<br>{$vo.addtime}<br>
+								处理时间:<br>{$vo.updatetime}</td>
 						</tr>
 					</volist>
 					<else/>

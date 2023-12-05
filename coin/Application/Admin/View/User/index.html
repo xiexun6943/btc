@@ -75,14 +75,14 @@
 						<th class="">会员账号 / 手机号</th>
 						<th class="">操作</th>
 						<th class="">登陆</th>
-						<th class="">流水</th>
-						<th class="">彩金流水</th>
+						<th class="">流水/彩金流水</th>
+<!--						<th class="">彩金流水</th>-->
 <!--						<th class="">认证</th>-->
 						<th class="">状态</th>
 						<th class="">邀请码</th>
 						<th class="">推荐人</th>
 						<th class="">注册IP/时间</th>
-						<th class="">地址</th>
+<!--						<th class="">地址</th>-->
 
 						
 					</tr>
@@ -104,12 +104,12 @@
 								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							    <td>
 									<a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>
-									<a class="btn btn-primary btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>
-										<if condition="$vo.gd_state == 0">
-											<input type="button" class="ajax-get btn btn-warning btn-xs" value="开启跟单" onclick="gdswitch('{$vo['id']}',1);"/>
-										<else/>
-											<input type="button" class="ajax-get btn btn-success btn-xs" value="关闭跟单" onclick="gdswitch('{$vo['id']}',0);"/>
-										</if>
+									<a class="btn btn-warning btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>
+<!--										<if condition="$vo.gd_state == 0">-->
+<!--											<input type="button" class="ajax-get btn btn-warning btn-xs" value="开启跟单" onclick="gdswitch('{$vo['id']}',1);"/>-->
+<!--										<else/>-->
+<!--											<input type="button" class="ajax-get btn btn-success btn-xs" value="关闭跟单" onclick="gdswitch('{$vo['id']}',0);"/>-->
+<!--										</if>-->
 									<eq name="vo.rzstatus" value="1">
 										<a class="btn btn-primary btn-xs" href="{:U('User/authrz')}?id={$vo.id}">审核认证</a>
 									</eq>
@@ -118,9 +118,14 @@
 										<input type="button" class="ajax-get btn btn-danger btn-xs" value="设为代理" onclick="setagent('{$vo['id']}');"/>
 									</eq>
 								</td>
-								<td><span>{$vo.logins}</span>次</td>
-								<td><span>{$vo.bill}</span></td>
-								<td><span>{$vo.st_bill}</span></td>
+								<td>
+									<span>{$vo.logins}</span>次
+								</td>
+								<td>
+									流水: <span>{$vo.bill}</span>
+									<br />
+									彩金流水: <span>{$vo.st_bill}</span>
+								</td>
 <!--								<td>-->
 <!--									<eq name="vo.rzstatus" value="0">未提交</eq>-->
 <!--									<eq name="vo.rzstatus" value="1"><span style="color:blue;">待审核</span></eq>-->
@@ -151,11 +156,13 @@
 									<neq name="vo.invit_2"><a href="{:U('User/index?name='.$vo['invit_2'].'&field=username')}">2代：{$vo['invit_2']}</a><br></neq>
 									<neq name="vo.invit_3"><a href="{:U('User/index?name='.$vo['invit_3'].'&field=username')}">3代：{$vo['invit_3']}</a><br></neq>
 								</td>
-								<td>
+								<td style="word-break:break-all;width: 30px">
 									<span>IP：{$vo.addip}</span><br />
 									<span>时间：<?php echo date("Y-m-d H:i:s",$vo['addtime']);?></span>
+									<br />
+<!--									<span>{$vo.addr}</span>-->
 								</td>
-								<td style="width:200px;white-space:unset"><span>{$vo.addr}</span></td>
+
 
 
 

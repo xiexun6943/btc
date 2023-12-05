@@ -52,14 +52,13 @@
                     <th class="">UID</th>
                     <th class="">用户名</th>
                     <th width="">操作</th>
-                    <th class="">币种名称</th>
+                    <th class="">币名称</th>
                     <th width="">提币地址</th>
-                    <th width="">提币数量(U)</th>
-                    <th class="">提现手续费(U)</th>
-                    <th class="">实际到账(U)</th>
-                    <th width="">申请时间</th>
-                    <th width="">审核时间</th>
-                    <th width="">状态</th>
+                    <th width="">提币信息(U)</th>
+<!--                    <th class="">提现手续费(U)</th>-->
+<!--                    <th class="">实际到账(U)</th>-->
+                    <th width="">申请/审核时间</th>
+<!--                    <th width="">状态</th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -81,23 +80,30 @@
                                 <input style="display: block;width:66px;margin-bottom:5px" type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
                                 <?php  }  ?>
                             </td>
-                            <td><?php echo strtoupper($vo['coinname']);?></td>
+                            <td>
+                                <?php echo strtoupper($vo['coinname']);?>
+                            </td>
+
                             <?php if(in_array($vo['coinname'],['hkd','jpy'])){ ?>
                                 <td style="width:200px;white-space:unset">({$vo.bank_name})-{$vo.address}-({$vo.withdrawal_name})-提现金额({$vo.remark})</td>
                             <?php }else{ ?>
                                 <td>{$vo.address}</td>
                             <?php } ?>
 
-                            <td>{$vo.num}</td>
-                            <td>{$vo.fee}</td>
-                            <td>{$vo.mum}</td>
-                            <td>{$vo.addtime}</td>
-                            <td>{$vo.endtime}</td>
-                            <td>
+                            <td>提现状态:
                                 <eq name="vo.status" value="1"><span style="color:blue;">待审核</span></eq>
                                 <eq name="vo.status" value="2"><span style="color:green;">完成</span></eq>
                                 <eq name="vo.status" value="3"><span style="color:red;">未通过</span></eq>
+                                <br>
+                                提币数目:<span style="color:red;">{$vo.num}</span> <br>
+                                提币手续费:<span style="color:blue;">{$vo.fee}</span><br>
+                                到账:<span style="color:orange;">{$vo.mum}</span>
                             </td>
+                            <td>
+                                {$vo.addtime}<br>
+                                {$vo.endtime}
+                            </td>
+
                         </tr>
                     </volist>
                     <else/>

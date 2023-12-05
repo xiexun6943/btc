@@ -70,9 +70,9 @@
 					<th class="">ID</th>
 					<th class="">UID</th>
 					<th class="">会员账号</th>
-					<th class="">交易对</th>
-					<th class="">方向</th>
-					<th class="">状态</th>
+					<th class="">交易信息</th>
+<!--					<th class="">方向</th>-->
+<!--					<th class="">状态</th>-->
 					<th class="">交易额度</th>
 					<th class="">USDT额度</th>
 					<th class="">交易价格</th>
@@ -89,20 +89,23 @@
 						<td>{$vo.id}</td>
 						<td>{$vo.uid}</td>
 						<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
-						<td>{$vo.symbol}</td>
 						<td>
-						    <if condition="$vo.type eq 1">
-						        <span style="color:#0ecb81;">购买</span>
-						    <elseif condition="$vo.type eq 2" />
-						        <span style="color:#f5465c;">出售</span>
-						    </if>
-						</td>
-						<td>
-						    <if condition="$vo.status eq 1">
-						        <span style="color:#707A8A;">委托中</span>
-						    <elseif condition="$vo.status eq 2" />
-						        <span style="color:#0ecb81;">已交易</span>
-						    </if>
+							交易对:  <span style="color:red;">{$vo.symbol}</span> <br>
+							方向:
+							<if condition="$vo.type eq 1">
+								<span style="color:#0ecb81;">购买</span>
+								<elseif condition="$vo.type eq 2" />
+								<span style="color:#f5465c;">出售</span>
+							</if>
+							<br>
+							状态:
+							<if condition="$vo.status eq 1">
+								<span style="color:#707A8A;">委托中</span>
+								<elseif condition="$vo.status eq 2" />
+								<span style="color:#0ecb81;">已交易</span>
+								<elseif condition="$vo.status eq 3" />
+								<span style="color:#f5465c;">已撤消</span>
+							</if>
 						</td>
 						<td>{$vo.coinnum}</td>
 						<td>{$vo.usdtnum}</td>
