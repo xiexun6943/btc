@@ -1,6 +1,7 @@
 <?php
 //土尔其
 return [
+    '您目前没有空投机会'=>'您目前沒有空投機會',
     "关于我们"=>"Hakkımızda",
     "MSB认证"=>"MSB Sertifikası",
     "提现密码"=>"Para çekme şifresi",

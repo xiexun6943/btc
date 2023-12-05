@@ -106,21 +106,30 @@
             if(data.code == 1){
                 $("#coinbox").empty();
                 var html = '';
+                
+                console.log(data.info)
+                console.log(data.info.length)
+                
                 if(data.info != '' || data.info != null){
-                    html += '<a href="/User/txpage.html?id='+ data.info.id +'">'+
+                    if(data.info.length>0){
+                        data.info.forEach((ele,index)=>{
+                            html += '<a href="/User/txpage.html?id='+ ele.id +'">'+
                             '<div class="coinlistbox_info_list">'+
                             '<div class="coinlistbox_info_list_l">'+
-                            '<span class="fzmmm fcc">' + data.info.cname + '</span>'+
+                            '<span class="fzmmm fcc">' + ele.cname + '</span>'+
                             '</div>'+
                             '<div class="coinlistbox_info_list_c">'+
-                            '<span class="fzmm fcc">' + data.info.title + '</span>'+
+                            '<span class="fzmm fcc">' + ele.title + '</span>'+
                             '</div>'+
                             '<div class="coinlistbox_info_list_r">'+
-                            '<span class="fzmm fcc">'+ data.info.cnum +'</span>'+
+                            '<span class="fzmm fcc">'+ ele.cnum +'</span>'+
                             '<i class="bi bi-chevron-right fcc"></i>'+
                             '</div>'+
                             '</div>'+
                             '</a>';
+                        })
+                    }
+                    
                     $("#coinbox").append(html);        
                 }
             }

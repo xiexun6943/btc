@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '您目前没有空投机会'=>'You currently have no airdrop opportunities',
     '操作成功'=>'Operation successful',
     '幣幣交易限價購買委託訂單購買成功'=>'Coin-to-coin trading limit purchase order was purchased successfully',
     '幣幣交易限價委託交易'=>'Coin-to-coin transaction limit order transaction',

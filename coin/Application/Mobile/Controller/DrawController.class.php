@@ -4,14 +4,14 @@ namespace Mobile\Controller;
 
 class DrawController extends MobileController
 {
-    
+
 	protected function _initialize()
 	{
 		parent::_initialize();	$allow_action=array("draw","drawList","goDraw");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error(L("非法操作"));
 		}
-		
+
 	}
 
 	//红包页面首页
@@ -90,7 +90,7 @@ class DrawController extends MobileController
         }
 
         $lang=cookie("think_language");
-   
+
         switch ($lang) {
             case 'zh-cn':
                 $langArr['s'] ? $return['draw_desc'] = $langArr['s']: [];
@@ -178,7 +178,7 @@ class DrawController extends MobileController
         if ($totalDrawNum < ($drawEdNum + 1)){
             $msg['data'] = [];
             $msg['err'] = 'y';
-            $msg['msg'] = L('您目前没有空降机会');
+            $msg['msg'] = L('您目前没有空投机会');
             $this->ajaxReturn($msg);
             exit;
         }
@@ -270,9 +270,9 @@ class DrawController extends MobileController
         }
     }
 
-	
-	
-	
+
+
+
 
 
 }
