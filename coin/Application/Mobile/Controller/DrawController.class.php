@@ -89,7 +89,7 @@ class DrawController extends MobileController
             $langArr = array_column($setting, null, 'type');
         }
 
-        $lang=cookie("think_language");
+        $lang=cookie("think_language")?:'zh-tw';
 
         switch ($lang) {
             case 'zh-cn':
