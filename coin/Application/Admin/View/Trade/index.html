@@ -67,9 +67,8 @@
 					<th class="">单控操作</th>
 					<th class="">建仓单价</th>
 					<th class="">平仓单价</th>
-					<th class="">建仓时间</th>
+					<th class="">建仓时间/结算时间</th>
 					<th class="">时长(秒)</th>
-					<th class="">结算时间</th>
 					<th class="">详情</th>
 				</tr>
 				</thead>
@@ -127,9 +126,9 @@
 						    </if>
 						</td>
 						
-						<td>{$vo.buytime}</td>
+						<td>建仓时间:{$vo.buytime}<br>
+						结算时间:{$vo.selltime}</td>
 						<td>{$vo.time}</td>
-						<td>{$vo.selltime}</td>
 						<td>
 						    <a href="{:U('Trade/orderinfo')}?id={$vo.id}">查看</a>
 						</td>
