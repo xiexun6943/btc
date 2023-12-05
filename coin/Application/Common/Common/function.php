@@ -585,5 +585,12 @@ function returnMsg($code){
     }
 }
 
+// 获取config 表中配置
+function qrcodeImg($filed)
+{
+    $qrcodeImg = M("config")->getField($filed);
+    return $qrcodeImg;
+}
+
 
 ?>
