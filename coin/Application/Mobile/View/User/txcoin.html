@@ -128,6 +128,21 @@
                             '</div>'+
                             '</a>';
                         })
+                    }else if(data.info!==undefined){
+                            html += '<a href="/User/txpage.html?id='+ data.info.id +'">'+
+                            '<div class="coinlistbox_info_list">'+
+                            '<div class="coinlistbox_info_list_l">'+
+                            '<span class="fzmmm fcc">' + data.info.cname + '</span>'+
+                            '</div>'+
+                            '<div class="coinlistbox_info_list_c">'+
+                            '<span class="fzmm fcc">' + data.info.title + '</span>'+
+                            '</div>'+
+                            '<div class="coinlistbox_info_list_r">'+
+                            '<span class="fzmm fcc">'+ data.info.cnum +'</span>'+
+                            '<i class="bi bi-chevron-right fcc"></i>'+
+                            '</div>'+
+                            '</div>'+
+                            '</a>';
                     }
                     
                     $("#coinbox").append(html);        

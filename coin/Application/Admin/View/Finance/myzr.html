@@ -50,6 +50,7 @@
 					<th class="">ID</th>
 					<th class="">UID</th>
 					<th class="">用户名</th>
+					<th width="">操作</th>
 					<th class="">充值币种</th>
 					<th width="">充值时间</th>
 					<th width="">处理时间</th>
@@ -59,7 +60,6 @@
 					<th width="">充值类型</th>
 					<th width="">转账凭证</th>
 					<th width="">状态</th>
-					<th width="">操作</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -69,6 +69,17 @@
 							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
 							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+							<td>
+                                <eq name="vo.status" value="1">
+                                    <input type="button" class="ajax-get btn btn-primary btn-xs" value="确认" onclick="Upzr('{$vo['id']}');"/>
+                                    <input type="button" class="ajax-get btn btn-primary btn-xs" value="驳回" onclick="Upbhzr('{$vo['id']}');"/>
+                                </eq>
+                                <eq name="vo.status" value="2"><span style="color:blue;">已处理</span></eq>
+                                <eq name="vo.status" value="3"><span style="color:blue;">已处理</span></eq>
+                                <?php if(session('admin_role') == 1){  ?>
+                                <input type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
+                                <?php  }  ?>
+                            </td>
 							<td><?php echo strtoupper($vo['coin']);?></td>
 							<td>{$vo.addtime}</td>
 							<td>{$vo.updatetime}</td>
@@ -101,17 +112,6 @@
 								    <span style="color:red;">驳回充值</span>
 								</eq>
 							</td>
-							<td>
-                                <eq name="vo.status" value="1">
-                                    <input type="button" class="ajax-get btn btn-primary btn-xs" value="确认" onclick="Upzr('{$vo['id']}');"/>
-                                    <input type="button" class="ajax-get btn btn-primary btn-xs" value="驳回" onclick="Upbhzr('{$vo['id']}');"/>
-                                </eq>
-                                <eq name="vo.status" value="2"><span style="color:blue;">已处理</span></eq>
-                                <eq name="vo.status" value="3"><span style="color:blue;">已处理</span></eq>
-                                <?php if(session('admin_role') == 1){  ?>
-                                <input type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
-                                <?php  }  ?>
-                            </td>
 						</tr>
 					</volist>
 					<else/>
