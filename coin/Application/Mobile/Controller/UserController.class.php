@@ -1115,6 +1115,7 @@ class UserController extends MobileController
         $uid = userid();
         $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
         $money = $minfo[$coinname];
+        $minfo[$coinname]?$money = $minfo[$coinname]:$money = "0.00";
         $this->assign('money',$money);
 
         $adrinfo = M("user_qianbao")->where(array('uid'=>$uid,'name'=>$coinname,'czline'=>$info['czline']))->order('id desc')->limit(1)->find();
@@ -1171,7 +1172,7 @@ class UserController extends MobileController
         if(!empty($clist)){
             foreach($clist as $k=>$v){
                 $coinname = $v['name'];
-                $coin_num = $minfo[$coinname];
+                $minfo[$coinname]?$coin_num = $minfo[$coinname]:$coin_num="0.00";
                 $data[$k]['cname'] = strtoupper($coinname);
                 $data[$k]['title'] = $v['title'];
                 $data[$k]['id'] = $v['id'];
@@ -1183,19 +1184,16 @@ class UserController extends MobileController
         if(!empty($bklist)){
             foreach($bklist as $k=>$v){
                 $coinname = $v['name'];
-
                 if ($v['name'] == 'hkd') {
-
-                    $coin_num=$minfo['usdt']*$config['ug_hl'];
+                    $minfo['usdt']*$config['ug_hl']?$coin_num=  round($minfo['usdt']*$config['ug_hl'],2):$coin_num="0.00";
                 }
                 if ($v['name'] == 'jpy') {
-
-                    $coin_num=$minfo['usdt']*$config['ur_hl'];
+                    $minfo['usdt']*$config['ug_hl']?$coin_num=round($minfo['usdt']*$config['ur_hl'],0):$coin_num="0.00";
                 }
                 $bddata[$k]['cname'] = strtoupper($coinname);
                 $bddata[$k]['title'] = $v['title'];
                 $bddata[$k]['id'] = $v['id'];
-                $bddata[$k]['cnum'] = round($coin_num,2);
+                $bddata[$k]['cnum'] = $coin_num;
             }
 
         }
@@ -1400,8 +1398,9 @@ class UserController extends MobileController
             $coinname = $info['name'];
             $uid = userid();
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+            $cnum="0.00";
             if(!empty($minfo)){
-                $cnum = $minfo[$coinname];
+                $minfo[$coinname]?$cnum = $minfo[$coinname]:$cnum="0.00";
             }
             if ($info) {
                 $data['cname'] = strtoupper($info['name']);
@@ -1413,20 +1412,41 @@ class UserController extends MobileController
             $this->ajaxReturn(['code'=>0,'info'=>[]]);
         }else {
             $uid = userid();
-            $clist = M("coin")->where(array('txstatus' => 1, 'type' => ['in',[1,4]]))->field("id,name,title")->order('sort asc')->select();
-            $minfo = M("user_coin")->where(array('userid' => $uid))->find();
+            $clist = M("coin")->where(array('txstatus'=>1,'type'=>1))->field("id,name,title")->order('sort asc')->select();
+            $bklist = M("coin")->where(array('txstatus'=>1,'type'=>4))->field("id,name,title")->order('sort asc')->select();
+            $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+            $config = M("config")->field('ug_hl,ur_hl')->find();
 
-            if (!empty($clist)) {
-                foreach ($clist as $k => $v) {
+            if(!empty($clist)){
+                foreach($clist as $k=>$v){
                     $coinname = $v['name'];
-                    $coin_num = $minfo[$coinname];
+                    $minfo[$coinname]?$coin_num = $minfo[$coinname]:$coin_num="0.00";
                     $data[$k]['cname'] = strtoupper($coinname);
                     $data[$k]['title'] = $v['title'];
                     $data[$k]['id'] = $v['id'];
                     $data[$k]['cnum'] = $coin_num;
                 }
+
             }
-            $this->ajaxReturn(['code'=>1,'info'=>$data]);
+
+            if(!empty($bklist)){
+                foreach($bklist as $k=>$v){
+                    $coinname = $v['name'];
+                    if ($v['name'] == 'hkd') {
+                        $minfo['usdt']*$config['ug_hl']?$coin_num=  round($minfo['usdt']*$config['ug_hl'],2):$coin_num="0.00";
+                    }
+                    if ($v['name'] == 'jpy') {
+                        $minfo['usdt']*$config['ug_hl']?$coin_num=round($minfo['usdt']*$config['ur_hl'],0):$coin_num="0.00";
+                    }
+                    $bddata[$k]['cname'] = strtoupper($coinname);
+                    $bddata[$k]['title'] = $v['title'];
+                    $bddata[$k]['id'] = $v['id'];
+                    $bddata[$k]['cnum'] = $coin_num;
+                }
+
+            }
+            $list=array_merge($data,$bddata);
+            $this->ajaxReturn(['code'=>1,'info'=>$list]);
         }
 
 
@@ -1541,67 +1561,65 @@ class UserController extends MobileController
             $this->redirect('User/czcoin');
         }
 
-
         //查询最上级是否代理
-        $user = M("user")->where(['id'=>$uid])->find();
-        if(M("user")->where(['id'=>$user['invit_3']])->getField('is_agent')){
-            switch ($info['title']) {
-                case 'USDT-TRC20':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_3']])->getField('trc');
-                    break;
-                case 'USDT-ERC20':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_3']])->getField('erc');
-                    break;
-                case 'BTC':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_3']])->getField('btc');
-                    break;
-                case 'ETH':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_3']])->getField('eth');
-                    break;
-                default:
-                    break;
-            }
-        }else if(M("user")->where(['id'=>$user['invit_2']])->getField('is_agent')){
-            switch ($info['title']) {
-                case 'USDT-TRC20':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_2']])->getField('trc');
-                    break;
-                case 'USDT-ERC20':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_2']])->getField('erc');
-                    break;
-                case 'BTC':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_2']])->getField('btc');
-                    break;
-                case 'ETH':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_2']])->getField('eth');
-                    break;
-                default:
-                    break;
-            }
-        }else if(M("user")->where(['id'=>$user['invit_1']])->getField('is_agent')){
-            switch ($info['title']) {
-                case 'USDT-TRC20':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_1']])->getField('trc');
-                    break;
-                case 'USDT-ERC20':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_1']])->getField('erc');
-                    break;
-                case 'BTC':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_1']])->getField('btc');
-                    break;
-                case 'ETH':
-                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_1']])->getField('eth');
-                    break;
-                default:
-                    break;
-            }
-        }
+//        $user = M("user")->where(['id'=>$uid])->find();
+//        if(M("user")->where(['id'=>$user['invit_3']])->getField('is_agent')){
+//            switch ($info['title']) {
+//                case 'USDT-TRC20':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_3']])->getField('trc');
+//                    break;
+//                case 'USDT-ERC20':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_3']])->getField('erc');
+//                    break;
+//                case 'BTC':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_3']])->getField('btc');
+//                    break;
+//                case 'ETH':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_3']])->getField('eth');
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }else if(M("user")->where(['id'=>$user['invit_2']])->getField('is_agent')){
+//            switch ($info['title']) {
+//                case 'USDT-TRC20':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_2']])->getField('trc');
+//                    break;
+//                case 'USDT-ERC20':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_2']])->getField('erc');
+//                    break;
+//                case 'BTC':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_2']])->getField('btc');
+//                    break;
+//                case 'ETH':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_2']])->getField('eth');
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }else if(M("user")->where(['id'=>$user['invit_1']])->getField('is_agent')){
+//            switch ($info['title']) {
+//                case 'USDT-TRC20':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_1']])->getField('trc');
+//                    break;
+//                case 'USDT-ERC20':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_1']])->getField('erc');
+//                    break;
+//                case 'BTC':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_1']])->getField('btc');
+//                    break;
+//                case 'ETH':
+//                    $info['czaddress'] = M("user")->where(['id'=>$user['invit_1']])->getField('eth');
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
         $this->assign('info',$info);
 
         $address = $info['czaddress'];
         $qrcode = $info['qrcode'];
-
         $url = $address;
 
         $drpath = './Public/Static/coinimgs/';

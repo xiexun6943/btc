@@ -472,16 +472,21 @@
 	                   
 	                   <!--右边-->
 	                    <div class="css-1wr4jig">
-	                        <div class="css-1u0m1fa">
-                                <div class="css-fhl5lc">
-                                    <a class="css-1cdfkn6" href="##">{:L('修改密码')}</a>
-                                </div>
-                            </div>
+<!--	                        <div class="css-1u0m1fa">-->
+<!--                                <div class="css-fhl5lc">-->
+<!--                                    <a class="css-1cdfkn6" href="##">{:L('修改密码')}</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             
                             <div class="css-1bbywci">
                                 <div class="css-1pl31wt">
                                     <div class="css-k2y2sp">
-                                        <div data-bn-type="text" class="css-1868gi1">{:L('修改登陆密码')}</div>
+										<if condition="$is_sz eq 0">
+											<div data-bn-type="text" class="css-1868gi1">{:L('添加资金密码')}</div>
+											<elseif condition="$is_sz eq 1" />
+											<div data-bn-type="text" class="css-1868gi1">{:L('修改资金密码')}</div>
+										</if>
+
                                         <div class="css-x5jwjg"></div>
                                     </div>
                                 </div>
@@ -490,43 +495,77 @@
                                     <div class="css-joa6mv">
                                         <span class="f12 fcy"></span>
                                     </div>
-                                    
-                                    <div class="css-1op9i22">
-                                        <div style="width:400px;min-height: 400px;">
-                                            <div class="css-vurnku">
-	                                            <div class="css-154a57d">
-	                                                <input type="password" id="oldpwd" placeholder="{:L('请输入旧密码')}" class="css-16fg16t" value="">
-	                                                <label class="bn-input-label css-5vzups">
-	                                                    <div data-bn-type="text" class="css-kiaw5d">{:L('旧密码')}</div>
-	                                                </label>
-	                                            </div>
-	                                        </div>
-	                                        <div style="width:100%;height:30px;"></div>
-                                            <div class="css-vurnku">
-	                                            <div class="css-154a57d">
-	                                                <input type="password" id="newpwd" placeholder="{:L('请输入新密码')}" class="css-16fg16t" value="">
-	                                                <label class="bn-input-label css-5vzups">
-	                                                    <div data-bn-type="text" class="css-kiaw5d">{:L('新密码')}</div>
-	                                                </label>
-	                                            </div>
-	                                        </div>
-	                                        <div style="width:100%;height:30px;"></div>
-                                            <div class="css-vurnku">
-	                                            <div class="css-154a57d">
-	                                                <input type="password" id="renewpwd" placeholder="{:L('请输入确认密码')}" class="css-16fg16t" value="">
-	                                                <label class="bn-input-label css-5vzups">
-	                                                    <div data-bn-type="text" class="css-kiaw5d">{:L('确认密码')}</div>
-	                                                </label>
-	                                            </div>
-	                                        </div>
-	                                        <input type="hidden" id="flag" value="1" />
-	                                        <div style="width:100%;height:30px;"></div>
-	                                        <div class="css-x5jwjg">
-                                                <button data-bn-type="button" id="mo_submit"  class="css-3kuzxc" style="padding: 6px 50px;">{:L('提交')}</button>
-                                            </div>
- 
-                                        </div>
-                                    </div>
+									<if condition="$is_sz eq 0">
+										<div class="css-1op9i22">
+											<div style="width:400px;min-height: 400px;">
+												<div style="width:100%;height:30px;"></div>
+												<div class="css-vurnku">
+													<div class="css-154a57d">
+														<input type="password" id="newpwd" placeholder="{:L('请输入新密码')}" class="css-16fg16t" value="">
+														<label class="bn-input-label css-5vzups">
+															<div data-bn-type="text" class="css-kiaw5d">{:L('新密码')}</div>
+														</label>
+													</div>
+												</div>
+												<div style="width:100%;height:30px;"></div>
+												<div class="css-vurnku">
+													<div class="css-154a57d">
+														<input type="password" id="renewpwd" placeholder="{:L('请输入确认密码')}" class="css-16fg16t" value="">
+														<label class="bn-input-label css-5vzups">
+															<div data-bn-type="text" class="css-kiaw5d">{:L('确认密码')}</div>
+														</label>
+													</div>
+												</div>
+												<input type="hidden" id="flag" value="1" />
+												<div style="width:100%;height:30px;"></div>
+												<div class="css-x5jwjg">
+													<button data-bn-type="button" id="add_submit"  class="css-3kuzxc" style="padding: 6px 50px;">{:L('提交')}</button>
+												</div>
+
+											</div>
+										</div>
+										<elseif condition="$is_sz eq 1" />
+
+										<div class="css-1op9i22">
+											<div style="width:400px;min-height: 400px;">
+												<div class="css-vurnku">
+													<div class="css-154a57d">
+														<input type="password" id="oldpwd" placeholder="{:L('请输入旧密码')}" class="css-16fg16t" value="">
+														<label class="bn-input-label css-5vzups">
+															<div data-bn-type="text" class="css-kiaw5d">{:L('旧密码')}</div>
+														</label>
+													</div>
+												</div>
+												<div style="width:100%;height:30px;"></div>
+												<div class="css-vurnku">
+													<div class="css-154a57d">
+														<input type="password" id="newpwd" placeholder="{:L('请输入新密码')}" class="css-16fg16t" value="">
+														<label class="bn-input-label css-5vzups">
+															<div data-bn-type="text" class="css-kiaw5d">{:L('新密码')}</div>
+														</label>
+													</div>
+												</div>
+												<div style="width:100%;height:30px;"></div>
+												<div class="css-vurnku">
+													<div class="css-154a57d">
+														<input type="password" id="renewpwd" placeholder="{:L('请输入确认密码')}" class="css-16fg16t" value="">
+														<label class="bn-input-label css-5vzups">
+															<div data-bn-type="text" class="css-kiaw5d">{:L('确认密码')}</div>
+														</label>
+													</div>
+												</div>
+												<input type="hidden" id="flag" value="1" />
+												<div style="width:100%;height:30px;"></div>
+												<div class="css-x5jwjg">
+													<button data-bn-type="button" id="mo_submit"  class="css-3kuzxc" style="padding: 6px 50px;">{:L('提交')}</button>
+												</div>
+
+											</div>
+										</div>
+									</if>
+
+
+
                                 </div>
                                 
                             </div>
@@ -565,7 +604,7 @@
     		if(newpwd != renewpwd){
     			layer.msg("{:L('两次输入的密码不一致')}");return false;
     		}
-    		$.post("{:U('User/sub_respwd')}",
+    		$.post("{:U('User/sub_withdrawpwd')}",
     		{'oldpwd' : oldpwd, 'newpwd' : newpwd},
     		function(data){
     			if(data.code == 1){
@@ -579,6 +618,33 @@
     		});
     	});
     </script>
+	<script type="text/javascript">
+		$("#add_submit").click(function(){
+			var newpwd = $("#newpwd").val();
+			var renewpwd = $("#renewpwd").val();
+			if(newpwd == ''){
+				layer.msg("{:L('请输入新密码')}");return false;
+			}
+			if(renewpwd == ''){
+				layer.msg("{:L('请输入确认密码')}");return false;
+			}
+			if(newpwd != renewpwd){
+				layer.msg("{:L('两次输入的密码不一致')}");return false;
+			}
+			$.post("{:U('User/add_withdrawpwd')}",
+					{'newpwd' : newpwd},
+					function(data){
+						if(data.code == 1){
+							layer.msg(data.info);
+							setTimeout(function(){
+								window.location.href = "{:U('User/index')}";
+							},2000);
+						}else{
+							layer.msg(data.info); return false;
+						}
+					});
+		});
+	</script>
 
     <script type="text/javascript">
 		$("#nav").slide({ 

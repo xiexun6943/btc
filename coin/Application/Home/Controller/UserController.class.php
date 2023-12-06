@@ -6,7 +6,7 @@ class UserController extends HomeController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action=array("index","addresslist","deladdress","upplusaddress","authrz","recharge_img","upauthrz","respwd","sub_respwd","tgcode","notice","readnoticeone","delonenotice","allread","allnoticedel","online","getlineinfo","uptxt","mybill","getbilllist");
+		$allow_action=array("index","addresslist","deladdress","upplusaddress","authrz","recharge_img","upauthrz","respwd","sub_respwd","tgcode","notice","readnoticeone","delonenotice","allread","allnoticedel","online","getlineinfo","uptxt","mybill","getbilllist","withdrawpwd","sub_withdrawpwd","add_withdrawpwd");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error(L("非法操作！"));
 		}
@@ -574,17 +574,75 @@ class UserController extends HomeController
             exit();
         }
     }
-	
-	
 
 
 
 
 
+    public function withdrawpwd()
+    {
+        $uid = userid();
+        if($uid <= 0){
+            $this->redirect('Login/index');
+        }
+        $userInfo = M('user')->where(['id' => $uid])->find();
+        $is_sz=0 ;
+        if (!empty($userInfo['paypassword'])) {
+            $is_sz=1 ;
+        }
+        $this->assign('userInfo',$userInfo);
+        $this->assign('is_sz',$is_sz);
+        $this->display();
+    }
 
 
+    public function sub_withdrawpwd()
+    {
+        if($_POST){
+            $oldpwd=I('post.oldpwd');
+            $newpwd=I('post.newpwd');
+            if(checkstr($oldpwd) || checkstr($newpwd)){
+                $this->ajaxReturn(['code'=>0,'info'=>L('您输入的信息有误')]);
+            }
+            $uid = userid();
+            if($uid == ''){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
+            }
+            $info = M("user")->where(array('id'=>$uid))->field("id,username,paypassword")->find();
+            if(md5($oldpwd) != $info['paypassword'] && $info['paypassword'] != ''){
+                $this->ajaxReturn(['code'=>0,'info'=>L('旧密码不正确')]);
+            }
 
+            $result = M("user")->where(array('id'=>$uid))->save(array('paypassword'=>md5($newpwd),'stoptime'=>time()));
+            if($result){
+                $this->ajaxReturn(['code'=>1,'info'=>L('密码修改成功')]);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=>L('密码修改失败')]);
+            }
 
+        }else{
+            $this->ajaxReturn(['code'=>0,'info'=>L('非法操作')]);
+        }
+    }
+
+    public function add_withdrawpwd($newpwd)
+    {
+        if($_POST){
+            $newpwd=I('post.newpwd');
+            $uid = userid();
+            if($uid == ''){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
+            }
+            $result = M("user")->where(array('id'=>$uid))->save(array('paypassword'=>md5($newpwd),'stoptime'=>time()));
+            if($result){
+                $this->ajaxReturn(['code'=>1,'info'=>L('添加密码成功')]);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=>L('添加密码失败')]);
+            }
+        }else{
+            $this->ajaxReturn(['code'=>0,'info'=>L('非法操作')]);
+        }
+    }
 
 }
 ?>
