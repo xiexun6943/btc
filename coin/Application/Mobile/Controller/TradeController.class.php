@@ -513,14 +513,14 @@ class TradeController extends MobileController
         $kefu=$clist['kefu'];
 
 		//查询最上级是否代理
-		$user = M("user")->where(['id'=>$uid])->find();
-		if(M("user")->where(['id'=>$user['invit_3']])->getField('is_agent')){
-		    $clist['kefu'] = M("user")->where(['id'=>$user['invit_3']])->getField('kefu');
-		}else if(M("user")->where(['id'=>$user['invit_2']])->getField('is_agent')){
-		    $clist['kefu'] = M("user")->where(['id'=>$user['invit_2']])->getField('kefu');
-		}else if(M("user")->where(['id'=>$user['invit_1']])->getField('is_agent')){
-		    $clist['kefu'] = M("user")->where(['id'=>$user['invit_1']])->getField('kefu');
-		}
+//		$user = M("user")->where(['id'=>$uid])->find();
+//		if(M("user")->where(['id'=>$user['invit_3']])->getField('is_agent')){
+//		    $clist['kefu'] = M("user")->where(['id'=>$user['invit_3']])->getField('kefu');
+//		}else if(M("user")->where(['id'=>$user['invit_2']])->getField('is_agent')){
+//		    $clist['kefu'] = M("user")->where(['id'=>$user['invit_2']])->getField('kefu');
+//		}else if(M("user")->where(['id'=>$user['invit_1']])->getField('is_agent')){
+//		    $clist['kefu'] = M("user")->where(['id'=>$user['invit_1']])->getField('kefu');
+//		}
         $lang=cookie("language");
 		switch ($lang){
             case $lang=="zh-cn":
