@@ -2564,4 +2564,5 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "修改资金密码"=>"Change fund password",
     "添加密码成功"=>"Add password successfully",
     "添加密码失败"=>"Failed to add password",
+    "请先设置提现密码"=>"Please set a withdrawal password first",
 ];
