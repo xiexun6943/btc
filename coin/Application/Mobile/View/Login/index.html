@@ -11,7 +11,7 @@
     <title>{$webname}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Public/Dela/demo/demo.css">
-    <link rel="stylesheet" href="/Public/Dela/template/dela-template.css">
+    <link rel="stylesheet" href="/Public/Dela/template/dela-template.css?v=<?=time()?>">
 
     <link rel="stylesheet" href="https://lib.sinaapp.com/js/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/5.15.2/css/all.min.css">
@@ -80,7 +80,7 @@
 
     </style>
 </head>
-<body onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
+<body autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
 
 <div class="no_headers header_box" >
     <div class="fl bhalf allhg txtl" style="line-height:50px;">
@@ -193,8 +193,8 @@
                     <button class="btn_bar_login btn-hover color-6 btnr gray" style="font-size:.8rem">{:L('手机')}</button>
                     
                     <span class="reg_kind_login">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="email" id="email" placeholder="{:L('邮箱')}" required autocomplete="email">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" id="lpwd" name="password" placeholder="{:L('密码')}" required>
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="email" id="email" placeholder="{:L('邮箱')}" required autocomplete="email">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" id="lpwd" name="password" placeholder="{:L('密码')}" required>
                         
                         
                        <!-- <input type="text" id="text" name="text" placeholder="{:L('验证码')}" required>
@@ -205,23 +205,23 @@
                         
                         <label class="dela-form__checkbox" id="remember"  >
                             {:L('记住账号')}
-                            <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="checkbox" name="remember"  id="rem"  value="1"><span></span>
+                            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="checkbox" name="remember"  id="rem"  value="1"><span></span>
                         </label>
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
     
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
                     </span>
                     
                     <span class="reg_kind_login" style="display:none">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="phone" id="phone" placeholder="{:L('手机号')}" required autocomplete="email">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" id="pwd_phone" name="pwd_phone" placeholder="{:L('密码')}" required>
-                        <label class="dela-form__checkbox" id="remember"  >
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="phone" name="phone" id="phone" placeholder="{:L('手机号')}" required >
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" id="pwd_phone" name="pwd_phone" placeholder="{:L('密码')}" required>
+                        <label class="dela-form__checkbox" id="remember2"  >
                             {:L('记住账号')}
-                            <input type="checkbox" name="remember"  id="rem"  value="1"><span></span>
+                            <input type="checkbox" name="remember"  id="rem2"  value="1"><span></span>
                         </label>
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin2()" value="{:L('登录')}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin2()" value="{:L('登录')}">
     
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="reg" onclick="upreg()" value="{:L('注册')}">
                     </span>
 
                     <span class="dela-form__rorgot-password" onclick="forgot_password()">
@@ -281,6 +281,11 @@
             $("#email").val($.cookie("email"));
             $("#lpwd").val($.cookie("password"));
         }
+        if ($.cookie("remember2") == "true") {
+            $("#rem2").prop("checked",true);
+            $("#phone").val($.cookie("phone"));
+            $("#pwd_phone").val($.cookie("pwd_phone"));
+        }
     });
 
     $("#remember").click(function(){
@@ -288,6 +293,15 @@
             $("#rem").prop("checked",false)
         }else{
             $("#rem").prop("checked",true)
+        }
+
+    });
+
+    $("#remember2").click(function(){
+        if ($("#rem2").prop("checked") == true) {
+            $("#rem2").prop("checked",false)
+        }else{
+            $("#rem2").prop("checked",true)
         }
 
     });
@@ -339,7 +353,7 @@
         if(pwd_phone == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
-        save_cookies();
+        save_cookies2();
         // $('.container-fluid').show();
         // $('#captcha').sliderCaptcha(
         //     {
@@ -384,6 +398,23 @@
             $.cookie("remember","false",{expires:-1});
             $.cookie("email","",{ expires:-1 });
             $.cookie("password","",{ expires:-1 });
+        }
+    };
+    function save_cookies2(){
+        if($("#rem2").prop("checked")){
+            var phone = $("#phone").val();
+            var pwd_phone = $("#pwd_phone").val();
+            $.cookie("remember2","true",{expires:7});
+            $.cookie("phone",phone,{expires:7 });
+            $.cookie("pwd_phone",pwd_phone,{expires:7 });
+            console.log($.cookie("remember2"))
+            console.log($.cookie("phone"))
+            console.log($.cookie("pwd_phone"))
+
+        }else{
+            $.cookie("remember2","false",{expires:-1});
+            $.cookie("phone","",{ expires:-1 });
+            $.cookie("pwd_phone","",{ expires:-1 });
         }
     };
 

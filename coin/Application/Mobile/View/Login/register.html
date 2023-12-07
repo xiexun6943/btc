@@ -135,7 +135,8 @@
 
     </style>
 </head>
-<body onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">
+<!--<body autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus">-->
+<body>
 
 <div class="no_headers header_box" >
     <div class="fl bhalf allhg txtl" style="line-height:50px;">
@@ -203,52 +204,52 @@
                     <button class="btn_bar btn-hover color-6 btnr gray" style="font-size:.8rem">{:L('手机')}</button>
                   
                     <span class="reg_kind">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="email" id="email" placeholder="{:L('邮箱')}" required="" autocomplete="email" >
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="email" id="email" placeholder="{:L('邮箱')}" required="" autocomplete="email" >
                         <div id="main_demo" style="margin-bottom:1.1em;display:none" >
                             <div class="container">
                                 <div class="form-item">
-                                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" id="country_selector" type="text">
+                                    <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" id="country_selector" type="text">
                                     <label for="country_selector" style="display:none;">Select a country here...</label>
                                 </div>
                                 <button type="submit" style="display:none;">Submit</button>
                             </div>
                         </div>
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="lpwd" placeholder="{:L('密码')}" required="">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="lpwd" placeholder="{:L('密码')}" required="">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
                         <div>
-                            <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
+                            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
                             <button  class="btn-hover color-4 send-btn" onclick="getCode()"> {:L('发送')} </button>
                         </div>
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg()" value="{:L('注册')}">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg()" value="{:L('注册')}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
                     </span>
                   
                     <span class="reg_kind" style="display:none">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="area_code" name="area_code" id="area_code" placeholder="{:L('区号')}" required="" autocomplete="area_code" >
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="phone" name="phone" id="phone" placeholder="{:L('手机号')}" required="" autocomplete="phone" >
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="area_code" name="area_code" id="area_code" placeholder="{:L('区号')}" required="" autocomplete="area_code" >
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="phone" name="phone" id="phone" placeholder="{:L('手机号')}" required="" autocomplete="phone" >
                         <div id="main_demo" style="margin-bottom:1.1em;display:none" >
                             <div class="container">
                                 <div class="form-item">
-                                    <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" id="country_selector" type="text">
+                                    <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" id="country_selector" type="text">
                                     <label for="country_selector" style="display:none;">Select a country here...</label>
                                 </div>
                                 <button type="submit" style="display:none;">Submit</button>
                             </div>
                         </div>
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="pwd_phone" placeholder="{:L('密码')}" required="">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invitation_code"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="pwd_phone" placeholder="{:L('密码')}" required="">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invitation_code"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
                         <div>
-                            <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="sms_code" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
+                            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="sms_code" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
                             <button  class="btn-hover color-4 send-btn" onclick="getPhoneCode()" style="top: 540px;"> {:L('发送')} </button>
                         </div>
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg2()" value="{:L('注册')}">
-                        <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg2()" value="{:L('注册')}">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
                     </span>
 
                 </form>

@@ -1195,13 +1195,13 @@
             var oid = $("#coinid").val();
             var czline = $("#czline").val();
             if(address == ""){
-                layer.msg("请输入提币地址");return false;
+                layer.msg("{:L('请输入提币地址')}");return false;
             }
             if(remark == ''){
-                layer.msg("请输入备注");return false;
+                layer.msg("{:L('请输入备注')}");return false;
             }
             if(oid <= 0){
-                layer.msg("参数错误");return false;
+                layer.msg("{:L('参数错误')}");return false;
             }
             $("#falg").val(2);
             $.post("{:U('User/upplusaddress')}",

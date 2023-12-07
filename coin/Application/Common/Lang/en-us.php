@@ -2565,4 +2565,6 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "添加密码成功"=>"Add password successfully",
     "添加密码失败"=>"Failed to add password",
     "请先设置提现密码"=>"Please set a withdrawal password first",
+    "请输入区号"=>"Please enter area code",
+    "请输入手机号"=>"Please enter phone number",
 ];
