@@ -1,6 +1,12 @@
 <?php
 
 return [
+    '修改登录密码'=>'Change login password',
+    '服务'=>'service',
+    '发布时间'=>'Release time',
+    '幣幣交易限價購買委託訂單銷售成功'=>'Coin-to-coin trading limit purchase order was successfully sold',
+    '幣幣交易限價委託交易'=>'Coin-to-coin trade limit order transaction',
+    '请输入手机验证码'=>'Please enter the mobile phone verification code',
     '您目前没有空投机会'=>'You currently have no airdrop opportunities',
     '操作成功'=>'Operation successful',
     '幣幣交易限價購買委託訂單購買成功'=>'Coin-to-coin trading limit purchase order was purchased successfully',
