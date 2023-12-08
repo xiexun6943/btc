@@ -84,28 +84,29 @@
 							
 						    <td>{$vo['remark']}</td>
 							<?php if( $vo['type'] == 1){ ?>
-								<td>客户充值<br>
+							<td ><span style="color:red; font-weight:bold">客户充值</span><br>
 								充值币种:<?php echo strtoupper($vo['coin']);?><br>
 								状态:<eq name="vo.status" value="1">
-								    <span style="color:blue;">等待审核</span>
+								    <span style="color:blue;font-weight:bold">等待审核</span>
 								</eq>
 								<eq name="vo.status" value="2">
-								    <span style="color:green;">审核通过</span>
+								    <span style="color:green;font-weight:bold">审核通过</span>
 								</eq>
 								<eq name="vo.status" value="3">
-								    <span style="color:red;">驳回充值</span>
+								    <span style="color:darkblue;font-weight:bold ">驳回充值</span>
 								</eq></td>
 							<?php }else{ ?>
-							      <td>人工充值<br>
+							      <td>
+									  <span style="color:orange;font-weight:bold">人工充值</span><br>
 								充值币种:<?php echo strtoupper($vo['coin']);?><br>
 								状态:<eq name="vo.status" value="1">
-								    <span style="color:blue;">等待审核</span>
+								    <span style="color:blue;font-weight:bold">等待审核</span>
 								</eq>
 								<eq name="vo.status" value="2">
-								    <span style="color:green;">审核通过</span>
+								    <span style="color:green;font-weight:bold">审核通过</span>
 								</eq>
 								<eq name="vo.status" value="3">
-								    <span style="color:red;">驳回充值</span>
+								    <span style="color:darkblue;font-weight:bold">驳回充值</span>
 								</eq></td>
 							<?php  }?>
 						

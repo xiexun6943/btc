@@ -56,25 +56,29 @@ class FinanceController extends AdminController
 	        $this->error("此订单已处理");exit();
 	    }
 	    $uid = $info['uid'];
-	    $num = $info['real_num'];
+        $num = $info['num'];
         if (in_array(strtolower(trim($info['coin'])),['jpy','hkd'])) {
             $coinname='usdt';
         }else{
             $coinname = strtolower(trim($info['coin']));
         }
-
+        $cinfo = M("coin")->where(array('name'=>$coinname))->find();
+        $real_num=round($num-$num*($cinfo['czsxf']/100),3);
 	    $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
 	    //修改订单状态
 	    $save['updatetime'] = date("Y-m-d H:i:s",time());
 	    $save['status'] = 2;
+        $save['real_num'] = $real_num;
+        M()->startTrans();
+
 	    $upre = M("recharge")->where(array('id'=>$id))->save($save);
 	    if($minfo){
 	        //增加会员资产
-	    $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$num);
+	    $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$real_num);
 	    }else{
 	        $coinData=[
 	                'userid'=>$uid,
-	                $coinname=>$num
+	                $coinname=>$real_num
 	            ];
 	        $incre = M("user_coin")->add($coinData);
 	    }
@@ -82,28 +86,28 @@ class FinanceController extends AdminController
 	    //增加充值日志
 	    $data['uid'] = $info['uid'];
 	    $data['username'] = $info['username'];
-	    $data['num'] = $num;
+	    $data['num'] = $real_num;
 	    $data['coinname'] = $coinname;
-	    $data['afternum'] = $minfo[$coinname] + $num;
+	    $data['afternum'] = $minfo[$coinname] + $real_num;
 	    $data['type'] = 17;
 	    $data['addtime'] = date("Y-m-d H:i:s",time());
 	    $data['st'] = 1;
-	    $data['remark'] = L('充币到账');
+	    $data['remark'] = '充币到账';
 	    
 	    $addre = M("bill")->add($data);
 	    if($upre && $incre && $addre){
-	        
+	        M()->commit();
 	        $notice['uid'] = $info['uid'];
 		    $notice['account'] = $info['username'];
-		    $notice['title'] = L('充币审核');
-		    $notice['content'] = L('您的充值金额已到账，请注意查收');
+		    $notice['title'] = '充币审核';
+		    $notice['content'] = '您的充值金额已到账，请注意查收';
 		    $notice['addtime'] = date("Y-m-d H:i:s",time());
 		    $notice['status'] = 1;
 		    M("notice")->add($notice);
-	        
-	        $this->success("处理成功");
+	        $this->success(L('处理成功'));
 	    }else{
-	        $this->error("处理失败");
+	        M()->commit();
+	        $this->error(L('处理失败'));
 	    }
 	}
 	

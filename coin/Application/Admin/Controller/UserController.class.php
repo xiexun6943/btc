@@ -648,6 +648,7 @@ class UserController extends AdminController
                 "type"=>2,
                 'coin'=>'USDT',
                 'num'=>$num,
+                'real_num'=>$num,
                 'addtime'=> date("Y-m-d H:i:s",time()),
                 'updatetime' => date("Y-m-d H:i:s",time()),
                 'payimg'=>'',
@@ -668,9 +669,9 @@ class UserController extends AdminController
             }
 
             if($usdt > 0){
-                $data['remark'] = L('后台充币');
+                $data['remark'] = '后台充币';
             }else{
-                $data['remark'] = L('后台减币');
+                $data['remark'] = '后台减币';
             }
               
             //增加充值日志

@@ -1264,12 +1264,9 @@ class UserController extends MobileController
 
     //上传转账号凭证
     public function paycoin(){
-        //echo 123;exit;
         if($_POST){
             $uid = userid();
             $uinfo = M("user")->where(array('id'=>$uid))->field("id,username")->find();
-            // echo trim(I('post.cid'));
-            // var_dump($uinfo);exit;
             if(empty($uinfo)){
                 $this->ajaxReturn(['code'=>0,'info'=> L('请先登陆')]);
             }
@@ -1277,7 +1274,6 @@ class UserController extends MobileController
             $zznum = trim(I('post.zznum'));
             $payimg = trim(I('post.payimg'));
             $coinname = trim(I('post.coinname'));
-            //echo 123;exit;
             if($zznum <= 0){
                 $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
             }
@@ -1301,7 +1297,6 @@ class UserController extends MobileController
             if($zznum < $cinfo['czminnum']){
                 $this->ajaxReturn(['code'=>0,'info'=> L('低于最低额度')]);
             }
-            //var_dump($cinfo);exit;
             $data['uid'] = $uid;
             $data['username'] = $uinfo['username'];
             $data['coin'] = strtoupper($coinname);
@@ -1480,7 +1475,6 @@ class UserController extends MobileController
 
     //上传转账号凭证
     public function payBank(){
-//        dump($_POST);exit();
         if($_POST){
             $uid = userid();
             $uinfo = M("user")->where(array('id'=>$uid))->field("id,username")->find();
@@ -1529,7 +1523,7 @@ class UserController extends MobileController
             $data['username'] = $uinfo['username'];
             $data['coin'] = strtoupper($coinname);
             $data['num'] = $num;
-            $data['real_num'] = round($num-$num*($cinfo['czsxf']/100),4);
+//            $data['real_num'] = round($num-$num*($cinfo['czsxf']/100),4);
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['updatetime'] = null;
             $data['status'] = 1;

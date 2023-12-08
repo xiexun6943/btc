@@ -321,6 +321,7 @@
         $("#sumbtn").click(function(){
             var flag = $("#flag").val();
             if(flag == 2){
+				window.location.reload();
                 return false;
             }
             var bank_num = $("#bank_num").val()
@@ -340,11 +341,12 @@
             // if(payimg == ''){
             //     layer.msg("{:L('请上传转账凭证')}");return false;
             // }
-            $("#flag").val(2)
+
             $.post("{:U('Finance/payBank')}",
             {'zznum':zznum,'bank_num':bank_num,'payimg':payimg,'coinname':coinname},
             function(data){
                 if(data.code == 1){
+					$("#flag").val(2)
                     layer.msg(data.info);
                     setTimeout(function(args){
                         window.location.reload();

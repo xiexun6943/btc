@@ -226,13 +226,12 @@ class FinanceController extends HomeController
 	        $data['username'] = $uinfo['username'];
 	        $data['coin'] = strtoupper($coinname);
             $data['num'] = $zznum;
-            $data['real_num'] = round($zznum-$zznum*($cinfo['czsxf']/100),4);
+//            $data['real_num'] = round($zznum-$zznum*($cinfo['czsxf']/100),4);
 	        $data['addtime'] = date("Y-m-d H:i:s",time());
 	        $data['updatetime'] = '';
 	        $data['status'] = 1;
 	        $data['payimg'] = $payimg;
 	        $data['msg'] = '';
-	        
 	        $result = M("recharge")->add($data);
 	        if($result){
 	            $this->ajaxReturn(['code'=>1,'info'=> L('凭证提交成功')]);
@@ -293,7 +292,7 @@ class FinanceController extends HomeController
             $data['username'] = $uinfo['username'];
             $data['coin'] = strtoupper($coinname);
             $data['num'] = $num;
-            $data['real_num'] = round($num-$num*($cinfo['czsxf']/100),4);
+//            $data['real_num'] = round($num-$num*($cinfo['czsxf']/100),4);
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['updatetime'] = '';
             $data['status'] = 1;
