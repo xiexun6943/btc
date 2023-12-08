@@ -62,7 +62,8 @@ class FinanceController extends AdminController
         }else{
             $coinname = strtolower(trim($info['coin']));
         }
-        $cinfo = M("coin")->where(array('name'=>$coinname))->find();
+
+        $cinfo = M("coin")->where(array('name'=>strtolower(trim($info['coin']))))->find();
         $real_num=round($num-$num*($cinfo['czsxf']/100),3);
 	    $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
 	    //修改订单状态
