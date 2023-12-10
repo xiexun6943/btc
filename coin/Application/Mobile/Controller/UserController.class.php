@@ -890,14 +890,7 @@ class UserController extends MobileController
             if(empty($uinfo['paypassword'])){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先设置提现密码')]);
             }
-            $paypassword = trim(I('post.paypwd'));
-            if($paypassword == '' || $paypassword == null){
-                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
-            }
 
-            if(md5($paypassword) != $uinfo['paypassword']){
-                $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
-            }
 
 //            if($uinfo['rzstatus'] != 2){
 //                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
@@ -909,14 +902,22 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('参数错误')]);
             }
             
-             $withdrawalName = trim(I('post.user_name'));
-            if($withdrawalName == '' || $withdrawalName == null){
-                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现人名')]);
-            }
-            
+
             $address = trim(I('post.address'));
             if($address == '' || $address == null){
-                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提币地址')]);
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入银行卡号')]);
+            }
+            $withdrawalName = trim(I('post.user_name'));
+            if($withdrawalName == '' || $withdrawalName == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入收款人姓名')]);
+            }
+            $paypassword = trim(I('post.paypwd'));
+            if($paypassword == '' || $paypassword == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
+            }
+
+            if(md5($paypassword) != $uinfo['paypassword']){
+                $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
             }
             $num = trim(I('post.num'));
             if($num <= 0){

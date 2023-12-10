@@ -335,6 +335,12 @@ class FinanceController extends HomeController
 //            if($uinfo['rzstatus'] != 2){
 //                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
 //            }
+            if($uinfo['txstate'] == 2){
+                $this->ajaxReturn(['code'=>0,'info'=>L('禁止提币,请联系客服')]);
+            }
+            if(empty($uinfo['paypassword'])){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请先设置提现密码')]);
+            }
             $coinname = trim(I('post.coinname'));
 
             $address = trim(I('post.address'));
@@ -342,20 +348,21 @@ class FinanceController extends HomeController
             $paypassword = trim(I('post.paypwd'));
             $withdrawalName = trim(I('post.user_name'));
 
+
+            if($address == '' || $address == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入银行卡号')]);
+            }
+             if($withdrawalName == '' || $withdrawalName == null){
+                $this->ajaxReturn(['code'=>0,'info'=>L('请输入收款人姓名')]);
+            }
             if($paypassword == '' || $paypassword == null){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现密码')]);
-            }
-
-             if($withdrawalName == '' || $withdrawalName == null){
-                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提现人名')]);
             }
             if(md5($paypassword) != $uinfo['paypassword']){
                 $this->ajaxReturn(['code'=>0,'info'=>L('提现密码错误')]);
             }
 
-            if($address == '' || $address == null){
-                $this->ajaxReturn(['code'=>0,'info'=>L('请输入提币地址')]);
-            }
+
             $num = trim(I('post.num'));
             if($num <= 0){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入正确的额度')]);
