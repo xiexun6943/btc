@@ -6,7 +6,7 @@
 	</div>
 	<div id="main" class="main">
 		<div class="main-title-h">
-			<span class="h1-title">在线客服</span>
+			<span class="h1-title">上诉管理</span>
 		</div>
 
 		<div class="data-table table-striped">
@@ -17,7 +17,7 @@
 						<th class="row-selected row-selected">
 							<input class="check-all" type="checkbox"/>
 						</th>
-						<th class="">ID</th>
+						<th class="">UID</th>
 						<th class="">会员账号</th>
 						<th class="">未回复记录</th>
 						<th class="">操作</th>
@@ -31,7 +31,7 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<td>{$vo.username}</td>
+								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 								<td>{$vo.nor}</td>
                                 <td>
 						            <a class="btn btn-primary btn-xs" href="{:U('User/onlinelist')}?id={$vo.id}">查看详情</a>

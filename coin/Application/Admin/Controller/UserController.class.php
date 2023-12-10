@@ -402,11 +402,16 @@ class UserController extends AdminController
         $where['type'] = 2;
         $where['state'] = 0;
         $count = M('online')->where($where)->count();
-        $Page = new \Think\Page($count, 50);
+        $Page = new \Think\Page($count, 15);
         $show = $Page->show();
 
-        $list = M('online')->where($where)->order('state desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-
+        $list = M('online')->where($where)->order('state DESC')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach ($list as $k => $v) {
+            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            if ($userInfo) {
+                $list[$k]['phone'] = $userInfo['phone'];
+            }
+        }
         $this->assign('list', $list);
         $this->assign('page', $show);
         $this->display();
@@ -450,7 +455,7 @@ class UserController extends AdminController
     }
 
 
-    //会员管理列表
+    //上诉管理列表
     public function online($name=NULL, $field=NULL, $status=NULL){
         $where = array();
         if ($field && $name) {
@@ -463,10 +468,7 @@ class UserController extends AdminController
         $count = M('User')->where($where)->count();
         $Page = new \Think\Page($count, 50);
         $show = $Page->show();
-
-        $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->field("id,username")->select();
-
-
+        $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->field("id,username,phone")->select();
 
         foreach($list as $key=>$vo){
             $map['uid'] = $vo['id'];

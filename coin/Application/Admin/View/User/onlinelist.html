@@ -6,7 +6,7 @@
 	</div>
 	<div id="main" class="main">
 		<div class="main-title-h">
-			<span class="h1-title">在线客服</span>
+			<span class="h1-title">上诉管理</span>
 		</div>
 
 		<div class="data-table table-striped">
@@ -31,7 +31,7 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<td>{$vo.username}</td>
+								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 								<td>{$vo.content}</td>
                                 <td>
 						            <a class="btn btn-primary btn-xs" href="{:U('User/sendonline')}?id={$vo.id}">回复</a>

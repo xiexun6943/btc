@@ -2567,4 +2567,8 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "请先设置提现密码"=>"Please set a withdrawal password first",
     "请输入区号"=>"Please enter area code",
     "请输入手机号"=>"Please enter phone number",
+    "上诉留言箱"=>"Appeal message box",
+    "您好，请问您要反馈什么问题?"=>"Hello, what problem do you want to feedback?",
+    "我要反馈:"=>"I want feedback:",
+    "留言箱"=>"Message box",
 ];

@@ -30,16 +30,17 @@ class UserController extends MobileController
         }
         $this->display();
     }
-
+    //获取聊天记录
     public function getlineinfo(){
         $uid = userid();
-        $list = M("online")->where(array('uid'=>$uid))->order('id asc')->field("type,content,addtime")->select();
+        $list = M("online")->where(array('uid'=>$uid))->order('id asc')->field("type,content,addtime")->limit(30)->select();
         foreach($list as $k=>$v){
             $list[$k]['time'] = date("H:i",strtotime($v['addtime']));
         }
         $this->ajaxReturn(['code'=>1,'data'=>$list]);exit();
 
     }
+
     //提交聊天内容
     public function uptxt($txt = null){
 
@@ -1752,6 +1753,7 @@ class UserController extends MobileController
         ];
         return $this->ajaxReturn(['code'=>200,'info'=>$data]);
     }
+
 
 }
 

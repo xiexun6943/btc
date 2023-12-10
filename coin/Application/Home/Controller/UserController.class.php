@@ -74,7 +74,7 @@ class UserController extends HomeController
 	//获取聊天记录
 	public function getlineinfo(){
 		$uid = userid();
-		$list = M("online")->where(array('uid'=>$uid))->order('id asc')->field("type,content")->limit(20)->select();
+		$list = M("online")->where(array('uid'=>$uid))->order('id asc')->field("type,content")->limit(30)->select();
 		$this->ajaxReturn(['code'=>1,'data'=>$list]);exit();
 
 	}
