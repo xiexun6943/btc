@@ -9,7 +9,7 @@ class FinanceController extends HomeController
 		$allow_action=array("index","getnewprice","getmoneyusdt","getmoneybtc","getmoneyeth","getmoneyeos","getmoneydoge","getmoneybch",
             "getmoneyltc","getmoneytrx","getmoneyxrp","getmoneyiotx","getmoneyfil","getmoneyshib","getmoneyflow","getmoneyjst",
             "getmoneyitc","getmoneyht","getmoneyogo","getmoneyusdz","getmoneyatm","getmoneyttc","getallzhehe","czpage","paycoin",
-            "txpage","tbhandle","czlist","txlist",'withdraw','recharge','payBank','getBank','getTxConfig','withdrawDo');
+            "txpage","tbhandle","czlist","txlist",'withdraw','recharge','payBank','getBank','getTxConfig','withdrawDo',"getmoneiota");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error(L("非法操作"));
 		}
@@ -534,6 +534,7 @@ class FinanceController extends HomeController
             'bch'=>['name'=>'bch'],
             'ltc'=>['name'=>'ltc'],
             'iota'=>['name'=>'iota'],
+            'flow'=>['name'=>'flow'],
             'fil'=>['name'=>'fil'],
             'jst'=>['name'=>'jst'],
             'ht'=>['name'=>'ht']
@@ -560,9 +561,8 @@ class FinanceController extends HomeController
 	    $uid = userid();
 	    $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
 	    $usdt = $minfo['usdt'] + $minfo['usdtd'];
-	    
-	    $allzhehe = $usdt  + session('usdzzh')  + session('ogozh') + session('htzh') + session('itczh') + session('htzh') + session('jstzh') + session('itczh') + session('shibzh') + session('filzh') + session('flowzh') + session('iotxzh') + session('xrpzh') + session('trxzh') + session('ltczh') + session('bchzh') + session('dogezh') + session('eoszh') + session('ethzh') + session('btczh');
 
+        $allzhehe = $usdt + session('flowzh')+ session('htzh') + session('jstzh') + session('filzh') + session('iotazh') + session('ltczh') + session('bchzh') + session('dogezh') + session('eoszh') + session('ethzh') + session('btczh');
 	    $this->ajaxReturn(['code'=>1,'allzhehe'=>$allzhehe]);
 	}
 	
@@ -580,7 +580,7 @@ class FinanceController extends HomeController
 	    $re['numd'] = $wallinfo['usdzd'];
 	    $zhehe = $wallinfo['usdz'] * $usdzusdt + $wallinfo['usdzd'] * $usdzusdt;
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -593,7 +593,7 @@ class FinanceController extends HomeController
 
 	
 	//获取单个币种资产(ogo)
-	public function getmoneyogo(){
+	/*public function getmoneyogo(){
 	    $uid = userid();
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -606,14 +606,14 @@ class FinanceController extends HomeController
 	    $re['numd'] = $wallinfo['ogod'];
 	    $zhehe = $wallinfo['ogo'] * $usdt_price + $wallinfo['ogod'] * $usdt_price;
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
-	    
+
 	    session("ogozh",$re['zhe']);
 	    $this->ajaxReturn($re);
-	}
+	}*/
 	
 	//获取单个币种资产(ht)
 	public function getmoneyht(){
@@ -621,15 +621,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'HT/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['ht'];
 	    $re['numd'] = $wallinfo['htd'];
-	    $zhehe = $wallinfo['ht'] * $usdt_price + $wallinfo['htd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['ht']  + $wallinfo['htd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -644,15 +644,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'ITC/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['itc'];
 	    $re['numd'] = $wallinfo['itcd'];
-	    $zhehe = $wallinfo['itc'] * $usdt_price + $wallinfo['itcd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['itc']  + $wallinfo['itcd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -667,15 +667,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'JST/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['jst'];
 	    $re['numd'] = $wallinfo['jstd'];
-	    $zhehe = $wallinfo['jst'] * $usdt_price + $wallinfo['jstd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['jst']  + $wallinfo['jstd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -690,15 +690,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'FLOW/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['flow'];
 	    $re['numd'] = $wallinfo['flowd'];
-	    $zhehe = $wallinfo['flow'] * $usdt_price + $wallinfo['flowd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['flow'] + $wallinfo['flowd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -708,7 +708,7 @@ class FinanceController extends HomeController
 	}
 	
 	//获取单个币种资产(shib)
-	public function getmoneyshib(){
+/*	public function getmoneyshib(){
 	    $uid = userid();
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -721,14 +721,14 @@ class FinanceController extends HomeController
 	    $re['numd'] = $wallinfo['shibd'];
 	    $zhehe = $wallinfo['shib'] * $usdt_price + $wallinfo['shibd'] * $usdt_price;
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
 	    
 	    session("shibzh",$re['zhe']);
 	    $this->ajaxReturn($re);
-	}
+	}*/
 	
 	//获取单个币种资产(fil)
 	public function getmoneyfil(){
@@ -736,15 +736,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'FIL/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['fil'];
 	    $re['numd'] = $wallinfo['fild'];
-	    $zhehe = $wallinfo['fil'] * $usdt_price + $wallinfo['fild'] * $usdt_price;
+	    $zhehe = round(($wallinfo['fil']+ $wallinfo['fild']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -753,31 +753,31 @@ class FinanceController extends HomeController
 	    $this->ajaxReturn($re);
 	}
 	
-	//获取单个币种资产(iotx)
-	public function getmoneyiotx(){
+	//获取单个币种资产(iota)
+	public function getmoneiota(){
 	    $uid = userid();
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'IOTA/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
-
-	    $re['num'] = $wallinfo['iotx'];
-	    $re['numd'] = $wallinfo['iotxd'];
-	    $zhehe = $wallinfo['iotx'] * $usdt_price + $wallinfo['iotxd'] * $usdt_price;
+//        var_dump($usdt_price);exit();
+	    $re['num'] = $wallinfo['iota'];
+	    $re['numd'] = $wallinfo['iotad'];
+	    $zhehe = $wallinfo['iota'] * $usdt_price + $wallinfo['iotad'] * $usdt_price;
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
 	    
-	    session("iotxzh",$re['zhe']);
+	    session("iotazh",$re['zhe']);
 	    $this->ajaxReturn($re);
 	}
 	
 	//获取单个币种资产(xrp)
-	public function getmoneyxrp(){
+/*	public function getmoneyxrp(){
 	    $uid = userid();
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -790,17 +790,17 @@ class FinanceController extends HomeController
 	    $re['numd'] = $wallinfo['xrpd'];
 	    $zhehe = $wallinfo['xrp'] * $usdt_price + $wallinfo['xrpd'] * $usdt_price;
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
 	    
 	    session("xrpzh",$re['zhe']);
 	    $this->ajaxReturn($re);
-	}
+	}*/
 	
 	//获取单个币种资产(trx)
-	public function getmoneytrx(){
+/*	public function getmoneytrx(){
 	    $uid = userid();
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -813,14 +813,14 @@ class FinanceController extends HomeController
 	    $re['numd'] = $wallinfo['trxd'];
 	    $zhehe = $wallinfo['trx'] * $usdt_price + $wallinfo['trxd'] * $usdt_price;
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
 	    
 	    session("trxzh",$re['zhe']);
 	    $this->ajaxReturn($re);
-	}
+	}*/
 	
 	
 	//获取单个币种资产(ltc)
@@ -829,15 +829,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'LTC/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['ltc'];
 	    $re['numd'] = $wallinfo['ltcd'];
-	    $zhehe = $wallinfo['ltc'] * $usdt_price + $wallinfo['ltcd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['ltc']  + $wallinfo['ltcd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -858,9 +858,9 @@ class FinanceController extends HomeController
 
 	    $re['num'] = $wallinfo['bch'];
 	    $re['numd'] = $wallinfo['bchd'];
-	    $zhehe = $wallinfo['bch'] * $usdt_price + $wallinfo['bchd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['bch'] + $wallinfo['bchd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -875,15 +875,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'DOGE/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['doge'];
 	    $re['numd'] = $wallinfo['doged'];
-	    $zhehe = $wallinfo['doge'] * $usdt_price + $wallinfo['doged'] * $usdt_price;
+	    $zhehe = round(($wallinfo['doge']  + $wallinfo['doged']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -898,15 +898,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'EOS/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['eos'];
 	    $re['numd'] = $wallinfo['eosd'];
-	    $zhehe = $wallinfo['eos'] * $usdt_price + $wallinfo['eosd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['eos'] + $wallinfo['eosd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -921,15 +921,15 @@ class FinanceController extends HomeController
 	    $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'ETH/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['eth'];
 	    $re['numd'] = $wallinfo['ethd'];
-	    $zhehe = $wallinfo['eth'] * $usdt_price + $wallinfo['ethd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['eth']  + $wallinfo['ethd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -948,15 +948,15 @@ class FinanceController extends HomeController
 //	    $price_arr  = $result['data'][0];
 //	    $usdt_price = $price_arr['close'];
         // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
+        $result=M('currency')->where(['name'=>'BTC/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
 
 	    $re['num'] = $wallinfo['btc'];
 	    $re['numd'] = $wallinfo['btcd'];
-	    $zhehe = $wallinfo['btc'] * $usdt_price + $wallinfo['btcd'] * $usdt_price;
+	    $zhehe = round(($wallinfo['btc'] + $wallinfo['btcd']) * $usdt_price,4);
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;
@@ -974,7 +974,7 @@ class FinanceController extends HomeController
 	    $re['numd'] = $wallinfo['usdtd'];
 	    $zhehe = $wallinfo['usdt'] + $wallinfo['usdtd'];
 	    if($zhehe <= 0){
-	        $zhehe = "0.000000";
+	        $zhehe = "0.0000";
 	    }
 	    $re['zhe'] = $zhehe;
 	    $re['code'] = 1;

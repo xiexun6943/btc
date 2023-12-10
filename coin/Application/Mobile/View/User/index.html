@@ -68,7 +68,7 @@
             <div class="allmbox_3">
                 <span class="fch zhehebox" style="font-size:24px;color: #fff" id="allzhehebox">--</span>
             </div>
-            
+
             <div class="allmbox_btn">
                 <div class="allmbox_btn_1">
                     <a href="{:U('User/czcoin')}">
@@ -131,7 +131,7 @@
                                     <span style="color:#cbcbcb;">{:L("可用")}</span>
                                 </div>
                                 <div style="width:100%;height:30px;line-height:20px;">
-                                    <span class="fch" id="num_{$vo.name}">0.000000</span>
+                                    <span class="fch" id="num_{$vo.name}">0.0000</span>
                                 </div>
                             </div>
                             <div style="width:33.33%;height:60px;float:left;">
@@ -139,7 +139,7 @@
                                     <span style="color:#cbcbcb;">{:L("冻结")}</span>
                                 </div>
                                 <div style="width:100%;height:30px;line-height:20px;">
-                                    <span class="fch" id="numd_{$vo.name}">0.000000</span>
+                                    <span class="fch" id="numd_{$vo.name}">0.0000</span>
                                 </div>
                             </div>
                             <div style="width:33.33%;height:60px;float:left;">
@@ -147,7 +147,7 @@
                                     <span style="color:#cbcbcb;">{:L("折合")}(USDT)</span>
                                 </div>
                                 <div style="width:100%;height:30px;line-height:20px;text-align:right;">
-                                    <span class="fch" id="zhehe_{$vo.name}">0.000000</span>
+                                    <span class="fch" id="zhehe_{$vo.name}">0.0000</span>
                                 </div>
                             </div>
                         </div>
@@ -641,15 +641,19 @@
         setInterval("getmoney_iota()",5000);
         getmoney_fil();
         setInterval("getmoney_fil()",5000);
-        getmoney_flow();
-        setInterval("getmoney_flow()",5000);
         getmoney_jst()
         setInterval("getmoney_jst()",5000);
         getmoney_ht();
         setInterval("getmoney_ht()",5000);
+
+        getmoney_flow();
+        setInterval("getmoney_flow()",5000);
+
+
         getallzhehe(); // 总和
         setInterval("getallzhehe()",3000);
         getmoney_usdt(); //usdt
+        setInterval("getmoney_usdt()",3000);
 
     });
 </script>

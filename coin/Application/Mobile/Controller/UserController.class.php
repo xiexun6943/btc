@@ -148,31 +148,29 @@ class UserController extends MobileController
         $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
         $usdt = $minfo['usdt'] + $minfo['usdtd'];
 
-        $allzhehe = $usdt + session('ttczh') + session('atmzh')  + session('usdzzh')  + session('ogozh') + session('htzh') + session('itczh') + session('htzh') + session('jstzh') + session('itczh') + session('shibzh') + session('filzh') + session('flowzh') + session('iotxzh') + session('xrpzh') + session('trxzh') + session('ltczh') + session('bchzh') + session('dogezh') + session('eoszh') + session('ethzh') + session('btczh');
-
-
+        $allzhehe = $usdt + session('flowzh')+ session('htzh') + session('jstzh') + session('filzh') + session('iotazh') + session('ltczh') + session('bchzh') + session('dogezh') + session('eoszh') + session('ethzh') + session('btczh');
         $this->ajaxReturn(['code'=>1,'allzhehe'=>$allzhehe]);
     }
 
 
     //获取单个币种资产(ttc)
-    public function getmoneyttc(){
-        $uid = userid();
-        $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
-
-        $ttcusdt = 0.01; //需要获取实时的行情
-
-        $re['num'] = $wallinfo['ttc'];
-        $re['numd'] = $wallinfo['ttcd'];
-        $re['zhe'] = $wallinfo['ttc'] * 0.01 + $wallinfo['ttcd'] * 0.01;
-        $re['code'] = 1;
-
-        session("ttczh",$re['zhe']);
-        $this->ajaxReturn($re);
-    }
+//    public function getmoneyttc(){
+//        $uid = userid();
+//        $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
+//
+//        $ttcusdt = 0.01; //需要获取实时的行情
+//
+//        $re['num'] = $wallinfo['ttc'];
+//        $re['numd'] = $wallinfo['ttcd'];
+//        $re['zhe'] = $wallinfo['ttc'] * 0.01 + $wallinfo['ttcd'] * 0.01;
+//        $re['code'] = 1;
+//
+//        session("ttczh",$re['zhe']);
+//        $this->ajaxReturn($re);
+//    }
 
     //获取单个币种资产(atm)
-    public function getmoneyatm(){
+/*    public function getmoneyatm(){
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -185,29 +183,29 @@ class UserController extends MobileController
 
         session("atmzh",$re['zhe']);
         $this->ajaxReturn($re);
-    }
+    }*/
 
     //获取单个币种资产(usdz)
-    public function getmoneyusdz(){
-        $uid = userid();
-        $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
-        $where['name'] = "usdz_usdt";
-        $marketinfo = M("market")->where($where)->field("new_price")->find();
-        $usdzusdt = $marketinfo['new_price'];
-
-        $re['num'] = $wallinfo['usdz'];
-        $re['numd'] = $wallinfo['usdzd'];
-        $re['zhe'] = $wallinfo['usdz'] * $usdzusdt + $wallinfo['usdzd'] * $usdzusdt;
-        $re['code'] = 1;
-
-        session("usdzzh",$re['zhe']);
-        $this->ajaxReturn($re);
-    }
+//    public function getmoneyusdz(){
+//        $uid = userid();
+//        $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
+//        $where['name'] = "usdz_usdt";
+//        $marketinfo = M("market")->where($where)->field("new_price")->find();
+//        $usdzusdt = $marketinfo['new_price'];
+//
+//        $re['num'] = $wallinfo['usdz'];
+//        $re['numd'] = $wallinfo['usdzd'];
+//        $re['zhe'] = $wallinfo['usdz'] * $usdzusdt + $wallinfo['usdzd'] * $usdzusdt;
+//        $re['code'] = 1;
+//
+//        session("usdzzh",$re['zhe']);
+//        $this->ajaxReturn($re);
+//    }
 
 
 
     //获取单个币种资产(ogo)
-    public function getmoneyogo(){
+  /*  public function getmoneyogo(){
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -223,7 +221,7 @@ class UserController extends MobileController
 
         session("ogozh",$re['zhe']);
         $this->ajaxReturn($re);
-    }
+    }*/
 
     //获取单个币种资产(ht)
     public function getmoneyht(){
@@ -242,7 +240,7 @@ class UserController extends MobileController
 
         $re['num'] = $wallinfo['ht'];
         $re['numd'] = $wallinfo['htd'];
-        $re['zhe'] = $wallinfo['ht'] * $usdt_price + $wallinfo['htd'] * $usdt_price;
+        $re['zhe'] = round(($wallinfo['ht']  + $wallinfo['htd']) * $usdt_price,4);
         $re['code'] = 1;
 
         session("htzh",$re['zhe']);
@@ -250,7 +248,7 @@ class UserController extends MobileController
     }
 
     //获取单个币种资产(itc)
-    public function getmoneyitc(){
+/*    public function getmoneyitc(){
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -266,7 +264,7 @@ class UserController extends MobileController
 
         session("itczh",$re['zhe']);
         $this->ajaxReturn($re);
-    }
+    }*/
 
     //获取单个币种资产(jst)
     public function getmoneyjst(){
@@ -285,7 +283,7 @@ class UserController extends MobileController
 
         $re['num'] = $wallinfo['jst'];
         $re['numd'] = $wallinfo['jstd'];
-        $re['zhe'] = $wallinfo['jst'] * $usdt_price + $wallinfo['jstd'] * $usdt_price;
+        $re['zhe'] = round(($wallinfo['jst']  + $wallinfo['jstd']) * $usdt_price,4);
         $re['code'] = 1;
 
         session("jstzh",$re['zhe']);
@@ -317,7 +315,7 @@ class UserController extends MobileController
     }
 
     //获取单个币种资产(shib)
-    public function getmoneyshib(){
+   /* public function getmoneyshib(){
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -333,7 +331,7 @@ class UserController extends MobileController
 
         session("shibzh",$re['zhe']);
         $this->ajaxReturn($re);
-    }
+    }*/
 
     //获取单个币种资产(fil)
     public function getmoneyfil(){
@@ -351,7 +349,7 @@ class UserController extends MobileController
 
         $re['num'] = $wallinfo['fil'];
         $re['numd'] = $wallinfo['fild'];
-        $re['zhe'] = $wallinfo['fil'] * $usdt_price + $wallinfo['fild'] * $usdt_price;
+        $re['zhe'] = round(($wallinfo['fil']+ $wallinfo['fild']) * $usdt_price,4);
         $re['code'] = 1;
 
         session("filzh",$re['zhe']);
@@ -359,7 +357,7 @@ class UserController extends MobileController
     }
 
     //获取单个币种资产(iotx)
-    public function getmoneyiotx(){
+   /* public function getmoneyiotx(){
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -375,10 +373,10 @@ class UserController extends MobileController
 
         session("iotxzh",$re['zhe']);
         $this->ajaxReturn($re);
-    }
+    }*/
 
     //获取单个币种资产(xrp)
-    public function getmoneyxrp(){
+  /*  public function getmoneyxrp(){
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -394,10 +392,10 @@ class UserController extends MobileController
 
         session("xrpzh",$re['zhe']);
         $this->ajaxReturn($re);
-    }
+    }*/
 
     //获取单个币种资产(trx)
-    public function getmoneytrx(){
+ /*   public function getmoneytrx(){
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
@@ -413,32 +411,10 @@ class UserController extends MobileController
 
         session("trxzh",$re['zhe']);
         $this->ajaxReturn($re);
-    }
+    }*/
 
 
-    //获取单个币种资产(ltc)
-    public function getmoneyltc(){
-        $uid = userid();
-        $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
-       /* $coinapi = "https://api.huobi.pro/market/history/kline?period=1day&size=1&symbol=ltcusdt";
-        $result = $this->get_maket_api($coinapi);
-        $price_arr  = $result['data'][0];
-        $usdt_price = $price_arr['close'];*/
-
-        // 使用数据库 采集的数据
-        $result=M('currency')->where(['name'=>'LTC/USDT'])->find();
-        $price_arr = json_decode($result['data'],true);
-        $usdt_price = $price_arr[0]['close'];//现价 close
-
-        $re['num'] = $wallinfo['ltc'];
-        $re['numd'] = $wallinfo['ltcd'];
-        $re['zhe'] = $wallinfo['ltc'] * $usdt_price + $wallinfo['ltcd'] * $usdt_price;
-        $re['code'] = 1;
-
-        session("ltczh",$re['zhe']);
-        $this->ajaxReturn($re);
-    }
 
     //获取单个币种资产(iota)
     public function getmoneiota(){
@@ -454,10 +430,32 @@ class UserController extends MobileController
         $result=M('currency')->where(['name'=>'IOTA/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
+        $re['num'] = $wallinfo['iota'];
+        $re['numd'] = $wallinfo['iotad'];
+        $re['zhe'] =round(( $wallinfo['iota']  + $wallinfo['iotad'] )* $usdt_price,4);
+        $re['code'] = 1;
 
+        session("iotazh",$re['zhe']);
+        $this->ajaxReturn($re);
+    }
+
+    //获取单个币种资产(ltc)
+    public function getmoneyltc(){
+        $uid = userid();
+        $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
+
+        /* $coinapi = "https://api.huobi.pro/market/history/kline?period=1day&size=1&symbol=ltcusdt";
+         $result = $this->get_maket_api($coinapi);
+         $price_arr  = $result['data'][0];
+         $usdt_price = $price_arr['close'];*/
+
+        // 使用数据库 采集的数据
+        $result=M('currency')->where(['name'=>'LTC/USDT'])->find();
+        $price_arr = json_decode($result['data'],true);
+        $usdt_price = $price_arr[0]['close'];//现价 close
         $re['num'] = $wallinfo['ltc'];
         $re['numd'] = $wallinfo['ltcd'];
-        $re['zhe'] = $wallinfo['ltc'] * $usdt_price + $wallinfo['ltcd'] * $usdt_price;
+        $re['zhe'] =  round(( $wallinfo['ltc']  + $wallinfo['ltcd'] )* $usdt_price,4);
         $re['code'] = 1;
 
         session("ltczh",$re['zhe']);
@@ -478,9 +476,10 @@ class UserController extends MobileController
         $result=M('currency')->where(['name'=>'BCH/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
+
         $re['num'] = $wallinfo['bch'];
         $re['numd'] = $wallinfo['bchd'];
-        $re['zhe'] = $wallinfo['bch'] * $usdt_price + $wallinfo['bchd'] * $usdt_price;
+        $re['zhe'] = round(($wallinfo['bch']  + $wallinfo['bchd']) * $usdt_price,4);
         $re['code'] = 1;
 
         session("bchzh",$re['zhe']);
@@ -501,10 +500,9 @@ class UserController extends MobileController
         $result=M('currency')->where(['name'=>'DOGE/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
-
         $re['num'] = $wallinfo['doge'];
         $re['numd'] = $wallinfo['doged'];
-        $re['zhe'] = $wallinfo['doge'] * $usdt_price + $wallinfo['doged'] * $usdt_price;
+        $re['zhe'] = round(($wallinfo['doge']  + $wallinfo['doged']) * $usdt_price,4);
         $re['code'] = 1;
 
         session("dogezh",$re['zhe']);
@@ -526,7 +524,7 @@ class UserController extends MobileController
         $usdt_price = $price_arr[0]['close'];//现价 close
         $re['num'] = $wallinfo['eos'];
         $re['numd'] = $wallinfo['eosd'];
-        $re['zhe'] = $wallinfo['eos'] * $usdt_price + $wallinfo['eosd'] * $usdt_price;
+        $re['zhe'] = round(($wallinfo['eos']  + $wallinfo['eosd'] )* $usdt_price,4);
         $re['code'] = 1;
 
         session("eoszh",$re['zhe']);
@@ -547,10 +545,9 @@ class UserController extends MobileController
         $result=M('currency')->where(['name'=>'ETH/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
-
         $re['num'] = $wallinfo['eth'];
         $re['numd'] = $wallinfo['ethd'];
-        $re['zhe'] = $wallinfo['eth'] * $usdt_price + $wallinfo['ethd'] * $usdt_price;
+        $re['zhe'] = round(($wallinfo['eth']  + $wallinfo['ethd'])* $usdt_price,4) ;
         $re['code'] = 1;
 
         session("ethzh",$re['zhe']);
@@ -562,7 +559,6 @@ class UserController extends MobileController
 
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
-
         /*$coinapi = "https://api.huobi.pro/market/history/kline?period=1day&size=1&symbol=btcusdt";
         $result = $this->get_maket_api($coinapi);
         $price_arr  = $result['data'][0];
@@ -571,11 +567,9 @@ class UserController extends MobileController
         $result=M('currency')->where(['name'=>'BTC/USDT'])->find();
         $price_arr = json_decode($result['data'],true);
         $usdt_price = $price_arr[0]['close'];//现价 close
-
-
         $re['num'] = $wallinfo['btc'];
         $re['numd'] = $wallinfo['btcd'];
-        $re['zhe'] = $wallinfo['btc'] * $usdt_price + $wallinfo['btcd'] * $usdt_price;
+        $re['zhe'] = round(($wallinfo['btc']   + $wallinfo['btcd'] )* $usdt_price,4);
         $re['code'] = 1;
 
         session("btczh",$re['zhe']);
@@ -587,13 +581,12 @@ class UserController extends MobileController
     public function getmoneyusdt(){
         $uid = userid();
         $wallinfo = M("user_coin")->where(array('userid'=>$uid))->find();
-//	    dump($wallinfo);
+
         $re['num'] = $wallinfo['usdt'];
         $re['numd'] = $wallinfo['usdtd'];
-        $re['zhe'] = $wallinfo['usdt'] + $wallinfo['usdtd'];
+        $re['zhe'] = round($wallinfo['usdt'] + $wallinfo['usdtd'],4);
         $re['code'] = 1;
         session("usdtzh",$re['zhe']);
-//	    dump($re);exit();
         $this->ajaxReturn($re);
     }
 
@@ -1350,6 +1343,7 @@ class UserController extends MobileController
             'ltc'=>['name'=>'ltc'],
             'iota'=>['name'=>'iota'],
             'fil'=>['name'=>'fil'],
+            'flow'=>['name'=>'flow'],
             'jst'=>['name'=>'jst'],
             'ht'=>['name'=>'ht']
         ];

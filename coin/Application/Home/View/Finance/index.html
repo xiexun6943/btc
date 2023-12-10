@@ -542,7 +542,25 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                    </div>
+                                    <div class="css-1imiysb">
+                                        <div class="cointitle">
+                                            <div class="titleop" style="width:30%;">
+                                                <span class="f14 fch" >{:L('USDT')}</span>
+                                                {:L('可用')}:<span id="usdt_num">0.0000</span>
+                                                {:L('冻结')}:<span id="usdt_numd">0.0000</span>
+                                            </div>
+                                            <div class="titleop" style="width:30%;">
+                                                <span class="f14 fch">{:L('BTC')}:</span>
+                                                {:L('可用')}:<span id="btc_num">0.0000</span>
+                                                {:L('冻结')}: <span id="btc_numd">0.0000</span>
+                                            </div>
+                                            <div class="titleop" style="width:30%;">
+                                                <span class="f14 fch">{:L('ETH')}</span>
+                                                {:L('可用')}:<span id="eth_num">0.0000</span>
+                                                {:L('冻结')}: <span id="eth_numd">0.0000</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="css-1imiysb">
@@ -645,6 +663,8 @@
                     $(numid).html(data.num);
                     $(numdid).html(data.numd);
                     $(zheheid).html(data.zhe);
+                    $('#usdt_num').html(data.num);
+                    $('#usdt_numd').html(data.numd);
                 }else{
                     console.log("error");
                 }
@@ -663,6 +683,8 @@
                     $(numid).html(data.num);
                     $(numdid).html(data.numd);
                     $(zheheid).html(data.zhe);
+                    $('#btc_num').html(data.num);
+                    $('#btc_numd').html(data.numd);
                 }else{
                     console.log("error");
                 }
@@ -681,6 +703,8 @@
                     $(numid).html(data.num);
                     $(numdid).html(data.numd);
                     $(zheheid).html(data.zhe);
+                    $('#eth_num').html(data.num);
+                    $('#eth_numd').html(data.numd);
                 }else{
                     console.log("error");
                 }
@@ -831,12 +855,12 @@
             }
             );
         }
-        function getmoney_shib(){
-            var coin = "shib";
+        function getmoney_iota(){
+            var coin = "iota";
             var numid = "#num_" + coin;
             var numdid = "#numd_" + coin;
             var zheheid = "#zhehe_" + coin;
-            $.post("{:U('Finance/getmoneyshib')}",
+            $.post("{:U('Finance/getmoneiota')}",
             {'coin':coin},
             function(data){
                 if(data.code == 1){
@@ -961,12 +985,11 @@
     </script>
     <script type="text/javascript">
         $(function(){
-            // setInterval("getmoney_usdz()",27000);
 
-            getmoney_btc();
-            setInterval("getmoney_btc()",2000);
-            getmoney_eth();
-            setInterval("getmoney_eth()",3000);
+            getmoney_eth();//eth 金额
+            setInterval("getmoney_eth()",2000);
+            getmoney_btc();//btc 金额
+            setInterval("getmoney_btc()",2500);
             getmoney_eos();
             setInterval("getmoney_eos()",5000);
             getmoney_doge();
@@ -975,14 +998,17 @@
             setInterval("getmoney_bch()",5000);
             getmoney_ltc();
             setInterval("getmoney_ltc()",5000);
-            getmoney_iotx();
-            setInterval("getmoney_iotx()",5000);
+            getmoney_iota();
+            setInterval("getmoney_iota()",5000);
             getmoney_fil();
             setInterval("getmoney_fil()",5000);
-            getmoney_jst();
+            getmoney_jst()
             setInterval("getmoney_jst()",5000);
             getmoney_ht();
             setInterval("getmoney_ht()",5000);
+
+            getmoney_flow();
+            setInterval("getmoney_flow()",5000);
 
             getmoney_usdt();
             setInterval("getmoney_usdt()",3000);
