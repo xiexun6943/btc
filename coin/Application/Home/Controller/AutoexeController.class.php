@@ -42,7 +42,7 @@ class AutoexeController extends \Think\Controller
 	                $data['type'] = 18;
 	                $data['addtime'] = date("Y-m-d H:i:s",time());
 	                $data['st'] = 1;
-	                $data['remark'] = L("认购资产释放");
+	                $data['remark'] = "认购资产释放";
 	                M("bill")->add($data);
 	                echo "==认购记录ID:".$id."释放成功";
 	            }else{
@@ -111,7 +111,7 @@ class AutoexeController extends \Think\Controller
 	                    $cincbill['type'] = 10;
 	                    $cincbill['addtime'] = date("Y-m-d H:i:s",time());
 	                    $cincbill['st'] = 1;
-	                    $cincbill['remark'] = L('币币交易限价购买委托成交');
+	                    $cincbill['remark'] = '币币交易限价购买委托成交';
 	                    $cincre = M("bill")->add($cincbill);
 
 	                    //扣除冻结的USDT并写入日志
@@ -124,15 +124,15 @@ class AutoexeController extends \Think\Controller
 	                    $uincbill['type'] = 9;
 	                    $uincbill['addtime'] = date("Y-m-d H:i:s",time());
 	                    $uincbill['st'] = 2;
-	                    $uincbill['remark'] = L('币币交易限价购买委托成交');
+	                    $uincbill['remark'] = '币币交易限价购买委托成交';
 	                    $uincre = M("bill")->add($uincbill);
 	                    
 	                    if($savere && $cincre && $uincre){
 	                        
 	                        $notice['uid'] = $uid;
 		                    $notice['account'] = $v['account'];
-		                    $notice['title'] = L('币币交易限价委托交易');
-		                    $notice['content'] = L('币币交易限价购买委托订单购买成功');
+		                    $notice['title'] = '币币交易限价委托交易';
+		                    $notice['content'] = '币币交易限价购买委托订单购买成功';
 		                    $notice['addtime'] = date("Y-m-d H:i:s",time());
 		                    $notice['status'] = 1;
 		                    M("notice")->add($notice);
@@ -170,7 +170,7 @@ class AutoexeController extends \Think\Controller
 	                    $uincbill['type'] = 9;
 	                    $uincbill['addtime'] = date("Y-m-d H:i:s",time());
 	                    $uincbill['st'] = 1;
-	                    $uincbill['remark'] = L('币币交易限价出售委托成交');
+	                    $uincbill['remark'] ='币币交易限价出售委托成交';
 	                    $uincre = M("bill")->add($uincbill);
 	                    
 	                    //扣除冻结的卖出币量并写入日志
@@ -183,15 +183,15 @@ class AutoexeController extends \Think\Controller
 	                    $cincbill['type'] = 10;
 	                    $cincbill['addtime'] = date("Y-m-d H:i:s",time());
 	                    $cincbill['st'] = 2;
-	                    $cincbill['remark'] = L('币币交易限价出售委托成交');
+	                    $cincbill['remark'] = '币币交易限价出售委托成交';
 	                    $cincre = M("bill")->add($cincbill);
 	                    
 	                    if($savere && $cincre && $uincre){
 	                        
 	                        $notice['uid'] = $uid;
 		                    $notice['account'] = $v['account'];
-		                    $notice['title'] = L('币币交易限价委托交易');
-		                    $notice['content'] = L('币币交易限价购买委托订单出售成功');
+		                    $notice['title'] = '币币交易限价委托交易';
+		                    $notice['content'] ='币币交易限价购买委托订单出售成功';
 		                    $notice['addtime'] = date("Y-m-d H:i:s",time());
 		                    $notice['status'] = 1;
 		                    M("notice")->add($notice);
@@ -236,7 +236,7 @@ class AutoexeController extends \Think\Controller
 	            $billdata['type'] = 8;
 	            $billdata['addtime'] = date("Y-m-d H:i:s",time());
 	            $billdata['st'] = 1;
-	            $billdata['remark'] = L('释放冻结收益');
+	            $billdata['remark'] = '释放冻结收益';
 	            M("bill")->add($billdata);
 	            //增加会员资产，减少冻结额度
 	            $coinname_d = $coinname."d";
@@ -246,8 +246,8 @@ class AutoexeController extends \Think\Controller
 	            
 	            $notice['uid'] = $uid;
 		        $notice['account'] = $username;
-		        $notice['title'] = L('释放冻结收益');
-		        $notice['content'] = L('您冻结的矿机收益释放成功，可以交易');
+		        $notice['title'] = '释放冻结收益';
+		        $notice['content'] = '您冻结的矿机收益释放成功，可以交易';
 		        $notice['addtime'] = date("Y-m-d H:i:s",time());
 		        $notice['status'] = 1;
 		        M("notice")->add($notice);
@@ -320,7 +320,7 @@ class AutoexeController extends \Think\Controller
 	                             $djprofit_d['addday'] = date("Y-m-d",time());
 	                             $djprofit_d['thawtime'] = date("Y-m-d H:i:s",(time() + 86400 * $djday));
 	                             $djprofit_d['thawday'] = date("Y-m-d",(time() + 86400 * $djday));
-	                             $djprofit_d['remark'] = L('冻结矿机释放收益');
+	                             $djprofit_d['remark'] ='冻结矿机释放收益';
                 
 	                             M("djprofit")->add($djprofit_d);
 	                             //写资金日志
@@ -332,13 +332,13 @@ class AutoexeController extends \Think\Controller
 	                             $billdata['type'] = 7;
 	                             $billdata['addtime'] = date("Y-m-d H:i:s",time());
 	                             $billdata['st'] = 1;
-	                             $billdata['remark'] = L('矿机收益释放冻结');
+	                             $billdata['remark'] = '矿机收益释放冻结';
 	                             M("bill")->add($billdata);
 	                             
 	                             $notice['uid'] = $uid;
 		                         $notice['account'] = $username;
-		                         $notice['title'] = L('矿机收益');
-		                         $notice['content'] = L('今日矿机收益已成功到账，请注册查收');
+		                         $notice['title'] = '矿机收益';
+		                         $notice['content'] = '今日矿机收益已成功到账，请注册查收';
 		                         $notice['addtime'] = date("Y-m-d H:i:s",time());
 		                         $notice['status'] = 1;
 		                         M("notice")->add($notice);
@@ -354,7 +354,7 @@ class AutoexeController extends \Think\Controller
 	                             $billdata['type'] = 8;
 	                             $billdata['addtime'] = date("Y-m-d H:i:s",time());
 	                             $billdata['st'] = 1;
-	                             $billdata['remark'] = L('矿机收益释放');
+	                             $billdata['remark'] = '矿机收益释放';
 	                             M("bill")->add($billdata);
 	                         }
 	                         
@@ -440,7 +440,7 @@ class AutoexeController extends \Think\Controller
 	                   $djprofit_d['addday'] = date("Y-m-d",time());
 	                   $djprofit_d['thawtime'] = date("Y-m-d H:i:s",(time() + 86400 * $djday));
 	                   $djprofit_d['thawday'] = date("Y-m-d",(time() + 86400 * $djday));
-	                   $djprofit_d['remark'] = L('冻结矿机释放收益');
+	                   $djprofit_d['remark'] = '冻结矿机释放收益';
 
 	                   M("djprofit")->add($djprofit_d);
 	                   //写资金日志
@@ -452,13 +452,13 @@ class AutoexeController extends \Think\Controller
 	                   $billdata['type'] = 7;
 	                   $billdata['addtime'] = date("Y-m-d H:i:s",time());
 	                   $billdata['st'] = 1;
-	                   $billdata['remark'] = L('矿机收益释放冻结');
+	                   $billdata['remark'] = '矿机收益释放冻结';
 	                   M("bill")->add($billdata);
 	                   
 	                   $notice['uid'] = $uid;
 		               $notice['account'] = $username;
-		               $notice['title'] = L('矿机收益');
-		               $notice['content'] = L('今日矿机收益已成功到账，请注册查收');
+		               $notice['title'] = '矿机收益';
+		               $notice['content'] = '今日矿机收益已成功到账，请注册查收';
 		               $notice['addtime'] = date("Y-m-d H:i:s",time());
 		               $notice['status'] = 1;
 		               M("notice")->add($notice);
@@ -474,7 +474,7 @@ class AutoexeController extends \Think\Controller
 	                   $billdata['type'] = 8;
 	                   $billdata['addtime'] = date("Y-m-d H:i:s",time());
 	                   $billdata['st'] = 1;
-	                   $billdata['remark'] = L('矿机收益释放');
+	                   $billdata['remark'] = '矿机收益释放';
 	                   M("bill")->add($billdata);
 	               }
 	               
@@ -1129,14 +1129,14 @@ class AutoexeController extends \Think\Controller
 	    $data['type'] = 4;
 	    $data['addtime'] = date("Y-m-d H:i:s",time());
 	    $data['st'] = 1;
-	    $data['remark'] = L('秒合约交易结算');
+	    $data['remark'] = '秒合约交易结算';
 	    M("bill")->add($data);
 
 	    
 	    $notice['uid'] = $uid;
 		$notice['account'] = $username;
-		$notice['title'] = L('秒合约交易');
-		$notice['content'] = L('秒合约已平仓，请及时加仓');
+		$notice['title'] ='秒合约交易';
+		$notice['content'] ='秒合约已平仓，请及时加仓';
 		$notice['addtime'] = date("Y-m-d H:i:s",time());
 		$notice['status'] = 1;
 		M("notice")->add($notice);
