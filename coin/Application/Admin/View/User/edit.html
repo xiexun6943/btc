@@ -97,7 +97,15 @@
 									<td class="item-note" style="color:red;">*会员提币的状态</td>
 								</tr>
 
-
+								<tr class="controls">
+									<td class="item-label">用户类型 :</td>
+									<td>
+										<select name="type" class="form-control input-10x">
+											<option value="0" <eq name="data.type" value="0">selected</eq>>正式</option>
+											<option value="1" <eq name="data.type" value="1">selected</eq>>虚拟</option>
+										</select></td>
+									<td class="item-note" style="color:red;">*用户类型 正式/虚拟</td>
+								</tr>
 
 								<tr class="controls">
 									<td class="item-label">彩金流水 :</td>

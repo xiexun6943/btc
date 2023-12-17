@@ -5,7 +5,10 @@ class UserController extends AdminController
 {
     protected function _initialize()
     {
-        parent::_initialize();	$allow_action=array("index","edit","status","admin","adminEdit","adminStatus","updateRules","log","logEdit","logStatus","qianbao","qianbaoEdit","qianbaoStatus","coin","coinEdit","coinFreeze","coinLog","setpwd","amountlog","loginadmin","billdel","sendnotice","upsendnotice","noticelist","noticedel","authrz","upanthrz","online","onlinelist","sendonline","uponline","setagent","agent","cancelagent","recharge","reset","gdswitch");
+        parent::_initialize();	$allow_action=array("index","edit","status","admin","adminEdit","adminStatus","updateRules","log",
+        "logEdit","logStatus","qianbao","qianbaoEdit","qianbaoStatus","coin","coinEdit","coinFreeze","coinLog","setpwd",
+        "amountlog","loginadmin","billdel","sendnotice","upsendnotice","noticelist","noticedel","authrz","upanthrz","online",
+        "onlinelist","sendonline","uponline","setagent","agent","cancelagent","recharge","reset","gdswitch","count");
         if(!in_array(ACTION_NAME,$allow_action)){
             $this->error("页面不存在！");
         }
@@ -1303,6 +1306,41 @@ class UserController extends AdminController
         }
     }
 
+    public function count()
+    {
+        $status=I('get.status');
+        $field=I('get.field');
+        $search=I('get.search');
+        $where = array();
+        if ($field && $search) {
+            $where[$field] = $search;
+        }
+        if ($status) {
+            $where['status'] = $status;
+        }
+        $count = M('User')->where($where)->count();
+        $Page = new \Think\Page($count, 15);
+        $show = $Page->show();
 
+        $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+
+        foreach ($list as $k => $v) {
+            $list[$k]['invit_1'] = M('User')->where(array('id' => $v['invit_1']))->getField('username');
+            $list[$k]['invit_2'] = M('User')->where(array('id' => $v['invit_2']))->getField('username');
+            $list[$k]['invit_3'] = M('User')->where(array('id' => $v['invit_3']))->getField('username');
+            $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
+            $list[$k]['state']=$user_login_state['state'];
+        }
+        $this->assign('list', $list);
+        $this->assign('page', $show);
+        $this->display();
+    }
+    private function getAgent($status){
+        // 1 一级代理  2 二级代理  3 三级代理  4普通用户    5 全部用户
+        switch ($status) {
+            case 1:
+        }
+
+    }
 }
 ?>
