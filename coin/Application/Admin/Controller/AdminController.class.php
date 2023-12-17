@@ -40,6 +40,7 @@ class AdminController extends Controller
             'Finance/myzr','Finance/myzc', //财务记录
             'Trade/tyorder','Trade/hylog', 'Trade/bbxjlist','Trade/bbsjlist',//交易中心
             'Kuangm/kjlist','Kuangm/overlist', 'Kuangm/kjsylist','Kuangm/djprofit',//矿机管理
+            'Draw/index','Draw/setting', //红包抽奖
         ];
         $this->assign('__LANG__', array('en-us'=>'English','zh-cn'=>'简体中文'));
         $this->assign('all_menu', $all_menu);
