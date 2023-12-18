@@ -20,40 +20,39 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="navbar-header" style="background-color:#3c434d;">
 		<a class="navbar-brand" style="width:200px;text-align:center;background-color:#3c434d;" href="{:U('Agent/Index/index')}">
-		    <span>{:L('代理系统')}</span>	
+			<span>{:L('代理系统')}</span>
 		</a>
 	</div>
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">
-			<li> 
-			    <a href="{:U('Agent/Index/index')}">{:L('会员列表')}</a>
-			</li>
-			
-			<li> 
-				<a href="{:U('Agent/Index/jclist')}">{:L('合约建仓订单')}</a>
-			</li>
-			
 			<li>
-			    <a href="{:U('Agent/Index/pclist')}">{:L('合约平仓订单')}</a>
-			</li>
-			
-			<li >
-			    <a href="{:U('Agent/Index/recharge')}">{:L('充值列表')}</a>
-			</li>
-			
-			<li >
-			    <a href="{:U('Agent/Index/withdraw')}">{:L('提现列表')}</a>
-			</li>
-			
-			<li  class="active">
-			    <a href="{:U('Agent/Index/property')}">{:L('用户财产')}</a>
-			</li>
-			<li>
-				<a href="{:U('Agent/Draw/index')}">{:L('红包抽奖')}</a>
+				<a href="{:U('Agent/Index/index')}">{:L('会员列表')}</a>
 			</li>
 
+			<li>
+				<a href="{:U('Agent/Index/jclist')}">{:L('合约建仓订单')}</a>
+			</li>
+
+			<li>
+				<a href="{:U('Agent/Index/pclist')}">{:L('合约平仓订单')}</a>
+			</li>
+
+			<li >
+				<a href="{:U('Agent/Index/recharge')}">{:L('充值列表')}</a>
+			</li>
+
+			<li>
+				<a href="{:U('Agent/Index/withdraw')}">{:L('提现列表')}</a>
+			</li>
+
+			<li>
+				<a href="{:U('Agent/Index/property')}">{:L('用户财产')}</a>
+			</li>
+			<li  class="active">
+				<a href="{:U('Agent/Draw/index')}">{:L('红包抽奖')}</a>
+			</li>
 		</ul>
-		
+
 		<ul class="nav navbar-nav navbar-rights" style="margin-right:10px;">
 			<li>
 				<a class="dropdown-toggle" title="{:L('退出')}" href="{:U('Agent/Login/loginout')}" >
@@ -71,10 +70,10 @@
 	</div>
 	<div id="main" class="main">
 		<div class="main-title-h">
-			<span class="h1-title">{:L('用户财产')}</span>
-			<a class="btn btn-warning" onClick="location.href='{:U('Agent/Index/property')}'">{:L('初始化搜索')}</a>
+			<span class="h1-title">{:L('红包中奖记录')}</span>
+			<a class="btn btn-warning" onClick="location.href='{:U('Agent/Index/recharge')}'">{:L('初始化搜索')}</a>
 		</div>
-		
+
 		<div class="cf">
 
 			<div class="search-form fl cf" style="float: none !important;">
@@ -106,39 +105,45 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="data-table table-striped">
 			<table class="">
 				<thead>
 				<tr>
-					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-					<th class="">UID</th>
-					<th class="">{:L('用户名')}</th>
-					<volist name="coinlist" id="v">
-						<th class="">{$v.title}(<?php echo strtoupper($v['name']);?>)</th>
-					</volist>
+					<th class="" style="text-align: center">UID</th>
+					<th class="" style="text-align: center">用户名</th>
+					<th class="" style="text-align: center">当日红包</th>
+					<th class="" style="text-align: center">累计红包</th>
+					<th class="" style="text-align: center">当日已经抽奖次数/当日总抽奖次数</th>
+					<th class="" style="text-align: center">累计充值金额</th>
 				</tr>
 				</thead>
 				<tbody>
 				<notempty name="list">
 					<volist name="list" id="vo">
 						<tr>
-							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
-							<td>{$vo.id}</td>
-							<td ><span style="color: #ff0000">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
-							<volist name="coinlist" id="v">
-								<td>
-								    {:L('可用')}：{$vo[$v['name']] * 1}<br>{:L('冻结')}：
-									<php>echo $vo[$v['name'].'d'] * 1;</php>
-									<br> {:L('总计')}：
-									<php>echo $vo[$v['name'].'d'] * 1 + $vo[$v['name']] * 1;</php>
-									<br>
-								</td>
-							</volist>
+
+							<td style="text-align: center">{$vo.uid}</td>
+							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+							<td style="text-align: center">{$vo.today_draw}</td>
+							<td style="text-align: center">{$vo.total_draw}</td>
+							<!--							<td>-->
+							<!--								<if condition="$vo.hyzd eq 1">-->
+							<!--									<span style="color:#0ecb81;">买涨</span>-->
+							<!--									<elseif condition="$vo.hyzd eq 2" />-->
+							<!--									<span style="color:#f5465c;">买跌</span>-->
+							<!--								</if>-->
+							<!--							</td>-->
+
+							<td style="text-align: center ;color:red">{$vo.is_draw}/{$vo.draw_total}</td>
+							<td style="text-align: center">{$vo.total_recharge}</td>
+
 						</tr>
 					</volist>
 					<else/>
-					<td colspan="12" class="text-center empty-info"><i class="glyphicon glyphicon-exclamation-sign"></i>{:L('暂无数据')}</td>
+					<td colspan="12" class="text-center empty-info">
+						<i class="glyphicon glyphicon-exclamation-sign"></i>暂无数据
+					</td>
 				</notempty>
 				</tbody>
 			</table>
@@ -149,31 +154,15 @@
 	</div>
 </div>
 <script type="text/javascript" src="__PUBLIC__/Admin/js/common.js"></script>
+
+
 <script type="text/javascript">
-    $(function(){
-        setInterval("tzfc()",2000);
-    });
-    
-    function tzfc(){
-        var st = 1;
-        $.post("{:U('Admin/Trade/gethyorder')}",
-        {'st':st},
-        function(data){
-            if(data.code == 1){
-                layer.confirm('There is a new contract order', {
-                  btn: ['I knew'] //按钮
-                }, function(){
-                    
-                    $.post("{:U('Admin/Trade/settzstatus')}",
-                    function(data){
-                        if(data.code == 1){
-                            window.location.reload();  
-                        } 
-                    });
-                });
-            }   
-        });
-    }
+	function closetanchu(){
+		layer.closeAll('loading');
+	}
+	function shuaxin(){
+		window.location.href=window.location.href;
+	}
 </script>
 
 
