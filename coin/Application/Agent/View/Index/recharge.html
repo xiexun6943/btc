@@ -111,53 +111,80 @@
 			<table class="">
 				<thead>
 				<tr>
+					<th class="">ID</th>
 					<th class="">UID</th>
-					<th class="">{:L('用户名')}</th>
-					<th class="">{:L('充值币种')}</th>
-					<th width="">{:L('充值时间')}</th>
-					<th width="">{:L('处理时间')}</th>
-					<th width="">{:L('充值数量')}</th>
-					<th width="">{:L('实际到账')}</th>
-					<th width="">{:L('转账凭证')}</th>
-					<th width="">{:L('状态')}</th>
-					<th width="">{:L('操作')}</th>
+					<th class="">用户名</th>
+					<th width="">操作</th>
+					<th width="">充值数量/实际到账(U)</th>
+					<th width="">银行卡充值信息</th>
+					<th width="">充值类型/币种/状态</th>
+					<th width="">转账凭证</th>
+					<th width="">充值时间/处理时间</th>
 				</tr>
 				</thead>
 				<tbody>
 				<notempty name="list">
 					<volist name="list" id="vo">
 						<tr>
+							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
-							<td ><span style="color: #ff0000">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
-							<td><?php echo strtoupper($vo['coin']);?></td>
-							<td>{$vo.addtime}</td>
-							<td>{$vo.updatetime}</td>
-							<td>{$vo['num']*1}</td>
-							<td>{$vo['num']*1}</td>
-							<td>
-							    <img src="/Public/Static/payimgs/{$vo.payimg}" style="height:60px;"/>
-							</td>
-							
+							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							<td>
 								<eq name="vo.status" value="1">
-								    <span style="color:blue;">{:L('等待审核')}</span>
+									<input type="button" class="ajax-get btn btn-primary btn-xs" value="确认" onclick="Upzr('{$vo['id']}');"/>
+									<input type="button" class="ajax-get btn btn-primary btn-xs" value="驳回" onclick="Upbhzr('{$vo['id']}');"/>
+								</eq>
+								<br>
+								<eq name="vo.status" value="2"><span style="color:blue;">已处理</span></eq>
+								<eq name="vo.status" value="3"><span style="color:blue;">已处理</span></eq>
+								<br>
+								<?php if(session('admin_role') == 1){  ?>
+								<input type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
+								<?php  }  ?>
+							</td>
+
+							<td>充值(U):{$vo['num']}<br>
+								到账(U):{$vo['real_num']}</td>
+
+							<td>{$vo['remark']}</td>
+							<?php if( $vo['type'] == 1){ ?>
+							<td ><span style="color:red; font-weight:bold">客户充值</span><br>
+								充值币种:<?php echo strtoupper($vo['coin']);?><br>
+								状态:<eq name="vo.status" value="1">
+									<span style="color:blue;font-weight:bold">等待审核</span>
 								</eq>
 								<eq name="vo.status" value="2">
-								    <span style="color:green;">{:L('审核通过')}</span>
+									<span style="color:green;font-weight:bold">审核通过</span>
 								</eq>
 								<eq name="vo.status" value="3">
-								    <span style="color:red;">{:L('驳回充值')}</span>
-								</eq>
-							</td>
+									<span style="color:darkblue;font-weight:bold ">驳回充值</span>
+								</eq></td>
+							<?php }else{ ?>
 							<td>
-                                <eq name="vo.status" value="1">
-                                    <input type="button" class="ajax-get btn btn-primary btn-xs" value="{:L('确认')}" onclick="Upzr('{$vo['id']}');"/>
-                                    <input type="button" class="ajax-get btn btn-primary btn-xs" value="{:L('驳回')}" onclick="Upbhzr('{$vo['id']}');"/>
-                                </eq>
-                                <eq name="vo.status" value="2"><span style="color:blue;">{:L('已处理')}</span></eq>
-                                <eq name="vo.status" value="3"><span style="color:blue;">{:L('已处理')}</span></eq>
-                                <input type="button" class="ajax-get btn btn-primary btn-xs" value="{:L('删除')}" onclick="del('{$vo['id']}');"/>
-                            </td>
+								<span style="color:orange;font-weight:bold">人工充值</span><br>
+								充值币种:<?php echo strtoupper($vo['coin']);?><br>
+								状态:<eq name="vo.status" value="1">
+								<span style="color:blue;font-weight:bold">等待审核</span>
+							</eq>
+								<eq name="vo.status" value="2">
+									<span style="color:green;font-weight:bold">审核通过</span>
+								</eq>
+								<eq name="vo.status" value="3">
+									<span style="color:darkblue;font-weight:bold">驳回充值</span>
+								</eq></td>
+							<?php  }?>
+
+							<?php if( $vo['type'] == 1){ ?>
+							<td>
+								<img src="/Public/Static/payimgs/{$vo.payimg}" style="height:60px;"/>
+							</td>
+
+
+							<?php }else{ ?>
+							<td>后台人工充值</td>
+							<?php  }?>
+							<td>充值时间:<br>{$vo.addtime}<br>
+								处理时间:<br>{$vo.updatetime}</td>
 						</tr>
 					</volist>
 					<else/>

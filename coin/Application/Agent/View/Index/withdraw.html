@@ -109,47 +109,57 @@
 		<div class="data-table table-striped">
             <table class="">
                 <thead>
-                <tr>
-                    <th class="">UID</th>
-                    <th class="">{:L('用户名')}</th>
-                    <th class="">{:L('币种名称')}</th>
-                    <th width="">{:L('申请时间')}</th>
-                    <th width="">{:L('审核时间')}</th>
-                    <th width="">{:L('提币地址')}</th>
-                    <th width="">{:L('提币数量')}</th>
-                    <th class="">{:L('提现手续费')}</th>
-                    <th class="">{:L('实际到账')}</th>
-                    <th width="">{:L('状态')}</th>
-                    <th width="">{:L('操作')}</th>
-                </tr>
+				<tr>
+					<th class="">ID</th>
+					<th class="">UID</th>
+					<th class="">用户名</th>
+					<th width="">操作</th>
+					<th class="">币名称</th>
+					<th width="">提币地址</th>
+					<th width="">提币信息(U)</th>
+					<th width="">申请/审核时间</th>
+				</tr>
                 </thead>
                 <tbody>
                 <notempty name="list">
                     <volist name="list" id="vo">
                         <tr>
+							<td>{$vo.id}</td>
 							<td>{$vo.userid}</td>
-							<td ><span style="color: #ff0000">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
-                            <td><?php echo strtoupper($vo['coinname']);?></td>
-                            <td>{$vo.addtime}</td>
-                            <td>{$vo.endtime}</td>
-                            <td>{$vo.address}</td>
-                            <td>{$vo.num}</td>
-                            <td>{$vo.fee}</td>
-                            <td>{$vo.mum}</td>
-                            <td>
-                                <eq name="vo.status" value="1"><span style="color:blue;">{:L('待审核')}</span></eq>
-                                <eq name="vo.status" value="2"><span style="color:green;">{:L('完成')}</span></eq>
-                                <eq name="vo.status" value="3"><span style="color:red;">{:L('未通过')}</span></eq>
-                            </td>
-                            <td>
-                                <eq name="vo.status" value="1">
-                                    <input type="button" class="ajax-get btn btn-primary btn-xs" value="{:L('确认提币')}" onclick="Upzc('{$vo['id']}');"/>
-                                    <input type="button" class="ajax-get btn btn-primary btn-xs" value="{:L('驳回提币')}" onclick="Upbh('{$vo['id']}');"/>
-                                </eq>
-                                <eq name="vo.status" value="2"><span style="color:blue;">{:L('已处理')}</span></eq>
-                                <eq name="vo.status" value="3"><span style="color:blue;">{:L('已处理')}</span></eq>
-                                <input type="button" class="ajax-get btn btn-primary btn-xs" value="{:L('删除')}" onclick="del('{$vo['id']}');"/>
-                            </td>
+							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+
+							<td>
+
+								<eq name="vo.status" value="1">
+									<input style="display: block;margin-bottom:5px" type="button" class="ajax-get btn btn-primary btn-xs" value="确认提币" onclick="Upzc('{$vo['id']}');"/>
+									<input style="display: block;margin-bottom:5px" type="button" class="ajax-get btn btn-primary btn-xs" value="驳回提币" onclick="Upbh('{$vo['id']}');"/>
+								</eq>
+								<eq name="vo.status" value="2"><span style="color:blue;">已处理</span></eq>
+								<eq name="vo.status" value="3"><span style="color:blue;">已处理</span></eq>
+								<?php if(session('admin_role') == 1){  ?>
+								<input style="display: block;width:66px;margin-bottom:5px" type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
+								<?php  }  ?>
+							</td>
+
+							<td><?php echo strtoupper($vo['coinname']);?></td>
+							<?php if(in_array($vo['coinname'],['hkd','jpy'])){ ?>
+							<td style="width:200px;white-space:unset">({$vo.bank_name})-{$vo.address}-({$vo.withdrawal_name})-提现金额({$vo.remark})</td>
+							<?php }else{ ?>
+							<td>{$vo.address}</td>
+							<?php } ?>
+							<td>提现状态:
+								<eq name="vo.status" value="1"><span style="color:blue;">待审核</span></eq>
+								<eq name="vo.status" value="2"><span style="color:green;">完成</span></eq>
+								<eq name="vo.status" value="3"><span style="color:red;">未通过</span></eq>
+								<br>
+								提币数目:<span style="color:red;">{$vo.num}</span> <br>
+								提币手续费:<span style="color:blue;">{$vo.fee}</span><br>
+								到账:<span style="color:orange;">{$vo.mum}</span>
+							</td>
+							<td>
+								{$vo.addtime}<br>
+								{$vo.endtime}
+							</td>
                         </tr>
                     </volist>
                     <else/>

@@ -565,12 +565,12 @@ class UserController extends AdminController
                     $add['invit_1'] = $inv_user['id'];
                     $add['invit_2'] = $inv_user['invit_1'];
                     $add['invit_3'] = $inv_user['invit_2'];
-                    $path = $inv_user['path'].','.$inv_user['id'];
+                    $add['path'] = $inv_user['path'].','.$inv_user['id'];
                 }else{
                     $add['invit_1'] = 0;
                     $add['invit_2'] = 0;
                     $add['invit_3'] = 0;
-                    $path = '';
+                    $add['path']  = '';
                 }
 
                 $add['status'] = $_POST['status'];
@@ -1311,19 +1311,31 @@ class UserController extends AdminController
         $status=I('get.status');
         $field=I('get.field');
         $search=I('get.search');
+        $start_time=I('get.start_time');
+        $end_time=I('get.end_time');
         $where = array();
         if ($field && $search) {
             $where[$field] = $search;
         }
+//        if ($start_time) {
+//            $where['addtime'] = ['>=',strtotime($start_time)];
+//        }
+//        if ($end_time) {
+//            $where['addtime'] = ['<=',strtotime($end_time)];
+//        }
         if ($status) {
-            $where['status'] = $status;
+            $where['status'] = $this->_getUserType($status);;
         }
+
+//    var_dump($where);exit();
+
+
         $count = M('User')->where($where)->count();
         $Page = new \Think\Page($count, 15);
         $show = $Page->show();
 
         $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
-
+//        echo M()->getLastSql();exit();
         foreach ($list as $k => $v) {
             $list[$k]['invit_1'] = M('User')->where(array('id' => $v['invit_1']))->getField('username');
             $list[$k]['invit_2'] = M('User')->where(array('id' => $v['invit_2']))->getField('username');
@@ -1335,12 +1347,18 @@ class UserController extends AdminController
         $this->assign('page', $show);
         $this->display();
     }
-    private function getAgent($status){
+    private function _getUserType($status){
         // 1 一级代理  2 二级代理  3 三级代理  4普通用户    5 全部用户
         switch ($status) {
-            case 1:
+            case 1:  $retrun=['invit_1'=>0];  break;
+            case 2:  ;break;
+            case 3:     ;break;
+            case 4:
+                $retrun=['is_agent'=>0]; break;
+            case 5:
+                $retrun=[];   break;
         }
-
+        return $retrun;
     }
 }
 ?>

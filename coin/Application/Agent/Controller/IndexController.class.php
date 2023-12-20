@@ -18,9 +18,11 @@ class IndexController extends AgentController
 		$field=I('get.field');
 		$search=I('get.search');
 		if ($field && $search) {
-            $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
+//            $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
+            $map_3 = "$field like '%{$search}%' and path like '%{$uid}%'";
 		}else{
-		    $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+//		    $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+		    $map_3 = "path like '%{$uid}%'";
 		}
 
 		$count = M('User')->where($map_3)->count();
@@ -217,11 +219,10 @@ class IndexController extends AgentController
 		$field=I('get.field');
 		$search=I('get.search');
 		$where = array();
-		if ($field && $search) {
-			$map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
-
+			if ($field && $search) {
+            $map_3 = "$field like '%{$search}%' and path like '%{$uid}%'";
 		}else{
-			$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+		    $map_3 = "path like '%{$uid}%'";
 		}
 
 		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
@@ -278,11 +279,10 @@ class IndexController extends AgentController
 		$field=I('get.field');
 		$search=I('get.search');
 		$where = array();
-		if ($field && $search) {
-			$map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
-
+			if ($field && $search) {
+            $map_3 = "$field like '%{$search}%' and path like '%{$uid}%'";
 		}else{
-			$map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+		    $map_3 = "path like '%{$uid}%'";
 		}
 
 		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
@@ -323,10 +323,9 @@ class IndexController extends AgentController
 		 $search=I('get.search');
 		 $where = array();
 		 if ($field && $search) {
-			 $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
-
+			 $map_3 = "$field like '%{$search}%' and path like '%{$uid}%'";
 		 }else{
-			 $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+			 $map_3 = "path like '%{$uid}%'";
 		 }
 
 		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
@@ -360,9 +359,9 @@ class IndexController extends AgentController
 		 $search=I('get.search');
 		 $where = array();
 		 if ($field && $search) {
-			 $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
+			 $map_3 = "$field like '%{$search}%' and path like '%{$uid}%'";
 		 }else{
-			 $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
+			 $map_3 = "path like '%{$uid}%'";
 		 }
 
 		 $ulist = M('User')->field('id,username,phone')->where($map_3)->select();
@@ -396,11 +395,11 @@ class IndexController extends AgentController
 		$field=I('get.field');
 		$search=I('get.search');
 
-		if ($field && $search) {
-		  $map_3 = "$field like '%{$search}%' and (invit_1 = $uid or invit_2 = $uid or invit_3 = $uid)";
-		}else{
-		  $map_3 = "invit_1 = $uid or invit_2 = $uid or invit_3 = $uid";
-		}
+		  if ($field && $search) {
+			  $map_3 = "$field like '%{$search}%' and path like '%{$uid}%'";
+		  }else{
+			  $map_3 = "path like '%{$uid}%'";
+		  }
       	$ulist = M('User')->where($map_3)->order('id desc')->getField('id',true);
       	if(!empty($ulist)){
       	    $where['userid'] = ['in',$ulist];

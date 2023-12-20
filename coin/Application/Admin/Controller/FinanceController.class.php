@@ -27,12 +27,23 @@ class FinanceController extends AdminController
 	    $save['updatetime'] = date("Y-m-d H:i:s",time());
 	    $save['status'] = 3;
 	    $upre = M("recharge")->where(array('id'=>$id))->save($save);
-	    if($upre){
-	        
+        if (in_array($info['coinname'],['hkd','jpy'])) {
+            $payname='usdt';
+        }else{
+            $payname=$info['coinname'];
+        }
+        $paynamed=$payname.'d';
+        // 用户 usdtd  冻结添加
+        $dec_re = M("user_coin")->where(array('userid'=>$info['userid']))->setDec($paynamed,$info['num']);
+        // 用户 usdt 添加
+        $inc_re = M("user_coin")->where(array('userid'=>$info['userid']))->setInc($payname,$info['num']);
+
+        if($upre && $dec_re && $inc_re){
+
 	        $data['uid'] = $info['uid'];
 		    $data['account'] = $info['username'];
-		    $data['title'] = L('充币审核');
-		    $data['content'] = L('您的充币记录被系统驳回，请联系客服');
+		    $data['title'] = '充币审核';
+		    $data['content'] = '您的充币记录被系统驳回，请联系客服';
 		    $data['addtime'] = date("Y-m-d H:i:s",time());
 		    $data['status'] = 1;
 		    M("notice")->add($data);
@@ -171,7 +182,18 @@ class FinanceController extends AdminController
 	   $upre = M("myzc")->where(array('id'=>$id))->save($save);
 	   //把提币的数量返回给账号户，并写入日志
 	   $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
-	   $incre = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname,$num);
+
+        if (in_array($info['coinname'],['hkd','jpy'])) {
+            $payname='usdt';
+        }else{
+            $payname=$info['coinname'];
+        }
+        $paynamed=$payname.'d';
+        // 用户 usdtd  冻结添加
+        $dec_re = M("user_coin")->where(array('userid'=>$info['userid']))->setDec($paynamed,$num);
+        // 用户 usdt 添加
+        $inc_re = M("user_coin")->where(array('userid'=>$info['userid']))->setInc($payname,$num);
+
 	   $bill['uid'] = $uid;
 	   $bill['username'] = $info['username'];
 	   $bill['num'] =$num;
@@ -182,7 +204,7 @@ class FinanceController extends AdminController
 	   $bill['st'] = 1;
 	   $bill['remark'] = L('提币驳回，退回资金');;
 	   $billre = M("bill")->add($bill);
-	   if($upre && $incre && $billre){
+	   if($upre && $inc_re && $dec_re && $billre){
 	       
 	       $notice['uid'] = $uid;
 		   $notice['account'] = $info['username'];
@@ -214,7 +236,15 @@ class FinanceController extends AdminController
 	    $save['endtime'] = date("Y-m-d H:i:s",time());
 	    $save['status'] = 2;
 	    $result = M("myzc")->where(array('id'=>$id))->save($save);
-	    if($result){
+	    // 提现成功将 冻结提醒币扣掉
+        if (in_array($info['coinname'],['hkd','jpy'])) {
+            $payname='usdt';
+        }else{
+            $payname=$info['coinname'];
+        }
+        $paynamed=$payname.'d';
+        $dec_re = M("user_coin")->where(array('userid'=>$info['userid']))->setDec($paynamed,$info['num']);
+	    if($result &&  $dec_re){
 	        
 	        $notice['uid'] = $info['userid'];
 		    $notice['account'] = $info['username'];

@@ -838,6 +838,7 @@ class UserController extends MobileController
 
 
             $dec_re = M("user_coin")->where(array('userid'=>$uid))->setDec($coinname,$num);
+            $inc_re = M("user_coin")->where(array('userid'=>$uid))->setInc($coinname.'d',$num);
 
 
             $data['userid'] = $uid;
@@ -866,7 +867,7 @@ class UserController extends MobileController
 
             $billre = M("bill")->add($bill);
 
-            if($result && $dec_re && $billre){
+            if($result && $inc_re&& $dec_re && $billre){
                 $this->ajaxReturn(['code'=>1,'info'=>L('提交成功')]);
             }else{
                 $this->ajaxReturn(['code'=>0,'info'=>L('提交失败')]);
@@ -962,7 +963,10 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('账户余额不足')]);
             }
 
+            // 用户 usdt 扣款
             $dec_re = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$unum);
+            // 用户 usdtd 冻结添加
+            $inc_re = M("user_coin")->where(array('userid'=>$uid))->setInc('usdtd',$unum);
 
             $data['userid'] = $uid;
             $data['username'] = $uinfo['username'];
@@ -993,7 +997,7 @@ class UserController extends MobileController
 
             $billre = M("bill")->add($bill);
 
-            if($result && $dec_re && $billre){
+            if($result && $inc_re && $dec_re && $billre){
                 $this->ajaxReturn(['code'=>1,'info'=>L('提交成功')]);
             }else{
                 $this->ajaxReturn(['code'=>0,'info'=>L('提交失败')]);
