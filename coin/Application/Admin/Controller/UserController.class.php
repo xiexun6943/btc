@@ -1380,8 +1380,15 @@ class UserController extends AdminController
                     ->select();
             }
             $this->assign('status', $status);
-            $all_recharge='0.00';
-            $all_withdraw='0.00';
+            $all_btc_recharge='0.00';
+            $all_eth_recharge='0.00';
+            $all_usdt_recharge='0.00';
+
+            $all_btc_withdraw='0.00';
+            $all_eth_withdraw='0.00';
+            $all_usdt_withdraw='0.00';
+
+
             foreach ($list as $k => $v) {
                 $ids=$this->_getAllId($v['id']); // 该id下面所有用户id
                 empty($ids)?$list[$k]['down']=0:$list[$k]['down']=1;
@@ -1394,31 +1401,70 @@ class UserController extends AdminController
 
                 //充值
                 if (!empty($ids)) {
-                    $recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]]))->select();
-                    $recharge[0]['total']?$list[$k]['recharge']= round($recharge[0]['total'],3):$list[$k]['recharge']='0.00' ;
+                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'BTC'))->select();
+                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'ETH'))->select();
+                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>['in',['HKD','USDT','JPY']]))->select();
+                    $btc_recharge[0]['total']?$list[$k]['btc_recharge']= round($btc_recharge[0]['total'],3):$list[$k]['btc_recharge']='0.00' ;
+                    $eth_recharge[0]['total']?$list[$k]['eth_recharge']= round($eth_recharge[0]['total'],3):$list[$k]['eth_recharge']='0.00' ;
+                    $usdt_recharge[0]['total']?$list[$k]['usdt_recharge']= round($usdt_recharge[0]['total'],3):$list[$k]['usdt_recharge']='0.00' ;
+                    echo $usdt_recharge[0]['total'];
                     //提现
-                    $withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]]))->select();
-                    $withdraw[0]['total']?$list[$k]['withdraw']= round($withdraw[0]['total'],3):$list[$k]['withdraw']='0.00' ;
-                    $list[$k]['yingkui']=round($list[$k]['recharge']-$list[$k]['withdraw'],3);
+                    $btc_withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'btc'))->select();
+                    $eth_withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'eth'))->select();
+                    $usdt_withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>['in',['hkd','usdt','jpy']]))->select();
+                    $btc_withdraw[0]['total']?$list[$k]['btc_withdraw']= round($btc_withdraw[0]['total'],3):$list[$k]['btc_withdraw']='0.00' ;
+                    $eth_withdraw[0]['total']?$list[$k]['eth_withdraw']= round($eth_withdraw[0]['total'],3):$list[$k]['eth_withdraw']='0.00' ;
+                    $usdt_withdraw[0]['total']?$list[$k]['usdt_withdraw']= round($usdt_withdraw[0]['total'],3):$list[$k]['usdt_withdraw']='0.00' ;
+
+                    //盈亏
+                    $list[$k]['btc_yingkui']=round($list[$k]['btc_recharge']-$list[$k]['btc_withdraw'],3);
+                    $list[$k]['eth_yingkui']=round($list[$k]['eth_recharge']-$list[$k]['eth_withdraw'],3);
+                    $list[$k]['usdt_yingkui']=round($list[$k]['usdt_recharge']-$list[$k]['usdt_withdraw'],3);
                 }else{
-                    $list[$k]['recharge']='0.00';
-                    $list[$k]['withdraw']='0.00';
-                    $list[$k]['yingkui']='0.00';
+                    $list[$k]['btc_recharge']='0.00';
+                    $list[$k]['eth_recharge']='0.00';
+                    $list[$k]['usdt_recharge']='0.00';
+
+                    $list[$k]['btc_withdraw']='0.00';
+                    $list[$k]['eth_withdraw']='0.00';
+                    $list[$k]['usdt_withdraw']='0.00';
+
+                    $list[$k]['btc_yingkui']='0.00';
+                    $list[$k]['eth_yingkui']='0.00';
+                    $list[$k]['usdt_yingkui']='0.00';
                 }
 
                 $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
                 $list[$k]['state']=$user_login_state['state'];
 
-                $all_recharge+=$list[$k]['recharge']; // 查询出来总充值
-                $all_withdraw+=$list[$k]['withdraw'];// 查询出来总提现
+                $all_btc_recharge+=$list[$k]['btc_recharge'];
+                $all_eth_recharge+=$list[$k]['eth_recharge'];
+                $all_usdt_recharge+=$list[$k]['usdt_recharge'];
+
+                $all_btc_withdraw+=$list[$k]['btc_withdraw'];
+                $all_eth_withdraw+=$list[$k]['eth_withdraw'];
+                $all_usdt_withdraw+=$list[$k]['usdt_withdraw'];
 
             }
+            $all_btc_yingkui= $all_btc_recharge - $all_btc_withdraw;
+            $all_eth_yingkui= $all_eth_recharge - $all_eth_withdraw;
+            $all_usdt_yingkui= $all_usdt_recharge - $all_usdt_withdraw;
 
-            $all_yingkui= $all_recharge - $all_withdraw;
-            $all_yingkui>0?:$all_yingkui='-'.$all_yingkui;
-            $this->assign('all_recharge', round($all_recharge,3));
-            $this->assign('all_withdraw', round($all_withdraw,3));
-            $this->assign('all_yingkui', round($all_yingkui,3) );
+            $all_btc_yingkui>0?:$all_btc_yingkui='-'.$all_btc_yingkui;
+            $all_eth_yingkui>0?:$all_eth_yingkui='-'.$all_eth_yingkui;
+            $all_usdt_yingkui>0?:$all_usdt_yingkui='-'.$all_usdt_yingkui;
+
+            $this->assign('all_btc_recharge', round($all_btc_recharge,3));
+            $this->assign('all_eth_recharge', round($all_eth_recharge,3));
+            $this->assign('all_usdt_recharge', round($all_usdt_recharge,3));
+
+            $this->assign('all_btc_withdraw', round($all_btc_withdraw,3));
+            $this->assign('all_eth_withdraw', round($all_eth_withdraw,3));
+            $this->assign('all_usdt_withdraw', round($all_usdt_withdraw,3));
+
+            $this->assign('all_btc_yingkui', round($all_btc_yingkui,3) );
+            $this->assign('all_eth_yingkui', round($all_eth_yingkui,3) );
+            $this->assign('all_usdt_yingkui', round($all_usdt_yingkui,3) );
             $this->assign('list', $list);
             $this->assign('page', $show);
             $this->display();
@@ -1441,8 +1487,14 @@ class UserController extends AdminController
                 ->limit($Page->firstRow . ',' . $Page->listRows)
                 ->select();
             $this->assign('status', '');
-            $all_recharge='0.00';
-            $all_withdraw='0.00';
+
+            $all_btc_recharge='0.00';
+            $all_eth_recharge='0.00';
+            $all_usdt_recharge='0.00';
+
+            $all_btc_withdraw='0.00';
+            $all_eth_withdraw='0.00';
+            $all_usdt_withdraw='0.00';
             foreach ($list as $k => $v) {
                 $ids=$this->_getAllId($v['id']); // 该id下面所有用户id
                 empty($ids)?$list[$k]['down']=0:$list[$k]['down']=1;
@@ -1456,30 +1508,70 @@ class UserController extends AdminController
 
                 //充值
                 if (!empty($ids)) {
-                    $recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]]))->select();
-
-                    $recharge[0]['total']?$list[$k]['recharge']= round($recharge[0]['total'],3):$list[$k]['recharge']='0.00' ;
+                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'BTC'))->select();
+                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'ETH'))->select();
+                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>['in',['HKD','USDT','JPY']]))->select();
+                    $btc_recharge[0]['total']?$list[$k]['btc_recharge']= round($btc_recharge[0]['total'],3):$list[$k]['btc_recharge']='0.00' ;
+                    $eth_recharge[0]['total']?$list[$k]['eth_recharge']= round($eth_recharge[0]['total'],3):$list[$k]['eth_recharge']='0.00' ;
+                    $usdt_recharge[0]['total']?$list[$k]['usdt_recharge']= round($usdt_recharge[0]['total'],3):$list[$k]['usdt_recharge']='0.00' ;
+                    echo $usdt_recharge[0]['total'];
                     //提现
-                    $withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]]))->select();
-                    $withdraw[0]['total']?$list[$k]['withdraw']= round($withdraw[0]['total'],3):$list[$k]['withdraw']='0.00' ;
-                    $list[$k]['yingkui']=round($list[$k]['recharge']-$list[$k]['withdraw'],3);
+                    $btc_withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'btc'))->select();
+                    $eth_withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'eth'))->select();
+                    $usdt_withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>['in',['hkd','usdt','jpy']]))->select();
+                    $btc_withdraw[0]['total']?$list[$k]['btc_withdraw']= round($btc_withdraw[0]['total'],3):$list[$k]['btc_withdraw']='0.00' ;
+                    $eth_withdraw[0]['total']?$list[$k]['eth_withdraw']= round($eth_withdraw[0]['total'],3):$list[$k]['eth_withdraw']='0.00' ;
+                    $usdt_withdraw[0]['total']?$list[$k]['usdt_withdraw']= round($usdt_withdraw[0]['total'],3):$list[$k]['usdt_withdraw']='0.00' ;
+
+                    //盈亏
+                    $list[$k]['btc_yingkui']=round($list[$k]['btc_recharge']-$list[$k]['btc_withdraw'],3);
+                    $list[$k]['eth_yingkui']=round($list[$k]['eth_recharge']-$list[$k]['eth_withdraw'],3);
+                    $list[$k]['usdt_yingkui']=round($list[$k]['usdt_recharge']-$list[$k]['usdt_withdraw'],3);
                 }else{
-                    $list[$k]['recharge']='0.00';
-                    $list[$k]['withdraw']='0.00';
-                    $list[$k]['yingkui']='0.00';
+                    $list[$k]['btc_recharge']='0.00';
+                    $list[$k]['eth_recharge']='0.00';
+                    $list[$k]['usdt_recharge']='0.00';
+
+                    $list[$k]['btc_withdraw']='0.00';
+                    $list[$k]['eth_withdraw']='0.00';
+                    $list[$k]['usdt_withdraw']='0.00';
+
+                    $list[$k]['btc_yingkui']='0.00';
+                    $list[$k]['eth_yingkui']='0.00';
+                    $list[$k]['usdt_yingkui']='0.00';
                 }
                 $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
                 $list[$k]['state']=$user_login_state['state'];
-                $all_recharge+=$list[$k]['recharge'];
-                $all_withdraw+=$list[$k]['withdraw'];
+
+                $all_btc_recharge+=$list[$k]['btc_recharge'];
+                $all_eth_recharge+=$list[$k]['eth_recharge'];
+                $all_usdt_recharge+=$list[$k]['usdt_recharge'];
+
+                $all_btc_withdraw+=$list[$k]['btc_withdraw'];
+                $all_eth_withdraw+=$list[$k]['eth_withdraw'];
+                $all_usdt_withdraw+=$list[$k]['usdt_withdraw'];
 
             }
 
-            $all_yingkui= $all_recharge - $all_withdraw;
-            $all_yingkui>0?:$all_yingkui='-'.$all_yingkui;
-            $this->assign('all_recharge', round($all_recharge,3));
-            $this->assign('all_withdraw', round($all_withdraw,3));
-            $this->assign('all_yingkui', round($all_yingkui,3) );
+            $all_btc_yingkui= $all_btc_recharge - $all_btc_withdraw;
+            $all_eth_yingkui= $all_eth_recharge - $all_eth_withdraw;
+            $all_usdt_yingkui= $all_usdt_recharge - $all_usdt_withdraw;
+
+            $all_btc_yingkui>0?:$all_btc_yingkui='-'.$all_btc_yingkui;
+            $all_eth_yingkui>0?:$all_eth_yingkui='-'.$all_eth_yingkui;
+            $all_usdt_yingkui>0?:$all_usdt_yingkui='-'.$all_usdt_yingkui;
+
+            $this->assign('all_btc_recharge', round($all_btc_recharge,3));
+            $this->assign('all_eth_recharge', round($all_eth_recharge,3));
+            $this->assign('all_usdt_recharge', round($all_usdt_recharge,3));
+
+            $this->assign('all_btc_withdraw', round($all_btc_withdraw,3));
+            $this->assign('all_eth_withdraw', round($all_eth_withdraw,3));
+            $this->assign('all_usdt_withdraw', round($all_usdt_withdraw,3));
+
+            $this->assign('all_btc_yingkui', round($all_btc_yingkui,3) );
+            $this->assign('all_eth_yingkui', round($all_eth_yingkui,3) );
+            $this->assign('all_usdt_yingkui', round($all_usdt_yingkui,3) );
             $this->assign('list', $list);
             $this->assign('page', $show);
             $this->display();

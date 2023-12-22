@@ -67,18 +67,24 @@
                 margin-left: 50px;
             }
         </style>
-        <div class="main-title-h">
+        <div class="data-table ">
             <div class="count">
-                <span class="h1-title">总充值</span>
-                <span id="count_recharge">{$all_recharge}</span>
+                <span class="h1-title">总充值</span><br>
+                USDT: <span style="color: red">{$all_usdt_recharge}</span>(U)<br>
+                BTC: <span style="color: green">{$all_btc_recharge}</span> (btc)<br>
+                ETH: <span style="color: blue">{$all_eth_recharge}</span> (eth)
             </div>
             <div class="count">
-                <span class="h1-title">总提现</span>
-                <span id="count_withdraw">{$all_withdraw}</span>
+                <span class="h1-title">总提现</span><br>
+                USDT: <span style="color: red">{$all_usdt_withdraw}</span>(U)<br>
+                BTC: <span style="color: green">{$all_btc_withdraw}</span> (btc)<br>
+                ETH: <span style="color: blue">{$all_eth_withdraw}</span> (eth)
             </div>
             <div class="count">
-                <span class="h1-title">总盈亏</span>
-                <span id = "count_profit">{$all_yingkui}</span>
+                <span class="h1-title">总盈亏</span><br>
+                USDT: <span style="color: red">{$all_usdt_yingkui}</span>(U)<br>
+                BTC: <span style="color: green">{$all_btc_yingkui}</span> (btc)<br>
+                ETH: <span style="color: blue">{$all_eth_yingkui}</span> (eth)
             </div>
 
         </div>
@@ -123,17 +129,26 @@
                                     <neq name="vo.invit_1"><a href="{:U('User/index?name='.$vo['invit_1'].'&field=username')}">{$vo['invit_1']['id']}<br/>{$vo['invit_1']['username']}<br/>{$vo['invit_1']['phone']}</a><br></neq>
 
                                 </td>
-                                <td><span>{$vo.recharge}</span></td>
                                 <td>
-                                    <span>{$vo.withdraw}</span>
+                                    USDT: <span style="color: red">{$vo.usdt_recharge} </span>(U)<br>
+                                    BTC: <span style="color: green">{$vo.btc_recharge} </span> (btc)<br>
+                                    ETH: <span style="color: blue">{$vo.eth_recharge}</span> (eth)
                                 </td>
-                                <td><span>{$vo.yingkui}</span></td>
+                                <td>
+                                    USDT: <span style="color: red">{$vo.usdt_withdraw} </span>(U)<br>
+                                    BTC: <span style="color: green">{$vo.btc_withdraw} </span> (btc)<br>
+                                    ETH: <span style="color: blue">{$vo.eth_withdraw}</span> (eth)
+                                </td>
+
+                                <td>
+                                    USDT: <span style="color: red">{$vo.usdt_yingkui} </span>(U)<br>
+                                    BTC: <span style="color: green">{$vo.btc_yingkui} </span> (btc)<br>
+                                    ETH: <span style="color: blue">{$vo.eth_yingkui}</span> (eth)
+                                </td>
 
                                 <td>
                                     <eq name="vo.down" value="1">
-
                                         <a href="{:U('User/count')}?status={$status}&field={$field}&search={$search}&start_time={$start_time}&end_time={$end_time}&agent_id={$vo.id}&xiaji={$vo.id}">[查看下级]</a>
-<!--                                        <span onclick="checkagent('{$vo.id}');">[查看下级]</span>-->
                                     </eq>
                                 </td>
 
