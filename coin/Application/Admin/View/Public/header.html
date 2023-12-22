@@ -132,30 +132,30 @@
 </div>
 <!-- /边栏 -->
 <script type="text/javascript">
-    $(function(){
-        setInterval("tzfc()",2000);
-    });
-
-    function tzfc(){
-        var st = 1;
-        $.post("{:U('Admin/Trade/gethyorder')}",
-        {'st':st},
-        function(data){
-            if(data.code == 1){
-                layer.confirm('有新的合约订单', {
-                  btn: ['知道了'] //按钮
-                }, function(){
-
-                    $.post("{:U('Admin/Trade/settzstatus')}",
-                    function(data){
-                        if(data.code == 1){
-                            window.location.reload();
-                        }
-                    });
-                });
-            }
-        });
-    }
+    // $(function(){
+    //     setInterval("tzfc()",2000);
+    // });
+	//
+    // function tzfc(){
+    //     var st = 1;
+    //     $.post("{:U('Admin/Trade/gethyorder')}",
+    //     {'st':st},
+    //     function(data){
+    //         if(data.code == 1){
+    //             layer.confirm('有新的合约订单', {
+    //               btn: ['知道了'] //按钮
+    //             }, function(){
+	//
+    //                 $.post("{:U('Admin/Trade/settzstatus')}",
+    //                 function(data){
+    //                     if(data.code == 1){
+    //                         window.location.reload();
+    //                     }
+    //                 });
+    //             });
+    //         }
+    //     });
+    // }
 </script>
 
 
