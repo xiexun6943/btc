@@ -12,25 +12,26 @@
             </div>
         </div>
         <div class="cf">
-            <div class="search-form fr cf">
-                <div class="sleft">
+            <div class="search-form fr cf" style="float:unset!important">
+                <div class="sleft" style="float:unset!important">
                     <form name="formSearch" id="formSearch" method="get" name="form1">
-                        <dev id="test-range">
-                            开始时间:
-                            <input id="start_time" type="text" name="start_time" class="search-input form-control" value="{$Think.get.start_time}"  style="" placeholder="开始日期">
-                            到:  <input  id="end_time" type="text" name="end_time" class="search-input form-control" value="{$Think.get.end_time}"  style="" placeholder="结束日期">
-                        </dev> <br>
+                        <dev id="test-range" style="display:inline-block">
+                            <span style="display:inline-block">开始时间:</span>
+                            <input style="display:inline-block;float:unset" id="start_time" type="text" name="start_time" class="search-input form-control" value="{$Think.get.start_time}"  style="" placeholder="开始日期">
+                            <span style="display:inline-block;float:unset" style="display:inline-block">到:</span>
+                            <input style="display:inline-block;float:unset"  id="end_time" type="text" name="end_time" class="search-input form-control" value="{$Think.get.end_time}"  style="" placeholder="结束日期">
+                        </dev>
 
 
-                        <select style="width:120px;float:left;margin-right:10px;" name="status" class="form-control">
+                        <select style="width:120px;display:inline-block;margin-right:10px;" name="status" class="form-control">
                             <option value="3" <eq name="Think.get.status" value="3">selected</eq> >全部用户</option>
                             <option value="1" <eq name="Think.get.status" value="1">selected</eq> >一级代理</option>
                             <option value="2" <eq name="Think.get.status" value="2">selected</eq> >普通用户</option>
                             <option value="4" <eq name="Think.get.status" value="4">selected</eq> >代理</option>
                         </select>
                         上级ID:
-                        <input type="text" name="agent_id" class="search-input form-control" value="{$agent_id}" >
-                        <select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+                        <input type="text" style="display:inline-block;float:unset;width:100px" name="agent_id" class="search-input form-control" value="{$agent_id}" >
+                        <select style="width:120px;display:inline-block;float:unset" name="field" class="form-control">
                             <option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
                             <option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
                             <option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
@@ -38,8 +39,8 @@
 
                         <script type="text/javascript" src="/Public/layer/laydate/laydate.js"></script>
                         <input type="hidden" name="is_get" class="search-input form-control" value="1" >
-                        <input type="text" name="search" class="search-input form-control" value="{$Think.get.search}" placeholder="请输入查询内容" style="">
-                        <a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+                        <input type="text" style="display:inline-block;float:unset;width:240px" name="search" class="search-input form-control" value="{$Think.get.search}" placeholder="请输入查询内容" >
+                        <a class="sch-btn" style="position: relative;top:-3px;margin-left:-40px;display:inline-block;float:unset" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
                     </form>
                     <script>
                         //搜索功能
@@ -63,25 +64,32 @@
             .count{
                 float: left;
                 margin-bottom: 5px;
-                background: red;
-                margin-left: 50px;
+                width: 32%;
+                margin-right:1%;
+                padding:5px;
+                border:1px solid  #e3e3e3;
+                border-radius: 6px;
+            }
+            .count .h1-title{
+                border-bottom: 1px solid #e9e9e9;
+                display: block;
             }
         </style>
         <div class="data-table ">
             <div class="count">
-                <span class="h1-title">总充值</span><br>
+                <span class="h1-title">总充值</span>
                 USDT: <span style="color: red">{$all_usdt_recharge}</span>(U)<br>
                 BTC: <span style="color: green">{$all_btc_recharge}</span> (btc)<br>
                 ETH: <span style="color: blue">{$all_eth_recharge}</span> (eth)
             </div>
             <div class="count">
-                <span class="h1-title">总提现</span><br>
+                <span class="h1-title">总提现</span>
                 USDT: <span style="color: red">{$all_usdt_withdraw}</span>(U)<br>
                 BTC: <span style="color: green">{$all_btc_withdraw}</span> (btc)<br>
                 ETH: <span style="color: blue">{$all_eth_withdraw}</span> (eth)
             </div>
             <div class="count">
-                <span class="h1-title">总盈亏</span><br>
+                <span class="h1-title">总盈亏</span>
                 USDT: <span style="color: red">{$all_usdt_yingkui}</span>(U)<br>
                 BTC: <span style="color: green">{$all_btc_yingkui}</span> (btc)<br>
                 ETH: <span style="color: blue">{$all_eth_yingkui}</span> (eth)
