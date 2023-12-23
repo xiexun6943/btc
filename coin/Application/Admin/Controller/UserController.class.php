@@ -1322,6 +1322,42 @@ class UserController extends AdminController
         $end_time?$end_time=$end_time:$end_time=date('Y-m-d 23:59:59');
         $this->assign('start_time', $start_time);
         $this->assign('end_time', $end_time);
+
+        $all_zs_ids=$this->_getAllZSUserId(); // 所有真实用户id集合
+        // 总充值
+        $allBtcRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
+        $allEthRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
+        $allUsdtRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
+
+        $allBtcRecharge[0]['total'] ? $all_btc_recharge= round($allBtcRecharge[0]['total'],3):$all_btc_recharge=0 ;
+        $allEthRecharge[0]['total'] ? $all_eth_recharge= round($allEthRecharge[0]['total'],3):$allEthRecharge=0 ;
+        $allUsdtRecharge[0]['total'] ? $all_usdt_recharge= round($allUsdtRecharge[0]['total'],3):$allUsdtRecharge=0 ;
+
+        //提现
+        $allBtcWithdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$all_zs_ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'btc'))->select();
+        $allEthWithdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$all_zs_ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'eth'))->select();
+        $allUsdtWithdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$all_zs_ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>['in',['hkd','usdt','jpy']]))->select();
+
+        $allBtcWithdraw[0]['total']?$all_btc_withdraw= round($allBtcWithdraw[0]['total'],3):$all_btc_withdraw=0 ;
+        $allEthWithdraw[0]['total']?$all_eth_withdraw= round($allEthWithdraw[0]['total'],3):$all_eth_withdraw=0 ;
+        $allUsdtWithdraw[0]['total']?$all_usdt_withdraw= round($allUsdtWithdraw[0]['total'],3):$all_usdt_withdraw=0 ;
+
+        $all_btc_yingkui= $all_btc_recharge - $all_btc_withdraw;
+        $all_eth_yingkui= $all_eth_recharge - $all_eth_withdraw;
+        $all_usdt_yingkui= $all_usdt_recharge - $all_usdt_withdraw;
+
+        $this->assign('all_btc_recharge', round($all_btc_recharge,3));
+        $this->assign('all_eth_recharge', round($all_eth_recharge,3));
+        $this->assign('all_usdt_recharge', round($all_usdt_recharge,3));
+
+        $this->assign('all_btc_withdraw', round($all_btc_withdraw,3));
+        $this->assign('all_eth_withdraw', round($all_eth_withdraw,3));
+        $this->assign('all_usdt_withdraw', round($all_usdt_withdraw,3));
+
+        $this->assign('all_btc_yingkui', round($all_btc_yingkui,3) );
+        $this->assign('all_eth_yingkui', round($all_eth_yingkui,3) );
+        $this->assign('all_usdt_yingkui', round($all_usdt_yingkui,3) );
+
         if ($is_get == 1) {  // 筛选
             $this->assign('field', $field);
             $this->assign('search', $search);
@@ -1380,13 +1416,6 @@ class UserController extends AdminController
                     ->select();
             }
             $this->assign('status', $status);
-            $all_btc_recharge='0.00';
-            $all_eth_recharge='0.00';
-            $all_usdt_recharge='0.00';
-
-            $all_btc_withdraw='0.00';
-            $all_eth_withdraw='0.00';
-            $all_usdt_withdraw='0.00';
 
 
             foreach ($list as $k => $v) {
@@ -1401,13 +1430,13 @@ class UserController extends AdminController
 
                 //充值
                 if (!empty($ids)) {
-                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'BTC'))->select();
-                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'ETH'))->select();
-                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>['in',['HKD','USDT','JPY']]))->select();
+                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
+                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
+                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
                     $btc_recharge[0]['total']?$list[$k]['btc_recharge']= round($btc_recharge[0]['total'],3):$list[$k]['btc_recharge']='0.00' ;
                     $eth_recharge[0]['total']?$list[$k]['eth_recharge']= round($eth_recharge[0]['total'],3):$list[$k]['eth_recharge']='0.00' ;
                     $usdt_recharge[0]['total']?$list[$k]['usdt_recharge']= round($usdt_recharge[0]['total'],3):$list[$k]['usdt_recharge']='0.00' ;
-                    echo $usdt_recharge[0]['total'];
+
                     //提现
                     $btc_withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'btc'))->select();
                     $eth_withdraw = M('myzc')->field("sum(num) as total")->where(array('userid' =>  ['in',$ids],'status'=>2,'endtime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'eth'))->select();
@@ -1436,38 +1465,10 @@ class UserController extends AdminController
 
                 $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
                 $list[$k]['state']=$user_login_state['state'];
-
-                $all_btc_recharge+=$list[$k]['btc_recharge'];
-                $all_eth_recharge+=$list[$k]['eth_recharge'];
-                $all_usdt_recharge+=$list[$k]['usdt_recharge'];
-
-                $all_btc_withdraw+=$list[$k]['btc_withdraw'];
-                $all_eth_withdraw+=$list[$k]['eth_withdraw'];
-                $all_usdt_withdraw+=$list[$k]['usdt_withdraw'];
-
             }
-            $all_btc_yingkui= $all_btc_recharge - $all_btc_withdraw;
-            $all_eth_yingkui= $all_eth_recharge - $all_eth_withdraw;
-            $all_usdt_yingkui= $all_usdt_recharge - $all_usdt_withdraw;
-
-            $all_btc_yingkui>0?:$all_btc_yingkui='-'.$all_btc_yingkui;
-            $all_eth_yingkui>0?:$all_eth_yingkui='-'.$all_eth_yingkui;
-            $all_usdt_yingkui>0?:$all_usdt_yingkui='-'.$all_usdt_yingkui;
-
-            $this->assign('all_btc_recharge', round($all_btc_recharge,3));
-            $this->assign('all_eth_recharge', round($all_eth_recharge,3));
-            $this->assign('all_usdt_recharge', round($all_usdt_recharge,3));
-
-            $this->assign('all_btc_withdraw', round($all_btc_withdraw,3));
-            $this->assign('all_eth_withdraw', round($all_eth_withdraw,3));
-            $this->assign('all_usdt_withdraw', round($all_usdt_withdraw,3));
-
-            $this->assign('all_btc_yingkui', round($all_btc_yingkui,3) );
-            $this->assign('all_eth_yingkui', round($all_eth_yingkui,3) );
-            $this->assign('all_usdt_yingkui', round($all_usdt_yingkui,3) );
             $this->assign('list', $list);
             $this->assign('page', $show);
-            $this->display();
+
 
 
         }else{   // 列表默认展示
@@ -1488,13 +1489,6 @@ class UserController extends AdminController
                 ->select();
             $this->assign('status', '');
 
-            $all_btc_recharge='0.00';
-            $all_eth_recharge='0.00';
-            $all_usdt_recharge='0.00';
-
-            $all_btc_withdraw='0.00';
-            $all_eth_withdraw='0.00';
-            $all_usdt_withdraw='0.00';
             foreach ($list as $k => $v) {
                 $ids=$this->_getAllId($v['id']); // 该id下面所有用户id
                 empty($ids)?$list[$k]['down']=0:$list[$k]['down']=1;
@@ -1508,9 +1502,9 @@ class UserController extends AdminController
 
                 //充值
                 if (!empty($ids)) {
-                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'BTC'))->select();
-                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>'ETH'))->select();
-                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coinname'=>['in',['HKD','USDT','JPY']]))->select();
+                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
+                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
+                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
                     $btc_recharge[0]['total']?$list[$k]['btc_recharge']= round($btc_recharge[0]['total'],3):$list[$k]['btc_recharge']='0.00' ;
                     $eth_recharge[0]['total']?$list[$k]['eth_recharge']= round($eth_recharge[0]['total'],3):$list[$k]['eth_recharge']='0.00' ;
                     $usdt_recharge[0]['total']?$list[$k]['usdt_recharge']= round($usdt_recharge[0]['total'],3):$list[$k]['usdt_recharge']='0.00' ;
@@ -1543,41 +1537,13 @@ class UserController extends AdminController
                 $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
                 $list[$k]['state']=$user_login_state['state'];
 
-                $all_btc_recharge+=$list[$k]['btc_recharge'];
-                $all_eth_recharge+=$list[$k]['eth_recharge'];
-                $all_usdt_recharge+=$list[$k]['usdt_recharge'];
-
-                $all_btc_withdraw+=$list[$k]['btc_withdraw'];
-                $all_eth_withdraw+=$list[$k]['eth_withdraw'];
-                $all_usdt_withdraw+=$list[$k]['usdt_withdraw'];
-
             }
 
-            $all_btc_yingkui= $all_btc_recharge - $all_btc_withdraw;
-            $all_eth_yingkui= $all_eth_recharge - $all_eth_withdraw;
-            $all_usdt_yingkui= $all_usdt_recharge - $all_usdt_withdraw;
-
-            $all_btc_yingkui>0?:$all_btc_yingkui='-'.$all_btc_yingkui;
-            $all_eth_yingkui>0?:$all_eth_yingkui='-'.$all_eth_yingkui;
-            $all_usdt_yingkui>0?:$all_usdt_yingkui='-'.$all_usdt_yingkui;
-
-            $this->assign('all_btc_recharge', round($all_btc_recharge,3));
-            $this->assign('all_eth_recharge', round($all_eth_recharge,3));
-            $this->assign('all_usdt_recharge', round($all_usdt_recharge,3));
-
-            $this->assign('all_btc_withdraw', round($all_btc_withdraw,3));
-            $this->assign('all_eth_withdraw', round($all_eth_withdraw,3));
-            $this->assign('all_usdt_withdraw', round($all_usdt_withdraw,3));
-
-            $this->assign('all_btc_yingkui', round($all_btc_yingkui,3) );
-            $this->assign('all_eth_yingkui', round($all_eth_yingkui,3) );
-            $this->assign('all_usdt_yingkui', round($all_usdt_yingkui,3) );
             $this->assign('list', $list);
             $this->assign('page', $show);
-            $this->display();
 
         }
-
+        $this->display();
     }
 
 
@@ -1602,6 +1568,18 @@ class UserController extends AdminController
         return $sons;
     }
 
+    /**
+     * 获取所有真是用户uid
+     * @return array|false|mixed|string
+     */
+    private function _getAllZSUserId()
+    {
+        $ids= M('User')->field('id')->where(['type'=>0])->select();
+        if (empty($ids)) {
+            return [];
+        }
+        return array_column($ids,'id');
+    }
 
 }
 ?>
