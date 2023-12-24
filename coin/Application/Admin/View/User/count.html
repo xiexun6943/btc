@@ -11,6 +11,27 @@
                 <button class="btn btn-warning" onClick="location.href='{:U('User/count')}'">初始化搜索</button>
             </div>
         </div>
+<!--        <span class="h1-title">平台统计(平台所有真实用户)</span>-->
+<!--        <div class="data-table ">-->
+<!--            <div class="count">-->
+<!--                <span class="h1-title">总充值</span>-->
+<!--                USDT: <span style="color: red">{$all_usdt_recharge}</span>(U)<br>-->
+<!--                BTC: <span style="color: green">{$all_btc_recharge}</span> (btc)<br>-->
+<!--                ETH: <span style="color: blue">{$all_eth_recharge}</span> (eth)-->
+<!--            </div>-->
+<!--            <div class="count">-->
+<!--                <span class="h1-title">总提现</span>-->
+<!--                USDT: <span style="color: red">{$all_usdt_withdraw}</span>(U)<br>-->
+<!--                BTC: <span style="color: green">{$all_btc_withdraw}</span> (btc)<br>-->
+<!--                ETH: <span style="color: blue">{$all_eth_withdraw}</span> (eth)-->
+<!--            </div>-->
+<!--            <div class="count">-->
+<!--                <span class="h1-title">总盈亏</span>-->
+<!--                USDT: <span style="color: red">{$all_usdt_yingkui}</span>(U)<br>-->
+<!--                BTC: <span style="color: green">{$all_btc_yingkui}</span> (btc)<br>-->
+<!--                ETH: <span style="color: blue">{$all_eth_yingkui}</span> (eth)-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="cf">
             <div class="search-form fr cf" style="float:unset!important">
                 <div class="sleft" style="float:unset!important">
@@ -27,7 +48,7 @@
 <!--                            <option value="3" <eq name="Think.get.status" value="3">selected</eq> >全部用户</option>-->
                             <option value="1" <eq name="Think.get.status" value="1">selected</eq> >一级代理</option>
                             <option value="2" <eq name="Think.get.status" value="2">selected</eq> >普通用户</option>
-                            <option value="4" <eq name="Think.get.status" value="4">selected</eq> >全部代理</option>
+                            <option value="4" <eq name="Think.get.status" value="4">selected</eq> >普通代理</option>
                         </select>
                         上级ID:
                         <input type="text" style="display:inline-block;float:unset;width:100px" name="agent_id" class="search-input form-control" value="{$agent_id}" >
@@ -94,7 +115,6 @@
                 BTC: <span style="color: green">{$all_btc_yingkui}</span> (btc)<br>
                 ETH: <span style="color: blue">{$all_eth_yingkui}</span> (eth)
             </div>
-
         </div>
         <div class="data-table table-striped">
             <form id="form"  method="post" class="form-horizontal">
