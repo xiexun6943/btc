@@ -1377,7 +1377,7 @@ class UserController extends AdminController
 
             }
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 100);
+            $Page = new \Think\Page($count, 15);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,path,addtime,is_agent,type")
                 ->where($where)
@@ -1419,7 +1419,7 @@ class UserController extends AdminController
             }
             $where['type']=0;
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 100);
+            $Page = new \Think\Page($count, 15);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,path,addtime,is_agent,type")
                 ->where($where)
