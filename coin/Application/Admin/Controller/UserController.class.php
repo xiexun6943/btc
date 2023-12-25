@@ -1368,6 +1368,7 @@ class UserController extends AdminController
         $all_total['all_usdt_yingkui']=0;
 
         if ($is_get == 1) {  // 筛选 查询
+            echo "筛选查询";
             $this->assign('field', $field);
             $this->assign('search', $search);
             $this->assign('xiaji', $xiaji);
@@ -1441,8 +1442,9 @@ class UserController extends AdminController
                 $where['type']=0;
 
             }
+
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 20);
+            $Page = new \Think\Page($count, 10);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
@@ -1452,7 +1454,9 @@ class UserController extends AdminController
             $this->assign('status', $status);
 
             $list=$this->_searchList($list,$start_time,$end_time); // 筛选列表数据
+
             $all_zs_ids=$this->_getAllZSUserId($where); // 所有直属下级id
+
             if ($status == 3) {
                 $allUserIds=$all_zs_ids;
             }else{
@@ -1490,7 +1494,7 @@ class UserController extends AdminController
             }
             $where['type']=0;
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 15);
+            $Page = new \Think\Page($count, 10);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
@@ -1705,7 +1709,7 @@ class UserController extends AdminController
 
                 $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
                 $list[$k]['state']=$user_login_state['state'];
-                // 用户分类
+//                 用户分类
                 if ($v['invit_1'] == 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
                     $list[$k]['user_type']=1;// 一级代理
                 } elseif ($v['invit_1'] > 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
