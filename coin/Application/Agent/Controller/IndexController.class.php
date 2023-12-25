@@ -424,6 +424,26 @@ class IndexController extends AgentController
       	}
 	      $this->display();
 	  }
+
+	/**
+	 * 获取所有下级id
+	 * @param $id
+	 * @param array $sons
+	 * @return array|mixed
+	 */
+	private  function _getAllId($id, &$sons = []){
+		$son= M('User')->field('id')->where(['invit_1'=>$id,'type'=>0])->select();
+		if ($son && !empty($son)) {
+			foreach ($son as $v) {
+				$sons[] = $v['id'];
+				self::_getAllId($v['id'], $sons);
+			}
+		} else {
+			return $sons;
+		}
+		return $sons;
+	}
+
 }
 
 ?>

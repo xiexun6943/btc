@@ -39,7 +39,6 @@ return [
     '感谢您访问BITVENTURE.com。通过浏览、访问或使用BITVENTURE.com以及相关移动应用程序（合为“BITVENTURE平台”)，您即（“用户”或“您”）同意本服务条款（本“条款”），因此请仔细阅读。<br><br>
 根据您的居住地和注册日期：对于您和以下服务供应商（“我们”）之间任何或全部服务的使用，以及任何获得服务的方式，本条款构成一致协议和理解：<br><br>
 BITVENTURE Bahamas FinTech Company Limited，一家注册在巴哈马的公司（“BITVENTURE 巴哈马”），适用于 2022 年 11月 16日至2023年8月28日期间注册的墨西哥居民用户，及于2023年8月29日之后注册的机构用户；<br><br>
-BITVENTURE Hong Kong FinTech Company Limited，一家注册在香港的公司（“BITVENTURE 香港”），适用于 2023 年5月15日或之后注册的香港居民用户；<br><br>
 BITVENTURE Serviços Digitais Ltda., 一家注册在巴西的公司（“BITVENTURE 巴西”），适用于 2023 年6月15日或之后注册的巴西居民用户；<br><br>
 BITVENTURE SG Pte. Ltd., 一家注册在新加坡的公司（“BITVENTURE 新加坡”），适用于 2023 年 10 月 13 日或之后注册的新加坡居民用户；<br><br>
 Aux Cayes FinTech Co. Ltd.， 一家注册在塞舌尔的公司（“Aux Cayes”），适用于有资格访问和使用 BITVENTURE 服务的所有其他用户。<br><br>

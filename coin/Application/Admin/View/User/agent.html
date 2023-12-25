@@ -5,26 +5,64 @@
 		<div class="alert-content">警告内容</div>
 	</div>
 	<div id="main" class="main">
-		<div class="main-title-h">
-			<span class="h1-title">代理管理</span>
-		</div>
+		<div class="cf">
+			<div class="main-title-h">
+				<span class="h1-title">代理管理</span>
+				<div class="fr">
+					<button class="btn btn-warning" onClick="location.href='{:U('User/agent')}'">初始化搜索</button>
+				</div>
+			</div>
+			<div class="search-form fr cf">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1">
+						<select style="width:120px;float:left;margin-right:10px;" name="status" class="form-control">
+							<option value="" <empty name="Think.get.status">selected</empty> >全部状态</option>
+							<option value="1" <eq name="Think.get.status" value="1">selected</eq> >正常状态</option>
+							<option value="2" <eq name="Think.get.status" value="2">selected</eq> >冻结状态</option>
+						</select>
+						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
+						</select>
 
+						<script type="text/javascript" src="/Public/layer/laydate/laydate.js"></script>
+
+						<input type="text" name="search" class="search-input form-control" value="{$Think.get.search}" placeholder="请输入查询内容" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//搜索功能
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//回车搜索
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
 		<div class="data-table table-striped">
 			<form id="form"  method="post" class="form-horizontal">
 				<table class="">
 					<thead>
 					<tr>
-						<th class="row-selected row-selected">
-							<input class="check-all" type="checkbox"/>
-						</th>
+
 						<th class="">ID</th>
 						<th class="">代理账号</th>
+						<th class="">邀请码</th>
 						<th class="">注册IP/时间</th>
-						<th class="">三代总人数</th>
-						<th class="">一代人数</th>
+						<th class="">代理</th>
 						<th class="">二代人数</th>
 						<th class="">三代人数</th>
-						<th class="">邀请码</th>
+						<th class="">所有下级成员</th>
 						<th class="">操作</th>
 					</tr>
 					</thead>
@@ -32,20 +70,23 @@
 					<notempty name="list">
 						<volist name="list" id="vo">
 							<tr>
-								<td>
-									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
-								</td>
 								<td>{$vo.id}</td>
-								<td>{$vo.username}</a></td>
+								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+								<td>{$vo.invit}</td>
 								<td>
 								    <span>IP：{$vo.addip}</span><br />
 								    <span>时间：<?php echo date("Y-m-d H:i:s",$vo['addtime']);?></span>
 								</td>
-                                <td>{$vo.all}人</td>
-                                <td>{$vo.one}人</td>
+								<td style="width:120px;white-space:unset">
+									<eq name="vo.user_type" value="1"> <span style="color: red">一级代理</span> </eq>
+									<eq name="vo.user_type" value="2"> <span style="color: red">二级代理</span> </eq>
+									<eq name="vo.user_type" value="3"> <span style="color: red">三级代理</span> </eq>
+									<eq name="vo.user_type" value="4"> <span style="color: red">普通用户</span> </eq>
+								</td>
                                 <td>{$vo.two}人</td>
                                 <td>{$vo.three}人</td>
-                                <td>{$vo.invit}</td>
+                                <td>{$vo.all}人</td>
+
                                 <td>
                                     <a class="btn btn-primary btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>
 						            <input type="button" class="ajax-get btn btn-danger btn-xs" value="取消代理" onclick="cancelagent('{$vo['id']}');"/>

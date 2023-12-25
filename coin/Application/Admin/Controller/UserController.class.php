@@ -41,32 +41,48 @@ class UserController extends AdminController
 
     //代理管理
     public function agent(){
+        $status=I('get.status');
+        $field=I('get.field');
+        $search=I('get.search');
+        $where = array();
+        if ($field && $search) {
+            $where[$field] = $search;
+        }
+        if ($status) {
+            $where['status'] = $status;
+        }
         $where['is_agent'] = 1;
+
         $count = M('User')->where($where)->count();
         $Page = new \Think\Page($count, 15);
         $show = $Page->show();
         $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+
         foreach ($list as $k => $v) {
             $uid = $v['id'];
-            $one = M('User')->where(array('invit_1'=>$uid))->count();
-            if($one <= 0){
-                $one = 0;
-            }
-            $two = M('User')->where(array('invit_2'=>$uid))->count();
+            // 二级代理
+            $two = M('User')->where(array('invit_1'=>$uid))->count();
             if($two <= 0){
                 $two = 0;
             }
-            $three = M('User')->where(array('invit_3'=>$uid))->count();
+            // 三级代理
+            $three = M('User')->where(array('invit_2'=>$uid))->count();
             if($three <= 0){
                 $three = 0;
             }
-
-            $all = $one + $two + $three;
-            if($all <= 0){
-                $all = 0;
+            // 用户分类
+            if ($v['invit_1'] == 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                $list[$k]['user_type']=1;// 一级代理
+            } elseif ($v['invit_1'] > 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                $list[$k]['user_type']=2;// 二级代理
+            } elseif ($v['invit_1'] > 0 && $v['invit_2'] > 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                $list[$k]['user_type']=3;// 三级代理
+            }else{
+                $list[$k]['user_type']=4;// 普通用户
             }
-            $list[$k]['all'] = $all;
-            $list[$k]['one'] = $one;
+
+            $all=$this->_getAllId($v['id']);
+            $list[$k]['all'] = count($all);
             $list[$k]['two'] = $two;
             $list[$k]['three'] = $three;
         }
@@ -85,9 +101,12 @@ class UserController extends AdminController
         if($uid <= 0 || $uid == ''){
             $this->error("参数得要参数");
         }
-        $uinfo = M("user")->where(array('id'=>$uid))->field("is_agent")->find();
+        $uinfo = M("user")->where(array('id'=>$uid))->field("is_agent,invit_1,invit_2,invit_3")->find();
         if(empty($uinfo)){
             $this->error("参数得要参数");
+        }
+        if ($uinfo['invit_1'] > 0 && $uinfo['invit_2'] > 0  ) {
+            $this->error("该用户不能设置为代理,调整层级关系!");
         }
         if($uinfo['is_agent'] == 1){
             $this->error("该会员已是代理");

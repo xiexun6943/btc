@@ -77,7 +77,7 @@
 		
 		<div class="cf">
 		    <div class="fl">
-				<a class="btn btn-success  " href="{:U('Index/edit')}">{:L('新 增')}</a>
+<!--				<a class="btn btn-success  " href="{:U('Index/edit')}">{:L('新 增')}</a>-->
 			</div>
 		    
 			<div class="search-form cf">
@@ -120,12 +120,13 @@
 					<th>UID</th>
 					<th>{:L('会员账号')}</th>
 					<th>{:L('登陆')}</th>
-					<th>{:L('注册IP')}/{:L('时间')}</th>
-					<th>{:L('地址')}</th>
-					<th>{:L('推荐人')}</th>
-					<th>{:L('认证状态')}</th>
 					<th>{:L('邀请码')}</th>
 					<th>{:L('操作')}</th>
+					<th>{:L('注册IP')}/{:L('时间')}</th>
+					<th>{:L('推荐人')}</th>
+					<th>{:L('认证状态')}</th>
+					<th>{:L('地址')}</th>
+
 				</tr>
 				</thead>
 				<tbody>
@@ -138,11 +139,19 @@
 								<td>{$vo.id}</td>
 								<td title="登录该用户"><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 								<td><span>{$vo.logins}</span>{:L('次')}</td>
+								<td><span>{$vo.invit}</span></td>
+
+								<td>
+									<a class="btn btn-primary btn-xs" href="{:U('Index/edit')}?id={$vo.id}">{:L('编辑')}</a>
+									<eq name="vo.rzstatus" value="1">
+										<a class="btn btn-primary btn-xs" href="{:U('Index/authrz')}?id={$vo.id}">{:L('审核认证')}</a>
+									</eq>
+								</td>
 								<td>
 								    <span>IP：{$vo.addip}</span><br />
 								    <span>{:L('时间')}：<?php echo date("Y-m-d H:i:s",$vo['addtime']);?></span>
 								</td>
-								<td><span>{$vo.addr}</span></td>
+
                                 <td>
 									<neq name="vo.invit_1">{:L('1代')}：{$vo['invit_1']}<br/></neq>
 									<neq name="vo.invit_2">{:L('2代')}：{$vo['invit_2']}<br/></neq>
@@ -150,22 +159,26 @@
 								</td>
 								
 								<td>
-								    <eq name="vo.rzstatus" value="0">{:L('未提交')}</eq>
-								    <eq name="vo.rzstatus" value="1"><span style="color:blue;">{:L('待审核')}</span></eq>
-								    <eq name="vo.rzstatus" value="2"><span style="color:green;">{:L('认证成功')}</span></eq>
-								    <eq name="vo.rzstatus" value="3"><span style="color:red;">{:L('认证驳回')}</span></eq>
-								    
+									<eq name="vo.rzstatus" value="0">认证：<span style="color:orange;">未提交</span> </eq>
+									<eq name="vo.rzstatus" value="1">认证：<span style="color:blue;">待审核</span></eq>
+									<eq name="vo.rzstatus" value="2">认证：<span style="color:green;">成功</span></eq>
+									<eq name="vo.rzstatus" value="3">认证：<span style="color:red;">驳回</span></eq>
+									<br />
+									<eq name="vo.status" value="1">登陆：<span style="color:green;">正常</span></eq>
+									<eq name="vo.status" value="2">登陆：<span style="color:red;">冻结</span></eq>
+									<br />
+									<eq name="vo.txstate" value="1">提币：<span style="color:green;">正常</span></eq>
+									<eq name="vo.txstate" value="2">提币：<span style="color:red;">禁止</span></eq>
+									<br />
+									<eq name="vo.gd_state" value="0">跟单：<span style="color:green;">关闭</span></eq>
+									<eq name="vo.gd_state" value="1">跟单：<span style="color:red;">开启</span></eq>
+									<br />
+									<eq name="vo.type" value="0"><span style="color:orange;">正式用户</span></eq>
+									<eq name="vo.type" value="1"><span style="color:red;">虚拟用户</span></eq>
 								    
 								</td>
+								<td><span>{$vo.addr}</span></td>
 
-                                <td><span>{$vo.invit}</span></td>
-                                
-                                <td>
-						            <a class="btn btn-primary btn-xs" href="{:U('Index/edit')}?id={$vo.id}">{:L('编辑')}</a>
-						             <eq name="vo.rzstatus" value="1">
-						            <a class="btn btn-primary btn-xs" href="{:U('Index/authrz')}?id={$vo.id}">{:L('审核认证')}</a>
-						            </eq>
-						        </td>
 							</tr>
 						</volist>
                     <else/>
