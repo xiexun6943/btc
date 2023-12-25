@@ -1368,7 +1368,6 @@ class UserController extends AdminController
         $all_total['all_usdt_yingkui']=0;
 
         if ($is_get == 1) {  // 筛选 查询
-            echo "筛选查询";
             $this->assign('field', $field);
             $this->assign('search', $search);
             $this->assign('xiaji', $xiaji);
@@ -1407,6 +1406,7 @@ class UserController extends AdminController
                 }
                 $where['type']=0;
                 $where['invit_1']=$agent_id;
+
             }else{
                 switch ($status) {
                     case 1: //一级代理
@@ -1444,7 +1444,7 @@ class UserController extends AdminController
             }
 
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 10);
+            $Page = new \Think\Page($count, 15);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
@@ -1452,17 +1452,12 @@ class UserController extends AdminController
                 ->limit($Page->firstRow . ',' . $Page->listRows)
                 ->select();
             $this->assign('status', $status);
-
             $list=$this->_searchList($list,$start_time,$end_time); // 筛选列表数据
-
             $all_zs_ids=$this->_getAllZSUserId($where); // 所有直属下级id
+            
+            $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
+            $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
 
-            if ($status == 3) {
-                $allUserIds=$all_zs_ids;
-            }else{
-                $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
-                $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
-            }
             if (!empty($allUserIds)) {
                 $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
             }
@@ -1494,7 +1489,7 @@ class UserController extends AdminController
             }
             $where['type']=0;
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 10);
+            $Page = new \Think\Page($count, 15);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
@@ -1506,12 +1501,10 @@ class UserController extends AdminController
             $list=$this->_moRenList($list,$start_time,$end_time); // 列表数据
 
             $all_zs_ids=$this->_getAllZSUserId($where); // 当前筛选条件下所有 直属下级id
-            if ($status == 3) {
-                $allUserIds=$all_zs_ids;
-            }else{
-                $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
-                $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
-            }
+
+            $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
+            $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
+
 
             if (!empty($allUserIds)) {
                 $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
@@ -1534,7 +1527,7 @@ class UserController extends AdminController
         $this->display();
     }
 
-    // 更加用户uid 集获取所有下级用户的
+    // 根据用户uid 集获取所有下级用户的
     private function _getAllUIds($all_id)
     {
         $user_ids=[];
@@ -1709,7 +1702,7 @@ class UserController extends AdminController
 
                 $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
                 $list[$k]['state']=$user_login_state['state'];
-//                 用户分类
+                //  用户分类
                 if ($v['invit_1'] == 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
                     $list[$k]['user_type']=1;// 一级代理
                 } elseif ($v['invit_1'] > 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
@@ -1731,6 +1724,24 @@ class UserController extends AdminController
      * @return array|mixed
      */
     private  function _getAllId($id, &$sons = []){
+        $son= M('User')->field('id')->where("path like ',{$id}' and type =0")->select();
+        if ($son && !empty($son)) {
+            return array_unique(array_column($son,'id'));
+        } else {
+            return [];
+        }
+
+    }
+
+    /**
+     * 遍历方式
+     * 获取所有下级id
+     * @param $id
+     * @param array $sons
+     * @return array|mixed
+     */
+    private function getAllId($id, &$sons = [])
+    {
         $son= M('User')->field('id')->where(['invit_1'=>$id,'type'=>0])->select();
         if ($son && !empty($son)) {
             foreach ($son as $v) {
