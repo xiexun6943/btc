@@ -1353,12 +1353,14 @@ class UserController extends AdminController
             $this->assign('search', $search);
             $this->assign('xiaji', $xiaji);
             $where = array();
-            if ($agent_id) {
+            if ($agent_id) { // 有 上级id
                 switch ($status) {
                     case 1: //一级代理
                         $where['is_agent']=1;
                         $where['path']='';
                         $where['invit_1']= 0;
+                        $where['invit_2']= 0;
+                        $where['invit_3']= 0;
                         break;
                     case 2: //普通用户
                         $where['is_agent']=0;break;
@@ -1367,6 +1369,17 @@ class UserController extends AdminController
                     case 4: // 普通代理
                         $where['is_agent']=1;
                         $where['invit_1'] =[['gt',0]];
+                    case 5: // 二级代理
+                        $where['is_agent']=1;
+                        $where['invit_1'] =[['gt',0]];
+                        $where['invit_2'] =[['eq',0]];
+                        $where['invit_3'] =[['eq',0]];
+                        break;
+                    case 6: // 三级代理
+                        $where['is_agent']=1;
+                        $where['invit_1'] =[['gt',0]];
+                        $where['invit_2'] =[['gt',0]];
+                        $where['invit_3'] =[['eq',0]];
                         break;
                 }
                 if ($field && $search) {
@@ -1380,6 +1393,8 @@ class UserController extends AdminController
                         $where['is_agent']=1;
                         $where['path']='';
                         $where['invit_1']= 0;
+                        $where['invit_2']= 0;
+                        $where['invit_3']= 0;
                         break;
                     case 2: //普通用户
                         $where['is_agent']=0;break;
@@ -1388,6 +1403,18 @@ class UserController extends AdminController
                     case 4: // 普通代理
                         $where['is_agent']=1;
                         $where['invit_1'] =[['gt',0]];
+                    case 5: // 二级代理
+                        $where['is_agent']=1;
+                        $where['invit_1'] =[['gt',0]];
+                        $where['invit_2'] =[['eq',0]];
+                        $where['invit_3'] =[['eq',0]];
+                        break;
+                    case 6: // 三级代理
+                        $where['is_agent']=1;
+                        $where['invit_1'] =[['gt',0]];
+                        $where['invit_2'] =[['gt',0]];
+                        $where['invit_3'] =[['eq',0]];
+                        break;
                 }
                 if ($field && $search) {
                     $where[$field] = $search;
@@ -1396,9 +1423,9 @@ class UserController extends AdminController
 
             }
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 100);
+            $Page = new \Think\Page($count, 20);
             $show = $Page->show();
-            $list = M('User')->field("id,username,phone,money,invit_1,path,addtime,is_agent,type")
+            $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
                 ->order('id asc')
                 ->limit($Page->firstRow . ',' . $Page->listRows)
@@ -1446,7 +1473,7 @@ class UserController extends AdminController
             $count = M('User')->where($where)->count();
             $Page = new \Think\Page($count, 15);
             $show = $Page->show();
-            $list = M('User')->field("id,username,phone,money,invit_1,path,addtime,is_agent,type")
+            $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
                 ->order('id asc')
                 ->limit($Page->firstRow . ',' . $Page->listRows)
@@ -1462,7 +1489,6 @@ class UserController extends AdminController
                 $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
                 $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
             }
-
 
             if (!empty($allUserIds)) {
                 $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
@@ -1594,6 +1620,17 @@ class UserController extends AdminController
                 $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
                 $list[$k]['state']=$user_login_state['state'];
 
+                // 用户分类
+                if ($v['invit_1'] == 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                    $list[$k]['user_type']=1;// 一级代理
+                } elseif ($v['invit_1'] > 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                    $list[$k]['user_type']=2;// 二级代理
+                } elseif ($v['invit_1'] > 0 && $v['invit_2'] > 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                    $list[$k]['user_type']=3;// 三级代理
+                }else{
+                    $list[$k]['user_type']=4;// 普通用户
+                }
+
             }
         }
         return $list;
@@ -1649,6 +1686,16 @@ class UserController extends AdminController
 
                 $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
                 $list[$k]['state']=$user_login_state['state'];
+                // 用户分类
+                if ($v['invit_1'] == 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                    $list[$k]['user_type']=1;// 一级代理
+                } elseif ($v['invit_1'] > 0 && $v['invit_2'] == 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                    $list[$k]['user_type']=2;// 二级代理
+                } elseif ($v['invit_1'] > 0 && $v['invit_2'] > 0 && $v['invit_3'] == 0 && $v['is_agent'] == 1) {
+                    $list[$k]['user_type']=3;// 三级代理
+                }else{
+                    $list[$k]['user_type']=4;// 普通用户
+                }
             }
         }
 

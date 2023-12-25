@@ -47,8 +47,10 @@
                         <select style="width:120px;display:inline-block;margin-right:10px;" name="status" class="form-control">
                             <option value="3" <eq name="Think.get.status" value="3">selected</eq> >全部用户</option>
                             <option value="1" <eq name="Think.get.status" value="1">selected</eq> >一级代理</option>
+                            <option value="5" <eq name="Think.get.status" value="5">selected</eq> >二级代理</option>
+                            <option value="6" <eq name="Think.get.status" value="6">selected</eq> >三级代理</option>
                             <option value="2" <eq name="Think.get.status" value="2">selected</eq> >普通用户</option>
-                            <option value="4" <eq name="Think.get.status" value="4">selected</eq> >普通代理</option>
+<!--                            <option value="4" <eq name="Think.get.status" value="4">selected</eq> >普通代理</option>-->
                         </select>
                         上级ID:
                         <input type="text" style="display:inline-block;float:unset;width:100px" name="agent_id" class="search-input form-control" value="{$agent_id}" >
@@ -125,6 +127,7 @@
                         <th class="">UID</th>
                         <th class="">会员账号 / 手机号</th>
                         <th class="">金额</th>
+                        <th class="">代理</th>
                         <th class="">上级账号/UID</th>
                         <th class="">总充值金额(u)</th>
                         <th class="">总提现金额(u)</th>
@@ -150,10 +153,15 @@
                                     USDT: <span style="color: red">{$vo.coin_usdt} </span>(U)<br>
                                     BTC: <span style="color: green">{$vo.coin_btc} </span> (btc)<br>
                                     ETH: <span style="color: blue">{$vo.coin_eth} </span> (eth)
-
+                                </td>
                                 <td style="width:120px;white-space:unset">
-                                    <eq name="vo.is_agent" value="1">代理: <span style="color: red">是</span> </eq>
-                                    <eq name="vo.is_agent" value="0">代理:<span style="color: blue"> 否</span> </eq> <br>
+                                    <eq name="vo.user_type" value="1"> <span style="color: red">一级代理</span> </eq>
+                                    <eq name="vo.user_type" value="2"> <span style="color: red">二级代理</span> </eq>
+                                    <eq name="vo.user_type" value="3"> <span style="color: red">三级代理</span> </eq>
+                                    <eq name="vo.user_type" value="4"> <span style="color: red">普通用户</span> </eq>
+                                </td>
+                                <td style="width:120px;white-space:unset">
+<!--                                    <empty name="vo.is_agent" value="1">代理: <span style="color: red">是</span> </empty>-->
                                     <neq name="vo.invit_1"><a href="{:U('User/index?name='.$vo['invit_1'].'&field=username')}">{$vo['invit_1']['id']}<br/>{$vo['invit_1']['username']}<br/>{$vo['invit_1']['phone']}</a><br></neq>
 
                                 </td>

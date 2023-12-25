@@ -138,7 +138,9 @@ class IndexController extends MobileController
 
 		header ( "Content-type: text/html; charset=utf-8" );
 		$uid = userid();
-		
+        if($uid <= 0){
+            $this->redirect('Login/index');
+        }
 		//三代会员统计
 		
 		$count1_rz = M("user")->where("invit_1 = {$uid} and rzstatus = 2")->count();
@@ -150,7 +152,7 @@ class IndexController extends MobileController
 		    $count1_nrz = 0;
 		}
 		
-		
+
 		
 		$count2_rz = M("user")->where("invit_2 = {$uid} and rzstatus = 2")->count();
 		if($count2_rz <= 0){
