@@ -510,9 +510,10 @@ class UserController extends AdminController
         $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
         foreach ($list as $k => $v) {
-            $list[$k]['invit_1'] = M('User')->where(array('id' => $v['invit_1']))->getField('username');
-            $list[$k]['invit_2'] = M('User')->where(array('id' => $v['invit_2']))->getField('username');
-            $list[$k]['invit_3'] = M('User')->where(array('id' => $v['invit_3']))->getField('username');
+            $list[$k]['invit_1'] = M('User')->field('username,phone,id')->where(array('id' => $v['invit_1']))->find();
+
+//            $list[$k]['invit_2'] = M('User')->where(array('id' => $v['invit_2']))->getField('username');
+//            $list[$k]['invit_3'] = M('User')->where(array('id' => $v['invit_3']))->getField('username');
             $user_login_state=M('user_log')->where(array('userid'=>$v['id'],'type' => 'login'))->order('id desc')->find();
             $list[$k]['state']=$user_login_state['state'];
         }
@@ -543,6 +544,8 @@ class UserController extends AdminController
                 }else{
                     $add['username'] = $username;
                 }
+
+
                 $is_user= M('user')->where(['username'=>$username])->find();
                 if($is_user){
                     $this->error("会员账号已经存在!");exit();
@@ -557,8 +560,9 @@ class UserController extends AdminController
                     $add['paypassword'] = md5($_POST['paypassword']);
                 }
 
-                if($_POST['invit'] != 0 || $_POST['invit'] != ''){
-                    $inv_user = M('User')->where(array('invit' => $_POST['invit']))->field("id,username,invit_1,invit_2,path")->find();
+                if($_POST['up_uid'] > 0 && $_POST['up_uid'] != ''){
+                    $inv_user = M('User')->where(array('id' => $_POST['up_uid']))->field("id,username,invit_1,invit_2,path")->find();
+
                     if(empty($inv_user)){
                         $this->error("推荐人不存在");exit();
                     }
@@ -600,7 +604,18 @@ class UserController extends AdminController
                 } else {
                     unset($_POST['paypassword']);
                 }
+                if($_POST['up_uid'] > 0 && $_POST['up_uid'] != ''){
+                    $inv_user = M('User')->where(array('id' => $_POST['up_uid']))->field("id,username,invit_1,invit_2,path")->find();
+                    if(empty($inv_user)){
+                        $this->error("推荐人不存在");exit();
+                    }else{
+                        $_POST['invit_1'] = $inv_user['id'];
+                        $_POST['invit_2'] = $inv_user['invit_1'];
+                        $_POST['invit_3'] = $inv_user['invit_2'];
+                        $_POST['path'] = $inv_user['path'].','.$inv_user['id'];
+                    }
 
+                }
                 $result = M("user")->where(array('id'=>$id))->save($_POST);
                 if($result){
                     $this->success("编辑成功");exit();
@@ -1308,7 +1323,7 @@ class UserController extends AdminController
     // 团队统计列表
     public function count()
     {
-        $status=I('get.status')?:1;
+        $status=I('get.status')?:3;
         $is_get=I('get.is_get');
         $field=I('get.field');
         $search=I('get.search');
@@ -1342,7 +1357,9 @@ class UserController extends AdminController
                 switch ($status) {
                     case 1: //一级代理
                         $where['is_agent']=1;
-                        $where['path']='';  break;
+                        $where['path']='';
+                        $where['invit_1']= 0;
+                        break;
                     case 2: //普通用户
                         $where['is_agent']=0;break;
                     case 3: // 全部用户
@@ -1361,7 +1378,9 @@ class UserController extends AdminController
                 switch ($status) {
                     case 1: //一级代理
                         $where['is_agent']=1;
-                        $where['path']='';  break;
+                        $where['path']='';
+                        $where['invit_1']= 0;
+                        break;
                     case 2: //普通用户
                         $where['is_agent']=0;break;
                     case 3: // 全部用户
@@ -1377,7 +1396,7 @@ class UserController extends AdminController
 
             }
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 15);
+            $Page = new \Think\Page($count, 100);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,path,addtime,is_agent,type")
                 ->where($where)
@@ -1385,27 +1404,26 @@ class UserController extends AdminController
                 ->limit($Page->firstRow . ',' . $Page->listRows)
                 ->select();
             $this->assign('status', $status);
+
             $list=$this->_searchList($list,$start_time,$end_time); // 筛选列表数据
-
             $all_zs_ids=$this->_getAllZSUserId($where); // 所有直属下级id
-            $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
-            $allUserIds=array_merge($all_zs_ids,$all_user_id); // 合并所有uid
-
+            if ($status == 3) {
+                $allUserIds=$all_zs_ids;
+            }else{
+                $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
+                $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
+            }
             if (!empty($allUserIds)) {
                 $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
             }
 
         }else{   // 列表默认展示
-            if ($xiaji) {
-                $where['invit_1']=$xiaji;
-            }else{
-                $where['is_agent']=1;
-                $where['path']='';
-            }
             switch ($status) {
                 case 1: //一级代理
                     $where['is_agent']=1;
-                    $where['path']='';  break;
+                    $where['path']='';
+                    $where['invit_1']= 0;
+                    break;
                 case 2: //普通用户
                     $where['is_agent']=0;break;
                 case 3: // 全部用户
@@ -1414,6 +1432,13 @@ class UserController extends AdminController
                     $where['is_agent']=1;
                     $where['invit_1'] =[['gt',0]];
             }
+            if ($xiaji) {
+                $where['invit_1']=$xiaji;
+            }else{
+                $where['is_agent']=1;
+                $where['path']='';
+            }
+
             if ($field && $search) {
                 $where[$field] = $search;
             }
@@ -1426,12 +1451,18 @@ class UserController extends AdminController
                 ->order('id asc')
                 ->limit($Page->firstRow . ',' . $Page->listRows)
                 ->select();
+
             $this->assign('status', '');
             $list=$this->_moRenList($list,$start_time,$end_time); // 列表数据
 
             $all_zs_ids=$this->_getAllZSUserId($where); // 当前筛选条件下所有 直属下级id
-            $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
-            $allUserIds=array_merge($all_zs_ids,$all_user_id); // 合并所有uid
+            if ($status == 3) {
+                $allUserIds=$all_zs_ids;
+            }else{
+                $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
+                $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
+            }
+
 
             if (!empty($allUserIds)) {
                 $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计

@@ -155,15 +155,16 @@
 								</td>
 								<td><span>{$vo.invit}</span></td>
 								<td style="width:120px;white-space:unset">
-									<neq name="vo.invit_1"><a href="{:U('User/index?name='.$vo['invit_1'].'&field=username')}">1代：{$vo['invit_1']}</a><br></neq>
-									<neq name="vo.invit_2"><a href="{:U('User/index?name='.$vo['invit_2'].'&field=username')}">2代：{$vo['invit_2']}</a><br></neq>
-									<neq name="vo.invit_3"><a href="{:U('User/index?name='.$vo['invit_3'].'&field=username')}">3代：{$vo['invit_3']}</a><br></neq>
+									<neq name="vo.invit_1">上级uid：{$vo['invit_1']['id']}<br></neq>
+									<neq name="vo.invit_1">上级账号：{$vo['invit_1']['phone']}<br></neq>
+								 <span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+<!--									<neq name="vo.invit_2"><a href="{:U('User/index?name='.$vo['invit_2'].'&field=username')}">2代：{$vo['invit_2']}</a><br></neq>-->
+<!--									<neq name="vo.invit_3"><a href="{:U('User/index?name='.$vo['invit_3'].'&field=username')}">3代：{$vo['invit_3']}</a><br></neq>-->
 								</td>
 								<td style="word-break:break-all;width: 30px">
 									<span>IP：{$vo.addip}</span><br />
 									<span>时间：<?php echo date("Y-m-d H:i:s",$vo['addtime']);?></span>
 									<br />
-<!--									<span>{$vo.addr}</span>-->
 								</td>
 
 
