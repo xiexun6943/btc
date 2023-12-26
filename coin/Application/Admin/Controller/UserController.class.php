@@ -1454,7 +1454,7 @@ class UserController extends AdminController
             $this->assign('status', $status);
             $list=$this->_searchList($list,$start_time,$end_time); // 筛选列表数据
             $all_zs_ids=$this->_getAllZSUserId($where); // 所有直属下级id
-            
+
             $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
             $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
 
@@ -1724,7 +1724,7 @@ class UserController extends AdminController
      * @return array|mixed
      */
     private  function _getAllId($id, &$sons = []){
-        $son= M('User')->field('id')->where("path like ',{$id}' and type =0")->select();
+        $son= M('User')->field('id')->where("path like ',%{$id}' and type =0")->select();
         if ($son && !empty($son)) {
             return array_unique(array_column($son,'id'));
         } else {
