@@ -673,18 +673,23 @@ class UserController extends AdminController
             $coinname = "usdt";
             $username = trim($_POST['username']);
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+            if (!$minfo) {
+                $this->error("用户不存在!");exit();
+            }
             $type=17;  // 充值
+            $coin_type=2;
             if ($coin == 'bill') { //  bill 是 彩金 需要设置 用户流水线 并且清空之前设置的流水线值
                 $type=21;  // 彩金
+                $coin_type=3;  // 彩金
                 $bonus = trim($_POST['bonus']);
                 $bill_result = M("user")->where(array('id'=>$uid))->save(['st_bill'=>$bonus,'bill'=>0]);
+
             }
-            //写入充值单
             $save=[
                 'uid'=>$uid,
                 'username'=>$username,
                 'status' => 2,
-                "type"=>2,
+                "type"=>$coin_type,
                 'coin'=>'USDT',
                 'num'=>$num,
                 'real_num'=>$num,
@@ -692,8 +697,9 @@ class UserController extends AdminController
                 'updatetime' => date("Y-m-d H:i:s",time()),
                 'payimg'=>'',
                 'msg'=>'无'
-
             ];
+            //写入充值单
+
             $upre = M("recharge")->add($save);
 
             if($minfo){
@@ -1442,7 +1448,6 @@ class UserController extends AdminController
                 $where['type']=0;
 
             }
-
             $count = M('User')->where($where)->count();
             $Page = new \Think\Page($count, 15);
             $show = $Page->show();
@@ -1457,7 +1462,6 @@ class UserController extends AdminController
 
             $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
             $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
-
             if (!empty($allUserIds)) {
                 $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
             }
@@ -1468,6 +1472,8 @@ class UserController extends AdminController
                     $where['is_agent']=1;
                     $where['path']='';
                     $where['invit_1']= 0;
+                    $where['invit_2']= 0;
+                    $where['invit_3']= 0;
                     break;
                 case 2: //普通用户
                     $where['is_agent']=0;break;
@@ -1476,12 +1482,23 @@ class UserController extends AdminController
                 case 4: // 普通代理
                     $where['is_agent']=1;
                     $where['invit_1'] =[['gt',0]];
+                case 5: // 二级代理
+                    $where['is_agent']=1;
+                    $where['invit_1'] =[['gt',0]];
+                    $where['invit_2'] =[['eq',0]];
+                    $where['invit_3'] =[['eq',0]];
+                    break;
+                case 6: // 三级代理
+                    $where['is_agent']=1;
+                    $where['invit_1'] =[['gt',0]];
+                    $where['invit_2'] =[['gt',0]];
+                    $where['invit_3'] =[['eq',0]];
+                    break;
             }
             if ($xiaji) {
                 $where['invit_1']=$xiaji;
             }else{
-                $where['is_agent']=1;
-                $where['path']='';
+                $where=[];
             }
 
             if ($field && $search) {
@@ -1496,16 +1513,11 @@ class UserController extends AdminController
                 ->order('id asc')
                 ->limit($Page->firstRow . ',' . $Page->listRows)
                 ->select();
-
             $this->assign('status', '');
             $list=$this->_moRenList($list,$start_time,$end_time); // 列表数据
-
             $all_zs_ids=$this->_getAllZSUserId($where); // 当前筛选条件下所有 直属下级id
-
             $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
             $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
-
-
             if (!empty($allUserIds)) {
                 $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
             }
@@ -1522,6 +1534,7 @@ class UserController extends AdminController
         $this->assign('all_eth_yingkui', $all_total['all_eth_yingkui']);
         $this->assign('all_usdt_yingkui', $all_total['all_usdt_yingkui']);
 
+        $this->assign('status', $status);
         $this->assign('page', $show);
         $this->assign('list', $list);
         $this->display();
@@ -1549,10 +1562,10 @@ class UserController extends AdminController
      */
     private function _allTotal($all_zs_ids,$start_time,$end_time){
         // 总充值
-        $allBtcRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
-        $allEthRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
+        $allBtcRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
+        $allEthRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
 //                echo M()->getLastSql();exit();
-        $allUsdtRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
+        $allUsdtRecharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$all_zs_ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
 
         $allBtcRecharge[0]['total'] ? $all_btc_recharge= round($allBtcRecharge[0]['total'],3):$all_btc_recharge=0 ;
         $allEthRecharge[0]['total'] ? $all_eth_recharge= round($allEthRecharge[0]['total'],3):$allEthRecharge=0 ;
@@ -1602,9 +1615,9 @@ class UserController extends AdminController
 
                 //充值
                 if (!empty($ids)) {
-                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
-                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
-                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
+                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
+                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
+                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
                     $btc_recharge[0]['total']?$list[$k]['btc_recharge']= round($btc_recharge[0]['total'],3):$list[$k]['btc_recharge']='0.00' ;
                     $eth_recharge[0]['total']?$list[$k]['eth_recharge']= round($eth_recharge[0]['total'],3):$list[$k]['eth_recharge']='0.00' ;
                     $usdt_recharge[0]['total']?$list[$k]['usdt_recharge']= round($usdt_recharge[0]['total'],3):$list[$k]['usdt_recharge']='0.00' ;
@@ -1667,9 +1680,9 @@ class UserController extends AdminController
 
                 //充值
                 if (!empty($ids)) {
-                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
-                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
-                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
+                    $btc_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'BTC'))->select();
+                    $eth_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>'ETH'))->select();
+                    $usdt_recharge = M('recharge')->field("sum(num) as total")->where(array('uid' => ['in',$ids],'type'=>['in',[1,2]],'status'=>2,'updatetime'=>[['EGT',$start_time],['ELT',$end_time]],'coin'=>['in',['HKD','USDT','JPY']]))->select();
                     $btc_recharge[0]['total']?$list[$k]['btc_recharge']= round($btc_recharge[0]['total'],3):$list[$k]['btc_recharge']='0.00' ;
                     $eth_recharge[0]['total']?$list[$k]['eth_recharge']= round($eth_recharge[0]['total'],3):$list[$k]['eth_recharge']='0.00' ;
                     $usdt_recharge[0]['total']?$list[$k]['usdt_recharge']= round($usdt_recharge[0]['total'],3):$list[$k]['usdt_recharge']='0.00' ;
@@ -1717,14 +1730,14 @@ class UserController extends AdminController
 
         return  $list;
     }
+
     /**
      * 获取所有下级id
      * @param $id
-     * @param array $sons
-     * @return array|mixed
+     * @return array
      */
-    private  function _getAllId($id, &$sons = []){
-        $son= M('User')->field('id')->where("path like ',%{$id}' and type =0")->select();
+    private  function _getAllId($id){
+        $son= M('User')->field('id')->where("path like '%,{$id}%' and type =0")->select();
         if ($son && !empty($son)) {
             return array_unique(array_column($son,'id'));
         } else {

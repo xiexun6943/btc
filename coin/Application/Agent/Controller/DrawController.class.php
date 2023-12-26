@@ -20,9 +20,9 @@ class DrawController extends AgentController
 		$search=I('get.search');
 		$where = array();
 		if ($field && $search) {
-			$map_3 = "$field like '%{$search}%' and path like '%{$uid}%'";
+			$map_3 = "$field like '%,{$search}%' and path like '%,{$uid}%'";
 		}else{
-			$map_3 = "path like '%{$uid}%'";
+			$map_3 = "path like '%,{$uid}%'";
 		}
 		$count = M('user')->where($map_3)->count();
 		$Page = new \Think\Page($count, 15);

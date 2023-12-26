@@ -173,16 +173,12 @@
 									<span style="color:darkblue;font-weight:bold">驳回充值</span>
 								</eq></td>
 							<?php  }?>
-
-							<?php if( $vo['type'] == 1){ ?>
 							<td>
-								<img src="/Public/Static/payimgs/{$vo.payimg}" style="height:60px;"/>
+								<eq name="vo.type" value="1">   <img src="/Public/Static/payimgs/{$vo.payimg}" style="height:60px;"/></eq>
+								<eq name="vo.type" value="2">后台人工充值</eq>
+								<eq name="vo.type" value="3">后台彩金赠送</eq>
 							</td>
 
-
-							<?php }else{ ?>
-							<td>后台人工充值</td>
-							<?php  }?>
 							<td>充值时间:<br>{$vo.addtime}<br>
 								处理时间:<br>{$vo.updatetime}</td>
 						</tr>
