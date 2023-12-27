@@ -1363,15 +1363,13 @@ class UserController extends AdminController
         $this->assign('start_time', $start_time);
         $this->assign('end_time', $end_time);
 
-        $all_total['all_btc_recharge']=0;
-        $all_total['$all_eth_recharge']=0;
-        $all_total['all_usdt_recharge']=0;
-        $all_total['all_btc_withdraw']=0;
-        $all_total['all_eth_withdraw']=0;
-        $all_total['all_usdt_withdraw']=0;
-        $all_total['all_btc_yingkui']=0;
-        $all_total['all_eth_yingkui']=0;
-        $all_total['all_usdt_yingkui']=0;
+        $all_btc_recharge=0;
+        $all_eth_recharge=0;
+        $all_usdt_recharge=0;
+
+        $all_btc_withdraw=0;
+        $all_eth_withdraw=0;
+        $all_usdt_withdraw=0;
 
         if ($is_get == 1) {  // 筛选 查询
             $this->assign('field', $field);
@@ -1449,7 +1447,7 @@ class UserController extends AdminController
 
             }
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 15);
+            $Page = new \Think\Page($count, 20);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
@@ -1457,82 +1455,73 @@ class UserController extends AdminController
                 ->limit($Page->firstRow . ',' . $Page->listRows)
                 ->select();
             $this->assign('status', $status);
+
             $list=$this->_searchList($list,$start_time,$end_time); // 筛选列表数据
-            $all_zs_ids=$this->_getAllZSUserId($where); // 所有直属下级id
-
-            $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
-            $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
-            if (!empty($allUserIds)) {
-                $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
-            }
-
+//            $all_zs_ids=$this->_getAllZSUserId($where); // 所有直属下级id
+//            $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
+//            $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
+//            if (!empty($allUserIds)) {
+//                $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
+//            }
+            $this->assign('status', $status);
         }else{   // 列表默认展示
-            switch ($status) {
-                case 1: //一级代理
-                    $where['is_agent']=1;
-                    $where['path']='';
-                    $where['invit_1']= 0;
-                    $where['invit_2']= 0;
-                    $where['invit_3']= 0;
-                    break;
-                case 2: //普通用户
-                    $where['is_agent']=0;break;
-                case 3: // 全部用户
-                    $where=[]; break;
-                case 4: // 普通代理
-                    $where['is_agent']=1;
-                    $where['invit_1'] =[['gt',0]];
-                case 5: // 二级代理
-                    $where['is_agent']=1;
-                    $where['invit_1'] =[['gt',0]];
-                    $where['invit_2'] =[['eq',0]];
-                    $where['invit_3'] =[['eq',0]];
-                    break;
-                case 6: // 三级代理
-                    $where['is_agent']=1;
-                    $where['invit_1'] =[['gt',0]];
-                    $where['invit_2'] =[['gt',0]];
-                    $where['invit_3'] =[['eq',0]];
-                    break;
-            }
-            if ($xiaji) {
+            if ($xiaji) { // 下级 全部
                 $where['invit_1']=$xiaji;
-            }else{
-                $where=[];
+            }else{ // 默认一级代理
+                $where['is_agent']=1;
+                $where['path']='';
+                $where['invit_1']= 0;
+                $where['invit_2']= 0;
+                $where['invit_3']= 0;
             }
-
             if ($field && $search) {
                 $where[$field] = $search;
             }
             $where['type']=0;
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 15);
+            $Page = new \Think\Page($count, 20);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
                 ->order('id asc')
                 ->limit($Page->firstRow . ',' . $Page->listRows)
                 ->select();
-            $this->assign('status', '');
+
             $list=$this->_moRenList($list,$start_time,$end_time); // 列表数据
-            $all_zs_ids=$this->_getAllZSUserId($where); // 当前筛选条件下所有 直属下级id
-            $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
-            $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
-            if (!empty($allUserIds)) {
-                $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
-            }
+
+//            $all_zs_ids=$this->_getAllZSUserId($where); // 当前筛选条件下所有 直属下级id
+//            $all_user_id=$this->_getAllUIds($all_zs_ids); //所有下级id
+//            $allUserIds=array_unique(array_merge($all_zs_ids,$all_user_id)); // 合并所有uid
+//            if (!empty($allUserIds)) {
+//                $all_total=$this->_allTotal($allUserIds,$start_time,$end_time); //总统计
+//            }
+
         }
-        $this->assign('all_btc_recharge', $all_total['all_btc_recharge']);
-        $this->assign('all_eth_recharge', $all_total['all_eth_recharge']);
-        $this->assign('all_usdt_recharge', $all_total['all_usdt_recharge']);
+        // 页面 总统计
+        foreach ($list as $v) {
+            $all_btc_recharge+=$v['btc_recharge'];
+            $all_eth_recharge+=$v['eth_recharge'];
+            $all_usdt_recharge+=$v['usdt_recharge'];
 
-        $this->assign('all_btc_withdraw', $all_total['all_btc_withdraw']);
-        $this->assign('all_eth_withdraw', $all_total['all_eth_withdraw']);
-        $this->assign('all_usdt_withdraw', $all_total['all_usdt_withdraw']);
+            $all_btc_withdraw+=$v['btc_withdraw'];
+            $all_eth_withdraw+=$v['eth_withdraw'];
+            $all_usdt_withdraw+=$v['usdt_withdraw'];
+        }
+        $all_btc_yingkui= $all_btc_recharge - $all_btc_withdraw;
+        $all_eth_yingkui= $all_eth_recharge - $all_eth_withdraw;
+        $all_usdt_yingkui= $all_usdt_recharge - $all_usdt_withdraw;
 
-        $this->assign('all_btc_yingkui', $all_total['all_btc_yingkui']);
-        $this->assign('all_eth_yingkui', $all_total['all_eth_yingkui']);
-        $this->assign('all_usdt_yingkui', $all_total['all_usdt_yingkui']);
+        $this->assign('all_btc_recharge', $all_btc_recharge);
+        $this->assign('all_eth_recharge', $all_eth_recharge);
+        $this->assign('all_usdt_recharge', $all_usdt_recharge);
+
+        $this->assign('all_btc_withdraw', $all_btc_withdraw);
+        $this->assign('all_eth_withdraw', $all_eth_withdraw);
+        $this->assign('all_usdt_withdraw', $all_usdt_withdraw);
+
+        $this->assign('all_btc_yingkui', $all_btc_yingkui);
+        $this->assign('all_eth_yingkui', $all_eth_yingkui);
+        $this->assign('all_usdt_yingkui', $all_usdt_yingkui);
 
         $this->assign('status', $status);
         $this->assign('page', $show);
@@ -1606,7 +1595,6 @@ class UserController extends AdminController
                 $ids=$this->_getAllId($v['id']); // 该id下面所有用户id
                 empty($ids)?$list[$k]['down']=0:$list[$k]['down']=1;
                 $ids[]=$v['id'];
-
                 $list[$k]['invit_1'] = M('User')->field('username,id,phone')->where(array('id' => $v['invit_1']))->find();
                 $list[$k]['coin'] = M('User_coin')->field('userid,usdt,usdtd,btc,btcd,eth,ethd')->where(array('userid' => $v['id']))->find();
                 $list[$k]['coin_usdt']=$list[$k]['coin']['usdt']+$list[$k]['coin']['usdtd'];
@@ -1659,7 +1647,6 @@ class UserController extends AdminController
                 }else{
                     $list[$k]['user_type']=4;// 普通用户
                 }
-
             }
         }
         return $list;
