@@ -51,6 +51,9 @@
 			<li>
 				<a href="{:U('Agent/Draw/index')}">{:L('红包抽奖')}</a>
 			</li>
+			<li>
+				<a href="{:U('Agent/Index/count')}">{:L('团队统计')}</a>
+			</li>
 
 		</ul>
 		
@@ -72,14 +75,14 @@
 	<div id="main" class="main">
 		<div class="main-title-h">
 			<span class="h1-title">{:L('会员管理')}</span>
+			<span class="h1-title">{:L('当前用户UID: ')}{$uid}</span>
 			<a class="btn btn-warning" onClick="location.href='{:U('Agent/Index/index')}'">{:L('初始化搜索')}</a>
 		</div>
-		
 		<div class="cf">
 		    <div class="fl">
 <!--				<a class="btn btn-success  " href="{:U('Index/edit')}">{:L('新 增')}</a>-->
 			</div>
-		    
+
 			<div class="search-form cf">
 				<div class="sleft">
 					<form name="formSearch" id="formSearch" method="get" name="form1">
@@ -111,7 +114,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="data-table table-striped">
 			<table class="">
 				<thead>
@@ -146,6 +149,7 @@
 									<eq name="vo.rzstatus" value="1">
 										<a class="btn btn-primary btn-xs" href="{:U('Index/authrz')}?id={$vo.id}">{:L('审核认证')}</a>
 									</eq>
+									</p>
 								</td>
 								<td>
 								    <span>IP：{$vo.addip}</span><br />
@@ -157,7 +161,7 @@
 									<neq name="vo.invit_2">{:L('2代')}：{$vo['invit_2']}<br/></neq>
 									<neq name="vo.invit_3">{:L('3代')}：{$vo['invit_3']}<br/></neq>
 								</td>
-								
+
 								<td>
 									<eq name="vo.rzstatus" value="0">认证：<span style="color:orange;">未提交</span> </eq>
 									<eq name="vo.rzstatus" value="1">认证：<span style="color:blue;">待审核</span></eq>
@@ -175,7 +179,7 @@
 									<br />
 									<eq name="vo.type" value="0"><span style="color:orange;">正式用户</span></eq>
 									<eq name="vo.type" value="1"><span style="color:red;">虚拟用户</span></eq>
-								    
+
 								</td>
 								<td><span>{$vo.addr}</span></td>
 

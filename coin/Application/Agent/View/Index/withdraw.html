@@ -51,6 +51,9 @@
 			<li>
 				<a href="{:U('Agent/Draw/index')}">{:L('红包抽奖')}</a>
 			</li>
+			<li>
+				<a href="{:U('Agent/Index/count')}">{:L('团队统计')}</a>
+			</li>
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-rights" style="margin-right:10px;">
@@ -129,16 +132,18 @@
 							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 
 							<td>
-
+								<eq name="agent_type" value="1">
 								<eq name="vo.status" value="1">
 									<input style="display: block;margin-bottom:5px" type="button" class="ajax-get btn btn-primary btn-xs" value="确认提币" onclick="Upzc('{$vo['id']}');"/>
 									<input style="display: block;margin-bottom:5px" type="button" class="ajax-get btn btn-primary btn-xs" value="驳回提币" onclick="Upbh('{$vo['id']}');"/>
+								</eq>
 								</eq>
 								<eq name="vo.status" value="2"><span style="color:blue;">已处理</span></eq>
 								<eq name="vo.status" value="3"><span style="color:blue;">已处理</span></eq>
 								<?php if(session('admin_role') == 1){  ?>
 								<input style="display: block;width:66px;margin-bottom:5px" type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
 								<?php  }  ?>
+
 							</td>
 
 							<td><?php echo strtoupper($vo['coinname']);?></td>

@@ -51,7 +51,9 @@
 			<li>
 				<a href="{:U('Agent/Draw/index')}">{:L('红包抽奖')}</a>
 			</li>
-
+			<li>
+				<a href="{:U('Agent/Index/count')}">{:L('团队统计')}</a>
+			</li>
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-rights" style="margin-right:10px;">
@@ -114,7 +116,9 @@
 					<th class="">ID</th>
 					<th class="">UID</th>
 					<th class="">用户名</th>
+
 					<th width="">操作</th>
+
 					<th width="">充值数量/实际到账(U)</th>
 					<th width="">银行卡充值信息</th>
 					<th width="">充值类型/币种/状态</th>
@@ -130,9 +134,11 @@
 							<td>{$vo.uid}</td>
 							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							<td>
+								<eq name="agent_type" value="1">
 								<eq name="vo.status" value="1">
 									<input type="button" class="ajax-get btn btn-primary btn-xs" value="确认" onclick="Upzr('{$vo['id']}');"/>
 									<input type="button" class="ajax-get btn btn-primary btn-xs" value="驳回" onclick="Upbhzr('{$vo['id']}');"/>
+								</eq>
 								</eq>
 								<br>
 								<eq name="vo.status" value="2"><span style="color:blue;">已处理</span></eq>
@@ -141,6 +147,7 @@
 								<?php if(session('admin_role') == 1){  ?>
 								<input type="button" class="ajax-get btn btn-primary btn-xs" value="删除" onclick="del('{$vo['id']}');"/>
 								<?php  }  ?>
+
 							</td>
 
 							<td>充值(U):{$vo['num']}<br>

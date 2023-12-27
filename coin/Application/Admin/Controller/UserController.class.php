@@ -105,7 +105,7 @@ class UserController extends AdminController
         if(empty($uinfo)){
             $this->error("参数得要参数");
         }
-        if ($uinfo['invit_1'] > 0 && $uinfo['invit_2'] > 0  ) {
+        if ($uinfo['invit_1'] > 0 && $uinfo['invit_2'] > 0  &&  $uinfo['invit_3'] > 0 ) {
             $this->error("该用户不能设置为代理,调整层级关系!");
         }
         if($uinfo['is_agent'] == 1){

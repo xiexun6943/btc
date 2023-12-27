@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>{:L('代理中心')}</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/base.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/common.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/module.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/default_color.css" media="all">
+	<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/flat-ui.css">
+	<script src="__PUBLIC__/Admin/js/flat-ui.min.js"></script>
+	<script src="__PUBLIC__/Admin/js/application.js"></script>
+</head>
+<body style="margin:0px;padding:0px; margin-top:100px;">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="navbar-header" style="background-color:#3c434d;">
+		<a class="navbar-brand" style="width:200px;text-align:center;background-color:#3c434d;" href="{:U('Agent/Index/index')}">
+		    <span>{:L('代理系统')}</span>	
+		</a>
+	</div>
+	<div class="navbar-collapse collapse">
+		<ul class="nav navbar-nav">
+			<li >
+			    <a href="{:U('Agent/Index/index')}">{:L('会员列表')}</a>
+			</li>
+			
+			<li> 
+				<a href="{:U('Agent/Index/jclist')}">{:L('合约建仓订单')}</a>
+			</li>
+			
+			<li>
+			    <a href="{:U('Agent/Index/pclist')}">{:L('合约平仓订单')}</a>
+			</li>
+			
+			<li>
+			    <a href="{:U('Agent/Index/recharge')}">{:L('充值列表')}</a>
+			</li>
+			
+			<li>
+			    <a href="{:U('Agent/Index/withdraw')}">{:L('提现列表')}</a>
+			</li>
+			
+			<li>
+			    <a href="{:U('Agent/Index/property')}">{:L('用户财产')}</a>
+			</li>
+			<li>
+				<a href="{:U('Agent/Draw/index')}">{:L('红包抽奖')}</a>
+			</li>
+			<li class="active">
+				<a href="{:U('Agent/Index/count')}">{:L('团队统计')}</a>
+			</li>
+
+		</ul>
+		
+		<ul class="nav navbar-nav navbar-rights" style="margin-right:10px;">
+			<li>
+				<a class="dropdown-toggle" title="{:L('退出')}" href="{:U('Agent/Login/loginout')}" >
+					<span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:L('警告内容')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title">{:L('团队统计')}</span>
+
+				<a  class="btn btn-warning" onClick="location.href='{:U('Agent/Index/count')}'">{:L('初始化搜索')}</a>
+
+
+		</div>
+		<div class="cf">
+			<div class="search-form fr cf" style="float:unset!important">
+				<div class="sleft" style="float:unset!important">
+					<form name="formSearch" id="formSearch" method="get" name="form1">
+						<dev id="test-range" style="display:inline-block">
+							<span style="display:inline-block">开始时间:</span>
+							<input style="display:inline-block;float:unset" id="start_time" type="text" name="start_time" class="search-input form-control" value="{$start_time}"  style="" placeholder="开始日期">
+							<span style="display:inline-block;float:unset" style="display:inline-block">到:</span>
+							<input style="display:inline-block;float:unset"  id="end_time" type="text" name="end_time" class="search-input form-control" value="{$end_time}"  style="" placeholder="结束日期">
+						</dev>
+
+
+						<select style="width:120px;display:inline-block;margin-right:10px;" name="status" class="form-control">
+							<option value="3" <eq name="Think.get.status" value="3">selected</eq> >全部用户</option>
+							<option value="1" <eq name="Think.get.status" value="1">selected</eq> >一级代理</option>
+							<option value="5" <eq name="Think.get.status" value="5">selected</eq> >二级代理</option>
+							<option value="6" <eq name="Think.get.status" value="6">selected</eq> >三级代理</option>
+							<option value="2" <eq name="Think.get.status" value="2">selected</eq> >普通用户</option>
+							<!--                            <option value="4" <eq name="Think.get.status" value="4">selected</eq> >普通代理</option>-->
+						</select>
+						上级ID:
+						<input type="text" style="display:inline-block;float:unset;width:100px" name="agent_id" class="search-input form-control" value="{$agent_id}" >
+						<select style="width:120px;display:inline-block;float:unset" name="field" class="form-control">
+							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
+						</select>
+
+						<script type="text/javascript" src="/Public/layer/laydate/laydate.js"></script>
+						<input type="hidden" name="is_get" class="search-input form-control" value="1" >
+						<input type="text" style="display:inline-block;float:unset;width:240px" name="search" class="search-input form-control" value="{$Think.get.search}" placeholder="请输入查询内容" >
+						<a class="sch-btn" style="position: relative;top:-3px;margin-left:-40px;display:inline-block;float:unset" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//搜索功能
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//回车搜索
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<style>
+			.count{
+				float: left;
+				margin-bottom: 5px;
+				width: 32%;
+				margin-right:1%;
+				padding:5px;
+				border:1px solid  #e3e3e3;
+				border-radius: 6px;
+			}
+			.count .h1-title{
+				border-bottom: 1px solid #e9e9e9;
+				display: block;
+			}
+		</style>
+
+		<div class="data-table ">
+			<div class="count">
+				<span class="h1-title">总充值</span>
+				USDT: <span style="color: red">{$all_usdt_recharge}</span>(U)<br>
+				BTC: <span style="color: green">{$all_btc_recharge}</span> (btc)<br>
+				ETH: <span style="color: blue">{$all_eth_recharge}</span> (eth)
+			</div>
+			<div class="count">
+				<span class="h1-title">总提现</span>
+				USDT: <span style="color: red">{$all_usdt_withdraw}</span>(U)<br>
+				BTC: <span style="color: green">{$all_btc_withdraw}</span> (btc)<br>
+				ETH: <span style="color: blue">{$all_eth_withdraw}</span> (eth)
+			</div>
+			<div class="count">
+				<span class="h1-title">总盈亏</span>
+				USDT: <span style="color: red">{$all_usdt_yingkui}</span>(U)<br>
+				BTC: <span style="color: green">{$all_btc_yingkui}</span> (btc)<br>
+				ETH: <span style="color: blue">{$all_eth_yingkui}</span> (eth)
+			</div>
+		</div>
+		<div class="data-table table-striped">
+			<form id="form"  method="post" class="form-horizontal">
+				<table class="">
+					<thead>
+					<tr>
+
+						<th class="">UID</th>
+						<th class="">会员账号 / 手机号</th>
+						<th class="">金额</th>
+						<th class="">代理</th>
+						<th class="">上级账号/UID</th>
+						<th class="">总充值金额(u)</th>
+						<th class="">总提现金额(u)</th>
+						<th class="">盈亏</th>
+						<th class="">操作</th>
+
+					</tr>
+					</thead>
+					<tbody>
+					<style>
+						.btn-xs, .btn-group-xs > .btn{
+							display: block;
+							margin-bottom: 5px;
+						}
+					</style>
+					<notempty name="list">
+						<volist name="list" id="vo">
+							<tr>
+
+								<td>{$vo.id}</td>
+								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+								<td>
+									USDT: <span style="color: red">{$vo.coin_usdt} </span>(U)<br>
+									BTC: <span style="color: green">{$vo.coin_btc} </span> (btc)<br>
+									ETH: <span style="color: blue">{$vo.coin_eth} </span> (eth)
+								</td>
+								<td style="width:120px;white-space:unset">
+									<eq name="vo.user_type" value="1"> <span style="color: red">一级代理</span> </eq>
+									<eq name="vo.user_type" value="2"> <span style="color: red">二级代理</span> </eq>
+									<eq name="vo.user_type" value="3"> <span style="color: red">三级代理</span> </eq>
+									<eq name="vo.user_type" value="4"> <span style="color: red">普通用户</span> </eq>
+								</td>
+								<td style="width:120px;white-space:unset">
+									<!--                                    <empty name="vo.is_agent" value="1">代理: <span style="color: red">是</span> </empty>-->
+									<neq name="vo.invit_1"><a href="{:U('User/index?name='.$vo['invit_1'].'&field=username')}">{$vo['invit_1']['id']}<br/>{$vo['invit_1']['username']}<br/>{$vo['invit_1']['phone']}</a><br></neq>
+
+								</td>
+								<td>
+									USDT: <span style="color: red">{$vo.usdt_recharge} </span>(U)<br>
+									BTC: <span style="color: green">{$vo.btc_recharge} </span> (btc)<br>
+									ETH: <span style="color: blue">{$vo.eth_recharge}</span> (eth)
+								</td>
+								<td>
+									USDT: <span style="color: red">{$vo.usdt_withdraw} </span>(U)<br>
+									BTC: <span style="color: green">{$vo.btc_withdraw} </span> (btc)<br>
+									ETH: <span style="color: blue">{$vo.eth_withdraw}</span> (eth)
+								</td>
+
+								<td>
+									USDT: <span style="color: red">{$vo.usdt_yingkui} </span>(U)<br>
+									BTC: <span style="color: green">{$vo.btc_yingkui} </span> (btc)<br>
+									ETH: <span style="color: blue">{$vo.eth_yingkui}</span> (eth)
+								</td>
+
+								<td>
+									<eq name="vo.down" value="1">
+										<a href="{:U('Index/count')}?status={$status}&field={$field}&search={$search}&start_time={$start_time}&end_time={$end_time}&agent_id={$vo.id}&xiaji={$vo.id}">[查看下级]</a>
+									</eq>
+								</td>
+
+
+							</tr>
+						</volist>
+						<else/>
+						<td colspan="12" class="text-center empty-info"><i class="glyphicon glyphicon-exclamation-sign"></i>暂无数据</td>
+					</notempty>
+					</tbody>
+				</table>
+			</form>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/common.js"></script>
+<script type="text/javascript" src="/Public/laydate/laydate.js"></script>
+<script type="text/javascript">
+	laydate.render({
+		type: "datetime",
+		elem: '#test-range' //开始时间和结束时间所在 input 框的父选择器
+		//设置开始日期、日期日期的 input 选择器
+		,range: ['#start_time', '#end_time'] //数组格式为 layui 2.6.6 开始新增
+	});
+</script>';
+
+
+

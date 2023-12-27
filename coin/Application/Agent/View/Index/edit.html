@@ -36,8 +36,15 @@
 									</td>
 									<td class="item-note" style="color:red;">* {:L('留空不更新')}</td>
 								</tr>
-
-
+								<eq name="agent_type" value="1">
+								<tr class="controls">
+									<td class="item-label">上级UID :</td>
+									<td><input type="text" class="form-control input-10x" name="up_uid" value="{$data.invit_1}">
+									</td>
+									<td class="item-note" style="color:red;">*填哪个用户UID，就属于该UID用户下级,不填不属于任何用户下级</p>
+									</td>
+								</tr>
+								</eq>
 								<tr class="controls">
 									<td class="item-label"></td>
 									<td>
