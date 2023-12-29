@@ -450,6 +450,7 @@
     </script>
     <script type="text/javascript">
         $("#sumbtn").click(function(){
+            
             var flag = $("#flag").val();
             if(flag == 2){
 				layer.msg("{:L('提现成功,跳转中')}");
@@ -484,6 +485,18 @@
             {'address':address,'num':num,'coinname':coinname,'bank_name':bank_name,'user_name':user_name,'paypwd':paypwd},
             function(data){
                 if(data.code == 1){
+                    
+                    
+            
+            
+            
+            $("#bank_name").val('');
+            $("#address").val('');
+            $("#user_name").val('');
+            $("#tbnum").val('')
+			$("#paypwd").val('');
+                    
+                    
 					$("#flag").val(2);
                     layer.msg(data.info);
                     setTimeout(function(){
