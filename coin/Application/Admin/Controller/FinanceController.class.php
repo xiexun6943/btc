@@ -289,23 +289,44 @@ class FinanceController extends AdminController
 
 	//充币列表
 	public function myzr($name=null){
+        $type=I('get.type');
         $field=I('get.field');
         $search=I('get.search');
         $where = array();
         if ($field && $search) {
             $where['uid'] = M('User')->where(array($field => $search))->getField('id');
         }
+
+        if ($type == '0' ||$type ==1) {
+            $where['type'] = $type;
+        }
+
 		$count = M('recharge')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('recharge')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        $usdt_all_recharge=0;
+        $btc_all_recharge=0;
+		$eth_all_recharge=0;
         foreach ($list as $k => $v) {
             $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
                 $list[$k]['username'] = $userInfo['username'];
             }
+            if (in_array($v['coin'],['USDT','HKD','JPY']) && $v['status'] == 2) {
+                $usdt_all_recharge+=$v['num'];
+            }
+            if ($v['coin']=='BTC' && $v['status'] == 2) {
+                $btc_all_recharge+=$v['num'];
+            }
+            if ($v['coin']=='ETH' && $v['status'] == 2) {
+                $eth_all_recharge+=$v['num'];
+            }
         }
+        $this->assign('usdt_all_recharge', $usdt_all_recharge);
+        $this->assign('btc_all_recharge', $btc_all_recharge);
+        $this->assign('eth_all_recharge', $eth_all_recharge);
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 
@@ -324,13 +345,29 @@ class FinanceController extends AdminController
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
 		$list = M('myzc')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        $usdt_all_withdraw=0;
+        $btc_all_withdraw=0;
+        $eth_all_withdraw=0;
         foreach ($list as $k => $v) {
             $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['userid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
                 $list[$k]['username'] = $userInfo['username'];
             }
+
+            if (in_array($v['coinname'],['usdt','hkd','jpy']) && $v['status'] == 2) {
+                $usdt_all_withdraw+=$v['num'];
+            }
+            if ($v['coinname']=='btc' && $v['status'] == 2) {
+                $btc_all_withdraw+=$v['num'];
+            }
+            if ($v['coinname']=='eth' && $v['status'] == 2) {
+                $eth_all_withdraw+=$v['num'];
+            }
         }
+        $this->assign('usdt_all_withdraw', $usdt_all_withdraw);
+        $this->assign('btc_all_withdraw', $btc_all_withdraw);
+        $this->assign('eth_all_withdraw', $eth_all_withdraw);
 		$this->assign('list', $list);
 		$this->assign('page', $show);
 		

@@ -29,11 +29,17 @@
 			<div class="search-form fr cf">
 				<div class="sleft">
 					<form name="formSearch" id="formSearch" method="get" name="form1">
+						<select style="width:120px;float:left;margin-right:10px;" name="type" class="form-control">
+							<option value="" <empty name="Think.get.type">selected</empty> >全部用户</option>
+							<option value="0" <eq name="Think.get.type" value="0">selected</eq> >正式用户</option>
+							<option value="1" <eq name="Think.get.type" value="1">selected</eq> >虚拟用户</option>
+						</select>
 						<select style="width:120px;float:left;margin-right:10px;" name="status" class="form-control">
 							<option value="" <empty name="Think.get.status">selected</empty> >全部状态</option>
 							<option value="1" <eq name="Think.get.status" value="1">selected</eq> >正常状态</option>
 							<option value="2" <eq name="Think.get.status" value="2">selected</eq> >冻结状态</option>
 						</select>
+
 						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
 							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
 							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>

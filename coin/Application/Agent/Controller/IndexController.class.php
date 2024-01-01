@@ -360,12 +360,27 @@ class IndexController extends AgentController
 		    $Page = new \Think\Page($count, 15);
 	    	$show = $Page->show();
 		    $list = M('recharge')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
+			$usdt_all_recharge=0;
+			$btc_all_recharge=0;
+			$eth_all_recharge=0;
 			foreach ($list as $k => $v) {
 				$list[$k]['phone'] =$userInfo[$v['uid']] ;
+				if (in_array($v['coin'],['USDT','HKD','JPY']) && $v['status'] == 2) {
+					$usdt_all_recharge+=$v['num'];
+				}
+				if ($v['coin']=='BTC' && $v['status'] == 2) {
+					$btc_all_recharge+=$v['num'];
+				}
+				if ($v['coin']=='ETH' && $v['status'] == 2) {
+					$eth_all_recharge+=$v['num'];
+				}
 			}
 		    $this->assign('list', $list);
 		    $this->assign('page', $show);
 		}
+		 $this->assign('usdt_all_recharge', $usdt_all_recharge);
+		 $this->assign('btc_all_recharge', $btc_all_recharge);
+		 $this->assign('eth_all_recharge', $eth_all_recharge);
 		 $this->assign('agent_type', $agent_type);
 	     $this->display();
 	 }
@@ -398,12 +413,27 @@ class IndexController extends AgentController
 			 $Page = new \Think\Page($count, 15);
 			 $show = $Page->show();
 			 $list = M('myzc')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
+			 $usdt_all_withdraw=0;
+			 $btc_all_withdraw=0;
+			 $eth_all_withdraw=0;
 			 foreach ($list as $k => $v) {
 				 $list[$k]['phone'] =$userInfo[$v['userid']] ;
+				 if (in_array($v['coinname'],['usdt','hkd','jpy']) && $v['status'] == 2) {
+					 $usdt_all_withdraw+=$v['num'];
+				 }
+				 if ($v['coinname']=='btc' && $v['status'] == 2) {
+					 $btc_all_withdraw+=$v['num'];
+				 }
+				 if ($v['coinname']=='eth' && $v['status'] == 2) {
+					 $eth_all_withdraw+=$v['num'];
+				 }
 			 }
 			 $this->assign('list', $list);
 			 $this->assign('page', $show);
 		 }
+		 $this->assign('usdt_all_withdraw', $usdt_all_withdraw);
+		 $this->assign('btc_all_withdraw', $btc_all_withdraw);
+		 $this->assign('eth_all_withdraw', $eth_all_withdraw);
 		 $this->display();
 	 }
 	 
