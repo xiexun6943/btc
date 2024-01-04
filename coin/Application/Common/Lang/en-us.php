@@ -2570,4 +2570,5 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "您好，请问您要反馈什么问题?"=>"Hello, what problem do you want to feedback?",
     "我要反馈:"=>"I want feedback:",
     "留言箱"=>"Message box",
+    "秒"=>"Second",
 ];
