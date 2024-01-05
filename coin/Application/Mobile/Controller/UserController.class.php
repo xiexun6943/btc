@@ -942,13 +942,13 @@ class UserController extends MobileController
 
             $coinname = $cinfo['name'];
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
-            $config = M("config")->field('gu_hl,ru_hl')->find();
-            $coinname =='hkd'?$hl=$config['gu_hl']:$hl=$config['ru_hl'];
+            $config = M("config")->field('gu_hl,ru_hl,ug_hl,ur_hl')->find();
+            $coinname =='hkd'?$hl=$config['ug_hl']:$hl=$config['ur_hl'];
 
             $sxftype = $cinfo['sxftype'];
-            if($sxftype == 1){
+            if($sxftype == 1){ // 比例 手续费
                 $sxf = $num * $cinfo['txsxf'] / 100;
-            }elseif($sxftype == 2){
+            }elseif($sxftype == 2){ // 数量手续费
                 $sxf = $cinfo['txsxf_n'];
             }
 
@@ -957,9 +957,11 @@ class UserController extends MobileController
             }
 
 
-            $tnum = round(($num - $sxf)*$hl,4);
-            $unum=round($num*$hl,2);
+            $tnum = round(($num - $sxf)/$hl,2);// 真实到账数量
+            $unum=round($num/$hl,2); // 提币数量
+
             if($minfo['usdt'] < $unum){ // 只能在ustd中扣
+
                 $this->ajaxReturn(['code'=>0,'info'=>L('账户余额不足')]);
             }
 
@@ -1146,7 +1148,7 @@ class UserController extends MobileController
             $money = $minfo['usdt'] * $config['ur_hl'];
         }
 
-        $this->assign('money',round($money,2));
+        $this->assign('money',intval($money));
 
         $adrinfo = M("user_qianbao")->where(array('uid'=>$uid,'name'=>$coinname,'czline'=>$info['czline']))->order('id desc')->limit(1)->find();
 
@@ -1184,10 +1186,10 @@ class UserController extends MobileController
             foreach($bklist as $k=>$v){
                 $coinname = $v['name'];
                 if ($v['name'] == 'hkd') {
-                    $minfo['usdt']*$config['ug_hl']?$coin_num=  round($minfo['usdt']*$config['ug_hl'],2):$coin_num="0.00";
+                    $minfo['usdt']*$config['ug_hl']?$coin_num=  intval($minfo['usdt']*$config['ug_hl']):$coin_num="0";
                 }
                 if ($v['name'] == 'jpy') {
-                    $minfo['usdt']*$config['ug_hl']?$coin_num=round($minfo['usdt']*$config['ur_hl'],0):$coin_num="0.00";
+                    $minfo['usdt']*$config['ug_hl']?$coin_num=intval($minfo['usdt']*$config['ur_hl']):$coin_num="0";
                 }
                 $bddata[$k]['cname'] = strtoupper($coinname);
                 $bddata[$k]['title'] = $v['title'];
