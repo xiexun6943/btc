@@ -276,7 +276,7 @@
 	                                              </div>
 	                                              <div class="czbox_6" style="padding:0px;position:relative">
 	                                                  <span style='position:absolute;top:0px;right:15px' id='currency_unit'></span>
-	                                                  <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" class="czbox_5" type="text" id="tbnum" onblur="changenum();" name="tbnum" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" autocomplete="off" step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"  />
+	                                                  <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" class="czbox_5" type="text" id="tbnum" onblur="changenum()" name="tbnum" style="border: 1px solid #f5f5f5;padding:0px;padding-left: 15px;" autocomplete="off" step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"  />
 	                                                  <span class="f12 fcy">{:L('实际到账')}</span>
 	                                                  <span class="f12 fcy" id="tmoney">0.000000</span><span style="font-size:12px;color:#00b897" id='currency_unit2'></span>
 		                                              <span class="f12 fcy">&nbsp;&nbsp;<?php echo strtoupper($info['name']);?></span>
@@ -371,6 +371,33 @@
     <script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
     <script type="text/javascript">
 		    var currency
+		    
+		    $(function(){
+		        
+    		    $('#tbnum').keyup(function(){
+    		        console.log(currency)
+    		        if($("select#coinname").val()=='hkd'){
+    		            if(currency.hkd.sxftype=='1'){
+    		                var temp = Number($(this).val())-Number($(this).val())*currency.hkd.czsxf
+    		                $('#tmoney').text(temp)
+    		            }
+    		            if(currency.hkd.sxftype=='2'){
+    		                var temp = Number($(this).val())-Number(currency.hkd.txsxf_n)
+    		                $('#tmoney').text(temp)
+    		            }
+    		        }
+    		        if($("select#coinname").val()=='jpy'){
+    		            if(currency.jpy.sxftype=='1'){
+    		                var temp = Number($(this).val())-Number($(this).val())*currency.jpy.czsxf
+    		                $('#tmoney').text(temp)
+    		            }
+    		            if(currency.jpy.sxftype=='2'){
+    		                var temp = Number($(this).val())-Number(currency.jpy.txsxf_n)
+    		                $('#tmoney').text(temp)
+    		            }
+    		        }
+    		    })
+		    })
     
     
         var coinname = $("select#coinname").val()
@@ -385,10 +412,10 @@
 			
 			
 						    if($('#coinname').val()==='hkd'){
-						       $('#keyong') .text(currency.hkd.ty_money+' hkd')
+						       $('#keyong') .text(currency.hkd.ky_money+' hkd')
 						    }
 						    if($('#coinname').val()==='jpy'){
-						       $('#keyong').text(currency.jpy.ty_money+' jpy')
+						       $('#keyong').text(currency.jpy.ky_money+' jpy')
 						    }
 			
 			$('#currency_unit').html(coinname)
@@ -401,12 +428,14 @@
 						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
 						    $('#tip_jpy').text(data.info['jpy'].ur_hl)
 						    
+						    moneyInfo = data.info
+						    
 						    
 						    
 							$('#txminnum_text').text(data.info[coinname].txminnum)
 							$('#czminnum_text').text(data.info[coinname].czminnum)
 							$('#ug_hl_text').text(data.info[coinname].ug_hl)
-							$('#tmoney').text(1000 -(100* data.info[coinname].txsxf))
+				// 			$('#tmoney').text(1000 -(100* data.info[coinname].txsxf))
 						}else{
 							layer.msg(data.info);return false;
 						}
@@ -428,10 +457,10 @@
 						    
 						    
 						    if($('#coinname').val()==='hkd'){
-						       $('#keyong') .text(currency.hkd.ty_money+' hkd')
+						       $('#keyong') .text(currency.hkd.ky_money+' hkd')
 						    }
 						    if($('#coinname').val()==='jpy'){
-						       $('#keyong').text(currency.jpy.ty_money+' jpy')
+						       $('#keyong').text(currency.jpy.ky_money+' jpy')
 						    }
 						    
 						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
@@ -441,7 +470,7 @@
 							$('#txminnum_text').text(data.info[coinname].txminnum)
 							$('#czminnum_text').text(data.info[coinname].czminnum)
 							$('#ug_hl_text').text(data.info[coinname].ug_hl)
-							$('#tmoney').text(1000 -(100* data.info[coinname].txsxf))
+				// 			$('#tmoney').text(1000 -(100* data.info[coinname].txsxf))
 						}else{
 							layer.msg(data.info);return false;
 						}
@@ -472,7 +501,7 @@
                 var tmoney = tbnum - txsxf_n;
             }
             
-            $("#tmoney").text(tmoney);
+            // $("#tmoney").text(tmoney);
       
         }
     </script>
