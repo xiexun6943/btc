@@ -121,7 +121,7 @@ class FinanceController extends HomeController
 	        }
 
             if($uinfo['bill'] < $uinfo['st_bill']){
-                $this->ajaxReturn(['code'=>0,'info'=>L('您的流水不够，暂时无法提现')]);
+                $this->ajaxReturn(['code'=>0,'info'=>L('交易码量未达到，暂时无法提现')]);
             }
 	        
 	        
@@ -320,9 +320,9 @@ class FinanceController extends HomeController
         $this->assign('info',$info);
 
         $uid = userid();
-        $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
-        $money = $minfo['usdt'];
-        $this->assign('money',$money);
+//        $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+//        $money = $minfo['usdt'];
+//        $this->assign('money',$money);
         $this->display();
     }
     // 银行卡提款
@@ -380,13 +380,13 @@ class FinanceController extends HomeController
             }
 
             if($uinfo['bill'] < $uinfo['st_bill']){
-                $this->ajaxReturn(['code'=>0,'info'=>L('您的流水不够，暂时无法提现')]);
+                $this->ajaxReturn(['code'=>0,'info'=>L('交易码量未达到，暂时无法提现')]);
             }
 
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
-            $config = M("config")->field('gu_hl,ru_hl')->find();
-            $coinname =='hkd'?$hl=$config['gu_hl']:$hl=$config['ru_hl'];
+            $config = M("config")->field('gu_hl,ru_hl,ug_hl,ur_hl')->find();
+            $coinname =='hkd'?$hl=$config['ug_hl']:$hl=$config['ur_hl'];
             $sxftype = $cinfo['sxftype'];
             if($sxftype == 1){
                 $sxf = $num * ($cinfo['txsxf'] / 100);
@@ -398,8 +398,9 @@ class FinanceController extends HomeController
                 $sxf = 0;
             }
 
-            $tnum = round(($num - $sxf)*$hl,4);
-            $unum=round($num*$hl,2);
+            $tnum = round(($num - $sxf)/$hl,2);// 真实到账数量
+            $unum=round($num/$hl,2); // 提币数量
+
             if($minfo['usdt'] < $unum){ // 只能在ustd中扣
                 $this->ajaxReturn(['code'=>0,'info'=>L('账户余额不足')]);
             }
@@ -478,22 +479,37 @@ class FinanceController extends HomeController
 
     // 获取 银行卡提现配置信息
     public function getTxConfig(){
+        $uid=userid();
+        if (!userid()) {
+            return $this->ajaxReturn(['code'=>403,'msg'=>L('请重新登录')]);
+        }
         $configs=M("config")->field('ug_hl,ur_hl')->find();
-        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf,czsxf,txminnum,czminnum')->select();
+        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf,czsxf,txminnum,czminnum,txmaxnum')->select();
+
+        $minfo = M("user_coin")->field('usdt')->where(array('userid'=>$uid))->find();
+
+        $hkd_money = intval($minfo['usdt'] * $configs['ug_hl']);
+
+        $jpy_money =  intval($minfo['usdt'] * $configs['ur_hl']);
+
         $data=[
             'hkd'=>[
                 'ug_hl'=>floatval($configs['ug_hl']),
                 'txsxf'=>round(($coinInfo[0]['txsxf']/100),2),
                 'czsxf'=>round(($coinInfo[0]['czsxf']/100),2),
                 'txminnum'=>$coinInfo[0]['txminnum'],
-                'czminnum'=>$coinInfo[0]['czminnum']
+                'txmaxnum'=>$coinInfo[0]['txmaxnum'],
+                'czminnum'=>$coinInfo[0]['czminnum'],
+                'ky_money'=>$hkd_money
             ],
             'jpy'=>[
                 'ur_hl'=>floatval($configs['ur_hl']),
                 'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
                 'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
                 'txminnum'=>$coinInfo[1]['txminnum'],
-                'czminnum'=>$coinInfo[1]['czminnum']
+                'txmaxnum'=>$coinInfo[0]['txmaxnum'],
+                'czminnum'=>$coinInfo[1]['czminnum'],
+                'ky_money'=>$jpy_money
             ]
         ];
         return $this->ajaxReturn(['code'=>200,'info'=>$data]);

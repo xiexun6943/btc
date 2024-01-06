@@ -811,7 +811,7 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=>L('不能高于最大提币值')]);
             }
             if($uinfo['bill'] < $uinfo['st_bill']){
-                $this->ajaxReturn(['code'=>0,'info'=>L('您的流水不够，暂时无法提现')]);
+                $this->ajaxReturn(['code'=>0,'info'=>L('交易码量未达到，暂时无法提现')]);
             }
 
 
@@ -936,7 +936,7 @@ class UserController extends MobileController
             }
 
             if($uinfo['bill'] < $uinfo['st_bill']){
-                $this->ajaxReturn(['code'=>0,'info'=>L('您的流水不够，暂时无法提现')]);
+                $this->ajaxReturn(['code'=>0,'info'=>L('交易码量未达到，暂时无法提现')]);
             }
 
 

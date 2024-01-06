@@ -1453,7 +1453,7 @@ class UserController extends AdminController
 
             }
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 20);
+            $Page = new \Think\Page($count, 40);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)
@@ -1485,7 +1485,7 @@ class UserController extends AdminController
             }
             $where['type']=0;
             $count = M('User')->where($where)->count();
-            $Page = new \Think\Page($count, 20);
+            $Page = new \Think\Page($count, 40);
             $show = $Page->show();
             $list = M('User')->field("id,username,phone,money,invit_1,invit_2,invit_3,path,addtime,is_agent,type")
                 ->where($where)

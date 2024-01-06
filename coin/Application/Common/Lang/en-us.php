@@ -2541,7 +2541,7 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     '成功'=>"success",
     '您目前没有抽奖机会'=>"You currently have no lottery entries",
     '数据错误'=>"data error",
-    '您的流水不够，暂时无法提现'=>"Your turnover is not enough and you are temporarily unable to withdraw money.",
+    '交易码量未达到，暂时无法提现'=>"The transaction code volume has not been reached and withdrawal is temporarily unavailable.",
     '繁体中文'=>"TC",
     '简体中文'=>"CN",
     '英语'=>"English",

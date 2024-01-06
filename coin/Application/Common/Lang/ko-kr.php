@@ -41,7 +41,7 @@ Aux Cayes FinTech Co. Ltd.， 一家注册在塞舌尔的公司（“Aux Cayes�
 홍콩에 등록된 회사("BITVENTURE Hong Kong")인 BITVENTURE Hong Kong FinTech Company Limited("BITVENTURE Hong Kong")는 2023년 5월 15일 이후에 등록된 홍콩 거주자 사용자에게 제공됩니다.<br><br>
 BITVENTURE Serviços Digitais Ltda., 브라질에 등록된 회사("BITVENTURE Brazil"), 2023년 6월 15일 이후 등록된 브라질 거주자 사용자 대상<br><br>
 BITVENTURE SG Pte. Ltd., 싱가포르에 등록된 회사("BITVENTURE Singapore"), 2023년 10월 13일 이후 등록된 싱가포르 거주자 사용자 대상<br><br>
-세이셸에 등록된 회사인 Aux Cayes FinTech Co. Ltd.(이하 "Aux Cayes")는 BITVENTURE 서비스에 접근하고 이용할 자격이 있는 기타 모든 사용자에게 제공됩니다. <br><br>
+세이셸에 등록된 회사인 Aux Cayes FinTech Co. Ltd.(이하 "Aux Cayes")는 BITVENTURE 서비您的流水不够，暂时无法提现스에 접근하고 이용할 자격이 있는 기타 모든 사용자에게 제공됩니다. <br><br>
 본 약관에서 "BITVENTURE"라는 단어는 각 사용자에게 적용되는 BITVENTURE Bahamas, BITVENTURE Hong Kong, BITVENTURE Brazil, BITVENTURE Singapore 또는 Aux Cayes를 의미합니다.',
 
     '1 序言'=>'1 서문',
@@ -2317,7 +2317,7 @@ BITVENTURE SG Pte. Ltd., 싱가포르에 등록된 회사("BITVENTURE Singapore"
     '规则说明'=>'규칙 설명',
     '空投福利'=>'에어드랍 혜택',
     '空投'=>'공수',
-    '您的流水不够，暂时无法提现'=>'귀하의 매출액이 충분하지 않아 일시적으로 돈을 인출할 수 없습니다.',
+    '交易码量未达到，暂时无法提现'=>'거래코드 수량에 도달하지 않아 일시적으로 출금이 불가능합니다.',
     '提现成功,跳转中'=>'철회가 완료되었습니다. 리디렉션 중입니다.',
     '充值'=>'충전하다',
     '提款'=>'돈을 인출',
