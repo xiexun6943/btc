@@ -271,7 +271,7 @@
 	                                              <div class="czbox_3">
 	                                                  <span class="fch f12">{:L('数量')}</span>
 	                                                  <span class="f12 fcy">{:L('可用')}&nbsp;&nbsp;</span>
-		                                              <span class="f12 fcy" id="keyong">{$money} U</span>
+		                                              <span class="f12 fcy" id="keyong"></span>
 		                                              <span class="f12 fcy"><?php echo strtoupper($info['name']);?></span>
 	                                              </div>
 	                                              <div class="czbox_6" style="padding:0px;position:relative">
@@ -342,7 +342,7 @@
 	                                      <span>{:L('温馨提示')}</span>
 	                                  </div>
 	                                  <div style="width:100%;min-height:180px;padding:10px;color:red;font-size:14px">
-	                                       1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> USDT<br/>
+	                                       1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> <i id="currency" style="font-style:normal"></i><br/>
 	                                       2、{:L('小于最小金额的提币将不会上账且无法退回')}<br/>
 	                                       3、1USDT = <span id='tip_hkd'></span> HKD 1USDT = <span id='tip_jpy'></span> JPY<br/>
 	                                       <br />
@@ -370,9 +370,27 @@
     <script type="text/javascript" src="/Public/Home/static/js/jquery.SuperSlide.2.1.1.js" ></script>
     <script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
     <script type="text/javascript">
+		    var currency
+    
+    
+        var coinname = $("select#coinname").val()
+			$('#currency').text(coinname)
+    
 		$("select#coinname").change(function(){
 
 			var	coinname = $(this).val()
+			
+			console.log(coinname)
+			$('#currency').text(coinname)
+			
+			
+						    if($('#coinname').val()==='hkd'){
+						       $('#keyong') .text(currency.hkd.ty_money+' hkd')
+						    }
+						    if($('#coinname').val()==='jpy'){
+						       $('#keyong').text(currency.jpy.ty_money+' jpy')
+						    }
+			
 			$('#currency_unit').html(coinname)
 			$('#currency_unit2').html(coinname)
 			$.post("{:U('Finance/getTxConfig')}",
@@ -405,6 +423,16 @@
 					{coinname:coinname},
 					function(data){
 						if(data.code == 200){
+						    
+						    currency = data.info
+						    
+						    
+						    if($('#coinname').val()==='hkd'){
+						       $('#keyong') .text(currency.hkd.ty_money+' hkd')
+						    }
+						    if($('#coinname').val()==='jpy'){
+						       $('#keyong').text(currency.jpy.ty_money+' jpy')
+						    }
 						    
 						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
 						    $('#tip_jpy').text(data.info['jpy'].ur_hl)
