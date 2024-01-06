@@ -484,7 +484,7 @@ class FinanceController extends HomeController
             return $this->ajaxReturn(['code'=>403,'msg'=>L('请重新登录')]);
         }
         $configs=M("config")->field('ug_hl,ur_hl')->find();
-        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf,czsxf,txminnum,czminnum,txmaxnum')->select();
+        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('sxftype,txsxf_n,txsxf,czsxf,txminnum,czminnum,txmaxnum')->select();
 
         $minfo = M("user_coin")->field('usdt')->where(array('userid'=>$uid))->find();
 
@@ -495,8 +495,10 @@ class FinanceController extends HomeController
         $data=[
             'hkd'=>[
                 'ug_hl'=>floatval($configs['ug_hl']),
-                'txsxf'=>round(($coinInfo[0]['txsxf']/100),2),
+                'txsxf'=>round(($coinInfo[0]['txsxf']/100),2), // 提现手续费比例
                 'czsxf'=>round(($coinInfo[0]['czsxf']/100),2),
+                'sxftype'=>$coinInfo[0]['sxftype'], // 提现手续费类型
+                'txsxf_n'=>$coinInfo[0]['txsxf_n'], // 提现手续 数目
                 'txminnum'=>$coinInfo[0]['txminnum'],
                 'txmaxnum'=>$coinInfo[0]['txmaxnum'],
                 'czminnum'=>$coinInfo[0]['czminnum'],
@@ -506,6 +508,8 @@ class FinanceController extends HomeController
                 'ur_hl'=>floatval($configs['ur_hl']),
                 'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
                 'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
+                'sxftype'=>$coinInfo[0]['sxftype'], // 提现手续费类型
+                'txsxf_n'=>$coinInfo[0]['txsxf_n'], // 提现手续 数目
                 'txminnum'=>$coinInfo[1]['txminnum'],
                 'txmaxnum'=>$coinInfo[0]['txmaxnum'],
                 'czminnum'=>$coinInfo[1]['czminnum'],
