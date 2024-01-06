@@ -397,9 +397,9 @@ class FinanceController extends HomeController
             if($sxf <= 0 || $sxf == ''){
                 $sxf = 0;
             }
-
-            $tnum = round(($num - $sxf)/$hl,2);// 真实到账数量
-            $unum=round($num/$hl,2); // 提币数量
+            $fee=round($sxf/$hl,3);
+            $unum=round($num/$hl,3); // 提币数量
+            $tnum =$unum-$fee;// 真实到账数量
 
             if($minfo['usdt'] < $unum){ // 只能在ustd中扣
                 $this->ajaxReturn(['code'=>0,'info'=>L('账户余额不足')]);
@@ -413,7 +413,7 @@ class FinanceController extends HomeController
             $data['username'] = $uinfo['username'];
             $data['coinname'] = $cinfo['name'];
             $data['num'] = $unum;
-            $data['fee'] = round($sxf*$hl,2);
+            $data['fee'] = $fee;
             $data['mum'] = $tnum;
             $data['address'] = $address;
             $data['sort'] = 1;

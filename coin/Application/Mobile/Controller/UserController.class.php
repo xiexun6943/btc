@@ -957,8 +957,9 @@ class UserController extends MobileController
             }
 
 
-            $tnum = round(($num - $sxf)/$hl,2);// 真实到账数量
-            $unum=round($num/$hl,2); // 提币数量
+            $fee=round($sxf/$hl,3);
+            $unum=round($num/$hl,3); // 提币数量
+            $tnum =$unum-$fee;// 真实到账数量
 
             if($minfo['usdt'] < $unum){ // 只能在ustd中扣
 
@@ -974,7 +975,7 @@ class UserController extends MobileController
             $data['username'] = $uinfo['username'];
             $data['coinname'] = $cinfo['name'];
             $data['num'] = $unum;
-            $data['fee'] = round($sxf*$hl,2);;
+            $data['fee'] = $fee;
             $data['mum'] = $tnum;
             $data['address'] = $address;
             $data['sort'] = 1;
