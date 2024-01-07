@@ -144,7 +144,7 @@ class FinanceController extends AdminController
             'operate_name'=>$admin_username,
             'type'=>1, // 充值
             'content'=>json_encode($content),
-            'created_time'=>date('Y-d-m h:i:s',time()),
+            'created_time'=>date('Y-m-d h:i:s',time()),
         ];
 
         $result2=M("delete_log")->add($data); // 写入删除记录
@@ -178,7 +178,7 @@ class FinanceController extends AdminController
             'operate_name'=>$admin_username,
             'type'=>2, // 提现
             'content'=>json_encode($content),
-            'created_time'=>date('Y-d-m h:i:s',time()),
+            'created_time'=>date('Y-m-d h:i:s',time()),
         ];
 
         $result2=M("delete_log")->add($data); // 写入删除记录
