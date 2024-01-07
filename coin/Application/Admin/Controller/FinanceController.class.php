@@ -126,14 +126,34 @@ class FinanceController extends AdminController
 	
 	    //删除充币记录
     public function del($id = null){
+	    $admin_id=session('admin_id');
+	    $admin_username=session('admin_username');
+        if (!$admin_id) {
+            $this->redirect('Admin/Login/index');
+        }
         $info = M("recharge")->where(array('id'=>$id))->find();
 	    if(empty($info)){
 	        $this->error("充币订单不存在");exit();
 	    }
+       $content= M("recharge")->where(array('id'=>$id))->find();
+
+	    M()->startTrans();
 	    $result = M("recharge")->where(array('id'=>$id))->delete();
-	    if($result){
+        $data=[
+            'operate_id'=>$admin_id,
+            'operate_name'=>$admin_username,
+            'type'=>1, // 充值
+            'content'=>json_encode($content),
+            'created_time'=>date('Y-d-m h:i:s',time()),
+        ];
+
+        $result2=M("delete_log")->add($data); // 写入删除记录
+
+	    if($result && $result2){
+	        M()->commit();
 	         $this->success('删除成功！',U('Finance/myzr'));
 	    }else{
+	        M()->rollback();
 	        $this->error("删除失败");exit();
 	    }
     }
@@ -141,14 +161,32 @@ class FinanceController extends AdminController
     
     //删除提币记录
     public function delT($id = null){
+        $admin_id=session('admin_id');
+        $admin_username=session('admin_username');
+        if (!$admin_id) {
+            $this->redirect('Admin/Login/index');
+        }
         $info = M("myzc")->where(array('id'=>$id))->find();
 	    if(empty($info)){
 	        $this->error("提币订单不存在");exit();
 	    }
+        $content= M("myzc")->where(array('id'=>$id))->find();
+        M()->startTrans();
 	    $result = M("myzc")->where(array('id'=>$id))->delete();
-	    if($result){
+        $data=[
+            'operate_id'=>$admin_id,
+            'operate_name'=>$admin_username,
+            'type'=>2, // 提现
+            'content'=>json_encode($content),
+            'created_time'=>date('Y-d-m h:i:s',time()),
+        ];
+
+        $result2=M("delete_log")->add($data); // 写入删除记录
+	    if($result && $result2){
+            M()->commit();
 	         $this->success('删除成功！',U('Finance/myzc'));
 	    }else{
+            M()->rollback();
 	        $this->error("删除失败");exit();
 	    }
     }

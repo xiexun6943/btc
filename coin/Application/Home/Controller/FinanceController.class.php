@@ -81,11 +81,13 @@ class FinanceController extends HomeController
 	public function tbhandle(){
 	    if($_POST){
 	        $uid = userid();
-	        $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword ,bill,st_bill")->find();
+	        $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword ,bill,st_bill,txstate")->find();
 	        if(empty($uinfo)){
 	            $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
 	        }
-	        
+            if($uinfo['txstate'] == 2){
+                $this->ajaxReturn(['code'=>0,'info'=>L('禁止提币,请联系客服')]);
+            }
 //	        if($uinfo['rzstatus'] != 2){
 //		        $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
 //		    }
@@ -329,9 +331,12 @@ class FinanceController extends HomeController
     public function withdrawDo(){
         if($_POST){
             $uid = userid();
-            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword,bill,st_bill")->find();
+            $uinfo = M("user")->where(array('id'=>$uid))->field("id,rzstatus,username,paypassword,bill,st_bill,txstate")->find();
             if(empty($uinfo)){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请先登陆')]);
+            }
+            if($uinfo['txstate'] == 2){
+                $this->ajaxReturn(['code'=>0,'info'=>L('禁止提币,请联系客服')]);
             }
 //            if($uinfo['rzstatus'] != 2){
 //                $this->ajaxReturn(['code'=>0,'info'=>L('请先完成实名认证')]);
