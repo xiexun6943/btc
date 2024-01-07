@@ -378,7 +378,7 @@
     		        console.log(currency)
     		        if($("select#coinname").val()=='hkd'){
     		            if(currency.hkd.sxftype=='1'){
-    		                var temp = Number($(this).val())-Number($(this).val())*currency.hkd.czsxf
+    		                var temp = Number($(this).val())-Number($(this).val())*currency.hkd.txsxf
     		                $('#tmoney').text(temp)
     		            }
     		            if(currency.hkd.sxftype=='2'){
@@ -388,7 +388,7 @@
     		        }
     		        if($("select#coinname").val()=='jpy'){
     		            if(currency.jpy.sxftype=='1'){
-    		                var temp = Number($(this).val())-Number($(this).val())*currency.jpy.czsxf
+    		                var temp = Number($(this).val())-Number($(this).val())*currency.jpy.txsxf
     		                $('#tmoney').text(temp)
     		            }
     		            if(currency.jpy.sxftype=='2'){
