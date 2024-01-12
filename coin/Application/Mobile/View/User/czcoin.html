@@ -89,7 +89,10 @@
             </div>
             <div class="coinlistbox_info" id="coinbox">
                 <foreach name="list" item="vo">
-                <a href="{:U('User/czpage')}?id={$vo.id}">
+<!--                    正常跳转-->
+<!--                <a href="{:U('User/czpage')}?id={$vo.id}">-->
+
+                <a href="{$kefu}">
                 <div class="coinlistbox_info_list">
                     <div class="coinlistbox_info_list_l">
                         <span class="fzmmm fcc"><?php echo strtoupper($vo['name']);?></span>

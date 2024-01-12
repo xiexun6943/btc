@@ -560,6 +560,8 @@ class FinanceController extends HomeController
         if (!userid()) {
 			$this->redirect('/Login/index');
 		}
+        $clist = M("config")->where(array('id'=>1))->field("kefu")->find();
+        $kefu=$clist['kefu'];
 //		$clist = M("coin")->where(array('status'=>1))->order('id asc')->field("id,name,title")->select();
         $clist=[ // 手动配置添加 的
             'usdt'=>['name'=>'usdt'],
@@ -577,6 +579,7 @@ class FinanceController extends HomeController
         ];
 //        dump($clist);exit();
 	    $this->assign("list",$clist);
+        $this->assign("kefu",$kefu);
         $this->display();
     }
     
