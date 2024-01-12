@@ -1651,8 +1651,11 @@ class UserController extends MobileController
             ->order('sort asc')
             ->field("name,title,id,czstatus")
             ->select();
+        $clist = M("config")->where(array('id'=>1))->field("kefu")->find();
+        $kefu=$clist['kefu'];
         $this->assign("list",$list);
         $this->assign("bklist",$bklist);
+        $this->assign("kefu",$kefu);
         $this->display();
     }
 
