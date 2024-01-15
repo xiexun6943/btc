@@ -90,7 +90,7 @@ function gettype_info($type=null){
             return "充币";
             break;
         case 18:
-            return "释放冻结认购币";
+            return "释放冻结币";
             break;
         case 20:
             return "中奖";

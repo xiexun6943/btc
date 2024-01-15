@@ -237,7 +237,7 @@ class FinanceController extends AdminController
 	   $bill['num'] =$num;
 	   $bill['coinname'] = $info['coinname'];
 	   $bill['afternum'] = $minfo[$coinname] + $num;
-	   $bill['type'] = 16;
+	   $bill['type'] = 18;
 	   $bill['addtime'] = date("Y-m-d H:i:s",time());
 	   $bill['st'] = 1;
 	   $bill['remark'] = L('提币驳回，退回资金');;
