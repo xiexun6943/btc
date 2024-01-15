@@ -19,7 +19,7 @@ class VerifyController extends \Think\Controller
 		$config['codeSet'] = '123456789';
 		ob_clean();
 		$verify = new \Think\Verify($config);
-		$verify->entry(1);
+		$verify->entry('.web');
 	}
 	
 	

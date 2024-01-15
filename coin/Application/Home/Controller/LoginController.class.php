@@ -109,9 +109,9 @@ class LoginController extends HomeController
         $pwd = I("post.pwd");
         $vcode = I("post.vcode");
         $type = I("post.type");
-//		if (!check_verify(strtoupper($vcode),'1')) {
-//			$this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
-//		}
+		if (!check_verify(strtoupper($vcode),'.web')) {
+			$this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
+		}
         if ($type == 1) { // type 1、邮箱 ，2、手机号码
             $email = I("post.email");
             $user = M('User')->where(array('username' => $email))->find();
