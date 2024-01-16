@@ -230,8 +230,8 @@
                     <span class="reg_kind" style="display:none">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="area_code" name="area_code" id="area_code" placeholder="{:L('区号')}" required="" autocomplete="area_code" >
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="phone" name="phone" id="phone" placeholder="{:L('手机号')}" required="" autocomplete="phone" >
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="area_code" name="area_code" id="area_code" placeholder="{:L('区号')}" required="" autocomplete="area_code" oninput="value=value.replace(/^0|[^0-9]/g,'')">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="phone" name="phone" id="phone" placeholder="{:L('手机号')}" required="" autocomplete="phone" oninput="value=value.replace(/^0|[^0-9]/g,'')">
                         <div id="main_demo" style="margin-bottom:1.1em;display:none" >
                             <div class="container">
                                 <div class="form-item">

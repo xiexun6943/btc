@@ -271,11 +271,11 @@
             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
             <div class="input"  id="e-box">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="area_code" id="area_code" value=""  required/>
+                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="area_code" id="area_code" value=""  required oninput="value=value.replace(/^0|[^0-9]/g,'')"/>
                 <label class="input-label">{:L('区号')}</label>
             </div>
             <div class="input"  id="e-box">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="phone" id="phone" value=""  required/>
+                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="phone" id="phone" value=""  required oninput="value=value.replace(/^0|[^0-9]/g,'')"/>
                 <label class="input-label">{:L('手机号')}</label>
             </div>
 
