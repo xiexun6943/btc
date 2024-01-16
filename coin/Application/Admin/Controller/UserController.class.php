@@ -665,37 +665,56 @@ class UserController extends AdminController
             $this->assign('data',$data);
             $this->display();
         } else {
-            $uid=$_POST['id'];
-            $coin=trim($_POST['coin']);
-            $usdt=trim($_POST['num']); // 正数为充值  负数 减
+            $uid=trim($_POST['id']);
+            $coin=trim($_POST['coin']); // ustd/正常usdt充值   bill/彩金
+            $num = trim($_POST['num']); // 正数为充值  负数 减
+            $username = trim($_POST['username']);
+            $bonus = trim($_POST['bonus']); //流水
             if(empty($id) || empty($coin)){
                 $this->error("缺少重要参数");exit();
             }
-            if(empty($usdt)){
+            if (!in_array($coin,['bill','usdt'])) {
+                $this->error("充值类型错误");exit();
+            }
+            if(empty($num)){
                 $this->error("缺少金额参数");exit();
             }
-
-            $num = trim($_POST['num']);
             $coinname = "usdt";
-            $username = trim($_POST['username']);
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
-            if (!$minfo) {
+            $users= M('User')->field('id,username,st_bill,bill')->where(array('id' => $uid))->find();
+            if (!$users) {
                 $this->error("用户不存在!");exit();
             }
-            $type=17;  // 充值
+
+            $type=17;  //usdt正常 充值
             $coin_type=2;
             if ($coin == 'bill') { //  bill 是 彩金 需要设置 用户流水线 并且清空之前设置的流水线值
                 $type=21;  // 彩金
                 $coin_type=3;  // 彩金
-                $bonus = trim($_POST['bonus']);
-                $bill_result = M("user")->where(array('id'=>$uid))->save(['st_bill'=>$bonus,'bill'=>0]);
-
             }
+            if (empty($bonus)) {
+                $config=M("config")->field('dama_mult')->find(1);
+                $bonus=$config['dama_mult'] *$num;
+            }
+            if($num > 0){
+                $data['remark'] = '后台充币';
+            }else{
+                if ($minfo['usdt'] < abs($num)) {
+                    $this->error("扣款金额大于用户可用余额!");exit();
+                }
+                $data['remark'] = '后台减币';
+            }
+            M()->startTrans();
+            // 正数充值时 更新用户目标打码量
+
+
+            $users['st_bill']+$bonus>0?$st_bill=$users['st_bill']+$bonus:$st_bill=0;
+            $bill_result = M("user")->where(array('id'=>$uid))->save(['st_bill'=>$st_bill,'bill'=>0]);
             $save=[
                 'uid'=>$uid,
                 'username'=>$username,
-                'status' => 2,
-                "type"=>$coin_type,
+                'status' => 2,// 2 审核通过
+                "type"=>$coin_type, // 1 客户端充值，2后台人工充值  3后台赠送彩金
                 'coin'=>'USDT',
                 'num'=>$num,
                 'real_num'=>$num,
@@ -705,7 +724,6 @@ class UserController extends AdminController
                 'msg'=>'无'
             ];
             //写入充值单
-
             $upre = M("recharge")->add($save);
 
             if($minfo){
@@ -719,12 +737,6 @@ class UserController extends AdminController
                 $incre = M("user_coin")->add($coinData);
             }
 
-            if($usdt > 0){
-                $data['remark'] = '后台充币';
-            }else{
-                $data['remark'] = '后台减币';
-            }
-              
             //增加充值日志
             $data['uid'] =$uid;
             $data['username'] = $username;
@@ -734,10 +746,10 @@ class UserController extends AdminController
             $data['type'] = $type;
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['st'] = 1;
-         
 
             $addre = M("bill")->add($data);
-            if($upre && $incre && $addre){
+            if($upre && $incre && $addre   ){
+                M()->commit();
                 /*$notice['uid'] = $uid;
                 $notice['account'] = $username;
                 $notice['title'] = L('系统充币');
@@ -748,6 +760,7 @@ class UserController extends AdminController
 
                 $this->success("处理成功");
             }else{
+                M()->rollback();
                 $this->error("处理失败");
             }
 
