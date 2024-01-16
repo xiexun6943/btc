@@ -58,7 +58,7 @@
 								<tr class="controls">
 									<td class="item-label">数 目 :</td>
 									<td>
-										<input type="text" class="form-control input-8x" name="num" value="">
+										<input type="text" class="form-control input-8x" name="num" value="" oninput="value=value.replace(/[^\d\.-]/g,'')">
 										<p style="color:red;">注意： 正数为充值如(100 充值100),负数为减比如(-100 减币100)。扣钱不会增加打码流水</p>
 									</td>
 									
@@ -70,7 +70,7 @@
 								<tr class="controls bonus" >
 									<td class="item-label">自定义流水 :</td>
 									<td>
-										<input type="text" class="form-control input-8x" name="bonus" value="">
+										<input type="text" class="form-control input-8x" name="bonus" value="" oninput="value=value.replace(/[^\d\.-]/g,'')">
 										<p style="color:red;">设置自定义流水(+100增加100，-100减少100)： 最新打码流水=原打码流水+自定义流水， 不设置自定义流水：  最新打码流水=原打码流水+（充值数*系统流水倍数）</p>
 									</td>
 									
