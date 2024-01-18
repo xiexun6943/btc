@@ -2571,4 +2571,7 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "我要反馈:"=>"I want feedback:",
     "留言箱"=>"Message box",
     "秒"=>"Second",
+    "提币中"=>"Withdrawing coins",
+    "充值中"=>"Recharging",
+
 ];

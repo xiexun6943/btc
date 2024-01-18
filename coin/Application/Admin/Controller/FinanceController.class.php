@@ -11,7 +11,7 @@ class FinanceController extends AdminController
 		}
 	}
 	
-	//驳回充币
+	//充值驳回充币
 	public function rejectzr($id = null){
 	    if($id <= 0){
 	        $this->error("缺少重要参数");exit();
@@ -27,18 +27,19 @@ class FinanceController extends AdminController
 	    $save['updatetime'] = date("Y-m-d H:i:s",time());
 	    $save['status'] = 3;
 	    $upre = M("recharge")->where(array('id'=>$id))->save($save);
-        if (in_array($info['coinname'],['hkd','jpy'])) {
-            $payname='usdt';
-        }else{
-            $payname=$info['coinname'];
-        }
-        $paynamed=$payname.'d';
+	   
+        // if (in_array($info['coinname'],['hkd','jpy'])) {
+        //     $payname='usdt';
+        // }else{
+        //     $payname=$info['coinname'];
+        // }
+        // $paynamed=$payname.'d';
         // 用户 usdtd  冻结添加
-        $dec_re = M("user_coin")->where(array('userid'=>$info['userid']))->setDec($paynamed,$info['num']);
+        // $dec_re = M("user_coin")->where(array('userid'=>$info['userid']))->setDec($paynamed,$info['num']);
         // 用户 usdt 添加
-        $inc_re = M("user_coin")->where(array('userid'=>$info['userid']))->setInc($payname,$info['num']);
+        // $inc_re = M("user_coin")->where(array('userid'=>$info['userid']))->setInc($payname,$info['num']);
 
-        if($upre && $dec_re && $inc_re){
+        if($upre){
 
 	        $data['uid'] = $info['uid'];
 		    $data['account'] = $info['username'];
@@ -77,11 +78,16 @@ class FinanceController extends AdminController
         $cinfo = M("coin")->where(array('name'=>strtolower(trim($info['coin']))))->find();
         $real_num=round($num-$num*($cinfo['czsxf']/100),3);
 	    $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
+	    $config = M("config")->field('dama_mult')->find();
+	   
 	    //修改订单状态
 	    $save['updatetime'] = date("Y-m-d H:i:s",time());
 	    $save['status'] = 2;
         $save['real_num'] = $real_num;
+
         M()->startTrans();
+       //增加会员目标打码流水
+	    $incre = M("user")->where(array('userid'=>$uid))->setInc('st_bill',$num*$config['dama_mult']);
 
 	    $upre = M("recharge")->where(array('id'=>$id))->save($save);
 	    if($minfo){

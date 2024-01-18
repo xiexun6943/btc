@@ -204,9 +204,17 @@
 		                    <div style="width:100%;height:20px;line-height:20px;">
 		                        <span class="fcc fzm">{:L('状态')}</span>
 		                    </div>
-		                    <div style="width:100%;height:40px;line-height:30px;">
-		                        <span class="fch fzmm">{:L('已完成')}</span>
+                          <eq name="vo.status" value="1">
+                              <div style="width:100%;height:40px;line-height:30px;">
+		                        <span class="fch fzmm">{$vo.tx_status}</span>
 		                    </div>
+                          </eq>
+                            <eq name="vo.status" value="0">
+                              <div style="width:100%;height:40px;line-height:30px;">
+		                        <span class="fch fzmm">{$vo.tx_status}</span>
+		                    </div>
+                          </eq>
+		                    
 		                </div>
 		                <div class="infobox_e" >
 		                    <div style="width:100%;height:20px;line-height:20px;text-align:right;">

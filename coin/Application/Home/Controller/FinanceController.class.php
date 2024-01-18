@@ -172,6 +172,7 @@ class FinanceController extends HomeController
 	        $bill['coinname'] = $cinfo['name'];
 	        $bill['afternum'] = $minfo[$coinname] - $num;
 	        $bill['type'] = 2;
+	        $bill['status'] = 1;
 	        $bill['addtime'] = date("Y-m-d H:i:s",time());
 	        $bill['st'] = 2;
 	        $bill['remark'] = "提币申请";
@@ -437,7 +438,8 @@ class FinanceController extends HomeController
             $bill['num'] = $unum;
             $bill['coinname'] = $cinfo['name'];
             $bill['afternum'] = $minfo['usdt'] - $unum;
-            $bill['type'] = 2;
+            $bill['type'] = 2;// 2 体现
+            $bill['type'] = 1;// 0 完成  ，1 体现中
             $bill['addtime'] = date("Y-m-d H:i:s",time());
             $bill['st'] = 2;
             $bill['remark'] = "提币申请";

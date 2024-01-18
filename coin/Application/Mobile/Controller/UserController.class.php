@@ -733,6 +733,17 @@ class UserController extends MobileController
         $uid = userid();
 
         $billist = M("bill")->where(array('uid'=>$uid,'coinname'=>$lowcoin))->order("id desc")->select();
+        foreach ($billist as $k=> $vo){
+         
+            if(in_array($vo['type'],[1,2]) && $vo['status'] ==1 ){
+                $tx_status=gettype_info($vo['type']).'中';
+                $billist[$k]['tx_status']=L($tx_status);
+            }else{
+                $billist[$k]['tx_status']=L('已完成');
+            }
+            
+          
+        }
         $this->assign('billlist',$billist);
 
         $this->assign('oid',$lowcoin);
@@ -861,6 +872,7 @@ class UserController extends MobileController
             $bill['coinname'] = $cinfo['name'];
             $bill['afternum'] = $minfo[$coinname] - $num;
             $bill['type'] = 2;
+            $bill['status'] = 1;
             $bill['addtime'] = date("Y-m-d H:i:s",time());
             $bill['st'] = 2;
             $bill['remark'] = "提币申请";
@@ -994,6 +1006,7 @@ class UserController extends MobileController
             $bill['coinname'] = $cinfo['name'];
             $bill['afternum'] = $minfo['usdt'] - $unum;
             $bill['type'] = 2;
+            $bill['status'] = 1;
             $bill['addtime'] = date("Y-m-d H:i:s",time());
             $bill['st'] = 2;
             $bill['remark'] = "提币申请";

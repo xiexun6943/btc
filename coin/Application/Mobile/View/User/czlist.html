@@ -85,7 +85,10 @@
                                 <span style="color:#cbcbcb;">{:L('手续费')}(Usdt)</span>
                             </div>
                             <div style="width:100%;height:30px;line-height:30px;">
-                                <span class="fch">{$vo.sxf}</span>
+                                <eq  name="vo.status" value="2"  >
+                                    <span class="fch">{$vo.sxf}</span>
+                                </eq>
+                                
                             </div>
                         </div>
                         <div style="width:33.33%;height:60px;float:left;">

@@ -127,7 +127,7 @@
 								</tr>
 								<tr class="controls">
 									<td class="item-label">打码流水倍数:</td>
-									<td><input type="text" class="form-control input-10x" name="dama_mult" value="{$data['dama_mult']}"></td>
+									<td><input type="text" class="form-control input-10x" name="dama_mult" value="{$data['dama_mult']}" oninput="value=value.replace(/[^\d\.]/g,'')"></td>
 									<td class="item-note" style="color:#ff0000;">*充值数目的多少倍流水 0 表示不设置充值打码流水</td>
 								</tr>
 								<tr class="controls">
