@@ -167,15 +167,15 @@ class DrawController extends HomeController
             }
         }
          if ($totalDrawNum < ($drawEdNum + 1)){
-             $msg['data'] = [];
-             $msg['err'] = 'y';
+             $msg['data'] = '';
+             $msg['code'] = 0;
              $msg['msg'] = L('您目前没有空投机会');
              $this->ajaxReturn($msg);
              exit;
          }
          if (empty($currDrawSet)){
-             $msg['data'] = [];
-             $msg['err'] = 'y';
+             $msg['data'] = '';
+             $msg['code'] = 0;
              $msg['msg'] = L('数据错误');
              $this->ajaxReturn($msg);
              exit;
@@ -206,7 +206,7 @@ class DrawController extends HomeController
             'comment' => '中奖'
         ));
         $msg['data'] = $drawAmount;
-        $msg['err'] = 1;
+        $msg['code'] = 1;
         $msg['msg'] = L('成功!');
         $this->ajaxReturn($msg);
         exit;

@@ -382,7 +382,7 @@
     $('.hb_handle_btn').click(function(){
         // $('.hb_menban,.round_contain').show()
         $.get('?a=ajax_godraw',function(data){
-            if(data.data == [] || data.data == ''){
+            if(data.code ==0 ){
                 console.log(getCookie('zh_choose'))
                 if(getCookie('zh_choose')==='j'){
                     layer.msg('現在、抽選を行う機会がありません')
