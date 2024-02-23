@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
 	    <title>{$webname}</title>
@@ -119,7 +119,7 @@
 	        .order_title{display: inline-block;margin-right: 20px;font-weight: 1000;}
 	        .FCD535{border-bottom: 2px solid #FCD535;}
 	        .fccbox{width:100%;height:15px;background:#f5f5f5;}
-	        .wtlistbox{width:100%;padding:0px 10px;} 
+	        .wtlistbox{width:100%;padding:0px 10px;}
 	        .o_title_box{width:50%;height:40px;line-height:40px;border-bottom:1px solid #f5f5f5;}
 	        .tlistbox{width:100%;clear:both;padding:10px 0px;}
 	        .tlistbox_1{width:100%;height:100px;border-bottom:1px solid #f5f5f5;}
@@ -165,15 +165,15 @@
                                                 </div>
                                         </a>
 	                                    </div>
-	                                    
-	                                    
+
+
 	                                    <div class="symbol_list" id="smybolbox">
 	                                        <div style="width:100%;height:100px;line-height:100px;text-align:center;">
                                                 <span class="f14 fcc">{:L('没有获取数据')}</span>
                                             </div>
 	                                    </div>
 	                                </div>
-                                    
+
                                 </div>
                             </div>
                             <div style="width:60%;min-height:900px;background:#fff;float:left;">
@@ -212,7 +212,7 @@
 			                        	            --
 			                        	        </div>
 			                        	    </div>
-			                        	    
+
 			                        	</div>
                 			        </div>
                                 </div>
@@ -514,32 +514,32 @@
 														</div>
 													</div>
 
-		            
-		            
-		            
+
+
+
 
 
 		        </div>
 		                                    </div>
-		    
+
 		                                </div>
-                                        
-                                        
-                                        
-                                        
-                                        
+
+
+
+
+
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div style="width:20%;min-height:800px;float:left;padding:0px 0px 0px 10px;">
                                 <div style="width:100%;min-height:1009px;background:#fff;">
                                     <div style="width:100%;height:40px;padding:0px 15px;">
                                         <div style="min-width:20%;height:40px;line-height:40px;border-bottom:2px solid #FCD535">
-                                            <span class="f12 fch">{:L('盘口')}</span>
+                                            <span class="f12 fch">{:L('最新成交')}</span>
                                         </div>
                                         <div style="width:100%;margin-top:20px;">
-                                            
+
                                             <div style="width:100%;">
 		                                        <div style="width:100%;height:20px;padding:0px 5px;">
 		                                            <div class="tradebox_title tl">
@@ -549,7 +549,7 @@
 		                                                <span class="fch f12">{:L('数量')}</span>
 		                                            </div>
 		                                        </div>
-		                                        
+
 		                                        <div class="trade_listbox" id="tradesellbox">
 		                                            <div style="width:100%;height:30px;">
 		                                                <div class="trade_list tl">
@@ -574,10 +574,10 @@
 		                                            </div>
 		                                        </div>
 		                                    </div>
-                                            
-                                            
+
+
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -619,7 +619,7 @@
                                             <td>{:L('交易限价')}</td>
                                             <td>{:L('委托时间')}</td>
                                             <td>{:L('操作')}</td>
-                                            
+
 										</tr>
 										</thead>
 
@@ -675,7 +675,7 @@
 									<table class="table tcc order-main-table ">
 										<thead>
 										<tr class="tcbh">
-										
+
 											<td>{:L('类型')}</td>
 											<td>{:L('交易对')}</td>
                                             <td>{:L('方向')}</td>
@@ -684,7 +684,7 @@
                                             <td>{:L('交易限价')}</td>
                                             <td>{:L('委托时间')}</td>
                                             <td>{:L('结单时间')}</td>
-                                            
+
 										</tr>
 										</thead>
 										<tbody>
@@ -741,10 +741,10 @@
 						</div>
 					</div>
 	            </main>
-	            
+
 	            <input type="hidden" id="buy_usermoney" value="{$usdt_blance}" />
                 <input type="hidden" id="buy_usercoin" value="{$coin_blance}" />
-                
+
                 <input type="hidden" id="symbolbox" value="{$coinname}"  />
                 <!--交易限价单价-->
 	            <input type="hidden" id="mprice" value="" />
@@ -754,10 +754,10 @@
 	            <input type="hidden" id="musdt" value="" />
 	            <!--购买类型，1限价2市价-->
 	            <input type="hidden" id="buytype" value="1" />
-	            
-	            
+
+
 	            <include file="Public:footer"/>
-	        </div>   
+	        </div>
 	    </div>
 
 
@@ -778,7 +778,7 @@
                     },2000);
                 }else{
                     layer.msg(data.info);return false;
-                }    
+                }
             });
         }
 
@@ -828,7 +828,7 @@
                         window.location.reload();
                     },2000);
                 }else{
-                    layer.msg(data.info);return false; 
+                    layer.msg(data.info);return false;
                 }
             });
         }
@@ -870,7 +870,7 @@
                         window.location.reload();
                     },2000);
                 }else{
-                   layer.msg(data.info);return false; 
+                   layer.msg(data.info);return false;
                 }
             });
         }
@@ -886,11 +886,11 @@
                     $("#smybolbox").empty();
                     var html = '';
                     if(data.data == '' || data.data == null){
-                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                                '<span class="f12 fcc">' + "{:L('没有获取数据')}" + '</span>'+
                                '</div>';
                         $("#smybolbox").append(html);
-                        
+
                     }else{
                         $.each(data.data,function(key,val){
                             html += '<a href="/Trade/index.html?symbol='+ val.coin +'&type=buy">'+
@@ -903,11 +903,11 @@
                                     '</div>'+
                                     '</a>';
                         });
-                        
+
                         $("#smybolbox").append(html);
                     }
                 }else{
-                    html =  '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                    html =  '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                             '<span class="f12 fcc">' + "{:L('没有获取数据')}" + '</span>'+
                             '</div>';
                     $("#smybolbox").append(html);
@@ -935,11 +935,11 @@
                     $("#tradebuybox").empty();
                     var html = '';
                     if(data.data == '' || data.data == null){
-                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                                '<span class="f12 fcc">' + "{:L('没有获取数据')}" + '</span>'+
                                '</div>';
                         $("#tradebuybox").append(html);
-                        
+
                     }else{
                         $.each(data.data,function(key,val){
                             html += '<div style="width:100%;height:30px;">'+
@@ -967,11 +967,11 @@
                     $("#tradesellbox").empty();
                     var html = '';
                     if(data.data == '' || data.data == null){
-                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                                '<span class="f12 fcc">' + "{:L('没有获取数据')}" + '</span>'+
                                '</div>';
                         $("#tradesellbox").append(html);
-                        
+
                     }else{
                         $.each(data.data,function(key,val){
                             html += '<div style="width:100%;height:30px;">'+
@@ -1057,7 +1057,7 @@
             $("#sellxjcoin").hide();
 			$('.jy-btn').removeClass('btn_bg_color');
 			$(this).addClass('btn_bg_color');
-            
+
         });
         $("#sell_sjbtn").click(function(){
             $("#sell_sjspan").addClass("fcb");
@@ -1074,7 +1074,7 @@
 			$('.jy-btn').removeClass('btn_bg_color');
 			$(this).addClass('btn_bg_color');
         });
-    
+
         //买入框
         $("#buyxjbtn").click(function(){
             $("#xjspan").addClass("fcb");
@@ -1112,7 +1112,7 @@
             var buyusdt = parseFloat($("#sell_usdt").val()); //输入的USDT数量
             var usermoney = parseFloat($("#buy_usercoin").val());//币的数量
             var coinnum = parseFloat(buyusdt / newprice).toFixed(4);
-            
+
             if(coinnum > usermoney){
                 layer.msg("{:L('余额不足')}");return false;
             }else{
@@ -1154,7 +1154,7 @@
                 $("#mnum").val(newbuynum);
                 $("#musdt").val(buyusdt);
             }
-            
+
         }
         function buynumfc(){
             var newbuynum = $("#buynum").val();
@@ -1168,7 +1168,7 @@
                 $("#mnum").val(newbuynum);
                 $("#musdt").val(buyusdt);
             }
-            
+
         }
     </script>
     <script type="text/javascript">
@@ -1234,9 +1234,9 @@
                 layer.msg("{:L('余额不足')}");return false;
             }
         }
-        
-        
-        
+
+
+
         function sellblfc(type,num){
             var type = type;
             var num = num;
@@ -1244,15 +1244,15 @@
             var musdt = parseFloat((usermoney * num / 100)).toFixed(4);
             var newprice = $("#newprice").val();
             var buynum = parseFloat((musdt * newprice)).toFixed(4);
-            
+
             $("#sell_usdt").val(buynum);
             $("#sell_num").val(musdt);
-            
+
             $("#musdt").val(buynum);
             $("#mnum").val(musdt);
             $("#sell_coin").val(musdt);
-            
-            
+
+
             if(type == 1){
                 $('#sellbl_1').addClass("bgred");
                 $('#sellbl_1').removeClass("bgf5");
@@ -1262,7 +1262,7 @@
                 $('#sellbl_3').removeClass("bgred");
                 $('#sellbl_4').addClass("bgf5");
                 $('#sellbl_4').removeClass("bgred");
-                
+
             }else if(type == 2){
                 $('#sellbl_2').addClass("bgred");
                 $('#sellbl_2').removeClass("bgf5");
@@ -1312,7 +1312,7 @@
                 $('#buybl_3').removeClass("bggreen");
                 $('#buybl_4').addClass("bgf5");
                 $('#buybl_4').removeClass("bggreen");
-                
+
             }else if(type == 2){
                 $('#buybl_2').addClass("bggreen");
                 $('#buybl_2').removeClass("bgf5");
@@ -1344,7 +1344,7 @@
         }
     </script>
     <script type="text/javascript">
-        
+
         $("#dash_sellprice").click(function(){
             var newprice =  parseFloat($("#sell_newprice").val());
             if(newprice > 0){
@@ -1355,14 +1355,14 @@
             $("#sell_newprice").val(buyprice);
             $("#mprice").val(buyprice);
         });
-        
+
         $("#plus_sellprice").click(function(){
             var newprice = parseFloat($("#sell_newprice").val());
             var buyprice = (newprice + 0.001).toFixed(4);
             $("#sell_newprice").val(buyprice);
             $("#mprice").val(buyprice);
         });
-        
+
         $("#dash_sellnum").click(function(){
             var buynum = parseFloat($("#sell_num").val());
             if(buynum > 0){
@@ -1376,7 +1376,7 @@
             var buyusdt = (newprice * newbuynum).toFixed(4);
             $("#sell_usdt").val(buyusdt);
             $("#musdt").val(buyusdt);
-            
+
         });
         $("#plus_sellnum").click(function(){
             var buynum = parseFloat($("#sell_num").val());
@@ -1397,8 +1397,8 @@
                 $("#musdt").val(buyusdt);
             }
         });
-    
-        
+
+
         $("#dash_buyprice").click(function(){
             var newprice =  parseFloat($("#newprice").val());
             if(newprice > 0){
@@ -1428,7 +1428,7 @@
             var buyusdt = (newprice * newbuynum).toFixed(4);
             $("#buyusdt").val(buyusdt);
             $("#musdt").val(buyusdt);
-            
+
         });
         $("#plus_buynum").click(function(){
             var buynum = parseFloat($("#buynum").val());
@@ -1452,7 +1452,7 @@
     </script>
 
     <script type="text/javascript">
-		$("#nav").slide({ 
+		$("#nav").slide({
 			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
 			titCell:".nLi", //鼠标触发对象
 			targetCell:".sub", //titCell里面包含的要显示/消失的对象
@@ -1463,5 +1463,5 @@
 		});
 	</script>
 
-    
+
 </html>

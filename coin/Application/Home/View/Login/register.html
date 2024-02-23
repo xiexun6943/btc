@@ -165,22 +165,22 @@
         </style>
         <form class="card-form" onclick="return false" style="padding:0">
             <div class="margin-topbox-px-10">
-                <div data-bn-type="text" class="css-1g5tc38  tcl fch f36 fw">{:L('立即注册')}<span class="fbaseblue"> {:L('BitVenture')}</span></div>
+                <div data-bn-type="text" class="css-1g5tc38  tcl fch f36 fw">{:L('立即注册')}<span class="fbaseblue"> {:L('BitoPro')}</span></div>
                 <div data-bn-type="text" class="css-152kxht tcl f16"></div>
             </div>
                     <style>
                         .gray{
-                            
+
                             background-image: linear-gradient(to right, #e9e9e9, #e9e9e9, #e9e9e9, #e9e9e9)!important;color:black
                         }
                         .btn_bar{
                             width:150px!important;
                         }
                         .input{
-                            padding-top:.3rem;   
+                            padding-top:.3rem;
                         }
                         .input-label{
-                            top:.3rem;   
+                            top:.3rem;
                         }
                     </style>
                     <script>
@@ -204,7 +204,7 @@
                 <button class="btn_bar btn-hover color-1 btnr">{:L('手机')}</button>
             </div>
 
-    
+
             <span class="reg_kind">
             <input type="hidden" name="type" id="type" value="2">
             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
@@ -239,7 +239,7 @@
                      }
                      if(lang[1]=='zh-cn'){
                          $('#area_code').val('+852')
-                     }   
+                     }
                     }
                 })
             </script>
@@ -265,8 +265,8 @@
                 <button class="action-button " onclick="upreg()">{:L('立即注册')}</button>
             </div>
             </span>
-            
-            
+
+
             <span class="reg_kind" style="display:none">
             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
@@ -329,7 +329,7 @@
         if (type == 2) {
             var account = $(".selected-flag");
         }
- 
+
         var email = $("#email").val();
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         if(email=='' || email == null){
@@ -366,8 +366,8 @@
 
 
     }
-    
-    
+
+
     function upreg2(){
         var  type = $('#type').val();
         if (type != 1 && type != 2) {
@@ -393,7 +393,7 @@
             layer.msg("{:L('请输入手机验证码')}");return false;
         }
         var pwd = $("#pwd_phone").val();
-        
+
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
@@ -401,7 +401,7 @@
         if( invitation_code == ''){
             layer.msg("{:L('请输入邀请码')}");return false;
         }
-      
+
         $.post("{:U('Login/smsregister')}",
             {'area_code' : area_code,'phone' : phone, 'sms_code' : sms_code, 'pwd' : pwd, 'invitation_code' : invitation_code},
             function(data){
@@ -418,17 +418,17 @@
 
 
     }
-    
-    
-    
+
+
+
             //获取验证码
     function getCode(){
         var  type = $('#type').val();
         if (type != 1 && type != 2) {
             layer.msg("{:L('请选择注册类型')}");return false;
         }
-        
-        
+
+
         if(type == 1){
             //获取手机验证码
             var account = $("#country_selector").val();
@@ -442,16 +442,16 @@
                     function(data){
                         if(data.code == 1){
                             layer.msg(data.info);
-                            
+
                         }else{
                             layer.msg(data.info);return false;
                         }
                     }
                 );
-            
+
         }
-        
-        
+
+
         if(type == 2){
             //获取邮箱验证码
             var account = $("#email").val();
@@ -464,25 +464,25 @@
             if(!reg.test(email)){
                 layer.msg("{:L('邮箱格式不正确')}");return false;
             }
-            
+
              $.post("{:U('Login/sendcode')}",
                 {'email' : email},
                 function(data){
                     if(data.code == 1){
                         layer.msg(data.info);
-                        
+
                     }else{
                         layer.msg(data.info);return false;
                     }
                 }
             );
         }
-        
+
     }
-    
+
             //获取验证码
     function getPhoneCode(){
-        
+
             //获取手机验证码
             var area_code = $('#area_code').val()
             var phone = $('#phone').val()
@@ -498,13 +498,13 @@
                     function(data){
                         if(data.code == 1){
                             layer.msg(data.info);
-                            
+
                         }else{
                             layer.msg(data.info);return false;
                         }
                     }
                 );
-            
+
     }
 </script>
 
