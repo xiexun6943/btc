@@ -548,26 +548,24 @@ class AutoexeController extends \Think\Controller
 	    $setting = M("hysetting")->where(array('id'=>1))->field("hy_fkgl")->find();
         $setting['hy_fkgl'] ? $hy_fkgl= $setting['hy_fkgl'] : $hy_fkgl=50;
         if($count > 0){
-            $rand=rand(1,10);
-            $result=$this->getShuYing($rand,intval($setting['hy_fkgl']/10));
 //            $ylcount = intval($count * $setting['hy_fkgl'] / 100);
 //            $kscount = $count - $ylcount;
             $list=$orderobj->field('id,uid,username,num,status,is_win,kongyk')->where($map)->order("num asc")->limit(25)->select();
+//            var_dump($list);exit();
             if(!empty($list)){
                 foreach ($list as $v) {
-                    $yid = $v['id'];
+                    $rand=rand(1,10);
                     $result=$this->getShuYing($rand,intval($setting['hy_fkgl']/10));
-                    $orderobj->where(array('id'=>$yid))->save(array('kongyk'=>$result));
+                    $orderobj->where(array('id'=>$v['id']))->save(array('kongyk'=>$result));
                     if ($result==1) {
-                        echo "订单ID:".$yid."设为盈利==";
+                        echo "订单ID:".$v['id']."设为盈利==";
                     }else{
-                        echo "订单ID:".$yid."设为亏损==";
+                        echo "订单ID:".$v['id']."设为亏损==";
                     }
 
                 }
             }
         }
-        
         echo "操作成功";
 	}
     // 根据杀率数  2  亏损   1 盈利
