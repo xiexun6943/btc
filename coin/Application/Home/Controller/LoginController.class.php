@@ -162,7 +162,7 @@ class LoginController extends HomeController
 
 
 	//注册处理程序
-	public function upregister($email,$ecode,$lpwd,$invit){
+	public function upregister($email,$ecode,$lpwd,$invit,$nick_name){
 		if($_POST){
 // 			if(checkstr($email) || checkstr($ecode) || checkstr($lpwd) || checkstr($invit)){
 // 				$this->ajaxReturn(['code'=>0,'info'=>L('您输入的信息有误')]);
@@ -171,7 +171,10 @@ class LoginController extends HomeController
 			if(!empty($checkus)){
 				$this->ajaxReturn(['code'=>0,'info'=>L('用户名已存在')]);
 			}
-
+			$is_nick = M('User')->where(array('nick_name' => $nick_name))->find();
+			if(!empty($is_nick)){
+				$this->ajaxReturn(['code'=>0,'info'=>L('昵称已存在')]);
+			}
 			$secode = session('regcode');
 			if($secode != $ecode){
 				$this->ajaxReturn(['code'=>0,'info'=>L('邮箱验证码错误')]);
@@ -215,6 +218,7 @@ class LoginController extends HomeController
 			$rs[] = $mo->table('tw_user')->add(
 				array(
 				'username' => $email,
+				'nick_name' => $nick_name,
 				'password' => md5($lpwd),
 				'money' => $config['tymoney'],
 				'invit' => $myinvit,
@@ -375,17 +379,22 @@ class LoginController extends HomeController
             $sms_code=I('post.sms_code');
             $pwd=I('post.pwd');
             $invit=I('post.invitation_code');
+            $nick_name=I('post.nick_name');
             $area_code=I('post.area_code');
             $checkus = M('User')->where(array('phone' => $phone))->find();
             if(!empty($checkus)){
                 $this->ajaxReturn(['code'=>0,'info'=>L('手机号已存在')]);
             }
+			$is_nick = M('User')->where(array('nick_name' => $nick_name))->find();
+			if(!empty($is_nick)){
+				$this->ajaxReturn(['code'=>0,'info'=>L('昵称已存在')]);
+			}
 
             $redis=$this->_Redis();
             $secode=$redis->hGet('sms_reg_code',$area_code.$phone);
-            if($secode != $sms_code){
-                $this->ajaxReturn(['code'=>0,'info'=>L('手机验证码错误')]);
-            }
+//            if($secode != $sms_code){
+//                $this->ajaxReturn(['code'=>0,'info'=>L('手机验证码错误')]);
+//            }
 
             if($pwd == ''){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入密码')]);
@@ -425,6 +434,7 @@ class LoginController extends HomeController
             $rs[] = $mo->table('tw_user')->add(
                 array(
                     'phone' => $phone,
+                    'nick_name' => $nick_name,
                     'password' => md5($pwd),
                     'money' => $config['tymoney'],
                     'invit' => $myinvit,

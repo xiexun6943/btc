@@ -44,6 +44,7 @@
 							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
 							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
 							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
+							<option value="nick_name" <eq name="Think.get.field" value="nick_name">selected</eq> >昵称</option>
 						</select>
 
 						<script type="text/javascript" src="/Public/layer/laydate/laydate.js"></script>
@@ -78,7 +79,7 @@
 							<input class="check-all" type="checkbox"/>
 						</th>
 						<th class="">ID</th>
-						<th class="">会员账号 / 手机号</th>
+						<th class="">会员账号/手机号(昵称)</th>
 						<th class="">操作</th>
 						<th class="">登陆</th>
 						<th class="">打码流水/目标流水</th>
@@ -107,7 +108,7 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span><p/>昵称: <span style="color: green">{$vo.nick_name}</span></td>
 							    <td>
 									<a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>
 									<a class="btn btn-warning btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>

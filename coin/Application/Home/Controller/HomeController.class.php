@@ -17,11 +17,23 @@ class HomeController extends \Think\Controller
 
 		} else if (CONTROLLER_NAME != 'Login') {
             $uid = userid();
-		    $uinfo = M("user")->where(array('id'=>$uid))->field("id,username,rzstatus")->find();
-		    $namearr = explode("@",$uinfo['username']);
-		    $name1 = substr($namearr[0],0,4);
-		    $username = $name1."***@".$namearr[1];
-		    $this->assign('username',$username);
+		    $uinfo = M("user")->where(array('id'=>$uid))->field("id,username,phone,nick_name,rzstatus")->find();
+//		    $namearr = explode("@",$uinfo['username']);
+//		    $name1 = substr($namearr[0],0,4);
+//		    $username = $name1."***@".$namearr[1];
+            if (empty($uinfo['nick_name'])) {
+                if (empty($uinfo['username'])) {
+                    $this->assign('phone',$uinfo['phone']);
+                }else{
+                    $this->assign('username',$uinfo['username']);
+                }
+
+            }else{
+
+                $this->assign('username',$uinfo['nick_name']);
+            }
+
+
 		    $this->assign('rzstatus',$uinfo['rzstatus']);
 		    if($uid <= 0 || $uid == ''){
 		        $uid = 0;

@@ -216,11 +216,12 @@
                                 <button type="submit" style="display:none;">Submit</button>
                             </div>
                         </div>
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="nick_name" id="nick_name" placeholder="{:L('昵称')}" required="">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="lpwd" placeholder="{:L('密码')}" required="">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
-                        <div>
                             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
+                        <div>
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
                             <button  class="btn-hover color-4 send-btn" onclick="getCode()"> {:L('发送')} </button>
                         </div>
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg()" value="{:L('注册')}">
@@ -241,11 +242,12 @@
                                 <button type="submit" style="display:none;">Submit</button>
                             </div>
                         </div>
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="nick" id="nick" placeholder="{:L('昵称')}" required="">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="pwd_phone" placeholder="{:L('密码')}" required="">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invitation_code"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
-                        <div>
                             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="sms_code" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
+                        <div>
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invitation_code"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
                             <button  class="btn-hover color-4 send-btn" onclick="getPhoneCode()" style="top: 540px;"> {:L('发送')} </button>
                         </div>
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg2()" value="{:L('注册')}">
@@ -271,6 +273,7 @@
         // console.log(account);
         // return false;
         var email = $("#email").val();
+        var nick_name = $("#nick_name").val();
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         if(email=='' || email == null){
             layer.msg("{:L('请输入邮箱')}");return false;
@@ -282,8 +285,10 @@
         if(ecode == ''){
             layer.msg("{:L('请输入邮箱验证码')}");return false;
         }
-        var lpwd = $("#lpwd").val();
-        
+        var nick_name = $("#nick_name").val();
+        if(nick_name == ''){
+            layer.msg("{:L('昵称不能为空')}");return false;
+        }
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
@@ -293,7 +298,7 @@
         }
       
         $.post("{:U('Login/upregister')}",
-            {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit},
+            {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit,'nick_name':nick_name},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);
@@ -332,8 +337,12 @@
         if(sms_code == ''){
             layer.msg("{:L('请输入手机验证码')}");return false;
         }
+        var nick = $("#nick").val();
+
+        if(nick == ''){
+            layer.msg("{:L('昵称不能为空')}");return false;
+        }
         var pwd = $("#pwd_phone").val();
-        
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
@@ -343,7 +352,7 @@
         }
       
         $.post("{:U('Login/smsregister')}",
-            {'area_code' : area_code,'phone' : phone, 'sms_code' : sms_code, 'pwd' : pwd, 'invitation_code' : invitation_code},
+            {'area_code' : area_code,'phone' : phone, 'sms_code' : sms_code, 'pwd' : pwd, 'invitation_code' : invitation_code,'nick':nick},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);

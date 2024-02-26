@@ -67,12 +67,25 @@ class IndexController extends MobileController
 
 
 		$uid = userid();
-		$info = M("user")->where(array('id'=>$uid))->field("id,username,invit")->find();
+		$info = M("user")->where(array('id'=>$uid))->field("id,username,phone,nick_name,invit")->find();
         $config = M("config")->where(array('id'=>1))->field('weblogo,kefu')->find();
         $kefu = $config['kefu'];
         $waplogo = $config['weblogo'] ? '/Upload/public/'.$config['weblogo'] : '/xm/4558.png';
 		$count = M("notice")->where(array('uid'=>$uid,'status'=>1))->count();
 
+//        $namearr = explode("@",$info['username']);
+//        $name1 = substr($namearr[0],0,4);
+//        $username = $name1."***@".$namearr[1];
+        if (empty($info['nick_name'])) {
+            if (empty($uinfo['username'])) {
+                $this->assign('phone',$info['phone']);
+            }else{
+                $this->assign('username',$uinfo['username']);
+            }
+
+        }else{
+            $this->assign('username',$info['nick_name']);
+        }
         $this->assign("info",$info);
 		$this->assign("count",$count);
 		$this->assign("waplogo",$waplogo);

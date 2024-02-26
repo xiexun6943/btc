@@ -32,6 +32,22 @@
 									<td class="item-note"></td>
 								</tr>
 								<tr class="controls">
+									<td class="item-label">昵称 :</td>
+									<?php  if(empty( $_GET['id'])){ ?>
+									<td>
+										<input type="text" class="form-control input-10x" name="nick_name" value="{$data.nick_name}"  style="color:red" >
+
+									</td>
+									<?php }else{ ?>
+									<td>
+										<input type="text" class="form-control input-10x" name="nick_name" value="{$data.nick_name}" readonly="true" style="color:red">
+									</td>
+
+									<?php }?>
+
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
 									<td class="item-label">用户密码 :</td>
 									<td><input type="text" class="form-control input-10x" name="password" value=""></td>
 									<td class="item-note" style="color:red;">*留空不更新</td>

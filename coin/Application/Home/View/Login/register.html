@@ -245,10 +245,13 @@
             </script>
 
             <div class="input" style="margin-top: 1.5rem;">
+                <input spellcheck="false" autofocus="autofocus" type="nick_name" class="input-field"  name="nick_name" id="nick_name" value="" required/>
+                <label class="input-label">{:L('昵称')}</label>
+            </div>
+            <div class="input" style="margin-top: 1.5rem;">
                 <input spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="lpwd" id="lpwd" value="" required/>
                 <label class="input-label">{:L('密码')}</label>
             </div>
-
             <div class="input">
                 <input spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="invit" id="invit" value="{$qrcode}" required/>
                 <label class="input-label">{:L('邀请码')}</label>
@@ -278,7 +281,10 @@
                 <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="phone" id="phone" value=""  required oninput="value=value.replace(/^0|[^0-9]/g,'')"/>
                 <label class="input-label">{:L('手机号')}</label>
             </div>
-
+            <div class="input"  id="e-box">
+                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="nick" id="nick" value=""  required />
+                <label class="input-label">{:L('昵称')}</label>
+            </div>
             <div class="input" style="margin-top: 1.5rem;">
                 <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="pwd_phone" id="pwd_phone" value="" required/>
                 <label class="input-label">{:L('密码')}</label>
@@ -339,8 +345,10 @@
             layer.msg("{:L('邮箱格式不正确')}");return false;
         }
         var ecode = $("#ecode").val();
-        if(ecode == ''){
-            layer.msg("{:L('请输入邮箱验证码')}");return false;
+
+        var nick_name = $("#nick_name").val();
+        if(nick_name == ''){
+            layer.msg("{:L('昵称不能为空')}");return false;
         }
         var lpwd = $("#lpwd").val();
         if(lpwd == ''){
@@ -350,8 +358,11 @@
         if( invit == ''){
             layer.msg("{:L('请输入邀请码')}");return false;
         }
+        if(ecode == ''){
+            layer.msg("{:L('请输入邮箱验证码')}");return false;
+        }
         $.post("{:U('Login/upregister')}",
-            {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit},
+            {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit,'nick_name':nick_name},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);
@@ -385,6 +396,10 @@
         if(phone=='' || phone == null){
             layer.msg("{:L('请输入手机号')}");return false;
         }
+        var nick_name = $("#nick").val();
+        if(nick_name == ''){
+            layer.msg("{:L('昵称不能为空')}");return false;
+        }
         /*if(!reg.test(phone)){
             layer.msg("{:L('手机号格式不正确')}");return false;
         }*/
@@ -403,7 +418,7 @@
         }
 
         $.post("{:U('Login/smsregister')}",
-            {'area_code' : area_code,'phone' : phone, 'sms_code' : sms_code, 'pwd' : pwd, 'invitation_code' : invitation_code},
+            {'area_code' : area_code,'phone' : phone, 'sms_code' : sms_code, 'pwd' : pwd, 'invitation_code' : invitation_code,'nick_name':nick_name},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);

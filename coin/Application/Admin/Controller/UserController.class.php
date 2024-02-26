@@ -569,11 +569,16 @@ class UserController extends AdminController
                 }else{
                     $add['username'] = $username;
                 }
+                $nick_name = trim($_POST['nick_name']);
+                if($nick_name == ''){
+                    $this->error("请输入会员昵称");exit();
+                }else{
+                    $add['nick_name'] = $nick_name;
+                }
 
-
-                $is_user= M('user')->where(['username'=>$username])->find();
+                $is_user= M('user')->where(['nick_name'=>$nick_name])->find();
                 if($is_user){
-                    $this->error("会员账号已经存在!");exit();
+                    $this->error("会员昵称已经存在!");exit();
                 }
 
                 if($_POST['password'] == ""){

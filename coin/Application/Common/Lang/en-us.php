@@ -2574,5 +2574,8 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "秒"=>"Second",
     "提币中"=>"Withdrawing coins",
     "充值中"=>"Recharging",
+    "昵称已存在"=>"Nickname already exists",
+    "昵称不能为空"=>"Nickname should be filled",
+    "昵称"=>"Nick name",
 
 ];
