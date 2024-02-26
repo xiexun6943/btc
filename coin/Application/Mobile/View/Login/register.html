@@ -218,7 +218,7 @@
                         </div>
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="nick_name" id="nick_name" placeholder="{:L('昵称')}" required="">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="lpwd" placeholder="{:L('密码')}" required="">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" id="repeat" placeholder="{:L('确认密码')}" required="">
                             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
                         <div>
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
@@ -244,7 +244,7 @@
                         </div>
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="nick" id="nick" placeholder="{:L('昵称')}" required="">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="pwd_phone" placeholder="{:L('密码')}" required="">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" id="repeat_phone" placeholder="{:L('确认密码')}" required="">
                             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="sms_code" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
                         <div>
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invitation_code"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
@@ -274,6 +274,10 @@
         // return false;
         var email = $("#email").val();
         var nick_name = $("#nick_name").val();
+        
+        var lpwd = $("#lpwd").val();
+        var repeat = $("#repeat").val();
+        
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         if(email=='' || email == null){
             layer.msg("{:L('请输入邮箱')}");return false;
@@ -285,12 +289,15 @@
         if(ecode == ''){
             layer.msg("{:L('请输入邮箱验证码')}");return false;
         }
-        var nick_name = $("#nick_name").val();
+        // var nick_name = $("#nick_name").val();
         if(nick_name == ''){
             layer.msg("{:L('昵称不能为空')}");return false;
         }
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
+        }
+        if(lpwd !== repeat){
+            layer.msg("{:L('两次输入密码不一致')}");return false;
         }
         var invit = $("#invit").val();
         if( invit == ''){
@@ -334,17 +341,24 @@
             layer.msg("{:L('手机号格式不正确')}");return false;
         }*/
         var sms_code = $("#sms_code").val();
+        
+        
         if(sms_code == ''){
             layer.msg("{:L('请输入手机验证码')}");return false;
         }
         var nick = $("#nick").val();
+        var pwd = $("#pwd_phone").val();
+        var repeatPhone = $("#repeat_phone").val();
+        
+        if(pwd == ''){
+            layer.msg("{:L('请输入密码')}");return false;
+        }
+        if(pwd !== repeatPhone){
+            layer.msg("{:L('两次输入密码不一致')}");return false;
+        }
 
         if(nick == ''){
             layer.msg("{:L('昵称不能为空')}");return false;
-        }
-        var pwd = $("#pwd_phone").val();
-        if(lpwd == ''){
-            layer.msg("{:L('请输入密码')}");return false;
         }
         var invitation_code = $("#invitation_code").val();
         if( invitation_code == ''){

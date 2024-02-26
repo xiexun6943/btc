@@ -78,7 +78,7 @@ class IndexController extends MobileController
 //        $username = $name1."***@".$namearr[1];
         if (empty($info['nick_name'])) {
             if (empty($uinfo['username'])) {
-                $this->assign('phone',$info['phone']);
+                $this->assign('username',$info['phone']);
             }else{
                 $this->assign('username',$uinfo['username']);
             }

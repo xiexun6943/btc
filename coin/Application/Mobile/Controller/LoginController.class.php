@@ -409,7 +409,7 @@ class LoginController extends MobileController
         if($_POST){
             $phone=I('post.phone');
             $sms_code=I('post.sms_code');
-			$nick_name=I('post.nick_name');
+			$nick_name=I('post.nick');
             $pwd=I('post.pwd');
             $invit=I('post.invitation_code');
             $area_code=I('post.area_code');
@@ -417,6 +417,7 @@ class LoginController extends MobileController
             if(!empty($checkus)){
                 $this->ajaxReturn(['code'=>0,'info'=>L('手机号已存在')]);
             }
+            // var_dump($nick_name);exit;
 			$is_nick = M('User')->where(array('nick_name' => $nick_name))->find();
 			if(!empty($is_nick)){
 				$this->ajaxReturn(['code'=>0,'info'=>L('昵称已存在')]);

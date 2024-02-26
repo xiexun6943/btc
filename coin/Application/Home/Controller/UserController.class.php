@@ -33,9 +33,19 @@ class UserController extends HomeController
 		$uinfo['name'] = substr($uarr[0],0,4)."***@".$uarr[1];
 		$uinfo['uid'] = '7012'.$uinfo['id'];
 		$uheader = substr($uinfo['username'],0,2);
+        if (empty($uinfo['nick_name'])) {
+            if (empty($uinfo['username'])) {
+                $this->assign('username',$uinfo['phone']);
+            }else{
+                $this->assign('username',$uinfo['username']);
+            }
+
+        }else{
+            $this->assign('username',$uinfo['nick_name']);
+        }
+		
 		$this->assign('uheader',$uheader);
 		$this->assign('uinfo',$uinfo);
-	    
 	    $list = M("bill")->where(array('uid'=>$uid))->order("id desc")->limit(50)->select();
 	    $this->assign('list',$list);
 	    

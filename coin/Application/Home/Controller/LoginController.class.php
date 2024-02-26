@@ -392,9 +392,9 @@ class LoginController extends HomeController
 
             $redis=$this->_Redis();
             $secode=$redis->hGet('sms_reg_code',$area_code.$phone);
-//            if($secode != $sms_code){
-//                $this->ajaxReturn(['code'=>0,'info'=>L('手机验证码错误')]);
-//            }
+            if($secode != $sms_code){
+                $this->ajaxReturn(['code'=>0,'info'=>L('手机验证码错误')]);
+            }
 
             if($pwd == ''){
                 $this->ajaxReturn(['code'=>0,'info'=>L('请输入密码')]);
