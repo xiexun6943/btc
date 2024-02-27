@@ -540,40 +540,42 @@ class AutoexeController extends \Think\Controller
 	
 	//自动按风控比例设置订单的盈亏比例
 	//设置成5-10秒执行一次的计划任务
-	public function setwl(){
-	    $map['status'] = 1;
-	    $map['kongyk'] = 0;
-	    $orderobj = M("hyorder");
-	    $count = $orderobj->where($map)->count();
-	    $setting = M("hysetting")->where(array('id'=>1))->field("hy_fkgl")->find();
-        if($setting['hy_fkgl'] > 0){
-            $ylcount = intval($count * $setting['hy_fkgl'] / 100);
-            $kscount = $count - $ylcount;
-            if($ylcount > 0){
-                $yllist = $orderobj->where($map)->order("num asc")->limit($ylcount)->select();
-                if(!empty($yllist)){
-                    foreach($yllist as $k=>$v){
-                        $yid = $v['id'];
-                        $orderobj->where(array('id'=>$yid))->save(array('kongyk'=>1));
-                        echo "订单ID:".$yid."设为盈利==";
+    public function setwl(){
+        $map['status'] = 1;
+        $map['kongyk'] = 0;
+        $orderobj = M("hyorder");
+        $count = $orderobj->where($map)->count();
+        $setting = M("hysetting")->where(array('id'=>1))->field("hy_fkgl")->find();
+        $setting['hy_fkgl'] ? $hy_fkgl= $setting['hy_fkgl'] : $hy_fkgl=50;
+        if($count > 0){
+//            $ylcount = intval($count * $setting['hy_fkgl'] / 100);
+//            $kscount = $count - $ylcount;
+            $list=$orderobj->field('id,uid,username,num,status,is_win,kongyk')->where($map)->order("num asc")->limit(25)->select();
+            if(!empty($list)){
+                foreach ($list as $v) {
+                    $rand=rand(1,10);
+                    $result=$this->getShuYing($rand,intval($setting['hy_fkgl']/10));
+                    $orderobj->where(array('id'=>$v['id']))->save(array('kongyk'=>$result));
+                    if ($result==1) {
+                        echo "订单ID:".$v['id']."设为盈利==";
+                    }else{
+                        echo "订单ID:".$v['id']."设为亏损==";
                     }
-                }
-            }
-            
-            if($kscount > 0){
-                $kslist = $orderobj->where($map)->order("num asc")->limit($kscount)->select();
-                if(!empty($kslist)){
-                    foreach($kslist as $k=>$v){
-                        $kid = $v['id'];
-                        $orderobj->where(array('id'=>$kid))->save(array('kongyk'=>2));
-                        echo "订单ID:".$kid."设为亏损==";
-                    }
+
                 }
             }
         }
-        
         echo "操作成功";
-	}
+    }
+    // 根据杀率数  2  亏损   1 盈利
+    public function getShuYing($rand,$odds){
+        if ($rand<=$odds) {
+            $result=1;
+        }else{
+            $result=2;
+        }
+        return $result;
+    }
 	
 	//自动结算体验合约订单
 	public function hycarryout_ty(){
