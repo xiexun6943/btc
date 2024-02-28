@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
 	<link rel="stylesheet" href="/Public/Static/Icoinfont/iconfont.css">
 	<script src="/Public/Static/Icoinfont/iconfont.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="/Public/Static/js/jquery-2.1.4.min.js"></script>
 	<title>{$webname}</title>
 	<style>
 	::-webkit-input-placeholder {color: #b5b5b5;font-size: 12px;}
@@ -415,7 +415,7 @@
 	    
 	    <!-------------------确认购买订单弹窗开始--------------------->
 	    <div class="dong_order_c" id="confirm_box" style="display:none;">
-	        <div class="dong_order_x" id="x_dongbox">
+	        <div class="dong_order_x" id="x_dongbox2">
 	            <i class="bi bi-x" style="font-size:18px;" ></i>
 	        </div>
 	        <div class="dong_order_title">
@@ -881,7 +881,7 @@
         $("#confirm_box").show();
         $("#dongbox").show();
     }
-    $("#x_dongbox").click(function(){
+    $("#x_dongbox,#x_dongbox2").click(function(){
         $("#timer_box").hide();
         $("#confirm_box").hide();
         $("#dongbox").hide();
