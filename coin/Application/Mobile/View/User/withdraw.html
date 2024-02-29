@@ -68,6 +68,11 @@
     							$('#czminnum_text').html(data.info['hkd'].czminnum)
     							$('#ug_hl_text').html(data.info['hkd'].ur_hl)
 							}
+							if($('#fzmmm').text()==='AUD'){
+    							$('#txminnum_text').html(data.info['aud'].txminnum)
+    							$('#czminnum_text').html(data.info['aud'].czminnum)
+    							$('#ug_hl_text').html(data.info['aud'].ur_hl)
+							}
 						}
 					}
 			);
@@ -302,6 +307,9 @@
         }
         var sxftype = $("#sxftype").val();
         var txsxf_n = $("#txsxf_n").val();
+        
+        console.log(sxftype)
+        console.log(txsxf_n)
 
         var txsxf = $("#txsxf").val();
         if(sxftype == 1){

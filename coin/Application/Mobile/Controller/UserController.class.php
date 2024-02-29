@@ -955,7 +955,7 @@ class UserController extends MobileController
             $coinname = $cinfo['name'];
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
             $config = M("config")->field('gu_hl,ru_hl,ug_hl,ur_hl')->find();
-            $coinname =='hkd'?$hl=$config['ug_hl']:$hl=$config['ur_hl'];
+            $hl=$config['ug_hl'];
 
             $sxftype = $cinfo['sxftype'];
             if($sxftype == 1){ // 比例 手续费
@@ -977,7 +977,7 @@ class UserController extends MobileController
 
                 $this->ajaxReturn(['code'=>0,'info'=>L('账户余额不足')]);
             }
-
+        
             // 用户 usdt 扣款
             $dec_re = M("user_coin")->where(array('userid'=>$uid))->setDec('usdt',$unum);
             // 用户 usdtd 冻结添加
@@ -1155,12 +1155,12 @@ class UserController extends MobileController
         $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
         $config = M("config")->field('ug_hl,ur_hl')->find();
 
-        if ($info['name'] == 'hkd') {
+        if ($info['name'] == 'aud') {
             $money = $minfo['usdt'] * $config['ug_hl'];
         }
-        if ($info['name'] == 'jpy') {
-            $money = $minfo['usdt'] * $config['ur_hl'];
-        }
+        // if ($info['name'] == 'jpy') {
+        //     $money = $minfo['usdt'] * $config['ur_hl'];
+        // }
 
         $this->assign('money',intval($money));
 
@@ -1199,12 +1199,12 @@ class UserController extends MobileController
         if(!empty($bklist)){
             foreach($bklist as $k=>$v){
                 $coinname = $v['name'];
-                if ($v['name'] == 'hkd') {
+                if ($v['name'] == 'aud') {
                     $minfo['usdt']*$config['ug_hl']?$coin_num=  intval($minfo['usdt']*$config['ug_hl']):$coin_num="0";
                 }
-                if ($v['name'] == 'jpy') {
-                    $minfo['usdt']*$config['ug_hl']?$coin_num=intval($minfo['usdt']*$config['ur_hl']):$coin_num="0";
-                }
+                // if ($v['name'] == 'jpy') {
+                //     $minfo['usdt']*$config['ug_hl']?$coin_num=intval($minfo['usdt']*$config['ur_hl']):$coin_num="0";
+                // }
                 $bddata[$k]['cname'] = strtoupper($coinname);
                 $bddata[$k]['title'] = $v['title'];
                 $bddata[$k]['id'] = $v['id'];
@@ -1525,16 +1525,13 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=> L('低于最低额度')]);
             }
 
-            $config = M("config")->field('gu_hl,ru_hl')->find();
-            if ($coinname == 'hkd') {
-                $num=round($zznum*$config['gu_hl'],4);
-            }elseif($coinname == 'jpy'){
-                $num=round($zznum*$config['ru_hl'],4);
+            $config = M("config")->field('ug_hl,ur_hl')->find();
+            if ($coinname == 'aud') {
+                $num=round($zznum/$config['ug_hl'],4);
             }else{
                 $this->ajaxReturn(['code'=>0,'info'=> L('币种类型错误！')]);
             }
             $cinfo = M("coin")->where(array('name'=>strtolower($coinname)))->find();
-            //var_dump($cinfo);exit;
             $data['uid'] = $uid;
             $data['username'] = $uinfo['username'];
             $data['coin'] = strtoupper($coinname);
@@ -1752,22 +1749,22 @@ class UserController extends MobileController
  // 获取 银行卡提现配置信息
     public function getTxConfig(){
         $configs=M("config")->field('ug_hl,ur_hl')->find();
-        $coinInfo = M("coin")->where(['name'=>['in',['hkd','jpy']]])->field('txsxf,czsxf,txminnum,czminnum')->select();
+        $coinInfo = M("coin")->where(['name'=>['in',['aud']]])->field('txsxf,czsxf,txminnum,czminnum')->select();
         $data=[
-            'hkd'=>[
+            'aud'=>[
                 'ug_hl'=>floatval($configs['ug_hl']),
                 'txsxf'=>round(($coinInfo[0]['txsxf']/100),2),
                 'czsxf'=>round(($coinInfo[0]['czsxf']/100),2),
                 'txminnum'=>$coinInfo[0]['txminnum'],
                 'czminnum'=>$coinInfo[0]['czminnum']
             ],
-            'jpy'=>[
-                'ur_hl'=>floatval($configs['ur_hl']),
-                'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
-                'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
-                'txminnum'=>$coinInfo[1]['txminnum'],
-                'czminnum'=>$coinInfo[1]['czminnum']
-            ]
+            // 'jpy'=>[
+            //     'ur_hl'=>floatval($configs['ur_hl']),
+            //     'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
+            //     'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
+            //     'txminnum'=>$coinInfo[1]['txminnum'],
+            //     'czminnum'=>$coinInfo[1]['czminnum']
+            // ]
         ];
         return $this->ajaxReturn(['code'=>200,'info'=>$data]);
     }

@@ -213,8 +213,9 @@
 	                                              </div>
 	                                              <div class="czbox_4">
 													  <select id="coinname" name="coinname" class="form-control input_12">
-														  <option value="hkd" >HKD</option>
-														  <option value="jpy" >JPY</option>
+														  <!--<option value="hkd" >HKD</option>-->
+														  <!--<option value="jpy" >JPY</option>-->
+														  <option value="aud" >AUD</option>
 													  </select>
 	                                              </div>
 	                                          </div>
@@ -342,9 +343,10 @@
 	                                      <span>{:L('温馨提示')}</span>
 	                                  </div>
 	                                  <div style="width:100%;min-height:180px;padding:10px;color:red;font-size:14px">
-	                                       1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> <i id="currency" style="font-style:normal"></i><br/>
+	                                       <!--1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> <i id="currency" style="font-style:normal"></i><br/>-->
+	                                       1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> <i style="font-style:normal">AUD</i><br/>
 	                                       2、{:L('小于最小金额的提币将不会上账且无法退回')}<br/>
-	                                       3、1USDT = <span id='tip_hkd'></span> HKD 1USDT = <span id='tip_jpy'></span> JPY<br/>
+	                                       3、1USDT = <span id='tip_aud'></span> AUD<br/>
 	                                       <br />
 	                                       <br />
 		        <span class="f14 fch">{:L('请务必确认电脑及浏览器安全，防止信息被篡改或泄露。')}</span><br /><br />
@@ -396,6 +398,16 @@
     		                $('#tmoney').text(temp)
     		            }
     		        }
+    		        if($("select#coinname").val()=='aud'){
+    		            if(currency.aud.sxftype=='1'){
+    		                var temp = Number($(this).val())-Number($(this).val())*currency.aud.txsxf
+    		                $('#tmoney').text(temp)
+    		            }
+    		            if(currency.aud.sxftype=='2'){
+    		                var temp = Number($(this).val())-Number(currency.aud.txsxf_n)
+    		                $('#tmoney').text(temp)
+    		            }
+    		        }
     		    })
 		    })
     
@@ -425,8 +437,9 @@
 					function(data){
 						if(data.code == 200){
 						    
-						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
-						    $('#tip_jpy').text(data.info['jpy'].ur_hl)
+						  //  $('#tip_hkd').text(data.info['hkd'].ug_hl)
+						  //  $('#tip_jpy').text(data.info['jpy'].ur_hl)
+						    $('#tip_aud').text(data.info['aud'].ug_hl)
 						    
 						    moneyInfo = data.info
 						    
@@ -463,8 +476,9 @@
 						       $('#keyong').text(currency.jpy.ky_money+' jpy')
 						    }
 						    
-						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
-						    $('#tip_jpy').text(data.info['jpy'].ur_hl)
+						  //  $('#tip_hkd').text(data.info['hkd'].ug_hl)
+						  //  $('#tip_jpy').text(data.info['jpy'].ur_hl)
+						    $('#tip_aud').text(data.info['aud'].ug_hl)
 						    
 							console.log(data.info[coinname].txminnum)
 							$('#txminnum_text').text(data.info[coinname].txminnum)

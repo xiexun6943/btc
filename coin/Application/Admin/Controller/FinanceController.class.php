@@ -69,7 +69,7 @@ class FinanceController extends AdminController
 	    }
 	    $uid = $info['uid'];
         $num = $info['num'];
-        if (in_array(strtolower(trim($info['coin'])),['jpy','hkd'])) {
+        if (in_array(strtolower(trim($info['coin'])),['aud'])) {
             $coinname='usdt';
         }else{
             $coinname = strtolower(trim($info['coin']));
@@ -214,7 +214,7 @@ class FinanceController extends AdminController
 	   $uid = $info['userid'];
 	   $num = $info['num'];
 
-        if (in_array($info['coinname'],['jpy','hkd'])) {
+        if (in_array($info['coinname'],['aud'])) {
             $coinname = 'usdt';
         }else{
             $coinname = strtolower(trim($info['coinname']));
@@ -227,7 +227,7 @@ class FinanceController extends AdminController
 	   //把提币的数量返回给账号户，并写入日志
 	   $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
-        if (in_array($info['coinname'],['hkd','jpy'])) {
+        if (in_array($info['coinname'],['aud'])) {
             $payname='usdt';
         }else{
             $payname=$info['coinname'];
@@ -281,7 +281,7 @@ class FinanceController extends AdminController
 	    $save['status'] = 2;
 	    $result = M("myzc")->where(array('id'=>$id))->save($save);
 	    // 提现成功将 冻结提醒币扣掉
-        if (in_array($info['coinname'],['hkd','jpy'])) {
+        if (in_array($info['coinname'],['aud'])) {
             $payname='usdt';
         }else{
             $payname=$info['coinname'];
