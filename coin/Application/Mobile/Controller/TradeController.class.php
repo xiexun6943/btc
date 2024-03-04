@@ -573,7 +573,31 @@ class TradeController extends MobileController
         $this->assign('sum',$sum);
         
         $list = M("ctmarket")->where(array('status'=>1))->field("coinname,id,logo,sort")->select();
+        $single_list = M("currency")->where(['name'=>['in',['BCH/USDT','BTC/USDT','ETH/USDT']]])->select();
+ 
+        // if(!empty($single_list)){
+        //     foreach ($single_list as  $v){
+        //         if($v['name'] == 'BCH/USDT' ){
+        //             // var_dump(json_decode($v['data']));exit;
+        //             $btc['name']='BCH/USDT';
+        //             $btc['close']='BCH/USDT';
+        //             $btc['name']='BCH/USDT';
+        //         }
+        //         if($v['name'] == 'ETH/USDT' ){
+        //             $eth=$v;
+        //         }
+        //         if($v['name'] == 'BCH/USDT' ){
+        //             $bhc=$v;
+        //         }
+        //     }
+                  
+        // }
+     
+        $this->assign("btc",$btc);
+        $this->assign("eth",$eth);
+        $this->assign("bhc",$bhc);
         $list_res=array_column($list,null,'sort') ;
+        // var_dump($list_res);exit;
         ksort($list_res);
         $this->assign("market",$list_res);
         
