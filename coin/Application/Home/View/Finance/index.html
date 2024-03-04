@@ -632,7 +632,11 @@
                                                         <a href="{$kefu}" class="f14 fcy">{:L('在线客服')}</a>&nbsp;&nbsp;&nbsp;
 <!--                                                        <a href="{:U('Finance/czpage')}?id={$vo.name}" class="f14 fcy">{:L('充币')}</a>&nbsp;&nbsp;&nbsp;&nbsp;-->
                                                         <a href="{:U('Finance/txpage')}?id={$vo.name}" class="f14 fcy">{:L('提币')}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <?php }?>
+                                                        <?php }else{ ?>
+                                                         <a href="{$kefu}" class="f14 fcy">{:L('在线客服')}</a>&nbsp;&nbsp;&nbsp;
+<!--                                                        <a href="{:U('Finance/czpage')}?id={$vo.name}" class="f14 fcy">{:L('充币')}</a>&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                                        <a href="" class="f14 fcy">{:L('提币')}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                         <?php } ?>
                                                     </div>
                                                 </div>
                                                 </foreach>
