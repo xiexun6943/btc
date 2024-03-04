@@ -826,15 +826,16 @@
     font-size: 16px;
     width: 14.4em;
     min-width: 11em;
-    padding: 9.5em 3.68em 7.7em 3.68em;
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    padding: 3.5em 3.68em 3.5em 3.68em;
+    box-shadow: unset;
     font-family: Roboto;
-    background: url(images/background-1-2.svg);
+    /*background: url(images/background-1-2.svg);*/
+            background: #d3f4ff;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; }
     .dela-presets-container-2 .dela-preset-2-1 .dela-form__title {
-      color: #fff;
+      color: #000;
       margin: 0;
       font-size: 2.375em;
       font-weight: 400;
@@ -845,7 +846,7 @@
     .dela-presets-container-2 .dela-preset-2-1 input[type="email"],
     .dela-presets-container-2 .dela-preset-2-1 input[type="password"],
     .dela-presets-container-2 .dela-preset-2-1 input[type="text"] {
-      color: #fff;
+      color: #000;
       font-family: Roboto;
       font-size: 1em;
       font-weight: 200;
@@ -857,6 +858,12 @@
       margin-bottom: 1.3em;
       border-radius: 0; 
         outline: none;
+     background: #fff;
+     border-radius: 5px;
+     text-indent: 10px;
+    }
+    .dela-presets-container-2 .dela-preset-2-1 input::placeholder {
+      color: #000!important;
     }
     .dela-presets-container-2 .dela-preset-2-1 input[type="area_code"]:valid,
     .dela-presets-container-2 .dela-preset-2-1 input[type="phone"]:valid,
@@ -866,16 +873,16 @@
       /*border-bottom: 0.063em solid #53da69;*/
       border-radius: 0; }
     .dela-presets-container-2 .dela-preset-2-1 ::-webkit-input-placeholder {
-      color: #fff; }
+      color: #000; }
     .dela-presets-container-2 .dela-preset-2-1 ::-moz-placeholder {
-      color: #fff; }
+      color: #000; }
     .dela-presets-container-2 .dela-preset-2-1 .dela-form__checkbox {
       display: inline-block;
       font-size: 0.875em;
       margin-top: 0.5em;
       font-weight: 200;
       cursor: pointer;
-      color: #fff;
+      color: #000;
       overflow: hidden;
       position: relative;
       padding-left: 2em; }
@@ -893,7 +900,7 @@
         font-size: 0.7em;
         width: 1.8em;
         height: 1.8em;
-        border: 0.1em solid rgba(255, 255, 255);
+        border: 0.1em solid #000;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -906,8 +913,8 @@
         display: block;
         width: 0.4em;
         height: 0.8em;
-        border-right: 0.1em solid #fff;
-        border-bottom: 0.1em solid #fff;
+        border-right: 0.1em solid #000;
+        border-bottom: 0.1em solid #000;
         transform: rotate(40deg); }
       .dela-presets-container-2 .dela-preset-2-1 .dela-form__checkbox input + span:before {
         content: ""; }
@@ -915,18 +922,20 @@
       margin: 0 auto;
       padding: 0;
       display: block;
-      color: #fff;
-      font-family: Roboto;
       font-size: 1em;
       font-weight: 200;
-      width: 10.25em;
-      min-height: 2.71em;
+      width: 15em;
+      height: 2.5em;
       background: none;
-      border: 0.063em solid #fff;
+      border: 0.063em solid #000;
       border-radius: 0.6em;
       cursor: pointer;
       margin-top: 2.1em;
-      -webkit-appearance: none; }
+      -webkit-appearance: none; 
+        background: #ffc336;
+        color:#fff;
+        border: none;
+    }
     .dela-presets-container-2 .dela-preset-2-1 input[type="submit"]:hover {
       background: #fff;
       color: #906acc;
@@ -940,7 +949,7 @@
         display: inline-block;
         text-align: center;
         text-decoration: none;
-        color: #fff;
+        color: #000;
         font-weight: 200;
         font-size: 0.75em;
         border-bottom: 0.1em solid rgba(255, 255, 255, 0); }
@@ -952,12 +961,13 @@
     font-size: 16px;
     width: 14.4em;
     min-width: 11em;
-    padding: 5.6em 3.68em 6.1em 3.68em;
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    padding: 3.5em 3.68em 3.5em 3.68em!important;
+    box-shadow: unset!important;
     font-family: Roboto;
-    background: linear-gradient(to top, #40cded 0, #135cc8 100%); }
+    background: #d3f4ff!important;
+    }
     .dela-presets-container-2 .dela-preset-2-2 .dela-form__title {
-      color: #fff;
+      color: #000;
       margin: 0;
       font-size: 2.38em;
       font-weight: 400;
@@ -968,7 +978,7 @@
     .dela-presets-container-2 .dela-preset-2-2 input[type="email"],
     .dela-presets-container-2 .dela-preset-2-2 input[type="password"],
     .dela-presets-container-2 .dela-preset-2-2 input[type="text"] {
-      color: #fff;
+      color: #000;
       font-family: Roboto;
       font-size: 1em;
       font-weight: 200;
@@ -980,6 +990,12 @@
       margin-bottom: 1.1em;
       border-radius: 0; 
      outline: none;
+     background: #fff;
+     border-radius: 5px;
+     text-indent: 10px;
+    }
+    .dela-presets-container-2 .dela-preset-2-2 input::placeholder {
+      color: #000!important;
     }
     .dela-presets-container-2 .dela-preset-2-2 input[type="area_code"]:valid,
     .dela-presets-container-2 .dela-preset-2-2 input[type="phone"]:valid,
@@ -989,9 +1005,9 @@
       /*border-bottom: 0.063em solid #53da69;*/
       border-radius: 0; }
     .dela-presets-container-2 .dela-preset-2-2 ::-webkit-input-placeholder {
-      color: #fff; }
+      color: #000; }
     .dela-presets-container-2 .dela-preset-2-2 ::-moz-placeholder {
-      color: #fff; }
+      color: #000; }
     .dela-presets-container-2 .dela-preset-2-2 .dela-form__checkbox {
       display: inline-block;
       font-size: 0.875em;
@@ -1037,18 +1053,22 @@
     .dela-presets-container-2 .dela-preset-2-2 input[type="submit"] {
       margin: 0 auto;
       display: block;
-      color: #fff;
+      color: #000;
       font-family: Roboto;
       font-size: 1em;
       font-weight: 200;
-      width: 10.25em;
-      min-height: 2.71em;
+          width: 15em;
+    height: 2.5em;
       background: none;
-      border: 0.063em solid #fff;
+      border: 0.063em solid #000;
       border-radius: 0.6em;
       cursor: pointer;
       margin-top: 2.1em;
-      -webkit-appearance: none; }
+      -webkit-appearance: none; 
+        background: #ffc336;
+    color: #fff;
+    border: none;
+    }
     .dela-presets-container-2 .dela-preset-2-2 input[type="submit"]:hover {
       background: #fff;
       color: #906acc;

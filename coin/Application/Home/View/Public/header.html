@@ -1,9 +1,9 @@
 <header class="css-jmskxt">
 	 <a href="{:U('Index/index')}" clss="css-1mvf8us">
-	     <img src="/Upload/public/{:get_config('waplogo')}" class="css-1jgk2rg" style="height:50px;width:50px;border-radius:5px;margin-left: 30px;" />
+	     <img src="/Upload/public/{:get_config('waplogo')}?v=<?=time()?>" class="css-1jgk2rg" style="height:50px;width:50px;border-radius:5px;margin-left: 30px;" />
 	 </a>
 	<div class="css-1tp5kus header-title">
-		<div class="css-vurnku  f22 fw header-title">{:L('BitVenture')}</div>
+		<div class="css-vurnku  f22 fw header-title">{:L('BTCUSDT')}</div>
 	</div>
 	 <div class="css-1tp5kus">
 	     <a href="{:U('Index/index')}" class="css-1smf7ma">
@@ -50,10 +50,10 @@
 	     </a>
 	 </div>
 	 <div class="css-11y6cix"></div>
-	 
+
 	 <ul id="nav" class="nav">
 	 <div class="css-wu6zme">
-	     
+
 	     <if condition="$uid neq 0">
 	     <div class="css-mu7imd nav">
 	         <div class="css-1smf7ma">
@@ -73,7 +73,7 @@
 	                 <ul class="sub" style="padding:0px;display:none;z-index: 999999;">
 	                 <!--<div class="order_navlist" style="transform: translate(972px, 64px);">-->
 	                 <div class="order_navlist" style="top: 50px;right:180px;">
-	                     
+
 	                         <li style="list-style:none;">
 	                             <a href="{:U('Trade/bborder')}">
 	                             <div class="optionli">
@@ -106,13 +106,13 @@
 	                             </div>
 	                             </a>
 	                         </li>
-	                     
+
 	                 </div>
 	                 </ul>
 	             </li>
 	         </div>
-	         
-	         
+
+
 	         <div class="css-1smf7ma">
 	             <li class="nLi">
 	                 <div class="css-15owl46" style="padding: 0px 5px;">
@@ -124,7 +124,7 @@
 	                 </div>
 	                 <ul class="sub" style="padding:0px;display:none;z-index: 999999;">
 	                 <div class="order_navlist" style="min-width:220px;top: 60px;right:60px;">
-	                     
+
 	                         <li style="list-style:none;">
 	                             <div style="width:100%;height:50px;line-height:50px;text-align:left;padding:0px 15px;">
 	                                 <span style="font-size:16px;font-weight:bold;color:#EAECEF;">{$username}</span>
@@ -168,7 +168,7 @@
 	                             </div>
 	                             </a>
 	                         </li>
-	                         
+
 	                         <li  style="list-style:none;">
 	                             <a href="{:U('Login/loginout')}">
 	                             <div class="optionli" style="border-top:1px solid #f5f5f5;">
@@ -177,16 +177,16 @@
 	                             </div>
 	                             </a>
 	                         </li>
-	                     
+
 	                 </div>
 	                 </ul>
-	                 
+
 	             </li>
-	             
+
 	         </div>
 	         <div class="css-1smf7ma">
-	             
-	             <div class="css-15owl46" style="padding: 0px 5px;"> 
+
+	             <div class="css-15owl46" style="padding: 0px 5px;">
 	                 <a href="{:U('User/notice')}" style="color: #fff;">
 	                 <div class="css-vurnku">
 	                     <i class="bi bi-bell css-6px2js" style="font-size:20px;"></i>
@@ -204,7 +204,7 @@
 	         <div class="css-1smf7ma">
 	             <div class="css-15owl46"  style="padding: 0px 5px;">
 	                 <div class="css-vurnku">{:L('登陆')}</div>
-	                 
+
 	             </div>
 	         </div>
 	         </a>
@@ -219,7 +219,7 @@
 	         </a>
 	     </div>
 	     </if>
-	     
+
 	 </div>
 
 	 <div class="css-wu6zme">
@@ -241,27 +241,27 @@
 	     </li>
 	     <li class="nLi">
 	     <div class="css-1ql2hru" style="padding: 0px 5px;">
-	         
+
 	        <?php if(LANG_SET=='zh-cn'){?>
 			<div class="css-1smf7ma">中文简体&nbsp;&nbsp;</div>
 		    <?php }elseif(LANG_SET=='zh-tw'){?>
 		 	<div class="css-1smf7ma">中文繁体&nbsp;&nbsp;</div>
 			<?php }elseif(LANG_SET=='en-us'){?>
-			<div class="css-1smf7ma">English&nbsp;&nbsp;</div>	
+			<div class="css-1smf7ma">English&nbsp;&nbsp;</div>
 			<?php }elseif(LANG_SET=='fr-fr'){?>
-			<div class="css-1smf7ma">Français&nbsp;&nbsp;</div>	
+			<div class="css-1smf7ma">Français&nbsp;&nbsp;</div>
 			<?php }elseif(LANG_SET=='de-de'){?>
-			<div class="css-1smf7ma">Deutsch&nbsp;&nbsp;</div>	
+			<div class="css-1smf7ma">Deutsch&nbsp;&nbsp;</div>
 			<?php }elseif(LANG_SET=='it-it'){?>
-			<div class="css-1smf7ma">Italiano&nbsp;&nbsp;</div>	
+			<div class="css-1smf7ma">Italiano&nbsp;&nbsp;</div>
 			<?php }elseif(LANG_SET=='ja-jp'){?>
             <div class="css-1smf7ma">日本語&nbsp;&nbsp;</div>
             <?php }elseif(LANG_SET=='ko-kr'){?>
             <div class="css-1smf7ma">한국어&nbsp;&nbsp;</div>
             <?php }elseif(LANG_SET=='tr-tr'){?>
-            <div class="css-1smf7ma">Türk&nbsp;&nbsp;</div>	
+            <div class="css-1smf7ma">Türk&nbsp;&nbsp;</div>
 			<?php }?>
-			
+
 	     </div>
 	     <ul class="sub" style="padding:0px;display:none;">
 	        <!--<div class="order_navlist" style="min-width:160px;transform: translate(1161px, 64px);">-->
@@ -305,4 +305,4 @@
 	     </li>
 	 </div>
 	 </ul>
-</header> 
+</header>

@@ -40,8 +40,12 @@
         </style>
         <form class="card-form" onclick="return false" style="padding:0">
 
-            <div class="margin-topbox-px-10">
-                <div data-bn-type="text" class="css-1g5tc38  tcc fch f36 fw">{:L('账户登录')}<span class="fbaseblue"> {:L('BitVenture')}</span></div>
+            <div class="margin-topbox-px-10" style="text-align:center">
+                <div data-bn-type="text" class="css-152kxht f16" style="text-align:center;line-height: 80px">
+                	<img src="/Upload/public/{:get_config('waplogo')}?v=<?=time()?>" class="css-1jgk2rg" style="position:relative;top:-5px;display:inline-block;height:50px;width:50px" />
+                	<span style="display:inline-block;font-weight:bold;font-size:24px;color:#ffc336" class="fbaseblue">{:L('BTCUSDT')}</span>
+                </div>
+                <div data-bn-type="text" class="css-1g5tc38 fch fw" style="font-size:23px">{:L('账户登录')}</div>
             </div>
 
 
@@ -141,18 +145,22 @@
             <div class="input">
                 <!--<button class="btn-hover color-6 btnr" onclick="stype(2)">E-mail</button>-->
                 <!--<button class="btn-hover color-1 btnl" onclick="stype(1)">Mobile</button>-->
-                <button class="btn_bar_login btn-hover color-6 btnl">{:L('邮箱')}</button>
-                <button class="btn_bar_login btn-hover color-1 btnr">{:L('手机')}</button>
+                <!--<button class="btn_bar_login btn-hover color-6 btnl">{:L('邮箱')}</button>-->
+                <!--<button class="btn_bar_login btn-hover color-1 btnr">{:L('手机')}</button>-->
             </div>
 
             <span class="reg_kind_login">
-                <div class="input">
+                <!--<div class="input">
                     <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="email" id="email" value="" required/>
                     <label class="input-label">{:L('邮箱')}</label>
-                </div>
+                </div>-->
+            <div class="input"  id="e-box">
+                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="account" id="account" value=""  required/>
+                <label class="input-label">{:L('请输入账号')}</label>
+            </div>
                 <div class="input">
                     <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="lpwd" id="lpwd" value="" required/>
-                    <label class="input-label">{:L('密码')}</label>
+                    <label class="input-label">{:L('请输入密码')}</label>
                 </div>
 
                 <div class="input">
@@ -163,11 +171,11 @@
                     </div>
                 </div>
                 <div class="action">
-                    <button class="action-button" onclick="uplogin()">{:L('登录')}</button>
+                    <button class="action-button" style="background:#ffc336" onclick="uplogin()">{:L('登录')}</button>
                 </div>
             </span>
 
-            <span class="reg_kind_login" style="display:none">
+            <!--<span class="reg_kind_login" style="display:none">
                 <div class="input">
                     <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="phone" id="phone" value="" required/>
                     <label class="input-label">{:L('手机号')}</label>
@@ -187,11 +195,11 @@
                 <div class="action">
                     <button class="action-button" onclick="uplogin2()">{:L('登录')}</button>
                 </div>
-            </span>
+            </span>-->
         </form>
         <div class="login-reg tcr">
             <!--<a href="{:U('Login/findpwd')}"  class="css-s84t59 floginbr" >{:L('忘记密码')}？</a>-->
-            <a href="{:U('Login/register')}"  class="css-utqtyo floginbr">{:L('立即注册')}</a>
+            <a href="{:U('Login/register')}" style="color:#ffc336" class="css-utqtyo floginbr">{:L('立即注册')}</a>
         </div>
     </div>
 </div>
@@ -206,25 +214,30 @@
 
 <script type="text/javascript">
     function uplogin(){
-        var email = $("#email").val();
+        // var email = $("#email").val();
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-        if(email=='' || email == null){
+        /*if(email=='' || email == null){
             layer.msg("{:L('请输入邮箱')}");return false;
-        }
+        }*/
         // if(!reg.test(email)){
         //     layer.msg("{:L('邮箱格式不正确')}");return false;
         // }
-        var vcode = $("#vcode").val();
-        if(vcode == ''){
-            layer.msg("{:L('请输入图形验证码')}");return false;
+        var account = $("#account").val();
+        if(account=='' || account == null){
+            layer.msg("{:L('请输入账号')}");return false;
         }
         var lpwd = $("#lpwd").val();
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
+        var vcode = $("#vcode").val();
+        if(vcode == ''){
+            layer.msg("{:L('请输入图形验证码')}");return false;
+        }
 
         $.post("{:U('Login/loginsubmit')}",
-            {'email' : email, 'vcode' : vcode, 'pwd' : lpwd,'type':1},
+            // {'email' : email, 'vcode' : vcode, 'pwd' : lpwd,'type':1},
+            {'account' : account, 'vcode' : vcode, 'pwd' : lpwd},
             function(data){
                 if(data.code){
                     layer.msg(data.info);
@@ -237,8 +250,8 @@
             });
 
     }
-    
-    
+
+
     function uplogin2(){
         var phone = $("#phone").val();
         if(phone=='' || phone == null){
