@@ -20,7 +20,7 @@ class IndexController extends HomeController
         $content = M('content')->where(['status' => 1])->order('id desc')->select();
         $title_arr = array_column($content, 'title');
         $title_string  = json_encode($title_arr);
-        $clist = M("config")->where(array('id'=>1))->field("kefu","websildea_y,websildea_z,websildea_r,websildea_f,websildeb_y,websildeb_z,websildeb_r,websildeb_f,websildec_y,websildec_z,websildec_r,websildec_f,kefu,websilded_y,websilded_f,websilded_z,websilded_r,websildea_kr,websildeb_kr,websildec_kr,websilded_kr")->find();
+        $clist = M("config")->where(array('id'=>1))->field("websildea_y,websildea_z,websildea_r,websildea_f,websildeb_y,websildeb_z,websildeb_r,websildeb_f,websildec_y,websildec_z,websildec_r,websildec_f,kefu,websilded_y,websilded_f,websilded_z,websilded_r,websildea_kr,websildeb_kr,websildec_kr,websilded_kr")->find();
         $kefu=$clist['kefu'];
         $lang=I('get.Lang');
         switch ($lang){
