@@ -675,10 +675,10 @@ fred{color:#f5465c;}
 }
 
 .index-box-4 {
-    background: #f6f7f9;
     height: 100%;
     width: 100%;
     margin: 0px;
+    background: #f8f5e8;
 }
 
 .css-dlistbox-4 {
@@ -688,7 +688,7 @@ fred{color:#f5465c;}
 
 .css-1hc8c4h-box-4 {
     border: none !important;
-    background-image: url(/Public/Home/static/imgs/community_bg.png);
+    background-image: url(/Public/Home/static/imgs/community_bg.png?v=2);
     background-size: cover;
     background-position: 100%;
     height: 100%;
@@ -1210,7 +1210,7 @@ a.openModal:focus {
 
 
 .css-8hstpq-bg {
-    background:url("/Public/Home/static/imgs/home_head_bg.png") 50% center / 100% 100% no-repeat rgb(255, 255, 255);
+    background:url("/Public/Home/static/imgs/home_head_bg.png?v=2") 50% center / 100% 100% no-repeat;
     min-height: 394px !important;
     z-index: -1;
 }
