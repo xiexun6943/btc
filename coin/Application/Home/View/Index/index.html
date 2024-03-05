@@ -1422,6 +1422,14 @@
 	<script src="/Public/Static/bootstrap5Slide/scripts.js" type="text/javascript"></script>
 
 	<script>
+	$('#box_ul').click(function(e){
+	    e.preventDefault()
+	})
+	$('#box_ul').unbind('click')
+	$('#box_ul').unbind('mouseover')
+	$('#box_ul').unbind('mouseon')
+	$('#box_ul').unbind('mouseout')
+	$('#box_ul').unbind('mouseleave')
 		//消息内容，可以任意长度
 		let arr = [""];
 
@@ -1474,15 +1482,15 @@
 
 		//鼠标悬停是否需要暂停
 		ul.onmouseover = function () {
-			if(settings.isHover){
-				clearInterval(timer);
-			}
+// 			if(settings.isHover){
+// 				clearInterval(timer);
+// 			}
 		};
 		ul.onmouseleave = function () {
-			clearInterval(timer);
-			if(settings.isHover){
-				timer = setInterval(run, settings.speeds);
-			}
+// 			clearInterval(timer);
+// 			if(settings.isHover){
+// 				timer = setInterval(run, settings.speeds);
+// 			}
 		};
 
 	</script>
