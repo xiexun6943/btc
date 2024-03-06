@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '请输入账号'=>'please enter account',
     '修改登录密码'=>'Change login password',
     '服务'=>'service',
     '发布时间'=>'posted on',
