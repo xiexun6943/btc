@@ -122,23 +122,24 @@ class LoginController extends MobileController
 	// 登录提交处理
     public function loginsubmit(){
         $pwd = I("post.lpwd");
+        $account = I("post.account");
+        $vcode = I("post.vcode");
+        $type=1;
 //        $vcode = I("post.vcode");
-        $type = I("post.type");
+        // $type = I("post.type");
 //        if (!check_verify(strtoupper($vcode),'1')) {
 //            $this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
 //        }
-        $email = I("post.email");
-        $phone = I("post.phone");
-        if ($email ) { // type 1、邮箱 ，2、手机号码
-            $email = I("post.email");
-            $user = M('User')->where(array('username' => $email))->find();
-            $remark="邮箱登录";
-        };
-        if ($phone ) { // type 1、邮箱 ，2、手机号码
-            $phone = I("post.phone");
-            $user = M('User')->where(array('phone' => $phone))->find();
-            $remark="邮箱登录";
-        };
+        // type 1、邮箱 ，2、手机号码
+            // $email = I("post.email");
+        $user = M('User')->where(array('username' => $account))->find();
+        $remark="账户登录";
+      
+        // if ($phone ) { // type 1、邮箱 ，2、手机号码
+        //     // $phone = I("post.phone");
+        //     $user = M('User')->where(array('phone' => $phone))->find();
+        //     $remark="邮箱登录";
+        // };
         // dump($email);exit;
         // if ($type == 1) { // type 1、邮箱 ，2、手机号码
         //     $email = I("post.email");
@@ -190,28 +191,34 @@ class LoginController extends MobileController
 
 
 	//注册处理程序
-	public function upregister($email,$ecode,$lpwd,$invit){
+	public function upregister(){
 		if($_POST){
+		     $account = I("post.account");
+		     $lpwd = I("post.lpwd");
+		     $vcode = I("post.vcode");
+            if (!check_verify(strtoupper($vcode),'1')) {
+                $this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
+            }
 // 			if(checkstr($email) || checkstr($ecode) || checkstr($lpwd) || checkstr($invit)){
 // 				$this->ajaxReturn(['code'=>0,'info'=>L('您输入的信息有误')]);
 // 			}
-			$checkus = M('User')->where(array('username' => $email))->find();
+			$checkus = M('User')->where(array('username' => $account))->find();
 			if(!empty($checkus)){
 				$this->ajaxReturn(['code'=>0,'info'=>L('用户名已存在')]);
 			}
 
-			$secode = session('regcode');
-			if($secode != $ecode){
-				$this->ajaxReturn(['code'=>0,'info'=>L('邮箱验证码错误')]);
-			}
+// 			$secode = session('regcode');
+// 			if($secode != $ecode){
+// 				$this->ajaxReturn(['code'=>0,'info'=>L('邮箱验证码错误')]);
+// 			}
 
 			if($lpwd == ''){
 				$this->ajaxReturn(['code'=>0,'info'=>L('请输入密码')]);
 			}
 
-			if($invit == ''){
-			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
-			}
+// 			if($invit == ''){
+// 			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
+// 			}
 
             $config = M("config")->where(array('id'=>1))->field("tymoney")->find();
 
@@ -237,14 +244,14 @@ class LoginController extends MobileController
 					break;
 				}
 			}
-
+        //   echo  111; exit;
 			$mo = M();
 			$mo->execute('set autocommit=0');
 			$mo->execute('lock tables tw_user write , tw_user_coin write ');
 			$rs = array();
 			$rs[] = $mo->table('tw_user')->add(
 				array(
-				'username' => $email,
+				'username' => $account,
 				'password' => md5($lpwd),
 				'money' => $config['tymoney'],
 				'invit' => $myinvit,

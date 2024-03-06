@@ -810,6 +810,7 @@
         transition: 0.3s; }
 
 .dela-presets-container-2 {
+    height: 100vh;
   background: url(images/main-background-2.svg) no-repeat;
   background-size: 100em auto;
   background-position: top;

@@ -107,15 +107,17 @@ class LoginController extends HomeController
 	// 登录提交处理
 	public function loginsubmit(){
         $pwd = I("post.pwd");
+        $account = I("post.account");
         $vcode = I("post.vcode");
-        $type = I("post.type");
-      
+
+        // $type = I("post.type");
+        $type =1;
 // 		if (!check_verify(strtoupper($vcode),'.web')) {
 // 			$this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
 // 		}
         if ($type == 1) { // type 1、邮箱 ，2、手机号码
             $email = I("post.account");
-            $user = M('User')->where(array('username' => $email))->find();
+            $user = M('User')->where(array('username' => $account))->find();
             $remark="账号登录";
         }else{
             $phone = I("post.phone");
@@ -163,28 +165,34 @@ class LoginController extends HomeController
 
 
 	//注册处理程序
-	public function upregister($email,$ecode,$lpwd,$invit){
+	public function upregister(){
 		if($_POST){
+		    $pwd = I("post.account");
+            $account = I("post.account");
+            $vcode = I("post.vcode");
 // 			if(checkstr($email) || checkstr($ecode) || checkstr($lpwd) || checkstr($invit)){
 // 				$this->ajaxReturn(['code'=>0,'info'=>L('您输入的信息有误')]);
 // 			}
-			$checkus = M('User')->where(array('username' => $email))->find();
+    		if (!check_verify(strtoupper($vcode),'.web')) {
+    			$this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
+    		}
+			$checkus = M('User')->where(array('username' => $account))->find();
 			if(!empty($checkus)){
 				$this->ajaxReturn(['code'=>0,'info'=>L('用户名已存在')]);
 			}
 
-			$secode = session('regcode');
-			if($secode != $ecode){
-				$this->ajaxReturn(['code'=>0,'info'=>L('邮箱验证码错误')]);
-			}
+// 			$secode = session('regcode');
+// 			if($secode != $ecode){
+// 				$this->ajaxReturn(['code'=>0,'info'=>L('邮箱验证码错误')]);
+// 			}
 
-			if($lpwd == ''){
+			if($pwd == ''){
 				$this->ajaxReturn(['code'=>0,'info'=>L('请输入密码')]);
 			}
 
-			if($invit == ''){
-			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
-			}
+// 			if($invit == ''){
+// 			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
+// 			}
             $config = M("config")->where(array('id'=>1))->field("tymoney")->find();
 			if($invit != 0 || $invit != ''){
 				$inv_user = M('User')->where(array('invit' => $invit))->field("id,username,invit_1,invit_2,path")->find();
@@ -215,8 +223,8 @@ class LoginController extends HomeController
 			$rs = array();
 			$rs[] = $mo->table('tw_user')->add(
 				array(
-				'username' => $email,
-				'password' => md5($lpwd),
+				'username' => $account,
+				'password' => md5($pwd),
 				'money' => $config['tymoney'],
 				'invit' => $myinvit,
 				'invit_1' => $invit_1,
