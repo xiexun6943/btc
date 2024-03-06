@@ -36,7 +36,7 @@ class AdminController extends Controller
         }
         $all_menu=[
             'Index/index','Finance/index','User/index','Trade/index','Kuangm/index',//导航
-            'User/index','User/agent','User/log','User/qianbao','User/coin','User/amountlog','User/noticelist','User/online', //用户管理
+            'User/index','User/agent','User/log','User/qianbao','User/coin','User/amountlog','User/noticelist','User/online','User/count', //用户管理
             'Finance/myzr','Finance/myzc', //财务记录
             'Trade/tyorder','Trade/hylog', 'Trade/bbxjlist','Trade/bbsjlist',//交易中心
             'Kuangm/kjlist','Kuangm/overlist', 'Kuangm/kjsylist','Kuangm/djprofit',//矿机管理
