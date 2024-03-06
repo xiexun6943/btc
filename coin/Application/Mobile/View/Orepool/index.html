@@ -82,7 +82,7 @@
 					</div>
 					<div style="width:70%;height:120px;float:left;padding:5px;">
 						<p class="fzmmm fcc fw" style="margin-bottom:2px;">{$av.title}</p>
-						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('上市时间')}：<?php echo date("Y-m-d",strtotime($av['addtime']));?></p>
+						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('上市时间')}：<?php echo date("Y-m-d",strtotime($av['market_time']));?></p>
 						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('产出币种')}：<?php echo strtoupper($av['outcoin']);?></p>
 						<a href="{:U('Orepool/kjinfo')}?oid={$av.id}">
 						<p class="fzmm fcc" style="margin-bottom:0px;text-align:right;">
@@ -144,7 +144,7 @@
 
 					<div style="width:70%;height:120px;float:left;padding:5px;">
 						<p class="fzmmm fcc fw" style="margin-bottom:2px;">{$bv.title}</p>
-						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('上市时间')}：<?php echo date("Y-m-d",strtotime($bv['addtime']));?></p>
+						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('上市时间')}：<?php echo date("Y-m-d",strtotime($bv['market_time']));?></p>
 						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('产出币种')}：<?php echo strtoupper($bv['outcoin']);?></p>
 						<a href="{:U('Orepool/kjinfo')}?oid={$bv.id}">
 						<p class="fzmm fcc" style="margin-bottom:0px;text-align:right;" onclick="buykuangji({$bv.id})">
@@ -208,7 +208,7 @@
 					</div>
 					<div style="width:70%;height:120px;float:left;padding:5px;">
 						<p class="fzmmm fcc fw" style="margin-bottom:2px;">{$cv.title}</p>
-						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('上市时间')}：<?php echo date("Y-m-d",strtotime($cv['addtime']));?></p>
+						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('上市时间')}：<?php echo date("Y-m-d",strtotime($cv['market_time']));?></p>
 						<p class="fzmm fcc" style="margin-bottom:2px;">{:L('产出币种')}：<?php echo strtoupper($cv['outcoin']);?></p>
 						<a href="{:U('Orepool/kjinfo')}?oid={$cv.id}">
 						<p class="fzmm fcc" style="margin-bottom:0px;text-align:right;" onclick="buykuangji({$cv.id})">
