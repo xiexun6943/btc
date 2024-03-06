@@ -27,13 +27,13 @@ return [
 
     '最近更新时间：2023年11月1日'=>'最終更新日：2023年11月1日',
 
-    '感谢您访问BTCUSDT.com。通过浏览、访问或使用BTCUSDT.com以及相关移动应用程序（合为“BTCUSDT平台”)，您即（“用户”或“您”）同意本服务条款（本“条款”），因此请仔细阅读。<br><br>
+    '感谢您访问BTCUSDT.online。通过浏览、访问或使用BTCUSDT.online以及相关移动应用程序（合为“BTCUSDT平台”)，您即（“用户”或“您”）同意本服务条款（本“条款”），因此请仔细阅读。<br><br>
 根据您的居住地和注册日期：对于您和以下服务供应商（“我们”）之间任何或全部服务的使用，以及任何获得服务的方式，本条款构成一致协议和理解：<br><br>
 BTCUSDT Bahamas FinTech Company Limited，一家注册在巴哈马的公司（“BTCUSDT 巴哈马”），适用于 2022 年 11月 16日至2023年8月28日期间注册的墨西哥居民用户，及于2023年8月29日之后注册的机构用户；<br><br>
 BTCUSDT Serviços Digitais Ltda., 一家注册在巴西的公司（“BTCUSDT 巴西”），适用于 2023 年6月15日或之后注册的巴西居民用户；<br><br>
 BTCUSDT SG Pte. Ltd., 一家注册在新加坡的公司（“BTCUSDT 新加坡”），适用于 2023 年 10 月 13 日或之后注册的新加坡居民用户；<br><br>
 Aux Cayes FinTech Co. Ltd.， 一家注册在塞舌尔的公司（“Aux Cayes”），适用于有资格访问和使用 BTCUSDT 服务的所有其他用户。<br><br>
-在本条款中使用“BTCUSDT”一词时，是指 BTCUSDT 巴哈马、BTCUSDT 香港、BTCUSDT 巴西、BTCUSDT 新加坡或Aux Cayes，依情形适用于其各自的用户。'=>'BTCUSDT.com をご覧いただきありがとうございます。 BTCUSDT.com および関連モバイル アプリケーション (総称して「BTCUSDT プラットフォーム」) を閲覧、訪問、または使用することにより、お客様 (「ユーザー」または「あなた」) は、これらの利用規約 (以下「規約」) に同意したことになります。それらは慎重に。 <br><br>
+在本条款中使用“BTCUSDT”一词时，是指 BTCUSDT 巴哈马、BTCUSDT 香港、BTCUSDT 巴西、BTCUSDT 新加坡或Aux Cayes，依情形适用于其各自的用户。'=>'BTCUSDT.online をご覧いただきありがとうございます。 BTCUSDT.online および関連モバイル アプリケーション (総称して「BTCUSDT プラットフォーム」) を閲覧、訪問、または使用することにより、お客様 (「ユーザー」または「あなた」) は、これらの利用規約 (以下「規約」) に同意したことになります。それらは慎重に。 <br><br>
 お客様の居住地および登録日により異なります: 本規約は、お客様と以下のサービスプロバイダー (「当社」) との間の、サービスの一部またはすべての使用、およびサービスを取得する手段に関する全会一致の合意および理解を構成します。 :<br><br >
 バハマで登録された会社（「BTCUSDT バハマ」）である BTCUSDT Bahamas FinTech Company Limited は、2022 年 11 月 16 日から 2023 年 8 月 28 日までに登録されたメキシコ居住ユーザー、および 2023 年 8 月 29 日以降に登録された機関ユーザーに適用されます。<br>< br>
 香港で登録された会社である BTCUSDT Hong Kong FinTech Company Limited (「BTCUSDT 香港」) は、2023 年 5 月 15 日以降に登録された香港在住のユーザーが利用できます。<br><br>
@@ -1577,7 +1577,7 @@ Aux Cayes FinTech Co. Ltd. は、セイシェルで登録されている会社 (
 
     'BTCUSDT 平台'=>'ビットベンチャープラットフォーム',
 
-    '通过 [BTCUSDT.com](http://BTCUSDT.com/)、API 或 BTCUSDT 运营的移动应用程序访问在线平台。'=>'[BTCUSDT.com](http://BTCUSDT.com/)、API、または BTCUSDT が運営するモバイル アプリケーションを通じてオンライン プラットフォームにアクセスします。',
+    '通过 [BTCUSDT.online](http://BTCUSDT.online/)、API 或 BTCUSDT 运营的移动应用程序访问在线平台。'=>'[BTCUSDT.online](http://BTCUSDT.online/)、API、または BTCUSDT が運営するモバイル アプリケーションを通じてオンライン プラットフォームにアクセスします。',
 
     '订单'=>'注文',
 

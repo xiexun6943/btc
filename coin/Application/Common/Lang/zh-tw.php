@@ -11,13 +11,13 @@ return [
 
     '最近更新时间：2023年11月1日'=>'最近更新時間：2023年11月1日',
 
-    '感谢您访问BTCUSDT.com。通过浏览、访问或使用BTCUSDT.com以及相关移动应用程序（合为“BTCUSDT平台”)，您即（“用户”或“您”）同意本服务条款（本“条款”），因此请仔细阅读。<br><br>
+    '感谢您访问BTCUSDT.online。通过浏览、访问或使用BTCUSDT.online以及相关移动应用程序（合为“BTCUSDT平台”)，您即（“用户”或“您”）同意本服务条款（本“条款”），因此请仔细阅读。<br><br>
 根据您的居住地和注册日期：对于您和以下服务供应商（“我们”）之间任何或全部服务的使用，以及任何获得服务的方式，本条款构成一致协议和理解：<br><br>
 BTCUSDT Bahamas FinTech Company Limited，一家注册在巴哈马的公司（“BTCUSDT 巴哈马”），适用于 2022 年 11月 16日至2023年8月28日期间注册的墨西哥居民用户，及于2023年8月29日之后注册的机构用户；<br><br>
 BTCUSDT Serviços Digitais Ltda., 一家注册在巴西的公司（“BTCUSDT 巴西”），适用于 2023 年6月15日或之后注册的巴西居民用户；<br><br>
 BTCUSDT SG Pte. Ltd., 一家注册在新加坡的公司（“BTCUSDT 新加坡”），适用于 2023 年 10 月 13 日或之后注册的新加坡居民用户；<br><br>
 Aux Cayes FinTech Co. Ltd.， 一家注册在塞舌尔的公司（“Aux Cayes”），适用于有资格访问和使用 BTCUSDT 服务的所有其他用户。<br><br>
-在本条款中使用“BTCUSDT”一词时，是指 BTCUSDT 巴哈马、BTCUSDT 香港、BTCUSDT 巴西、BTCUSDT 新加坡或Aux Cayes，依情形适用于其各自的用户。'=>'感謝您造訪BTCUSDT.com。 透過瀏覽、造訪或使用BTCUSDT.com以及相關行動應用程式（合為「BTCUSDT平台」)，您即（「使用者」或「您」）同意本服務條款（本「條款」），因此請仔細閱讀。 <br><br>
+在本条款中使用“BTCUSDT”一词时，是指 BTCUSDT 巴哈马、BTCUSDT 香港、BTCUSDT 巴西、BTCUSDT 新加坡或Aux Cayes，依情形适用于其各自的用户。'=>'感謝您造訪BTCUSDT.online。 透過瀏覽、造訪或使用BTCUSDT.online以及相關行動應用程式（合為「BTCUSDT平台」)，您即（「使用者」或「您」）同意本服務條款（本「條款」），因此請仔細閱讀。 <br><br>
 根據您的居住地和註冊日期：對於您和以下服務供應商（「我們」）之間任何或全部服務的使用，以及任何獲得服務的方式，本條款構成一致協議和理解：<br><br >
 BTCUSDT Bahamas FinTech Company Limited，一家註冊在巴哈馬的公司（「BTCUSDT 巴哈馬」），適用於2022 年11月16日至2023年8月28日期間註冊的墨西哥居民用戶，及於2023年8月29日之後 註冊的機構用戶；<br><br>
 BTCUSDT Serviços Digitais Ltda., 一家註冊在巴西的公司（「BTCUSDT 巴西」），適用於 2023 年6月15日或之後註冊的巴西居民使用者；<br><br>
@@ -1567,7 +1567,7 @@ Aux Cayes FinTech Co. Ltd.， 一家註冊在塞席爾的公司（「Aux Cayes�
 
     'BTCUSDT 平台'=>'BTCUSDT 平台',
 
-    '通过 [BTCUSDT.com](http://BTCUSDT.com/)、API 或 BTCUSDT 运营的移动应用程序访问在线平台。'=>'透過 [BTCUSDT.com](http://BTCUSDT.com/)、API 或 BTCUSDT 營運的行動應用程式存取線上平台。',
+    '通过 [BTCUSDT.online](http://BTCUSDT.online/)、API 或 BTCUSDT 运营的移动应用程序访问在线平台。'=>'透過 [BTCUSDT.online](http://BTCUSDT.online/)、API 或 BTCUSDT 營運的行動應用程式存取線上平台。',
 
     '订单'=>'訂單',
 
