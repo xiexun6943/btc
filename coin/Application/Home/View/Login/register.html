@@ -257,10 +257,10 @@
                 <label class="input-label">{:L('请输入密码')}</label>
             </div>
 
-            <!--<div class="input">
+            <div class="input">
                 <input spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="invit" id="invit" value="{$qrcode}" required/>
                 <label class="input-label">{:L('邀请码')}</label>
-            </div>-->
+            </div>
 
             <!--<div class="input">
                 <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="ecode" id="ecode" value="" style="width: 70%" required />
@@ -367,17 +367,17 @@
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
-        /*var invit = $("#invit").val();
+        var invit = $("#invit").val();
         if( invit == ''){
             layer.msg("{:L('请输入邀请码')}");return false;
-        }*/
+        }
         var vcode = $("#vcode").val();
         if(vcode == ''){
             layer.msg("{:L('请输入图形验证码')}");return false;
         }
         $.post("{:U('Login/upregister')}",
             // {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit},
-            {'account' : account, 'vcode' : vcode, 'pwd' : lpwd},
+            {'account' : account, 'pwd' : lpwd, 'invit' : invit, 'vcode' : vcode},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);

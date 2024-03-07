@@ -167,9 +167,10 @@ class LoginController extends HomeController
 	//注册处理程序
 	public function upregister(){
 		if($_POST){
-		    $pwd = I("post.account");
+		    $pwd = I("post.pwd");
             $account = I("post.account");
             $vcode = I("post.vcode");
+            $invit = I("post.invit");
 // 			if(checkstr($email) || checkstr($ecode) || checkstr($lpwd) || checkstr($invit)){
 // 				$this->ajaxReturn(['code'=>0,'info'=>L('您输入的信息有误')]);
 // 			}
@@ -190,9 +191,9 @@ class LoginController extends HomeController
 				$this->ajaxReturn(['code'=>0,'info'=>L('请输入密码')]);
 			}
 
-// 			if($invit == ''){
-// 			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
-// 			}
+			if($invit == ''){
+			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
+			}
             $config = M("config")->where(array('id'=>1))->field("tymoney")->find();
 			if($invit != 0 || $invit != ''){
 				$inv_user = M('User')->where(array('invit' => $invit))->field("id,username,invit_1,invit_2,path")->find();

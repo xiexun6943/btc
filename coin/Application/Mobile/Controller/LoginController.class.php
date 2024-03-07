@@ -196,9 +196,11 @@ class LoginController extends MobileController
 		     $account = I("post.account");
 		     $lpwd = I("post.lpwd");
 		     $vcode = I("post.vcode");
+		     $invit = I("post.invit");
             if (!check_verify(strtoupper($vcode),'1')) {
                 $this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
             }
+        
 // 			if(checkstr($email) || checkstr($ecode) || checkstr($lpwd) || checkstr($invit)){
 // 				$this->ajaxReturn(['code'=>0,'info'=>L('您输入的信息有误')]);
 // 			}
@@ -216,9 +218,9 @@ class LoginController extends MobileController
 				$this->ajaxReturn(['code'=>0,'info'=>L('请输入密码')]);
 			}
 
-// 			if($invit == ''){
-// 			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
-// 			}
+			if($invit == ''){
+			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
+			}
 
             $config = M("config")->where(array('id'=>1))->field("tymoney")->find();
 

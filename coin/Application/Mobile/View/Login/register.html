@@ -275,6 +275,7 @@
                         </div>-->
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="account" id="account" placeholder="{:L('请输入账号')}" required autocomplete="account">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="lpwd" placeholder="{:L('请输入密码')}" required="">
+                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
                         <!--<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
                         <div>
@@ -358,18 +359,18 @@
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
+        var invit = $("#invit").val();
+        if( invit == ''){
+            layer.msg("{:L('请输入邀请码')}");return false;
+        }
         var vcode = $("#vcode").val();
         if(vcode == ''){
             layer.msg("{:L('请输入图形验证码')}");return false;
         }
-        /*var invit = $("#invit").val();
-        if( invit == ''){
-            layer.msg("{:L('请输入邀请码')}");return false;
-        }*/
       
         $.post("{:U('Login/upregister')}",
             // {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit},
-                        {'account' : account,  'lpwd' : lpwd, 'vcode' : vcode},
+                        {'account' : account,  'lpwd' : lpwd, 'invit' : invit, 'vcode' : vcode},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);
