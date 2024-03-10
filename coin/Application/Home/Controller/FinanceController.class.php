@@ -9,7 +9,7 @@ class FinanceController extends HomeController
 		$allow_action=array("index","getnewprice","getmoneyusdt","getmoneybtc","getmoneyeth","getmoneyeos","getmoneydoge","getmoneybch",
             "getmoneyltc","getmoneytrx","getmoneyxrp","getmoneyiotx","getmoneyfil","getmoneyshib","getmoneyflow","getmoneyjst",
             "getmoneyitc","getmoneyht","getmoneyogo","getmoneyusdz","getmoneyatm","getmoneyttc","getallzhehe","czpage","paycoin",
-            "txpage","tbhandle","czlist","txlist",'withdraw','recharge','payBank','getBank','getTxConfig','withdrawDo',"getmoneiota");
+            "txpage","tbhandle","czlist","txlist",'withdraw','recharge','payBank','getBank','getTxConfig','withdrawDo',"getmoneiota","getNetWork");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error(L("非法操作"));
 		}
@@ -203,6 +203,7 @@ class FinanceController extends HomeController
 	        $zznum = trim(I('post.zznum'));
 	        $payimg = trim(I('post.payimg'));
 	        $coinname = trim(I('post.coinname'));
+	        $address= trim(I('post.paycoin'));
 	        if($zznum <= 0){
 	            $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
 	        }
@@ -236,6 +237,7 @@ class FinanceController extends HomeController
 	        $data['status'] = 1;
 	        $data['payimg'] = $payimg;
 	        $data['msg'] = '';
+	        $data['remark'] = '币种:'.$coinname.'地址:'.'('.$address.')充值: ('.$zznum.')';
 	        $result = M("recharge")->add($data);
 	        if($result){
 	            $this->ajaxReturn(['code'=>1,'info'=> L('凭证提交成功')]);
@@ -1076,6 +1078,17 @@ class FinanceController extends HomeController
         $data['changestr'] = $changestr;
         $this->ajaxReturn($data);
 	}
-
+    // 获取usdt 网络 
+    public  function getNetWork(){
+        $netWork=I('post.network');
+         $coins = M("coin")->where(['name'=>'usdt','czline'=>$netWork])->field("name,czline,czaddress,qrcode")->find();
+      
+         if($coins){
+             $this->ajaxReturn(['code'=>200,'data'=>$coins,'msg'=>'网络信息成功!']);
+         }else{
+               $this->ajaxReturn(['code'=>4001,'data'=>[],'msg'=>'网络信息失败!']);
+         }
+        
+    }
 }
 ?>

@@ -1289,6 +1289,7 @@ class UserController extends MobileController
             $zznum = trim(I('post.zznum'));
             $payimg = trim(I('post.payimg'));
             $coinname = trim(I('post.coinname'));
+            $address = trim(I('post.paycoin'));
             if($zznum <= 0){
                 $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
             }
@@ -1321,6 +1322,7 @@ class UserController extends MobileController
             $data['status'] = 1;
             $data['payimg'] = $payimg;
             $data['msg'] = '无';
+            $data['remark'] = '币种:'.$coinname.'地址:'.'('.$address.')充值: ('.$zznum.')';
             $result = M("recharge")->add($data);
 
             if($result){

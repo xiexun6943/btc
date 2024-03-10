@@ -106,11 +106,103 @@
 								<td><span><?php echo $vo['hysxf']."%";?></span></td>
 								<td>
 									<neq name="vo.name" value="cny">
-										<a href="{:U('Config/coinEdit?id='.$vo['id'])}" class="btn btn-primary btn-xs">编辑</a>
+										<a class="checkEdit btn btn-primary btn-xs" onclick="doing('{:U('Config/coinEdit?id='.$vo['id'])}')">编辑</a>
+										<!--<a style="display:none" href="{:U('Config/coinEdit?id='.$vo['id'])}" class="checkEdited btn btn-primary btn-xs">编辑</a>-->
 									</neq>
 								</td>
 							</tr>
 						</volist>
+						
+								<div id="checkPayPwdPop">
+								    <h3>请输入支付修改密码:</h3>
+								    <input id="checkPayPwd" type="password" name="" id="" value="" />
+								    <div>
+    								    <div id="ppwdSure" onclick="doing2()">确定</div>
+    								    <div id="ppwdCancel" onclick="doing3()">取消</div>
+								    </div>
+								</div>
+								<style>
+								    #checkPayPwdPop{
+								        display: none;
+								        width:400px;
+								        height: 160px;
+								        background: #fff;
+								        border:1px solid #gray;
+								        border-radius: 4px;
+								        position: fixed;
+								        top:0;
+								        right: 0;
+								        bottom: 0;
+								        left: 0;
+								        margin: auto;
+								        box-shadow: 0px 0px 3px #a7a7a7;
+								        padding: 10px 15px;
+								    }
+								    #checkPayPwdPop h3{
+								        font-size: 20px;
+								        margin: 0;
+								    }
+								    #checkPayPwd{
+								        width:100%;
+								        margin: 15px auto;
+								    }
+								    #checkPayPwdPop>div{
+								        display: grid;
+								        grid-template-columns:50% 50%;
+								    }
+								    #checkPayPwdPop>div>div{
+								        width:100px;
+								        height: 35px;
+								        line-height: 35px;
+								        text-align: center;
+								        margin: 10px auto;
+								        cursor: pointer;
+								        border-radius: 4px;
+								    }
+								    #checkPayPwdPop>div>div:first-child{
+								        background:#2c4eff;
+								        color:#fff;
+								    }
+								    #checkPayPwdPop>div>div:last-child{
+								        border:1px solid #4f4f4f;
+								    }
+								</style>
+								<script>
+								    var link
+								    function doing(str){
+								        link = str
+								        $('#checkPayPwdPop').show()
+								    }
+								    function doing3(){
+								        $('#checkPayPwdPop').hide()
+								    }
+								    function doing2(){
+								        
+								        if($('#checkPayPwd').val().length<=0){
+								            
+								        }else{
+								            $('#checkPayPwdPop').hide()
+								        }
+								        if($('#checkPayPwd').val().length>0){
+								            $.ajax({
+                                    			url: '/Admin/Config/checkPayPwd',
+                                    			type: 'POST',
+                                    			data: {
+                                    			    pwd:$('#checkPayPwd').val()
+                                    			},
+                                    			cache: false,
+                                    			success: function (data) {
+                                    			    console.log(data)
+                                    			    if(data.code===4001){
+                                    			        layer.alert(data.msg)
+                                    			    }else{
+                                    			        window.location.href = link
+                                    			    }
+                                    			}
+                                    		});
+								        }
+								    }
+								</script>
 					<else/>
 						<td colspan="12" class="text-center empty-info">Oh! 暂时还没有内容!</td>
 					</notempty>

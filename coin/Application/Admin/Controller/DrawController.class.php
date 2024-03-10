@@ -104,6 +104,8 @@ class DrawController extends AdminController
 			$setting_arr = $_POST['setting'];
 //			$setting_arr['lang']['name']['4']='韩文';
 //			$setting_arr['lang']['type']['4']='kr';
+            $data=$setting_arr;
+            unset($data['lang']);
 			$setting_data['draw_control'] = urlencode(serialize($setting_arr['draw_control']));
 			$lang = array();
 			foreach ($setting_arr['lang'] as $keyL => $valL) {
@@ -114,6 +116,7 @@ class DrawController extends AdminController
 
 				}
 			}
+			
 			$setting_data['lang'] = urlencode(serialize($lang));
 			unset($setting_arr['draw_control']);
 			unset($setting_arr['lang']);
@@ -122,6 +125,13 @@ class DrawController extends AdminController
 			foreach($setting_data as $k => $v) {
 				M("settings") ->where(array('name' => $k ))->save(array('data' => $this->safe_replace(trim($v)))); //更新数据
 			}
+			
+			 $inserts=[
+			        'type'=>2,// 红包抽奖设置
+			        'data'=>json_encode($data),
+			        'created_at'=>date('Y-m-d H:i:s',time())
+			        ];
+			    M('operate_log')->add($inserts);
 			$this->success("操作成功!",U('Draw/setting'));
 		}else{
 			$drawArr = [];

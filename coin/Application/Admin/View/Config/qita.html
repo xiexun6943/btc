@@ -52,6 +52,11 @@
 									<td><input type="text" class="form-control input-10x" name="tgtext" value="{$data['tgtext']}"></td>
 									<td class="item-note" style="color:red;">*推荐页面的推广语，不要多于40个字</td>
 								</tr>
+								<!--	<tr class="controls">-->
+								<!--	<td class="item-label">支付方式验证密码 :</td>-->
+								<!--	<td><input type="password" maxlength="16" class="form-control input-10x" name="pay_pwd" id="pay_pwd" value="{$data['pay_pwd']}"></td>-->
+								<!--	<td class="item-note" style="color:red;">*修改支付方式验证码密码,8-16位</td>-->
+								<!--</tr>-->
 								
 								<tr class="controls">
 									<td class="item-label">官方客服邮箱 :</td>
@@ -145,10 +150,18 @@
 				</form>
 
 				<script type="text/javascript">
+				    $(function(){
+				        $('#pay_pwd').blur(function(){
+    					    if($('#pay_pwd').val().length<8){
+    					        console.log($('#pay_pwd').val().length)
+    					        layer.msg('支付方式验证码密码需为8-16位', {
+                                    icon: 2
+                                });
+    					    }
+				        })
+				    })
 					//提交表单
-					$('#submit').click(function(){
-						$('#form').submit();
-					});
+    				// 		$('#form').submit();
 				</script>
 			</div>
 		</div>

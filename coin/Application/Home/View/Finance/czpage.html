@@ -211,21 +211,27 @@
 	                                                  <span class="fch f12">{:L('网络')}</span>
 	                                              </div>
 	                                              <div class="czbox_4">
-	                                                  <span class="fch f14">{$info.czline}</span>
+	                                                  <!--<span class="fch f14">TRC20</span>-->
+													  <select id="protocol" name="protocol" class="form-control input_12">
+														  <option value="TRC20" >TRC20</option>
+														  <!--<option value="ERC20" >ERC20</option>-->
+													  </select>
 	                                              </div>
 	                                          </div>
 	                                      </div>
 	                                      
-	                                      <div class="czbox" style="min-height:200px;">
-	                                          <div class="czbox_1" style="min-height:200px;"></div>
-	                                          <div class="czbox_2" style="min-height:200px;">
-	                                              <div style="width:100%;min-height:200px;margin-top:10px;">
-	                                                  <div style="width:100%;height:120px;text-align:center;">
-	                                                      <img src="/Public/Static/coinimgs/{$qrcode}" style="height:120px;" />
+	                                      <div class="czbox" style="height:350px;">
+	                                          <div class="czbox_1" style="min-height:auto;"></div>
+	                                          <div class="czbox_2" style="min-height:auto;">
+	                                              <div style="width:100%;min-height:auto;margin-top:10px;">
+	                                                  <div style="width:100%;height:auto;text-align:center;">
+	                                                      <!--<img id="protocolImg" src="/Public/Static/coinimgs/{$qrcode}" style="height:260px;" />-->
+	                                                      <img id="protocolImg" src="" style="height:260px;display:none" />
 	                                                  </div>
-	                                                  <div style="width:100%;height:40px;line-height:40px;text-align:center;">
+	                                                  <div id="paycoinAddress" style="width:100%;height:40px;line-height:40px;text-align:center;display:none">
 	                                                      <input type="hidden" id="czaddress" value="{$info.czaddress}" />
-	                                                      <span>{$info.czaddress}</span>
+	                                                      <!--<span id='paycoin'>{$info.czaddress}</span>-->
+	                                                      <span id='paycoin'></span>
 	                                                      <i class="bi bi-back fcy" style="cursor:pointer;" onclick="copyUrl()"></i>
 	                                                  </div>
 	                                                  
@@ -308,6 +314,44 @@
     <script type="text/javascript" src="/Public/Home/static/js/jquery.SuperSlide.2.1.1.js" ></script>
     <script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
     <script type="text/javascript">
+    $(function(){
+        
+        
+			$.ajax({
+				url: '/Finance/getNetWork',
+				type: 'POST',
+				data: {network:$('#protocol').val()},
+				cache: false,
+				success: function (data) {
+					if(data.code==200){
+					    $('#protocolImg').show()
+					    $('#protocolImg').attr('src','/Public/Static/coinimgs/'+data.data.qrcode)
+					    $('#paycoinAddress').show()
+					    $('#paycoin').text(data.data.czaddress)
+					}
+				}
+			});
+        
+        $('#protocol').change(function(){
+			$.ajax({
+				url: '/Finance/getNetWork',
+				type: 'POST',
+				data: {network:$('#protocol').val()},
+				cache: false,
+				success: function (data) {
+					if(data.code==200){
+					    $('#protocolImg').show()
+					    $('#protocolImg').attr('src','/Public/Static/coinimgs/'+data.data.qrcode)
+					    $('#paycoinAddress').show()
+					    $('#paycoin').text(data.data.czaddress)
+					}
+				}
+			});
+        })    
+    })
+    
+    
+    
         $("#sumbtn").click(function(){
             var flag = $("#flag").val();
             if(flag == 2){
@@ -328,7 +372,7 @@
             }
             $("#flag").val(2)
             $.post("{:U('Finance/paycoin')}",
-            {'cid' : cid,'zznum':zznum,'payimg':payimg,'coinname':coinname},
+            {'cid' : cid,'zznum':zznum,'payimg':payimg,'coinname':coinname,'paycoin':$("#paycoin").text()},
             function(data){
                 if(data.code == 1){
                     layer.msg(data.info);

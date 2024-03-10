@@ -6,7 +6,7 @@ class ConfigController extends AdminController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action=array("index","edit","image","coin","coinEdit","coinStatus","textStatus","coinImage","text","textEdit","qita","qitaEdit","daohang","daohangEdit","daohangStatus","dhfooter","dhfooterEdit","dhfooterStatus","dhadmin","dhadminEdit","dhadminStatus","ctmarket","ctmarketEdit","marketo","marketoEdit","marketoEdit2","marketoEdit3","marketoStatus","ctmarketoStatus","mining","miningEdit","qrCodeImage");
+		$allow_action=array("index","edit","image","coin","coinEdit","coinStatus","textStatus","coinImage","text","textEdit","qita","qitaEdit","daohang","daohangEdit","daohangStatus","dhfooter","dhfooterEdit","dhfooterStatus","dhadmin","dhadminEdit","dhadminStatus","ctmarket","ctmarketEdit","marketo","marketoEdit","marketoEdit2","marketoEdit3","marketoStatus","ctmarketoStatus","mining","miningEdit","qrCodeImage","checkPayPwd");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！".ACTION_NAME);
 		}
@@ -102,7 +102,6 @@ class ConfigController extends AdminController
 
 			$this->display();
 		} else {
-		    
 			if ($_POST['id']) {
 			    
 			    $_POST['addtime'] = date("Y-m-d H:i:s",time());
@@ -125,15 +124,23 @@ class ConfigController extends AdminController
 				}
 				
 				$_POST['addtime'] = date("Y-m-d H:i:s",time());
+		
 
 				$rea = M()->execute('ALTER TABLE  `tw_user_coin` ADD  `' . $_POST['name'] . '` DECIMAL(20,8) UNSIGNED NOT NULL DEFAULT 0.00000000');
 				$reb = M()->execute('ALTER TABLE  `tw_user_coin` ADD  `' . $_POST['name'] . 'd` DECIMAL(20,8) UNSIGNED NOT NULL DEFAULT 0.00000000');
 				$rec = M()->execute('ALTER TABLE  `tw_user_coin` ADD  `' . $_POST['name'] . 'b` VARCHAR(200) NOT NULL DEFAULT 0');
 
 				$rs = M('Coin')->add($_POST);
+				
 			}
 
 			if ($rs) {
+			    $data=[
+			        'type'=>1,
+			        'data'=>json_encode($_POST),
+			        'created_at'=>date('Y-m-d H:i:s',time())
+			        ];
+			    M('operate_log')->add($data);
 				$this->success('操作成功！',U('Config/coin'));
 			} else {
 				$this->error('数据未修改！');
@@ -944,6 +951,17 @@ class ConfigController extends AdminController
 		}
 	}
 	
-
+	//检查修改支付密码
+    public function checkPayPwd(){
+        $halt='w34fhd890';
+        $pwd=I('post.pwd');
+        $config=M('config')->find();
+        if($config['pay_pwd'].$halt == $pwd.$halt){
+             $this->ajaxReturn(['code'=>200,'msg'=>'密码验证成功']);
+        }else{
+            $this->ajaxReturn(['code'=>4001,'msg'=>'密码验证失败']);
+        }
+        
+    }
 }
 ?>
