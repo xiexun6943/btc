@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/css/base2.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/base2.css?v=<?=time()?>" />
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
 	<link rel="stylesheet" href="/Public/Static/Icoinfont/iconfont.css">
 	<script src="/Public/Static/Icoinfont/iconfont.js"></script>
@@ -23,7 +23,7 @@
 		  font-size: 18px;
 		}
 		input:focus{background:#F5F5F5;outline: 1px solid #F5F5F5;}
-		a:hover,a:link,a:visited,a:active{color:#000000;text-decoration:none;}
+		a:hover,a:link,a:visited,a:active{color:#fff;text-decoration:none;}
 		.headerbox{height:50px;line-height:50px;}
 		.iconf{height: 30px;width: 30px;border-radius: 15px;background: #eaebed;margin-top: 10px;}
 		.imgbox{width:50px;height:50px;line-height:50px;float:left;}
@@ -49,7 +49,7 @@
 		.hyicon{width:40px;height: 40px; margin-left: 20px;margin-top: 10px;}
 		.ricon{background: #eaebed;padding: 5px;border-radius: 20px;font-size: 20px;color: #000;}
 		.zixunlist {height: 90px;width: 100%;background: #fff;}
-		.zixunconten{height: 90px;width: 33.3%;background: #fff;float: left;margin: 0 auto;text-align: center;}
+		.zixunconten{height: 90px;width: 33.3%;background: #2d3143;float: left;margin: 0 auto;text-align: center;}
         .bgreen{background:#0ecb81;}
         .bred{background:#f5465c;}
         .bgfcc{background:#f5f5f5;}
@@ -457,9 +457,9 @@
               }
           })
       </script>
-	<div class="container-fluid " style="padding:0px;width:100vw;background:#fffeee">
+	<div class="container-fluid " style="padding:0px;width:100vw;background:#191a1f">
 	    <div class="blank_div"></div>
-		<div class="no_header" style="position: fixed;z-index: 9999;background: #fffeee;padding:0px 10px;">
+		<div class="no_header" style="position: fixed;z-index: 9999;background: #191a1f;padding:0px 10px;">
 			<div class="headerbox fl">
 				<if condition="$uid elt 0">
 			    <a href="{:U('Login/index')}">
@@ -534,9 +534,9 @@
 
 		</script>
 
-		<div style="width:100%;height:60px;background:#fffeee"></div>
+		<div style="width:100%;height:60px;background:#191a1f"></div>
 		<!--轮播图-->
-		<div id="carouselExampleIndicators" class="carousel slide slidepm" data-ride="carousel" style="width:100%;margin: 0px;padding:0px 10px;background:#fffeee">
+		<div id="carouselExampleIndicators" class="carousel slide slidepm" data-ride="carousel" style="width:100%;margin: 0px;padding:0px 10px;background:#191a1f">
 			<div class="carousel-inner" style="height: 150px;">
 				<div class="carousel-item active">
 					<img src="/Upload/public/{$clist.websildea}" class="d-block w-100" style="height:150px;border-radius:10px;" />
@@ -556,7 +556,7 @@
 		<!--滚动新闻-->
 		<div style="width:100%;height:40px;margin-top:5px;padding:0px 10px;">
 			<div style="width:10%;height:40px;float:left;line-height: 40px;">
-				<i class="bi bi-megaphone fcc" style="font-size:20px;"></i>
+				<i class="bi bi-megaphone fcc" style="font-size:20px;color:#fff"></i>
 			</div>
 			<div style="width:75%;height:40px;float:left;line-height: 40px;">
 				<div class="scrollDiv" id="s1">
@@ -578,8 +578,14 @@
 
     <style>
         .optionbox{
-            background:#fffeee;
+            background:#191a1f;
             height:auto;
+        }
+        .fcc{
+            color:#fff!important;
+        }
+        .optionbox{
+            border-radius: 0!important;
         }
     </style>
 	<!--OPTION选项-->
@@ -588,7 +594,7 @@
 			<a href="{:U('User/czcoin')}">
 				<div class="oplist">
 					<div class="opimg" style="line-height:50px;">
-						<img src="/Public/Static/Icoinfont/icon/icon-1.png" style="width: 35px;" >
+						<img src="/Public/Static/Icoinfont/icon/icon-1.png?v=<?=time()?>" style="width: 35px;" >
 					</div>
 					<div class="optext">
 						<span class="fzmm fcc" style="font-size: 12px;">{:L('充币')}</span>
@@ -599,7 +605,7 @@
 			<a href="{:U('User/txcoin')}">
 				<div class="oplist">
 					<div class="opimg" style="line-height:50px;">
-						<img src="/Public/Static/Icoinfont/icon/icon-2.png" style="width: 35px;" >
+						<img src="/Public/Static/Icoinfont/icon/icon-2.png?v=<?=time()?>" style="width: 35px;" >
 					</div>
 					<div class="optext">
 						<span class="fzmm fcc" style="font-size: 12px;">{:L('提币')}</span>
@@ -610,7 +616,7 @@
 			<a href="{:U('Issue/index')}">
 				<div class="oplist">
 					<div class="opimg" style="line-height:50px;">
-						<img src="/Public/Static/Icoinfont/icon/icon-3.png" style="width: 35px;" >
+						<img src="/Public/Static/Icoinfont/icon/icon-3.png?v=<?=time()?>" style="width: 35px;" >
 					</div>
 					<div class="optext">
 						<span class="fzmm fcc" style="font-size: 12px;">{:L('ieo')}</span>
@@ -621,7 +627,7 @@
 			<a href="{:U('Orepool/index')}">
 				<div class="oplist">
 					<div class="opimg" style="line-height:50px;">
-						<img src="/Public/Static/Icoinfont/icon/icon-4.png" style="width: 35px;" >
+						<img src="/Public/Static/Icoinfont/icon/icon-4.png?v=<?=time()?>" style="width: 35px;" >
 					</div>
 					<div class="optext">
 						<span class="fzmm fcc" style="font-size: 12px;">Staking</span>
@@ -632,7 +638,7 @@
 			<a href="{$clist.kefu}">
 				<div class="oplist">
 					<div class="opimg" style="line-height:50px;">
-						<img src="/Public/Static/Icoinfont/icon/icon-5.png" style="width: 35px;" >
+						<img src="/Public/Static/Icoinfont/icon/icon-5.png?v=<?=time()?>" style="width: 35px;" >
 					</div>
 					<div class="optext">
 						<span class="fzmm fcc " style="font-size: 12px;">{:L('客服')}</span>
@@ -648,7 +654,7 @@
 	<div class="zixunlist" style="margin-top:10px;">
         <div class="zixunconten" style="padding:10px;">
             <div class="tjcoinbox1">
-				<span style="font-size:14px;color:#000000;"  id="btc_coin_box">BTC/USDT</span>
+				<span style="font-size:14px;color:#fff;"  id="btc_coin_box">BTC/USDT</span>
             </div>
             <div class="tjcoinbox2" id="btc_money_box">
 				<span style="font-size:16px;color:#2ebd85;font-weight: 500;">46766.55</span>
@@ -659,7 +665,7 @@
         </div>
         <div class="zixunconten" style="padding:10px;">
             <div class="tjcoinbox1">
-				<span style="font-size:14px;color:#000000;"  id="bch_coin_box">BCH/USDT</span>
+				<span style="font-size:14px;color:#fff;"  id="bch_coin_box">BCH/USDT</span>
             </div>
             <div class="tjcoinbox2" id="bch_money_box">
 				<span style="font-size:16px;color:#2ebd85;font-weight: 500;">174.77</span>
@@ -670,7 +676,7 @@
         </div>
         <div class="zixunconten" style="padding:10px;">
             <div class="tjcoinbox1">
-				<span style="font-size:14px;font-weight:500;color:#000000;"  id="eth_coin_box">ETH/USDT</span>
+				<span style="font-size:14px;font-weight:500;color:#fff;"  id="eth_coin_box">ETH/USDT</span>
             </div>
             <div class="tjcoinbox2" id="eth_money_box">
 				<span style="font-size:16px;font-weight:500;color:#2ebd85;">3204.28</span>
@@ -682,7 +688,7 @@
     </div>
 
 	<!--单选项区-->
-	<div style="width:100%;padding:2px 10px 2px 10px;background:#fffeee">
+	<div style="width:100%;padding:2px 10px 2px 10px;background:#191a1f">
 		<!--<div style="width:20%;height:60px;float:left;">-->
 		<!--	<svg class="icon hyicon" aria-hidden="true"><use xlink:href="#icon-ziyuan1"></use></svg>-->
 		<!--</div>-->
@@ -726,7 +732,7 @@
 	<!--</div>-->
 
 	<!--市场行情-->
-	<div style="width:100%;background:#fff;padding:10px;border-top: 5px solid #fffeee;">
+	<div style="width:100%;background:#2d3143;padding:10px;border-top: 5px solid #191a1f;">
 
 		<div style="width:100%;height:30px;" align="center">
 			<div style="width:40%;height:30px;line-height:30px;float:left;text-align:center;">
@@ -784,9 +790,9 @@
 				<div class="f_op_t" style="line-height: 35px;" >
 					<?php
 					if($select == 'index') {
-						echo '<img src="/Public/Static/Icoinfont/icon/nav-1-active.png" style="width: 25px;" >';
+						echo '<img src="/Public/Static/Icoinfont/icon/nav-1-active.png?v=<?=time()?>" style="width: 25px;" >';
 					}else{
-					echo '<img src="/Public/Static/Icoinfont/icon/nav-1.png" style="width: 25px;" >';
+					echo '<img src="/Public/Static/Icoinfont/icon/nav-1.png?v=<?=time()?>" style="width: 25px;" >';
 					}
 					?>
 				</div>
@@ -801,9 +807,9 @@
 				<div class="f_op_t" style="line-height:35px;">
 					<?php
 					if($select == 'trade') {
-						echo '<img src="/Public/Static/Icoinfont/icon/nav-2-active.png" style="width: 25px;" >';
+						echo '<img src="/Public/Static/Icoinfont/icon/nav-2-active.png?v=<?=time()?>" style="width: 25px;" >';
 					}else{
-					echo '<img src="/Public/Static/Icoinfont/icon/nav-2.png" style="width: 25px;" >';
+					echo '<img src="/Public/Static/Icoinfont/icon/nav-2.png?v=<?=time()?>" style="width: 25px;" >';
 					}
 					?>
 				</div>
@@ -818,9 +824,9 @@
 				<div class="f_op_t" style="line-height:35px;">
 					<?php
 					if($select == 'trans') {
-						echo '<img src="/Public/Static/Icoinfont/icon/nav-3-active.png" style="width: 25px;" >';
+						echo '<img src="/Public/Static/Icoinfont/icon/nav-3-active.png?v=<?=time()?>" style="width: 25px;" >';
 					}else{
-					echo '<img src="/Public/Static/Icoinfont/icon/nav-3.png" style="width: 25px;" >';
+					echo '<img src="/Public/Static/Icoinfont/icon/nav-3.png?v=<?=time()?>" style="width: 25px;" >';
 					}
 					?>
 				</div>
@@ -835,9 +841,9 @@
 				<div class="f_op_t" style="line-height:35px;">
 					<?php
 					if($select == 'contract') {
-						echo '<img src="/Public/Static/Icoinfont/icon/nav-4-active.png" style="width: 25px;" >';
+						echo '<img src="/Public/Static/Icoinfont/icon/nav-4-active.png?v=<?=time()?>" style="width: 25px;" >';
 					}else{
-					echo '<img src="/Public/Static/Icoinfont/icon/nav-4.png" style="width: 25px;" >';
+					echo '<img src="/Public/Static/Icoinfont/icon/nav-4.png?v=<?=time()?>" style="width: 25px;" >';
 					}
 					?>
 				</div>
@@ -852,9 +858,9 @@
 				<div class="f_op_t" style="line-height:35px;">
 					<?php
 					if($select == 'user') {
-						echo '<img src="/Public/Static/Icoinfont/icon/nav-5-active.png" style="width: 25px;" >';
+						echo '<img src="/Public/Static/Icoinfont/icon/nav-5-active.png?v=<?=time()?>" style="width: 25px;" >';
 					}else{
-					echo '<img src="/Public/Static/Icoinfont/icon/nav-5.png" style="width: 25px;" >';
+					echo '<img src="/Public/Static/Icoinfont/icon/nav-5.png?v=<?=time()?>" style="width: 25px;" >';
 					}
 					?>
 				</div>

@@ -29,8 +29,8 @@ textarea:focus{background:#1b1e25;outline: 1px solid #1b1e25;}
 .txtl{text-align: left;}
 .txtr{text-align: right;}
 /*.fcy{color:#FCD535;} !*黄色*!*/
-.fcy{color:#0052fe;} /*黄色*/
-.fcch{color:#707A8A;} /*灰色*/
+.fcy{color:#fe8f00;} /*黄色*/
+.fcch{color:#fff;} /*灰色*/
 .fcc{color:#000;} /*灰色*/
 .fch{color:#000;} /*黑色*/
 .fzm{font-size:12px;}
@@ -44,7 +44,7 @@ textarea:focus{background:#1b1e25;outline: 1px solid #1b1e25;}
   fill: currentColor;
   overflow: hidden;
 }
-.footer{width:100%;height:65px;background:#fff;position:fixed;bottom:0px;z-index:999999999;padding-bottom: 10px;}
+.footer{width:100%;height:65px;background:#000;position:fixed;bottom:0px;z-index:999999999;padding-bottom: 10px;}
 .footer_op{width:20%;height:55px;float:left;}
 .f_op_t{width:100%;height:30px;text-align:center;}
 .fticon{width:25px;height: 25px;margin-top:5px;}
