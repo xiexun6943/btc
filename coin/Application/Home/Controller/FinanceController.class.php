@@ -259,7 +259,6 @@ class FinanceController extends HomeController
             $payimg = trim(I('post.payimg'));
             $coinname = trim(I('post.coinname'));
             $bank_name = trim(I('post.bank_num'));
-          
             if($zznum <= 0){
                 $this->ajaxReturn(['code'=>0,'info'=> L('请输入正确充值数量')]);
             }
@@ -283,9 +282,12 @@ class FinanceController extends HomeController
             if($zznum < $cinfo['czminnum']){
                 $this->ajaxReturn(['code'=>0,'info'=> L('低于最低额度')]);
             }
-            $config = M("config")->field('ug_hl,ur_hl')->find();
-            if ($coinname == 'AUD') {
-                $num=round($zznum/$config['ug_hl'],4);
+            $config = M("config")->field('gu_hl,ru_hl')->find();
+      
+             if ($coinname == 'AUD') {
+                $num=round($zznum*$config['gu_hl'],4);
+            }elseif($coinname == 'USD'){
+                $num=round($zznum*$config['ru_hl'],4);
             }else{
                 $this->ajaxReturn(['code'=>0,'info'=> L('币种类型错误！')]);
             }
@@ -301,7 +303,7 @@ class FinanceController extends HomeController
             $data['payimg'] = $payimg;
             $data['msg'] = '';
             $data['remark'] = '银行卡号:('.$bank_name.')充值: ('.$zznum.')';
-
+   
             $result = M("recharge")->add($data);
             if($result){
                 $this->ajaxReturn(['code'=>1,'info'=> L('凭证提交成功')]);
@@ -390,7 +392,7 @@ class FinanceController extends HomeController
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
 
             $config = M("config")->field('gu_hl,ru_hl,ug_hl,ur_hl')->find();
-            $hl=$config['ug_hl'];
+            $coinname =='aud'?$hl=$config['ug_hl']:$hl=$config['ur_hl'];
             $sxftype = $cinfo['sxftype'];
             if($sxftype == 1){
                 $sxf = $num * ($cinfo['txsxf'] / 100);
@@ -489,7 +491,7 @@ class FinanceController extends HomeController
             return $this->ajaxReturn(['code'=>403,'msg'=>L('请重新登录')]);
         }
         $configs=M("config")->field('ug_hl,ur_hl')->find();
-        $coinInfo = M("coin")->where(['name'=>['in',['aud']]])->field('sxftype,txsxf_n,txsxf,czsxf,txminnum,czminnum,txmaxnum')->select();
+        $coinInfo = M("coin")->where(['name'=>['in',['aud','usd']]])->field('sxftype,txsxf_n,txsxf,czsxf,txminnum,czminnum,txmaxnum')->select();
 
         $minfo = M("user_coin")->field('usdt')->where(array('userid'=>$uid))->find();
 
@@ -509,17 +511,17 @@ class FinanceController extends HomeController
                 'czminnum'=>$coinInfo[0]['czminnum'],
                 'ky_money'=>$hkd_money
             ],
-            // 'jpy'=>[
-            //     'ur_hl'=>floatval($configs['ur_hl']),
-            //     'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
-            //     'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
-            //     'sxftype'=>$coinInfo[0]['sxftype'], // 提现手续费类型
-            //     'txsxf_n'=>$coinInfo[0]['txsxf_n'], // 提现手续 数目
-            //     'txminnum'=>$coinInfo[1]['txminnum'],
-            //     'txmaxnum'=>$coinInfo[0]['txmaxnum'],
-            //     'czminnum'=>$coinInfo[1]['czminnum'],
-            //     'ky_money'=>$jpy_money
-            // ]
+            'usd'=>[
+                'ur_hl'=>floatval($configs['ur_hl']),
+                'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
+                'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
+                'sxftype'=>$coinInfo[0]['sxftype'], // 提现手续费类型
+                'txsxf_n'=>$coinInfo[0]['txsxf_n'], // 提现手续 数目
+                'txminnum'=>$coinInfo[1]['txminnum'],
+                'txmaxnum'=>$coinInfo[0]['txmaxnum'],
+                'czminnum'=>$coinInfo[1]['czminnum'],
+                'ky_money'=>$jpy_money
+            ]
         ];
         return $this->ajaxReturn(['code'=>200,'info'=>$data]);
     }

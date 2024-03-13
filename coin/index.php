@@ -22,9 +22,9 @@ define('DB_TYPE', 'mysql');
 // 定义数据库地址
 define('DB_HOST', '127.0.0.1');
 // 定义数据库名
-define('DB_NAME', 'jys1');
+define('DB_NAME', 'jys1_aozhou');
 // 定义数据库账号
-define('DB_USER', 'jys1');
+define('DB_USER', 'jys1_aozhou');
 // 定义数据库密码
 define('DB_PWD', 'RDwX46Y87M4XSpDE');
 // 定义数据库端口

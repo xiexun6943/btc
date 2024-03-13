@@ -218,7 +218,7 @@
 	                                              <div class="czbox_4">
 													  <select id="coinname" name="coinname" class="form-control input_12">
 														  <option value="aud" >AUD</option>
-														  <!--<option value="jpy" >JPY</option>-->
+														  <option value="usd" >USD</option>
 													  </select>
 
 	                                              </div>
@@ -290,8 +290,8 @@
 	                                      <span>{:L('温馨提示')}</span>
 	                                  </div>
 	                                  <div style="width:100%;min-height:180px;padding:10px;color:red;font-size:14px">
-	                                       <!--1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> <i id="currency" style="font-style:normal"></i><br/>-->
-	                                       1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> <i style="font-style:normal">AUD</i><br/>
+	                                       1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> <i id="currency" style="font-style:normal"></i><br/>
+	                                       <!--1、<span class="f14" style="color:red;">{:L('最小提币数量')}：<span id='txminnum_text'></span> <i style="font-style:normal">AUD</i><br/>-->
 	                                       2、{:L('小于最小金额的充值将不会上账且无法退回')}<br/>
 <!--	                                       3、1USDT = <span id='tip_hkd'></span> HKD 1USDT = <span id='tip_jpy'></span> JPY<br/>-->
 	                                       <br />
@@ -375,7 +375,7 @@
 					function(data){
 						if(data.code == 200){
 						    
-						    $('#tip_jpy').text(data.info['aud'].ur_hl)
+						  //  $('#tip_jpy').text(data.info['aud'].ur_hl)
 				// 			$("#bank_num").val(data.bank)
 						}else{
 							layer.msg(data.info);return false;
@@ -388,8 +388,8 @@
 					function(data){
 						if(data.code == 200){
 						    
-						    $('#tip_hkd').text(data.info['hkd'].ug_hl)
-						    $('#tip_jpy').text(data.info['jpy'].ur_hl)
+						  //  $('#tip_hkd').text(data.info['hkd'].ug_hl)
+						  //  $('#tip_jpy').text(data.info['jpy'].ur_hl)
 						    
 							$('#txminnum_text').text(data.info[coinname].txminnum)
 							$('#czminnum_text').text(data.info[coinname].czminnum)

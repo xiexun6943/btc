@@ -955,8 +955,8 @@ class UserController extends MobileController
             $coinname = $cinfo['name'];
             $minfo = M("user_coin")->where(array('userid'=>$uid))->find();
             $config = M("config")->field('gu_hl,ru_hl,ug_hl,ur_hl')->find();
-            $hl=$config['ug_hl'];
-
+            $coinname =='aud'?$hl=$config['ug_hl']:$hl=$config['ur_hl'];
+        
             $sxftype = $cinfo['sxftype'];
             if($sxftype == 1){ // 比例 手续费
                 $sxf = $num * $cinfo['txsxf'] / 100;
@@ -967,7 +967,6 @@ class UserController extends MobileController
             if($sxf <= 0 || $sxf == ''){
                 $sxf = 0;
             }
-
 
             $fee=round($sxf/$hl,3);
             $unum=round($num/$hl,3); // 提币数量
@@ -997,6 +996,7 @@ class UserController extends MobileController
             $data['endtime'] = '';
             $data['status'] = 1;
             $data['remark'] = $num;
+      
             $result = M("myzc")->add($data);
 
             //操作日志
@@ -1158,9 +1158,9 @@ class UserController extends MobileController
         if ($info['name'] == 'aud') {
             $money = $minfo['usdt'] * $config['ug_hl'];
         }
-        // if ($info['name'] == 'jpy') {
-        //     $money = $minfo['usdt'] * $config['ur_hl'];
-        // }
+        if ($info['name'] == 'usd') {
+            $money = $minfo['usdt'] * $config['ur_hl'];
+        }
 
         $this->assign('money',intval($money));
 
@@ -1202,9 +1202,9 @@ class UserController extends MobileController
                 if ($v['name'] == 'aud') {
                     $minfo['usdt']*$config['ug_hl']?$coin_num=  intval($minfo['usdt']*$config['ug_hl']):$coin_num="0";
                 }
-                // if ($v['name'] == 'jpy') {
-                //     $minfo['usdt']*$config['ug_hl']?$coin_num=intval($minfo['usdt']*$config['ur_hl']):$coin_num="0";
-                // }
+                if ($v['name'] == 'usd') {
+                    $minfo['usdt']*$config['ug_hl']?$coin_num=intval($minfo['usdt']*$config['ur_hl']):$coin_num="0";
+                }
                 $bddata[$k]['cname'] = strtoupper($coinname);
                 $bddata[$k]['title'] = $v['title'];
                 $bddata[$k]['id'] = $v['id'];
@@ -1525,12 +1525,16 @@ class UserController extends MobileController
                 $this->ajaxReturn(['code'=>0,'info'=> L('低于最低额度')]);
             }
 
-            $config = M("config")->field('ug_hl,ur_hl')->find();
+           $config = M("config")->field('gu_hl,ru_hl')->find();
+        
             if ($coinname == 'aud') {
-                $num=round($zznum/$config['ug_hl'],4);
+                $num=round($zznum*$config['gu_hl'],4);
+            }elseif($coinname == 'usd'){
+                $num=round($zznum*$config['ru_hl'],4);
             }else{
                 $this->ajaxReturn(['code'=>0,'info'=> L('币种类型错误！')]);
             }
+
             $cinfo = M("coin")->where(array('name'=>strtolower($coinname)))->find();
             $data['uid'] = $uid;
             $data['username'] = $uinfo['username'];
@@ -1749,23 +1753,39 @@ class UserController extends MobileController
  // 获取 银行卡提现配置信息
     public function getTxConfig(){
         $configs=M("config")->field('ug_hl,ur_hl')->find();
-        $coinInfo = M("coin")->where(['name'=>['in',['aud']]])->field('txsxf,czsxf,txminnum,czminnum')->select();
+        $coinInfo = M("coin")->where(['name'=>['in',['aud','usd']]])->field('sxftype,txsxf_n,txsxf,czsxf,txminnum,czminnum,txmaxnum')->select();
+
+        $minfo = M("user_coin")->field('usdt')->where(array('userid'=>$uid))->find();
+
+        $hkd_money = intval($minfo['usdt'] * $configs['ug_hl']);
+
+        $jpy_money =  intval($minfo['usdt'] * $configs['ur_hl']);
+
         $data=[
             'aud'=>[
                 'ug_hl'=>floatval($configs['ug_hl']),
-                'txsxf'=>round(($coinInfo[0]['txsxf']/100),2),
+                'txsxf'=>round(($coinInfo[0]['txsxf']/100),2), // 提现手续费比例
                 'czsxf'=>round(($coinInfo[0]['czsxf']/100),2),
+                'sxftype'=>$coinInfo[0]['sxftype'], // 提现手续费类型
+                'txsxf_n'=>$coinInfo[0]['txsxf_n'], // 提现手续 数目
                 'txminnum'=>$coinInfo[0]['txminnum'],
-                'czminnum'=>$coinInfo[0]['czminnum']
+                'txmaxnum'=>$coinInfo[0]['txmaxnum'],
+                'czminnum'=>$coinInfo[0]['czminnum'],
+                'ky_money'=>$hkd_money
             ],
-            // 'jpy'=>[
-            //     'ur_hl'=>floatval($configs['ur_hl']),
-            //     'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
-            //     'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
-            //     'txminnum'=>$coinInfo[1]['txminnum'],
-            //     'czminnum'=>$coinInfo[1]['czminnum']
-            // ]
+            'usd'=>[
+                'ur_hl'=>floatval($configs['ur_hl']),
+                'txsxf'=>round(($coinInfo[1]['txsxf']/100),2),
+                'czsxf'=>round(($coinInfo[1]['czsxf']/100),2),
+                'sxftype'=>$coinInfo[0]['sxftype'], // 提现手续费类型
+                'txsxf_n'=>$coinInfo[0]['txsxf_n'], // 提现手续 数目
+                'txminnum'=>$coinInfo[1]['txminnum'],
+                'txmaxnum'=>$coinInfo[0]['txmaxnum'],
+                'czminnum'=>$coinInfo[1]['czminnum'],
+                'ky_money'=>$jpy_money
+            ]
         ];
+        return $this->ajaxReturn(['code'=>200,'info'=>$data]);
         return $this->ajaxReturn(['code'=>200,'info'=>$data]);
     }
 
