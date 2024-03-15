@@ -447,7 +447,28 @@ class OrepoolController extends HomeController
 		//我的矿机
 		$uid = userid();
 		$mylist = M("kjorder")->where(array('uid'=>$uid))->order('id desc')->select();
-		$this->assign('mylist',$mylist);
+// 		var_dump($mylist);exit;
+        // $mydata=[];
+        if(!empty($mylist)){
+        	foreach ($mylist as $k=>  $vo){
+    		    foreach ($blist as $item){
+ 
+    		        if($vo['kid'] == $item['id']){
+    		            $mydata[$k]=$vo;
+    		            $mydata[$k]['output_yield']=$item['output_yield'];
+    		            $mydata[$k]['service_charge']=$item['service_charge'];
+    		            $mydata[$k]['pricenum']=$item['pricenum'];
+    		            $mydata[$k]['suanl']=$item['suanl'];
+    		            $mydata[$k]['dayoutnum']=$item['dayoutnum']; 
+                          $mydata[$k]['outcoin']=$item['outcoin']; 
+                          $mydata[$k]['pricecoin']=$item['pricecoin']; 
+    		        }
+    		    }
+		    }
+            
+        }
+	   // var_dump($mydata);exit;
+		$this->assign('mylist',$mydata);
 		$this->assign('alist',$alist);
         $this->assign('blist',$blist);
         $this->assign('clist',$clist);

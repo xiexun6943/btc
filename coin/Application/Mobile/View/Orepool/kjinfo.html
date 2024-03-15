@@ -73,7 +73,7 @@
 				<div style="width:100%;height:80px;margin-top:15px;padding:0px 15px;">
 					<div class="obbox" style="width:40%;">
 						<div class="obbox_h">
-							<span class="fzmm fcc">{:L('矿机单价')}</span>
+							<span class="fzmm fcc">{:L('本次租金')}</span>
 						</div>
 						<div class="obbox_h">
 							<span class="fzmm fcc">{$info.pricenum} <?php echo strtoupper($info['pricecoin']);?></span>
@@ -104,32 +104,29 @@
 				    <div style="width:100%;height:10px;"></div>
 				    <div class="infobox_1">
 				        <div class="infobox_1l">
-				            <span class="fzmm fcc">{:L('产出说明')}：</span>
+				            <span class="fzmm fcc">{:L('预计日产')}：</span>
 				        </div>
 				        <div class="infobox_1r">
-				            <if condition="$info.outtype eq 1">
-				            <span class="fzmm fcc">{:L('按产值')}：{$info.dayoutnum}USDT</span>
-				            <elseif condition="$info.outtype eq 2" />
-				            <span class="fzmm fcc">{:L('按币量')}：{$info.dayoutnum} <?php echo strtoupper($info['outcoin']);?></span>
-				            </if>
+				            {$info.dayoutnum} 
+                             <?php echo strtoupper($info['outcoin']); ?>
 				        </div>
 				    </div>
 				    <div style="width:100%;min-height:60px;padding:10px 0px;">
 				        <div style="width:30%;height:60px;float:left;">
-				            <span class="fzmm fcc">{:L('矿机说明')}：</span>
+				            <span class="fzmm fcc">{:L('产出收益率')}：</span>
 				        </div>
 				        <div style="width:70%;height:60px;float:right;">
-				            <span class="fzmm fcc">{$info.content} </span>
+				            <span class="fzmm fcc">{$info.output_yield} %</span>
 				        </div>
 				    </div>
 				    
 				    <if condition="$info.buyask eq 1">
 				    <div class="infobox_1">
 				        <div class="infobox_1l">
-				            <span class="fzmm fcc">{:L('购买条件')}：</span>
+				            <span class="fzmm fcc">{:L('矿机算力')}：</span>
 				        </div>
 				        <div class="infobox_1r">
-				            <span class="fzmm fcc">{:L('最低持仓')}：{$info.asknum}{:L('平台币')}</span>
+				            <span class="fzmm fcc">{$info.suanl}</span>
 				        </div>
 				    </div>
 				    <elseif condition="$info.buyask eq 2" />
@@ -145,10 +142,10 @@
 				    <if condition="$info.djout eq 1">
 				    <div class="infobox_1">
 				        <div class="infobox_1l">
-				            <span class="fzmm fcc">{:L('产币冻结')}：</span>
+				            <span class="fzmm fcc">{:L('服务费')}：</span>
 				        </div>
 				        <div class="infobox_1r">
-				            <span class="fzmm fcc">{:L('否')}</span>
+				            <span class="fzmm fcc">{$info.service_charge} %</span>
 				        </div>
 				    </div>
 				    <elseif condition="$info.djout eq 2" />

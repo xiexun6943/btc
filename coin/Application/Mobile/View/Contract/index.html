@@ -520,9 +520,23 @@
             </div>    
             <else />
             
-            <div id="subbtn" style="width:100%;height:40px;line-height:40px;text-align:center;margin-top:30px;background: #0052fe;border-radius:10px;float:left;color: #fff">
-                <span class=" fzmm">{:L('确认下单')}</span>
+            <div id="subbtn" style="position:relative;width:100%;height:40px;line-height:40px;text-align:center;margin-top:30px;background: #0052fe;border-radius:10px;float:left;color: #fff">
+                <span class=" fzmm sub_button">{:L('确认下单')}</span>
+                        <img src="/Public/Static/img/spin.gif" class="spin" >
             </div>
+                    <style>
+                        .spin{
+                            display: none;
+                            position: absolute;
+                            top:0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            margin: auto;
+                            width:25px;
+                            height: 25px;
+                        }
+                    </style>
             <!--<div id="tyj_subbtn" style="width:45%;height:40px;line-height:40px;text-align:center;margin-top:30px;background: #0052fe;border-radius:10px;float:right;color: #fff">-->
             <!--    <span class=" fzmm">{:L('体验金下单')}</span>-->
             <!--</div>-->
@@ -664,11 +678,17 @@
 
 
     var myProcess;
+        var canSubmit = true
     $("#subbtn").click(function(){
         
         var postData = {
                   time: parseInt($('.option_list_active').find('.fcy').text())
                 };
+                
+                if(canSubmit==false) return
+                canSubmit = false
+                $('.sub_button').hide()
+                $('.spin').show()
             
                 // 发送POST请求
                 $.ajax({
@@ -736,6 +756,13 @@
                   },
                   error: function(error) {
                     console.error("发生错误:", error);
+                  },
+                  complete:function(){
+                    setTimeout(function(){
+                        canSubmit = true
+                        $('.sub_button').show()
+                        $('.spin').hide()
+                    },2000)
                   }
                 });
         

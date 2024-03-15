@@ -197,6 +197,8 @@ class KuangmController extends AdminController
 	        $data['buyask'] = trim($_POST['buyask']); 
 	        $data['asknum'] = trim($_POST['asknum']);
 	        $data['djout'] = trim($_POST['djout']); 
+	        $data['output_yield'] = trim($_POST['output_yield']);
+	        $data['service_charge'] = trim($_POST['service_charge']); 
 	        if(trim($_POST['djout']) == 2){
 	            $data['djday'] = trim($_POST['djday']); 
 	        }else{

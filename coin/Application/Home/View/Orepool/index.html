@@ -302,36 +302,38 @@
                                                     <div style="width:100%;height:30px;">
                                                         <span class="f14 fcc">{:L('购买时间')}：{$vo.addtime}</span>
                                                     </div>
-                                                    <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('产出币种')}：<?php echo strtoupper($vo['outcoin']);?></span>
+                                                    
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('矿机算力')}： {$vo.suanl} </span>
                                                     </div>
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('矿机类型')}：
-                                                        <if condition="$vo.type eq 1">
-                                                            <span class="f16 fcy fw">{:L('独资机型')}</span>
-                                                        <elseif condition="$vo.type eq 2" />    
-                                                            <span class="f16 fcy fw">{:L('共享机型')}</span>
-                                                        </if>
+                                                        <!--<span class="f14 fcc">{:L('本次租金')}：<?php echo strtoupper($vo['outcoin']);?></span> -->
+                                                        <span class="f14 fcc">{:L('本次租金')}：{$vo.pricenum} 
+                                                        <?php echo strtoupper($vo['pricecoin']); ?>
                                                         </span>
                                                     </div>
-                                                    <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('收益类型')}：
-                                                        <if condition="$vo.type eq 1">
-                                                            {:L('按产值')}
-                                                        <elseif condition="$vo.type eq 2" />    
-                                                            {:L('按产量')}
-                                                        </if>
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('服务费')}：{$vo.service_charge} %</span>
+                                                    </div>
+                                                  
+                                                    <!--<div style="width:100%;height:30px;">-->
+                                                    <!--    <span class="f14 fcc">{:L('收益类型')}：-->
+                                                    <!--    <if condition="$vo.type eq 1">-->
+                                                    <!--        {:L('按产值')}-->
+                                                    <!--    <elseif condition="$vo.type eq 2" />    -->
+                                                    <!--        {:L('按产量')}-->
+                                                    <!--    </if>-->
+                                                    <!--    </span>-->
+                                                    <!--</div>-->
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('预计日产')}：{$vo.dayoutnum} 
+                                                         <?php echo strtoupper($vo['outcoin']); ?>
                                                         </span>
                                                     </div>
+                                                    
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('收益方式')}：{:L('自动收益')}</span>
+                                                        <span class="f14 fcc">{:L('产出收益率')}：{$vo.output_yield} %</span>
                                                     </div>
-                                                    <if condition="$vo.type eq 2"></if>
-                                                    <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('份额占比')}：{$vo.sharebl}%</span>
-                                                    </div>
-                                                       
-                                                    </if>
                                                     
                                                 </div>
                                                 
@@ -348,21 +350,21 @@
                                                     <span class="f16 fch">{:L('矿机详情')}</span>
                                                 </div>
                                                 
-                                                <div style="width:100%;height:30px;">
-                                                    <span class="f14 fcc">{:L('收益次数')} ：
-                                                    {$vo.synum} {:L('次')}
-                                                    </span>
-                                                </div>
+                                                <!--<div style="width:100%;height:30px;">-->
+                                                <!--    <span class="f14 fcc">{:L('收益次数')} ：-->
+                                                <!--    {$vo.synum} {:L('次')}-->
+                                                <!--    </span>-->
+                                                <!--</div>-->
   
-                                                <div style="width:100%;height:30px;">
-                                                    <span class="f14 fcc">{:L('产出说明')} ：
-                                                    <if condition="$vo.outtype eq 1">
-				                                    {:L('按产值')}：{$vo.outusdt}USDT
-				                                    <elseif condition="$vo.outtype eq 2" />
-				                                    {:L('按币量')}：{$vo.outnum} <?php echo strtoupper($vo['outcoin']);?>
-				                                    </if>
-                                                    </span>
-                                                </div>
+                                        <!--        <div style="width:100%;height:30px;">-->
+                                        <!--            <span class="f14 fcc">{:L('产出说明')} ：-->
+                                        <!--            <if condition="$vo.outtype eq 1">-->
+				                                    <!--{:L('按产值')}：{$vo.outusdt}USDT-->
+				                                    <!--<elseif condition="$vo.outtype eq 2" />-->
+				                                    <!--{:L('按币量')}：{$vo.outnum} <?php echo strtoupper($vo['outcoin']);?>-->
+				                                    <!--</if>-->
+                                        <!--            </span>-->
+                                        <!--        </div>-->
 
                                                 
                                                 <div style="width:100%;min-height:30px;marin-top:30px;">
@@ -412,35 +414,38 @@
                                                     <img src="/Upload/public/{$vo.imgs}" style="width:60%;">
                                                 </div>
                                                 <div style="width:75%;padding:10px 0px 10px 10px;float:right;">
-                                                    <div style="width:100%;min-height:30px;">
+                                                  <div style="width:100%;min-height:30px;">
                                                         <span class="f16 fch">{$vo.title}</span>
                                                     </div>
+                                                 
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('上市时间')}：{$vo.market_time}</span>
+                                                        <span class="f14 fcc">{:L('矿机算力')}： {$vo.suanl} </span>
                                                     </div>
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('产出币种')}：<?php echo strtoupper($vo['outcoin']);?></span>
-                                                    </div>
-                                                    <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('矿机类型')}：
-                                                        <if condition="$vo.type eq 1">
-                                                            <span class="f16 fcy fw">{:L('独资机型')}</span>
-                                                        <elseif condition="$vo.type eq 2" />    
-                                                            <span class="f16 fcy fw">{:L('共享机型')}</span>
-                                                        </if>
+                                                        <!--<span class="f14 fcc">{:L('本次租金')}：<?php echo strtoupper($vo['outcoin']);?></span> -->
+                                                        <span class="f14 fcc">{:L('本次租金')}：{$vo.pricenum} 
+                                                        <?php echo strtoupper($vo['pricecoin']); ?>
                                                         </span>
                                                     </div>
-                                                    <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('收益类型')}：
-                                                        <if condition="$vo.type eq 1">
-                                                            {:L('按产值')}
-                                                        <elseif condition="$vo.type eq 2" />    
-                                                            {:L('按产量')}
-                                                        </if>
-                                                        </span>
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('服务费')}：{$vo.service_charge} %</span>
                                                     </div>
+                                                  
+                                                    <!--<div style="width:100%;height:30px;">-->
+                                                    <!--    <span class="f14 fcc">{:L('收益类型')}：-->
+                                                    <!--    <if condition="$vo.type eq 1">-->
+                                                    <!--        {:L('按产值')}-->
+                                                    <!--    <elseif condition="$vo.type eq 2" />    -->
+                                                    <!--        {:L('按产量')}-->
+                                                    <!--    </if>-->
+                                                    <!--    </span>-->
+                                                    <!--</div>-->
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('预计日产')}：{$vo.dayoutnum} {$vo.outcoin}</span>
+                                                    </div>
+                                                    
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('收益方式')}：{:L('自动收益')}</span>
+                                                        <span class="f14 fcc">{:L('产出收益率')}：{$vo.output_yield} %</span>
                                                     </div>
                                                 </div>
                                                 
@@ -472,19 +477,19 @@
 				                                    </if>
                                                     </span>
                                                 </div>
-                                                <div style="width:100%;height:30px;">
-                                                    <span class="f14 fcc">{:L('购买条件')} ：
-                                                    <if condition="$vo.buyask eq 1">
-                                                    {:L('最低持仓')}：{$vo.asknum}{:L('平台币')}    
-                                                    <elseif condition="$vo.buyask eq 2" /> 
-                                                    {:L('要求直推')}{$vo.asknum}{:L('人')}
-                                                    </if>
-                                                    </span>
-                                                </div>
+                                                <!--<div style="width:100%;height:30px;">-->
+                                                <!--    <span class="f14 fcc">{:L('购买条件')} ：-->
+                                                <!--    <if condition="$vo.buyask eq 1">-->
+                                                <!--    {:L('最低持仓')}：{$vo.asknum}{:L('平台币')}    -->
+                                                <!--    <elseif condition="$vo.buyask eq 2" /> -->
+                                                <!--    {:L('要求直推')}{$vo.asknum}{:L('人')}-->
+                                                <!--    </if>-->
+                                                <!--    </span>-->
+                                                <!--</div>-->
 
-                                                <div style="width:100%;min-height:30px;">
-                                                    <span class="f14 fcc">{$vo.content}</span>
-                                                </div>
+                                                <!--<div style="width:100%;min-height:30px;">-->
+                                                <!--    <span class="f14 fcc">{$vo.content}</span>-->
+                                                <!--</div>-->
                                             
                                             </div>
                                         </div>
@@ -535,32 +540,39 @@
                                                     <div style="width:100%;min-height:30px;">
                                                         <span class="f16 fch">{$vo.title}</span>
                                                     </div>
-                                                    <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('上市时间')}：{$vo.market_time}</span>
-                                                    </div>
-                                                    <div style="width:100%;height:30px;">
+                                                 <div style="width:100%;height:30px;">
                                                         <span class="f14 fcc">{:L('产出币种')}：<?php echo strtoupper($vo['outcoin']);?></span>
                                                     </div>
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('矿机类型')}：
-                                                        <if condition="$vo.type eq 1">
-                                                            <span class="f16 fcy fw">{:L('独资机型')}</span>
-                                                        <elseif condition="$vo.type eq 2" />    
-                                                            <span class="f16 fcy fw">{:L('共享机型')}</span>
-                                                        </if>
-                                                        </span>
+                                                        <span class="f14 fcc">{:L('矿机算力')}：{$vo.suanl} </span>
                                                     </div>
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('收益类型')}：
-                                                        <if condition="$vo.type eq 1">
-                                                            {:L('按产值')}
-                                                        <elseif condition="$vo.type eq 2" />    
-                                                            {:L('按产量')}
-                                                        </if>
+                                                        <!--<span class="f14 fcc">{:L('本次租金')}：<?php echo strtoupper($vo['outcoin']);?></span> -->
+                                                        <span class="f14 fcc">{:L('本次租金')}：：{$vo.pricenum} 
+                                                        <?php echo strtoupper($vo['pricecoin']);?>
                                                         </span>
                                                     </div>
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('服务费')}：{$vo.service_charge} %</span>
+                                                    </div>
+                                                  
+                                                    <!--<div style="width:100%;height:30px;">-->
+                                                    <!--    <span class="f14 fcc">{:L('收益类型')}：-->
+                                                    <!--    <if condition="$vo.type eq 1">-->
+                                                    <!--        {:L('按产值')}-->
+                                                    <!--    <elseif condition="$vo.type eq 2" />    -->
+                                                    <!--        {:L('按产量')}-->
+                                                    <!--    </if>-->
+                                                    <!--    </span>-->
+                                                    <!--</div>-->
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('预计日产')}：{$vo.dayoutnum} 
+                                                        <?php echo strtoupper($vo['outcoin']);?>
+                                                        </span>
+                                                    </div>
+                                                    
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('收益方式')}：{:L('自动收益')}</span>
+                                                        <span class="f14 fcc">{:L('产出收益率')}：{$vo.output_yield} %</span>
                                                     </div>
                                                 </div>
                                                 
@@ -576,35 +588,43 @@
                                                 <div style="width:100%;height:30px;">
                                                     <span class="f16 fch">{:L('矿机详情')}</span>
                                                 </div>
-                                                
+                                                 <div style="width:100%;height:30px;">
+                                                    <span class="f14 fcc">{:L('矿机类型')}：
+                                                    <if condition="$vo.type eq 1">
+                                                        <span class="f16 fcy fw">{:L('独资机型')}</span>
+                                                    <elseif condition="$vo.type eq 2" />    
+                                                        <span class="f16 fcy fw">{:L('共享机型')}</span>
+                                                    </if>
+                                                    </span>
+                                                </div>
                                                 <div style="width:100%;height:30px;">
                                                     <span class="f14 fcc">{:L('矿机单价')} ：
                                                     {$vo.pricenum} <?php echo strtoupper($vo['pricecoin']);?>
                                                     </span>
                                                 </div>
                                                 
-                                                <div style="width:100%;height:30px;">
-                                                    <span class="f14 fcc">{:L('产出说明')} ：
-                                                    <if condition="$vo.outtype eq 1">
-				                                    {:L('按产值')}：{$vo.dayoutnum}USDT
-				                                    <elseif condition="$vo.outtype eq 2" />
-				                                    {:L('按币量')}：{$vo.dayoutnum} <?php echo strtoupper($vo['outcoin']);?>
-				                                    </if>
-                                                    </span>
-                                                </div>
-                                                <div style="width:100%;height:30px;">
-                                                    <span class="f14 fcc">{:L('购买条件')} ：
-                                                    <if condition="$vo.buyask eq 1">
-                                                    {:L('最低持仓')}：{$vo.asknum}{:L('平台币')}    
-                                                    <elseif condition="$vo.buyask eq 2" /> 
-                                                    {:L('要求直推')}{$vo.asknum}{:L('人')}
-                                                    </if>
-                                                    </span>
-                                                </div>
+                                        <!--        <div style="width:100%;height:30px;">-->
+                                        <!--            <span class="f14 fcc">{:L('产出说明')} ：-->
+                                        <!--            <if condition="$vo.outtype eq 1">-->
+				                                    <!--{:L('按产值')}：{$vo.dayoutnum}USDT-->
+				                                    <!--<elseif condition="$vo.outtype eq 2" />-->
+				                                    <!--{:L('按币量')}：{$vo.dayoutnum} <?php echo strtoupper($vo['outcoin']);?>-->
+				                                    <!--</if>-->
+                                        <!--            </span>-->
+                                        <!--        </div>-->
+                                                <!--<div style="width:100%;height:30px;">-->
+                                                <!--    <span class="f14 fcc">{:L('购买条件')} ：-->
+                                                <!--    <if condition="$vo.buyask eq 1">-->
+                                                <!--    {:L('最低持仓')}：{$vo.asknum}{:L('平台币')}    -->
+                                                <!--    <elseif condition="$vo.buyask eq 2" /> -->
+                                                <!--    {:L('要求直推')}{$vo.asknum}{:L('人')}-->
+                                                <!--    </if>-->
+                                                <!--    </span>-->
+                                                <!--</div>-->
 
-                                                <div style="width:100%;min-height:30px;">
-                                                    <span class="f14 fcc">{$vo.content}</span>
-                                                </div>
+                                                <!--<div style="width:100%;min-height:30px;">-->
+                                                <!--    <span class="f14 fcc">{$vo.content}</span>-->
+                                                <!--</div>-->
                                             
                                             </div>
                                         </div>
@@ -653,35 +673,42 @@
                                                     <img src="/Upload/public/{$vo.imgs}" style="width:60%;">
                                                 </div>
                                                 <div style="width:75%;padding:10px 0px 10px 10px;float:right;">
-                                                    <div style="width:100%;min-height:30px;">
+                                                   <div style="width:100%;min-height:30px;">
                                                         <span class="f16 fch">{$vo.title}</span>
                                                     </div>
-                                                    <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('上市时间')}：{$vo.market_time}</span>
-                                                    </div>
-                                                    <div style="width:100%;height:30px;">
+                                                 <div style="width:100%;height:30px;">
                                                         <span class="f14 fcc">{:L('产出币种')}：<?php echo strtoupper($vo['outcoin']);?></span>
                                                     </div>
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('矿机类型')}：
-                                                        <if condition="$vo.type eq 1">
-                                                            <span class="f16 fcy fw">{:L('独资机型')}</span>
-                                                        <elseif condition="$vo.type eq 2" />    
-                                                            <span class="f16 fcy fw">{:L('共享机型')}</span>
-                                                        </if>
-                                                        </span>
+                                                        <span class="f14 fcc">{:L('矿机算力')}：{$vo.suanl} </span>
                                                     </div>
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('收益类型')}：
-                                                        <if condition="$vo.type eq 1">
-                                                            {:L('按产值')}
-                                                        <elseif condition="$vo.type eq 2" />    
-                                                            {:L('按产量')}
-                                                        </if>
+                                                        <!--<span class="f14 fcc">{:L('本次租金')}：<?php echo strtoupper($vo['outcoin']);?></span> -->
+                                                        <span class="f14 fcc">{:L('本次租金')}：：{$vo.pricenum}  
+                                                        <?php echo strtoupper($vo['pricecoin']);?>
                                                         </span>
                                                     </div>
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('服务费')}：{$vo.service_charge} %</span>
+                                                    </div>
+                                                  
+                                                    <!--<div style="width:100%;height:30px;">-->
+                                                    <!--    <span class="f14 fcc">{:L('收益类型')}：-->
+                                                    <!--    <if condition="$vo.type eq 1">-->
+                                                    <!--        {:L('按产值')}-->
+                                                    <!--    <elseif condition="$vo.type eq 2" />    -->
+                                                    <!--        {:L('按产量')}-->
+                                                    <!--    </if>-->
+                                                    <!--    </span>-->
+                                                    <!--</div>-->
+                                                     <div style="width:100%;height:30px;">
+                                                        <span class="f14 fcc">{:L('预计日产')}：{$vo.dayoutnum}
+                                                          <?php echo strtoupper($vo['outcoin']);?>
+                                                       </span>
+                                                    </div>
+                                                    
                                                     <div style="width:100%;height:30px;">
-                                                        <span class="f14 fcc">{:L('收益方式')}：{:L('自动收益')}</span>
+                                                        <span class="f14 fcc">{:L('产出收益率')}：{$vo.output_yield} %</span>
                                                     </div>
                                                 </div>
                                                 
@@ -704,28 +731,28 @@
                                                     </span>
                                                 </div>
                                                 
-                                                <div style="width:100%;height:30px;">
-                                                    <span class="f14 fcc">{:L('产出说明')} ：
-                                                    <if condition="$vo.outtype eq 1">
-				                                    {:L('按产值')}：{$vo.dayoutnum}USDT
-				                                    <elseif condition="$vo.outtype eq 2" />
-				                                    {:L('按币量')}：{$vo.dayoutnum} <?php echo strtoupper($vo['outcoin']);?>
-				                                    </if>
-                                                    </span>
-                                                </div>
-                                                <div style="width:100%;height:30px;">
-                                                    <span class="f14 fcc">{:L('购买条件')} ：
-                                                    <if condition="$vo.buyask eq 1">
-                                                    {:L('最低持仓')}：{$vo.asknum}{:L('平台币')}    
-                                                    <elseif condition="$vo.buyask eq 2" /> 
-                                                    {:L('要求直推')}{$vo.asknum}{:L('人')}
-                                                    </if>
-                                                    </span>
-                                                </div>
+                                        <!--        <div style="width:100%;height:30px;">-->
+                                        <!--            <span class="f14 fcc">{:L('产出说明')} ：-->
+                                        <!--            <if condition="$vo.outtype eq 1">-->
+				                                    <!--{:L('按产值')}：{$vo.dayoutnum}USDT-->
+				                                    <!--<elseif condition="$vo.outtype eq 2" />-->
+				                                    <!--{:L('按币量')}：{$vo.dayoutnum} <?php echo strtoupper($vo['outcoin']);?>-->
+				                                    <!--</if>-->
+                                        <!--            </span>-->
+                                        <!--        </div>-->
+                                                <!--<div style="width:100%;height:30px;">-->
+                                                <!--    <span class="f14 fcc">{:L('购买条件')} ：-->
+                                                <!--    <if condition="$vo.buyask eq 1">-->
+                                                <!--    {:L('最低持仓')}：{$vo.asknum}{:L('平台币')}    -->
+                                                <!--    <elseif condition="$vo.buyask eq 2" /> -->
+                                                <!--    {:L('要求直推')}{$vo.asknum}{:L('人')}-->
+                                                <!--    </if>-->
+                                                <!--    </span>-->
+                                                <!--</div>-->
 
-                                                <div style="width:100%;min-height:30px;">
-                                                    <span class="f14 fcc">{$vo.content}</span>
-                                                </div>
+                                                <!--<div style="width:100%;min-height:30px;">-->
+                                                <!--    <span class="f14 fcc">{$vo.content}</span>-->
+                                                <!--</div>-->
                                             
                                             </div>
                                         </div>
