@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" style="background:#191a1f;">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=2" />
+    <link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=<?=time()?>" />
     <link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
     <title>{$webname}</title>
     <style>
@@ -24,10 +24,33 @@
         .lbox{width:100%;height:60px;}
         .lbox_l{width:70%;height:60px;line-height:60px;text-align:left;float:left;}
         .lbox_r{width:30%;height:60px;line-height:60px;text-align:right;float:left;}
+    
+	    .isModernIPhone{
+	        padding-top:49px!important;
+	    }
+    
+	    .bottomUp{
+	        padding-bottom:100px!important;
+	    }
+	.bi-arrow-left::before{
+	    color: #fff;
+	}
+            .fch{
+                color:#fff!important;
+            }
+            .f16{
+                color:#fff!important;
+            }
+            .fcc{
+                color:#fff!important;
+            }
+            .bi-x::before{
+                color:#fff!important;
+            }
     </style>
 </head>
 <body>
-<div class="container-fluid ctbox">
+<div class="container-fluid ctbox" style="background:#191a1f;">
     <div class="no_header">
         <div class="fl bhalf allhg txtl" style="line-height:50px;">
             <i class="bi bi-arrow-left fcc fw" onclick="goback()" style="font-size: 26px;"></i>
@@ -38,7 +61,7 @@
 
     <div class="no_content">
 
-        <div class="no_title" style="background: rgb(245, 245, 245);padding-left:15px;">
+        <div class="no_title" style="padding-left:15px;">
             <span class="title_txt fch">{:L('修改密码')}</span>
         </div>
 

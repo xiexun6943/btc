@@ -1020,6 +1020,7 @@ a.openModal:focus {
 
 .pop-content {
     background: #fff;
+    background: none;
 }
 
 .pop-content-desc {

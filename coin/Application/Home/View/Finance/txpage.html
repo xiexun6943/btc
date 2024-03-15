@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=<?=time()?>" />
 	    <title>{$webname}</title>
         <style>
             .css-ogtd7z {
@@ -162,16 +162,16 @@
 	    <div class="App">
 	        <div class="css-tq0shg">
 	            <include file="Public:header"/>
-	            
+
 	            <div class="css-ogtd7z">
 	                <div class="css-jrzkh7">
 	                    <div id="header_global_js_wxgy34nj" class="css-1aac2e"></div>
 	                </div>
 	           </div>
-	           
+
 	           <main class="css-1wr4jig">
 	               <main class="css-xry4yv">
-	                  
+
 	                  <div class="css-1ay57iv">
 	                      <div class="css-8hzjvg">
 	                          <div class="css-1eklhqk">
@@ -184,7 +184,7 @@
 	                              </div>
 	                          </div>
 	                      </div>
-	                      
+
 	                      <div class="css-1dihobw">
 	                          <div class="css-1eklhqk">
 	                              <div class="css-tu2ioc" style="width:60%;float:left;">
@@ -202,7 +202,7 @@
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                      <div class="czbox" style="margin-bottom:0px;">
 	                                          <div class="czbox_1">
 	                                              <span class="fch f16">{:L('提币网络')}</span>
@@ -216,7 +216,7 @@
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                      <div class="czbox"  style="margin-top:20px;">
 	                                          <div class="czbox_1">
 	                                              <span class="fch f16">{:L('提币地址')}</span>
@@ -231,7 +231,7 @@
 	                                          </div>
 	                                      </div>
 
-	                                      
+
 	                                      <div class="czbox" style="margin-top:20px;">
 	                                          <div class="czbox_1">
 	                                              <span class="fch f16">{:L('提币数量')}</span>
@@ -270,7 +270,7 @@
 		                                <input type="hidden" id="txsxf" value="{$info.txsxf}" />
 		                                <input type="hidden" id="txsxf_n" value="{$info.txsxf_n}" />
 		                                <input type="hidden" id="sxftype" value="{$info.sxftype}" />
-		                                
+
 		                                <input type="hidden" id="tbid" value="{$info.id}" />
 		                                <input type="hidden" id="tbaddre" value="{$adrinfo.addr}" />
 
@@ -283,7 +283,7 @@
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                  </div>
 	                              </div>
 	                              <div style="width:35%;height:600px;float:right;padding:10px;">
@@ -301,17 +301,17 @@
 	                              </div>
 	                          </div>
 	                      </div>
-	                      
-	                      
+
+
 	                  </div>
-	                  
+
 	               </main>
 	           </main>
 
 	            <include file="Public:footer"/>
-	        </div>   
+	        </div>
 	    </div>
-	    
+
 	</body>
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/Public/Home/static/js/layer/layer.js" ></script>
@@ -327,7 +327,7 @@
             if(tbnum < txminnum){
                 layer.msg("{:L('不能低于最小提币值')}");return false;
             }
-            
+
             var sxftype = $("#sxftype").val();
             var txsxf = $("#txsxf").val();
             var txsxf_n = $("#txsxf_n").val();
@@ -336,9 +336,9 @@
             }else if(sxftype == 2){
                 var tmoney = tbnum - txsxf_n;
             }
-            
+
             $("#tmoney").text(tmoney);
-      
+
         }
     </script>
     <script type="text/javascript">
@@ -387,7 +387,7 @@
         }
     </script>
     <script type="text/javascript">
-		$("#nav").slide({ 
+		$("#nav").slide({
 			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
 			titCell:".nLi", //鼠标触发对象
 			targetCell:".sub", //titCell里面包含的要显示/消失的对象
@@ -398,5 +398,5 @@
 		});
 	</script>
 
-    
+
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" style="background:#191a1f;">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,14 +14,14 @@
 	<style>
 	    ::-webkit-input-placeholder {color: #b5b5b5;font-size: 12px;}
 	    ::-moz-placeholder {color: #b5b5b5;font-size: 12px;}
-	    input:focus{background:#f5f5f5;outline: 1px solid #f5f5f5;}
+	    input:focus{background:#191a1f;outline: 1px solid #f5f5f5;}
 	    a:hover,a:link,a:visited,a:active{color:#000000;text-decoration:none;}
-	    .no_header{position: fixed;z-index: 9999;padding:0px 10px;top:0px;line-height: 50px;background:#f5f5f5;}
+	    .no_header{position: fixed;z-index: 9999;padding:0px 10px;top:0px;line-height: 50px;background:#191a1f;}
 	    .contentbox{width:100%;height:600px;margin-top:45px;padding:5px 15px;}
 	    .contentbox_top{width:100%;height:50px;line-height:50px;text-align:left;}
-	    .contentbox_line{width:100%;background:#fff;border-radius:10px;padding:0px 10px;}
+	    .contentbox_line{width:100%;background:#353434;border-radius:10px;padding:0px 10px;}
 	    .line_2{width:100%;padding:10px;}
-	    .imgbox{width:100%;padding:10px;background:#fff;margin-top:15px;border-radius:10px;}
+	    .imgbox{width:100%;padding:10px;background:#353434;margin-top:15px;border-radius:10px;}
 	    .imgbox_1{width:100%;height:40px;line-height:40px;text-align:left;}
 	    .imgbox_2{width:100%;height:35px;line-height:35px;text-align:left;}
 	    .imgbox_3{width:100px;height:35px;line-height:35px;text-align:center;border:1px solid #FCD535;border-radius:5px;}
@@ -31,15 +31,34 @@
 	    .imgbox_7{width:100%;height:30px;line-height:30px;text-align:center;margin-top:10px;}
 	    .imgbox_8{width:100%;height:30px;line-height:30px;text-align:center;}
 	    .imgbox_9{width:100px;height:30px;line-height:30px;text-align:center;border-radius:5px;border:1px solid #FCD535;margin:auto;}
-	    .imgbox_10{width:100%;height:40px;line-height:40px;text-align:center;border-radius:5px;margin:auto;background: #0052fe;color: #fff;}
-	    .textbox{width:100%;background:#fff;margin-top:10px;border-radius:10px;padding:15px;}
+	    .imgbox_10{width:100%;height:40px;line-height:40px;text-align:center;border-radius:5px;margin:auto;background: #feb103;color: #fff;}
+	    .textbox{width:100%;background:#353434;margin-top:10px;border-radius:10px;padding:15px;}
 	    
-	    .zz_inputbox{width:100%;height:40px;line-height:40px;background:#f5f5f5;border-radius:10px;padding:0px 15px;}
-	    .zz_input{height:30px;line-height:30px;margin-top:5px;border:#f5f5f5;background:#f5f5f5;width:100%;}
+	    .zz_inputbox{width:100%;height:40px;line-height:40px;background:#191a1f;border-radius:10px;padding:0px 15px;}
+	    .zz_input{height:30px;line-height:30px;margin-top:5px;border:#f5f5f5;background:#191a1f;width:100%;color:#fff}
 	    .layui-upload-file{display: none!important;opacity: .01;}
+		.badge{
+			line-height: 0.4;
+    		border-radius: .5rem;
+		}
+		.bi-arrow-left::before {
+            color: #fff;
+        }
+		.bi-pencil-square::before {
+            color: #fff;
+        }
+        .fcc{
+            color:#fff!important;
+        }
+        .fch{
+            color:#fff!important;
+        }
+        .line_2{
+            color:#fff!important;
+        }
 	</style>
 </head>
-<body>
+  <body style="background:#191a1f;">
 	<div class="container-fluid " style="padding:0px;width:100vw;">
         <div class="no_header">
 			<div class="fl allhg txtl">
@@ -54,7 +73,7 @@
 		<div class="contentbox">
 		    <div class="contentbox_top">
 		       
-		        <span style="font-size:26px;font-weight:500;">{:L('实名认证')}</span>
+		        <span style="font-size:26px;font-weight:500;color:#fff">{:L('实名认证')}</span>
 		        
 		    </div>
 		    

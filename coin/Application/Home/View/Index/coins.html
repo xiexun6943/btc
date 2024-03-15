@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=<?=time()?>" />
 	    <title>{$webname}</title>
 	    <style>
             .css-1wr4jig {
@@ -323,21 +323,21 @@
               color: #474d57;
               font-size: 14px;
             }
-    
+
             ::-moz-placeholder { /* Mozilla Firefox 19+ */
               color: #474d57;
               font-size: 14px;
             }
             input:focus{background:#2B3139;outline: 1px solid #2B3139;}
-            
+
             .coin_lump2{
-                background: url("/Public/Static/img/coins/coins_bg_pc.png") no-repeat center bottom;
+                background: url("/Public/Static/img/coins/coins_bg_pc.jpg?v=3") no-repeat center bottom;
                 background-size:cover;
                 width: 100%;
                 height: 700px;
                 margin: 0 auto;
             }
-            
+
     .left{
           width: 15rem;
         height: 100vh;
@@ -350,7 +350,7 @@
          width: 15rem;
         height: auto;
     }
-            
+
     .right{
           width: 15rem;
         height: 100vh;
@@ -377,7 +377,7 @@
     height: auto;
     }
     .lump{
-        background:#fff;
+        background:#ffbf2f;
         width:33rem;
         height: auto;
         position: fixed;
@@ -413,9 +413,9 @@
 	</head>
 	<body>
 	    <div class="App">
-	        
-	        
-	        
+
+
+
 	    <div style="position:fixed; top:-10000px">
     	        <img src="/Public/Static/img/coins.png?v=2"/>
     	        <img src="/Public/Static/img/sunshine.png"/>
@@ -423,18 +423,18 @@
     	        <img src="/Public/Static/img/red_bag.png"/>
     	        <img src="/Public/Static/img/label.png"/>
 	    </div>
-	    
+
 	    <div class="coin_container" style="display:none">
     	    <div class="coin_lump">
         	    <div class="coins">
         	        <img src="/Public/Static/img/coins.png?v=2"/>
         	    </div>
-        	    
+
         	    <span class="coin_detail">
             	    <div class="close">
             	        <img src="/Public/Static/img/icon_close.png?v=3"/>
             	    </div>
-        	        
+
             	    <div class="sunshine">
             	        <img src="/Public/Static/img/sunshine.png"/>
             	    </div>
@@ -451,9 +451,9 @@
         	    </span>
     	    </div>
 	    </div>
-	    
+
 	    <style>
-	           
+
             .close{
                 position: absolute;
                 width: 60px;
@@ -462,7 +462,7 @@
                 right: 0;
                 bottom: 0;
                 z-index: 999;
-                
+
             }
             .close img{
                 position: absolute;
@@ -472,7 +472,7 @@
                 left: 0;
                 cursor: pointer;
             }
-	    
+
 	        .gift_text{
 	            text-align: center;
                 color: white;
@@ -483,11 +483,11 @@
                 z-index: 9;
                 text-shadow: 0 0 2px #000;
 	        }
-	    
+
 	        .coin_detail{
 	            display: none;
 	        }
-	           
+
             .redBag{
                 position: absolute;
                 width: 240px;
@@ -501,8 +501,8 @@
                 animation-fill-mode: forwards;
                 animation-duration: .5s;
                 animation-delay: .5s;
-                
-                
+
+
             }
             .redBag img{
                 position: absolute;
@@ -514,7 +514,7 @@
                 bottom: 0;
                 margin: auto;
             }
-            
+
             @keyframes redBag {
               0% {
                 top:470px;
@@ -527,7 +527,7 @@
                 opacity:1;
               }
             }
-	           
+
             .label{
                 position: absolute;
                 width: 300px;
@@ -542,7 +542,7 @@
                 animation-duration: .5s;
                 animation-fill-mode: forwards;
                 animation-delay: .5s;
-                
+
             }
             .label img{
                 position: absolute;
@@ -554,7 +554,7 @@
                 bottom: 0;
                 margin: auto;
             }
-            
+
             @keyframes label {
               0% {
                 opacity:0;
@@ -563,7 +563,7 @@
                 opacity:1;
               }
             }
-	           
+
             .coin_big{
                 position: absolute;
                 width: 200px;
@@ -574,7 +574,7 @@
                 bottom: 0;
                 margin: auto;
                 animation: coin_big .5s linear;
-                
+
             }
             .coin_big img{
                 position: absolute;
@@ -586,7 +586,7 @@
                 bottom: 0;
                 margin: auto;
             }
-            
+
             @keyframes coin_big {
               0% {
                 transform: scale(0);
@@ -595,7 +595,7 @@
                 transform: scale(1);
               }
             }
-	           
+
             .sunshine{
                 position: absolute;
                 width: 550px;
@@ -606,7 +606,7 @@
                 bottom: 0;
                 margin: auto;
                 animation: sunshine 5s linear infinite;
-                
+
             }
             .sunshine img{
                 position: absolute;
@@ -619,7 +619,7 @@
                 margin: auto;
                 opacity: .9;
             }
-            
+
             @keyframes sunshine {
               0% {
                 transform: rotate(0deg);
@@ -628,7 +628,7 @@
                 transform: rotate(-359deg);
               }
             }
-            
+
             .coin_container{
                 position: fixed;
                 width: 100vw;
@@ -641,7 +641,7 @@
                 z-index: 999;
                 background: rgba(0,0,0,.7);
             }
-	    
+
 	        .coin_lump{
                 position: absolute;
                 background-size:contain;
@@ -655,7 +655,7 @@
                 z-index: 99;
                 overflow: hidden;
             }
-	    
+
             .coins{
                 position: absolute;
                 width: 600px;
@@ -676,7 +676,7 @@
                 top:0;
                 left: 0;
             }
-            
+
             @keyframes coins {
               0% {
                 top:-1200px;
@@ -686,17 +686,17 @@
               }
             }
 	    </style>
-	    
-	    
+
+
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	    
+
 	    <script>
-	    
+
 	        function getDes(){
-	            
+
                 $.ajax({
                   type: "GET",
-                  url: "/draw/drawList", 
+                  url: "/draw/drawList",
                   success: function(res) {
                       if(res.code==1){
                           var newText = res.data.draw_desc.content.replace(/\r\n/g, "<br>")
@@ -704,23 +704,23 @@
                       }else{
                           layer.msg(res.msg)
                       }
-                      
+
                   },
                   error: function(error) {
                     console.error("发生错误:", error);
                   }
                 });
 	        }
-	        
+
 	        getDes()
-	        
+
 	        function setDraw(){
 	            const loginStatus = "{:userid()}"
-            
+
                 // 发送POST请求
                 $.ajax({
                   type: "GET",
-                  url: "/draw/goDraw", 
+                  url: "/draw/goDraw",
                   success: function(res) {
                       if(res.code==0){
                           layer.msg(res.msg)
@@ -737,27 +737,27 @@
                 	        },1000)
     	                }
                       }
-                      
+
                   },
                   error: function(error) {
                     console.error("{:L('发生错误')}:", error);
                   }
                 });
 	        }
-	    
+
 	        $(function(){
-	            
+
 	            $('.coin_btn').click(function(){
 	                    setDraw()
 	                })
-	            
+
 	            $('.close').click(function(){
 	                    $('.coin_container').hide()
 	                })
 	            })
 	    </script>
-	        
-	        
+
+
 	        <div class="css-tq0shg">
 	            <include file="Public:header"/>
 	            <div class="css-ogtd7z">
@@ -766,13 +766,13 @@
 	                 </div>
 	            </div>
 	            <main class="css-1wr4jig" style="background: #fff;">
-	                
+
 	                <div class="coin_lump2">
-	                    
-	                    
+
+
 			<div class="left"><img src="/Public/Static/img/coins/left.png?v=4"></div>
 			<div class="right"><img src="/Public/Static/img/coins/right.png?v=4"></div>
-	                    
+
 			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png?v=4"></div>
 			<div class="lump">
 			    <div class="label">{:L('规则说明')}</div>
@@ -780,19 +780,19 @@
 			    </p>
 			</div>
 	                </div>
-	                
+
 	            </main>
 
 	            <include file="Public:footer"/>
-	        </div>   
+	        </div>
 	    </div>
-	    
+
 	</body>
     <script type="text/javascript" src="/Public/Home/static/js/layer/layer.js" ></script>
     <script type="text/javascript" src="/Public/Home/static/js/jquery.SuperSlide.2.1.1.js" ></script>
 
     <script type="text/javascript">
-		$("#nav").slide({ 
+		$("#nav").slide({
 			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
 			titCell:".nLi", //鼠标触发对象
 			targetCell:".sub", //titCell里面包含的要显示/消失的对象
@@ -803,5 +803,5 @@
 		});
 	</script>
 
-    
+
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" style="background:#fff;">
+<html lang="zh-CN" style="background:#191a1f;">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,11 +15,11 @@
 	::-webkit-input-placeholder {color: #b5b5b5;font-size: 12px;}
 	::-moz-placeholder {color: #b5b5b5;font-size: 12px;}
 	input:focus{background:#f5f5f5;outline: 1px solid #f5f5f5;}
-	a:hover,a:link,a:visited,a:active{color:#000000;text-decoration:none;}
-	.no_header{position: fixed;z-index: 9999;background:#fff;padding:0px 10px;top:0px;box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);}
+	a:hover,a:link,a:visited,a:active{color:#fff000;text-decoration:none;}
+	.no_header{position: fixed;z-index: 9999;background:#191a1f;padding:0px 10px;top:0px;box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);}
 	.txtl{line-height:50px;width:10%;}
 	.klinebox{width:100%;height:550px;margin-top:55px;}
-	.klinetitle{width:100%;height:80px;background:#fff;padding:0px 20px;box-shadow: 0 2px 10px 0 rgb(0 0 0 / 5%);}
+	.klinetitle{width:100%;height:80px;background:#191a1f;padding:0px 20px;box-shadow: 0 2px 10px 0 rgb(0 0 0 / 5%);}
 	.klinetitle_l{width:45%;height:80px;float:left;}
 	.klinetitle_r{width:55%;height:80px;float:left;}
 	.newpricebox{height:40px;line-height:60px;margin-bottom:0px;color:#2ebd85;font-size:22px;font-weight:bold;}
@@ -31,9 +31,9 @@
 	.klr2_box_dl{width:45%;height:25px;line-height:25px;float:left;text-align:left;}
 	.klr2_box_dr{width:55%;height:25px;line-height:25px;float:right;text-align:right;}
 	.dongbox{position:fixed;z-index:9999;display:none;top:0px;width:100%;height:100vh;background:rgba(0,0,0,0.2);}
-	.dong_con{width:80%;height:86vh;background:#fff;margin-top:20px;border-top-right-radius:20px;border-bottom-right-radius:20px;padding:20px 15px 10px 20px;float:left;}
+	.dong_con{width:80%;height:86vh;background:#191a1f;margin-top:20px;border-top-right-radius:20px;border-bottom-right-radius:20px;padding:20px 15px 10px 20px;float:left;}
 	.dong_title{width:100%;height:40px;line-height:40px;}
-	.dong_title_span{font-size:18px;font-weight:500;}
+	.dong_title_span{font-size:18px;font-weight:500;color:#fff}
 	.dong_find_box{width:100%;height:30px;background:#f5f5f5;border-radius:10px;}
 	.dong_find_box_img{width:20%;height:30px;line-height:30px;float:left;text-align:center;}
 	.dong_input_box{width:80%;height:30px;float:left;}
@@ -47,7 +47,7 @@
 	.btnbox{width:100%;height:40px;padding:10px 20px;}
 	.btnbox_l{width:45%;height:40px;line-height:40px;float:left;text-align:center;border-radius:10px;background:#0ecb81;}
 	.btnbox_r{width:45%;height:40px;line-height:40px;float:right;text-align:center;border-radius:10px;background:#f5465c;}
-	.dong_order_c{width:90%;height:450px;background:#fff;margin:60px auto;border-radius:10px;padding:10px;}
+	.dong_order_c{width:90%;height:450px;background:#191a1f;margin:60px auto;border-radius:10px;padding:10px;}
 	.dong_order_x{width:100%;height:20px;line-height:20px;text-align:right;}
 	.dong_order_title{width:100%;height:30px;line-height:20px;text-align:center;border-bottom: 1px solid #f5f5f5;}
 	.dong_order_option{width:100%;height:80px;;overflow: hidden;overflow-x: scroll;margin-top:5px;}
@@ -62,16 +62,28 @@
     .red{color:#f5465c;}
     .bggreen{background:#0ecb81;}
     .bgred{background:#f5465c;}
-    .transbtnbox{width:100%;height:60px;background:rgb(245, 245, 245);position: fixed;bottom: 0px;padding:0px 15px;}
+    .transbtnbox{width:100%;height:60px;background:#353434;position: fixed;bottom: 0px;padding:0px 15px;}
     .transbtn{width:45%;height:40px;line-height:40px;text-align:center;margin-top:10px;border-radius:10px;}
     .tradlist{width:100%;margin-top:10px;}
 	.tradetitle{width:33.33%;height:30px;line-height:30px;float:left;}
 	.tleft{text-align:left;}
 	.tright{text-align:right;}
 	.tcenter{text-align:center;}
+	.bi-arrow-left::before{
+	    color: #fff;
+	}
+            .fch{
+                color:#fff!important;
+            }
+            .f16{
+                color:#fff!important;
+            }
+            .fcc{
+                color:#fff!important;
+            }
 	</style>
   </head>
-  <body style="background:#fff;">
+  <body style="background:#191a1f;">
 	<div class="container-fluid " style="padding:0px;width:100vw;">
 		<div class="no_header">
 			<div class="fl allhg txtl">
@@ -79,9 +91,9 @@
 			</div>
 
 			<div class="fl allhg" id="centerbox" style="width:80%;text-align:center;line-height:50px;">
-				<i class="bi bi-text-indent-left fw" style="font-size:22px;color:#000;"></i>
-				<span class="fzmmm fw"  style="color:#000;" id="symbolbox">{$upmarket}</span>
-				<span class="fzmmm fw"  style="color:#000;">{:L('币币交易')}</span>
+				<i class="bi bi-text-indent-left fw" style="font-size:22px;color:#fff;"></i>
+				<span class="fzmmm fw"  style="color:#fff;" id="symbolbox">{$upmarket}</span>
+				<span class="fzmmm fw"  style="color:#fff;">{:L('币币交易')}</span>
 			</div>
             
             <a href="{:U('Trade/tradebill')}">
@@ -133,7 +145,7 @@
 			</div>
 			
 			
-			<div style="width:100%;height:500px;background:#fff;padding:5px 15px;">
+			<div style="width:100%;height:500px;background:#191a1f;padding:5px 15px;">
 			    <div style="width:100%;height:30px;line-height:30px;">
 			        <span class="fzmmm fch" style="padding:5px 0px;border-bottom:2px solid #FCD535;">{:L('最近成交')}</span>
 			    </div>

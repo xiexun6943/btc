@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" style="background:#fff;">
+<html lang="zh-CN" style="background:#191a1f;">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,17 +14,17 @@
 	<style>
 	::-webkit-input-placeholder {color: #b5b5b5;font-size: 12px;}
 	::-moz-placeholder {color: #b5b5b5;font-size: 12px;}
-	input:focus{background:#fff;outline: 1px solid #fff;}
-	a:hover,a:link,a:visited,a:active{color:#000000;text-decoration:none;}
-	.no_header{position: fixed;z-index: 9999;padding:0px 10px;top:0px;background: #fff;}
+	input:focus{background:#191a1f;outline: 1px solid #fff;}
+	a:hover,a:link,a:visited,a:active{color:#fff000;text-decoration:none;}
+	.no_header{position: fixed;z-index: 9999;padding:0px 10px;top:0px;background: #191a1f;}
 	.txtl{line-height:50px;width:30%;}
-	.contentbox{width:100%;background:#fff;padding:10px;}
-	.content_title{width:100%;height:40px;line-height:40px;margin-top:50px;position: fixed;z-index: 9999;top:0px;padding:0px 10px;background:#fff;border-bottom:1px solid #f5f5f5;}
+	.contentbox{width:100%;background:#191a1f;padding:10px;}
+	.content_title{width:100%;height:40px;line-height:40px;margin-top:50px;position: fixed;z-index: 9999;top:0px;padding:0px 10px;background:#191a1f;border-bottom:1px solid #5d5d5d;}
 	.content_title_l{width:70%;height:40px;line-height:40px;float:left;}
 	.content_title_r{width:30%;height:40px;line-height:40px;float:right;padding:0px 5px;}
 	.tleft{text-align:left;}
 	.tright{text-align:right;}
-	.tradebox{width:100%;height:400px;background:#fff;}
+	.tradebox{width:100%;height:400px;background:#191a1f;}
 	.tradebox_l{width:58%;height:400px;float:left;}
 	.tradebox_r{width:40%;height:400px;float:right;}
 	.tradebox_l_btn{width:100%;height:36px;}
@@ -34,23 +34,23 @@
 	.green{color:#0ecb81;}
     .bgred{background:#f5465c;}
     .red{color:#f5465c;}
-    .bghc{background:#f5f5f5;}
+    .bghc{background:#5d5d5d;}
     .cfff{color:#fff;}
-    .c000{color:#000;}
+    .c000{color:#fff;}
     .formbox{width:100%;height:350px;margin-top:15px;}
     .formbox_op{width:100%;height:30px;}
     .formbox_op_list{width:50%;height:30px;line-height:30px;float:left;text-align:center;}
-    .inputbox{width:100%;height:36px;border:1px solid #f5f5f5;border-radius:5px;margin-top:10px;}
+    .inputbox{width:100%;height:36px;border:1px solid #5d5d5d;border-radius:5px;margin-top:10px;}
 	.inputbox_float{width:60%;height:36px;float:left;}
-	.xjinput{width:90%;background:#fff;border:#fff;margin-top:7px;padding:0px 10px;}
+	.xjinput{width:90%;background:#191a1f;border:#fff;margin-top:7px;padding:0px 10px;}
 	.input_bi{width:50%;height:26px;line-height:26px;float:left;text-align:center;margin-top:5px;}
-	.borderright{border-right:1px solid #f5f5f5;}
+	.borderright{border-right:1px solid #5d5d5d;}
 	.bistyle{font-size:24px;font-weight:bold;}
 	.blbox{width:100%;height:30px;margin-top:15px;}
 	.blbox_1{width:20%;height:30px;float:left;margin-right:6%;}
 	.blbox_2{width:20%;height:30px;float:left;}
 	.blbox_3{width:100%;height:10px;}
-	.bgf5{background:#f5f5f5;}
+	.bgf5{background:#5d5d5d;}
 	.blbox_4{width:100%;height:20x;line-height:20px;text-align:center;}
 	.tradebox_title{width:50%;height:20px;line-height:20px;float:left;}
 	.tl{text-align:left;}
@@ -62,26 +62,26 @@
 	.trade_listpricebox{width:100%;height:40px;line-height:40px;padding:0px 10px;}
 	.trade_list{width:50%;height:30px;line-height:30px;float:left;}
 	.dongbox{position:fixed;z-index:9999;display:none;top:0px;width:100%;height:100vh;background:rgba(0,0,0,0.2);}
-	.dong_con{width:80%;height:100vh;background:#fff;margin-top:0px;border-top-right-radius:0px;border-bottom-right-radius:0px;padding:20px 15px 10px 20px;float:left;}
+	.dong_con{width:80%;height:100vh;background:#191a1f;margin-top:0px;border-top-right-radius:0px;border-bottom-right-radius:0px;padding:20px 15px 10px 20px;float:left;}
 	.dong_title{width:100%;height:40px;line-height:40px;}
 	.dong_title_span{font-size:18px;font-weight:500;}
-	.dong_find_box{width:100%;height:30px;background:#f5f5f5;border-radius:10px;}
+	.dong_find_box{width:100%;height:30px;background:#5d5d5d;border-radius:10px;}
 	.dong_find_box_img{width:20%;height:30px;line-height:30px;float:left;text-align:center;}
 	.dong_input_box{width:80%;height:30px;float:left;}
-	.dong_symbox{width:90%;height:20px;border:none;background:#f5f5f5;margin-top:5px;}
-	.dong_sel_box{width:100%;height:30px;border-bottom:1px solid #f5f5f5;}
+	.dong_symbox{width:90%;height:20px;border:none;background:#5d5d5d;margin-top:5px;}
+	.dong_sel_box{width:100%;height:30px;border-bottom:1px solid #5d5d5d;}
 	.dong_sel_span{display:block;width:35px;height:30px;line-height:30px;border-bottom:2px solid #FCD535;font-size:14px;text-align:center;font-size:14px;}
 	.symbol_list{width:100%;height:450px;overflow-y: scroll;margin-top:10px;}
 	.sy_list_box{width:100%;height:30px;}
 	.sy_list_boxl{width:35%;height:30px;line-height:30px;float:left;text-align:left;}
 	.sy_list_boxr{width:30%;height:30px;line-height:30px;float:right;text-align:right;}
-	.order_title{display: inline-block;margin-right: 20px;font-weight: 1000;}
+	.order_title{color:#fff;display: inline-block;margin-right: 20px;font-weight: 1000;}
 	.FCD535{border-bottom: 2px solid #FCD535;}
-	.fccbox{width:100%;height:15px;background:#f5f5f5;}
+	.fccbox{width:100%;height:15px;background:#5d5d5d;}
 	.wtlistbox{width:100%;padding:0px 10px;} 
-	.o_title_box{width:50%;height:40px;line-height:40px;border-bottom:1px solid #f5f5f5;}
+	.o_title_box{width:50%;height:40px;line-height:40px;border-bottom:1px solid #5d5d5d;}
 	.tlistbox{width:100%;clear:both;padding:10px 0px;}
-	.tlistbox_1{width:100%;height:100px;border-bottom:1px solid #f5f5f5;}
+	.tlistbox_1{width:100%;height:100px;border-bottom:1px solid #5d5d5d;}
 	.tlistbox_2{width:100%;height:30px;}
 	.tlistbox_3{width:80%;height:30px;line-height:30px;}
 	.tlistbox_4{width:20%;height:30px;line-height:30px;}
@@ -90,13 +90,34 @@
 	.tlistbox_7{width:33.33%;height:60px;}
 	.tlistbox_8{width:100%;height:30px;line-height:30px;}
 	.tlistbox_9{width:100%;height:30px;line-height:20px;}
+		.bi-arrow-left::before {
+            color: #fff;
+        }
+		.bi-pencil-square::before {
+            color: #fff;
+        }
+        .lboxc{
+            color:#fff!important;
+        }
+        .fcc{
+            color:#fff!important;
+        }
+        .fch{
+            color:#fff!important;
+        }
+        .bi-dash::before{
+            color: #fff;
+        }
+        .bi-plus::before{
+            color: #fff;
+        }
 	</style>
   </head>
-  <body style="background:#fff;">
+  <body style="background:#191a1f;">
 	<div class="container-fluid " style="padding:0px;width:100vw;">
 		<div class="no_header">
             <div class="fl allhg txtl">
-				<span style="font-size:20px;font-weight:bold;color:#000;">{:L('币币交易')}</span>
+				<span style="font-size:20px;font-weight:bold;color:#fff;">{:L('币币交易')}</span>
 			</div>
 			<div class="fl allhg" style="width:30%;"></div>
 			<div class="fr allhg txtr" style="line-height:50px;width:10%;"></div>
@@ -106,7 +127,7 @@
 		 
 		        <i class="bi bi-text-indent-left fch" style="font-size:22px;" id="centerbox"></i>
 		        
-		        <span style="font-size:18px;font-weight:bold;color:#000;" id="marketbox">{$coinname}</span>
+		        <span style="font-size:18px;font-weight:bold;color:#fff;" id="marketbox">{$coinname}</span>
 		        <span style="color:#f5465c;" id="changebox">--</span>
 		    </div>
 		    
@@ -157,9 +178,9 @@
 		                    </div>
 		                </div>
 		                
-		                <div class="inputbox" style="background: #f5f5f5;display:none" id="sjbox">
+		                <div class="inputbox" style="background: #5d5d5d;display:none" id="sjbox">
 		                    <div class="inputbox_float">
-		                        <input type="text"  class="fcc xjinput" placeholder="{:L('按市场最优价')}" style="background:#f5f5f5;"  />
+		                        <input type="text"  class="fcc xjinput" placeholder="{:L('按市场最优价')}" style="background:#5d5d5d;"  />
 		                    </div>
 		                </div>
 		                
@@ -269,9 +290,9 @@
 		                    </div>
 		                </div>
 		                
-		                <div class="inputbox" style="background: #f5f5f5;display:none" id="sell_sjbox">
+		                <div class="inputbox" style="background: #5d5d5d;display:none" id="sell_sjbox">
 		                    <div class="inputbox_float">
-		                        <input type="text"  class="fcc xjinput" placeholder="{:L('按市场最优价')}" style="background:#f5f5f5;"  />
+		                        <input type="text"  class="fcc xjinput" placeholder="{:L('按市场最优价')}" style="background:#5d5d5d;"  />
 		                    </div>
 		                </div>
 		                

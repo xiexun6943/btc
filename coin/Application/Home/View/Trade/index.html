@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=<?=time()?>" />
 	    <title>{$webname}</title>
 	    <style>
             .css-1wr4jig {
@@ -36,7 +36,7 @@
                -ms-flex-direction: column;
                flex-direction: column;
             }
-            .klinetitle{width:100%;height:48px;background:#fff;padding:0px 20px;}
+            .klinetitle{width:100%;height:48px;background:#191a1f;padding:0px 20px;}
 	        .klinetitle_l{width:20%;height:50px;float:left;}
 	        .klinetitle_r{width:60%;height:50px;float:left;}
 			.newpricebox{height:28px;line-height:30px;margin-bottom:0px;color:#2ebd85;font-size:14px;text-align: left;}
@@ -59,31 +59,31 @@
 	        .symbol_list{width:100%;height:890px;margin-top:10px;}
 	        .no_header{position: fixed;z-index: 9999;padding:0px 10px;top:0px;background: #fff;}
 	        .txtl{line-height:50px;width:30%;}
-	        .contentbox{width:100%;background:#fff;padding:10px;}
+	        .contentbox{width:100%;background:#353434;padding:10px;}
 	        .content_title{width:100%;height:40px;line-height:40px;margin-top:50px;position: fixed;z-index: 9999;top:0px;padding:0px 10px;background:#fff;border-bottom:1px solid #f5f5f5;}
 	        .content_title_l{width:70%;height:40px;line-height:40px;float:left;}
 	        .content_title_r{width:30%;height:40px;line-height:40px;float:right;padding:0px 5px;}
 	        .tleft{text-align:left;}
 	        .tright{text-align:right;}
-	        .tradebox{width:100%;height:350px;background:#fff;}
+	        .tradebox{width:100%;height:350px;background:#353434;}
 	        .tradebox_l{width:58%;height:300px;float:left;}
 	        .tradebox_r{width:40%;height:300px;float:right;}
 	        .tradebox_l_btn{width:100%;height:36px;}
 	        .tradebox_l_buybtn{width:48%;height:36px;line-height:36px;float:left;text-align:center;border-radius:5px;}
 	        .tradebox_l_sellbtn{width:48%;height:36px;line-height:36px;float:right;text-align:center;border-radius:5px;}
-	        .bggreen{background:#0ecb81;}
+	        .bggreen{background:#0ecb81;border-radius:5px}
 	        .green{color:#0ecb81;}
-            .bgred{background:#f5465c;}
+            .bgred{background:#f5465c;border-radius:5px}
             .red{color:#f5465c;}
             .bghc{background:#f5f5f5;}
             .cfff{color:#fff;}
             .c000{color:#000;}
-            .formbox{width:100%;height:350px;margin-top:15px;}
+            .formbox{width:100%;height:auto;margin-top:15px;}
             .formbox_op{width:100%;height:30px;}
             .formbox_op_list{width:20%;height:30px;line-height:30px;float:left;text-align:center;cursor:pointer;}
             .inputbox{width:100%;height:36px;border:1px solid #707A8A;border-radius:5px;margin:10px 0px 20px;}
 	        .inputbox_float{width:60%;height:36px;float:left;}
-	        .xjinput{width:70%;background:#fff;border:#fff;margin-top:7px;padding:0px 10px;outline:none !important;}
+	        .xjinput{color:#fff;width:70%;background:#353434;border:#5d5d5d;margin-top:7px;padding:0px 10px;outline:none !important;}
 	        .input_bi{width:50%;height:26px;line-height:26px;float:left;text-align:center;margin-top:5px;cursor:pointer;}
 	        .borderright{border-right:1px solid #f5f5f5;}
 	        .bistyle{font-size:16px;cursor: pointer;}
@@ -91,7 +91,7 @@
 	        .blbox_1{width:20%;height:30px;float:left;margin-right:6%;}
 	        .blbox_2{width:20%;height:30px;float:left;}
 	        .blbox_3{width:100%;height:10px;}
-	        .bgf5{background:#f5f5f5;border-radius:5px;cursor: pointer;}
+	        .bgf5{background:#5d5d5d;border-radius:5px;cursor: pointer;}
 	        .blbox_4{width:100%;height:20x;line-height:20px;text-align:center;}
 	        .tradebox_title{width:50%;height:20px;line-height:20px;float:left;}
 	        .tl{text-align:left;}
@@ -119,7 +119,7 @@
 	        .order_title{display: inline-block;margin-right: 20px;font-weight: 1000;}
 	        .FCD535{border-bottom: 2px solid #FCD535;}
 	        .fccbox{width:100%;height:15px;background:#f5f5f5;}
-	        .wtlistbox{width:100%;padding:0px 10px;} 
+	        .wtlistbox{width:100%;padding:0px 10px;}
 	        .o_title_box{width:50%;height:40px;line-height:40px;border-bottom:1px solid #f5f5f5;}
 	        .tlistbox{width:100%;clear:both;padding:10px 0px;}
 	        .tlistbox_1{width:100%;height:100px;border-bottom:1px solid #f5f5f5;}
@@ -131,7 +131,31 @@
 	        .tlistbox_7{width:33.33%;height:60px;}
 	        .tlistbox_8{width:100%;height:30px;line-height:30px;}
 	        .tlistbox_9{width:100%;height:30px;line-height:20px;}
-
+            .interval-item{
+                color:#fff!important;
+                background: #353434!important;
+                border:1px solid #5d5d5d!important;
+            }
+            .bi-dash::before{
+                color:#fff;
+            }
+            .bi-plus::before{
+                color:#fff;
+            }
+            input:focus{
+                background: unset!important;
+            }
+            .btn_bg_color{
+                border:none!important;
+                color:#191a1f!important;
+            }
+            .fcb{
+                border:none!important;
+                color:#191a1f!important;
+            }
+            .order-top-select{
+                border:none!important;
+            }
 	    </style>
 	</head>
 	<body>
@@ -144,10 +168,10 @@
 	                 </div>
 	            </div>
 	            <main class="css-1wr4jig">
-                    <div style="width:100%;min-height:880px;background:#f5f5f5;padding:10px 0px 0px 0px;">
+                    <div style="width:100%;min-height:880px;background:#191a1f;padding:10px 0px 0px 0px;">
                         <div style="width:100%;min-height:900px;">
                             <div style="width:20%;min-height:900px;float:left;padding:0px 10px 0px 0px;">
-                                <div style="width:100%;min-height:1009px;background:#fff;">
+                                <div style="width:100%;min-height:1009px;background:#353434;">
                                     <div style="width:100%;height:100%;padding:0px;padding:0px 10px;">
 	                                    <div style="width:100%;top:0px;">
 
@@ -160,24 +184,24 @@
                                                 <div class="sy_list_boxl">
                                                     <span  class="f14 tcbh">{:L('币种')}</span>
                                                     </div>
-                                                <div class="sy_list_boxl tcbh f14 tcc"  style="text-align: center"  >{:L('24小时交易量')}</div>
-                                                <div class="sy_list_boxr tcbh f14" >{:L('24h涨跌')}</div>
+                                                <div class="sy_list_boxl tcbh f14 tcc"  style="text-align: center;border-bottom: 1px solid #5d5d5d !important;"  >{:L('24小时交易量')}</div>
+                                                <div class="sy_list_boxr tcbh f14" style="border-bottom: 1px solid #5d5d5d !important;">{:L('24h涨跌')}</div>
                                                 </div>
                                         </a>
 	                                    </div>
-	                                    
-	                                    
+
+
 	                                    <div class="symbol_list" id="smybolbox">
 	                                        <div style="width:100%;height:100px;line-height:100px;text-align:center;">
                                                 <span class="f14 fcc">{:L('没有获取数据')}</span>
                                             </div>
 	                                    </div>
 	                                </div>
-                                    
+
                                 </div>
                             </div>
-                            <div style="width:60%;min-height:900px;background:#fff;float:left;">
-                                <div style="width:100%;height:50px;border-bottom:3px solid #f5f5f5;padding-right: 40%">
+                            <div style="width:60%;min-height:900px;background:#191a1f;float:left;">
+                                <div style="width:100%;height:50px;border-bottom:3px solid #5d5d5d;padding-right: 40%">
                                     <div class="klinetitle">
                                         <div class="klinetitle_l">
 			                        	    <p class="newpricebox fw f12 fch">{$coinname}</p>
@@ -189,30 +213,30 @@
 			                        	</div>
 			                        	<div class="klinetitle_r">
 			                        	    <div class="col-4 klinetitle-s-box">
-			                        	        <div class="newpricebox f12 tcbh">
+			                        	        <div class="newpricebox f12 tcbh" style="background:none">
 			                        	            {:L('最低')}
 			                        	        </div>
-			                        	        <div class="changebox f12 tcbh" id="minmoney">
+			                        	        <div class="changebox f12 tcbh" id="minmoney" style="background:none">
 			                        	            --
 			                        	        </div>
 			                        	    </div>
 			                        	    <div class="col-4 klinetitle-s-box">
-			                        	        <div class="newpricebox f12 tcbh">
+			                        	        <div class="newpricebox f12 tcbh" style="background:none">
 			                        	            {:L('最高')}
 			                        	        </div>
-			                        	        <div class="changebox f12 tcbh" id="maxmoney">
+			                        	        <div class="changebox f12 tcbh" id="maxmoney" style="background:none">
 			                        	            --
 			                        	        </div>
 			                        	    </div>
 			                        	    <div class="col-4 klinetitle-s-box">
-			                        	        <div class="newpricebox f12 tcbh">
+			                        	        <div class="newpricebox f12 tcbh" style="background:none">
 			                        	            24h{:L('量')}
 			                        	        </div>
-			                        	        <div class="changebox f12 tcbh" id="allvol">
+			                        	        <div class="changebox f12 tcbh" id="allvol" style="background:none">
 			                        	            --
 			                        	        </div>
 			                        	    </div>
-			                        	    
+
 			                        	</div>
                 			        </div>
                                 </div>
@@ -224,14 +248,14 @@
 			                            </div>
                                     </div>
                                 </div>
-                                <div style="width:100%;height:360px;padding:0px 25px;border-top: 5px solid #f5f5f5;">
+                                <div style="width:100%;height:360px;padding:0px 25px;">
                                     <div style="width:100%;height:360px;">
                                         <div class="contentbox" style="width:100%;padding:0px;">
 		                                    <div class="tradebox" style="width:100%;padding:0px;">
 		                                        <div class="tradebox_l" style="width:100%;padding:0px;">
 													<div>
 														<!--买入框-->
-														<div class="formbox col-6 klinetitle-s-box klinetitle-s-box-l" id="buycoinbox">
+														<div class="formbox col-6 klinetitle-s-box klinetitle-s-box-l" style="border-right: 2px dashed #5d5d5d;" id="buycoinbox">
 
 															<div style="width:100%;height:30px;margin-bottom:10px;">
 																<div style="width:30%;height:30px;line-height:30px;float:left;">
@@ -275,12 +299,12 @@
 																</div>
 															</div>
 
-															<div class="inputbox" style="background: #f5f5f5;display:none" id="sjbox">
+															<div class="inputbox" style="display:none" id="sjbox">
 																<div class="inputbox_float">
 																	<div class="klinetitle-s-box input-desc tcc f12">
 																		{:L('买入')}
 																	</div>
-																	<input type="text"  class="fcc xjinput" placeholder="{:L('按市场最优价')}" style="background:#f5f5f5;"  />
+																	<input type="text"  class="fcc xjinput" placeholder="{:L('按市场最优价')}"   />
 																</div>
 															</div>
 
@@ -410,12 +434,12 @@
 																</div>
 															</div>
 
-															<div class="inputbox" style="background: #f5f5f5;display:none" id="sell_sjbox">
+															<div class="inputbox" style="display:none" id="sell_sjbox">
 																<div class="inputbox_float">
 																	<div class="klinetitle-s-box input-desc tcc f12">
 																		{:L('卖出')}
 																	</div>
-																	<input type="text"  class="fcc xjinput" placeholder="{:L('按市场最优价')}" style="background:#f5f5f5;"  />
+																	<input type="text"  class="fcc xjinput" placeholder="{:L('按市场最优价')}"  />
 																</div>
 															</div>
 
@@ -514,32 +538,64 @@
 														</div>
 													</div>
 
-		            
-		            
-		            
+
+
+
 
 
 		        </div>
 		                                    </div>
-		    
+
 		                                </div>
-                                        
-                                        
-                                        
-                                        
-                                        
+
+
+
+
+
                                     </div>
                                 </div>
-                                
+
                             </div>
+                            <style>
+                                .fcc{
+                                    color:#fff!important;
+                                }
+                                .fch{
+                                    color:#fff!important;
+                                }
+                                .tcbh{
+                                    color:#fff!important;
+                                    background:#353434;
+                                }
+                                .tcc{
+                                    color:#fff!important;
+                                }
+                                .dong_sel_box{
+                                    border-bottom:1px solid #5d5d5d!important;
+                                }
+                                .sy_list_box{
+                                    border-bottom:1px solid #5d5d5d!important;
+                                }
+                                .css-1wr4jig{
+                                    background:#191a1f;
+                                }
+                                .order-top{
+                                    color:#fff!important;
+                                    background:#1f2535!important;
+                                    border-bottom:1px solid #5d5d5d!important;
+                                }
+                                .order-main-table{
+                                    background:#1f2535!important;
+                                }
+                            </style>
                             <div style="width:20%;min-height:800px;float:left;padding:0px 0px 0px 10px;">
-                                <div style="width:100%;min-height:1009px;background:#fff;">
+                                <div style="width:100%;min-height:1009px;background:#353434;">
                                     <div style="width:100%;height:40px;padding:0px 15px;">
                                         <div style="min-width:20%;height:40px;line-height:40px;border-bottom:2px solid #FCD535">
                                             <span class="f12 fch">{:L('盘口')}</span>
                                         </div>
                                         <div style="width:100%;margin-top:20px;">
-                                            
+
                                             <div style="width:100%;">
 		                                        <div style="width:100%;height:20px;padding:0px 5px;">
 		                                            <div class="tradebox_title tl">
@@ -549,7 +605,7 @@
 		                                                <span class="fch f12">{:L('数量')}</span>
 		                                            </div>
 		                                        </div>
-		                                        
+
 		                                        <div class="trade_listbox" id="tradesellbox">
 		                                            <div style="width:100%;height:30px;">
 		                                                <div class="trade_list tl">
@@ -574,16 +630,16 @@
 		                                            </div>
 		                                        </div>
 		                                    </div>
-                                            
-                                            
+
+
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-					<div style="width:100%;float:left;min-height: 160px;margin-top: 10px;border-top: 1px solid #f5f5f5;background: #fff">
+					<div style="width:100%;float:left;min-height: 160px;margin-top: 10px;border-top: 1px solid #5d5d5d;background: #353434">
 
 						<div class="order-top">
 							<div class="order-top-span order-top-current order-top-select" onclick="order_top_select_action(1)">
@@ -593,7 +649,7 @@
 								{:L('历史记录')}
 							</div>
 							<div class="refresh-icon">
-								<svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42 8V24" stroke="#303131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 24L6 40" stroke="#303131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 24C6 33.9411 14.0589 42 24 42C28.8556 42 33.2622 40.0774 36.5 36.9519" stroke="#303131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M42.0007 24C42.0007 14.0589 33.9418 6 24.0007 6C18.9152 6 14.3223 8.10896 11.0488 11.5" stroke="#303131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+								<svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42 8V24" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 24L6 40" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 24C6 33.9411 14.0589 42 24 42C28.8556 42 33.2622 40.0774 36.5 36.9519" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M42.0007 24C42.0007 14.0589 33.9418 6 24.0007 6C18.9152 6 14.3223 8.10896 11.0488 11.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
 
 							</div>
 
@@ -619,7 +675,7 @@
                                             <td>{:L('交易限价')}</td>
                                             <td>{:L('委托时间')}</td>
                                             <td>{:L('操作')}</td>
-                                            
+
 										</tr>
 										</thead>
 
@@ -675,7 +731,7 @@
 									<table class="table tcc order-main-table ">
 										<thead>
 										<tr class="tcbh">
-										
+
 											<td>{:L('类型')}</td>
 											<td>{:L('交易对')}</td>
                                             <td>{:L('方向')}</td>
@@ -684,7 +740,7 @@
                                             <td>{:L('交易限价')}</td>
                                             <td>{:L('委托时间')}</td>
                                             <td>{:L('结单时间')}</td>
-                                            
+
 										</tr>
 										</thead>
 										<tbody>
@@ -741,10 +797,10 @@
 						</div>
 					</div>
 	            </main>
-	            
+
 	            <input type="hidden" id="buy_usermoney" value="{$usdt_blance}" />
                 <input type="hidden" id="buy_usercoin" value="{$coin_blance}" />
-                
+
                 <input type="hidden" id="symbolbox" value="{$coinname}"  />
                 <!--交易限价单价-->
 	            <input type="hidden" id="mprice" value="" />
@@ -754,10 +810,10 @@
 	            <input type="hidden" id="musdt" value="" />
 	            <!--购买类型，1限价2市价-->
 	            <input type="hidden" id="buytype" value="1" />
-	            
-	            
+
+
 	            <include file="Public:footer"/>
-	        </div>   
+	        </div>
 	    </div>
 
 
@@ -778,7 +834,7 @@
                     },2000);
                 }else{
                     layer.msg(data.info);return false;
-                }    
+                }
             });
         }
 
@@ -828,7 +884,7 @@
                         window.location.reload();
                     },2000);
                 }else{
-                    layer.msg(data.info);return false; 
+                    layer.msg(data.info);return false;
                 }
             });
         }
@@ -870,7 +926,7 @@
                         window.location.reload();
                     },2000);
                 }else{
-                   layer.msg(data.info);return false; 
+                   layer.msg(data.info);return false;
                 }
             });
         }
@@ -886,11 +942,11 @@
                     $("#smybolbox").empty();
                     var html = '';
                     if(data.data == '' || data.data == null){
-                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                                '<span class="f12 fcc">' + "{:L('没有获取数据')}" + '</span>'+
                                '</div>';
                         $("#smybolbox").append(html);
-                        
+
                     }else{
                         $.each(data.data,function(key,val){
                             html += '<a href="/Trade/index.html?symbol='+ val.coin +'&type=buy">'+
@@ -903,11 +959,11 @@
                                     '</div>'+
                                     '</a>';
                         });
-                        
+
                         $("#smybolbox").append(html);
                     }
                 }else{
-                    html =  '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                    html =  '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                             '<span class="f12 fcc">' + "{:L('没有获取数据')}" + '</span>'+
                             '</div>';
                     $("#smybolbox").append(html);
@@ -935,11 +991,11 @@
                     $("#tradebuybox").empty();
                     var html = '';
                     if(data.data == '' || data.data == null){
-                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                                '<span class="f12 fcc">' + "{:L('没有获取数据')}" + '</span>'+
                                '</div>';
                         $("#tradebuybox").append(html);
-                        
+
                     }else{
                         $.each(data.data,function(key,val){
                             html += '<div style="width:100%;height:30px;">'+
@@ -967,11 +1023,11 @@
                     $("#tradesellbox").empty();
                     var html = '';
                     if(data.data == '' || data.data == null){
-                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                                '<span class="f12 fcc">' + "{:L('没有获取数据')}" + '</span>'+
                                '</div>';
                         $("#tradesellbox").append(html);
-                        
+
                     }else{
                         $.each(data.data,function(key,val){
                             html += '<div style="width:100%;height:30px;">'+
@@ -1057,7 +1113,7 @@
             $("#sellxjcoin").hide();
 			$('.jy-btn').removeClass('btn_bg_color');
 			$(this).addClass('btn_bg_color');
-            
+
         });
         $("#sell_sjbtn").click(function(){
             $("#sell_sjspan").addClass("fcb");
@@ -1074,7 +1130,7 @@
 			$('.jy-btn').removeClass('btn_bg_color');
 			$(this).addClass('btn_bg_color');
         });
-    
+
         //买入框
         $("#buyxjbtn").click(function(){
             $("#xjspan").addClass("fcb");
@@ -1112,7 +1168,7 @@
             var buyusdt = parseFloat($("#sell_usdt").val()); //输入的USDT数量
             var usermoney = parseFloat($("#buy_usercoin").val());//币的数量
             var coinnum = parseFloat(buyusdt / newprice).toFixed(4);
-            
+
             if(coinnum > usermoney){
                 layer.msg("{:L('余额不足')}");return false;
             }else{
@@ -1154,7 +1210,7 @@
                 $("#mnum").val(newbuynum);
                 $("#musdt").val(buyusdt);
             }
-            
+
         }
         function buynumfc(){
             var newbuynum = $("#buynum").val();
@@ -1168,7 +1224,7 @@
                 $("#mnum").val(newbuynum);
                 $("#musdt").val(buyusdt);
             }
-            
+
         }
     </script>
     <script type="text/javascript">
@@ -1234,9 +1290,9 @@
                 layer.msg("{:L('余额不足')}");return false;
             }
         }
-        
-        
-        
+
+
+
         function sellblfc(type,num){
             var type = type;
             var num = num;
@@ -1244,15 +1300,15 @@
             var musdt = parseFloat((usermoney * num / 100)).toFixed(4);
             var newprice = $("#newprice").val();
             var buynum = parseFloat((musdt * newprice)).toFixed(4);
-            
+
             $("#sell_usdt").val(buynum);
             $("#sell_num").val(musdt);
-            
+
             $("#musdt").val(buynum);
             $("#mnum").val(musdt);
             $("#sell_coin").val(musdt);
-            
-            
+
+
             if(type == 1){
                 $('#sellbl_1').addClass("bgred");
                 $('#sellbl_1').removeClass("bgf5");
@@ -1262,7 +1318,7 @@
                 $('#sellbl_3').removeClass("bgred");
                 $('#sellbl_4').addClass("bgf5");
                 $('#sellbl_4').removeClass("bgred");
-                
+
             }else if(type == 2){
                 $('#sellbl_2').addClass("bgred");
                 $('#sellbl_2').removeClass("bgf5");
@@ -1312,7 +1368,7 @@
                 $('#buybl_3').removeClass("bggreen");
                 $('#buybl_4').addClass("bgf5");
                 $('#buybl_4').removeClass("bggreen");
-                
+
             }else if(type == 2){
                 $('#buybl_2').addClass("bggreen");
                 $('#buybl_2').removeClass("bgf5");
@@ -1344,7 +1400,7 @@
         }
     </script>
     <script type="text/javascript">
-        
+
         $("#dash_sellprice").click(function(){
             var newprice =  parseFloat($("#sell_newprice").val());
             if(newprice > 0){
@@ -1355,14 +1411,14 @@
             $("#sell_newprice").val(buyprice);
             $("#mprice").val(buyprice);
         });
-        
+
         $("#plus_sellprice").click(function(){
             var newprice = parseFloat($("#sell_newprice").val());
             var buyprice = (newprice + 0.001).toFixed(4);
             $("#sell_newprice").val(buyprice);
             $("#mprice").val(buyprice);
         });
-        
+
         $("#dash_sellnum").click(function(){
             var buynum = parseFloat($("#sell_num").val());
             if(buynum > 0){
@@ -1376,7 +1432,7 @@
             var buyusdt = (newprice * newbuynum).toFixed(4);
             $("#sell_usdt").val(buyusdt);
             $("#musdt").val(buyusdt);
-            
+
         });
         $("#plus_sellnum").click(function(){
             var buynum = parseFloat($("#sell_num").val());
@@ -1397,8 +1453,8 @@
                 $("#musdt").val(buyusdt);
             }
         });
-    
-        
+
+
         $("#dash_buyprice").click(function(){
             var newprice =  parseFloat($("#newprice").val());
             if(newprice > 0){
@@ -1428,7 +1484,7 @@
             var buyusdt = (newprice * newbuynum).toFixed(4);
             $("#buyusdt").val(buyusdt);
             $("#musdt").val(buyusdt);
-            
+
         });
         $("#plus_buynum").click(function(){
             var buynum = parseFloat($("#buynum").val());
@@ -1452,7 +1508,7 @@
     </script>
 
     <script type="text/javascript">
-		$("#nav").slide({ 
+		$("#nav").slide({
 			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
 			titCell:".nLi", //鼠标触发对象
 			targetCell:".sub", //titCell里面包含的要显示/消失的对象
@@ -1463,5 +1519,5 @@
 		});
 	</script>
 
-    
+
 </html>

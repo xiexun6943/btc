@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=2" />
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=<?=time()?>" />
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
 	<title>{$webname}</title>
 	<style>
@@ -86,7 +86,7 @@
 			</div>
 		</div>
 
-	</div>		
+	</div>
 </body>
 
 <body>
@@ -97,18 +97,18 @@
 		var email = $("#email").val();
 		var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         if(email=='' || email == null){
-            layer.msg("{:L('请输入邮箱')}");return false;       
+            layer.msg("{:L('请输入邮箱')}");return false;
         }
         if(!reg.test(email)){
-            layer.msg("{:L('邮箱格式不正确')}");return false; 
+            layer.msg("{:L('邮箱格式不正确')}");return false;
         }
         var vcode = $("#vcode").val();
         if(vcode == ''){
-            layer.msg("{:L('请输入图形验证码')}");return false; 
+            layer.msg("{:L('请输入图形验证码')}");return false;
         }
 		var lpwd = $("#lpwd").val();
 		if(lpwd == ''){
-            layer.msg("{:L('请输入密码')}");return false; 
+            layer.msg("{:L('请输入密码')}");return false;
         }
 
         $.post("{:U('Login/loginsubmit')}",

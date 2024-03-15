@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=<?=time()?>" />
 	    <title>{$webname}</title>
         <style>
             .css-ogtd7z {
@@ -33,7 +33,7 @@
                 max-width: 1248px;
                 background-color: rgb(254, 241, 242);
             }
-            
+
             .css-xry4yv {
                 box-sizing: border-box;
                 margin: 0px;
@@ -181,20 +181,20 @@
                 height: 96px;
                 font-size: 96px;
             }
-            
+
         </style>
 	</head>
 	<body>
 	    <div class="App">
 	        <div class="css-tq0shg">
 	            <include file="Public:header"/>
-	            
+
 	            <div class="css-ogtd7z">
 	                <div class="css-jrzkh7">
 	                    <div id="header_global_js_wxgy34nj" class="css-1aac2e"></div>
 	                </div>
 	           </div>
-	           
+
 	           <main class="css-1wr4jig">
 	               <main class="css-xry4yv">
 	                   <!--左边-->
@@ -254,7 +254,7 @@
 	                           </div>
 	                        </a>
 	                   </div>
-	                   
+
 	                   <!--右边-->
 	                   <div class="css-1wr4jig" style="background:#fff;">
 	                       <div class="css-6ul7zn">
@@ -303,7 +303,7 @@
 	                                                </div>
 	                                                <div class="bcontentop" style="width:5%;">
 	                                                   <span class="fch f14"><?php echo strtoupper($vo['coinname']);?></span>
-	
+
 	                                                </div>
 	                                                <div class="bcontentop" style="width:10%">
 	                                                    <span class="fch f14">{$vo.price}<?php echo strtoupper($vo['buycoin']);?></span>
@@ -328,8 +328,8 @@
 	                                            </div>
 	                                            </foreach>
 	                                            </empty>
-	                                           
-	                                           
+
+
 	                                       </div>
 	                                   </div>
 	                               </div>
@@ -340,9 +340,9 @@
 	           </main>
 
 	            <include file="Public:footer"/>
-	        </div>   
+	        </div>
 	    </div>
-	    
+
 	</body>
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/Public/Home/static/js/layer/layer.js" ></script>
@@ -360,13 +360,13 @@
                     },2000);
                 }else{
                     layer.msg(data.info);return false;
-                }    
+                }
             });
         }
     </script>
- 
+
     <script type="text/javascript">
-		$("#nav").slide({ 
+		$("#nav").slide({
 			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
 			titCell:".nLi", //鼠标触发对象
 			targetCell:".sub", //titCell里面包含的要显示/消失的对象
@@ -377,5 +377,5 @@
 		});
 	</script>
 
-    
+
 </html>

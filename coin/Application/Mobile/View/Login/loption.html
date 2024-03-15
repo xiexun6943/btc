@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	<link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=2" />
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=<?=time()?>" />
 	<link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
 	<title>{$webname}</title>
 	<style>
@@ -50,11 +50,11 @@
 				<div class="lbox">
 					<div class="lbox_l">
 						<i class="bi bi-globe fcc fzmmm" style="font-size:22px;"></i>
-						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;{:L('语言')}</span>	
+						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;{:L('语言')}</span>
 					</div>
 					<a href="{:U('Login/setlang')}">
 					<div class="lbox_r">
-						<span class="fcc fzmmm" style="font-size:16px;">中文简体&nbsp;&nbsp;</span>	
+						<span class="fcc fzmmm" style="font-size:16px;">中文简体&nbsp;&nbsp;</span>
 						<i class="bi bi-chevron-right fcc fw" style="font-size: 22px;"></i>
 					</div>
 					</a>
@@ -63,7 +63,7 @@
 				<div class="lbox">
 					<div class="lbox_l">
 						<i class="bi bi-question-square fcc fzmmm" style="font-size:22px;"></i>
-						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;{:L('中文简体')}</span>	
+						<span class="fcc fzmmm" style="font-size:18px;">&nbsp;&nbsp;{:L('中文简体')}</span>
 					</div>
 					<a href="{:U('Login/lhelp')}">
 					<div class="lbox_r">
@@ -79,7 +79,7 @@
 		<div  style="width:100%;height:60px;position:fixed;bottom:10px;left:0px;padding:0px 10px;">
 			<span class="fzmm fcc">{:L('请不要把密码，短信验证码等信息透露给任何人,客服人员也不会向您索要账号信息！')}</span>
 		</div>
-	</div>		
+	</div>
 </body>
 
 <body>

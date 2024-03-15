@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=<?=time()?>" />
 	    <title>{$webname}</title>
         <style>
             .css-ogtd7z {
@@ -161,16 +161,16 @@
 	    <div class="App">
 	        <div class="css-tq0shg">
 	            <include file="Public:header"/>
-	            
+
 	            <div class="css-ogtd7z">
 	                <div class="css-jrzkh7">
 	                    <div id="header_global_js_wxgy34nj" class="css-1aac2e"></div>
 	                </div>
 	           </div>
-	           
+
 	           <main class="css-1wr4jig">
 	               <main class="css-xry4yv">
-	                  
+
 	                  <div class="css-1ay57iv">
 	                      <div class="css-8hzjvg">
 	                          <div class="css-1eklhqk">
@@ -183,7 +183,7 @@
 	                              </div>
 	                          </div>
 	                      </div>
-	                      
+
 	                      <div class="css-1dihobw">
 	                          <div class="css-1eklhqk">
 	                              <div class="css-tu2ioc" style="width:60%;float:left;">
@@ -201,7 +201,7 @@
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                      <div class="czbox" style="margin-bottom:0px;">
 	                                          <div class="czbox_1">
 	                                              <span class="fch f16">{:L('充值网络')}</span>
@@ -215,7 +215,7 @@
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                      <div class="czbox" style="min-height:200px;">
 	                                          <div class="czbox_1" style="min-height:200px;"></div>
 	                                          <div class="czbox_2" style="min-height:200px;">
@@ -228,11 +228,11 @@
 	                                                      <span>{$info.czaddress}</span>
 	                                                      <i class="bi bi-back fcy" style="cursor:pointer;" onclick="copyUrl()"></i>
 	                                                  </div>
-	                                                  
+
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                      <div class="czbox">
 	                                          <div class="czbox_1">
 	                                              <span class="fch f16">{:L('充值数量')}</span>
@@ -246,7 +246,7 @@
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                      <div class="czbox" style="height:120px;">
 	                                          <div class="czbox_1" style="height:120px;">
 	                                              <span class="fch f16">{:L('上传转账凭证')}</span>
@@ -256,11 +256,11 @@
 	                                                  <span class="fch f12">{:L('转账凭证')}</span>
 	                                              </div>
 	                                              <div class="czbox_4" style="min-height:100px;border: none;text-align:center;">
-	                                                   <img src="/Public/Static/img/upimg.png" id="test1" style="height:100px;">    
+	                                                   <img src="/Public/Static/img/upimg.png" id="test1" style="height:100px;">
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                      <input type="hidden" id="payimg" value="" />
 		                                <input type="hidden" id="coinname" value="{$info.name}" />
 		                                <input type="hidden" id="cid" value="{$info.id}" />
@@ -273,7 +273,7 @@
 	                                              </div>
 	                                          </div>
 	                                      </div>
-	                                      
+
 	                                  </div>
 	                              </div>
 	                              <div style="width:35%;height:600px;float:right;padding:10px;">
@@ -291,17 +291,17 @@
 	                              </div>
 	                          </div>
 	                      </div>
-	                      
-	                      
+
+
 	                  </div>
-	                  
+
 	               </main>
 	           </main>
 
 	            <include file="Public:footer"/>
-	        </div>   
+	        </div>
 	    </div>
-	    
+
 	</body>
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/Public/Home/static/js/layer/layer.js" ></script>
@@ -340,7 +340,7 @@
                 }
             }
             );
-            
+
         });
     </script>
     <script type="text/javascript">
@@ -348,7 +348,7 @@
             var qrcode_url=$("#czaddress").val();
             copy(qrcode_url);
         }
-    
+
         function copy(message) {
             var input = document.createElement("input");
             input.value = message;
@@ -384,7 +384,7 @@
         }
     </script>
     <script type="text/javascript">
-		$("#nav").slide({ 
+		$("#nav").slide({
 			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
 			titCell:".nLi", //鼠标触发对象
 			targetCell:".sub", //titCell里面包含的要显示/消失的对象
@@ -395,5 +395,5 @@
 		});
 	</script>
 
-    
+
 </html>

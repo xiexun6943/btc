@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=<?=time()?>" />
 	    <title>{$webname}</title>
 	    <style>
             .css-1wr4jig {
@@ -323,14 +323,14 @@
               color: #474d57;
               font-size: 14px;
             }
-    
+
             ::-moz-placeholder { /* Mozilla Firefox 19+ */
               color: #474d57;
               font-size: 14px;
             }
             input:focus{background:#2B3139;outline: 1px solid #2B3139;}
             .klinebox{width:100%;height:550px;margin-top:55px;}
-	        .klinetitle{width:100%;height:50px;background:#fff;padding:0px 20px;}
+	        .klinetitle{width:100%;height:50px;padding:0px 20px;}
 	        .klinetitle_l{width:20%;height:50px;float:left;}
 	        .klinetitle_r{width:60%;height:50px;float:left;}
 	        .newpricebox{height:28px;line-height:30px;margin-bottom:0px;color:#2ebd85;font-size:14px;text-align: left;}
@@ -349,7 +349,7 @@
 	        .dong_find_box_img{width:20%;height:30px;line-height:30px;float:left;text-align:center;}
 	        .dong_input_box{width:80%;height:30px;float:left;}
 	        .dong_symbox{width:90%;height:20px;border:none;background:#f5f5f5;margin-top:5px;}
-	        .dong_sel_box{width:100%;height:30px;border-bottom:1px solid #f5f5f5;}
+	        .dong_sel_box{width:100%;height:30px;border-bottom:1px solid #5d5d5d;}
 	        .dong_sel_span{display:block;width:35px;height:30px;line-height:30px;border-bottom:2px solid #FCD535;font-size:14px;text-align:center;font-size:14px;}
 	        .symbol_list{width:100%;height:450px;margin-top:10px;}
 	        .sy_list_box{width:100%;height:30px;}
@@ -358,11 +358,11 @@
 	        .btnbox{width:100%;height:60px;padding:10px 20px;}
 	        .btnbox_l{width:45%;height:40px;line-height:40px;float:left;text-align:center;border-radius:10px;background:#0ecb81;}
 	        .btnbox_r{width:45%;height:40px;line-height:40px;float:right;text-align:center;border-radius:10px;background:#f5465c;}
-	        .dong_order_c{width:100%;height:550px;background:#fff;margin:0;padding:0px 10px;line-height: 0px;}
+	        .dong_order_c{width:100%;padding-bottom:15px;margin:0;padding:0px 10px;line-height: 0px;}
 	        .dong_order_x{width:100%;height:20px;line-height:20px;text-align:right;}
-	        .dong_order_title{width:100%;height:30px;line-height:20px;text-align:center;border-bottom: 1px solid #f5f5f5;}
+	        .dong_order_title{width:100%;height:30px;line-height:20px;text-align:center;border-bottom: 1px solid #5d5d5d;}
 	        .dong_order_option{width:100%;min-height:110px;overflow: hidden;margin-top:25px;max-height: 180px;}
-	        .dong_order_option_list{width:100px;height:80px;background:#f5f5f5;float:left;margin-right:10px;border-radius:10px;padding:5px;cursor: pointer;margin-top: 10px;}
+	        .dong_order_option_list{width:100px;height:80px;background:#191a1f;float:left;margin-right:10px;border-radius:10px;padding:5px;cursor: pointer;margin-top: 10px;}
 	        .option_list_active{border:1px solid #FCD535;}
 	        .dong_order_p{
                 width: 100%;
@@ -374,19 +374,77 @@
 	        .dong_money_list{width:100%;min-height:60px;}
 	        .dong_money_list_box{width:70%;max-height:100px;float:left;overflow: hidden;cursor: pointer;}
 	        .dong_money_list_box_l{height:40px;}
-	        .dong_money_list_box_option{width:70px;height:40px;line-height:40px;background:#f5f5f5;float:left;margin-right:5px;border-radius:5px;text-align:center;margin-top: 5px;}
+	        .dong_money_list_box_option{width:70px;height:40px;line-height:40px;background:#191a1f;color:#fff;float:left;margin-right:5px;border-radius:5px;text-align:center;margin-top: 5px;}
 	        .green{color:#0ecb81;}
             .red{color:#f5465c;}
-            input:focus{background:#f5f5f5;outline: 1px solid #f5f5f5;}
+            input:focus{background:#f5f5f5;outline: 1px solid #5d5d5d;}
 
 
             .left-border-css {
-                border-left:10px solid #f5f5f5;
+                /*border-left:10px solid #f5f5f5;*/
             }
 
             .right-border-css {
-                border-right:10px solid #f5f5f5;
+                border-right:10px solid #191a1f;
             }
+            .interval-item{
+                color:#fff!important;
+                background: #353434!important;
+                border:1px solid #5d5d5d!important;
+            }
+            .bi-dash::before{
+                color:#fff;
+            }
+            .bi-plus::before{
+                color:#fff;
+            }
+            input:focus{
+                background: unset!important;
+            }
+            .btn_bg_color{
+                border:none!important;
+                color:#191a1f!important;
+            }
+            .fcb{
+                border:none!important;
+                color:#191a1f!important;
+            }
+            .order-top-select{
+                border:none!important;
+            }
+                                .fcc{
+                                    color:#fff!important;
+                                }
+                                .fch{
+                                    color:#fff!important;
+                                }
+                                .tcbh{
+                                    color:#fff!important;
+                                    background:#353434;
+                                }
+                                .tcc{
+                                    color:#fff!important;
+                                }
+                                .dong_sel_box{
+                                    border-bottom:1px solid #5d5d5d!important;
+                                }
+                                .sy_list_box{
+                                    border-bottom:1px solid #5d5d5d!important;
+                                }
+                                .css-1wr4jig{
+                                    background:#191a1f;
+                                }
+                                .order-top{
+                                    color:#fff!important;
+                                    background:#1f2535!important;
+                                    border-bottom:1px solid #5d5d5d!important;
+                                }
+                                .order-main-table{
+                                    background:#353434!important;
+                                }
+                                .layui-layer{
+                                    background: #353434!important;
+                                }
 	    </style>
 	</head>
 	<body>
@@ -398,9 +456,9 @@
 	                    <div id="header_global_js_wxgy34nj" class="css-1aac2e"></div>
 	                 </div>
 	            </div>
-	            <main class="css-1wr4jig" style="background: #f5f5f5;border-top: 10px solid #f5f5f5;">
+	            <main class="css-1wr4jig" style="border-top: 10px solid #191a1f;">
                     <div style="width:20%;min-height:650px;float:left;padding:0px 10px 0px 0px;">
-                        <div style="width:100%;min-height:680px;background:#fff;">
+                        <div style="width:100%;min-height:680px;background:#353434;">
                             <div style="width:100%;height:100%;padding:0px;padding:0px 10px;">
                                 <div style="width:100%;top:0px;">
 
@@ -448,28 +506,28 @@
                                     </div>
                                     <div class="klinetitle_r">
                                         <div class="col-4 klinetitle-s-box">
-                                            <div class="newpricebox f14 tcbh">
+                                            <div class="newpricebox f14 tcbh" style="background:none">
                                                 {:L('最低')}
                                             </div>
-                                            <div class="changebox f14 tcbh" id="minmoney">
+                                            <div class="changebox f14 tcbh" id="minmoney" style="background:none">
                                                 --
                                             </div>
                                         </div>
 
                                         <div class="col-4 klinetitle-s-box">
-                                            <div class="newpricebox f14 tcbh">
+                                            <div class="newpricebox f14 tcbh" style="background:none">
                                                 {:L('最高')}
                                             </div>
-                                            <div class="changebox f14 tcbh" id="maxmoney">
+                                            <div class="changebox f14 tcbh" id="maxmoney" style="background:none">
                                                 --
                                             </div>
                                         </div>
 
                                         <div class="col-4 klinetitle-s-box">
-                                            <div class="newpricebox f14 tcbh">
+                                            <div class="newpricebox f14 tcbh" style="background:none">
                                                 24h{:L('量')}
                                             </div>
-                                            <div class="changebox f14 tcbh" id="allvol">
+                                            <div class="changebox f14 tcbh" id="allvol" style="background:none">
                                                 --
                                             </div>
                                         </div>
@@ -478,11 +536,11 @@
 
                                 </div>
                                 </div>
-                                <div class="right-border-css" style="width:30%;height:50px;float:left;background: #fff;padding-left: 0px;border: none;">
+                                <div class="right-border-css" style="width:30%;height:50px;float:left;padding-left: 0px;border: none;">
                                 </div>
                             </div>
 
-                            <div  style="width:35%;height:50px;line-height:100px;float:left;padding-left:15px; background: #fff;">
+                            <div  style="width:35%;height:50px;line-height:100px;float:left;padding-left:15px; background: #353434;">
                                 <div class="tcl" style="width:100%;height:40px;line-height:50px;">
                                     <div class="newpricebox fw f14 tcbh" style="color:#000;">{$upmarket}</div>
                                     <div class="changebox fw f14 tcbh">{:L('合约建仓')}</div>
@@ -492,18 +550,18 @@
 
                             </div>
                         </div>
-                        <div style="width:100%;min-height:630px;background: #fff">
-                            <div style="width:100%;min-height:550px;border-top: 2px solid #f5f5f5;">
+                        <div style="width:100%;min-height:630px;background: #191a1f">
+                            <div style="width:100%;min-height:550px;border-top: 2px solid #353434;">
 
                                 <div style="width:100%;min-height:550px;float:left;">
-                                    <div  class="right-border-css" style="width:65%;height:630px;float:left;">
+                                    <div  class="right-border-css" style="width:65%;height:630px;float:left;background:#191a1f">
                                         <input type="hidden" id="coinname" value="{$smybol}" />
                                         <div style="width:100%;height:600px;">
                                             <iframe id="iframeid" width="100%" scrolling="no" height="600" src="/Trade/ordinary?market={$market}"  noresize="noresize" frameborder="0" >{:L('不支持IFRAME，请升级')}</iframe>
                                         </div>
                                     </div>
-                                    <div class="" style="width:35%;height:550px;float:left;">
-                                        <div style="width:100%;height:550px;padding:0px 10px;">
+                                    <div class="" style="width:35%;float:left;background:#353434">
+                                        <div style="width:100%;padding:0px 10px;background:#353434">
                                             <div class="dong_order_c">
                                                 <p class="dong_order_p tcl fch f14">{:L('订单类型')}</p>
                                                 <div class="dong_order_option">
@@ -528,7 +586,7 @@
                                                 <p class="dong_order_p tcl fcc fch f14">{:L('选择投资金额')}</p>
                                                 <div class="dong_money_list">
                                                     <div  style="width:100%;height:40px;text-align:center;" id="custommoney">
-                                                        <input type="text" id="tzmoney" onblur="settzmoney();" oninput="settzmoney();" value="" placeholder="{:L('请输入金额')}" style="width:98%;margin:auto;height:35px;line-height:35px;background:#f5f5f5;padding-left:15px;border:none;margin-top:2px;" />
+                                                        <input type="text" id="tzmoney" onblur="settzmoney();" oninput="settzmoney();" value="" placeholder="{:L('请输入金额')}" style="width:98%;margin:auto;height:35px;line-height:35px;background:#191a1f;padding-left:15px;border:none;margin-top:2px;color:#fff" />
                                                     </div>
                                                 </div>
 
@@ -555,7 +613,7 @@
                                                     </if>
                                                 </div>
 
-                                                <div class="tcc" style="width:100%;height:40px;line-height:30px; margin-top: 35px;">
+                                                <div class="tcc" style="width:100%;height:40px;line-height:30px; margin-top: 15px;margin-bottom:20px;">
                                                     <if condition="$uid elt 0">
 <a href="{:U('Login/index')}">
                                                         <div  class="ks_buy_up" style="width:45%;height:40px;line-height:40px;text-align:center;border-radius:10px;cursor:pointer;float:left;">
@@ -598,7 +656,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="width:100%;min-height:200px;float:left;min-height: 360px;margin-top: 10px;border-top: 1px solid #f5f5f5;background: #fff">
+                    <div style="width:100%;min-height:200px;float:left;min-height: 360px;margin-top: 10px;border-top: 1px solid #5d5d5d">
 
                         <div class="order-top">
                             <div class="order-top-span order-top-current order-top-select" onclick="order_top_select_action(1)">
@@ -608,7 +666,7 @@
                                 {:L('历史记录')}
                             </div>
                             <div class="refresh-icon">
-                                <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42 8V24" stroke="#303131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 24L6 40" stroke="#303131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 24C6 33.9411 14.0589 42 24 42C28.8556 42 33.2622 40.0774 36.5 36.9519" stroke="#303131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M42.0007 24C42.0007 14.0589 33.9418 6 24.0007 6C18.9152 6 14.3223 8.10896 11.0488 11.5" stroke="#303131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42 8V24" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 24L6 40" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 24C6 33.9411 14.0589 42 24 42C28.8556 42 33.2622 40.0774 36.5 36.9519" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M42.0007 24C42.0007 14.0589 33.9418 6 24.0007 6C18.9152 6 14.3223 8.10896 11.0488 11.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
 
                             </div>
 
@@ -717,11 +775,11 @@
                         </div>
                     </div>
 
-                
+
 	            </main>
 
 	            <include file="Public:footer"/>
-	        </div>   
+	        </div>
 	    </div>
 
 	<!---------交易选择弹窗---------->
@@ -736,15 +794,15 @@
 	                <span class="fcc dong_sel_span">{:L('全部')}</span>
 	            </div>
 	        </div>
-	        
-	        
+
+
 	        <div class="symbol_list" id="smybolbox-b">
 	            <div style="width:100%;height:100px;line-height:100px;text-align:center;">
                     <span class="fzmm fcc">{:L('没有获取数据')}</span>
                 </div>
 	        </div>
 	    </div>
-	    
+
 	    <div style="width:70%;height:100vh;float:left;" id="hidedong"></div>
 	</div>
     <!--    购买弹框-->
@@ -812,10 +870,10 @@
         </div>
     </div>
 
-	    
+
 	</body>
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/Public/Home/static/js/layer/layer.js" ></script>
+    <script type="text/javascript" src="/Public/Home/static/js/layer/layer.js?v=<?=time()?>" ></script>
     <script type="text/javascript" src="/Public/Home/static/js/jquery.SuperSlide.2.1.1.js" ></script>
     <script type="text/javascript">
         let pct = 0;
@@ -826,10 +884,10 @@
             if(tzmoney < hymin){
                 layer.msg("{:L('不能小于最低投资额度')}");return false;
             }
-            
+
             $("#ctzed").val(tzmoney);
             $("#ttzed").html(tzmoney);
-            
+
         }
     </script>
     <script type="text/javascript">
@@ -840,12 +898,12 @@
     </script>
     <script type="text/javascript">
         $("#tyj_subbtn").click(function(){
-            
+
             var flag = $("#flag").val();
             if(flag == 2){
                 return false;
             }
-            
+
             var ctime = $("#ctime").val();
             var ctzed = $("#ctzed").val();
             var ccoinname = $("#ccoinname").val();
@@ -866,7 +924,7 @@
             if(cykbl <= 0 || cykbl ==''){
                 layer.msg("{:L('缺少重要参数')}");return false;
             }
-            
+
 
             ctime = ctime / 60;
             $.post("{:U('Contract/ty_creatorder')}",
@@ -883,23 +941,23 @@
                 }
             });
         });
-    
+
         var canSubmit = true
         $("#subbtn").click(function(){
             var postData = {
                   time: parseInt($('.option_list_active').find('.fch').text())
                 };
-                
+
                 if(canSubmit==false) return
                 canSubmit = false
                 $('.sub_button').hide()
                 $('.spin').show()
-            
+
                 // 发送POST请求
                 $.ajax({
                   type: "POST",
                   data: postData,
-                  url: "/Contract/checkUsdt", 
+                  url: "/Contract/checkUsdt",
                   success: function(res) {
                   if(res.code==1){
                   var flag = $("#flag").val();
@@ -910,7 +968,7 @@
                     },2000);
                     return false;
                 }
-            
+
             var ctime = $("#ctime").val();
             var ctzed = $("#ctzed").val();
             var ccoinname = $("#ccoinname").val();
@@ -945,11 +1003,11 @@
                     layer.msg(data.msg);return false;
                 }
             });
-                          
+
                       }else{
                          layer.msg(res.msg)
                       }
-                      
+
                   },
                   error: function(error) {
                     console.error("发生错误:", error);
@@ -962,10 +1020,10 @@
                     },2000)
                   }
                 });
-            
-            
-            
-            
+
+
+
+
         });
     </script>
     <script type="text/javascript">
@@ -987,7 +1045,7 @@
             $('#vo-ykbl-'+sort).css('color', '#fff');
 
 
-            $('.dong_order_option_list').css('background', '#f5f5f5')
+            $('.dong_order_option_list').css('background', '#191a1f')
             $('#time_'+sort).css('background', '#f5465c')
             // #f5f5f5
             $("#ctime").val(time);
@@ -995,7 +1053,7 @@
             $(idtxt).addClass("option_list_active");
             $(idtxt).siblings().removeClass("option_list_active");
         }
-        
+
         function ylnumf() {
             if (pct != 0 && usdtnum != 0) {
                 console.log(usdtnum)
@@ -1012,8 +1070,8 @@
             pct = tzed
             ylnumf();
 
-            $('.dong_money_list_box_option').css('background', '#f5f5f5');
-            $('.dong_money_list_box_option').css('color', '#000');
+            $('.dong_money_list_box_option').css('background', '#191a1f');
+            $('.dong_money_list_box_option').css('color', '#fff');
             $('#tzed_'+sort).css('background', 'rgb(245, 70, 92)');
             $('#tzed_'+sort).css('color', '#fff');
 
@@ -1050,11 +1108,11 @@
                     $("#smybolbox").empty();
                     var html = '';
                     if(data.data == '' || data.data == null){
-                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                        html = '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                                '<span class="fzmm fcc">' + "{:L('没有获取数据')}" + '</span>'+
                                '</div>';
                         $("#smybolbox").append(html);
-                        
+
                     }else{
                         $.each(data.data,function(key,val){
                             html += '<a href="/Contract/index.html?coin='+ val.symbol +'">'+
@@ -1070,7 +1128,7 @@
                         $("#smybolbox").append(html);
                     }
                 }else{
-                    html =  '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+ 
+                    html =  '<div style="width:100%;height:100px;line-height:100px;text-align:center;">'+
                             '<span class="fzmm fcc">' + "{:L('没有获取数据')}" + '</span>'+
                             '</div>';
                     $("#smybolbox").append(html);
@@ -1107,7 +1165,7 @@
         });
     </script>
     <script type="text/javascript">
-		$("#nav").slide({ 
+		$("#nav").slide({
 			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
 			titCell:".nLi", //鼠标触发对象
 			targetCell:".sub", //titCell里面包含的要显示/消失的对象
@@ -1356,5 +1414,5 @@
         }
     </script>
 
-    
+
 </html>

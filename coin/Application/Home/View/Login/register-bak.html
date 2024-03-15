@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1.0,initial-scale=1,user-scalable=no,viewport-fit=true" data-shuvi-head="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">	
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=2" />
+	    <link rel="stylesheet" type="text/css" href="/Public/Home/static/css/base.css?v=<?=time()?>" />
 	    <title>{$webname}</title>
 	    <style>
 	        .css-155nz97 {
@@ -181,7 +181,7 @@
                 flex: 0 0 16.6667%;
                 max-width: 16.6667%;
             }
-            
+
             .binance-col {
                 position: relative;
                 max-width: 100%;
@@ -468,7 +468,7 @@
 	                    <div class="css-11y6cix"></div>
 	                    <ul id="nav" class="nav">
 	                    <div class="css-wu6zme">
-	                       
+
 	                        <li class="nLi">
 	                            <div class="css-1ql2hru" style="padding: 0px 5px;">
 	                                <?php if(LANG_SET=='zh-tw'){?>
@@ -476,9 +476,9 @@
 	                                <?php if(LANG_SET=='zh-cn'){?>
 		                        	<div class="css-1smf7ma fch">简体中文&nbsp;&nbsp;</div>
 		                        	<?php }elseif(LANG_SET=='en-us'){?>
-		                        	<div class="css-1smf7ma fch">English&nbsp;&nbsp;</div>	
+		                        	<div class="css-1smf7ma fch">English&nbsp;&nbsp;</div>
 		                        	<?php }elseif(LANG_SET=='ja-jp'){?>
-                                    <div class="css-1smf7ma fch">日本語&nbsp;&nbsp;</div>	
+                                    <div class="css-1smf7ma fch">日本語&nbsp;&nbsp;</div>
 		                        	<?php }?>
 	                             </div>
 	                            <ul class="sub" style="padding:0px;display:none;">
@@ -530,7 +530,7 @@
 	                        </div>
 	                    </ul>
                     </header>
-                    
+
                     <main clss="main css-1ka9xaf">
                         <div class="css-8t6vxp">
                             <div class="binance-row css-16kn2us" style="margin-left:-12px;margin-right:-12px">
@@ -542,7 +542,7 @@
                                     </div>
                                     <div class="css-128p7pv">
                                         <div class="css-tmpver">
-                                            
+
                                                 <div class="css-hlfj64">
                                                     <div class="css-15651n7">
                                                         <div class="css-xjlny9">{:L('邮箱')}</div>
@@ -552,7 +552,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="css-15651n7">
                                                         <div class="css-xjlny9">{:L('图形验证码')}</div>
                                                         <div class="css-hiy16i" style="height: 48px;">
@@ -564,7 +564,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="css-15651n7" style="margin-top:20px;">
                                                         <div class="css-xjlny9">{:L('邮箱验证码')}</div>
                                                         <div class="css-hiy16i" style="height: 48px;">
@@ -576,7 +576,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="css-15651n7">
                                                         <div class="css-xjlny9">{:L('密码')}</div>
                                                         <div class="css-hiy16i">
@@ -593,26 +593,26 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                                 <button data-bn-type="button"  style="clear:both;" class="css-1tsxga3" onclick="upreg();">{:L('注册')}</button>
                                         </div>
                                     </div>
                                     <div class="css-1xpp6z8">{:L('注册过')}？&nbsp;<a data-bn-type="link" id="RegisterForm-a-login" class="css-1exejw" href="{:U('Login/index')}">{:L('登录')}</a></div>
                                 </div>
-                                
+
                                 <div style="width:100%;height:50px;"></div>
                             </div>
-                            
+
                         </div>
-                        
+
                     </main>
-                    
-                    
+
+
                 </div>
             </div>
         </div>
-        
+
     </body>
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/Public/Home/static/js/layer/layer.js" ></script>
@@ -622,22 +622,22 @@
             var email = $("#email").val();
             var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
             if(email=='' || email == null){
-                layer.msg("{:L('请输入邮箱')}");return false;       
+                layer.msg("{:L('请输入邮箱')}");return false;
             }
             if(!reg.test(email)){
-                layer.msg("{:L('邮箱格式不正确')}");return false; 
+                layer.msg("{:L('邮箱格式不正确')}");return false;
             }
             var ecode = $("#ecode").val();
             if(ecode == ''){
-                layer.msg("{:L('请输入邮箱验证码')}");return false; 
+                layer.msg("{:L('请输入邮箱验证码')}");return false;
             }
             var lpwd = $("#lpwd").val();
             if(lpwd == ''){
-                layer.msg("{:L('请输入密码')}");return false; 
+                layer.msg("{:L('请输入密码')}");return false;
             }
             var invit = $("#invit").val();
             if( invit == ''){
-                layer.msg("{:L('请输入邀请码')}");return false; 
+                layer.msg("{:L('请输入邀请码')}");return false;
             }
             $.post("{:U('Login/upregister')}",
             {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit},
@@ -650,27 +650,27 @@
                 }else{
                     layer.msg(data.info);return false;
                 }
-            }  
+            }
             );
-    
-    
+
+
         }
     </script>
-    
-    
+
+
     <script type="text/javascript">
         function emailsend(){
             var email = $("#email").val();
             var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
             if(email=='' || email == null){
-                layer.msg("{:L('请输入邮箱')}");return false;       
+                layer.msg("{:L('请输入邮箱')}");return false;
             }
             if(!reg.test(email)){
-                layer.msg("{:L('邮箱格式不正确')}");return false; 
+                layer.msg("{:L('邮箱格式不正确')}");return false;
             }
             var vcode = $("#vcode").val();
             if(vcode == ''){
-                layer.msg("{:L('请输入图形验证码')}");return false; 
+                layer.msg("{:L('请输入图形验证码')}");return false;
             }
             $.post("{:U('Login/sendcode')}",
             {'email':email,'vcode':vcode},
@@ -700,7 +700,7 @@
         }
     </script>
     <script type="text/javascript">
-		$("#nav").slide({ 
+		$("#nav").slide({
 			type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
 			titCell:".nLi", //鼠标触发对象
 			targetCell:".sub", //titCell里面包含的要显示/消失的对象
@@ -710,5 +710,5 @@
 			returnDefault:true //鼠标移走后返回默认状态，例如默认频道是“预告片”，鼠标移走后会返回“预告片”（默认false）
 		});
 	</script>
-    
+
 </html>

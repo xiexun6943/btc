@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" style="background:#fff;">
+<html lang="zh-CN" style="background:#191a1f;">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,12 +15,12 @@
 	<style>
 	::-webkit-input-placeholder {color: #b5b5b5;font-size: 12px;}
 	::-moz-placeholder {color: #b5b5b5;font-size: 12px;}
-	input:focus{background:#f5f5f5;outline: 1px solid #f5f5f5;}
+	input:focus{background:#f5f5f5;outline: 1px solid #5d5d5d;}
 	a:hover,a:link,a:visited,a:active{color:#000000;text-decoration:none;}
-	.no_header{position: fixed;z-index: 9999;background:#fff;padding:0px 10px;top:0px;box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);}
+	.no_header{position: fixed;z-index: 9999;background:#191a1f;padding:0px 10px;top:0px;box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);}
 	.txtl{line-height:50px;width:10%;}
 	.klinebox{width:100%;height:550px;margin-top:55px;}
-	.klinetitle{width:100%;height:80px;background:#fff;padding:0px 20px;box-shadow: 0 2px 10px 0 rgb(0 0 0 / 5%);}
+	.klinetitle{width:100%;height:80px;background:#191a1f;padding:0px 20px;box-shadow: 0 2px 10px 0 rgb(0 0 0 / 5%);}
 	.klinetitle_l{width:45%;height:80px;float:left;}
 	.klinetitle_r{width:55%;height:80px;float:left;}
 	.newpricebox{height:40px;line-height:60px;margin-bottom:0px;color:#2ebd85;font-size:22px;font-weight:bold;}
@@ -32,14 +32,14 @@
 	.klr2_box_dl{width:45%;height:25px;line-height:25px;float:left;text-align:left;}
 	.klr2_box_dr{width:55%;height:25px;line-height:25px;float:right;text-align:right;}
 	.dongbox{position:fixed;z-index:9999;display:none;top:0px;width:100%;height:100vh;background:rgba(0,0,0,0.2);}
-	.dong_con{width:80%;height:86vh;background:#fff;margin-top:20px;border-top-right-radius:20px;border-bottom-right-radius:20px;padding:20px 15px 10px 20px;float:left;}
+	.dong_con{width:80%;height:86vh;background:#191a1f;margin-top:20px;border-top-right-radius:20px;border-bottom-right-radius:20px;padding:20px 15px 10px 20px;float:left;}
 	.dong_title{width:100%;height:40px;line-height:40px;}
-	.dong_title_span{font-size:18px;font-weight:500;}
+	.dong_title_span{font-size:18px;font-weight:500;color:#fff}
 	.dong_find_box{width:100%;height:30px;background:#f5f5f5;border-radius:10px;}
 	.dong_find_box_img{width:20%;height:30px;line-height:30px;float:left;text-align:center;}
 	.dong_input_box{width:80%;height:30px;float:left;}
 	.dong_symbox{width:90%;height:20px;border:none;background:#f5f5f5;margin-top:5px;}
-	.dong_sel_box{width:100%;height:30px;border-bottom:1px solid #f5f5f5;}
+	.dong_sel_box{width:100%;height:30px;border-bottom:1px solid #5d5d5d;}
 	.dong_sel_span{display:block;width:35px;height:30px;line-height:30px;border-bottom:2px solid #FCD535;font-size:14px;text-align:center;font-size:14px;}
 	.symbol_list{width:100%;height:450px;overflow-y: scroll;margin-top:10px;}
 	.sy_list_box{width:100%;height:30px;}
@@ -48,17 +48,17 @@
 	.btnbox{width:100%;height:60px;padding:10px 20px;}
 	.btnbox_l{width:45%;height:40px;line-height:40px;float:left;text-align:center;border-radius:10px;background:#0ecb81;}
 	.btnbox_r{width:45%;height:40px;line-height:40px;float:right;text-align:center;border-radius:10px;background:#f5465c;}
-	.dong_order_c{width:90%;height:540px;background:#fff;margin:60px auto;border-radius:10px;padding:10px;}
+	.dong_order_c{width:90%;height:540px;background:#353434;margin:60px auto;border-radius:10px;padding:10px;}
 	.dong_order_x{width:100%;height:20px;line-height:20px;text-align:right;}
-	.dong_order_title{width:100%;height:30px;line-height:20px;text-align:center;border-bottom: 1px solid #f5f5f5;}
+	.dong_order_title{width:100%;height:30px;line-height:20px;text-align:center;border-bottom: 1px solid #5d5d5d;}
 	.dong_order_option{width:100%;height:80px;;overflow: hidden;overflow-x: scroll;margin-top:5px;}
-	.dong_order_option_list{width:100px;height:80px;background:#f5f5f5;float:left;margin-right:10px;border-radius:10px;padding:5px;}
+	.dong_order_option_list{width:100px;height:80px;background:#191a1f;float:left;margin-right:10px;border-radius:10px;padding:5px;}
 	.option_list_active{border:1px solid #FCD535;}
 	.dong_order_p{width:100%;margin-bottom: 0rem;margin-top:10px;padding-left:5px;}
 	.dong_money_list{width:100%;height:40px;}
 	.dong_money_list_box{width:70%;height:40px;float:left;overflow: hidden;overflow-x: scroll;}
 	.dong_money_list_box_l{width:1000px;height:40px;}
-	.dong_money_list_box_option{width:70px;height:40px;line-height:40px;background:#f5f5f5;float:left;margin-right:5px;border-radius:5px;text-align:center;}
+	.dong_money_list_box_option{width:70px;height:40px;line-height:40px;background:#191a1f;float:left;margin-right:5px;border-radius:5px;text-align:center;}
 	.green{color:#0ecb81;}
     .red{color:#f5465c;}
     .circle_box{position: relative;left: 0;right: 0;top: 5px;bottom: 120px;margin: auto;width: 110px;height: 127px;box-sizing: content-box;}
@@ -155,7 +155,7 @@
     }
     .remaining > div >div:nth-of-type(2) {
         font-size: 12px;
-        color: #6d6d6d;
+        color: #fff;
         text-align: center;
     }
     .remaining > div >div:nth-of-type(3) {
@@ -172,9 +172,24 @@
 	    .bottomUp{
 	        padding-bottom:100px!important;
 	    }
+	.bi-arrow-left::before{
+	    color: #fff;
+	}
+            .fch{
+                color:#fff!important;
+            }
+            .f16{
+                color:#fff!important;
+            }
+            .fcc{
+                color:#fff!important;
+            }
+            .bi-x::before{
+                color:#fff!important;
+            }
 	</style>
   </head>
-  <body style="background:#fff;">
+  <body style="background:#191a1f;">
       <script>
           $(function(){
               // 检测是否在WebView中打开
@@ -222,9 +237,9 @@
 				<i class="bi bi-arrow-left fcc fw" onclick="goback()" style="font-size: 24px;"></i>
 			</div>
 			<div class="fl allhg" id="centerbox" style="width:80%;text-align:center;line-height:50px;">
-				<i class="bi bi-text-indent-left fw" style="font-size:22px;color:#000;"></i>
-				<span class="fzmmm fw"  style="color:#000;" id="symbolbox">{$upmarket}</span>
-				<span class="fzmmm fw"  style="color:#000;">{:L('秒合约')}</span>
+				<i class="bi bi-text-indent-left fw" style="font-size:22px;color:#fff;"></i>
+				<span class="fzmmm fw"  style="color:#fff;" id="symbolbox">{$upmarket}</span>
+				<span class="fzmmm fw"  style="color:#fff;">{:L('秒合约')}</span>
 			</div>
             
             <a href="{:U('Contract/ctbill')}">
@@ -323,14 +338,14 @@
 			
 			<div class="btnbox" style="width: 100%;
     height: 60px;
-    background: rgb(245, 245, 245);
+    background: #353434;
     position: fixed;
     bottom: 0px;
     padding: 0px 15px;">
-			    <div class="btnbox_l" onclick="show_dongbox(1)">
+			    <div class="btnbox_l" onclick="show_dongbox(1)" style="margin-top: 10px">
 			        <span class="fzmm fch" style="color:#fff;">{:L('买涨')}</span>
 			    </div>
-			    <div class="btnbox_r" onclick="show_dongbox(2)">
+			    <div class="btnbox_r" onclick="show_dongbox(2)" style="margin-top: 10px">
 			        <span class="fzmm fch" style="color:#fff;">{:L('买跌')}</span>
 			    </div>
 			</div>
@@ -383,19 +398,19 @@
                     </div>
                 </div>
             
-                <div style="width:100%;height:150px;border-top:1px solid #f5f5f5;">
+                <div style="width:100%;height:150px;border-top:1px solid #5d5d5d;">
                     <div style="width:100%;height:80px;">
                         <div style="width:33.33%;height:80px;float:left;">
-                            <div style="width:100%;height:40px;line-height:50px;text-align:center;">{:L('类型')}</div>
+                            <div style="width:100%;height:40px;line-height:50px;text-align:center;color:#fff">{:L('类型')}</div>
                             <div id="timer_type" style="width:100%;height:40px;line-height:30px;text-align:center;"><span>{:L('买涨')}</span></div>
                         </div>
                         <div style="width:33.33%;height:80px;float:left;">
-                            <div style="width:100%;height:40px;line-height:50px;text-align:center;">{:L('金额')}</div>
-                            <div id="timer_buynum" style="width:100%;height:40px;line-height:30px;text-align:center;font-weight:bold;">1000.00</div>
+                            <div style="width:100%;height:40px;line-height:50px;text-align:center;color:#fff">{:L('金额')}</div>
+                            <div id="timer_buynum" style="width:100%;height:40px;line-height:30px;text-align:center;font-weight:bold;color:#fff">1000.00</div>
                         </div>
                         <div style="width:33.33%;height:80px;float:left;">
-                            <div style="width:100%;height:40px;line-height:50px;text-align:center;">{:L('建仓')}</div>
-                            <div id="timer_buyprice" style="width:100%;height:40px;line-height:30px;text-align:center;font-weight:bold;">43128.277</div>
+                            <div style="width:100%;height:40px;line-height:50px;text-align:center;color:#fff">{:L('建仓')}</div>
+                            <div id="timer_buyprice" style="width:100%;height:40px;line-height:30px;text-align:center;font-weight:bold;color:#fff">43128.277</div>
                         </div>
                     </div> 
                     <input type="hidden" id="timer_order_type" value="1" />
@@ -470,7 +485,7 @@
 	        <p class="dong_order_p fcc">{:L('账户余额')}：{$eusdt_blan} USDT</p>
 	        <!--<p class="dong_order_p fcc">{:L('体验金')}：{$tj_money} USDT</p>-->
             
-            <div style="width:100%;height:50px;margin-top:10px;border-top:1px solid #f5f5f5;padding-top:10px;">
+            <div style="width:100%;height:50px;margin-top:10px;border-top:1px solid #5d5d5d;padding-top:10px;">
                 <div style="width:25%;height:50px;float:left;">
                     <div style="width:100%;height:30px;line-height:30px;text-align:center;">
                         <span class="fcc fzmm">{:L('交易对')}</span>
@@ -520,7 +535,7 @@
             </div>    
             <else />
             
-            <div id="subbtn" style="position:relative;width:100%;height:40px;line-height:40px;text-align:center;margin-top:30px;background: #0052fe;border-radius:10px;float:left;color: #fff">
+            <div id="subbtn" style="position:relative;width:100%;height:40px;line-height:40px;text-align:center;margin-top:30px;background: #feb000;border-radius:10px;float:left;color: #fff">
                 <span class=" fzmm sub_button">{:L('确认下单')}</span>
                         <img src="/Public/Static/img/spin.gif" class="spin" >
             </div>

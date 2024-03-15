@@ -6,7 +6,7 @@
 
     <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=2" />
+    <link rel="stylesheet" type="text/css" href="/Public/Static/css/base.css?v=<?=time()?>" />
     <link rel="stylesheet" type="text/css" href="/Public/Static/css/nologed.css" />
     <title>{$webname}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
@@ -144,15 +144,15 @@
     <div class="fl bhalf allhg txtl" style="line-height:50px;">
         <i class="bi bi-x fw"  onclick="goindex()" style="font-size:36px;color: #fff"></i>
     </div>
-    
+
     <a href="{:U('Login/setlang')}">
         <div class="fr bhalf allhg txtr" style="line-height:50px;position:relative;top:10px;right:10px">
     	    <div class="headerbox fr txtr"></div>
         </div>
 	</a>
-    
-    
-		
+
+
+
 		<style>
 		    .txtr > img{
 		        width:30px;
@@ -164,7 +164,7 @@
               const name = cookieName + "=";
               const decodedCookie = decodeURIComponent(document.cookie);
               const cookieArray = decodedCookie.split(';');
-            
+
               for(let i = 0; i < cookieArray.length; i++) {
                 let cookie = cookieArray[i];
                 while (cookie.charAt(0) === ' ') {
@@ -174,13 +174,13 @@
                   return cookie.substring(name.length, cookie.length);
                 }
               }
-            
+
               return "";
             }
-            
+
             const language = getCookie("think_language");
             console.log(language);
-            
+
             if(language=='zh-tw'){
                 $('.txtr').html('<img src="/Public/Static/img/flag/tw.png?v=2" class="flag">')
             }else if(language=='zh-cn'){
@@ -203,16 +203,16 @@
         <div class="dela-presets-container-2" style="padding: 0px;background:#000">
             <div class="dela-preset-container">
                 <form class="dela-preset-2-2" onclick="return false" method="get">
-                    
+
                 <div data-bn-type="text" class="css-152kxht f16" style="text-align:center;line-height: 80px">
                 	<img src="/Upload/public/{:get_config('waplogo')}?v=<?=time()?>" class="css-1jgk2rg" style="position:relative;top:15px;display:inline-block;height:50px;width:50px" />
                 	<span style="display:inline-block;font-weight:bold;font-size:24px;color:#ffc336" class="fbaseblue">{:L('BTCUSDT')}</span>
                 </div>
-                    
+
                     <p class="dela-form__title" style="font-size:1.3em">{:L('注册')}</p>
-                    
-                    
-                    
+
+
+
                     <style>
                         .btn_bar{
                             float: left;
@@ -223,7 +223,7 @@
                             background-image: linear-gradient(to right, #e9e9e9, #e9e9e9, #e9e9e9, #e9e9e9)!important;color:black
                         }
                     </style>
-                    
+
             <script>
                 $(function(){
                     var cookies = document.cookie ? document.cookie.split('; ') : [];
@@ -240,11 +240,11 @@
                      }
                      if(lang[1]=='zh-cn'){
                          $('#area_code').val('+852')
-                     }   
+                     }
                     }
                 })
             </script>
-            
+
                     <script>
                         $(function(){
                             $('.btn_bar').click(function(){
@@ -256,10 +256,10 @@
                             })
                         })
                     </script>
-                    
+
                     <!--<button class="btn_bar btn-hover color-6 btnr" style="margin-right:1.5rem;font-size:.8rem">{:L('邮箱')}</button>-->
                     <!--<button class="btn_bar btn-hover color-6 btnr gray" style="font-size:.8rem">{:L('手机')}</button>-->
-                  
+
                     <span class="reg_kind">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
                         <!--<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >-->
@@ -282,20 +282,20 @@
                             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
                             <button  class="btn-hover color-4 send-btn" onclick="getCode()"> {:L('发送')} </button>
                         </div>-->
-                        
-                        
+
+
                 <div class="input">
                     <input onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="vcode" id="vcode" value="" required style="width: 50%;display:inline-block"  placeholder="{:L('验证码')}"/>
                     <div class="action-button login-send-button" style="display:inline-block;width:45%;position:relative;top:15px">
                         <img style="width:100%;height:40px;border-radius:5px;" src="{:U('Verify/code')}" onclick="this.src=this.src+'?t='+Math.random()" title="{:L('换一张')}">
                     </div>
                 </div>
-                        
-                        
+
+
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg()" value="{:L('注册')}">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
                     </span>
-                  
+
                     <!--<span class="reg_kind" style="display:none">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
@@ -350,7 +350,7 @@
         if(ecode == ''){
             layer.msg("{:L('请输入邮箱验证码')}");return false;
         }*/
-        
+
         var account = $("#account").val();
         if(account=='' || account == null){
             layer.msg("{:L('请输入账号')}");return false;
@@ -367,7 +367,7 @@
         if(vcode == ''){
             layer.msg("{:L('请输入图形验证码')}");return false;
         }
-      
+
         $.post("{:U('Login/upregister')}",
             // {'email' : email, 'ecode' : ecode, 'lpwd' : lpwd, 'invit' : invit},
                         {'account' : account,  'lpwd' : lpwd, 'invit' : invit, 'vcode' : vcode},
@@ -383,8 +383,8 @@
             }
         );
     }
-    
-    
+
+
     function upreg2(){
         var  type = $('#type').val();
         if (type != 1 && type != 2) {
@@ -410,7 +410,7 @@
             layer.msg("{:L('请输入手机验证码')}");return false;
         }
         var pwd = $("#pwd_phone").val();
-        
+
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
@@ -418,7 +418,7 @@
         if( invitation_code == ''){
             layer.msg("{:L('请输入邀请码')}");return false;
         }
-      
+
         $.post("{:U('Login/smsregister')}",
             {'area_code' : area_code,'phone' : phone, 'sms_code' : sms_code, 'pwd' : pwd, 'invitation_code' : invitation_code},
             function(data){
@@ -435,16 +435,16 @@
 
 
     }
-    
-    
+
+
         //获取验证码
     function getCode(){
         var  type = $('#type').val();
         if (type != 1 && type != 2) {
             layer.msg("{:L('请选择注册类型')}");return false;
         }
-        
-        
+
+
         if(type == 1){
             //获取手机验证码
             var account = $("#country_selector").val();
@@ -458,16 +458,16 @@
                     function(data){
                         if(data.code == 1){
                             layer.msg(data.info);
-                            
+
                         }else{
                             layer.msg(data.info);return false;
                         }
                     }
                 );
-            
+
         }
-        
-        
+
+
         if(type == 2){
             //获取邮箱验证码
             var account = $("#email").val();
@@ -480,25 +480,25 @@
             if(!reg.test(email)){
                 layer.msg("{:L('邮箱格式不正确')}");return false;
             }
-            
+
              $.post("{:U('Login/sendcode')}",
                 {'email' : email},
                 function(data){
                     if(data.code == 1){
                         layer.msg(data.info);
-                        
+
                     }else{
                         layer.msg(data.info);return false;
                     }
                 }
             );
         }
-        
+
     }
         //获取验证码
     function getPhoneCode(){
-        
-        
+
+
             //获取手机验证码
             var area_code = $('#area_code').val()
             var phone = $('#phone').val()
@@ -514,23 +514,23 @@
                     function(data){
                         if(data.code == 1){
                             layer.msg(data.info);
-                            
+
                         }else{
                             layer.msg(data.info);return false;
                         }
                     }
                 );
-            
-        
-        
-        
-        
+
+
+
+
+
     }
 </script>
 
 
 <script type="text/javascript">
-    
+
     function stype(type) {
         if (type == 2) {
             $('#email').show();
@@ -543,7 +543,7 @@
         $('#type').val(type);
 
     }
-    
+
     function goindex(){
         window.location.href="{:U('Index/index')}";
     }
