@@ -397,6 +397,12 @@ class AutoexeController extends \Think\Controller
 	           $nowdate = date("Y-m-d",time());
 	           $profitinfo = M("kjprofit")->where(array('uid'=>$uid,'kid'=>$id,'day'=>$nowdate))->find();
 	           if(empty($profitinfo)){
+                    // 服务费
+                   $kjInfo=M('kuangji')->field('id,title,service_charge')->where(['id'=>$vo['kid']])->find();
+                   $service_charge=0;
+                   if ($kjInfo && $kjInfo['service_charge']) {
+                       $service_charge=$kjInfo['service_charge']/100;
+                   }
 	               //查找矿机收益的类型以及查找收益是否需要冻结及冻结天数
 	               $outtype = $vo['outtype'];
 	               if($outtype == 1){//按产值需要查找产出币种的最新行情
@@ -415,7 +421,9 @@ class AutoexeController extends \Think\Controller
 	                   $coinname = strtolower(trim($vo['outcoin']));
 	                   $tcoinnum = $vo['outnum'];
 	               }
-	               $djout = $vo['djout'];//1冻结2不冻结
+                   $services=sprintf("%.6f",($tcoinnum*$service_charge));// 服务费
+                   $tcoinnum=sprintf("%.6f",$tcoinnum-$services); // 扣除手续费
+	               $djout = $vo['djout'];//1、不冻结/2、冻结
 	               $djday = $vo['djnum'];//冻结天数
 	               //写入矿机收益日志
 	               $kjprofit_d['uid'] = $uid;
@@ -424,11 +432,11 @@ class AutoexeController extends \Think\Controller
 	               $kjprofit_d['ktitle'] = $vo['kjtitle'];
 	               $kjprofit_d['num'] = $tcoinnum;
 	               $kjprofit_d['coin'] = $coinname;
+	               $kjprofit_d['services'] = $services;
 	               $kjprofit_d['addtime'] = date("Y-m-d H:i:s",time());
 	               $kjprofit_d['day'] =  date("Y-m-d",time());
-
 	               M("kjprofit")->add($kjprofit_d);
-	               if($djout == 2){
+	               if($djout == 2){//冻结
 	                   $coin_d = $coinname."d";
 	                   M("user_coin")->where(array('userid'=>$uid))->setInc($coin_d,$tcoinnum);
 	                   $djprofit_d['uid'] = $uid;
@@ -551,7 +559,6 @@ class AutoexeController extends \Think\Controller
 //            $ylcount = intval($count * $setting['hy_fkgl'] / 100);
 //            $kscount = $count - $ylcount;
             $list=$orderobj->field('id,uid,username,num,status,is_win,kongyk')->where($map)->order("num asc")->limit(25)->select();
-//            var_dump($list);exit();
             if(!empty($list)){
                 foreach ($list as $v) {
                     $rand=rand(1,10);

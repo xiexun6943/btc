@@ -2577,5 +2577,9 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "昵称已存在"=>"Nickname already exists",
     "昵称不能为空"=>"Nickname should be filled",
     "昵称"=>"Nick name",
-
+    '矿机算力'=>'Mining machine Calculate ability',
+    '本次租金'=>'This rental',
+    '服务费'=>'Service charge',
+    '预计日产'=>'Expected Nissan',
+    '产出收益率'=>'Output yield',
 ];

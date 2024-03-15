@@ -234,6 +234,7 @@ class FinanceController extends HomeController
 	        $data['addtime'] = date("Y-m-d H:i:s",time());
 	        $data['updatetime'] = '';
 	        $data['status'] = 1;
+            $data['type'] = 1;
 	        $data['payimg'] = $payimg;
 	        $data['msg'] = '';
 	        $result = M("recharge")->add($data);
@@ -300,10 +301,10 @@ class FinanceController extends HomeController
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['updatetime'] = '';
             $data['status'] = 1;
+            $data['type'] = 1;// 客户充值
             $data['payimg'] = $payimg;
             $data['msg'] = '';
             $data['remark'] = '银行卡号:('.$bank_name.')充值: ('.$zznum.')';
-
             $result = M("recharge")->add($data);
             if($result){
                 $this->ajaxReturn(['code'=>1,'info'=> L('凭证提交成功')]);

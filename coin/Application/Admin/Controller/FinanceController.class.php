@@ -87,8 +87,7 @@ class FinanceController extends AdminController
 
         M()->startTrans();
        //增加会员目标打码流水
-	    $incre = M("user")->where(array('userid'=>$uid))->setInc('st_bill',$num*$config['dama_mult']);
-
+	    $incre = M("user")->where(array('id'=>$uid))->setInc('st_bill',$num*$config['dama_mult']);
 	    $upre = M("recharge")->where(array('id'=>$id))->save($save);
 	    if($minfo){
 	        //增加会员资产
