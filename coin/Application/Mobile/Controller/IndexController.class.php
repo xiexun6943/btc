@@ -87,6 +87,10 @@ class IndexController extends MobileController
             $this->redirect('Trade/tradelist');
         }
         $list = M("notice")->where(array('uid'=>$uid))->order("id desc")->select();
+        foreach ($list as $k => $v) {
+            $list[$k]['title'] = L($v['title']);
+            $list[$k]['content'] = L($v['content']);
+        }
         $this->assign('list',$list);
 		$this->display();
 	}
