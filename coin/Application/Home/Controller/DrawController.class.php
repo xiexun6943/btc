@@ -81,7 +81,7 @@ class DrawController extends HomeController
             $langArr = array_column($setting, null, 'type');
         }
 
-        $lang=cookie("think_language")?:'zh-tw';
+        $lang=cookie("think_language")?:'en-us';
 
         switch ($lang) {
             case 'zh-cn':
