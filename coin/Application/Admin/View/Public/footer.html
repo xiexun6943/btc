@@ -83,6 +83,56 @@
 		});
 	}
 </script>
+<script type="text/javascript">
+    $(function(){
+        var payid = [], cashid = [];
+        var ajax_getprompt = function(t){
+            $.ajax({
+                url: ":U('Config/ajax_getprompt')}",
+                type: 'GET',
+                dataType: 'json',
+                success: function(e) {
+                    console.log(e)
+                    var pay_ids = e.pay_ids;
+                    var cash_ids = e.cash_ids;
+                    if(pay_ids.length > 0){
+                        playSound();
+                        payid = pay_ids;
+                        $('#pay_tps a').text('<?=L('您有')?>'+pay_ids.length+"<?=L('条充值申请需要处理！')?>");
+                        $('#pay_tps').show();
+                    }else if(cash_ids.length > 0){
+                        playSound();
+                        cashid = cash_ids;
+                        $('#cash_tps a').text('<?=L('您有')?>'+cash_ids.length+"<?=L('条提现申请需要处理！')?>");
+                        $('#cash_tps').show();
+                        $('#pay_tps').hide();
+                    }else{
+                        $('#pay_tps').hide();
+                        $('#cash_tps').hide();
+                        playSound(true);
+                    }
+                    // console.log(e);
+                },
+                error: function() {
+                    console.log('ERR');
+                }
+            });
+        }
+
+        setInterval(function(){
+            var stamp = Date.parse(new Date());//当前时间戳
+            // console.log(stamp)
+            /*ajax_getpay(stamp);
+            ajax_getcash(stamp);*/
+            ajax_getprompt(stamp);
+
+        },5000);//10秒刷新一次
+        $('.col-auto .w_tps i').click(function() {
+            $(this).parent().hide();
+            playSound(true);
+        });
+    });
+</script>
 <div style="display:none;">
 
 </div>
