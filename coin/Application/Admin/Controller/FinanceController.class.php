@@ -292,8 +292,8 @@ class FinanceController extends AdminController
 	        
 	        $notice['uid'] = $info['userid'];
 		    $notice['account'] = $info['username'];
-		    $notice['title'] = L('提币审核');
-		    $notice['content'] = L('您的提币申请已通过，请及时查询');
+		    $notice['title'] = '提币审核';
+		    $notice['content'] = '您的提币申请已通过，请及时查询';
 		    $notice['addtime'] = date("Y-m-d H:i:s",time());
 		    $notice['status'] = 1;
 		    M("notice")->add($notice);

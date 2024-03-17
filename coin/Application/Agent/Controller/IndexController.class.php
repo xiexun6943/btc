@@ -199,8 +199,8 @@ class IndexController extends AgentController
 	             
 	            $notice['uid'] = $uid;
 		        $notice['account'] = $_POST['username'];
-		        $notice['title'] = L('Certification audit successful');
-		        $notice['content'] = L('Your certification application has been reviewed successfully');
+		        $notice['title'] = '认证审核成功';
+		        $notice['content'] = '您的认证申请已成功审核';
 		        $notice['addtime'] = date("Y-m-d H:i:s",time());
 		        $notice['status'] = 1;
 		        M("notice")->add($notice);
@@ -215,8 +215,8 @@ class IndexController extends AgentController
             if($result){
                 $notice['uid'] = $uid;
 		        $notice['account'] = $_POST['username'];
-		        $notice['title'] = L('Certification rejected');
-		        $notice['content'] = L('Your certification application was rejected by the administrator, please contact the administrator');
+		        $notice['title'] = '认证被拒绝';
+		        $notice['content'] = '您的认证申请被管理员拒绝，请联系管理员';
 		        $notice['addtime'] = date("Y-m-d H:i:s",time());
 		        $notice['status'] = 1;
 		        M("notice")->add($notice);

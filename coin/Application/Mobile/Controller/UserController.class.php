@@ -129,8 +129,8 @@ class UserController extends MobileController
         if($re){
             $notice['uid'] = $uid;
             $notice['account'] = $userinfo['username'];
-            $notice['title'] = L('认证资料提交成功');
-            $notice['content'] = L('实名资料提成功，耐心等待管理员审核');
+            $notice['title'] = '认证资料提交成功';
+            $notice['content'] = '实名资料提成功，耐心等待管理员审核';
             $notice['addtime'] = date("Y-m-d H:i:s",time());
             $notice['status'] = 1;
             M("notice")->add($notice);

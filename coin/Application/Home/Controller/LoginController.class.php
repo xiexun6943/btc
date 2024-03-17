@@ -92,8 +92,8 @@ class LoginController extends HomeController
 		if($result){
 		    $data['uid'] = $uinfo['id'];
 		    $data['account'] = $uinfo['username'];
-		    $data['title'] = L('重置密码');
-		    $data['content'] = L('登陆密码重置成功');
+		    $data['title'] = '重置密码';
+		    $data['content'] = '登陆密码重置成功';
 		    $data['addtime'] = date("Y-m-d H:i:s",time());
 		    $data['status'] = 1;
 		    M("notice")->add($data);

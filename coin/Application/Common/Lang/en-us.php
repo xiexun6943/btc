@@ -2573,5 +2573,7 @@ Most countries currently do not recognize Bitcoin as currency, but define it as 
     "秒"=>"Second",
     "提币中"=>"Withdrawing coins",
     "充值中"=>"Recharging",
-
+    '您的认证申请已成功审核'=>'您的认证申请已成功审核',
+    '认证被拒绝'=>'Authentication denied',
+    '您的认证申请被管理员拒绝，请联系管理员'=>'Your certification application was rejected by the administrator, please contact the administrator',
 ];

@@ -23,8 +23,8 @@ class FinanceController extends AgentController
 
             $data['uid'] = $info['uid'];
             $data['account'] = $info['username'];
-            $data['title'] = L('充币审核');
-            $data['content'] = L('您的充币记录被系统驳回，请联系客服');
+            $data['title'] = '充币审核';
+            $data['content'] = '您的充币记录被系统驳回，请联系客服';
             $data['addtime'] = date("Y-m-d H:i:s",time());
             $data['status'] = 1;
             M("notice")->add($data);
@@ -189,8 +189,8 @@ class FinanceController extends AgentController
 
             $notice['uid'] = $uid;
             $notice['account'] = $info['username'];
-            $notice['title'] = L('提币审核');
-            $notice['content'] = L('您的提币申请被驳回，请联系管理员');
+            $notice['title'] = '提币审核';
+            $notice['content'] = '您的提币申请被驳回，请联系管理员';
             $notice['addtime'] = date("Y-m-d H:i:s",time());
             $notice['status'] = 1;
             M("notice")->add($notice);
@@ -229,8 +229,8 @@ class FinanceController extends AgentController
 
             $notice['uid'] = $info['userid'];
             $notice['account'] = $info['username'];
-            $notice['title'] = L('提币审核');
-            $notice['content'] = L('您的提币申请已通过，请及时查询');
+            $notice['title'] = '提币审核';
+            $notice['content'] = '您的提币申请已通过，请及时查询';
             $notice['addtime'] = date("Y-m-d H:i:s",time());
             $notice['status'] = 1;
             M("notice")->add($notice);

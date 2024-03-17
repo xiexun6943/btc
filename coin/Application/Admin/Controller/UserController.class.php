@@ -171,8 +171,8 @@ class UserController extends AdminController
 
                 $notice['uid'] = $uid;
                 $notice['account'] = $_POST['username'];
-                $notice['title'] = L('认证审核成功');
-                $notice['content'] = L('您的认证申请已审核成功');
+                $notice['title'] = '认证审核成功';
+                $notice['content'] = '您的认证申请已审核成功';
                 $notice['addtime'] = date("Y-m-d H:i:s",time());
                 $notice['status'] = 1;
                 M("notice")->add($notice);
@@ -187,8 +187,8 @@ class UserController extends AdminController
             if($result){
                 $notice['uid'] = $uid;
                 $notice['account'] = $_POST['username'];
-                $notice['title'] = L('认证驳回');
-                $notice['content'] = L('您的认证申请被管理员驳回，请联系管理员');
+                $notice['title'] = '认证驳回';
+                $notice['content'] = '您的认证申请被管理员驳回，请联系管理员';
                 $notice['addtime'] = date("Y-m-d H:i:s",time());
                 $notice['status'] = 1;
                 M("notice")->add($notice);
