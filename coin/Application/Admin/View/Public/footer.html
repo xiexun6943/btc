@@ -1,104 +1,104 @@
-<script type="text/javascript" src="__PUBLIC__/Admin/js/common.js?v=2"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/common.js"></script>
 <script type="text/javascript">
-	+function(){
-		//$("select").select2({dropdownCssClass: 'dropdown-inverse'});//下拉条样式
-		layer.config({
-			extend: 'extend/layer.ext.js'
-		});
+    +function(){
+        //$("select").select2({dropdownCssClass: 'dropdown-inverse'});//下拉条样式
+        layer.config({
+            extend: 'extend/layer.ext.js'
+        });
 
-		var $window = $(window), $subnav = $("#subnav"), url;
-		$window.resize(function(){
-			//$("#main").css("min-height", $window.height() - 90);
-		}).resize();
+        var $window = $(window), $subnav = $("#subnav"), url;
+        $window.resize(function(){
+            //$("#main").css("min-height", $window.height() - 90);
+        }).resize();
 
-		/* 左边菜单高亮 */
-		url = window.location.pathname + window.location.search;
+        /* 左边菜单高亮 */
+        url = window.location.pathname + window.location.search;
 
-		url = url.replace(/(\/(p)\/\d+)|(&p=\d+)|(\/(id)\/\d+)|(&id=\d+)|(\/(group)\/\d+)|(&group=\d+)/, "");
-		$subnav.find("a[href='" + url + "']").parent().addClass("current");
+        url = url.replace(/(\/(p)\/\d+)|(&p=\d+)|(\/(id)\/\d+)|(&id=\d+)|(\/(group)\/\d+)|(&group=\d+)/, "");
+        $subnav.find("a[href='" + url + "']").parent().addClass("current");
 
-		/* 左边菜单显示收起 */
-		$("#subnav").on("click", "h3", function(){
-			var $this = $(this);
-			$this.find(".icon").toggleClass("icon-fold");
-			$this.next().slideToggle("fast").siblings(".side-sub-menu:visible").
-			prev("h3").find("i").addClass("icon-fold").end().end().hide();
-		});
+        /* 左边菜单显示收起 */
+        $("#subnav").on("click", "h3", function(){
+            var $this = $(this);
+            $this.find(".icon").toggleClass("icon-fold");
+            $this.next().slideToggle("fast").siblings(".side-sub-menu:visible").
+            prev("h3").find("i").addClass("icon-fold").end().end().hide();
+        });
 
-		$("#subnav h3 a").click(function(e){e.stopPropagation()});
+        $("#subnav h3 a").click(function(e){e.stopPropagation()});
 
-		/* 头部管理员菜单 */
-		$(".user-bar").mouseenter(function(){
-			var userMenu = $(this).children(".user-menu ");
-			userMenu.removeClass("hidden");
-			clearTimeout(userMenu.data("timeout"));
-		}).mouseleave(function(){
-			var userMenu = $(this).children(".user-menu");
-			userMenu.data("timeout") && clearTimeout(userMenu.data("timeout"));
-			userMenu.data("timeout", setTimeout(function(){userMenu.addClass("hidden")}, 100));
-		});
+        /* 头部管理员菜单 */
+        $(".user-bar").mouseenter(function(){
+            var userMenu = $(this).children(".user-menu ");
+            userMenu.removeClass("hidden");
+            clearTimeout(userMenu.data("timeout"));
+        }).mouseleave(function(){
+            var userMenu = $(this).children(".user-menu");
+            userMenu.data("timeout") && clearTimeout(userMenu.data("timeout"));
+            userMenu.data("timeout", setTimeout(function(){userMenu.addClass("hidden")}, 100));
+        });
 
-		/* 表单获取焦点变色 */
-		$("form").on("focus", "input", function(){
-			$(this).addClass('focus');
-		}).on("blur","input",function(){
-			$(this).removeClass('focus');
-		});
-		$("form").on("focus", "textarea", function(){
-			$(this).closest('label').addClass('focus');
-		}).on("blur","textarea",function(){
-			$(this).closest('label').removeClass('focus');
-		});
+        /* 表单获取焦点变色 */
+        $("form").on("focus", "input", function(){
+            $(this).addClass('focus');
+        }).on("blur","input",function(){
+            $(this).removeClass('focus');
+        });
+        $("form").on("focus", "textarea", function(){
+            $(this).closest('label').addClass('focus');
+        }).on("blur","textarea",function(){
+            $(this).closest('label').removeClass('focus');
+        });
 
-		// 导航栏超出窗口高度后的模拟滚动条
-		var sHeight = $(".sidebar").height();
-		var subHeight  = $(".subnav").height();
-		var diff = subHeight - sHeight; //250
-		var sub = $(".subnav");
+        // 导航栏超出窗口高度后的模拟滚动条
+        var sHeight = $(".sidebar").height();
+        var subHeight  = $(".subnav").height();
+        var diff = subHeight - sHeight; //250
+        var sub = $(".subnav");
 
-	}();
+    }();
 
-	//导航高亮
-	function highlight_subnav(url){
-		$('.side-sub-menu').find('a[href="'+url+'"]').closest('li').addClass('current');
-	}
+    //导航高亮
+    function highlight_subnav(url){
+        $('.side-sub-menu').find('a[href="'+url+'"]').closest('li').addClass('current');
+    }
 
-	function lockscreen(){
-		layer.prompt({
-			title: '输入一个锁屏密码',
-			formType: 1,
-			btn: ['锁屏','取消'] //按钮
-		}, function(pass){
-			if(!pass){
-				layer.msg('需要输入一个密码!');
-			}else{
-				$.post("{:U('Login/lockScreen')}",{pass:pass},function(data){
-					layer.msg(data.info);
-					layer.close();
-					if(data.status){
-						window.location.href = "{:U('Login/lockScreen')}";
-					}
-				},'json');
-			}
-		});
-	}
+    function lockscreen(){
+        layer.prompt({
+            title: '输入一个锁屏密码',
+            formType: 1,
+            btn: ['锁屏','取消'] //按钮
+        }, function(pass){
+            if(!pass){
+                layer.msg('需要输入一个密码!');
+            }else{
+                $.post("{:U('Login/lockScreen')}",{pass:pass},function(data){
+                    layer.msg(data.info);
+                    layer.close();
+                    if(data.status){
+                        window.location.href = "{:U('Login/lockScreen')}";
+                    }
+                },'json');
+            }
+        });
+    }
 </script>
 <script type="text/javascript">
 
-function playSound() {
-	var a = $('#SOUND');
-	if (a.length == 0) {
-		a = $('<audio id="SOUND"><source src="/Public/Admin/ecshe_img/kaijiang.mp3" type="audio/mpeg"/></audio>').appendTo($('body'))[0];
-		if (a.load) {
-			a.load()
-		}
-	} else {
-		a = a[0]
-	}
-	if (a.play) {
-		a.play()
-	}
-}
+    function playSound() {
+        var a = $('#SOUND');
+        if (a.length == 0) {
+            a = $('<audio id="SOUND"><source src="/Public/Admin/ecshe_img/kaijiang.mp3" type="audio/mpeg"/></audio>').appendTo($('body'))[0];
+            if (a.load) {
+                a.load()
+            }
+        } else {
+            a = a[0]
+        }
+        if (a.play) {
+            a.play()
+        }
+    }
 
     $(function(){
         var payid = [], cashid = [];
@@ -149,83 +149,83 @@ function playSound() {
     });
 </script>
 <div class="col-auto">
-        <div class="content">
-            <iframe name="right_iframe" id="right_iframe" frameborder="false" scrolling="auto" style="overflow-x:hidden;border:none;" width="100%" height="auto" allowtransparency="true"></iframe>
-        </div>
-        <div id="pay_tps" class="w_tps">
-            <a hidefocus="true" style="outline:none" href="/Admin/Finance/myzr" target="_self"><?=L('您有新的充值订单需要处理！')?></a>
-            <i>x</i>
-        </div>
-        <div id="cash_tps" class="w_tps">
-            <a hidefocus="true" style="outline:none" href="/Admin/Finance/myzc" target="_self"><?=L('您有新的提现申请需要处理！')?></a>
-            <i>x</i>
-        </div>
+    <div class="content">
+        <iframe name="right_iframe" id="right_iframe" frameborder="false" scrolling="auto" style="overflow-x:hidden;border:none;" width="100%" height="auto" allowtransparency="true"></iframe>
     </div>
+    <div id="pay_tps" class="w_tps">
+        <a hidefocus="true" style="outline:none" href="/Admin/Finance/myzr" target="_self"><?=L('您有新的充值订单需要处理！')?></a>
+        <i>x</i>
+    </div>
+    <div id="cash_tps" class="w_tps">
+        <a hidefocus="true" style="outline:none" href="/Admin/Finance/myzc" target="_self"><?=L('您有新的提现申请需要处理！')?></a>
+        <i>x</i>
+    </div>
+</div>
 </body>
 </html>
 
 <style>
     .col-auto {
-	padding-left: 1px;
-	/*overflow: hidden;*/
-	position: fixed;
-	right:10px;
-	bottom:10px;
-	
-}
+        padding-left: 1px;
+        /*overflow: hidden;*/
+        position: fixed;
+        right:10px;
+        bottom:10px;
 
-#pay_tps{
-    display: none;
-}
+    }
 
-#cash_tps{
-    display: none;
-}
+    #pay_tps{
+        display: none;
+    }
 
-.col-right {
-	float: right
-}
+    #cash_tps{
+        display: none;
+    }
 
-.col-auto .w_tps {
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
-	display: none;
-	z-index: 999;
-	width: 240px;
-	height: 100px;
-	background-color: #333c59;
-	line-height: 100px;
-	text-align: center;
-	font-size: 16px;
-	color: #fff;
-}
+    .col-right {
+        float: right
+    }
 
-.col-auto .w_tps#cash_tps {
-	right: 280px;
-}
+    .col-auto .w_tps {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+        z-index: 999;
+        width: 240px;
+        height: 100px;
+        background-color: #333c59;
+        line-height: 100px;
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+    }
 
-.col-auto .w_tps a {
-	display: block;
-	color: #fff;
-}
+    .col-auto .w_tps#cash_tps {
+        right: 280px;
+    }
 
-.col-auto .w_tps i {
-	position: absolute;
-	top: -10px;
-	right: -10px;
-	z-index: 1000;
-	width: 24px;
-	height: 24px;
-	line-height: 24px;
-	background-color: #f00;
-	text-align: center;
-	font-size: 14px;
-	color: #fff;
-	font-style: normal;
-	cursor:pointer;
-	-moz-border-radius: 12px;
-	-webkit-border-radius: 12px;
-	border-radius: 12px;
-}
+    .col-auto .w_tps a {
+        display: block;
+        color: #fff;
+    }
+
+    .col-auto .w_tps i {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        z-index: 1000;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        background-color: #f00;
+        text-align: center;
+        font-size: 14px;
+        color: #fff;
+        font-style: normal;
+        cursor:pointer;
+        -moz-border-radius: 12px;
+        -webkit-border-radius: 12px;
+        border-radius: 12px;
+    }
 </style>
