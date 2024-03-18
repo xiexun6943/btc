@@ -115,7 +115,7 @@
 				<tr>
 					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
 					<th class="">UID</th>
-					<!--<th class="">{:L('用户名')}</th>-->
+					<th class="">{:L('用户名')}</th>
 					<volist name="coinlist" id="v">
 						<th class="">{$v.title}(<?php echo strtoupper($v['name']);?>)</th>
 					</volist>
@@ -127,7 +127,7 @@
 						<tr>
 							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
 							<td>{$vo.userid}</td>
-							<!--<td ><span style="color: #ff0000">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
+							<td ><span style="color: #ff0000">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							<volist name="coinlist" id="v">
 								<td>
 								    {:L('可用')}：{$vo[$v['name']] * 1}<br>{:L('冻结')}：
