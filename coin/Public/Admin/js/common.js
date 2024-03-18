@@ -151,7 +151,7 @@ $(function(){
 
 	//客服
 	var button_toggle = true;
-	$(".show_box").live("mouseover", function(){
+	$(".show_box").on("mouseover", function(){
 		var tip_top;
 		var show= $(this).attr('show');
 		var hide= $(this).attr('hide');
@@ -159,14 +159,14 @@ $(function(){
 		button_toggle = false;
 		$("#show_box").css("top" , tip_top).show().find(".flag_"+show).show();
 		$(".flag_"+hide).hide();
-	}).live("mouseout", function(){
+	}).on("mouseout", function(){
 		button_toggle = true;
 		hideRightTip();
 	});
-	$("#show_box").live("mouseover", function(){
+	$("#show_box").on("mouseover", function(){
 		button_toggle = false;
 		$(this).show();
-	}).live("mouseout", function(){
+	}).on("mouseout", function(){
 		button_toggle = true;
 		hideRightTip();
 	});
