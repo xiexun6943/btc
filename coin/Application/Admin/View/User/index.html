@@ -79,7 +79,8 @@
 							<input class="check-all" type="checkbox"/>
 						</th>
 						<th class="">ID</th>
-						<th class="">会员账号/手机号(昵称)</th>
+						<!--<th class="">会员账号/手机号(昵称)</th>-->
+						<!--<th class="">昵称</th>-->
 						<th class="">操作</th>
 						<th class="">登陆</th>
 						<th class="">打码流水/目标流水</th>
@@ -108,7 +109,8 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span><p/>昵称: <span style="color: green">{$vo.nick_name}</span></td>
+								<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span><p/>昵称: <span style="color: green">{$vo.nick_name}</span></td>-->
+									<!--<td>昵称: <span style="color: green">{$vo.nick_name}</span></td>-->
 							    <td>
 									<a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>
 									<a class="btn btn-warning btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>
