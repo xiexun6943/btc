@@ -18,7 +18,7 @@
 							<input class="check-all" type="checkbox"/>
 						</th>
 						<th class="">UID</th>
-						<th class="">会员账号</th>
+						<!--<th class="">会员账号</th>-->
 						<th class="">未回复记录</th>
 						<th class="">操作</th>
 					</tr>
@@ -31,7 +31,7 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+								<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
 								<td>{$vo.nor}</td>
                                 <td>
 						            <a class="btn btn-primary btn-xs" href="{:U('User/onlinelist')}?id={$vo.id}">查看详情</a>

@@ -69,6 +69,7 @@ class IndexController extends MobileController
 		$uid = userid();
 		$info = M("user")->where(array('id'=>$uid))->field("id,username,invit")->find();
         $config = M("config")->where(array('id'=>1))->field('weblogo,kefu')->find();
+        $info['uid'] = '7012'.$info['id'];
         $kefu = $config['kefu'];
         $waplogo = $config['weblogo'] ? '/Upload/public/'.$config['weblogo'] : '/xm/4558.png';
 		$count = M("notice")->where(array('uid'=>$uid,'status'=>1))->count();
