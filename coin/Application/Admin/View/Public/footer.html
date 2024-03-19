@@ -117,17 +117,19 @@
                         payid = pay_ids;
                         $('#pay_tps a').text('<?=L('您有')?>'+pay_ids.length+"<?=L('条充值申请需要处理！')?>");
                         $('#pay_tps').show();
-                    }else if(cash_ids.length > 0){
+                    }
+                    if(cash_ids.length > 0){
                         playSound();
                         cashid = cash_ids;
                         $('#cash_tps a').text('<?=L('您有')?>'+cash_ids.length+"<?=L('条提现申请需要处理！')?>");
                         $('#cash_tps').show();
-                        $('#pay_tps').hide();
-                    }else{
-                        $('#pay_tps').hide();
-                        $('#cash_tps').hide();
-                        playSound(true);
+                        // $('#pay_tps').hide();
                     }
+                    // else{
+                    //     $('#pay_tps').hide();
+                    //     $('#cash_tps').hide();
+                    //     playSound(true);
+                    // }
                 },
                 error: function() {
                     console.log('ERR');
