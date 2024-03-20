@@ -6,7 +6,7 @@ class ConfigController extends AdminController
 	protected function _initialize()
 	{
 		parent::_initialize();
-		$allow_action=array("index","edit","image","coin","coinEdit","coinStatus","textStatus","coinImage","text","textEdit","qita","qitaEdit","daohang","daohangEdit","daohangStatus","dhfooter","dhfooterEdit","dhfooterStatus","dhadmin","dhadminEdit","dhadminStatus","ctmarket","ctmarketEdit","marketo","marketoEdit","marketoEdit2","marketoEdit3","marketoStatus","ctmarketoStatus","mining","miningEdit","qrCodeImage");
+		$allow_action=array("index","edit","image","coin","coinEdit","coinStatus","textStatus","coinImage","text","textEdit","qita","qitaEdit","daohang","daohangEdit","daohangStatus","dhfooter","dhfooterEdit","dhfooterStatus","dhadmin","dhadminEdit","dhadminStatus","ctmarket","ctmarketEdit","marketo","marketoEdit","marketoEdit2","marketoEdit3","marketoStatus","ctmarketoStatus","mining","miningEdit","qrCodeImage","ajax_getprompt");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！".ACTION_NAME);
 		}
@@ -950,6 +950,38 @@ class ConfigController extends AdminController
 		}
 	}
 	
+	/**
+     * 充值和提现订单 提示接口
+     */
+    public function ajax_getprompt() {
+        $msg = array(
+            'pay_ids' => array(),
+            'cash_ids' => array(),
+        );
+
+        $rechargeDb = M('recharge');
+        $myzcDb = M('myzc');
+        $recharges = $rechargeDb
+            ->where(['status'=>1])
+            ->order('id ASC')
+            ->select();
+
+        foreach($recharges as $k => $v) {
+            $payarr[] = $v['id'];
+        }
+        $msg['pay_ids'] = empty($payarr)?array():$payarr;
+
+        $cashs = $myzcDb
+            ->where(['status'=>1])
+            ->order('id ASC')
+            ->select();
+        foreach($cashs as $k => $v) {
+            $casharr[] = $v['id'];
+        }
+
+        $msg['cash_ids'] = empty($casharr)?array():$casharr;
+        $this->ajaxReturn(['code'=>0,'data' => $msg,'msg'=>'成功']);
+    }
 
 }
 ?>
