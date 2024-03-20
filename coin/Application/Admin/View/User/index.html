@@ -41,8 +41,8 @@
 						</select>
 
 						<select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
-							<option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
-							<option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
+							<option value="username" <empty name="Think.get.field" value="username">selected</empty> >邮箱账号</option>
+							<option value="id" <eq name="Think.get.field" value="id" >selected</eq> >UID</option>
 							<option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
 						</select>
 
@@ -86,7 +86,7 @@
 <!--						<th class="">认证</th>-->
 						<th class="">状态</th>
 						<th class="">邀请码</th>
-						<th class="">推荐人</th>
+						<th class="">上级代理人(UID)</th>
 						<th class="">注册IP/时间</th>
 <!--						<th class="">地址</th>-->
 
@@ -161,9 +161,10 @@
 								</td>
 								<td><span>{$vo.invit}</span></td>
 								<td style="width:120px;white-space:unset">
-									<neq name="vo.invit_1">上级uid：{$vo['invit_1']['id']}<br></neq>
-									<neq name="vo.invit_1">上级账号：{$vo['invit_1']['phone']}<br></neq>
-								 <span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+									<neq name="vo.invit_1">uid：{$vo['invit_1']['id']}<br></neq>
+									<neq name="vo.invit_1">账号：<br></neq>
+								 <span style="color: red"> {$vo['invit_1']['username']} </span> <p/>
+									<span style="color: green">{$vo['invit_1']['phone']}</span>
 <!--									<neq name="vo.invit_2"><a href="{:U('User/index?name='.$vo['invit_2'].'&field=username')}">2代：{$vo['invit_2']}</a><br></neq>-->
 <!--									<neq name="vo.invit_3"><a href="{:U('User/index?name='.$vo['invit_3'].'&field=username')}">3代：{$vo['invit_3']}</a><br></neq>-->
 								</td>

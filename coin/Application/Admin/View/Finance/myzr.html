@@ -56,12 +56,13 @@
 					<th class="">ID</th>
 					<th class="">UID</th>
 					<th class="">用户名</th>
+					<th class="">上级代理人(UID)</th>
 					<th width="">操作</th>
 					<th width="">充值数量/实际到账(U)</th>
 					<th width="">银行卡充值信息</th>
 					<th width="">充值类型/币种/状态</th>
 					<th width="">转账凭证</th>
-					<th width="">充值时间/处理时间</th>
+					<th width="">充值/处理(时间)</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -71,6 +72,19 @@
 							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
 							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+							<td style="width:120px;white-space:unset">
+								<neq name="vo.invit_1">uid：{$vo['invit_1']['id']}<br></neq>
+								<neq name="vo.invit_1">账号：<br></neq>
+								<span style="color: red"> {$vo['invit_1']['username']} </span> <p/>
+								<span style="color: green">{$vo['invit_1']['phone']}</span> <br>
+								<?php  if($vo['invit_1']['type'] == 1){ ?>
+								<span style="color:red;">正式</span>
+								<?php }else{ ?>
+								<span style="color:blue;">虚拟</span>
+								<?php } ?>
+<!--								<eq name="$vo['invit_1']['type']" value="1"><span style="color:blue;">正式</span></eq>-->
+<!--								<eq name="$vo['invit_1']['type']" value="2"><span style="color:blue;">正式</span></eq>-->
+							</td>
 							<td>
                                 <eq name="vo.status" value="1">
                                     <input type="button" class="ajax-get btn btn-primary btn-xs" value="确认" onclick="Upzr('{$vo['id']}');"/>

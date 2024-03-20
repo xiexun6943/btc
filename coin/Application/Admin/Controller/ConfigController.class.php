@@ -134,6 +134,12 @@ class ConfigController extends AdminController
 			}
 
 			if ($rs) {
+                $data=[
+                    'type'=>1,
+                    'data'=>json_encode($_POST),
+                    'created_at'=>date('Y-m-d H:i:s',time())
+                ];
+                M('operate_log')->add($data);
 				$this->success('操作成功！',U('Config/coin'));
 			} else {
 				$this->error('数据未修改！');

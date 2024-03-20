@@ -353,11 +353,12 @@ class FinanceController extends AdminController
         $btc_all_recharge=0;
 		$eth_all_recharge=0;
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('username,phone,invit_1')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
                 $list[$k]['username'] = $userInfo['username'];
             }
+            $list[$k]['invit_1'] = M('User')->field('username,phone,id,type')->where(array('id' => $userInfo['invit_1']))->find();
             if (in_array($v['coin'],['USDT','HKD','JPY']) && $v['status'] == 2) {
                 $usdt_all_recharge+=$v['num'];
             }
@@ -368,6 +369,7 @@ class FinanceController extends AdminController
                 $eth_all_recharge+=$v['num'];
             }
         }
+//        var_dump($list);exit;
         $this->assign('usdt_all_recharge', $usdt_all_recharge);
         $this->assign('btc_all_recharge', $btc_all_recharge);
         $this->assign('eth_all_recharge', $eth_all_recharge);
