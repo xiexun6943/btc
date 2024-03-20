@@ -331,7 +331,7 @@
             input:focus{background:#2B3139;outline: 1px solid #2B3139;}
 
             .coin_lump2{
-                background: url("/Public/Static/img/coins/coins_bg_pc.jpg?v=3") no-repeat center bottom;
+                background: url("/Public/Static/img/coins/coins_bg_pc.jpg?v=<?=time()?>") no-repeat center bottom;
                 background-size:cover;
                 width: 100%;
                 height: 700px;
@@ -367,13 +367,13 @@
           width: 30rem;
     height: 20.5rem;
         position: fixed;
-        top:3%;
+        top:5.5%;
         left: 0;
         right: 0;
         margin: auto;
     }
     .btn img{
-         width: 30rem;
+         width: 20rem;
     height: auto;
     }
     .lump{
@@ -381,7 +381,7 @@
         width:33rem;
         height: auto;
         position: fixed;
-        top:45%;
+        top:50%;
         left: 0;
         right: 0;
         margin: auto;
@@ -773,7 +773,7 @@
 			<div class="left"><img src="/Public/Static/img/coins/left.png?v=4"></div>
 			<div class="right"><img src="/Public/Static/img/coins/right.png?v=4"></div>
 
-			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png?v=4"></div>
+			<div class="btn coin_btn"><img src="/Public/Static/img/coins/coins_btn.png?v=<?=time()?>"></div>
 			<div class="lump">
 			    <div class="label">{:L('规则说明')}</div>
 			    <p>

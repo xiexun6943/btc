@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '下单成功'=>'success',
     '请输入账号'=>'please enter account',
     '修改登录密码'=>'Change login password',
     '服务'=>'service',

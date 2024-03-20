@@ -1,4 +1,24 @@
 <include file="Public:header"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/viewer.css" crossorigin="anonymous">
+	<script src="__PUBLIC__/Admin/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/viewer.js"></script>
+	<script src="__PUBLIC__/Admin/js/jquery-viewer.js"></script>
+    <style>
+      .viewer-footer{
+        display: none;
+      }
+    </style>
+
+    <script>
+      $(function () {
+          setTimeout(function(){
+              
+        var $images = $('img');
+        console.log($images)
+        $images.viewer();
+          },2000)
+      });
+    </script>
 <div id="main-content">
 	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
 		<button class="close fixed" style="margin-top: 4px;">&times;</button>
@@ -56,6 +76,8 @@
 					<th class="">ID</th>
 					<th class="">UID</th>
 					<th class="">用户名</th>
+					<th class="">上级代理人(UID)</th>
+					<th class="">用户类型</th>
 					<th width="">操作</th>
 					<th width="">充值数量/实际到账(U)</th>
 					<th width="">银行卡充值信息</th>
@@ -71,6 +93,22 @@
 							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
 							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+							<td>{$vo.agent_username}({$vo.agent_uid})</td>
+							<td>
+							    <eq name="vo.type" value="0">
+							        <span style="color:blue;">正式</span>
+                                </eq>
+		                        <eq name="vo.type" value="1">
+							        <span style="color:red;">虚拟</span>
+                                </eq>
+                                <eq name="vo.is_agent" value="0">
+							        <span style="color:red;">普通</span>
+                                </eq>
+		                        <eq name="vo.is_agent" value="1">
+							        <span style="color:blue;">代理</span>
+                                </eq>
+                                <span style="color:green;">用户</span>
+							</td>
 							<td>
                                 <eq name="vo.status" value="1">
                                     <input type="button" class="ajax-get btn btn-primary btn-xs" value="确认" onclick="Upzr('{$vo['id']}');"/>
@@ -117,7 +155,9 @@
 							<?php  }?>
 						
 					   		<td>
-								<eq name="vo.type" value="1">   <img src="/Public/Static/payimgs/{$vo.payimg}" style="height:60px;"/></eq>
+								<eq name="vo.type" value="1">
+								    <img src="/Public/Static/payimgs/{$vo.payimg}" style="height:60px;"/>
+								</eq>
 								<eq name="vo.type" value="2">后台人工充值</eq>
 								<eq name="vo.type" value="3">后台彩金赠送</eq>
 							</td>

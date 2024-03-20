@@ -713,6 +713,10 @@
                   success: function(res) {
                       
                       console.log(res)
+                      
+                      
+            layer.msg("{:L('下单成功')}")
+                      
                       if(res.code==1){
                           var flag = $("#flag").val();
         if(flag == 2){
