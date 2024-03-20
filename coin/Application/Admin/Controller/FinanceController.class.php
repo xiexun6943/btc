@@ -370,7 +370,6 @@ class FinanceController extends AdminController
                 $eth_all_recharge+=$v['num'];
             }
         }
-        var_dump($list);
         $this->assign('usdt_all_recharge', $usdt_all_recharge);
         $this->assign('btc_all_recharge', $btc_all_recharge);
         $this->assign('eth_all_recharge', $eth_all_recharge);
