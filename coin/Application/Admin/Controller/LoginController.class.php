@@ -48,12 +48,17 @@ class LoginController extends \Think\Controller
 //				}
 				
 				M('Admin')->where(array('username' => $username))->save(array('last_login_time' => time(), 'last_login_ip' => get_client_ip()));
-				
-				session('admin_id', $admin['id']);
-				S('5df4g5dsh8shnfsf', $admin['id']);
-				session('admin_username', $admin['username']);
-				session('admin_password', $admin['password']);
-				session('admin_role', $admin['role']);
+
+                $redis=$this-> getRedis();
+                $userInfo=['id'=>$admin['id'],'username'=>$admin['username']];
+                $redis->hMSet($admin['id'].'admin_token',$userInfo);
+                $ttl=C('redis_expire');
+                $redis->expire($admin['id'].'admin_token', $ttl);
+                cookie('admin_id',$admin['id']);
+                cookie('admin_username',$admin['username']);
+                cookie('admin_password',$admin['password']);
+                cookie('admin_role',$admin['role']);
+
 				$this->success('登陆成功!', U('Index/index'));
 			}
 		} else {
@@ -62,7 +67,7 @@ class LoginController extends \Think\Controller
 			if (ADMIN_KEY && ($urlkey != ADMIN_KEY)) {
 				$this->redirect('Home/Index/index');
 			}
-			if (session('admin_id')) {
+			if (cookie('admin_id')) {
 				$this->redirect('Admin/Index/index');
 			}
 
@@ -70,9 +75,23 @@ class LoginController extends \Think\Controller
 		}
 	}
 
+    protected function getRedis()
+    {
+        $redis = new \Redis();
+        $host = REDIS_HOST;
+        $port = REDIS_PORT;
+        $password= REDIS_PWD;
+        $redis->connect($host ,$port, 30);
+        $redis->auth($password);
+        return $redis;
+    }
 	public function loginout()
 	{
-		session(null);
+//		session(null);
+        cookie('admin_id',null);
+        cookie('admin_username','');
+        cookie('admin_password',null);
+        cookie('admin_role',null);
 		S('5df4g5dsh8shnfsf', null);
 		$this->redirect('Login/index');
 	}

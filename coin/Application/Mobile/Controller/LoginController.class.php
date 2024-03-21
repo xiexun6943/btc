@@ -118,6 +118,16 @@ class LoginController extends MobileController
 		}
 
     }
+	protected function getRedis()
+	{
+		$redis = new \Redis();
+		$host = REDIS_HOST;
+		$port = REDIS_PORT;
+		$password= REDIS_PWD;
+		$redis->connect($host ,$port, 30);
+		$redis->auth($password);
+		return $redis;
+	}
 
 	// 登录提交处理
     public function loginsubmit(){
@@ -180,8 +190,14 @@ class LoginController extends MobileController
             $lgdata['loginaddr'] = get_city_ip();
             $lgdata['logintime'] = date("Y-m-d H:i:s",time());
             M("user")->where(array('id' => $user['id']))->save($lgdata);
-            session('userId', $user['id']);
-            session('userName', $user['username']);
+
+			$redis=$this-> getRedis();
+			$userInfo=['uid'=>$user['id'],'username'=>$user['username']];
+			$redis->hMSet($user['id'].'user_token',$userInfo);
+			$ttl=C('redis_expire');
+			$redis->expire($user['id'].'user_token', $ttl);
+			cookie('web.uid',$user['id']);
+			cookie('web.username',$user['username']);
             $this->ajaxReturn(['code'=>1,'info'=>L('登录成功')]);
         }else{
             $this->ajaxReturn(['code'=>0,'info'=>L('登录失败')]);

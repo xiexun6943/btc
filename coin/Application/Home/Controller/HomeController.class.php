@@ -12,8 +12,9 @@ class HomeController extends \Think\Controller
         $webname = $clist['webname'];
         $this->assign("webname",$webname);
 
-		if (!session('userId')) {
-			session('userId', 0);
+//		if (!session('userId')) {
+		if (!cookie('web.uid')) { // 走cookie
+            cookie('web.uid', 0);
 
 		} else if (CONTROLLER_NAME != 'Login') {
             $uid = userid();
@@ -26,7 +27,6 @@ class HomeController extends \Think\Controller
 		    if($uid <= 0 || $uid == ''){
 		        $uid = 0;
 		    }
-		    
 		    $this->assign('uid',$uid);
 		    
 		    if($uid > 0){

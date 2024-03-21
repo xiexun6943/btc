@@ -132,8 +132,8 @@ class FinanceController extends AdminController
 	
 	    //删除充币记录
     public function del($id = null){
-	    $admin_id=session('admin_id');
-	    $admin_username=session('admin_username');
+	    $admin_id=cookie('admin_id');
+	    $admin_username=cookie('admin_username');
         if (!$admin_id) {
             $this->redirect('Admin/Login/index');
         }
@@ -167,8 +167,8 @@ class FinanceController extends AdminController
     
     //删除提币记录
     public function delT($id = null){
-        $admin_id=session('admin_id');
-        $admin_username=session('admin_username');
+        $admin_id=cookie('admin_id');
+        $admin_username=cookie('admin_username');
         if (!$admin_id) {
             $this->redirect('Admin/Login/index');
         }

@@ -799,7 +799,7 @@ class UserController extends AdminController
             $aga = M('AuthGroupAccess')->where(array('uid'=>$v['id']))->find();
             $ag = M('AuthGroup')->where(array('id'=>$aga['group_id']))->find();
         }
-        $login_admin=session('admin_username');
+        $login_admin=cookie('admin_username');
         $data=[];
         if ($login_admin != "mitan007") {
             foreach ($list as$k=> $v) {

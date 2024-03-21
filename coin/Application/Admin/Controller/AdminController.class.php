@@ -14,11 +14,13 @@ class AdminController extends Controller
 
         defined('APP_DEMO') || define('APP_DEMO', 0);
 
-        if (!session('admin_id')) {
+//        if (!session('admin_id')) {
+//            $this->redirect('Admin/Login/index');
+//        }
+        if (!cookie('admin_id')) {
             $this->redirect('Admin/Login/index');
         }
-        
-        define('UID', session('admin_id'));
+        define('UID', cookie('admin_id'));
         
         $access = $this->accessControl();
         if ($access === false) {

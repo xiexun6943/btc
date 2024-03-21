@@ -14,7 +14,7 @@
 		<div class="cf">
 			<div class="fl">
 				<a class="btn btn-success " href="{:U('User/qianbaoEdit')}">新 增</a>
-<?php if(session('admin_role') == 1){  ?>
+<?php if(cookie('admin_role') == 1){  ?>
 				<button class="btn ajax-post confirm btn-danger " url="{:U('User/qianbaoStatus',array('type'=>'del'))}" target-form="ids">删 除</button>
 				<?php  }  ?>
 			</div>
@@ -71,7 +71,7 @@
 					<th class="">钱包地址</th>
 					<th class="">备注</th>
 					<th class="" >操作时间</th>
-					<?php if(session('admin_role') == 1){  ?>
+					<?php if(cookie('admin_role') == 1){  ?>
 					<th class="">操作</th>
 						<?php  }  ?>
 				</tr>
@@ -93,7 +93,7 @@
 							     <input type="button" class="ajax-get btn btn-danger btn-xs" value="重置" onclick="reset('{$vo['id']}','{$vo['czline']}');"/>
 							</td>
 					
-							<?php if(session('admin_role') == 1){  ?>
+							<?php if(cookie('admin_role') == 1){  ?>
 							<td><a href="{:U('User/qianbaoEdit?id='.$vo['id'])}" class="btn btn-primary btn-xs" '{$vo['id']}'>编辑</a>
 							</td>
 							<?php  }  ?>

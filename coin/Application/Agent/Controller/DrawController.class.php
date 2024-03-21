@@ -10,11 +10,11 @@ class DrawController extends AgentController
 
 	//系统设置首页
 	public function index(){
-		if (!session('agent_id')) {
+		if (!cookie('agent_id')) {
 			$this->redirect('Agent/Login/index');
 		}
 
-		$uid = session('agent_id');
+		$uid = cookie('agent_id');
 
 		$field=I('get.field');
 		$search=I('get.search');

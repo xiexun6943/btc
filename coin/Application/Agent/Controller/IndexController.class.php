@@ -11,10 +11,10 @@ class IndexController extends AgentController
 
 	//代理中心会员管理
 	public function index($name=NULL){
-        if (!session('agent_id')) {
+        if (!cookie('agent_id')) {
 			$this->redirect('Agent/Login/index');
 		}
-		$uid = session('agent_id');
+		$uid = cookie('agent_id');
 		$this->assign('uid', $uid);
 		$field=I('get.field');
 		$search=I('get.search');
@@ -48,8 +48,8 @@ class IndexController extends AgentController
 	//编辑或新增会员
 	public function edit($id = NULL)
 	{
-	    $uid = session('agent_id');
-	    $agent_type=session('agent_type');
+	    $uid = cookie('agent_id');
+	    $agent_type=cookie('agent_type');
 		$this->assign('agent_type',$agent_type);
 		if (empty($_POST)) {
 			if (empty($id)) {
@@ -231,11 +231,11 @@ class IndexController extends AgentController
 	
 	//代理中心建仓订单
 	public function jclist(){
-		if (!session('agent_id')) {
+		if (!cookie('agent_id')) {
 			$this->redirect('Agent/Login/index');
 		}
 
-		$uid = session('agent_id');
+		$uid = cookie('agent_id');
 
 		$field=I('get.field');
 		$search=I('get.search');
@@ -291,11 +291,11 @@ class IndexController extends AgentController
 	
 	//代理中心平仓订单
 	public function pclist(){
-		if (!session('agent_id')) {
+		if (!cookie('agent_id')) {
 			$this->redirect('Agent/Login/index');
 		}
 
-		$uid = session('agent_id');
+		$uid = cookie('agent_id');
 
 		$field=I('get.field');
 		$search=I('get.search');
@@ -334,12 +334,12 @@ class IndexController extends AgentController
 	 * 代理中心充币列表
 	 */ 
 	 public function recharge(){
-	   if (!session('agent_id')) {
+	   if (!cookie('agent_id')) {
 			$this->redirect('Agent/Login/index');
 		}
 		
-		$uid = session('agent_id');
-		$agent_type = session('agent_type');
+		$uid = cookie('agent_id');
+		$agent_type = cookie('agent_type');
 
 		 $field=I('get.field');
 		 $search=I('get.search');
@@ -390,10 +390,10 @@ class IndexController extends AgentController
 	 * 代理中心提币列表
 	 */ 
 	 public function withdraw($name=null){
-		 if (!session('agent_id')) {
+		 if (!cookie('agent_id')) {
 			 $this->redirect('Agent/Login/index');
 		 }
-		 $uid = session('agent_id');
+		 $uid = cookie('agent_id');
 		 $field=I('get.field');
 		 $search=I('get.search');
 		 $where = array();
@@ -442,10 +442,10 @@ class IndexController extends AgentController
 	  * 用户财产
 	  */
 	  public function property(){
-		if (!session('agent_id')) {
+		if (!cookie('agent_id')) {
 		  $this->redirect('Agent/Login/index');
 		}
-		$uid = session('agent_id');
+		$uid = cookie('agent_id');
 		$field=I('get.field');
 		$search=I('get.search');
 
@@ -485,12 +485,12 @@ class IndexController extends AgentController
 	// 团队统计列表
 	public function count()
 	{
-		$agent_type= session('agent_type');
-		if (!session('agent_id') || $agent_type <=0 ) {
+		$agent_type= cookie('agent_type');
+		if (!cookie('agent_id') || $agent_type <=0 ) {
 			$this->redirect('Agent/Login/index');
 		}
 
-		$uid = session('agent_id');
+		$uid = cookie('agent_id');
 
 
 		$status=I('get.status')?:3;

@@ -18,7 +18,7 @@ class LoginController extends \Think\Controller
 			    if($uinfo['is_agent'] != 1){
 			        $this->error(L('该账号不是代理'));exit();
 			    }
-				session('agent_id', $uinfo['id']);
+				cookie('agent_id', $uinfo['id']);
                 if ($uinfo['invit_1'] == 0 && $uinfo['invit_2'] == 0 && $uinfo['invit_3'] == 0 && $uinfo['is_agent'] == 1) {
                     $agent_type=1;// 一级代理
                 } elseif ($uinfo['invit_1'] > 0 && $uinfo['invit_2'] == 0 && $uinfo['invit_3'] == 0 && $uinfo['is_agent'] == 1) {
@@ -28,11 +28,11 @@ class LoginController extends \Think\Controller
                 }else{
                     $agent_type=4;// 普通用户
                 }
-                session('agent_type', $agent_type);
+                cookie('agent_type', $agent_type);
 				$this->success(L('登陆成功'), U('Agent/Index/index'));
 			}
 		} else {
-			if(session('agent_id')) {
+			if(cookie('agent_id')) {
 				$this->redirect('Index/index');
 			}
 			$this->display();
@@ -41,7 +41,7 @@ class LoginController extends \Think\Controller
 
 	public function loginout()
 	{
-		session('agent_id',null);
+        cookie('agent_id',null);
 		$this->redirect('Agent/Login/index');
 	}
 

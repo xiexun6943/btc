@@ -45,6 +45,7 @@ class LoginController extends HomeController
 	public function index()
 	{
 	    $uid = userid();
+//	    var_dump($uid);exit();
 	    if($uid >= 1){
 	       $this->redirect("Index/index");
 	    }
@@ -103,14 +104,22 @@ class LoginController extends HomeController
 		}
 
     }
-
+	protected function getRedis()
+	{
+		$redis = new \Redis();
+		$host = REDIS_HOST;
+		$port = REDIS_PORT;
+		$password= REDIS_PWD;
+		$redis->connect($host ,$port, 30);
+		$redis->auth($password);
+		return $redis;
+	}
 	// 登录提交处理
 	public function loginsubmit(){
         $pwd = I("post.pwd");
         $account = I("post.account");
         $vcode = I("post.vcode");
 
-        // $type = I("post.type");
         $type =1;
 // 		if (!check_verify(strtoupper($vcode),'.web')) {
 // 			$this->ajaxReturn(['code'=>0,'info'=>L('图形验证码错误!')]);
@@ -155,8 +164,14 @@ class LoginController extends HomeController
 		    $lgdata['loginaddr'] = get_city_ip();
 		    $lgdata['logintime'] = date("Y-m-d H:i:s",time());
 	    	M("user")->where(array('id' => $user['id']))->save($lgdata);
-		    session('userId', $user['id']);
-			session('userName', $user['username']);
+
+			$redis=$this-> getRedis();
+			$userInfo=['uid'=>$user['id'],'username'=>$user['username']];
+			$redis->hMSet($user['id'].'user_token',$userInfo);
+			$ttl=C('redis_expire');
+			$redis->expire($user['id'].'user_token', $ttl);
+			cookie('web.uid',$user['id']);
+			cookie('web.username',$user['username']);
 			$this->ajaxReturn(['code'=>1,'info'=>L('登录成功')]);
 		}else{
 		    $this->ajaxReturn(['code'=>0,'info'=>L('登录失败')]);
@@ -361,10 +376,12 @@ class LoginController extends HomeController
 	}
 
 
-
+	// 退出登录
 	public function loginout()
 	{
-		session(null);
+//		session(null);
+		cookie('web.uid',null);
+		cookie('web.username',null);
 		redirect('/');
 	}
 

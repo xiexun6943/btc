@@ -4,7 +4,6 @@ class IndexController extends AdminController
 {
     
 	public function index(){
-        
         //全网总人数
         $alluser = M("user")->count();
         $this->assign("alluser",$alluser);

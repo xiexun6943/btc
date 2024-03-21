@@ -26,5 +26,7 @@ return array(
 
 	'TMPL_ACTION_ERROR' => './Public/error.html', //默认错误跳转对应的模板文件优选源码库  www.yxymk.net
 	'TMPL_ACTION_SUCCESS' => './Public/success.html', //默认成功跳转对应的模板文件
+    'redis_expire'        =>    88200, // redis过期时间
+    'COOKIE_EXPIRE'       =>    86400,// cookie 过期时间
 	);
 ?>

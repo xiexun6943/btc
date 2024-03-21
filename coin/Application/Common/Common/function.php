@@ -214,7 +214,17 @@ function getUrl($url)
 	return $data;
 }
 
-
+ function getRedis()
+{
+    $redis = new \Redis();
+    $host = REDIS_HOST;
+    $port = REDIS_PORT;
+    $password= REDIS_PWD;
+    $redis->connect($host ,$port, 30);
+    $redis->auth($password);
+    return $redis;
+}
+// 获取登录用户信息
 function userid($username = NULL, $type = 'username')
 {
 	if ($username && $type) {
@@ -225,11 +235,19 @@ function userid($username = NULL, $type = 'username')
 			S('userid' . $username . $type, $userid);
 		}
 	} else {
-		$userid = session('userId');
+	    // 老的
+        //$userid = session('userId');
+        $redis=getRedis();
+        $uid=cookie('web.uid');
+        $userInfo=$redis->hGetAll($uid.'user_token');
+        if ($userInfo) {
+            $userid = $userInfo['uid'];
+        }
 	}
-
 	return $userid ? $userid : NULL;
 }
+
+
 
 function username($id = NULL, $type = 'id')
 {

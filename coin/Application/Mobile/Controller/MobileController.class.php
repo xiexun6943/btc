@@ -13,8 +13,8 @@ class MobileController extends \Think\Controller
         $clist = M("config")->where(array('id'=>1))->field("webname")->find();
         $webname = $clist['webname'];
         $this->assign("webname",$webname);
-		if (!session('userId')) {
-			session('userId', 0);
+		if (!cookie('web.uid')) {
+            cookie('web.uid', 0);
 			
 		} else if (CONTROLLER_NAME != 'Login') {
 

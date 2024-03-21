@@ -14,10 +14,10 @@ class AgentController extends Controller
         parent::__construct();
 
 
-        if (!session('agent_id')) {
+        if (!cookie('agent_id')) {
             $this->redirect('Agent/Login/index');
         }
-        define('AID', session('agent_id'));
+        define('AID', cookie('agent_id'));
         
         $access = $this->accessControl();
         if ($access === false) {
