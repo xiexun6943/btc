@@ -303,10 +303,11 @@ class UserController extends AdminController
         $show = $Page->show();
         $list = M('notice')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
                 $list[$k]['username'] = $userInfo['username'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
         }
         $this->assign('list', $list);
@@ -429,9 +430,10 @@ class UserController extends AdminController
 
         $list = M('online')->where($where)->order('state DESC')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
         }
         $this->assign('list', $list);
@@ -490,7 +492,7 @@ class UserController extends AdminController
         $count = M('User')->where($where)->count();
         $Page = new \Think\Page($count, 50);
         $show = $Page->show();
-        $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->field("id,username,phone")->select();
+        $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->field("id,username,phone,is_agent")->select();
 
         foreach($list as $key=>$vo){
             $map['uid'] = $vo['id'];
@@ -1012,10 +1014,11 @@ class UserController extends AdminController
         $list = M('UserLog')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['userid']))->find();
+            $userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['userid']))->find();
             if ($userInfo) {
                 $list[$k]['username'] = $userInfo['username'];
                 $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
 
         }
@@ -1127,9 +1130,10 @@ class UserController extends AdminController
         $list = M('UserQianbao')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
 		foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
 		}
         $this->assign('list', $list);
@@ -1243,9 +1247,10 @@ class UserController extends AdminController
         $show = $Page->show();
         $list = M('UserCoin')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->field('username,phone')->where(array('id' => $v['userid']))->find();
+            $userInfo=M('User')->field('username,phone,is_agent')->where(array('id' => $v['userid']))->find();
             $list[$k]['username'] = $userInfo['username'];
             $list[$k]['phone'] = $userInfo['phone'];
+            $list[$k]['is_agent'] = $userInfo['is_agent'];
         }
         $this->assign('list', $list);
         $this->assign('page', $show);
@@ -1295,9 +1300,10 @@ class UserController extends AdminController
         $show = $Page->show();
         $list = M('bill')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
 
         }

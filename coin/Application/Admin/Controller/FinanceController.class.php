@@ -317,10 +317,11 @@ class FinanceController extends AdminController
 		$list = M('bill')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['username'] = $userInfo['username'];
                 $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
 
         }
@@ -352,10 +353,11 @@ class FinanceController extends AdminController
         $btc_all_recharge=0;
 		$eth_all_recharge=0;
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
                 $list[$k]['username'] = $userInfo['username'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
             if (in_array($v['coin'],['USDT','HKD','JPY']) && $v['status'] == 2) {
                 $usdt_all_recharge+=$v['num'];
@@ -392,10 +394,11 @@ class FinanceController extends AdminController
         $btc_all_withdraw=0;
         $eth_all_withdraw=0;
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['userid']))->find();
+            $userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['userid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
                 $list[$k]['username'] = $userInfo['username'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
 
             if (in_array($v['coinname'],['usdt','hkd','jpy']) && $v['status'] == 2) {

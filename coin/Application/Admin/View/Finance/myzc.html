@@ -73,7 +73,11 @@
                         <tr>
                             <td>{$vo.id}</td>
                             <td>{$vo.userid}</td>
-                            <!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
+                            <td>
+                                <eq name="vo.is_agent" value="1">
+                                <span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+                                </eq>
+                            </td>
                             <td>
                                 <eq name="vo.status" value="1">
 

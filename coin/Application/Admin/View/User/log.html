@@ -77,7 +77,7 @@
 				<tr>
 					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
 					<th class="">UID</th>
-					<!--<th class="">用户名/手机号码</th>-->
+					<th class="">用户名/手机号码</th>
 					<th class="">类型</th>
 					<th class="">内容</th>
 					<th class="">操作ip</th>
@@ -94,7 +94,11 @@
 						<tr>
 							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
 							<td>{$vo.userid}</td>
-							<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
+							<td>
+								<eq name="vo.is_agent" value="1">
+								<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+								</eq>
+							</td>
 							<td>{$vo.type}</td>
 							<td>{$vo.remark}</td>
 							<td>{$vo.addip}</td>

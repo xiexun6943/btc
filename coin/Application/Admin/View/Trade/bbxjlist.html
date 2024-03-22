@@ -71,7 +71,7 @@
 				<tr>
 					<th class="">ID</th>
 					<th class="">UID</th>
-					<!--<th class="">会员账号</th>-->
+					<th class="">会员账号</th>
 					<th class="">交易信息</th>
 <!--					<th class="">方向</th>-->
 <!--					<th class="">状态</th>-->
@@ -90,7 +90,12 @@
 					<tr>
 						<td>{$vo.id}</td>
 						<td>{$vo.uid}</td>
-						<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
+						<td>
+							<eq name="vo.is_agent" value="1">
+								<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+							</eq>
+						</td>
+
 						<td>
 							交易对:  <span style="color:red;">{$vo.symbol}</span> <br>
 							方向:

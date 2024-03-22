@@ -77,7 +77,7 @@
 				<tr>
 				    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
 					<th class="">UID</th>
-					<!--<th class="">会员账号/手机号码</th>-->
+					<th class="">会员账号/手机号码</th>
 					<th class="">币种</th>
 					<th class="">变动金额</th>
 					<th class="">变动后金额</th>
@@ -93,7 +93,11 @@
 						<tr>
 						    <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
 							<td>{$vo.uid}</td>
-							<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
+							<td>
+								<eq name="vo.is_agent" value="1">
+								<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+								</eq>
+							</td>
 							<td><?php echo strtoupper($vo['coinname']);?></td>
                             <td>
                                 <if condition="$vo.st eq 1">

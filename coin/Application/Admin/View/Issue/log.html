@@ -47,7 +47,7 @@
 						<th class="row-selected row-selected"><input class="check-all" type="checkbox" /></th>
 						<th class="">ID</th>
 						<th class="">UID</th>
-						<!--<th class="">会员账号</th>-->
+						<th class="">会员账号</th>
 						<th class="">项目名称</th>
 						<th class="">认购</th>
 						<th class="">支付</th>
@@ -62,7 +62,11 @@
 								<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
 								<td>{$vo.id}</td>
 								<td>{$vo.uid}</td>
-								<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
+								<td>
+									<eq name="vo.is_agent" value="1">
+										<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+									</eq>
+								</td>
 								<td>{$vo.name}</td>
 								<td>
 								    <span>认购币种：<?php echo strtoupper($vo['coinname']);?></span><br />

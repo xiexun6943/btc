@@ -121,7 +121,7 @@
 				<tr>
 					<th class="">ID</th>
 					<th class="">UID</th>
-					<!--<th class="">用户名</th>-->
+					<th class="">用户名</th>
 
 					<th width="">操作</th>
 
@@ -138,7 +138,11 @@
 						<tr>
 							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
-							<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
+							<td>
+								<eq name="vo.is_agent" value="1">
+									<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+								</eq>
+							</td>
 							<td>
 								<eq name="agent_type" value="1">
 								<eq name="vo.status" value="1">
