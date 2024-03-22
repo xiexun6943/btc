@@ -25,13 +25,14 @@ class DrawController extends AdminController
 		$count = M('user')->where($where)->count();
 		$Page = new \Think\Page($count, 15);
 		$show = $Page->show();
-		$list = M('user')->field("id,username,phone")->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+		$list = M('user')->field("id,username,phone,is_agent")->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		$data=[];
 		if ($list) {
 			foreach ($list as$k=> $v) {
 				$data[$k]['uid']=$v['id'];
 				$data[$k]['username']=$v['username'];
 				$data[$k]['phone']=$v['phone'];
+				$data[$k]['is_agent']=$v['is_agent'];
 				$todays=$this->getTodayDraw($v['id']);
 				$data[$k]['today_draw']=$todays['amount'];
 				$data[$k]['total_draw']=$this->getUserDraw($v['id']);

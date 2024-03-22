@@ -15,7 +15,7 @@
                 <div class="sleft">
                     <form name="formSearch" id="formSearch" method="get" name="form1" >
                         <select style="width:120px;float:left;margin-right:10px;" name="field" class="form-control">
-                            <option value="id" <empty name="Think.get.field" value="id" >selected</empty> >UID</option>
+                            <option value="uid" <empty name="Think.get.field" value="uid" >selected</empty> >UID</option>
                             <option value="username" <eq name="Think.get.field" value="username">selected</eq> >邮箱账号</option>
                             <option value="phone" <eq name="Think.get.field" value="phone">selected</eq> >手机号码</option>
                         </select>
@@ -47,7 +47,7 @@
                     <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
                     <th class="">ID</th>
                     <th class="">UID</th>
-                    <!--<th class="">用户名</th>-->
+                    <th class="">用户名</th>
                     <th class="">操作币种</th>
                     <th class="">操作数量</th>
                     <th class="">操作类型</th>
@@ -64,6 +64,11 @@
                             <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
                             <td>{$vo.id}</td>
                             <td>{$vo.uid}</td>
+                            <td>
+                                <eq name="vo.is_agent" value="1">
+                                    <span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+                                </eq>
+                            </td>
                             <!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
                             <td><?php echo strtoupper($vo['coinname']);?></td>
                             <td>{$vo.num}</td>

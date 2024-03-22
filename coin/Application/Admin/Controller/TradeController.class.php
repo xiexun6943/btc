@@ -70,10 +70,11 @@ class TradeController extends AdminController
 		$show = $Page->show();
 		$list = M('bborder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		foreach ($list as $k => $v) {
-			$userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+			$userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['uid']))->find();
 			if ($userInfo) {
 				$list[$k]['username'] = $userInfo['username'];
 				$list[$k]['phone'] = $userInfo['phone'];
+				$list[$k]['is_agent'] = $userInfo['is_agent'];
 			}
 
 		}
@@ -107,10 +108,11 @@ class TradeController extends AdminController
 		$show = $Page->show();
 		$list = M('bborder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		foreach ($list as $k => $v) {
-			$userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+			$userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['uid']))->find();
 			if ($userInfo) {
 				$list[$k]['username'] = $userInfo['username'];
 				$list[$k]['phone'] = $userInfo['phone'];
+				$list[$k]['is_agent'] = $userInfo['is_agent'];
 			}
 		}
 		$this->assign('list', $list);
@@ -320,9 +322,10 @@ class TradeController extends AdminController
 		$show = $Page->show();
 		$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		foreach ($list as $k => $v) {
-			$userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+			$userInfo=M('User')->Field('phone,is_agent')->where(array('id' => $v['uid']))->find();
 			if ($userInfo) {
 				$list[$k]['phone'] = $userInfo['phone'];
+				$list[$k]['is_agent'] = $userInfo['is_agent'];
 			}
 		}
 		$this->assign('list', $list);
@@ -357,9 +360,10 @@ class TradeController extends AdminController
 		$show = $Page->show();
 		$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		foreach ($list as $k => $v) {
-			$userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+			$userInfo=M('User')->Field('phone,is_agent')->where(array('id' => $v['uid']))->find();
 			if ($userInfo) {
 				$list[$k]['phone'] = $userInfo['phone'];
+				$list[$k]['is_agent'] = $userInfo['is_agent'];
 			}
 		}
 		$this->assign('list', $list);

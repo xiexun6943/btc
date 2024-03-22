@@ -18,7 +18,7 @@
 							<input class="check-all" type="checkbox"/>
 						</th>
 						<th class="">ID</th>
-						<!--<th class="">会员账号</th>-->
+						<th class="">会员账号</th>
 						<th class="">内容</th>
 						<th class="">操作</th>
 					</tr>
@@ -31,6 +31,11 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
+								<td>
+									<eq name="vo.is_agent" value="1">
+										<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+									</eq>
+								</td>
 								<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
 								<td>{$vo.content}</td>
                                 <td>

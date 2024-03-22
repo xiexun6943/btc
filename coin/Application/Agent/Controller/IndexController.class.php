@@ -246,9 +246,10 @@ class IndexController extends AgentController
 		    $map_3 = "path like '%,{$uid}%'";
 		}
 
-		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
+		$ulist = M('User')->field('id,username,phone,is_agent')->where($map_3)->select();
 		if(!empty($ulist)){
 			$userInfo=array_column($ulist,'phone','id');
+			$is_agent=array_column($ulist,'is_agent','id');
 			$ulist=array_column($ulist,'id');
 			$where['uid'] = ['in',$ulist];
 			$where['status'] = 1;
@@ -259,6 +260,7 @@ class IndexController extends AgentController
 			$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
 			foreach ($list as $k => $v) {
 				$list[$k]['phone'] =$userInfo[$v['uid']] ;
+				$list[$k]['is_agent'] =$is_agent[$v['uid']] ;
 			}
 			$this->assign('list', $list);
 			$this->assign('page', $show);
@@ -306,9 +308,10 @@ class IndexController extends AgentController
 			$map_3 = "path like '%,{$uid}%'";
 		}
 
-		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
+		$ulist = M('User')->field('id,username,phone,is_agent')->where($map_3)->select();
 		if(!empty($ulist)){
 			$userInfo=array_column($ulist,'phone','id');
+			$is_agent=array_column($ulist,'is_agent','id');
 			$ulist=array_column($ulist,'id');
 			$where['uid'] = ['in',$ulist];
 			$where['status'] = ['in',[2,3]];
@@ -319,6 +322,7 @@ class IndexController extends AgentController
 			$list = M('hyorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows    )->select();
 			foreach ($list as $k => $v) {
 				$list[$k]['phone'] =$userInfo[$v['uid']] ;
+				$list[$k]['is_agent'] =$is_agent[$v['uid']] ;
 			}
 			$this->assign('list', $list);
 			$this->assign('page', $show);
@@ -351,9 +355,10 @@ class IndexController extends AgentController
 		 }
 
 
-		$ulist = M('User')->field('id,username,phone')->where($map_3)->select();
+		$ulist = M('User')->field('id,username,phone,is_agent')->where($map_3)->select();
 		if(!empty($ulist)){
 			$userInfo=array_column($ulist,'phone','id');
+			$is_agent=array_column($ulist,'is_agent','id');
 			$ulist=array_column($ulist,'id');
 		    $where['uid'] = ['in',$ulist];
 	    	$count = M('recharge')->where($where)->count();
@@ -365,6 +370,7 @@ class IndexController extends AgentController
 			$eth_all_recharge=0;
 			foreach ($list as $k => $v) {
 				$list[$k]['phone'] =$userInfo[$v['uid']] ;
+				$list[$k]['is_agent'] =$is_agent[$v['uid']] ;
 				if (in_array($v['coin'],['USDT','HKD','JPY']) && $v['status'] == 2) {
 					$usdt_all_recharge+=$v['num'];
 				}
@@ -403,10 +409,11 @@ class IndexController extends AgentController
 			 $map_3 = "path like '%,{$uid}%'";
 		 }
 
-		 $ulist = M('User')->field('id,username,phone')->where($map_3)->select();
+		 $ulist = M('User')->field('id,username,phone,is_agent')->where($map_3)->select();
 
 		 if(!empty($ulist)){
 			 $userInfo=array_column($ulist,'phone','id');
+			 $is_agent=array_column($ulist,'is_agent','id');
 			 $ulist=array_column($ulist,'id');
 			 $where['userid'] = ['in',$ulist];
 			 $count = M('myzc')->where($where)->count();
@@ -418,6 +425,7 @@ class IndexController extends AgentController
 			 $eth_all_withdraw=0;
 			 foreach ($list as $k => $v) {
 				 $list[$k]['phone'] =$userInfo[$v['userid']] ;
+				 $list[$k]['is_agent'] =$is_agent[$v['userid']] ;
 				 if (in_array($v['coinname'],['usdt','hkd','jpy']) && $v['status'] == 2) {
 					 $usdt_all_withdraw+=$v['num'];
 				 }
@@ -463,10 +471,11 @@ class IndexController extends AgentController
 	    	$list = M('UserCoin')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
 		    foreach ($list as $k => $v) {
-				$userinfo=M('User')->where(array('id' => $v['userid']))->field('username,phone')->find();
+				$userinfo=M('User')->where(array('id' => $v['userid']))->field('username,phone,is_agent')->find();
 				if ($userinfo) {
 					$list[$k]['username'] =$userinfo['username'];
 					$list[$k]['phone'] =$userinfo['phone'];
+					$list[$k]['is_agent'] =$userinfo['is_agent'];
 				}
 	    	}
 		    $this->assign('list', $list);

@@ -23,9 +23,10 @@ class KuangmController extends AdminController
 		$show = $Page->show();
 		$list = M('djprofit')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
 
         }
@@ -47,9 +48,10 @@ class KuangmController extends AdminController
 		$show = $Page->show();
 		$list = M('kjprofit')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
 
         }
@@ -112,10 +114,11 @@ class KuangmController extends AdminController
 		$show = $Page->show();
 		$list = M('kjorder')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('username,phone,is_agent')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['username'] = $userInfo['username'];
                 $list[$k]['phone'] = $userInfo['phone'];
+                $list[$k]['is_agent'] = $userInfo['is_agent'];
             }
 
         }

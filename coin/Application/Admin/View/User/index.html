@@ -78,7 +78,7 @@
 							<input class="check-all" type="checkbox"/>
 						</th>
 						<th class="">ID</th>
-						<!--<th class="">会员账号 / 手机号</th>-->
+						<th class="">会员账号 / 手机号</th>
 						<th class="">操作</th>
 						<th class="">登陆</th>
 						<th class="">打码流水/目标流水</th>
@@ -107,7 +107,11 @@
 									<input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
 								</td>
 								<td>{$vo.id}</td>
-								<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
+								<td>
+									<eq name="vo.is_agent" value="1">
+									<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+									</eq>
+								</td>
 							    <td>
 									<a class="btn btn-primary btn-danger btn-xs" href="{:U('User/recharge')}?id={$vo.id}">充值</a>
 									<a class="btn btn-warning btn-xs" href="{:U('User/edit')}?id={$vo.id}">编辑</a>
@@ -158,6 +162,8 @@
 									<br />
 									<eq name="vo.type" value="0"><span style="color:orange;">正式用户</span></eq>
 									<eq name="vo.type" value="1"><span style="color:red;">虚拟用户</span></eq>
+									<br/>
+									<eq name="vo.is_agent" value="1"><span style="color:green;">代理</span></eq>
 								</td>
 								<td><span>{$vo.invit}</span></td>
 								<td style="width:120px;white-space:unset">

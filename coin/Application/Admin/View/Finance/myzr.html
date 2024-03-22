@@ -55,7 +55,7 @@
 				<tr>
 					<th class="">ID</th>
 					<th class="">UID</th>
-					<!--<th class="">用户名</th>-->
+					<th class="">用户名</th>
 					<th width="">操作</th>
 					<th width="">充值数量/实际到账(U)</th>
 					<th width="">银行卡充值信息</th>
@@ -70,6 +70,11 @@
 						<tr>
 							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
+							<td>
+								<eq name="vo.is_agent" value="1">
+									<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+								</eq>
+							</td>
 							<!--<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>-->
 							<td>
                                 <eq name="vo.status" value="1">
