@@ -145,16 +145,67 @@
 
 
 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<style>
+    #ls_lump{
+        max-width: unset;
+        padding-left: unset;
+        padding-right: unset;
+        width:100%;
+        height: 100vh;
+        display:grid;
+        grid-template-columns: 50% 50%;
+    }
+    #ls_lump .left_pic{
+        position: relative;
+        background: #000;
+    }
+    #ls_lump .left_pic .logo_lump{
+        width:100%;
+        position: absolute;
+        left: 60px;
+        top: 60px;
+    }
+    #ls_lump .left_pic .logo{
+        width: 276px;
+    height: 75px;
+    }
+    #ls_lump .left_pic .pic{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+            width: 70%;
+    height: auto;
+    }
+    #ls_lump .right_lump{
+        background: #fff;
+        position: relative;
+    }
+</style>
 
 
 <!-- partial:index.partial.html -->
-<div class="container">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<div class="container" id="ls_lump">
+    
+    
+    
+    <div class="left_pic">
+        <div class="logo_lump">
+            <img class="logo" src="/Public/Static/img/video_logo.png">
+    		    <h1 style="color:hsla(0,0%,100%,.7);font-size:16px;position:absolute;left:0;top:100px">{:L('切尔西足球俱乐部官方加密货币交易所合作伙伴')}</h1>
+    		    <h1 style="color:#fff;font-size:60px;width:100%;height:auto;position:absolute;top:130px">{:L('赋能未来')}<span style="color:#0047ff">.</span></h1>
+        </div>
+        <img class="pic" src="/Public/Static/img/login-ship.png">
+    </div>
+    
+    
+    <div class="right_lump">
     <!-- code here -->
-    <div class="card"  style="margin:4rem auto;position:relative">
+    <div class="card"  style="margin:1rem auto;position:relative">
         <div class="goHome"><a href="{:U('Index/index')}"><img src="/Public/Static/img/close.png"></a></div>
         <style>
             .goHome{
+                display:none;
                 position: absolute;
                 top:3px;
                 right: 3px;
@@ -163,54 +214,233 @@
                 cursor: pointer;
             }
         </style>
+        
+            <style>
+                .goHome{
+                    position: absolute;
+                    top:3px;
+                    right: 3px;
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                }
+                .card{
+                    border:none;
+                    box-shadow:none;
+                }
+                .form_content_title{
+                        font-size: 42px;
+                    font-weight: 500;
+                    color: #000;
+                    line-height: 56px;
+                }
+                .btn_bar_login{
+                    width:75px;
+                    height: 44px;
+                    line-height: 44px;
+                    background: unset;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    line-height: 20px;
+    border:none;
+    display: inline-block;
+    margin-right: 20px;
+                }
+                
+                .btn_bar_login:focus, .btn_bar_login:valid{
+                        outline: 0;
+                }
+                .btn_active{
+                    width:75px;
+                    height: 44px;
+                    line-height: 44px;
+                        border-radius: 100px;
+    background: #f2f2f2!important;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    line-height: 20px;
+    border:none;
+    display: inline-block;
+    margin-right: 20px;
+                }
+                .input{
+                    position: relative;
+                    padding-top:0!important;
+                }
+                .input .icon{
+                    position: absolute;
+                    cursor: pointer;
+                    top:60px;
+                    right:20px;
+                }
+                .input .label{
+                       font-size: 14px;
+    font-weight: 400;
+    color: #000000b3;
+    font-style: normal;
+    line-height: 18px; 
+                }
+                .input .inputer{
+                    
+                      height: 52px;
+                      line-height: 52px;
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: transparent;  
+    margin-top:20px;
+    text-indent: 10px;
+                }
+                .input .inputer:focus, .input-field:valid{
+                        outline: 0;
+                    border:2px solid #2a54ff;
+                }
+                .sub_button{
+                    display: block;
+height: 52px !important;
+    margin-top: 35px !important;
+    background: #0047ff;
+    border-radius: 100px !important;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 20px;
+    width:100%;
+    border:none;
+                }
+            </style>
         <form class="card-form" onclick="return false" style="padding:0">
             <div class="margin-topbox-px-10">
-                <div data-bn-type="text" class="css-1g5tc38  tcl fch f36 fw">{:L('立即注册')}<span class="fbaseblue"> {:L('BitVenture')}</span></div>
-                <div data-bn-type="text" class="css-152kxht tcl f16"></div>
+                <div data-bn-type="text" class="form_content_title">{:L('注册')}</div>
+                <!--<div data-bn-type="text" class="css-152kxht tcl f16"></div>-->
             </div>
-                    <style>
-                        .gray{
-                            
-                            background-image: linear-gradient(to right, #e9e9e9, #e9e9e9, #e9e9e9, #e9e9e9)!important;color:black
-                        }
-                        .btn_bar{
-                            width:150px!important;
-                        }
-                        .input{
-                            padding-top:.3rem;   
-                        }
-                        .input-label{
-                            top:.3rem;   
-                        }
-                    </style>
+                        <style>
+    
+            .btn-hover.color-1 {
+                /*color: #0052fe;*/
+                color: #6d7c82;
+                border: none !important;
+                /*background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);*/
+                /*box-shadow: 0 4px 15px 0 rgb(49 196 190 / 75%);*/
+            }
+            .btn-hover.color-6 {
+                /*color: #0052fe;*/
+                color: #6d7c82;
+                border: none !important;
+                /*background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);*/
+                /*box-shadow: 0 4px 15px 0 rgb(83 176 57 / 75%);*/
+            }
+             .btnl {
+                float: left;
+                margin-bottom:1.1em;
+    
+            }
+            .btnr {
+                float: right;
+                margin-bottom:1.1em;
+                position: absolute;
+                left: 40%;
+            }
+    
+            button {
+                appearance: auto;
+                writing-mode: horizontal-tb !important;
+                font-style: ;
+                font-variant-ligatures: ;
+                font-variant-caps: ;
+                font-variant-numeric: ;
+                font-variant-east-asian: ;
+                font-weight: ;
+                font-stretch: ;
+                font-size: ;
+                font-family: ;
+                text-rendering: auto;
+                color: buttontext;
+                letter-spacing: normal;
+                word-spacing: normal;
+                line-height: normal;
+                text-transform: none;
+                text-indent: 0px;
+                text-shadow: none;
+                display: inline-block;
+                text-align: center;
+                align-items: flex-start;
+                cursor: default;
+                box-sizing: border-box;
+                background-color: buttonface;
+                margin: 0em;
+                padding: 1px 6px;
+                border-width: 2px;
+                border-style: outset;
+                border-color: buttonborder;
+                border-image: initial;
+            }
+            .btn-hover {
+                width: 7em;
+                font-size: 16px;
+                font-weight: 600;
+                color: #fff;
+                cursor: pointer;
+                height: 30px;
+                text-align: center;
+                border: none;
+                background-size: 300% 100%;
+                border-radius: 50px;
+                moz-transition: all .4s ease-in-out;
+                -o-transition: all .4s ease-in-out;
+                -webkit-transition: all .4s ease-in-out;
+                transition: all .4s ease-in-out;
+            }
+                            .gray{
+                                background-image: linear-gradient(to right, #e9e9e9, #e9e9e9, #e9e9e9, #e9e9e9)!important;color:black
+                            }
+                        </style>
                     <script>
                         $(function(){
-                            $('.btn_bar').click(function(){
-                                $('.btn_bar').addClass('gray')
-                                $('.btn_bar').attr('style','')
-                                $(this).removeClass('gray')
-                                $(this).attr('style','border:2px solid gray!important')
-                                var index = $(this).index($('.btn_bar'))
+                            $('.btn_bar_login').click(function(){
+                                $('.btn_bar_login').removeClass('btn_active')
+                                // $('.btn_bar_login').attr('style','')
+                                $(this).addClass('btn_active')
+                                // $(this).attr('style','border:2px solid gray!important')
+                                var index = $(this).index($('.btn_bar_login'))
                                 $('.reg_kind').hide()
                                 $('.reg_kind').eq(index).show()
                             })
                         })
                     </script>
 
-            <div class="input">
+            <div>
                 <!--<button class="btn-hover color-6 btnr" onclick="stype(2)">E-mail</button>-->
                 <!--<button class="btn-hover color-1 btnl" onclick="stype(1)">Mobile</button>-->
-                <button class="btn_bar btn-hover color-6 btnl" style="border:2px solid gray!important">{:L('邮箱')}</button>
-                <button class="btn_bar btn-hover color-1 btnr">{:L('手机')}</button>
+                <button class="btn_bar_login btn_active">{:L('邮箱')}</button>
+                <button class="btn_bar_login">{:L('手机')}</button>
             </div>
 
-    
+
             <span class="reg_kind">
             <input type="hidden" name="type" id="type" value="2">
             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
-            <div class="input"  id="e-box">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="email" id="email" value=""  required/>
-                <label class="input-label">{:L('邮箱')}</label>
+            <div class="input" style="margin-top: 30px" id="e-box">
+                <input placeholder="{:L('请输入信箱')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="email" id="email" value=""  required/>
+                <label class="label">{:L('邮箱')}</label>
             </div>
 
             <!--<div id="main_demo" style="margin-bottom:1.1em;display: block" >-->
@@ -239,72 +469,89 @@
                      }
                      if(lang[1]=='zh-cn'){
                          $('#area_code').val('+852')
-                     }   
+                     }
                     }
                 })
             </script>
 
+                    <script>
+                        $(function(){
+                            $('#eyeOpen').click(function(){
+                                $(this).hide()
+                                $('#eyeClose').show()
+                                $('#lpwd').attr('type','text')
+                            })
+                            $('#eyeClose').click(function(){
+                                $(this).hide()
+                                $('#eyeOpen').show()
+                                $('#lpwd').attr('type','password')
+                            })
+                        })
+                    </script>
             <div class="input" style="margin-top: 1.5rem;">
-                <input spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="lpwd" id="lpwd" value="" required/>
-                <label class="input-label">{:L('密码')}</label>
+                <input placeholder="{:L('请输入密码')}" class="inputer" spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="lpwd" id="lpwd" value="" required/>
+                <label class="label">{:L('密码')}</label>
+            <img class="icon" id="eyeOpen" src="/Public/Static/img/eye_close.svg">
+            <img class="icon" id="eyeClose" style="display:none" src="/Public/Static/img/eye_open.svg">
             </div>
 
             <div class="input">
-                <input spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="invit" id="invit" value="{$qrcode}" required/>
-                <label class="input-label">{:L('邀请码')}</label>
+                <input placeholder="{:L('请输入邀请码')}" class="inputer" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="invit" id="invit" value="{$qrcode}" required/>
+                <label class="label">{:L('邀请码')}</label>
             </div>
 
             <div class="input">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="ecode" id="ecode" value="" style="width: 70%" required />
-                <label class="input-label">{:L('验证码')}</label>
-                <div class="action-button login-send-button tcr" style="background-color: rgba(255,255,255,0.5);width: 30%">
+                <input placeholder="{:L('请输入密码')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="ecode" id="ecode" value="" style="width: 70%" required />
+                <div class="action-button login-send-button tcr" style="background-color: rgba(255,255,255,0.5);text-align:center;width:30%!important">
                     <a><label style='font-size:14px' onclick="getCode()">{:L('获取验证码')}</label></a>
                 </div>
+                <label class="label">{:L('验证码')}</label>
             </div>
             <div class="action">
-                <button class="action-button " onclick="upreg()">{:L('立即注册')}</button>
+                <button class="sub_button" onclick="upreg()">{:L('立即注册')}</button>
             </div>
             </span>
-            
-            
+
+
             <span class="reg_kind" style="display:none">
             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
             <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
-            <div class="input"  id="e-box">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="area_code" id="area_code" value=""  required oninput="value=value.replace(/^0|[^0-9]/g,'')"/>
-                <label class="input-label">{:L('区号')}</label>
+            <div class="input" id="e-box" style="margin-top: 30px">
+                <input placeholder="{:L('请输入密码')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="area_code" id="area_code" value=""  required oninput="value=value.replace(/^0|[^0-9]/g,'')"/>
+                <label class="label">{:L('区号')}</label>
             </div>
             <div class="input"  id="e-box">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="phone" id="phone" value=""  required oninput="value=value.replace(/^0|[^0-9]/g,'')"/>
-                <label class="input-label">{:L('手机号')}</label>
+                <input placeholder="{:L('请输入密码')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field" name="phone" id="phone" value=""  required oninput="value=value.replace(/^0|[^0-9]/g,'')"/>
+                <label class="label">{:L('手机号')}</label>
             </div>
 
             <div class="input" style="margin-top: 1.5rem;">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="pwd_phone" id="pwd_phone" value="" required/>
-                <label class="input-label">{:L('密码')}</label>
+                <input placeholder="{:L('请输入密码')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" class="input-field"  name="pwd_phone" id="pwd_phone" value="" required/>
+                <label class="label">{:L('密码')}</label>
             </div>
 
             <div class="input">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="invitation_code" id="invitation_code" value="{$qrcode}" required/>
-                <label class="input-label">{:L('邀请码')}</label>
+                <input placeholder="{:L('请输入邀请码')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="invitation_code" id="invitation_code" value="{$qrcode}" required/>
+                <label class="label">{:L('邀请码')}</label>
             </div>
 
             <div class="input">
-                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="ecode" id="sms_code" value="" style="width: 70%" required />
-                <label class="input-label">{:L('验证码')}</label>
-                <div class="action-button login-send-button tcr" style="background-color: rgba(255,255,255,0.5);width: 30%">
+                <input placeholder="{:L('请输入验证码')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" class="input-field"  name="ecode" id="sms_code" value="" style="width: 70%" required />
+                <label class="label">{:L('验证码')}</label>
+                <div class="action-button login-send-button tcr" style="background-color: rgba(255,255,255,0.5);text-align:center;width:30%!important">
                     <a><label style='font-size:14px' onclick="getPhoneCode()">{:L('获取验证码')}</label></a>
                 </div>
             </div>
             <div class="action">
-                <button class="action-button " onclick="upreg2()">{:L('立即注册')}</button>
+                <button class="sub_button" onclick="upreg2()">{:L('立即注册')}</button>
             </div>
             </span>
         </form>
         <div class="login-reg tcr">
             <!--<a href="{:U('Login/findpwd')}"  class="css-s84t59 floginbr" >{:L('忘记密码')}？</a>-->
-            <a href="{:U('Login/index')}"  class="css-utqtyo floginbr" >{:L('登录')}</a>
+            <a href="{:U('Login/index')}" style="color:#000" class="css-utqtyo floginbr" >{:L('已有账号?')}<span style="margin-left:10px;color:#0047ff">{:L('登录')}</span></a>
         </div>
+    </div>
     </div>
 </div>
 <!-- partial -->
@@ -329,7 +576,7 @@
         if (type == 2) {
             var account = $(".selected-flag");
         }
- 
+
         var email = $("#email").val();
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         if(email=='' || email == null){
@@ -366,8 +613,8 @@
 
 
     }
-    
-    
+
+
     function upreg2(){
         var  type = $('#type').val();
         if (type != 1 && type != 2) {
@@ -393,7 +640,7 @@
             layer.msg("{:L('请输入手机验证码')}");return false;
         }
         var pwd = $("#pwd_phone").val();
-        
+
         if(lpwd == ''){
             layer.msg("{:L('请输入密码')}");return false;
         }
@@ -401,7 +648,7 @@
         if( invitation_code == ''){
             layer.msg("{:L('请输入邀请码')}");return false;
         }
-      
+
         $.post("{:U('Login/smsregister')}",
             {'area_code' : area_code,'phone' : phone, 'sms_code' : sms_code, 'pwd' : pwd, 'invitation_code' : invitation_code},
             function(data){
@@ -418,17 +665,17 @@
 
 
     }
-    
-    
-    
+
+
+
             //获取验证码
     function getCode(){
         var  type = $('#type').val();
         if (type != 1 && type != 2) {
             layer.msg("{:L('请选择注册类型')}");return false;
         }
-        
-        
+
+
         if(type == 1){
             //获取手机验证码
             var account = $("#country_selector").val();
@@ -442,16 +689,16 @@
                     function(data){
                         if(data.code == 1){
                             layer.msg(data.info);
-                            
+
                         }else{
                             layer.msg(data.info);return false;
                         }
                     }
                 );
-            
+
         }
-        
-        
+
+
         if(type == 2){
             //获取邮箱验证码
             var account = $("#email").val();
@@ -464,25 +711,25 @@
             if(!reg.test(email)){
                 layer.msg("{:L('邮箱格式不正确')}");return false;
             }
-            
+
              $.post("{:U('Login/sendcode')}",
                 {'email' : email},
                 function(data){
                     if(data.code == 1){
                         layer.msg(data.info);
-                        
+
                     }else{
                         layer.msg(data.info);return false;
                     }
                 }
             );
         }
-        
+
     }
-    
+
             //获取验证码
     function getPhoneCode(){
-        
+
             //获取手机验证码
             var area_code = $('#area_code').val()
             var phone = $('#phone').val()
@@ -498,13 +745,13 @@
                     function(data){
                         if(data.code == 1){
                             layer.msg(data.info);
-                            
+
                         }else{
                             layer.msg(data.info);return false;
                         }
                     }
                 );
-            
+
     }
 </script>
 

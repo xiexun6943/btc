@@ -330,7 +330,7 @@
 
 
 	</head>
-	
+
 	<body style="background-color: #f6f7f9;">
 	    <div style="position:fixed; top:-10000px">
     	        <img src="/Public/Static/img/coins.png"/>
@@ -339,18 +339,18 @@
     	        <img src="/Public/Static/img/red_bag.png"/>
     	        <img src="/Public/Static/img/label.png"/>
 	    </div>
-	    
+
 	    <div class="coin_container" style="display:none">
     	    <div class="coin_lump">
         	    <div class="coins">
         	        <img src="/Public/Static/img/coins.png"/>
         	    </div>
-        	    
+
         	    <span class="coin_detail">
             	    <div class="close">
             	        <img src="/Public/Static/img/icon_close.png?v=3"/>
             	    </div>
-        	        
+
             	    <div class="sunshine">
             	        <img src="/Public/Static/img/sunshine.png"/>
             	    </div>
@@ -367,9 +367,9 @@
         	    </span>
     	    </div>
 	    </div>
-	    
+
 	    <style>
-	           
+
             .close{
                 position: absolute;
                 width: 60px;
@@ -378,7 +378,7 @@
                 right: 0;
                 bottom: 0;
                 z-index: 999;
-                
+
             }
             .close img{
                 position: absolute;
@@ -388,7 +388,7 @@
                 left: 0;
                 cursor: pointer;
             }
-	    
+
 	        .gift_text{
 	            text-align: center;
                 color: white;
@@ -399,11 +399,11 @@
                 z-index: 9;
                 text-shadow: 0 0 2px #000;
 	        }
-	    
+
 	        .coin_detail{
 	            display: none;
 	        }
-	           
+
             .redBag{
                 position: absolute;
                 width: 240px;
@@ -417,8 +417,8 @@
                 animation-fill-mode: forwards;
                 animation-duration: .5s;
                 animation-delay: .5s;
-                
-                
+
+
             }
             .redBag img{
                 position: absolute;
@@ -430,7 +430,7 @@
                 bottom: 0;
                 margin: auto;
             }
-            
+
             @keyframes redBag {
               0% {
                 top:470px;
@@ -443,7 +443,7 @@
                 opacity:1;
               }
             }
-	           
+
             .label{
                 position: absolute;
                 width: 300px;
@@ -458,7 +458,7 @@
                 animation-duration: .5s;
                 animation-fill-mode: forwards;
                 animation-delay: .5s;
-                
+
             }
             .label img{
                 position: absolute;
@@ -470,7 +470,7 @@
                 bottom: 0;
                 margin: auto;
             }
-            
+
             @keyframes label {
               0% {
                 opacity:0;
@@ -479,7 +479,7 @@
                 opacity:1;
               }
             }
-	           
+
             .coin_big{
                 position: absolute;
                 width: 200px;
@@ -490,7 +490,7 @@
                 bottom: 0;
                 margin: auto;
                 animation: coin_big .5s linear;
-                
+
             }
             .coin_big img{
                 position: absolute;
@@ -502,7 +502,7 @@
                 bottom: 0;
                 margin: auto;
             }
-            
+
             @keyframes coin_big {
               0% {
                 transform: scale(0);
@@ -511,7 +511,7 @@
                 transform: scale(1);
               }
             }
-	           
+
             .sunshine{
                 position: absolute;
                 width: 550px;
@@ -522,7 +522,7 @@
                 bottom: 0;
                 margin: auto;
                 animation: sunshine 5s linear infinite;
-                
+
             }
             .sunshine img{
                 position: absolute;
@@ -535,7 +535,7 @@
                 margin: auto;
                 opacity: .9;
             }
-            
+
             @keyframes sunshine {
               0% {
                 transform: rotate(0deg);
@@ -544,7 +544,7 @@
                 transform: rotate(-359deg);
               }
             }
-            
+
             .coin_container{
                 position: fixed;
                 width: 100vw;
@@ -557,7 +557,7 @@
                 z-index: 999;
                 background: rgba(0,0,0,.7);
             }
-	    
+
 	        .coin_lump{
                 position: absolute;
                 background-size:contain;
@@ -591,7 +591,7 @@
                 top:0;
                 left: 0;
             }
-            
+
             @keyframes coins {
               0% {
                 top:-1200px;
@@ -601,18 +601,18 @@
               }
             }
 	    </style>
-	    
-	    
-	    
+
+
+
 	    <script>
-	        
+
 	        function setDraw(){
 	            const loginStatus = "{:userid()}"
-            
+
                 // 发送POST请求
                 $.ajax({
                   type: "GET",
-                  url: "/draw/goDraw", 
+                  url: "/draw/goDraw",
                   success: function(res) {
                       if(res.err=='y'){
                           layer.msg(res.msg)
@@ -629,32 +629,32 @@
                 	        },1000)
     	                }
                       }
-                      
+
                   },
                   error: function(error) {
                     console.error("发生错误:", error);
                   }
                 });
 	        }
-	    
+
 	        $(function(){
-	            
+
 	            $('.coin_btn').click(function(){
 	                    setDraw()
 	                })
-	            
+
 	            $('.close').click(function(){
 	                    $('.coin_container').hide()
 	                })
 	            })
 	    </script>
-	    
-	    
+
+
 
 									<!--<div class="coin_btn">
 										<img src="/Public/Static/img/icon_coin.png"/>
 									</div>-->
-									
+
 									<style>
 									    .coin_btn{
 									        cursor: pointer;
@@ -670,7 +670,7 @@
                                             height: 60px;
 									    }
 									</style>
-	    
+
 	    <div class="App">
 	        <div class="css-tq0shg">
 	            <include file="Public:header"/>
@@ -678,7 +678,24 @@
 	            <main class="css-1wr4jig">
 
 	                <div class="css-1pysja1">
-						<div class="bg-box">
+
+
+
+		<div style="position:relative;background:#000;width:100%;height:auto;display:block;margin:0 auto">
+		    <div style="height:800px;width:1200px;position:relative;margin:0 auto">
+    		    <img style="width:276px;height:auto;position:absolute;left:2.5rem;top:3rem" src="/Public/Static/img/video_logo.png?v=2">
+    		    <h1 style="color:hsla(0,0%,100%,.7);font-size:16px;position:absolute;left:40px;top:135px">{:L('切尔西足球俱乐部官方加密货币交易所合作伙伴')}</h1>
+    		    <img style="width:500px;height:auto;position:absolute;right:0;top:10px" src="/Public/Static/img/video_banner.png?v=2">
+    		    <h1 style="color:#fff;font-size:60px;width:100%;height:auto;position:absolute;text-align:center;top:640px">{:L('赋能未来')}</h1>
+    		    <h3 style="color:hsla(0,0%,100%,.7);font-size:16px;width:100%;height:auto;position:absolute;text-align:center;top:740px">{:L('BINGX 与蓝军携手合作。 通过加密货币和足球结合， 将创新、热情和才华汇聚，携手推动我们共同的目标，打造更为庞大、智慧和大胆的未来。')}</h1>
+		    </div>
+		</div>
+		<div style="width:100%;height:auto;background:#000;">
+		    <video style="display:block;width:880px;margin:0 auto;height:auto;padding:30px auto" muted="muted" controls="controls"  webkit-playsinline="true" playsinline="true" src="/Public/Static/img/video.mp4"></video>
+		</div>
+
+
+						<div class="bg-box" style="display:none">
 							<div class="css-1t9l9dt" style="width: 100%;padding-top:74px;">
 							<div class="css-8hstpq-bg css-8hstpq" >
 									<div class="css-b22026 reg-input-box">
@@ -704,7 +721,7 @@
 
 						</div>
 
-						<div>
+						<div style="display:none">
 							<div class="css-1t9l9dt" style="width: 100%;background: #f6f7f9;padding: 55px 24px;">
 
 								<div class="css-8hstpq" style="height: 220px;">
@@ -725,7 +742,7 @@
 									<div class="box">
 										<ul id="box_ul">
 										     <foreach name="notice" item="vo">
-										         
+
                                                 <li>{$vo.title}</li>
                                             </foreach>
 										</ul>
@@ -877,7 +894,7 @@
 									<div class="css-dlistbox-top css-dlistbox-sub" >
 										<div class="ss-dlistbox-top-text">
 											<p class="ss-dlistbox-top-p1" >Start your cryptocurrency journey today</p>
-											<p class="ss-dlistbox-top-p2">BitVenture Global has several features that make it an ideal place to buy and sell digital assets.</p>
+											<p class="ss-dlistbox-top-p2">BingX Global has several features that make it an ideal place to buy and sell digital assets.</p>
 										</div>
 
 									</div>
@@ -947,7 +964,7 @@
 									<div class="css-dlistbox-l-item1">
 										<div class="">
 											<p class="ss-dlistbox-top-p1 tcl" >The most complete trading cryptocurrency platform</p>
-											<p class="ss-dlistbox-top-p2 tcl">Here are a few reasons why you should choose BitVenture </p>
+											<p class="ss-dlistbox-top-p2 tcl">Here are a few reasons why you should choose BingX </p>
 										</div>
 									</div>
 								</div>
@@ -1373,7 +1390,7 @@
 		});
 	</script>
       <span style="position:fixed;right:20px;bottom:50px" tabindex="0" class="chat-button-aT2v"><style>#scaT2v .psmtc_aT2v .chat-button-aT2v:focus:not(:focus-visible) {outline: 0;}#scaT2v .psmtc_aT2v .chat-button-aT2v:focus-visible { outline: auto; }</style><img id='psaT2vimage' style="cursor:pointer" name="psaT2vimage" width="60" height="60" src="https://image.providesupport.com/image/1soil3whrakbp13q82a5teqhl4/online-922901134.svg" style="display: block; border: 0px;"></a>
-        
+
         <style>
             svg   {
                 /*stroke: red!important;*/
@@ -1386,7 +1403,7 @@
     z-index: 9;
     width:70px;
     text-align:right;
-    
+
     background: #298dd3;">
             <button style="    background: #298dd3;
     border: none;
@@ -1395,13 +1412,13 @@
         <iframe name="ifmaT2v" allowfullscreen="" src="{$kefu}" class="ps_rvm__messenger" style="height:100%;position:fixed;right:0;bottom:0"></iframe><div class="ps_rvm__header"></div><span class="ps_rvm__coming_message"></span><style>
     #scaT2v .ps_messenger__wrap {
       transform: matrix(1, 0, 0, 1, 0, 0);width: 370px; height: 590px;
-      
+
     }
-    
+
       #scaT2v:not(.ps_rvm__hidden):not(.ps_rvm_rewrite-dynamic-styles):not(.ps_rvm__expanding):not(.ps_rvm__collapses):not(.ps_rvm__show-button-with-code) .ps_messenger__toggle-content { display: none }
-    
+
   </style><style></style><div class="resizer-and-mover_resize-items"><div class="ps_t"></div><div class="ps_r"></div><div class="ps_b"></div><div class="ps_l"></div><div class="ps_tr"></div><div class="ps_rb"></div><div class="ps_bl"></div><div class="ps_lt"></div></div></div>
-        
+
         <script>
             $(function(){
                 $('#psaT2vimage').on('click',function(){

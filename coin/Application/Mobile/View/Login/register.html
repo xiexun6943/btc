@@ -151,11 +151,205 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <div id="page-container">
     <div class="all-dela-presets-container"  >
+        
+        
+<style>
+    #ls_lump{
+        max-width: unset;
+        padding-left: unset;
+        padding-right: unset;
+        width:100%;
+        height: 100vh;
+    }
+    #ls_lump .left_pic{
+        background: #000;
+        width:100%;
+        height: 20rem;
+        position: relative;
+    }
+    #ls_lump .left_pic .logo_lump{
+        width:40%;
+        position: absolute;
+        left: 20px;
+        bottom: 110px;
+    }
+    #ls_lump .left_pic .logo{
+        width: 112px;
+    height: 30px;
+    }
+    #ls_lump .left_pic .pic{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+            width: 60%;
+    height: auto;
+    }
+    #ls_lump .right_lump{
+        background: #fff;
+        position: relative;
+    }
+</style>
+        
+        
+        
+        
+            <style>
+                .goHome{
+                    position: absolute;
+                    top:3px;
+                    right: 3px;
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                }
+                .card{
+                    border:none;
+                    box-shadow:none;
+            width:90vw;
+                }
+                .form_content_title{
+                        font-size: 3rem;
+                    font-weight: 500;
+                    color: #000;
+                    line-height: 56px;
+                    margin: 0;
+                    margin-bottom: 1rem;
+                }
+                .btn_bar_login{
+                    width:70px;
+                    height: 44px;
+                    line-height: 44px;
+                    background: unset;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: Inter;
+    font-size: .9rem;
+    font-weight: 400;
+    color: #000;
+    line-height: 20px;
+    border:none;
+    display: inline-block;
+                }
+                
+                .btn_bar_login:focus, .btn_bar_login:valid{
+                        outline: 0;
+                }
+                .btn_active{
+                    height: 2.5rem;
+                    line-height: 2.5rem;
+                        border-radius: 1.5rem;
+    background: #f2f2f2!important;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: Inter;
+    font-size: .9rem;
+    font-weight: 400;
+    color: #000;
+    border:none;
+    display: inline-block;
+    margin-right: 0;
+    
+    
+                    width:70px;
+                    height: 44px;
+    font-family: Inter;
+                }
+                .input{
+                    position: relative;
+                    padding-top:0!important;
+                }
+                .input .icon{
+                    position: absolute;
+                    cursor: pointer;
+                    top:50px;
+                    right:15px;
+                }
+                .input .label{
+                    display: block!important;
+                       font-size: 14px;
+    font-weight: 400;
+    color: #000000b3;
+    font-style: normal;
+    line-height: 18px; 
+    margin-bottom:20px;
+                }
+                .input .inputer{
+                    
+                      height: 1.2rem!important;
+                      line-height: 1.2rem!important;
+    color: #000!important;
+    font-weight: 500!important;
+    font-size: 16px!important;
+    border-radius: 6px!important;
+    border: 1px solid #d9d9d9!important;
+    background-color: transparent!important;  
+    margin-bottom:20px!important;
+    text-indent: 10px!important;
+                }
+                .input .inputer::placeholder{
+    color: #000!important;
+                }
+                .input .inputer:focus, .input-field:valid{
+                        outline: 0!important;
+                    border:2px solid #2a54ff!important;
+                }
+                .sub_button{
+                    display: block!important;
+height: 52px !important;
+    margin-top: 20px !important;
+    background: #0047ff!important;
+    border-radius: 100px !important;
+    font-size: 16px!important;
+    font-weight: 500!important;
+    color: #fff!important;
+    line-height: 20px!important;
+    width:100%!important;
+    border:none!important;
+                }
+                .dela-presets-container-2{
+                    background: #fff!important;
+                }
+                .dela-presets-container-2 .dela-preset-2-2{
+                    padding:2.5em 0em;
+                    width:unset;
+                    background: #fff!important;
+    box-shadow: unset!important;
+                }
+                .dela-form__rorgot-password a{
+                    color:#000!important;
+                }
+            </style>
+        
+        
+        
         <!-- Preset Begin-->
-        <div class="dela-presets-container-2" style="padding: 0px;">
-            <div class="dela-preset-container">
+        <div class="dela-presets-container-2" style="padding: 0px;" id="ls_lump">
+            
+            
+            
+    <div class="left_pic">
+        <div class="logo_lump">
+            <img class="logo" src="/Public/Static/img/video_logo.png">
+    		    <h1 style="color:hsla(0,0%,100%,.7);font-size:10px;position:absolute;left:0;top:40px">{:L('切尔西足球俱乐部官方加密货币交易所合作伙伴')}</h1>
+    		    <h1 style="color:#fff;font-size:20px;width:100%;height:auto;position:absolute;top:75px">{:L('赋能未来')}<span style="color:#0047ff">.</span></h1>
+        </div>
+        <img class="pic" src="/Public/Static/img/login-ship.png">
+    </div>
+            
+            
+            
+    <div class="right_lump">
+            <div class="card">
                 <form class="dela-preset-2-2" onclick="return false" method="get">
-                    <p class="dela-form__title">{:L('注册')}</p>
+                    <p class="form_content_title">{:L('注册')}</p>
                     <style>
                         .btn_bar{
                             float: left;
@@ -190,23 +384,24 @@
             
                     <script>
                         $(function(){
-                            $('.btn_bar').click(function(){
-                                $('.btn_bar').addClass('gray')
-                                $(this).removeClass('gray')
-                                var index = $(this).index($('.btn_bar'))
-                                $('.reg_kind').hide()
-                                $('.reg_kind').eq(index).show()
+                            $('.btn_bar_login').click(function(){
+                                $('.btn_bar_login').removeClass('btn_active')
+                                $(this).addClass('btn_active')
+                                var index = $(this).index($('.btn_bar_login'))
+                                $('.input').hide()
+                                $('.input').eq(index).show()
                             })
                         })
                     </script>
                     
-                    <button class="btn_bar btn-hover color-6 btnr" style="margin-right:1.5rem;font-size:.8rem">{:L('邮箱')}</button>
-                    <button class="btn_bar btn-hover color-6 btnr gray" style="font-size:.8rem">{:L('手机')}</button>
+                    <button class="btn_bar_login btn_active">{:L('邮箱')}</button>
+                    <button class="btn_bar_login" style="font-size:.8rem">{:L('手机')}</button>
                   
-                    <span class="reg_kind">
+                    <span class="input">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="email" id="email" placeholder="{:L('邮箱')}" required="" autocomplete="email" >
+                <label class="label" style="margin-top:.8rem">{:L('邮箱')}</label>
+                        <input placeholder="{:L('请输入信箱')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="email" name="email" id="email" placeholder="{:L('邮箱')}" required="" autocomplete="email" >
                         <div id="main_demo" style="margin-bottom:1.1em;display:none" >
                             <div class="container">
                                 <div class="form-item">
@@ -216,22 +411,32 @@
                                 <button type="submit" style="display:none;">Submit</button>
                             </div>
                         </div>
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="lpwd" placeholder="{:L('密码')}" required="">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
-                        <div>
-                            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
-                            <button  class="btn-hover color-4 send-btn" onclick="getCode()"> {:L('发送')} </button>
+                        <label class="label">{:L('密码')}</label>
+                        <input placeholder="{:L('请输入密码')}" class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="lpwd" required="">
+                        <label class="label">{:L('确认密码')}</label>
+                        <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
+                        <label class="label">{:L('邀请码')}</label>
+                        <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invit"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
+                        <div style="position:relative">
+                        <label class="label">{:L('验证码')}</label>
+                            <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="ecode" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
+                            <button  class="btn-hover color-4 send-btn" style="position: absolute;right: 10px;top: 47px;left: unset;" onclick="getCode()"> {:L('发送')} </button>
                         </div>
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg()" value="{:L('注册')}">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                        <input class="sub_button" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg()" value="{:L('注册')}">
+                        <!--<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">-->
+            <div class="login-reg tcr" style="margin-top:30px;font-size:14px">
+                <!--<a href="{:U('Login/findpwd')}"  class="css-s84t59 floginbr" >{:L('忘记密码')}？</a>-->
+                <a onclick="uplogin()" style="color:#000" class="css-utqtyo floginbr" >{:L('已有账号?')}<span style="margin-left:10px;color:#0047ff">{:L('登录')}</span></a>
+            </div>
                     </span>
                   
-                    <span class="reg_kind" style="display:none">
+                    <span class="input" style="display:none">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="type" id="type" value="2">
                         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="hidden" name="account" id="account" >
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="area_code" name="area_code" id="area_code" placeholder="{:L('区号')}" required="" autocomplete="area_code" oninput="value=value.replace(/^0|[^0-9]/g,'')">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="phone" name="phone" id="phone" placeholder="{:L('手机号')}" required="" autocomplete="phone" oninput="value=value.replace(/^0|[^0-9]/g,'')">
+                        <label class="label" style="margin-top:.8rem">{:L('区号')}</label>
+                        <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="area_code" name="area_code" id="area_code" placeholder="{:L('区号')}" required="" autocomplete="area_code" oninput="value=value.replace(/^0|[^0-9]/g,'')">
+                        <label class="label">{:L('手机号')}</label>
+                        <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="phone" name="phone" id="phone" placeholder="{:L('手机号')}" required="" autocomplete="phone" oninput="value=value.replace(/^0|[^0-9]/g,'')">
                         <div id="main_demo" style="margin-bottom:1.1em;display:none" >
                             <div class="container">
                                 <div class="form-item">
@@ -241,19 +446,28 @@
                                 <button type="submit" style="display:none;">Submit</button>
                             </div>
                         </div>
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="pwd_phone" placeholder="{:L('密码')}" required="">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invitation_code"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
-                        <div>
-                            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="sms_code" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
-                            <button  class="btn-hover color-4 send-btn" onclick="getPhoneCode()" style="top: 540px;"> {:L('发送')} </button>
+                        <label class="label">{:L('密码')}</label>
+                        <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="password" id="pwd_phone" placeholder="{:L('密码')}" required="">
+                        <label class="label">{:L('确认密码')}</label>
+                        <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="password" name="repeat" placeholder="{:L('确认密码')}" oninput="this.setCustomValidity(this.value != document.getElementById('pass-'+2).value ? 'Passwords are not the same.' : '')" required="">
+                        <label class="label">{:L('请输入邀请码')}</label>
+                        <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" name="invite" id="invitation_code"  placeholder="{:L('邀请码')}" required="" value="{$qrcode}">
+                        <div style="position:relative">
+                            <label class="label">{:L('请输入验证码')}</label>
+                            <input class="inputer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="text" id="sms_code" name="code" placeholder="{:L('验证码')}"  class="code"  required=""  value="">
+                            <button  class="btn-hover color-4 send-btn" onclick="getPhoneCode()"  style="position: absolute;right: 10px;top: 47px;left: unset;"> {:L('发送')} </button>
                         </div>
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg2()" value="{:L('注册')}">
-                        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">
+                        <input class="sub_button" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit"  onclick="upreg2()" value="{:L('注册')}">
+                        <!--<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="autofocus" type="submit" name="submit" onclick="uplogin()" value="{:L('登录')}">-->
+            <div class="login-reg tcr" style="margin-top:30px;font-size:14px">
+                <!--<a href="{:U('Login/findpwd')}"  class="css-s84t59 floginbr" >{:L('忘记密码')}？</a>-->
+                <a onclick="uplogin()" style="color:#000" class="css-utqtyo floginbr" >{:L('已有账号?')}<span style="margin-left:10px;color:#0047ff">{:L('登录')}</span></a>
+            </div>
                     </span>
 
                 </form>
             </div>
+        </div>
         </div>
 
     </div>

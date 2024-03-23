@@ -12,8 +12,8 @@ class LoginController extends HomeController
 			$this->error(L("非法操作"));
 		}
 	}
-	
-	
+
+
 
 	//未登陆状态的选项页面
 	public function loption(){
@@ -35,18 +35,18 @@ class LoginController extends HomeController
 		$this->display();
 	}
 
-	
+
 	// 用户协议
 	public function webreg()
 	{
 		$this->display();
 	}
-	
+
 	public function index()
 	{
 	    $uid = userid();
 	    if($uid >= 1){
-	       $this->redirect("Index/index"); 
+	       $this->redirect("Index/index");
 	    }
 		$this->display();
 	}
@@ -81,12 +81,12 @@ class LoginController extends HomeController
 		if($findcode != $ecode){
 		    $this->ajaxReturn(['code'=>0,'info'=>L('邮箱验证码错误')]);
 		}
-		
+
 		$uinfo = M("user")->where(array('username'=>$email))->field("id,username")->find();
 		if(empty($uinfo)){
 		    $this->ajaxReturn(['code'=>0,'info'=>L('邮箱未注册')]);
 		}
-		
+
 		$password = md5($lpwd);
 		$result = M("user")->where(array('username'=>$email))->save(array('password'=>$password));
 		if($result){
@@ -101,7 +101,7 @@ class LoginController extends HomeController
 		}else{
 		    $this->ajaxReturn(['code'=>0,'info'=>L('密码重置失败')]);
 		}
-		
+
     }
 
 	// 登录提交处理
@@ -129,13 +129,13 @@ class LoginController extends HomeController
 		if (md5($pwd) != $user['password']){
 			$this->ajaxReturn(['code'=>0,'info'=> L('登录密码错误')]);
 		}
-		
+
 		if (isset($user['status']) && $user['status'] != 1) {
 			$this->ajaxReturn(['code'=>0,'info'=> L('你的账号已冻结请联系管理员')]);
 		}
 		//增加登陆次数
 		$incre = M("user")->where(array('id' => $user['id']))->setInc('logins', 1);
-		
+
 		//新增登陆记录
 		$data['userid'] = $user['id'];
 		$data['type'] = '登录';
@@ -145,7 +145,7 @@ class LoginController extends HomeController
 		$data['addr'] = get_city_ip();
 		$data['status'] = 1;
 		$dre = M("user_log")->add($data);
-		
+
 		if($incre && $dre){
 		    $lgdata['lgtime'] = date("Y-m-d",time());
 		    $lgdata['loginip'] = get_client_ip();
@@ -180,7 +180,7 @@ class LoginController extends HomeController
 			if($lpwd == ''){
 				$this->ajaxReturn(['code'=>0,'info'=>L('请输入密码')]);
 			}
-			
+
 			if($invit == ''){
 			    $this->ajaxReturn(['code'=>0,'info'=>L('请输入邀请码')]);
 			}
@@ -224,18 +224,18 @@ class LoginController extends HomeController
 				'path'=>$path,
 				'addip' => get_client_ip(),
 				'addr' => get_city_ip(),
-				'addtime' => time(), 
+				'addtime' => time(),
 				'status' => 1,
 				'txstate' => 1,
 				));
-		
+
 			$user_coin = array('userid' => $rs[0]);
 			// 创建用户数字资产档案
 			$rs[] = $mo->table('tw_user_coin')->add($user_coin);
 			if (check_arr($rs)) {
 				$mo->execute('commit');
-				$mo->execute('unlock tables');			
-				session('regcode', null); //初始化动态验证码			
+				$mo->execute('unlock tables');
+				session('regcode', null); //初始化动态验证码
 				$user = $mo->table('tw_user')->where(array('id'=>$rs[0]))->find();
 				$this->ajaxReturn(['code'=>1,'info'=>L('注册成功')]);
 			} else {
@@ -313,13 +313,13 @@ class LoginController extends HomeController
 		}else{
 			$this->ajaxReturn(['code'=>0,'info'=>L('网络错误')]);
 		}
-		
+
 	}
 
 
 	//邮件发送验证码
-	public function emailsend($desc_content, $toemail){	
-	    
+	public function emailsend($desc_content, $toemail){
+
 //	    $config = $clist = M("config")->where(array('id'=>1))->field("smsemail,emailcode,smstemple")->find();
 	    $smsemail = "pnscx.s@gmail.com";
 //	    $emailcode = trim($config['emailcode']);
@@ -328,7 +328,7 @@ class LoginController extends HomeController
 		Vendor('PHPMailer.src.SMTP');
 		$mail = new \PHPMailer();
 		$mail->SMTPDebug = 0;
-		$mail->isSMTP();        
+		$mail->isSMTP();
 		//$mail->CharSet = "utf8";
 		$mail->Host = "smtp.gmail.com";
 		$mail->SMTPAuth = true;
@@ -341,13 +341,13 @@ class LoginController extends HomeController
 		$mail->addAddress($toemail,'');
 		$mail->addReplyTo($smsemail,"Reply");
 		$mail->Subject = L('Verification Code');
-        $mail->Body = '[bitventure] '.L("验证码5分钟内有效,").L("您的验证码是:").$desc_content;;
-		if(!$mail->send()){  
+        $mail->Body = '[BingX] '.L("验证码5分钟内有效,").L("您的验证码是:").$desc_content;;
+		if(!$mail->send()){
 			return 0;
 		}else{
 			return 1;
 		}
-		
+
 	}
 
 
@@ -357,7 +357,7 @@ class LoginController extends HomeController
 		session(null);
 		redirect('/');
 	}
-	
+
 	// 找回密码页面
 	public function findpwd(){
 
@@ -471,7 +471,7 @@ class LoginController extends HomeController
                 $this->ajaxReturn(['code'=>0,'info'=>L('该手机号码已经注册过')]);
             }
             $code = rand(10000,99999);
-            $desc_content='[bitventure] '.L("验证码5分钟内有效,").L("您的验证码是:").$code;
+            $desc_content='[BingX] '.L("验证码5分钟内有效,").L("您的验证码是:").$code;
             $phone=$area_code.$phone;
 
             $result = $this->smsSend($desc_content,$phone);

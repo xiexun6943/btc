@@ -19,7 +19,7 @@ return array(
 	'LANG_SWITCH_ON'       => true, //开启多语言支持开关
 	
 	'LANG_AUTO_DETECT'     => true, // 自动侦测语言
-	'DEFAULT_LANG'         => 'en-us', // 默认语言
+	'DEFAULT_LANG'         => 'zh-tw',
 	'LANG_LIST'     	   => 'zh-cn,zh-tw,en-us,fr-fr,de-de,it-it,ja-jp,ko-kr,tr-tr',
 	'VAR_LANGUAGE'         => 'Lang', //默认语言切换变量
     'NATION'     =>array('zh_CN'=>'中国','en_US'=>'美国',),

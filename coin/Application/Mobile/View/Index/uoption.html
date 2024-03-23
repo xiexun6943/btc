@@ -26,7 +26,7 @@
 		.lbox_r{width:30%;height:60px;line-height:60px;text-align:right;float:left;}
 		.userbox{
 			width: 100%;
-			background: url("/Public/Static/img/user_bg.png") no-repeat;
+			background: url("/Public/Static/img/user_bg.png?v=2") no-repeat;
 			background-size: 100% 135px;
 			padding: 15px;
 			border-radius: 10px;
@@ -79,7 +79,7 @@
 
 			<div class="userbox">
 				<div class="userbox_left" >
-					<img src="{$waplogo}" id="config_app_log" >
+					<img src="{$waplogo}?v=<?=time()?>" id="config_app_log" >
 				</div>
 				<div class="userbox_right">
 					<p style="font-size:20px;margin-bottom:5px;margin-top:20px;" class="">{$info.username}</p>
@@ -170,7 +170,7 @@
 				</a>
 
 
-				<a href="{:U('Login/lhelp')}">
+				<a href="{:U('Login/lhelp')}" style="display:none">
 					<div class="lbox">
 						<div class="lbox_l">
 							<i class="bi bi-question-square fcc fzmmm" style="font-size:22px;"></i>
