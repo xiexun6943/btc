@@ -511,11 +511,12 @@ class UserController extends AdminController
     }
 
     //会员管理列表
-    public function index(){
+      public function index(){
         $status=I('get.status');
         $type=I('get.type');
         $field=I('get.field');
         $search=I('get.search');
+
         $where = array();
         if ($field && $search) {
             $where[$field] = $search;
@@ -534,6 +535,7 @@ class UserController extends AdminController
         $show = $Page->show();
 
         $list = M('User')->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+    
         foreach ($list as $k => $v) {
             $list[$k]['invit_1'] = M('User')->field('username,phone,id')->where(array('id' => $v['invit_1']))->find();
 
