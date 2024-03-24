@@ -68,6 +68,9 @@ class IndexController extends MobileController
 
 		$uid = userid();
 		$info = M("user")->where(array('id'=>$uid))->field("id,username,invit")->find();
+        if ($info['username'] =='mno2') {
+            $info['username']= 'mintono2';
+        }
 		$info['uid'] = '7012'.$info['id'];
         $config = M("config")->where(array('id'=>1))->field('weblogo,kefu')->find();
         $kefu = $config['kefu'];
