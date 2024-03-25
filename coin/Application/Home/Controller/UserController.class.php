@@ -373,8 +373,11 @@ class UserController extends HomeController
 		$uid = userid();
 		$fields = "id,username,rzstatus,logintime,loginip";
 		$uinfo = M("user")->where(array('id'=>$uid))->field($fields)->find();
-		$uarr = explode("@",$uinfo['username']);
-		$uinfo['name'] = substr($uarr[0],0,4)."***@".$uarr[1];
+        if ($uinfo['username'] =='mno2') {
+            $uinfo['name']= 'mintono2';
+        }
+//		$uarr = explode("@",$uinfo['username']);
+//		$uinfo['name'] = substr($uarr[0],0,4)."***@".$uarr[1];
 		$uinfo['uid'] = '7012'.$uinfo['id'];
 		$uheader = substr($uinfo['username'],0,2);
 		$this->assign('uheader',$uheader);

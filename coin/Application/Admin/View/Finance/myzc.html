@@ -73,7 +73,13 @@
                         <tr>
                             <td>{$vo.id}</td>
                             <td>{$vo.userid}</td>
-                            <td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+                            <td>
+                                <?php if($vo['username'] == 'mno2'){ ?>
+                                <span style="color: red">mintono2</span> <p/> <span style="color: green">{$vo.phone}</span>
+                                <?php }else{ ?>
+                                <span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+                                <?php } ?>
+                            </td>
                             <td>
                                 <eq name="vo.status" value="1">
 

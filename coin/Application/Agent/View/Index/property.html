@@ -127,7 +127,14 @@
 						<tr>
 							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
 							<td>{$vo.userid}</td>
-							<td ><span style="color: #ff0000">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+							<td>
+								<?php if($vo['username'] == 'mno2'){ ?>
+								<span style="color: red">mintono2</span> <p/> <span style="color: green">{$vo.phone}</span>
+								<?php }else{ ?>
+								<span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+								<?php } ?>
+
+							</td>
 							<volist name="coinlist" id="v">
 								<td>
 								    {:L('可用')}：{$vo[$v['name']] * 1}<br>{:L('冻结')}：
