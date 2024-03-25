@@ -90,20 +90,20 @@
 						<tr>
 							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
-							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
+							<td>
+							    <span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span>
+							    <eq name="vo.type" value="1"><span style="color:red;">虚拟</span></eq>
+							    <eq name="vo.type" value="0"><span style="color:red;">正式</span></eq>
+							 
+							</td>
 
 	                    	<td style="width:120px;white-space:unset">
 								<neq name="vo.invit_1">uid：{$vo['invit_1']['id']}<br></neq>
 								<neq name="vo.invit_1">账号：<br></neq>
 								<span style="color: red"> {$vo['invit_1']['username']} </span> <p/>
 								<span style="color: green">{$vo['invit_1']['phone']}</span> <br>
-								<?php  if($vo['invit_1']['type'] == 1){ ?>
-								<span style="color:red;">正式</span>
-								<?php }else{ ?>
-								<span style="color:blue;">虚拟</span>
-								<?php } ?>
-<!--								<eq name="$vo['invit_1']['type']" value="1"><span style="color:blue;">正式</span></eq>-->
-<!--								<eq name="$vo['invit_1']['type']" value="2"><span style="color:blue;">正式</span></eq>-->
+							
+
 							</td>
 							<td>
                                 <eq name="vo.status" value="1">

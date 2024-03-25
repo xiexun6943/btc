@@ -353,10 +353,11 @@ class FinanceController extends AdminController
         $btc_all_recharge=0;
 		$eth_all_recharge=0;
         foreach ($list as $k => $v) {
-            $userInfo=M('User')->Field('username,phone,invit_1')->where(array('id' => $v['uid']))->find();
+            $userInfo=M('User')->Field('username,phone,invit_1,type')->where(array('id' => $v['uid']))->find();
             if ($userInfo) {
                 $list[$k]['phone'] = $userInfo['phone'];
                 $list[$k]['username'] = $userInfo['username'];
+                $list[$k]['type'] = $userInfo['type'];
             }
             $list[$k]['invit_1'] = M('User')->field('username,phone,id,type')->where(array('id' => $userInfo['invit_1']))->find();
             if (in_array($v['coin'],['USDT','HKD','JPY']) && $v['status'] == 2) {

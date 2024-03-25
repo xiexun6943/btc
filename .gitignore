@@ -6,3 +6,5 @@ coin/Public/Static/coinimgs
 coin/Upload/public
 coin/index.php
 coin/Public/Static/qrcode
+coin/Public/laydate
+coin/Upload/article
