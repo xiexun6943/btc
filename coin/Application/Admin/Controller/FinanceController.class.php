@@ -5,7 +5,7 @@ class FinanceController extends AdminController
 {
 	protected function _initialize(){
 		parent::_initialize();
-		$allow_action=array("index","myzr","myzc","adopttb","reject","adoptzr","rejectzr","del","delT","edit");
+		$allow_action=array("index","myzr","myzc","adopttb","reject","adoptzr","rejectzr","del","delT","edit","settype");
 		if(!in_array(ACTION_NAME,$allow_action)){
 			$this->error("页面不存在！");
 		}
@@ -439,6 +439,27 @@ class FinanceController extends AdminController
             }else{
                 $this->error("编辑失败");exit();
             }
+        }
+    }
+
+    //充值订单类型调整
+    public function settype(){
+        if($_POST){
+            $id = trim(I('post.id'));
+            $type= trim(I('post.type'));
+            $info = M("recharge")->where(array('id'=>$id))->find();
+            if(empty($info)){
+                $this->ajaxReturn(['code'=>0,'info'=>"参少重要参数"]);
+            }
+
+            $result = M("recharge")->where(array('id'=>$id))->save(array('type'=>$type));
+            if($result){
+                $this->ajaxReturn(['code'=>1,'info'=>"操作成功"]);
+            }else{
+                $this->ajaxReturn(['code'=>0,'info'=>"操作失败"]);
+            }
+        }else{
+            $this->ajaxReturn(['code'=>0,'info'=>"网络错误"]);
         }
     }
 
