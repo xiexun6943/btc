@@ -122,7 +122,7 @@
 					<th class="">ID</th>
 					<th class="">UID</th>
 					<th class="">用户名</th>
-					<th class="">充值类型</th>
+					<!--<th class="">充值类型</th>-->
 					<th width="">操作</th>
 
 					<th width="">充值数量/实际到账(U)</th>
@@ -139,26 +139,7 @@
 							<td>{$vo.id}</td>
 							<td>{$vo.uid}</td>
 							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
-							<td>
-								<?php if($vo['status'] == 1  ){  ?>
-								<select name="type" id="type" style="width:100px;" onchange="settype({$vo.id});">
-									<option value="1" <?php if($vo['type'] == 1){?>selected<?php }?>>客户端充值</option>
-									<option value="2" <?php if($vo['type'] == 2){?>selected<?php }?>>后台充值</option>
-									<option value="3" <?php if($vo['type'] == 3){?>selected<?php }?>>赠送彩金</option>
-								</select>
-								<?php  }else{  ?>
-								<eq name="vo.type" value="1">
-									<span >客户端充值</span>
-								</eq>
-								<eq name="vo.type" value="2">
-									<span >后台充值</span>
-								</eq>
-								<eq name="vo.type" value="3">
-									<span >赠送彩金</span>
-								</eq>
-
-								<?php  }  ?>
-							</td>
+					
 							<td>
 								<eq name="agent_type" value="1">
 								<eq name="vo.status" value="1">

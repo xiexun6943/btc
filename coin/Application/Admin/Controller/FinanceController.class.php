@@ -69,6 +69,13 @@ class FinanceController extends AdminController
 	    }
 	    $uid = $info['uid'];
         $num = $info['num'];
+        
+        if($info['type'] == 3){
+            $type=21;
+        }else{
+            $type=17;
+        }
+        
         if (in_array(strtolower(trim($info['coin'])),['jpy','hkd'])) {
             $coinname='usdt';
         }else{
@@ -107,7 +114,7 @@ class FinanceController extends AdminController
 	    $data['num'] = $real_num;
 	    $data['coinname'] = $coinname;
 	    $data['afternum'] = $minfo[$coinname] + $real_num;
-	    $data['type'] = 17;
+	    $data['type'] = $type;
 	    $data['addtime'] = date("Y-m-d H:i:s",time());
 	    $data['st'] = 1;
 	    $data['remark'] = '充币到账';

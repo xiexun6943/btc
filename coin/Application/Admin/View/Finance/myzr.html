@@ -74,7 +74,7 @@
 							<td><span style="color: red">{$vo.username}</span> <p/> <span style="color: green">{$vo.phone}</span></td>
 							<td>
 								<?php if($vo['status'] == 1  ){  ?>
-									<select name="type" id="type" style="width:100px;" onchange="settype({$vo.id});">
+									<select name="type" curid="{$vo.id}" class="type" style="width:100px;">
 										<option value="1" <?php if($vo['type'] == 1){?>selected<?php }?>>客户端充值</option>
 										<option value="2" <?php if($vo['type'] == 2){?>selected<?php }?>>后台充值</option>
 										<option value="3" <?php if($vo['type'] == 3){?>selected<?php }?>>赠送彩金</option>
@@ -161,9 +161,16 @@
 </div>
 <include file="Public:footer"/>
 <script type="text/javascript">
-	function settype(id){
-		var id  = id;
-		var type = $("#type").val();
+    $(function(){
+        $('.type').on('change',function(){
+            console.log($(this).val())
+            console.log($(this).find("option:selected").text())
+             settype($(this).attr('curid'),$(this).val())
+        })
+    })
+
+	function settype(id,type){
+		
 		$.post("{:U('Finance/settype')}",
 				{'id':id,'type':type},
 				function(data){
