@@ -220,7 +220,8 @@
         // if(!reg.test(email)){
         //     layer.msg("{:L('邮箱格式不正确')}");return false;
         // }
-        var account = $("#account").val();
+        
+        
         if(account=='' || account == null){
             layer.msg("{:L('请输入账号')}");return false;
         }
@@ -284,6 +285,8 @@
 </script>
 
 <script type="text/javascript">
+        
+        console.log(123123)
     $("#nav").slide({
         type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
         titCell:".nLi", //鼠标触发对象
@@ -297,3 +300,4 @@
 
 
 </html>
+

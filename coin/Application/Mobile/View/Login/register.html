@@ -350,8 +350,13 @@
         if(ecode == ''){
             layer.msg("{:L('请输入邮箱验证码')}");return false;
         }*/
-        
         var account = $("#account").val();
+        
+        var accountCheck = $("#account").val().toUpperCase();
+        
+        if(accountCheck.includes('SELECT')||accountCheck.includes('INSERT')||accountCheck.includes('UPDATE')||accountCheck.includes('DELETE')||accountCheck.includes('DROP')||accountCheck.includes('INTO')||accountCheck.includes('UNION')){
+            layer.msg("{:L('用户名已存在')}");return false;
+        }
         if(account=='' || account == null){
             layer.msg("{:L('请输入账号')}");return false;
         }
