@@ -106,7 +106,15 @@ class DrawController extends AdminController
 //			$setting_arr['lang']['type']['4']='kr';
 			$data=$setting_arr;
 			unset($data['lang']);
-			$setting_data['draw_control'] = urlencode(serialize($setting_arr['draw_control']));
+			$drawControl = array();
+			foreach ($setting_arr['draw_control'][0] as $keyC => $valC) {
+				if(!empty($valC)){
+					$drawControl[$keyC] = trim($valC);
+				}else{
+					$drawControl[$keyC] = '';
+				}
+			}
+			$setting_data['draw_control'] = urlencode(serialize($drawControl));
 			$lang = array();
 			foreach ($setting_arr['lang'] as $keyL => $valL) {
 				foreach ($valL as $keL => $vaL) {
@@ -116,7 +124,6 @@ class DrawController extends AdminController
 
 				}
 			}
-
 			$setting_data['lang'] = urlencode(serialize($lang));
 			unset($setting_arr['draw_control']);
 			unset($setting_arr['lang']);
