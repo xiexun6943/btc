@@ -212,33 +212,40 @@ class DrawController extends HomeController
         exit;
     }
 
-    protected function drawControl($uid, $drawEdNum, $currDrawSet)
+       protected function drawControl($uid, $drawEdNum, $currDrawSet)
     {
         $drawControl = $this->get_settings('draw_control');
+
         $isControl = 0;
         if ($drawControl['type'] == 2 && !empty($drawControl['draw_control'])) {
             $drawControlData = explode("\n", $drawControl['draw_control']);
-            $drawControlData = explode(',',$drawControlData[0]);
-
-            $drawControlDataArr=[];
+            $drawControlDataArr = [];
             foreach ($drawControlData as $v) {
                 $v = trim($v);
-                $itme=explode(':',$v);
-                $drawControlDataArr[$itme[0]]=$itme[1];
+                $v = str_replace("：", ":", $v);
+                $v = str_replace("，", ",", $v);
+                if ($v && substr_count($v, ':') == 1) {
+                    $tmpUid = trim(substr($v, 0, strripos($v, ":")));
+                    $tmpAmount = trim(substr($v, strripos($v, ":") + 1));
+                    $drawControlDataArr[$tmpUid] = explode(',', $tmpAmount);
+                }
             }
+
             if (isset($drawControlDataArr[$uid])) {
-                $drawAmount = $drawControlDataArr[$uid];
+                $drawAmount = $drawControlDataArr[$uid][0];
                 $isControl = 1;
             } else {
                 $drawMin = $currDrawSet['draw_min'];
                 $drawMax = $currDrawSet['draw_max'];
                 $drawAmount = mt_rand($drawMin, $drawMax);
             }
+
         } else {
             $drawMin = $currDrawSet['draw_min'];
             $drawMax = $currDrawSet['draw_max'];
             $drawAmount = mt_rand($drawMin, $drawMax);
         }
+
         return ['draw_amount' => $drawAmount, 'is_control' => $isControl];
     }
 
