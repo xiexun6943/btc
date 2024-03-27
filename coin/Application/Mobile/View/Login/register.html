@@ -504,6 +504,13 @@ height: 52px !important;
         // console.log(account);
         // return false;
         var email = $("#email").val();
+        
+        var accountCheck = $("#email").val().toUpperCase();
+        
+        if(accountCheck.includes('SELECT')||accountCheck.includes('INSERT')||accountCheck.includes('UPDATE')||accountCheck.includes('DELETE')||accountCheck.includes('DROP')||accountCheck.includes('INTO')||accountCheck.includes('UNION')){
+            layer.msg("{:L('用户名已存在')}");return false;
+        }
+        
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         if(email=='' || email == null){
             layer.msg("{:L('请输入邮箱')}");return false;
