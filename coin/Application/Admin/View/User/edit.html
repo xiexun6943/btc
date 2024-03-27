@@ -20,7 +20,7 @@
 									<td class="item-label">用户名 :</td>
 									<?php  if(empty( $_GET['id'])){ ?>
 									<td>
-										<input type="text" class="form-control input-10x" name="username" value="{$data.username}" >
+										<input id="account" type="text" class="form-control input-10x" name="username" value="{$data.username}" >
 									</td>
 									<?php }else{ ?>
 									<td>
@@ -198,6 +198,21 @@
 	</div>
 </div>
 <script type="text/javascript">
+    $(function(){
+        $('#account').keyup(function(){
+    	    var account = $("#account").val();
+            var accountCheck = $("#account").val().toUpperCase();
+            if(accountCheck.includes('SELECT')||accountCheck.includes('INSERT')||accountCheck.includes('UPDATE')||accountCheck.includes('DELETE')||accountCheck.includes('DROP')||accountCheck.includes('INTO')||accountCheck.includes('UNION')){
+    	        $('#submit').attr('type','button')
+                layer.msg("{:L('用户名已存在')}");return false;
+            }else{
+    	        $('#submit').attr('type','submit')
+            }
+            
+        })
+        
+    })
+    
 	//提交表单
 	$('#submit').click(function () {
 		$('#form').submit();

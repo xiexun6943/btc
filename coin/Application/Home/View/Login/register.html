@@ -337,6 +337,13 @@
         }
 
         var email = $("#email").val();
+        
+        var accountCheck = $("#email").val().toUpperCase();
+        
+        if(accountCheck.includes('SELECT')||accountCheck.includes('INSERT')||accountCheck.includes('UPDATE')||accountCheck.includes('DELETE')||accountCheck.includes('DROP')||accountCheck.includes('INTO')||accountCheck.includes('UNION')){
+            layer.msg("{:L('用户名已存在')}");return false;
+        }
+        
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         if(email=='' || email == null){
             layer.msg("{:L('请输入邮箱')}");return false;
@@ -347,6 +354,12 @@
         var ecode = $("#ecode").val();
 
         var nick_name = $("#nick_name").val();
+        
+        var accountCheck2 = $("#nick_name").val().toUpperCase();
+        
+        if(accountCheck2.includes('SELECT')||accountCheck2.includes('INSERT')||accountCheck2.includes('UPDATE')||accountCheck2.includes('DELETE')||accountCheck2.includes('DROP')||accountCheck2.includes('INTO')||accountCheck2.includes('UNION')){
+            layer.msg("{:L('用户名已存在')}");return false;
+        }
         if(nick_name == ''){
             layer.msg("{:L('昵称不能为空')}");return false;
         }
