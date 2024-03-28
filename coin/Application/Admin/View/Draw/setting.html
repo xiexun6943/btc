@@ -70,15 +70,15 @@
                                     <th>控制</th>
                                     <td>
                                         <label>随机 <input type="radio" checked="checked" class="settingdrawcontroltype focus"
-                                                         name="setting[draw_control][type]"
+                                                         name="setting[draw_control][0][type]"
                                                          value="1" <?php if ($drawControl['type'] == 1) echo 'checked="checked"' ?>/></label>
                                         <label>自定义 <input type="radio" class="settingdrawcontroltype"
-                                                          name="setting[draw_control][type]"
+                                                          name="setting[draw_control][0][type]"
                                                           value="2" <?php if ($drawControl['type'] == 2) echo 'checked="checked"' ?>/></label>
                                     </td>
                                     <td>
                             <textarea class="input-text settingdrawcontroldrawcontrol"
-                                      name="setting[draw_control][draw_control]"
+                                      name="setting[draw_control][0][draw_control]"
                                       style="height: 60px;width: 95%"  <?php if ($drawControl['type'] == 1) { ?> disabled="disabled" <?php } ?>><?= $drawControl['draw_control'] ?></textarea>
                                     </td>
                                 </tr>
